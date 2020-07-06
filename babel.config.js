@@ -4,12 +4,12 @@ module.exports = {
   ],
   plugins: [
     'syntax-dynamic-import'
-    // [
-    //   // 'component',
-    //   // {
-    //   //   'libraryName': 'element-ui',
-    //   //   'styleLibraryName': 'theme-chalk'
-    //   // }
-    // ]
+    [
+      'component',
+      {
+        'libraryName': 'element-ui',
+        'styleLibraryName': 'theme-chalk'
+      }
+    ]
   ]
 }
