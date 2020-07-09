@@ -1,0 +1,22 @@
+{
+  "name": "infinite-ui",
+  "version": "1.0.0",
+  "description": "A Vue UI Toolkit For Web",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VS-LAB/infinite-ui.git"
+  },
+  "keywords": [
+    "VS-LAB"
+  ],
+  "author": "VS-LAB",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VS-LAB/infinite-ui/issues"
+  },
+  "homepage": "https://github.com/VS-LAB/infinite-ui#readme"
+}
