@@ -25,6 +25,9 @@
          <el-menu-item-group>
           <el-menu-item index="/guide/themePicker">ThemePicker</el-menu-item>
         </el-menu-item-group>
+         <el-menu-item-group>
+          <el-menu-item index="/guide/table">Table</el-menu-item>
+        </el-menu-item-group>
       </el-submenu>
     </el-menu>
   </div>

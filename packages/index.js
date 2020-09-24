@@ -2,6 +2,7 @@
 // This file is auto gererated by build/build-entry.js
     import InfiniteButton from './infinite-button'
 import InfiniteThemePicker from './infinite-theme-picker'
+import InfiniteTable  from './infinite-table'
     const version = '0.0.2'
     const components = [
       InfiniteButton,
@@ -21,7 +22,8 @@ import InfiniteThemePicker from './infinite-theme-picker'
       install,
       version,
       InfiniteButton,
-  InfiniteThemePicker
+      InfiniteThemePicker,
+      InfiniteTable
     }
     export default {
       install,

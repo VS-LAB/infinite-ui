@@ -11,11 +11,12 @@ import '../packages/theme-chalk/src/infinite-button.scss';
 // 导入组件库
 import {
   InfiniteButton, 
-  InfiniteThemePicker
+  InfiniteThemePicker,
+  InfiniteTable
 } from '../packages'
 Vue.config.productionTip = false
 
-Vue.use(InfiniteButton).use(InfiniteThemePicker)
+Vue.use(InfiniteButton).use(InfiniteThemePicker).use(InfiniteTable)
 Vue.use(ElementUI)
 Vue.component('demo-block', demoBlock)
 router.afterEach(route => {

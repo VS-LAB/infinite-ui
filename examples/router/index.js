@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Installation from '../docs/Installation.md';
 import Button from '../docs/button.md'
 import ThemePicker from '../docs/themePicker.md'
+import Table from '../docs/table.md'
 
 import VueRouter from 'vue-router';
 const routes = [
@@ -24,6 +25,11 @@ const routes = [
     path: '/guide/themePicker',
     name: 'themePicker',
     component: ThemePicker
+  },
+  {
+    path: '/guide/table',
+    name: 'Table',
+    component: Table
   }
 ]
 Vue.use(VueRouter)
