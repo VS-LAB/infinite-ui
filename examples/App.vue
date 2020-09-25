@@ -16,18 +16,18 @@
   </div>
 </template>
 <script>
-import HeaderModel from "./components/header";
-import MenuModel from "./components/menu";
+import HeaderModel from './components/header'
+import MenuModel from './components/menu'
 export default {
   components: {
     HeaderModel,
     MenuModel
   },
-  data() {
-    return {};
+  data () {
+    return {}
   },
   methods: {}
-};
+}
 </script>
 <style>
 /* 引入代码高亮样式 */

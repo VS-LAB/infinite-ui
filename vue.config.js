@@ -1,7 +1,7 @@
-const path = require('path');
+const path = require('path')
 const resolve = (dir) => {
-  return path.join(__dirname, dir);
-};
+  return path.join(__dirname, dir)
+}
 module.exports = {
   publicPath: './',
   lintOnSave: false,
@@ -22,12 +22,16 @@ module.exports = {
   chainWebpack: config => {
     config.module
       .rule('js')
-      .include.add(path.resolve(__dirname, 'packages')).end()
-      .use('babel')
+      .test(/\.js$/)
+      .include
+      .add(path.resolve(__dirname, 'packages'))
+      .add(path.resolve(__dirname, 'node_modules/element-ui/packages'))
+      .end()
+      .use('babel-loader')
       .loader('babel-loader')
       .tap(options => {
-        return options;
-      });
+        return options
+      })
     config.module
       .rule('md')
       .test(/\.md/)
@@ -35,7 +39,7 @@ module.exports = {
       .loader('vue-loader')
       .end()
       .use('./build/md-loader/index.js')
-      .loader('./build/md-loader/index.js');
+      .loader('./build/md-loader/index.js')
   },
   devServer: {
     overlay: {
@@ -43,4 +47,4 @@ module.exports = {
       errors: false
     }
   }
-};
+}

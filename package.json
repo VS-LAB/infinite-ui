@@ -24,7 +24,7 @@
   ],
   "dependencies": {
     "core-js": "^3.3.4",
-    "element-ui": "^2.13.2"
+    "element-ui": "2.4.9"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.11.5",
@@ -36,7 +36,11 @@
     "@vue/eslint-config-standard": "^4.0.0",
     "@vue/test-utils": "^1.0.3",
     "babel-eslint": "^10.0.3",
+    "babel-helper-vue-jsx-merge-props": "^2.0.3",
     "babel-plugin-component": "^1.1.1",
+    "babel-plugin-syntax-jsx": "^6.18.0",
+    "babel-plugin-transform-vue-jsx": "^3.7.0",
+    "babel-preset-env": "^1.7.0",
     "cp-cli": "^2.0.0",
     "cz-conventional-changelog": "^3.2.0",
     "eslint": "^5.16.0",

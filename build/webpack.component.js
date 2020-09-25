@@ -1,12 +1,12 @@
-const path = require('path');
-const ProgressBarPlugin = require('progress-bar-webpack-plugin');
-const VueLoaderPlugin = require('vue-loader/lib/plugin');
-const Components = require('./get-components')();
-const entry = {};
+const path = require('path')
+const ProgressBarPlugin = require('progress-bar-webpack-plugin')
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const Components = require('./get-components')()
+const entry = {}
 
 Components.forEach(c => {
-  entry[c] = `./packages/${c}/index.js`;
-});
+  entry[c] = `./packages/${c}/index.js`
+})
 // entry['element'] = ['element-ui/packages/color-picker']
 
 const webpackConfig = {
@@ -18,17 +18,17 @@ const webpackConfig = {
     chunkFilename: '[id].js',
     libraryTarget: 'umd'
   },
-  // optimization: {
-  //   splitChunks: {
-  //     cacheGroups: {
-  //       commons: {
-  //           name: "commons",
-  //           chunks: "initial",
-  //           minChunks: 2
-  //       }
-  //     }
-  //   },
-  // },
+  optimization: {
+    // splitChunks: {
+    //   cacheGroups: {
+    //     commons: {
+    //       name: 'commons',
+    //       chunks: 'initial',
+    //       minChunks: 2
+    //     }
+    //   }
+    // }
+  },
   resolve: {
     extensions: ['.js', '.vue', '.json']
   },
@@ -50,6 +50,6 @@ const webpackConfig = {
     new ProgressBarPlugin(),
     new VueLoaderPlugin()
   ]
-};
+}
 
-module.exports = webpackConfig;
+module.exports = webpackConfig
