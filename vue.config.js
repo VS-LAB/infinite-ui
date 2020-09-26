@@ -21,13 +21,13 @@ module.exports = {
   },
   chainWebpack: config => {
     config.module
-      .rule('js')
-      .test(/\.js$/)
-      .include
-      .add(path.resolve(__dirname, 'packages'))
-      .add(path.resolve(__dirname, 'node_modules/element-ui/packages'))
+    .rule('thejs')
+    .test(/\.js$/)
+    .include
+      .add(resolve('examples'))
+      .add(resolve('node_modules/element-ui/packages'))
       .end()
-      .use('babel-loader')
+    .use('babel-loader')
       .loader('babel-loader')
       .tap(options => {
         return options

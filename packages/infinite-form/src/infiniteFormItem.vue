@@ -1,5 +1,8 @@
 <script>
 import ElInput from 'element-ui/packages/input'
+import ElSelect from 'element-ui/packages/select'
+// import ElOption from 'element-ui/packages/option'
+
 
 export default {
   name: 'InfiniteFormItem',
@@ -9,7 +12,9 @@ export default {
     }
   },
   components: {
-    ElInput
+    ElInput,
+    ElSelect
+    // ElOption
   },
   props: {
     itemData: {
@@ -33,6 +38,9 @@ export default {
     switch (itemData.type) {
       case 'input':
         return (<el-input placeholder={placeholder} class={itemData.class} v-model={formModels[itemData.key]}/>)
+      case 'select':
+        return (<el-select placeholder={placeholder} class={itemData.class} v-model={formModels[itemData.key]}>
+        </el-select>)
       case 'textarea':
         return (<el-input placeholder={placeholder} class={itemData.class} v-model={formModels[itemData.key]}/>) 
       case 'radio':

@@ -28,6 +28,7 @@
   },
   "devDependencies": {
     "@babel/preset-env": "^7.11.5",
+    "@vue/babel-preset-jsx": "^1.1.2",
     "@vue/cli-plugin-babel": "^4.1.0",
     "@vue/cli-plugin-eslint": "^3.0.5",
     "@vue/cli-plugin-unit-jest": "~4.5.0",
@@ -59,6 +60,7 @@
     "transliteration": "^2.1.8",
     "uppercamelcase": "^3.0.0",
     "vue": "^2.6.11",
+    "vue-loader": "^15.9.3",
     "vue-markdown-loader": "^2.4.1",
     "vue-router": "^3.3.2",
     "vue-template-compiler": "^2.6.11",

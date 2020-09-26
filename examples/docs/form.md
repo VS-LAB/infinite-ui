@@ -26,6 +26,11 @@
                             type: 'input',
                             key: 'name',
                         },
+                        {
+                            label: '喜好',
+                            type: 'select',
+                            key: 'likes',
+                        },
                          {
                             label: '密码',
                             type: 'input',
