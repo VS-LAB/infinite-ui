@@ -1,24 +1,74 @@
 <template>
-  <div class="infinite-table">
-    <el-table :data="data"
-              width="100%">
-      <el-table-column v-for="hItem in header"
-                       :key="hItem.prop"
-                       :prop="hItem.prop"
-                       :label="hItem.label"
-                       :width="hItem.width || ''">
-      </el-table-column>
-    </el-table>
-  </div>
+  <el-table 
+    ref="infiniteTableRef"
+    :data="data"
+    :stripe="stripe"
+    :border="border"
+    :height="height || computedHeight || 'auto'"
+    :row-class-name="rowClassName"
+    @selection-change="selectionChange"
+    @sort-change="sortChange"
+    :default-sort="defaultSort"
+    class="infinite-table"
+    width="100%">
+
+    <template v-if="header.length">
+
+      <template v-if="type">
+        <infinite-table-column 
+          :type="type"
+          width="60px"
+        ></infinite-table-column>
+      </template>
+
+          <infinite-table-column 
+            v-for="hItem in header"
+            :key="hItem.prop"
+            :prop="hItem.prop"
+            :label="hItem.label"
+            :width="getColumnWidth(hItem)"
+            :fixed="isFixed(hItem)"
+            :min-width="hItem.minWidth"
+            :sortable="hItem.sortable"
+            :align="hItem.align"
+            :show-overflow-tooltip="hItem.showOverflowTooltip"
+          >
+            <template v-if="hItem.prop === 'operation'" slot-scope="scope">
+              <div class="infinite-table-operation-btn">
+                <template v-for="(btn,index) in operations" >
+                    <infinite-button
+                    :key="index"
+                    :type="btn.type"
+                    @click="handleClick(btn,scope.$index, scope.row)">{{btn.label}}</infinite-button>
+                </template>
+              </div>
+            </template>
+          </infinite-table-column>
+
+    </template>
+
+    <template v-else>
+      <slot></slot>
+    </template>
+    
+  </el-table>
 </template>
 <script>
 import ElTable from 'element-ui/packages/table'
-import ElTableColumn from 'element-ui/packages/table-column'
+import InfiniteTableColumn from './infiniteTableColumn'
+import InfiniteButton from '../../infinite-button'
 export default {
   name: 'InfiniteTable',
   components: {
     ElTable,
-    ElTableColumn
+    InfiniteTableColumn,
+    InfiniteButton
+  },
+  data () {
+    return {
+      computedHeight: '',
+      computedHeightData: this.computedHeightFun
+    }
   },
   props: {
     data: {
@@ -30,18 +80,163 @@ export default {
 
     header: {
       type: Array,
-      default: function () {
-        return []
-      }
+      default: () => []
+    },
+
+    stripe: {
+      type: Boolean,
+      default: false
+    },
+
+    border: {
+      type: Boolean,
+      default: false
+    },
+
+    rowClassName: {
+      type: String,
+      default: ''
     },
 
     width: [String, Number],
 
+    needAutoHeight: {
+      type: Boolean,
+      default: false
+    },
+
     height: [String, Number],
 
-    maxHeight: [String, Number]
+    selection: {
+      type: Boolean,
+      default: false
+    },
+
+    defaultSort: {
+      type: Object,
+      default: () => {}
+    },
+
+    defaultFontSize: {
+      type: Number,
+      default: 14
+    },
+
+    defaultTdAtuoPadding: {
+      type: Number,
+      default: 20
+    },
+
+    type: {
+      type: String,
+      default: ''
+    },
+
+    operations: {
+      type: Array,
+      default: () => {}
+    }
   },
-  methods: {},
-  mounted () { }
+  methods: {
+    // 计算表格高度随父盒子
+    computedHeightFun () {
+      this.$nextTick(() => {
+      // 获取父节点及高度
+        const parentElement = this.$el.parentElement || {}
+        const parentElementClientHeight = parentElement.clientHeight
+        this.computedHeight = parentElementClientHeight || ''
+      })
+    },
+    // 切换选中状态
+    toggleRowSelection (row) {
+      this.$refs.infiniteTableRef.toggleRowSelection(row)
+    },
+    // 取消选中
+    clearSelection () {
+      this.$refs.infiniteTableRef.clearSelection()
+    },
+    // 选中change
+    selectionChange (val) {
+      this.$emit('selection-change', val)
+    },
+    // 远程排序
+    sortChange (column) {
+      this.$emit('sort-change', column)
+    },
+    // 获取列自适应宽度
+    getColumnWidth (item) {
+      let colW = item.width || ''
+      // 定义字符区间
+      let charInterval = item.charInterval || [5, 25]
+      const minCharLength = charInterval[0]
+      const maxCharLength = charInterval[1]
+      // 当前满足header存在切开启了needAutoWidth为true时计算
+      if (item.needAutoWidth && this.header.length) {
+        // this.$nextTick(() => {
+        // console.log(this.computedDomWidth(item.prop, item.label))
+        const CDW = this.computedDomWidth(item.prop, item.label)
+        console.log(CDW)
+        return CDW + 1 + this.defaultTdAtuoPadding
+        // })
+      }
+      return colW
+    },
+    computedDomWidth (prop, label) {
+      const ws = [this.getRealDomWidth(label)]
+      this.data.forEach(item => {
+        ws.push(this.getRealDomWidth(item[prop]))
+      })
+      return Math.max(...ws)
+    },
+    getRealDomWidth (name) {
+      let rEl = document.getElementById('realDom')
+      if (!rEl) {
+        // 生成DOM
+        rEl = document.createElement('span')
+        rEl.style.fontSize = this.defaultFontSize + 'px'
+        rEl.id = 'realDom'
+        document.body.append(rEl)
+      }
+      // 删除DOM
+      // clearTimeout(this.clearREl)
+      // this.clearREl = setTimeout(() => {
+      //   rEl.remove()
+      // }, 2000)
+      rEl.innerHTML = name
+      console.dir(rEl)
+      return rEl.offsetWidth
+    },
+    isFixed (item) {
+      if (item.prop === 'operation') {
+        return 'right'
+      }
+      return item.fixed
+    },
+    // 操作按钮点击
+    handleClick (item, index, row) {
+      item.click && item.click(index, row)
+    }
+  },
+  mounted () {
+    // 设置高度拉伸
+    if (!this.height && this.needAutoHeight) {
+      this.computedHeightData()
+      window.addEventListener('resize', () => {
+        this.computedHeightData()
+      })
+    }
+  },
+  destroyed () {
+    this.computedHeightData = () => {}
+  }
 }
 </script>
+<style lang="scss" scoped>
+  .infinite-table-operation-btn{
+    .infinite-button{
+      &+.infinite-button{
+        margin-left: 5px;
+      }
+    }
+  }
+</style>

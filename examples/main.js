@@ -13,11 +13,12 @@ import {
   InfiniteButton, 
   InfiniteThemePicker,
   InfiniteTable,
+  InfiniteTableColumn,
   InfiniteForm
 } from '../packages'
 Vue.config.productionTip = false
 
-Vue.use(InfiniteButton).use(InfiniteThemePicker).use(InfiniteForm).use(InfiniteTable)
+Vue.use(InfiniteButton).use(InfiniteThemePicker).use(InfiniteForm).use(InfiniteTable).use(InfiniteTableColumn)
 
 Vue.use(ElementUI)
 Vue.component('demo-block', demoBlock)
