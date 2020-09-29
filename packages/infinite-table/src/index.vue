@@ -167,17 +167,13 @@ export default {
     getColumnWidth (item) {
       let colW = item.width || ''
       // 定义字符区间
-      let charInterval = item.charInterval || [5, 25]
-      const minCharLength = charInterval[0]
-      const maxCharLength = charInterval[1]
+      // let charInterval = item.charInterval || [5, 25]
+      // const minCharLength = charInterval[0]
+      // const maxCharLength = charInterval[1]
       // 当前满足header存在切开启了needAutoWidth为true时计算
       if (item.needAutoWidth && this.header.length) {
-        // this.$nextTick(() => {
-        // console.log(this.computedDomWidth(item.prop, item.label))
         const CDW = this.computedDomWidth(item.prop, item.label)
-        console.log(CDW)
         return CDW + 1 + this.defaultTdAtuoPadding
-        // })
       }
       return colW
     },
@@ -198,12 +194,11 @@ export default {
         document.body.append(rEl)
       }
       // 删除DOM
-      // clearTimeout(this.clearREl)
-      // this.clearREl = setTimeout(() => {
-      //   rEl.remove()
-      // }, 2000)
+      clearTimeout(this.clearREl)
+      this.clearREl = setTimeout(() => {
+        rEl.remove()
+      })
       rEl.innerHTML = name
-      console.dir(rEl)
       return rEl.offsetWidth
     },
     isFixed (item) {

@@ -4,6 +4,7 @@ import Button from '../docs/button.md'
 import ThemePicker from '../docs/themePicker.md'
 import Table from '../docs/table.md'
 import Form from '../docs/form.md'
+import Dialog from '../docs/dialog.md'
 
 import VueRouter from 'vue-router'
 const routes = [
@@ -20,21 +21,40 @@ const routes = [
   {
     path: '/guide/button',
     name: 'Button',
-    component: Button
+    component: Button,
+    meta: {
+      type: 'component'
+    }
   },
   {
     path: '/guide/themePicker',
     name: 'themePicker',
-    component: ThemePicker
+    component: ThemePicker,
+    meta: {
+      type: 'component'
+    }
   },
   {
     path: '/guide/table',
     name: 'Table',
-    component: Table
+    component: Table,
+    meta: {
+      type: 'component'
+    }
   }, {
     path: '/guide/form',
-    name: 'form',
-    component: Form
+    name: 'Form',
+    component: Form,
+    meta: {
+      type: 'component'
+    }
+  }, {
+    path: '/guide/dialog',
+    name: 'Dialog',
+    component: Dialog,
+    meta: {
+      type: 'component'
+    }
   }
 ]
 Vue.use(VueRouter)

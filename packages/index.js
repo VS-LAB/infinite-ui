@@ -5,13 +5,15 @@ import InfiniteForm from './infinite-form'
 import InfiniteTable from './infinite-table'
 import InfiniteTableColumn from './infinite-table-column'
 import InfiniteThemePicker from './infinite-theme-picker'
+import InfiniteDialog from './infinite-dialog'
     const version = '0.0.2'
     const components = [
       InfiniteButton,
       InfiniteForm,
       InfiniteTable,
       InfiniteTableColumn,
-      InfiniteThemePicker
+      InfiniteThemePicker,
+      InfiniteDialog
     ]
     const install = Vue => {
       components.forEach(Component => {
@@ -30,7 +32,8 @@ import InfiniteThemePicker from './infinite-theme-picker'
       InfiniteForm,
       InfiniteTable,
       InfiniteTableColumn,
-      InfiniteThemePicker
+      InfiniteThemePicker,
+      InfiniteDialog
     }
     export default {
       install,

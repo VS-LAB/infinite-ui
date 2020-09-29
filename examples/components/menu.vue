@@ -19,17 +19,8 @@
         <template slot="title">
           <span>通用模块</span>
         </template>
-        <el-menu-item-group>
-          <el-menu-item index="/guide/button">Button</el-menu-item>
-        </el-menu-item-group>
-         <el-menu-item-group>
-          <el-menu-item index="/guide/themePicker">ThemePicker</el-menu-item>
-        </el-menu-item-group>
-           <el-menu-item-group>
-          <el-menu-item index="/guide/table">Table</el-menu-item>
-        </el-menu-item-group>
-         <el-menu-item-group>
-          <el-menu-item index="/guide/form">Form</el-menu-item>
+        <el-menu-item-group v-for="menu in menuList" :key="menu.label">
+          <el-menu-item :index="menu.index">{{menu.label}}</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
     </el-menu>
@@ -43,9 +34,23 @@ export default {
       defaultActive: '/guide/install'
     }
   },
+  computed: {
+    menuList () {
+      const menulist = []
+      this.$router.options.routes.forEach((route) => {
+        if (route.meta && route.meta.type === 'component') {
+          menulist.push({
+            index: route.path,
+            label: route.name
+          })
+        }
+      })
+      return menulist
+    }
+  },
   created () {
     const path = this.$route.fullPath
-    this.defaultActive = path == '/' ? '/guide/install' : path
+    this.defaultActive = path === '/' ? '/guide/install' : path
   },
   methods: {
   }
