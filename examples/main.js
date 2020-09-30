@@ -8,6 +8,8 @@ import './style/index.scss'
 import demoBlock from './components/demo-block'
 import hljs from 'highlight.js'
 import '../packages/theme-chalk/src/infinite-button.scss'
+import '../packages/theme-chalk/src/infinite-form.scss'
+
 // 导入组件库
 import {
   InfiniteButton, 

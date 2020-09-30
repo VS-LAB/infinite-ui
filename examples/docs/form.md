@@ -5,7 +5,7 @@
 基础的按钮用法。
 :::demo 
 
-```html
+```html 
     <template>
         <infinite-form 
             :formData='formData'
@@ -29,57 +29,74 @@
                 return {
                     inline: true,
                     formData: [
-                        {
-                            label: '姓名',
-                            type: 'input',
-                            key: 'name',
-                        },
-                        {
-                            label: '喜好',
-                            type: 'select',
-                            key: 'likes',
-                            clearable: true,
-                            options: [
-                                {
-                                    id: '1',
-                                    label: '篮球'
-                                },
-                                {
-                                    id: '2',
-                                    label: '兵乓球'
-                                }
-                            ]
-                        },
-                        {
-                            label: '今日开心',
-                            type: 'switch',
-                            key: 'happy',
-                        },
-                        {
-                            label: '出生日期',
-                            type: 'date',
-                            key: 'birthday',
-                        },
-                        {
-                            label: '自我介绍',
-                            type: 'textarea',
-                            key: 'introduction',
-                        },
-                        {
-                            label: '我有我独特',
-                            type: 'own',
-                            key: 'special',
-                            slotString: slotString
-                        },
                          {
-                            label: '密码',
-                            type: 'input',
-                            key: 'password',
-                            rules: [
-                                { validator: validatePass, trigger: 'blur' },
-                                { required: true, trigger: 'blur' }
-                            ]
-                        }
+                            label: '自定义表单组件',
+                            type: 'component',
+                            key: 'component',
+                            component: {
+                                type: 'component',
+                                name: 'el-radio-group',
+                                props: {
+                                    fill: 'red'
+                                },
+                                events: {
+                                    change: (data) => {
+                                        window.alert(`you choose the ${data}`);
+                                    }
+                                }
+                            }
+                            },
+                            {
+                                label: '姓名',
+                                type: 'input',
+                                key: 'name',
+                            },
+                            {
+                                label: '喜好',
+                                type: 'select',
+                                key: 'likes',
+                                clearable: true,
+                                options: [
+                                    {
+                                        id: '1',
+                                        label: '篮球'
+                                    },
+                                    {
+                                        id: '2',
+                                        label: '兵乓球'
+                                    }
+                                ]
+                            },
+                            {
+                                label: '今日开心',
+                                type: 'switch',
+                                key: 'happy',
+                            },
+                            {
+                                label: '出生日期',
+                                type: 'date',
+                                key: 'birthday',
+                            },
+                            {
+                                label: '自我介绍',
+                                type: 'textarea',
+                                key: 'introduction',
+                            },
+                            {
+                                label: '我有我独特',
+                                type: 'own',
+                                key: 'special',
+                                slotString: slotString
+                            },
+                            {
+                                label: '密码',
+                                type: 'input',
+                                key: 'password',
+                                rules: [
+                                    { validator: validatePass, trigger: 'blur' },
+                                    { required: true, trigger: 'blur' }
+                                ]
+                            }
                     ],
                     formBtns: [
                         {

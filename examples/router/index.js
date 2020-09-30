@@ -28,7 +28,7 @@ const routes = [
   },
   {
     path: '/guide/themePicker',
-    name: 'themePicker',
+    name: 'ThemePicker',
     component: ThemePicker,
     meta: {
       type: 'component'

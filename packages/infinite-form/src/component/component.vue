@@ -6,7 +6,7 @@
     :is="component.name">
     <infinite-dynamic-component v-for="(item, index) in children" :key="index" :component="item"></infinite-dynamic-component>
   </component>
-  <span v-else>{{ component }}</span>
+  <span v-else>{{ component.name }}</span>
 </template>
 
 <script>
@@ -37,7 +37,9 @@ export default {
   data () {
     return {}
   },
-  created () {},
+  mounted () {
+    console.log(this.props, 'dynamic')
+  },
   methods: {}
 }
 </script>
