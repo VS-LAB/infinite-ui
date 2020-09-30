@@ -22,7 +22,7 @@
   </el-table-column>
 </template>
 <script>
-import ElTableColumn from 'element-ui/packages/table-column'
+import ElTableColumn from 'element-ui/lib/table-column'
 export default {
   name: 'InfiniteTableColumn',
   components: {

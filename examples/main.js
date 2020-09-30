@@ -18,7 +18,6 @@ import {
   InfiniteDialog
 } from '../packages'
 Vue.config.productionTip = false
-console.log('InfiniteDialog', InfiniteDialog)
 Vue.use(InfiniteButton)
   .use(InfiniteThemePicker)
   .use(InfiniteForm)

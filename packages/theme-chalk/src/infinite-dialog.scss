@@ -1,0 +1,9 @@
+@import '../../../node_modules/element-ui/packages/theme-chalk/src/dialog.scss';
+
+.dialog-footer-btn{
+    .infinite-button{
+      &+.infinite-button{
+        margin-left: 10px;
+      }
+    }
+  }

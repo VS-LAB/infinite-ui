@@ -54,9 +54,9 @@
   </el-table>
 </template>
 <script>
-import ElTable from 'element-ui/packages/table'
 import InfiniteTableColumn from './infiniteTableColumn'
-import InfiniteButton from '../../infinite-button'
+import InfiniteButton from '../../infinite-button/src/index'
+import ElTable from 'element-ui/lib/table'
 export default {
   name: 'InfiniteTable',
   components: {
@@ -226,12 +226,3 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped>
-  .infinite-table-operation-btn{
-    .infinite-button{
-      &+.infinite-button{
-        margin-left: 5px;
-      }
-    }
-  }
-</style>

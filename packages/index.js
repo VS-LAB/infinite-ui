@@ -1,23 +1,23 @@
 /* eslint-disable */
 // This file is auto gererated by build/build-entry.js
     import InfiniteButton from './infinite-button'
+import InfiniteDialog from './infinite-dialog'
 import InfiniteForm from './infinite-form'
 import InfiniteTable from './infinite-table'
 import InfiniteTableColumn from './infinite-table-column'
 import InfiniteThemePicker from './infinite-theme-picker'
-import InfiniteDialog from './infinite-dialog'
-    const version = '0.0.2'
+    const version = '0.0.3'
     const components = [
       InfiniteButton,
-      InfiniteForm,
-      InfiniteTable,
-      InfiniteTableColumn,
-      InfiniteThemePicker,
-      InfiniteDialog
+  InfiniteDialog,
+  InfiniteForm,
+  InfiniteTable,
+  InfiniteTableColumn,
+  InfiniteThemePicker
     ]
     const install = Vue => {
       components.forEach(Component => {
-        Vue.use(Component.name,Component)
+        Vue.use(Component)
       })
 
     };
@@ -29,11 +29,11 @@ import InfiniteDialog from './infinite-dialog'
       install,
       version,
       InfiniteButton,
-      InfiniteForm,
-      InfiniteTable,
-      InfiniteTableColumn,
-      InfiniteThemePicker,
-      InfiniteDialog
+  InfiniteDialog,
+  InfiniteForm,
+  InfiniteTable,
+  InfiniteTableColumn,
+  InfiniteThemePicker
     }
     export default {
       install,

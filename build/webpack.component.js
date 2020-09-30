@@ -7,8 +7,7 @@ const entry = {}
 Components.forEach(c => {
   entry[c] = `./packages/${c}/index.js`
 })
-// entry['element'] = ['element-ui/packages/color-picker']
-
+// entry['vendor'] = ['element-ui', 'vue']
 const webpackConfig = {
   mode: 'production',
   entry: entry,
@@ -35,16 +34,17 @@ const webpackConfig = {
   performance: {
     hints: false
   },
-  stats: 'none',  
+  stats: 'none',
   module: {
-    rules: [{
-      test: /\.js$/,
-      loader: 'babel-loader',
-      exclude: /node_modules/
-    }, {
-      test: /\.vue$/,
-      loader: 'vue-loader'
-    }]
+    rules: [
+      {
+        test: /\.js$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/
+      }, {
+        test: /\.vue$/,
+        loader: 'vue-loader'
+      }]
   },
   plugins: [
     new ProgressBarPlugin(),

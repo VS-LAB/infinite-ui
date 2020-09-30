@@ -19,12 +19,8 @@
   </button>
 </template>
 <script>
-// import ElButton from "element-ui/packages/button";
 export default {
   name: 'InfiniteButton',
-  // components: {
-  //   ElButton,
-  // },
   props: {
     type: {
       type: String,

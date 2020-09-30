@@ -1,0 +1,9 @@
+@import '../../../node_modules/element-ui/packages/theme-chalk/src/table.scss';
+
+.infinite-table-operation-btn{
+    .infinite-button{
+      &+.infinite-button{
+        margin-left: 5px;
+      }
+    }
+  }

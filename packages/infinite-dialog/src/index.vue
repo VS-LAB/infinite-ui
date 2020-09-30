@@ -29,8 +29,8 @@
   </el-dialog>
 </template>
 <script>
-import ElDialog from 'element-ui/packages/dialog'
-import InfiniteButton from '../../infinite-button'
+import ElDialog from 'element-ui/lib/dialog'
+import InfiniteButton from '../../infinite-button/src/index'
 export default {
   name: 'InfiniteDialog',
   components: {
@@ -147,12 +147,3 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped>
-  .dialog-footer-btn{
-    .infinite-button{
-      &+.infinite-button{
-        margin-left: 10px;
-      }
-    }
-  }
-</style>

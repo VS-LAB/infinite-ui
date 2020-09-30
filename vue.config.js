@@ -13,6 +13,18 @@ module.exports = {
     }
   },
   configureWebpack: {
+    performance: {
+      hints: 'warning',
+      // 入口起点的最大体积
+      maxEntrypointSize: 50000000,
+      // 生成文件的最大体积
+      maxAssetSize: 30000000,
+      // 只给出 js 文件的性能提示
+      assetFilter: function (assetFilename) {
+        return assetFilename.endsWith('.js')
+      }
+    },
+
     resolve: {
       alias: {
         '@': resolve('examples')
@@ -21,17 +33,14 @@ module.exports = {
   },
   chainWebpack: config => {
     config.module
-    .rule('thejs')
-    .test(/\.js$/)
-    .include
-      .add(resolve('examples'))
-      .add(resolve('node_modules/element-ui/packages'))
-      .end()
-    .use('babel-loader')
+      .rule('js')
+      .include.add(path.resolve(__dirname, 'packages')).end()
+      .use('babel')
       .loader('babel-loader')
       .tap(options => {
         return options
       })
+   
     config.module
       .rule('md')
       .test(/\.md/)

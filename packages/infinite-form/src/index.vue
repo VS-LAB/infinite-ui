@@ -20,18 +20,29 @@
         :formModels="formModels.models"
       />
     </el-form-item>
+    <el-form-item v-if="formBtns.length > 0" class="infinite-form-btns">
+      <el-button
+        :type="btn.type"
+        v-for="(btn, i) in formBtns"
+        :key="i"
+      >
+        {{ btn.name }}
+      </el-button>
+    </el-form-item>
   </el-form>
 </template>
 <script>
-import ElForm from 'element-ui/packages/form'
-import ElFormItem from 'element-ui/packages/form-item'
+import ElForm from 'element-ui/lib/form'
+import ElFormItem from 'element-ui/lib/form-item'
+import ElButton from '../../infinite-button'
 import InfiniteFormItem from './infiniteFormItem'
 export default {
   name: 'InfiniteForm',
   components: {
     ElForm,
     ElFormItem,
-    InfiniteFormItem
+    InfiniteFormItem,
+    ElButton
   },
   props: {
     inline: {
@@ -46,6 +57,10 @@ export default {
     labelWidth: {
       type: String,
       default: '120px'
+    },
+    formBtns: {
+      type: Array,
+      default: () => []
     }
   },
   computed: {

@@ -10,7 +10,7 @@
 <script>
 // default color
 // const ColorPicker = require('element-ui/packages/color-picker')
-import ElColorPicker from 'element-ui/packages/color-picker' 
+import ElColorPicker from 'element-ui/lib/color-picker' 
 const version = require('element-ui/package.json').version
 const ORIGINAL_THEME = '#409EFF'
 

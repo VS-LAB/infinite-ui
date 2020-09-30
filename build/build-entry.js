@@ -1,32 +1,26 @@
-const fs = require('fs-extra');
-const path = require('path');
-const uppercamelize = require('uppercamelcase');
+const fs = require('fs-extra')
+const path = require('path')
+const uppercamelize = require('uppercamelcase')
 
-const Components = require('./get-components')();
-const packageJson = require('../package.json');
+const Components = require('./get-components')()
+const packageJson = require('../package.json')
 
-const version = process.env.VERSION || packageJson.version;
+const version = process.env.VERSION || packageJson.version
 const tips = `/* eslint-disable */
-// This file is auto gererated by build/build-entry.js`;
-function parseName(_str, camel2Dash) {
-    if (!camel2Dash) {
-      return _str;
-    }
-    const str = _str[0].toLowerCase() + _str.substr(1);
-    return str.replace(/([A-Z])/g, ($1) => `-${$1.toLowerCase()}`);
-  }
-function buildPackagesEntry() {
-  const uninstallComponents = ['Message'];
-  const UI_FLAG_NAME = '';
+// This file is auto gererated by build/build-entry.js`
+
+function buildPackagesEntry () {
+  const uninstallComponents = ['Message']
+  const UI_FLAG_NAME = ''
   const importList = Components.map(
     name => `import ${UI_FLAG_NAME}${uppercamelize(name)} from './${name}'`
-  );
+  )
 
-  const exportList = Components.map(name => `${UI_FLAG_NAME}${uppercamelize(name)}`);
+  const exportList = Components.map(name => `${UI_FLAG_NAME}${uppercamelize(name)}`)
 
   const installList = exportList.filter(
     name => !~uninstallComponents.indexOf(`${UI_FLAG_NAME}${uppercamelize(name)}`)
-  );
+  )
 
   const content = `${tips}
     ${importList.join('\n')}
@@ -53,8 +47,8 @@ function buildPackagesEntry() {
       install,
       version
     }
-  `;
-  fs.writeFileSync(path.join(__dirname, '../packages/index.js'), content);
+  `
+  fs.writeFileSync(path.join(__dirname, '../packages/index.js'), content)
 }
 
-buildPackagesEntry();
+buildPackagesEntry()
