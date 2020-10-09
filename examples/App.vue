@@ -32,4 +32,7 @@ export default {
 <style>
 /* 引入代码高亮样式 */
 @import '~highlight.js/styles/color-brewer.css';
+.el-main{
+  height:calc(100vh - 60px)
+}
 </style>

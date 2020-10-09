@@ -26,9 +26,8 @@
             :key="hItem.prop"
             :prop="hItem.prop"
             :label="hItem.label"
-            :width="getColumnWidth(hItem)"
             :fixed="isFixed(hItem)"
-            :min-width="hItem.minWidth"
+            :min-width="getColumnWidth(hItem)"
             :sortable="hItem.sortable"
             :align="hItem.align"
             :show-overflow-tooltip="hItem.showOverflowTooltip"
@@ -143,7 +142,7 @@ export default {
       this.$nextTick(() => {
       // 获取父节点及高度
         const parentElement = this.$el.parentElement || {}
-        const parentElementClientHeight = parentElement.clientHeight
+        const parentElementClientHeight = parseFloat(getComputedStyle(parentElement).height)
         this.computedHeight = parentElementClientHeight || ''
       })
     },

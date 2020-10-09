@@ -1,10 +1,14 @@
 <template>
   <el-dialog
+    class="infinite-dialog"
+    ref="infiniteDialog"
     :visible="visible"
-    :widh="width"
+    :width="width"
     :before-close="beforeClose"
     :top="top"
     :center="center"
+    :append-to-body="appendToBody"
+    :show-close="showClose"
     @open="open"
     @opened="opened"
     @close="close"
@@ -16,9 +20,9 @@
   <template slot="title">
     <slot name="title">{{title}}</slot>
   </template>
-  <template slot="footer">
+  <template v-if="needFooter" slot="footer">
     <slot name="footer">
-      <span class="dialog-footer-btn">
+      <span class="dialog-footer-btn dialog-footer">
         <infinite-button infinite-button v-for="(btn,index) in (operations.length?operations:localOperations)" :key="index" :type="btn.type" @click="handleClick(btn)">
           {{btn.label}}
         </infinite-button>
@@ -82,6 +86,7 @@ export default {
       type: Boolean,
       default: false
     },
+    // 弹窗距离顶部高度
     top: {
       type: String,
       default: '15vh'
@@ -95,6 +100,35 @@ export default {
     center: {
       type: Boolean,
       default: false
+    },
+    // 需要footer <slot>
+    needFooter: {
+      type: Boolean,
+      default: true
+    },
+    containerHeight: {
+      type: String,
+      default: ''
+    }
+  },
+  watch: {
+    visible () {
+      if (this.visible && this.containerHeight) {
+        // 设置container-height
+        this.$nextTick(() => {
+          const infiniteDialogEl = this.$refs.infiniteDialog.$el.querySelectorAll('.el-dialog__body')[0]
+          if (infiniteDialogEl) {
+            const containerHeight = parseFloat(this.containerHeight)
+            // 情况一：高度没有单位，默认px
+            if (String(containerHeight) === this.containerHeight) {
+              infiniteDialogEl.style.height = this.containerHeight + 'px'
+            } else {
+              // 情况二：高度存在单位
+              infiniteDialogEl.style.height = this.containerHeight
+            }
+          }
+        })
+      }
     }
   },
   data () {
@@ -147,3 +181,6 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+@import '../../theme-chalk/src/infinite-dialog.scss';
+</style>
