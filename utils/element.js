@@ -7,7 +7,12 @@ import {
   Option,
   Switch,
   Table,
-  TableColumn
+  TableColumn,
+  Dialog,
+  Menu,
+  MenuItem,
+  MenuItemGroup,
+  Submenu
 } from 'element-ui'
 
 Vue.use(Select)
@@ -18,3 +23,8 @@ Vue.use(Select)
   .use(Switch)
   .use(Table)
   .use(TableColumn)
+  .use(Dialog)
+  .use(Menu)
+  .use(MenuItem)
+  .use(MenuItemGroup)
+  .use(Submenu)

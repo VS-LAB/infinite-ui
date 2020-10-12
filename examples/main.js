@@ -7,8 +7,9 @@ import 'element-ui/lib/theme-chalk/index.css'
 import './style/index.scss'
 import demoBlock from './components/demo-block'
 import hljs from 'highlight.js'
-import '../packages/theme-chalk/src/infinite-button.scss'
-import '../packages/theme-chalk/src/infinite-form.scss'
+import '../packages/theme-chalk/src/index.scss'
+// import '../packages/theme-chalk/src/infinite-button.scss'
+// import '../packages/theme-chalk/src/infinite-form.scss'
 
 // 导入组件库
 import {
@@ -17,7 +18,8 @@ import {
   InfiniteTable,
   InfiniteTableColumn,
   InfiniteForm,
-  InfiniteDialog
+  InfiniteDialog,
+  InfiniteNavMenu
 } from '../packages'
 Vue.config.productionTip = false
 Vue.use(InfiniteButton)
@@ -26,6 +28,7 @@ Vue.use(InfiniteButton)
   .use(InfiniteTable)
   .use(InfiniteTableColumn)
   .use(InfiniteDialog)
+  .use(InfiniteNavMenu)
 
 Vue.use(ElementUI)
 Vue.component('demo-block', demoBlock)

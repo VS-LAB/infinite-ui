@@ -3,6 +3,7 @@
     import InfiniteButton from './infinite-button'
 import InfiniteDialog from './infinite-dialog'
 import InfiniteForm from './infinite-form'
+import InfiniteNavMenu from './infinite-nav-menu'
 import InfiniteTable from './infinite-table'
 import InfiniteTableColumn from './infinite-table-column'
 import InfiniteThemePicker from './infinite-theme-picker'
@@ -11,6 +12,7 @@ import InfiniteThemePicker from './infinite-theme-picker'
       InfiniteButton,
   InfiniteDialog,
   InfiniteForm,
+  InfiniteNavMenu,
   InfiniteTable,
   InfiniteTableColumn,
   InfiniteThemePicker
@@ -31,6 +33,7 @@ import InfiniteThemePicker from './infinite-theme-picker'
       InfiniteButton,
   InfiniteDialog,
   InfiniteForm,
+  InfiniteNavMenu,
   InfiniteTable,
   InfiniteTableColumn,
   InfiniteThemePicker

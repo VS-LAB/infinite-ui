@@ -5,6 +5,7 @@ import ThemePicker from '../docs/themePicker.md'
 import Table from '../docs/table.md'
 import Form from '../docs/form.md'
 import Dialog from '../docs/dialog.md'
+import NavMenu from '../docs/navMenu.md'
 
 import VueRouter from 'vue-router'
 const routes = [
@@ -52,6 +53,13 @@ const routes = [
     path: '/guide/dialog',
     name: 'Dialog',
     component: Dialog,
+    meta: {
+      type: 'component'
+    }
+  }, {
+    path: '/guide/NavMenu',
+    name: 'NavMenu',
+    component: NavMenu,
     meta: {
       type: 'component'
     }

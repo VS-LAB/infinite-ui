@@ -179,136 +179,142 @@
       padding-right: 25px;
     }
   }
+
+  .line{
+    height: 1px;
+    background-color: #e0e6ed;
+    margin: 35px -24px;
+  }
 }
 </style>
 
 <script>
-import { stripScript, stripStyle, stripTemplate } from "../util";
+import { stripScript, stripStyle, stripTemplate } from '../util'
 export default {
-  data() {
+  data () {
     return {
       codepen: {
-        script: "",
-        html: "",
-        style: ""
+        script: '',
+        html: '',
+        style: ''
       },
       hovering: false,
       isExpanded: false,
       fixedControl: false,
       scrollParent: null
-    };
+    }
   },
 
   methods: {
-    scrollHandler() {
-      const { top, bottom, left } = this.$refs.meta.getBoundingClientRect();
+    scrollHandler () {
+      const { top, bottom, left } = this.$refs.meta.getBoundingClientRect()
       this.fixedControl =
         bottom > document.documentElement.clientHeight &&
-        top + 44 <= document.documentElement.clientHeight;
-      this.$refs.control.style.left = this.fixedControl ? `${left}px` : "0";
+        top + 44 <= document.documentElement.clientHeight
+      this.$refs.control.style.left = this.fixedControl ? `${left}px` : '0'
     },
 
-    removeScrollHandler() {
+    removeScrollHandler () {
       this.scrollParent &&
-        this.scrollParent.removeEventListener("scroll", this.scrollHandler);
+        this.scrollParent.removeEventListener('scroll', this.scrollHandler)
     }
   },
 
   computed: {
-    lang() {
-      return this.$route.path.split("/")[1];
+    lang () {
+      return this.$route.path.split('/')[1]
     },
 
-    langConfig() {
-      return  {
-          "hide-text": "隐藏代码",
-          "show-text": "显示代码",
-        }
-    },
-
-    blockClass() {
-      return `demo-${this.lang} demo-${this.$router.currentRoute.path
-        .split("/")
-        .pop()}`;
-    },
-
-    iconClass() {
-      return this.isExpanded ? "el-icon-caret-top" : "el-icon-caret-bottom";
-    },
-
-    controlText() {
-      return this.isExpanded
-        ? this.langConfig["hide-text"]
-        : this.langConfig["show-text"];
-    },
-
-    codeArea() {
-      return this.$el.getElementsByClassName("meta")[0];
-    },
-
-    codeAreaHeight() {
-      if (this.$el.getElementsByClassName("description").length > 0) {
-        return (
-          this.$el.getElementsByClassName("description")[0].clientHeight +
-          this.$el.getElementsByClassName("highlight")[0].clientHeight +
-          20
-        );
+    langConfig () {
+      return {
+        'hide-text': '隐藏代码',
+        'show-text': '显示代码'
       }
-      return this.$el.getElementsByClassName("highlight")[0].clientHeight;
+    },
+
+    blockClass () {
+      return `demo-${this.lang} demo-${this.$router.currentRoute.path
+        .split('/')
+        .pop()}`
+    },
+
+    iconClass () {
+      return this.isExpanded ? 'el-icon-caret-top' : 'el-icon-caret-bottom'
+    },
+
+    controlText () {
+      return this.isExpanded
+        ? this.langConfig['hide-text']
+        : this.langConfig['show-text']
+    },
+
+    codeArea () {
+      return this.$el.getElementsByClassName('meta')[0]
+    },
+
+    codeAreaHeight () {
+      if (this.$el.getElementsByClassName('description').length > 0) {
+        return (
+          this.$el.getElementsByClassName('description')[0].clientHeight +
+          this.$el.getElementsByClassName('highlight')[0].clientHeight +
+          20
+        )
+      }
+      return this.$el.getElementsByClassName('highlight')[0].clientHeight
     }
   },
 
   watch: {
-    isExpanded(val) {
-      this.codeArea.style.height = val ? `${this.codeAreaHeight + 1}px` : "0";
+    isExpanded (val) {
+      this.codeArea.style.height = val ? `${this.codeAreaHeight + 1}px` : '0'
       if (!val) {
-        this.fixedControl = false;
-        this.$refs.control.style.left = "0";
-        this.removeScrollHandler();
-        return;
+        this.fixedControl = false
+        this.$refs.control.style.left = '0'
+        this.removeScrollHandler()
+        return
       }
       setTimeout(() => {
         this.scrollParent = document.querySelector(
-          ".page-component__scroll > .el-scrollbar__wrap"
-        );
+          '.page-component__scroll > .el-scrollbar__wrap'
+        )
         this.scrollParent &&
-          this.scrollParent.addEventListener("scroll", this.scrollHandler);
-        this.scrollHandler();
-      }, 200);
+          this.scrollParent.addEventListener('scroll', this.scrollHandler)
+        this.scrollHandler()
+      }, 200)
     }
   },
 
-  created() {
-    const highlight = this.$slots.highlight;
+  created () {
+    const highlight = this.$slots.highlight
     if (highlight && highlight[0]) {
-      let code = "";
-      let cur = highlight[0];
-      if (cur.tag === "pre" && cur.children && cur.children[0]) {
-        cur = cur.children[0];
-        if (cur.tag === "code") {
-          code = cur.children[0].text;
+      let code = ''
+      let cur = highlight[0]
+      if (cur.tag === 'pre' && cur.children && cur.children[0]) {
+        cur = cur.children[0]
+        if (cur.tag === 'code') {
+          code = cur.children[0].text
         }
       }
       if (code) {
-        this.codepen.html = stripTemplate(code);
-        this.codepen.script = stripScript(code);
-        this.codepen.style = stripStyle(code);
+        this.codepen.html = stripTemplate(code)
+        this.codepen.script = stripScript(code)
+        this.codepen.style = stripStyle(code)
       }
     }
   },
 
-  mounted() {
+  mounted () {
     this.$nextTick(() => {
-      let highlight = this.$el.getElementsByClassName("highlight")[0];
-      if (this.$el.getElementsByClassName("description").length === 0) {
-        highlight.style.width = "100%";
-        highlight.borderRight = "none";
+      let highlight = this.$el.getElementsByClassName('highlight')[0]
+      if (this.$el.getElementsByClassName('description').length === 0) {
+        highlight.style.width = '100%'
+        highlight.borderRight = 'none'
       }
-    });
+    })
   },
 
-  beforeDestroy() {
-    this.removeScrollHandler();
+  beforeDestroy () {
+    this.removeScrollHandler()
   }
-};
+}
 </script>
