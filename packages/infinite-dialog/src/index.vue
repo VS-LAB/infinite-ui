@@ -181,6 +181,3 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped>
-@import '../../theme-chalk/src/infinite-dialog.scss';
-</style>
