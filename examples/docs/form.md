@@ -2,7 +2,7 @@
 ## Form
 
 ### 基础用法
-基础的按钮用法。
+表单用法。
 :::demo 
 
 ```html 
@@ -11,10 +11,10 @@
             :formData='formData'
             :formBtns="formBtns"
         >
-        Form
         </infinite-form>
     </template>
     <script>
+        const ElInput =  require('element-ui/lib/input')
         const validatePass = (rule, value, callback) => {
             if (value === '') {
             callback(new Error('请再次输入密码'));
@@ -22,8 +22,7 @@
             callback('密码不能为空');
             }
         };
-        const slotString = `<div name='content'>hello world ==== </div>`
-       
+        
         export default {
             data(){
                 return {
@@ -33,18 +32,7 @@
                             label: '自定义表单组件',
                             type: 'component',
                             key: 'component',
-                            component: {
-                                type: 'component',
-                                name: 'el-radio-group',
-                                props: {
-                                    fill: 'red'
-                                },
-                                events: {
-                                    change: (data) => {
-                                        window.alert(`you choose the ${data}`);
-                                    }
-                                }
-                            }
+                            component: `<header slot> header </header>`
                             },
                             {
                                 label: '姓名',
@@ -86,7 +74,6 @@
                                 label: '我有我独特',
                                 type: 'own',
                                 key: 'special',
-                                slotString: slotString
                             },
                             {
                                 label: '密码',

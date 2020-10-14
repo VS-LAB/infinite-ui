@@ -3,6 +3,7 @@
     class="infinite-form-ele"
     role="infiniteFormEle"
   >
+  ----
     <slot></slot>
   </div>
 </template>

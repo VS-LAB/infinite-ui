@@ -6,6 +6,7 @@ import Table from '../docs/table.md'
 import Form from '../docs/form.md'
 import Dialog from '../docs/dialog.md'
 import NavMenu from '../docs/navMenu.md'
+import LineChart from '../docs/lineChart.md'
 
 import VueRouter from 'vue-router'
 const routes = [
@@ -60,6 +61,14 @@ const routes = [
     path: '/guide/NavMenu',
     name: 'NavMenu',
     component: NavMenu,
+    meta: {
+      type: 'component'
+    }
+  },
+  {
+    path: '/guide/lineChart',
+    name: 'LineChart',
+    component: LineChart,
     meta: {
       type: 'component'
     }

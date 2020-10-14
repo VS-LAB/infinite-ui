@@ -19,7 +19,8 @@ import {
   InfiniteTableColumn,
   InfiniteForm,
   InfiniteDialog,
-  InfiniteNavMenu
+  InfiniteNavMenu,
+  InfiniteLineChart
 } from '../packages'
 Vue.config.productionTip = false
 Vue.use(InfiniteButton)
@@ -29,6 +30,7 @@ Vue.use(InfiniteButton)
   .use(InfiniteTableColumn)
   .use(InfiniteDialog)
   .use(InfiniteNavMenu)
+  .use(InfiniteLineChart)
 
 Vue.use(ElementUI)
 Vue.component('demo-block', demoBlock)

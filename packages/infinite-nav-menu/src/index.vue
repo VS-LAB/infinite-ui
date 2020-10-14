@@ -105,7 +105,7 @@ export default {
               index: item.index
             }
           }, [tamplateTitleEl, children])
-        } else {
+        } else { 
           const hrefEl = item.href
             ? (<a href={item.href} target="_blank">{item.icon ? <i class={item.icon}></i> : ''}<span slot="title">{item.label}</span></a>) 
             : ([item.icon ? <i class={item.icon}></i> : '', <span slot="title">{item.label}</span>])
