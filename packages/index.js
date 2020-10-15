@@ -8,6 +8,8 @@ import InfiniteTable from './infinite-table'
 import InfiniteTableColumn from './infinite-table-column'
 import InfiniteThemePicker from './infinite-theme-picker'
 import InfinitePagination from './infinite-pagination'
+import InfiniteLineChart from './infinite-line-chart'
+
     const version = '0.0.3'
     const components = [
       InfiniteButton,
@@ -17,7 +19,8 @@ import InfinitePagination from './infinite-pagination'
   InfiniteTable,
   InfiniteTableColumn,
   InfiniteThemePicker,
-  InfinitePagination
+  InfinitePagination,
+  InfiniteLineChart
     ]
     const install = Vue => {
       components.forEach(Component => {
@@ -39,7 +42,8 @@ import InfinitePagination from './infinite-pagination'
   InfiniteTable,
   InfiniteTableColumn,
   InfiniteThemePicker,
-  InfinitePagination
+  InfinitePagination,
+  InfiniteLineChart
     }
     export default {
       install,

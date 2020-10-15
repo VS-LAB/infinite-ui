@@ -4,7 +4,7 @@
     v-bind="component.props"
     v-on="component.events"
     :is="component.name">
-    <infinite-dynamic-component v-for="(item, index) in children" :key="index" :component="item"></infinite-dynamic-component>
+    <!-- <infinite-dynamic-component v-for="(item, index) in children" :key="index" :component="item"></infinite-dynamic-component> -->
   </component>
   <span v-else>{{ component.name }}</span>
 </template>

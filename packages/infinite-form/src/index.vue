@@ -14,12 +14,7 @@
       :class="formItem.class"
       :prop="formItem.key"
     >
-      <infiniteDynamicComponent
-        v-if="formItem.component"
-        :component="formItem.component"
-      />
       <infinite-form-item
-        v-else
         :ref="formItem.key"
         :itemData="formItem"
         :formModels="formModels.models"
@@ -42,15 +37,14 @@ import ElForm from 'element-ui/lib/form'
 import ElFormItem from 'element-ui/lib/form-item'
 import ElButton from '../../infinite-button'
 import InfiniteFormItem from './infiniteFormItem'
-import infiniteDynamicComponent from './component/component'
 export default {
   name: 'InfiniteForm',
   components: {
     ElForm,
     ElFormItem,
     InfiniteFormItem,
-    ElButton,
-    infiniteDynamicComponent
+    ElButton
+    
   },
   props: {
     inline: {

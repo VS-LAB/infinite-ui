@@ -23,8 +23,10 @@
     "packages"
   ],
   "dependencies": {
+    "@antv/g2": "^4.0.15",
     "core-js": "^3.3.4",
-    "element-ui": "2.4.9"
+    "element-ui": "2.4.9",
+    "uuid": "^8.3.1"
   },
   "devDependencies": {
     "@vue/babel-preset-app": "^4.5.6",

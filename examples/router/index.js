@@ -7,6 +7,7 @@ import Form from '../docs/form.md'
 import Dialog from '../docs/dialog.md'
 import NavMenu from '../docs/navMenu.md'
 import Pagination from '../docs/pagination.md'
+import LineChart from '../docs/lineChart.md'
 
 import VueRouter from 'vue-router'
 const routes = [
@@ -68,6 +69,14 @@ const routes = [
     path: '/guide/Pagination',
     name: 'Pagination',
     component: Pagination,
+    meta: {
+      type: 'component'
+    }
+  },
+  {
+    path: '/guide/lineChart',
+    name: 'LineChart',
+    component: LineChart,
     meta: {
       type: 'component'
     }
