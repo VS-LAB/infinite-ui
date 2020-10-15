@@ -1,29 +1,12 @@
 <template lang="html">
   <div class="menu-model">
-    <el-menu
-      default-active="1"
-      :unique-opened="true"
+    <infinite-nav-menu 
+      v-model="menuList" 
       :default-openeds="['1', '2', '3']"
       :default-active="defaultActive"
       :router="true"
     >
-      <el-submenu index="1">
-        <template slot="title">
-          <span>开发指南</span>
-        </template>
-        <el-menu-item-group>
-          <el-menu-item index="/guide/installation">安装</el-menu-item>
-        </el-menu-item-group>
-      </el-submenu>
-      <el-submenu index="2">
-        <template slot="title">
-          <span>通用模块</span>
-        </template>
-        <el-menu-item-group v-for="menu in menuList" :key="menu.label">
-          <el-menu-item :index="menu.index">{{menu.label}}</el-menu-item>
-        </el-menu-item-group>
-      </el-submenu>
-    </el-menu>
+    </infinite-nav-menu>
   </div>
 </template>
 
@@ -31,28 +14,49 @@
 export default {
   data () {
     return {
-      defaultActive: '/guide/install'
+      defaultActive: '/guide/installation',
+      mainMenuData: [
+        {
+          index: '1',
+          label: '开发指南',
+          children: [
+            {
+              index: '/guide/installation',
+              label: '安装'
+            }
+          ]
+        },
+        {
+          index: '2',
+          label: '通用模块'
+        }
+      ]
     }
   },
   computed: {
     menuList () {
-      const menulist = []
+      const componentlist = []
       this.$router.options.routes.forEach((route) => {
         if (route.meta && route.meta.type === 'component') {
-          menulist.push({
+          componentlist.push({
             index: route.path,
             label: route.name
           })
         }
       })
-      return menulist
+      this.$set(this.mainMenuData[1], 'children', componentlist)
+      return this.mainMenuData
     }
   },
-  created () {
-    const path = this.$route.fullPath
-    this.defaultActive = path === '/' ? '/guide/install' : path
-  },
-  methods: {
+  watch: {
+    '$route': {
+      handler (val) {
+        console.log(val)
+        const path = val.fullPath
+        this.defaultActive = path === '/' ? '/guide/installation' : path
+      },
+      immediate: true
+    }
   }
 }
 </script>

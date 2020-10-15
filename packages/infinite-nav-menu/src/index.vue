@@ -58,6 +58,11 @@ export default {
     activeTextColor: {
       type: String,
       default: ''
+    },
+    // 是否使用 vue-router 的模式，启用该模式会在激活导航时以 index 作为 path 进行路由跳转
+    router: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {
@@ -88,7 +93,8 @@ export default {
       collapseTransition,
       backgroundColor,
       textColor,
-      activeTextColor 
+      activeTextColor,
+      router
     } = this.$props
     function iterate (arr) {
       return arr.map((item, index) => {
@@ -130,7 +136,8 @@ export default {
         collapseTransition,
         backgroundColor,
         textColor,
-        activeTextColor
+        activeTextColor,
+        router
       },
       on: {
         select: this.handleSelect,

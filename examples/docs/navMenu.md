@@ -110,7 +110,7 @@
             :default-active="defaultActive"
             class="infinite-menu-vertical-demo"
             @open="handleOpen"
-            @close="handleClose">
+            @close="handleClose"
           >
           </infinite-nav-menu>
         </el-col>
@@ -124,7 +124,7 @@
             text-color="#fff"
             active-text-color="#ffd04b"
             @open="handleOpen"
-            @close="handleClose">
+            @close="handleClose"
           >
           </infinite-nav-menu>
         </el-col>
