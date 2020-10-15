@@ -3,8 +3,8 @@
 </template>
 
 <script>
-import mixinChart from './chart.js'
-import { percentFormat, floatIntFormat, AxisOption } from '../utils/index'
+import mixinChart from '../../mixins/chart'
+import { percentFormat, floatIntFormat, AxisOption } from './../utils/index'
 
 export default {
   name: 'InfiniteLineChart',
@@ -90,9 +90,6 @@ export default {
         return ['auto', 'auto']
       }
     }
-  },
-  mounted () {
-    this.setChartConfig(this.data)
   },
   methods: {
     setChartConfig: function (data) {

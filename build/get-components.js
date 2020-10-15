@@ -5,6 +5,7 @@ const excludes = [
   'index.js',
   'theme-chalk',
   'mixins',
+  'utils',
   'fonts',
   '.DS_Store'
 ]

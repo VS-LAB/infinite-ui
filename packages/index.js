@@ -3,24 +3,25 @@
     import InfiniteButton from './infinite-button'
 import InfiniteDialog from './infinite-dialog'
 import InfiniteForm from './infinite-form'
+import InfiniteLineChart from './infinite-line-chart'
 import InfiniteNavMenu from './infinite-nav-menu'
+import InfinitePagination from './infinite-pagination'
+import InfinitePieChart from './infinite-pie-chart'
 import InfiniteTable from './infinite-table'
 import InfiniteTableColumn from './infinite-table-column'
 import InfiniteThemePicker from './infinite-theme-picker'
-import InfinitePagination from './infinite-pagination'
-import InfiniteLineChart from './infinite-line-chart'
-
     const version = '0.0.3'
     const components = [
       InfiniteButton,
   InfiniteDialog,
   InfiniteForm,
+  InfiniteLineChart,
   InfiniteNavMenu,
+  InfinitePagination,
+  InfinitePieChart,
   InfiniteTable,
   InfiniteTableColumn,
-  InfiniteThemePicker,
-  InfinitePagination,
-  InfiniteLineChart
+  InfiniteThemePicker
     ]
     const install = Vue => {
       components.forEach(Component => {
@@ -38,12 +39,13 @@ import InfiniteLineChart from './infinite-line-chart'
       InfiniteButton,
   InfiniteDialog,
   InfiniteForm,
+  InfiniteLineChart,
   InfiniteNavMenu,
+  InfinitePagination,
+  InfinitePieChart,
   InfiniteTable,
   InfiniteTableColumn,
-  InfiniteThemePicker,
-  InfinitePagination,
-  InfiniteLineChart
+  InfiniteThemePicker
     }
     export default {
       install,
