@@ -22,7 +22,7 @@
             callback('密码不能为空');
             }
         };
-        
+
         export default {
             data(){
                 return {
@@ -32,7 +32,13 @@
                             label: '自定义表单组件',
                             type: 'component',
                             key: 'component',
-                            component: `<header slot> header </header>`
+                            component: {
+                                render (h) {
+                                    return h('div', [
+                                        h('span', 'Hello world')
+                                    ])
+                                }
+                            }
                             },
                             {
                                 label: '姓名',

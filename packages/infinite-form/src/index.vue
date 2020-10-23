@@ -44,7 +44,6 @@ export default {
     ElFormItem,
     InfiniteFormItem,
     ElButton
-    
   },
   props: {
     inline: {
@@ -82,6 +81,25 @@ export default {
   methods: {
     handleClick (e) {
       this.$emit('click', e)
+    },
+    validate (func) {
+      if (typeof func === 'function') {
+        this.$refs['infinite-form'].validate(valid => {
+          func(valid)
+        })
+      } else {
+        return new Promise((resolve, reject) => {
+          this.$refs['infinite-form'].validate(valid => {
+            resolve(valid)
+          })
+        })
+      }
+    },
+    resetFields () {
+      this.$refs['infinite-form'].resetFields()
+    },
+    clearValidate () {
+      this.$refs['infinite-form'].clearValidate()
     }
   },
   mounted () {

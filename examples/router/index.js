@@ -7,6 +7,7 @@ import Form from '../docs/form.md'
 import Dialog from '../docs/dialog.md'
 import NavMenu from '../docs/navMenu.md'
 import Pagination from '../docs/pagination.md'
+import Tree from '../docs/tree.md'
 import LineChart from '../docs/lineChart.md'
 import PieChart from '../docs/pieChart.md'
 
@@ -66,10 +67,19 @@ const routes = [
     meta: {
       type: 'component'
     }
-  }, {
+  }, 
+  {
     path: '/guide/Pagination',
     name: 'Pagination',
     component: Pagination,
+    meta: {
+      type: 'component'
+    }
+  },
+  {
+    path: '/guide/tree',
+    name: 'Tree',
+    component: Tree,
     meta: {
       type: 'component'
     }

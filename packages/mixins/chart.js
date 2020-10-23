@@ -61,6 +61,10 @@ export default {
       // 绘制
       this.chart.render()
 
+      const e = document.createEvent('Event')
+      e.initEvent('resize', true, true)
+      window.dispatchEvent(e)
+
       let _this = this
       // 销毁实例
       this.$once('hook:beforeDestroy', function () {

@@ -136,8 +136,26 @@ export default {
       }
 
       // 坐标轴配置
-      this.chart.axis('name', new AxisOption('name', this.axisColor))
-      this.chart.axis('value', new AxisOption('value', this.axisColor, this.showGrid))
+      this.chart.axis('name', {
+        tickLine: false
+      })
+      this.chart.axis('value', {
+        grid: {
+          lineStyle: {
+            lineDash: null,
+            stroke: '#d9d9d9',
+            lineWidth: 1
+          }
+        },
+        label: {
+          autoRotate: false,
+          rotate: 0,
+          formatter: (text, item, index) => {
+            return text + ''
+          }
+        },
+        tickLine: false
+      })
 
       // 配置折线和散点的颜色、形状等
       let line = this.chart.line().position('name*value')

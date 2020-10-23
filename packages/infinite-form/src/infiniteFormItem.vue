@@ -4,7 +4,6 @@ import ElSelect from 'element-ui/lib/select'
 import ElOption from 'element-ui/lib/option'
 import DatePicker from 'element-ui/lib/date-picker'
 import ElSwitch from 'element-ui/lib/switch'
-import InfiniteFormEle from './infiniteFormEle'
 
 export default {
   name: 'InfiniteFormItem',
@@ -18,8 +17,7 @@ export default {
     ElSelect,
     ElOption,
     DatePicker,
-    ElSwitch,
-    InfiniteFormEle
+    ElSwitch
   },  
   props: {
     itemData: {
@@ -32,20 +30,13 @@ export default {
       default: () => {}
     }
   },
-  methods: {
-
-  },
   render (h, context) {
     const { itemData, formModels } = this
     const placeholder = itemData.placeholder || ''
     formModels[itemData.key] = formModels[itemData.key] || itemData.defaultValue
-    
     switch (itemData.type) {
       case 'component': 
-        const tamplateTitleEl = (<template slot='component'><span>2</span></template>)
-
-        return h('InfiniteFormEle', {}, ['hello wrold', tamplateTitleEl])
-        
+        return h(itemData.component)
       case 'input':
         return (<el-input placeholder={placeholder} class={itemData.class} v-model={formModels[itemData.key]}/>)
       case 'select':
