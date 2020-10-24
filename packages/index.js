@@ -1,6 +1,6 @@
 /* eslint-disable */
 // This file is auto gererated by build/build-entry.js
-    import InfiniteButton from './infinite-button'
+import InfiniteButton from './infinite-button'
 import InfiniteDialog from './infinite-dialog'
 import InfiniteForm from './infinite-form'
 import InfiniteLineChart from './infinite-line-chart'
@@ -10,9 +10,10 @@ import InfinitePieChart from './infinite-pie-chart'
 import InfiniteTable from './infinite-table'
 import InfiniteTableColumn from './infinite-table-column'
 import InfiniteThemePicker from './infinite-theme-picker'
-    const version = '0.0.3'
-    const components = [
-      InfiniteButton,
+import InfiniteCascaders from './infinite-cascaders'
+const version = '0.0.3'
+const components = [
+  InfiniteButton,
   InfiniteDialog,
   InfiniteForm,
   InfiniteLineChart,
@@ -21,22 +22,23 @@ import InfiniteThemePicker from './infinite-theme-picker'
   InfinitePieChart,
   InfiniteTable,
   InfiniteTableColumn,
-  InfiniteThemePicker
-    ]
-    const install = Vue => {
-      components.forEach(Component => {
-        Vue.use(Component)
-      })
+  InfiniteThemePicker,
+  InfiniteCascaders
+]
+const install = Vue => {
+  components.forEach(Component => {
+    Vue.use(Component)
+  })
 
-    };
-    /* istanbul ignore if */
-    if (typeof window !== 'undefined' && window.Vue) {
-      install(window.Vue)
-    }
-    export {
-      install,
-      version,
-      InfiniteButton,
+};
+/* istanbul ignore if */
+if (typeof window !== 'undefined' && window.Vue) {
+  install(window.Vue)
+}
+export {
+  install,
+  version,
+  InfiniteButton,
   InfiniteDialog,
   InfiniteForm,
   InfiniteLineChart,
@@ -45,10 +47,11 @@ import InfiniteThemePicker from './infinite-theme-picker'
   InfinitePieChart,
   InfiniteTable,
   InfiniteTableColumn,
-  InfiniteThemePicker
-    }
-    export default {
-      install,
-      version
-    }
-  
+  InfiniteThemePicker,
+  InfiniteCascaders
+}
+export default {
+  install,
+  version
+}
+

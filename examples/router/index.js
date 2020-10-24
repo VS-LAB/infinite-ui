@@ -10,6 +10,7 @@ import Pagination from '../docs/pagination.md'
 import Tree from '../docs/tree.md'
 import LineChart from '../docs/lineChart.md'
 import PieChart from '../docs/pieChart.md'
+import Cascaders from '../docs/Cascaders.md'
 
 import VueRouter from 'vue-router'
 const routes = [
@@ -67,7 +68,7 @@ const routes = [
     meta: {
       type: 'component'
     }
-  }, 
+  },
   {
     path: '/guide/Pagination',
     name: 'Pagination',
@@ -96,6 +97,14 @@ const routes = [
     path: '/guide/pieChart',
     name: 'PieChart',
     component: PieChart,
+    meta: {
+      type: 'component'
+    }
+  },
+  {
+    path: '/guide/cascaders',
+    name: 'Cascaders',
+    component: Cascaders,
     meta: {
       type: 'component'
     }

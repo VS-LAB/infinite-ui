@@ -1,5 +1,5 @@
 
-import { mount } from '@vue/test-utils'
+import { mount, shallowMount } from '@vue/test-utils'
 import InfiniteTable from '@/packages/infinite-table/src/index.vue'
 
 const getTestData = function () {
@@ -45,9 +45,10 @@ const getTestHeader = function () {
 describe('InfiniteTable.vue', () => {
   const data = getTestData()
   const header = getTestHeader()
-  const wrapper = mount(InfiniteTable, {
+
+  const wrapper = shallowMount(InfiniteTable, {
     propsData: {
-      data, 
+      data,
       header
     }
   })
@@ -59,7 +60,7 @@ describe('InfiniteTable.vue', () => {
     })
   })
 
-  it('headerData to checked', () => {
+  it('tableData to checked', () => {
     const wrapperArrayRow = wrapper.findAll('.el-table__body-wrapper .el-table__row')
     data.forEach((dItem, dIndex) => {
       const wrapperArrayRowCell = wrapperArrayRow.at(dIndex).findAll('.cell')

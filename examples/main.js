@@ -13,7 +13,7 @@ import '../packages/theme-chalk/src/index.scss'
 
 // 导入组件库
 import {
-  InfiniteButton, 
+  InfiniteButton,
   InfiniteThemePicker,
   InfiniteTable,
   InfiniteTableColumn,
@@ -22,7 +22,8 @@ import {
   InfiniteNavMenu,
   InfinitePagination,
   InfiniteLineChart,
-  InfinitePieChart
+  InfinitePieChart,
+  InfiniteCascaders
 } from '../packages'
 Vue.config.productionTip = false
 Vue.use(InfiniteButton)
@@ -35,6 +36,7 @@ Vue.use(InfiniteButton)
   .use(InfinitePagination)
   .use(InfiniteLineChart)
   .use(InfinitePieChart)
+  .use(InfiniteCascaders)
 
 Vue.use(ElementUI)
 Vue.component('demo-block', demoBlock)
