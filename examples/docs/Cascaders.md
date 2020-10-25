@@ -14,26 +14,35 @@
     v-model="value"
     @componentClick="componentClick"
     @componentInput="componentInput"
+    @componentChange="componentChange"
   />
 </template>
 <script>
   export default {
     methods: {
-      componentInput() {},
+      // 輸入框
+      componentInput(val) {
+        console.log('event-input=', val);
+      },
+      // 按鈕
       componentClick(val) {
-        console.log(val);
+        console.log('event-click=', val);
+      },
+      // 日期
+      componentChange(val) {
+        console.log('event-change=', val);
       },
     },
     watch: {
       value() {
-        console.log(this.value.keys, this.value.value);
+        console.log('watch=', this.value.keys.join(','), this.value.value);
       },
     },
     data() {
       return {
         value: {
           keys: ['inputs', 'input-1'],
-          value: '2323',
+          value: '输入值',
         },
         options: [
           {
@@ -90,11 +99,17 @@
             ],
           },
           {
-            value: 'textarea',
-            label: '文本域',
-            defaultValue: '文本域默认值',
-            component: 'input',
-            type: 'textarea',
+            value: 'date-picker',
+            label: '日期选择器',
+            children: [
+              {
+                value: 'date-picker-1',
+                label: '日选择器',
+                defaultValue: '2020-12-12',
+                component: 'date-picker',
+                type: 'date',
+              },
+            ],
           },
         ],
       };

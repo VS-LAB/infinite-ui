@@ -16,6 +16,13 @@
                  @click="onClick"
                  :type="selectNode.type">
         {{selectNode.name}}</el-button>
+
+      <el-date-picker v-if="selectNode.component === 'date-picker'"
+                      v-model="selectNode.defaultValue"
+                      @change="onChange"
+                      value-format="yyyy-MM-dd"
+                      :type="selectNode.type" />
+
     </div>
   </div>
 </template>
@@ -23,12 +30,14 @@
 import ElCascader from 'element-ui/lib/cascader'
 import ElInput from 'element-ui/lib/input'
 import ElButton from 'element-ui/lib/button'
+import ElDatePicker from 'element-ui/lib/date-picker'
 export default {
   name: 'InfiniteCascaders',
   components: {
     ElCascader,
     ElInput,
-    ElButton
+    ElButton,
+    ElDatePicker
   },
   model: {
     prop: 'vModel',
@@ -76,16 +85,19 @@ export default {
     onInput () {
       this.$emit('change', { keys: this.keys, value: this.selectNode.defaultValue })
       if (this.selectNode.component === 'input' && this.selectNode.defaultValue !== this.vModel.value) {
-        this.$emit('componentChange', this.selectNode.defaultValue)
+        this.$emit('componentInput', this.selectNode.defaultValue)
       }
     },
     // 按钮event-click
     onClick () {
       this.$emit('componentClick', this.keys[this.keys.length - 1])
     },
+    // 按钮event-click
+    onChange (val) {
+      this.$emit('componentChange', val)
+    },
     // 及联动event-chenge
     handleChange () {
-      console.log(this.keys)
       this.setSelectNode()
       this.$emit('cascaderChange', this.keys)
     },
@@ -115,14 +127,16 @@ export default {
     setSelectNode () {
       const { value } = this.reProps
       const selectNode = this.tiledOptions.find(item => item[value] === this.keys[this.keys.length - 1])
-      this.selectNode = JSON.parse(JSON.stringify(selectNode))
+      this.selectNode = selectNode ? JSON.parse(JSON.stringify(selectNode)) : {}
+      const defaultValue = this.selectNode.defaultValue || ''
       this.$emit('change', {
         keys: this.keys,
-        value: this.selectNode.defaultValue || ''
+        value: defaultValue
       })
     }
   },
   watch: {
+    // 由于数据可能是动态的，所有在监听里边做初始化
     options: {
       handler (val) {
         if (val && val.length) {
