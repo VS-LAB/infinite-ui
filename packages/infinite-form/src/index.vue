@@ -10,6 +10,7 @@
     <el-form-item
       v-for="formItem in formData"
       :key="formItem.key"
+      v-show="formItem.isShow"
       :label="formItem.label"
       :class="formItem.class"
       :prop="formItem.key"

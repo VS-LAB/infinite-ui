@@ -8,7 +8,7 @@
 ```html
     <el-row>
         <infinite-button>默认按钮</infinite-button>
-        <infinite-button type="primary">主要按钮</infinite-button>
+        <infinite-button type="primary" @click="handleClick">主要按钮</infinite-button>
         <infinite-button type="success">成功按钮</infinite-button>
         <infinite-button type="info">信息按钮</infinite-button>
         <infinite-button type="warning">警告按钮</infinite-button>
@@ -22,6 +22,15 @@
         <infinite-button type="warning" plain>警告按钮</infinite-button>
         <infinite-button type="danger" plain>危险按钮</infinite-button>
     </el-row>
+    <script>
+        export default{
+            methods: {
+                handleClick(val){
+                    console.log(val,'clicked the button')
+                }
+            }
+        }
+    </script>
 ```
 :::
 ### 禁用状态

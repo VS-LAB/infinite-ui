@@ -36,7 +36,8 @@ export default {
     formModels[itemData.key] = formModels[itemData.key] || itemData.defaultValue
     switch (itemData.type) {
       case 'component': 
-        return h(itemData.component)
+        // return h(itemData.component)
+        return itemData.component(h)
       case 'input':
         return (<el-input placeholder={placeholder} class={itemData.class} v-model={formModels[itemData.key]}/>)
       case 'select':

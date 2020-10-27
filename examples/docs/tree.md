@@ -7,9 +7,7 @@ tree用法。
 
 ```html 
     <el-row>
-        <infinite-tree
-            
-        >
+        <infinite-tree>
         </infinite-tree>    
     </el-row>
 ```
