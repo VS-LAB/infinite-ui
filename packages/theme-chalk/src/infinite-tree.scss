@@ -1,0 +1,106 @@
+@import '../../../node_modules/element-ui/packages/theme-chalk/src/tree.scss';
+
+.tree-container {
+    width: 100%;
+    max-width: 700px;
+    max-height: 60vh;
+    padding: 2em;
+    overflow: auto;
+    /deep/#node-input {
+      height: 25px;
+    }
+  
+    /deep/.el-tree-node__content {
+      height: 100%;
+    }
+    /deep/.same-node-error {
+      margin-top: 4px;
+      margin-bottom: 5px;
+      font-size: 12px;
+      color: red;
+    }
+  
+    // 高亮显示按钮
+    .is-current {
+      & > .el-tree-node__content {
+        .com-tree-btn {
+          opacity: 1;
+        }
+      }
+    }
+    // 悬浮显示按钮
+    .el-tree-node__content {
+      &:hover {
+        .com-tree-btn {
+          opacity: 1;
+        }
+      }
+    }
+    .com-tree-btn {
+      margin-left: 10px;
+      opacity: 0;
+      transition: opacity 0.1s;
+      .el-button {
+        transform: scale(0.7); // 缩小按钮
+        & + .el-button {
+          margin-left: -1px;
+        }
+      }
+    }
+    .btn-text {
+      font-size: 12px;
+      color: #409eff;
+      margin-right: 5px;
+      margin-left: 5px;
+    }
+  }
+  
+  // .tree /deep/ .is-focusable.is-expanded.el-tree-node:before {
+  //   content: "";
+  //   position: absolute;
+  //   border-left: 1px dashed #b8b9bb;
+  //   bottom: 0px;
+  //   height: calc(~"100%-22px");
+  //   margin: 22px, 0, 0;
+  //   top: 18px;
+  //   left: 11px;
+  //   width: 1px;
+  // }
+  
+  .tree /deep/.el-tree-node .el-tree-node__content {
+    // height: 30px;
+  
+    &:hover .ly-visible {
+      visibility: visible;
+    }
+  
+    // &::before,
+    // &::after {
+    //   content: "";
+    //   position: absolute;
+    //   right: auto;
+    // }
+  
+    // &::before {
+    //   border-left: 1px solid #e6e6e6;
+    //   bottom: 50px;
+    //   height: 100%;
+    //   // height: calc(~"100%-22px");
+    //   top: 0px;
+    //   width: 1px;
+    //   margin-top: 25px;
+    //   margin-left: 10px;
+    // }
+  
+    // &::after {
+    //   border-top: 1px solid #e6e6e6;
+    //   height: 20px;
+    //   top: 104px;
+    //   width: 10px;
+    //   margin-left: -5px;
+    // }
+  }
+  
+  .el-tree .el-tree-node {
+    position: relative;
+  }

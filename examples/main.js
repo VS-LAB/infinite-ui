@@ -23,7 +23,8 @@ import {
   InfinitePagination,
   InfiniteLineChart,
   InfinitePieChart,
-  InfiniteCascaders
+  InfiniteCascaders,
+  InfiniteTree
 } from '../packages'
 Vue.config.productionTip = false
 Vue.use(InfiniteButton)
@@ -37,6 +38,7 @@ Vue.use(InfiniteButton)
   .use(InfiniteLineChart)
   .use(InfinitePieChart)
   .use(InfiniteCascaders)
+  .use(InfiniteTree)
 
 Vue.use(ElementUI)
 Vue.component('demo-block', demoBlock)
