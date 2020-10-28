@@ -1,33 +1,27 @@
 <template>
-  <el-form
-    ref="infinite-form"
-    class="infinite-form"
-    :inline="inline"
-    :rules="formModels.rules"
-    :model="formModels.models"
-    :label-width="labelWidth"
-  >
-    <el-form-item
-      v-for="formItem in formData"
-      :key="formItem.key"
-      v-show="formItem.isShow"
-      :label="formItem.label"
-      :class="formItem.class"
-      :prop="formItem.key"
-    >
-      <infinite-form-item
-        :ref="formItem.key"
-        :itemData="formItem"
-        :formModels="formModels.models"
-      />
+  <el-form ref="infinite-form"
+           class="infinite-form"
+           :inline="inline"
+           :rules="formModels.rules"
+           :model="formModels.models"
+           :label-width="labelWidth">
+    <el-form-item v-for="formItem in formData"
+                  :key="formItem.key"
+                  v-show="formItem.isShow"
+                  :label="formItem.label"
+                  :class="formItem.class"
+                  :prop="formItem.key">
+      <infinite-form-item :ref="formItem.key"
+                          :itemData="formItem"
+                          :formModels="formModels.models" />
     </el-form-item>
-    <el-form-item v-if="formBtns.length > 0" class="infinite-form-btns">
-      <el-button
-        :type="btn.type"
-        v-for="(btn, i) in formBtns"
-        :key="i"
-        class="infinite-form-btns"
-      >
+    <el-form-item v-if="formBtns.length > 0"
+                  class="infinite-form-btns">
+      <el-button :type="btn.type"
+                 v-for="(btn, i) in formBtns"
+                 :key="i"
+                 class="infinite-form-btns"
+                 @click="btnClick(btn)">
         {{ btn.name }}
       </el-button>
     </el-form-item>
@@ -82,6 +76,9 @@ export default {
   methods: {
     handleClick (e) {
       this.$emit('click', e)
+    },
+    btnClick (btn) {
+      btn.click && btn.click(this.formModels)
     },
     validate (func) {
       if (typeof func === 'function') {

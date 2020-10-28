@@ -33,7 +33,6 @@
         {
           value: 'input-2',
           label: '文本输入框',
-          defaultValue: '默认文本内容',
           component: 'input',
           type: 'text',
         },
@@ -80,7 +79,6 @@
         {
           value: 'date-picker-1',
           label: '日选择器',
-          defaultValue: '2020-12-12',
           component: 'date-picker',
           type: 'date',
         },
@@ -92,7 +90,7 @@
       componentClick(val) {
         console.log('====event-click===', val);
       },
-      componentInput(val) {
+      componentEvent(val) {
         console.log('event-input=', val);
       },
     },
@@ -103,7 +101,7 @@
           {
             label: '自定义表单组件',
             type: 'component',
-            key: 'component',
+            key: 'cascaders',
             isShow: true,
             component: (h) => {
               return h(cascaders.default, {
@@ -116,8 +114,8 @@
                   },
                 },
                 on: {
-                  componentInput: (val) => {
-                    this.componentInput(val);
+                  componentEvent: (val) => {
+                    this.componentEvent(val);
                   },
                 },
               });
@@ -179,6 +177,9 @@
           {
             name: '保存',
             type: 'primary',
+            click: (val) => {
+              console.log(val);
+            },
           },
           {
             name: '取消',

@@ -9,20 +9,19 @@
     <div class="cascader-container-component">
       <el-input v-if="selectNode.component === 'input'"
                 :type="selectNode.type"
-                @input="onInput"
-                v-model="selectNode.defaultValue" />
+                @input="componentEvent"
+                v-model="value" />
 
       <el-button v-if="selectNode.component === 'button'"
-                 @click="onClick"
+                 @click="componentEvent"
                  :type="selectNode.type">
         {{selectNode.name}}</el-button>
 
       <el-date-picker v-if="selectNode.component === 'date-picker'"
-                      v-model="selectNode.defaultValue"
-                      @change="onChange"
+                      v-model="value"
+                      @change="componentEvent"
                       value-format="yyyy-MM-dd"
                       :type="selectNode.type" />
-
     </div>
   </div>
 </template>
@@ -66,7 +65,6 @@ export default {
     return {
       keys: [],
       value: '',
-      tiledOptions: [],
       selectNode: {},
       reProps: {
         expandTrigger: 'click',
@@ -82,23 +80,15 @@ export default {
   },
   methods: {
     // 输入框event-input
-    onInput () {
-      this.$emit('change', { keys: this.keys, value: this.selectNode.defaultValue })
-      if (this.selectNode.component === 'input' && this.selectNode.defaultValue !== this.vModel.value) {
-        this.$emit('componentInput', this.selectNode.defaultValue)
-      }
-    },
-    // 按钮event-click
-    onClick () {
-      this.$emit('componentClick', this.keys[this.keys.length - 1])
-    },
-    // 按钮event-click
-    onChange (val) {
-      this.$emit('componentChange', val)
+    componentEvent () {
+      this.setVModel()
+      this.$emit('componentEvent', this.value)
     },
     // 及联动event-chenge
     handleChange () {
+      this.value = ''
       this.setSelectNode()
+      this.setVModel()
       this.$emit('cascaderChange', this.keys)
     },
     // 获取options平铺数据
@@ -115,8 +105,7 @@ export default {
       }
       tiledArray(this.options)
       return result
-    },
-    // 初始化本地参数
+    }, // 初始化本地参数
     initParam () {
       this.reProps = { ...{}, ...this.reProps, ...this.props }
       const { keys, value } = this.vModel
@@ -127,12 +116,15 @@ export default {
     setSelectNode () {
       const { value } = this.reProps
       const selectNode = this.tiledOptions.find(item => item[value] === this.keys[this.keys.length - 1])
-      this.selectNode = selectNode ? JSON.parse(JSON.stringify(selectNode)) : {}
-      const defaultValue = this.selectNode.defaultValue || ''
-      this.$emit('change', {
+      this.selectNode = selectNode || {}
+    },
+    // 设置vModel
+    setVModel () {
+      const vModel = {
         keys: this.keys,
-        value: defaultValue
-      })
+        value: this.value
+      }
+      this.$emit('change', vModel)
     }
   },
   watch: {
@@ -146,6 +138,14 @@ export default {
         }
       },
       immediate: true
+    },
+    // 双向绑定的v-model被父组件变动时，及时更新上去
+    vModel: {
+      handler (val) {
+        this.keys = val.keys
+        this.value = val.value
+      },
+      deep: true
     }
   }
 }

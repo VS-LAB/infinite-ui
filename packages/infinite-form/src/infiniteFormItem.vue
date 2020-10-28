@@ -18,16 +18,16 @@ export default {
     ElOption,
     DatePicker,
     ElSwitch
-  },  
+  },
   props: {
     itemData: {
       type: Object,
-      default: () => {},
+      default: () => { },
       required: true
     },
     formModels: {
       type: Object,
-      default: () => {}
+      default: () => { }
     }
   },
   render (h, context) {
@@ -35,11 +35,15 @@ export default {
     const placeholder = itemData.placeholder || ''
     formModels[itemData.key] = formModels[itemData.key] || itemData.defaultValue
     switch (itemData.type) {
-      case 'component': 
-        // return h(itemData.component)
-        return itemData.component(h)
+      case 'component':
+        const component = itemData.component(h)
+        component.componentOptions.propsData.vModel = formModels[itemData.key]
+        component.componentOptions.listeners.change = (val) => {
+          formModels[itemData.key] = val
+        }
+        return component
       case 'input':
-        return (<el-input placeholder={placeholder} class={itemData.class} v-model={formModels[itemData.key]}/>)
+        return (<el-input placeholder={placeholder} class={itemData.class} v-model={formModels[itemData.key]} />)
       case 'select':
         return (<el-select placeholder={placeholder} class={itemData.class} clearable={itemData.clearable} v-model={formModels[itemData.key]}>
           {
@@ -49,9 +53,9 @@ export default {
       case 'switch':
         return (<el-switch v-model={formModels[itemData.key]}></el-switch>)
       case 'textarea':
-        return (<el-input type="textarea" placeholder={placeholder} class={itemData.class} v-model={formModels[itemData.key]}/>) 
+        return (<el-input type="textarea" placeholder={placeholder} class={itemData.class} v-model={formModels[itemData.key]} />)
       case 'radio':
-        return (<el-input placeholder={placeholder} class={itemData.class} v-model={formModels[itemData.key]}/>) 
+        return (<el-input placeholder={placeholder} class={itemData.class} v-model={formModels[itemData.key]} />)
       case 'own':
         return ''
       case 'date':
@@ -61,11 +65,11 @@ export default {
             align="right"
             type="date"
             placeholder="选择日期"
-            // picker-options={}
+          // picker-options={}
           >
           </el-date-picker>
         )
-      default: 
+      default:
         return null
     }
   }

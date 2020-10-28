@@ -5,44 +5,34 @@
 ### 基础用法
 
 基础的联动组件用法。
-:::demo 使用`type`、`plain`、`round`和`circle`属性来定义 Button 的样式。
+:::demo 使用`options`属性来定义级联动的数据,根据`options`里边不同的`component`来定义不同的联动组件,`v-model`可以双向绑定两个属性,分别是`keys`和`value`。
 
 ```html
 <template>
   <infinite-cascaders
     :options="options"
     v-model="value"
-    @componentClick="componentClick"
-    @componentInput="componentInput"
-    @componentChange="componentChange"
+    @componentEvent="componentEvent"
+    @cascaderChange="cascaderChange"
   />
 </template>
 <script>
   export default {
     methods: {
-      // 輸入框
-      componentInput(val) {
-        console.log('event-input=', val);
+      // 所有联动组件事件
+      componentEvent() {
+        console.log('componentEvent = ', this.value);
       },
-      // 按鈕
-      componentClick(val) {
-        console.log('event-click=', val);
-      },
-      // 日期
-      componentChange(val) {
-        console.log('event-change=', val);
-      },
-    },
-    watch: {
-      value() {
-        console.log('watch=', this.value.keys.join(','), this.value.value);
+      // 级联动change
+      cascaderChange() {
+        console.log('cascaderChange = ', this.value);
       },
     },
     data() {
       return {
         value: {
           keys: ['inputs', 'input-1'],
-          value: '输入值',
+          value: '默认输入值',
         },
         options: [
           {
@@ -58,7 +48,6 @@
               {
                 value: 'input-2',
                 label: '文本输入框',
-                defaultValue: '默认文本内容',
                 component: 'input',
                 type: 'text',
               },
@@ -105,7 +94,6 @@
               {
                 value: 'date-picker-1',
                 label: '日选择器',
-                defaultValue: '2020-12-12',
                 component: 'date-picker',
                 type: 'date',
               },
