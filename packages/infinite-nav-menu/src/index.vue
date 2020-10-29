@@ -83,12 +83,12 @@ export default {
     }
   },
   render (h, context) {
-    const { 
-      menuData, 
-      mode, 
+    const {
+      menuData,
+      mode,
       defaultActive,
       defaultOpeneds,
-      activeIndex, 
+      activeIndex,
       collapse,
       collapseTransition,
       backgroundColor,
@@ -111,17 +111,15 @@ export default {
               index: item.index
             }
           }, [tamplateTitleEl, children])
-        } else { 
-          const hrefEl = item.href
-            ? (<a href={item.href} target="_blank">{item.icon ? <i class={item.icon}></i> : ''}<span slot="title">{item.label}</span></a>) 
-            : ([item.icon ? <i class={item.icon}></i> : '', <span slot="title">{item.label}</span>])
+        } else {
+          const componentEl = item.component ? item.component(h) : ([item.icon ? <i class={item.icon}></i> : '', <span slot="title">{item.label}</span>])
           return h('el-menu-item', {
             props: {
               key: item.index,
               index: item.index,
               disabled: item.disabled
             }
-          }, [hrefEl, children])
+          }, [componentEl, children])
         }
       })
     }
