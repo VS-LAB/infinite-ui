@@ -31,14 +31,14 @@ export let dateFormat = (dateTime, valueFormat) => {
   })
   return valueFormat
 }
-  
+
 // 处理百分比
 export let percentFormat = (value) => {
   if (!value) return '0%'
   value = value * 100
   return String(value).indexOf('.') > 0 ? `${value.toFixed(1)}%` : `${parseInt(value)}%`
 }
-  
+
 // 处理千位分隔
 export let numFormat = (value) => {
   if (!value) return 0
@@ -51,7 +51,7 @@ export let numFormat = (value) => {
     return String(value).replace(reg, '$&,')
   }
 }
-  
+
 // 处理浮点数或整数(浮点数取一位/整数不做处理)  问题: floatIntFormat(0.58*100) 返回 58.0
 export let floatIntFormat = (value) => {
   if (!value) return 0
@@ -61,13 +61,13 @@ export let floatIntFormat = (value) => {
     return value
   }
 }
-  
+
 // 颜色组
 export const color = ['#1890FF', '#2FC25B', '#FACC14', '#223273', '#8543E0', '#13C2C2', '#3436C7', '#F04864']
-  
+
 // axis配置类
 export class AxisOption {
-  constructor (type, axisColor, showGrid) {
+  constructor(type, axisColor, showGrid) {
     let axisOption = { label: { textStyle: { fill: axisColor.labelColor } }, line: {} }
     if (type === 'x' || type === 'name') {
       axisOption['line']['stroke'] = axisColor.lineColor
@@ -79,4 +79,20 @@ export class AxisOption {
       return axisOption
     }
   }
+}
+
+// json数据平铺
+export let tiledArray = (json, props = { children: 'children' }) => {
+  const { children } = props
+  const result = []
+  const tiledArraying = (data) => {
+    data.forEach(item => {
+      if (item[children] && item[children].length) {
+        tiledArraying(item[children])
+      }
+      result.push(item)
+    })
+  }
+  tiledArraying(json)
+  return result
 }

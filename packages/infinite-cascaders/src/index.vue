@@ -30,6 +30,7 @@ import ElCascader from 'element-ui/lib/cascader'
 import ElInput from 'element-ui/lib/input'
 import ElButton from 'element-ui/lib/button'
 import ElDatePicker from 'element-ui/lib/date-picker'
+import { tiledArray } from '../../utils'
 export default {
   name: 'InfiniteCascaders',
   components: {
@@ -91,21 +92,7 @@ export default {
       this.setVModel()
       this.$emit('cascaderChange', this.keys)
     },
-    // 获取options平铺数据
-    getTiledArrayed () {
-      const { children } = this.reProps
-      const result = []
-      const tiledArray = (data) => {
-        data.forEach(item => {
-          if (item[children] && item[children].length) {
-            tiledArray(item[children])
-          }
-          result.push(item)
-        })
-      }
-      tiledArray(this.options)
-      return result
-    }, // 初始化本地参数
+    // 初始化本地参数
     initParam () {
       this.reProps = { ...{}, ...this.reProps, ...this.props }
       const { keys, value } = this.vModel
@@ -133,7 +120,7 @@ export default {
       handler (val) {
         if (val && val.length) {
           this.initParam()
-          this.tiledOptions = this.getTiledArrayed()
+          this.tiledOptions = tiledArray(this.options, { children: this.reProps.children })
           this.setSelectNode()
         }
       },
