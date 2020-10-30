@@ -1,9 +1,8 @@
 <template>
-  <button
-    class="infinite-button"
-    :disabled="disabled"
-    @click="handleClick"
-    :class="[
+  <button class="infinite-button"
+          :disabled="disabled"
+          @click="handleClick"
+          :class="[
       `infinite-button--${type}`,
       {
         'is-plain': plain,
@@ -11,11 +10,13 @@
         'is-circle': circle,
         'is-disabled': disabled,
       },
-    ]"
-  >
-    <i :class="icon" v-if="icon"></i>
+    ]">
+    <i :class="icon"
+       v-if="icon"></i>
     <!-- 如果没有传入插槽的时候才显示 -->
-    <span v-if="$slots.default"><slot></slot></span>
+    <span v-if="$slots.default">
+      <slot></slot>
+    </span>
   </button>
 </template>
 <script>
@@ -51,7 +52,7 @@ export default {
     }
   },
   mounted () {
-    console.log(this.$attrs)
+    console.log(this)
   }
 }
 </script>

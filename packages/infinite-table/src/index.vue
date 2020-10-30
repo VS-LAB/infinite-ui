@@ -1,55 +1,50 @@
 <template>
-  <el-table 
-    ref="infiniteTableRef"
-    :data="data"
-    :stripe="stripe"
-    :border="border"
-    :height="height || computedHeight || 'auto'"
-    :row-class-name="rowClassName"
-    @selection-change="selectionChange"
-    @sort-change="sortChange"
-    :default-sort="defaultSort"
-    class="infinite-table"
-    width="100%">
+  <el-table ref="infiniteTableRef"
+            :data="data"
+            :stripe="stripe"
+            :border="border"
+            :height="height || computedHeight || 'auto'"
+            :row-class-name="rowClassName"
+            @selection-change="selectionChange"
+            @sort-change="sortChange"
+            :default-sort="defaultSort"
+            class="infinite-table"
+            width="100%">
 
     <template v-if="header.length">
 
       <template v-if="type">
-        <infinite-table-column 
-          :type="type"
-          width="60px"
-        ></infinite-table-column>
+        <infinite-table-column :type="type"
+                               width="60px"></infinite-table-column>
       </template>
 
-          <infinite-table-column 
-            v-for="hItem in header"
-            :key="hItem.prop"
-            :prop="hItem.prop"
-            :label="hItem.label"
-            :fixed="isFixed(hItem)"
-            :min-width="getColumnWidth(hItem)"
-            :sortable="hItem.sortable"
-            :align="hItem.align"
-            :show-overflow-tooltip="hItem.showOverflowTooltip"
-          >
-            <template v-if="hItem.prop === 'operation'" slot-scope="scope">
-              <div class="infinite-table-operation-btn">
-                <template v-for="(btn,index) in operations" >
-                    <infinite-button
-                    :key="index"
-                    :type="btn.type"
-                    @click="handleClick(btn,scope.$index, scope.row)">{{btn.label}}</infinite-button>
-                </template>
-              </div>
+      <infinite-table-column v-for="hItem in header"
+                             :key="hItem.prop"
+                             :prop="hItem.prop"
+                             :label="hItem.label"
+                             :fixed="isFixed(hItem)"
+                             :min-width="getColumnWidth(hItem)"
+                             :sortable="hItem.sortable"
+                             :align="hItem.align"
+                             :show-overflow-tooltip="hItem.showOverflowTooltip">
+        <template v-if="hItem.prop === 'operation'"
+                  slot-scope="scope">
+          <div class="infinite-table-operation-btn">
+            <template v-for="(btn,index) in operations">
+              <infinite-button :key="index"
+                               :type="btn.type"
+                               @click="handleClick(btn,scope.$index, scope.row)">{{btn.label}}</infinite-button>
             </template>
-          </infinite-table-column>
+          </div>
+        </template>
+      </infinite-table-column>
 
     </template>
 
     <template v-else>
       <slot></slot>
     </template>
-    
+
   </el-table>
 </template>
 <script>
@@ -113,7 +108,7 @@ export default {
 
     defaultSort: {
       type: Object,
-      default: () => {}
+      default: () => { }
     },
 
     defaultFontSize: {
@@ -133,14 +128,14 @@ export default {
 
     operations: {
       type: Array,
-      default: () => {}
+      default: () => { }
     }
   },
   methods: {
     // 计算表格高度随父盒子
     computedHeightFun () {
       this.$nextTick(() => {
-      // 获取父节点及高度
+        // 获取父节点及高度
         const parentElement = this.$el.parentElement || {}
         const parentElementClientHeight = parseFloat(getComputedStyle(parentElement).height)
         this.computedHeight = parentElementClientHeight || ''
@@ -221,7 +216,7 @@ export default {
     }
   },
   destroyed () {
-    this.computedHeightData = () => {}
+    this.computedHeightData = () => { }
   }
 }
 </script>
