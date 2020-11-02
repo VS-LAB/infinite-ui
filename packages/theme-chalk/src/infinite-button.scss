@@ -164,6 +164,10 @@
     border-radius: 50%;
     padding: 12px;
   }
+
+  & + .infinite-button {
+    margin-left: 5px;
+  }
 }
 .infinite-button [class*=infinite-icon-]+span {
   margin-left: 5px;
