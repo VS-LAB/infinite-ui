@@ -42,10 +42,12 @@ const getTestHeader = function () {
     }
   ]
 }
+
 describe('InfiniteTable.vue', () => {
   const data = getTestData()
   const header = getTestHeader()
   const defaultTdAtuoPadding = 20
+  const needAutoHeight = true
   let wrapper = mount(InfiniteTable, {
     propsData: {
       data,
@@ -53,6 +55,7 @@ describe('InfiniteTable.vue', () => {
       defaultTdAtuoPadding
     }
   })
+
   it('tableData to checked', () => {
     const wrapperArrayCell = wrapper.findAll('.el-table__header-wrapper thead .cell')
     header.forEach((hItem, hIndex) => {
@@ -69,7 +72,7 @@ describe('InfiniteTable.vue', () => {
     wrapper.destroy()
   })
 
-  it('table colAutoWidth unit', () => {
+  it('table colAutoWidth test', () => {
     header.forEach(async (hItem, hIndex) => {
       if (hItem.needAutoWidth) {
         // 自适应宽度在table组件中使用 creatElement 不被识别，导致获取宽度为0，这里只测试自适应宽度列的默认宽度
@@ -78,5 +81,25 @@ describe('InfiniteTable.vue', () => {
       }
     })
     wrapper.destroy()
+  })
+
+  const autoHeightWrapper = mount({
+    render: (h) => {
+      return h('div', {
+        style: {
+          height: '100px'
+        }
+      }, [h(InfiniteTable, {
+        props: {
+          data,
+          header,
+          needAutoHeight
+        }
+      })])
+    }
+  })
+  it('table autoHeight test', () => {
+    expect(autoHeightWrapper.find('.infinite-table').attributes('style')).toContain('height: 100px')
+    autoHeightWrapper.destroy()
   })
 })

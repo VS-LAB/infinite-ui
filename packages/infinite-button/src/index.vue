@@ -50,9 +50,6 @@ export default {
     handleClick (e) {
       this.$emit('click', e)
     }
-  },
-  mounted () {
-    console.log(this)
   }
 }
 </script>
