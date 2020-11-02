@@ -98,6 +98,7 @@ describe('InfiniteTable.vue', () => {
       })])
     }
   })
+
   it('table autoHeight test', () => {
     expect(autoHeightWrapper.find('.infinite-table').attributes('style')).toContain('height: 100px')
     autoHeightWrapper.destroy()

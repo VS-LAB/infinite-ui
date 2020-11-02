@@ -1,10 +1,10 @@
 <template lang="html">
   <div class="menu-model">
     <infinite-nav-menu 
-      v-model="menuList" 
+      :data="menuList" 
       :default-openeds="['1', '2', '3']"
       :default-active="defaultActive"
-      :router="true"
+      @select="onSelect"
     >
     </infinite-nav-menu>
   </div>
@@ -48,10 +48,16 @@ export default {
       return this.mainMenuData
     }
   },
+  methods: {
+    onSelect (index, indexPath) {
+      this.$route.path !== index && this.$router.push({
+        path: index
+      })
+    }
+  },
   watch: {
     '$route': {
       handler (val) {
-        console.log(val)
         const path = val.fullPath
         this.defaultActive = path === '/' ? '/guide/installation' : path
       },

@@ -9,13 +9,9 @@ export default {
     ElMenuItem,
     ElSubmenu
   },
-  model: {
-    prop: 'menuData',
-    event: 'change'
-  },
   props: {
     // menu数据
-    menuData: {
+    data: {
       type: Array,
       default: () => []
     },
@@ -84,7 +80,7 @@ export default {
   },
   render (h, context) {
     const {
-      menuData,
+      data,
       mode,
       defaultActive,
       defaultOpeneds,
@@ -123,7 +119,7 @@ export default {
         }
       })
     }
-    let children = iterate(menuData)
+    let children = iterate(data)
     let el = h('el-menu', {
       props: {
         mode,
@@ -137,6 +133,7 @@ export default {
         activeTextColor,
         router
       },
+      'class': ['infinite-nav-menu-container'],
       on: {
         select: this.handleSelect,
         open: this.handleOpen,
