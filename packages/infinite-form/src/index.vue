@@ -4,12 +4,13 @@
            :inline="inline"
            :rules="formModels.rules"
            :model="formModels.models"
+           :label-position="labelPosition"
            :label-width="labelWidth">
     <el-form-item v-for="formItem in formData"
                   :key="formItem.key"
                   v-show="formItem.isShow"
                   :label="formItem.label"
-                  :class="formItem.class"
+                  :class="[{ 'is-required-value':formItem.rules && requiredPosition === 'value' },formItem.class]"
                   :prop="formItem.key">
       <infinite-form-item :ref="formItem.key"
                           :itemData="formItem"
@@ -32,6 +33,7 @@ import ElForm from 'element-ui/lib/form'
 import ElFormItem from 'element-ui/lib/form-item'
 import ElButton from '../../infinite-button'
 import InfiniteFormItem from './infiniteFormItem'
+import { validateLabelPosition } from './labelPostion'
 export default {
   name: 'InfiniteForm',
   components: {
@@ -44,6 +46,14 @@ export default {
     inline: {
       type: Boolean,
       default: false
+    },
+    labelPosition: {
+      type: String,
+      validator: validateLabelPosition
+    },
+    requiredPosition: {
+      type: String,
+      default: 'label'
     },
     formData: {
       type: Array,
