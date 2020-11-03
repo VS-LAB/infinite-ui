@@ -45,6 +45,7 @@
   border: solid 1px #ebebeb;
   border-radius: 3px;
   transition: 0.2s;
+  margin-top: 20px;
 
   &.hover {
     box-shadow: 0 0 8px 0 rgba(232, 237, 250, 0.6),

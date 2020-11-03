@@ -5,7 +5,22 @@
 @import '../../../node_modules/element-ui/packages/theme-chalk/src/option.scss';
 @import '../../../node_modules/element-ui/packages/theme-chalk/src/date-picker.scss';
 .infinite-form-btns:nth-child(1){
-    margin-right: 16px;
+  // margin-right: 16px;
+}
+
+.el-form-item.is-required-value:not(.is-no-asterisk){
+  >.el-form-item__label:before{
+    content: '' !important;
+  }
+  >.el-form-item__content{
+    position: relative;
+    &::before{
+      content: "*";
+      position: absolute;
+      left: -10px;
+      color: var(--themeColor);
+    }
+  }
 }
 
 

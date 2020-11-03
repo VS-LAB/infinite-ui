@@ -386,4 +386,18 @@
       }
     }
   }
+
+  // 圆角
+  &.is-round {
+    border-radius: 20px;
+    padding: 12px 23px;
+  }
+  &.is-circle {
+    border-radius: 50%;
+    padding: 12px;
+  }
+
+  & + .infinite-button {
+    margin-left: 5px;
+  }
 }

@@ -10,7 +10,7 @@
 <script>
 // default color
 // const ColorPicker = require('element-ui/packages/color-picker')
-import ElColorPicker from 'element-ui/lib/color-picker' 
+import ElColorPicker from 'element-ui/lib/color-picker'
 const version = require('element-ui/package.json').version
 const ORIGINAL_THEME = '#409EFF'
 
@@ -64,6 +64,10 @@ export default {
         style.innerText = this.updateStyle(innerText, originalCluster, themeCluster)
       })
       this.$emit('changeTheme', this.theme)
+      // TODO，全局设置主题色
+      this.$nextTick(() => {
+        document.body.style.setProperty('--themeColor', val)
+      })
     }
   },
 
