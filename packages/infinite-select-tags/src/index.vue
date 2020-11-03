@@ -4,31 +4,30 @@
     v-model="visible"
     placement="bottom"
     :width="width"
+    popper-class="infinite-select-popover"
     :visible-arrow="false">
       <div slot="reference" class="infinite-select">
-        <el-input v-model="defaultSelect" :placeholder="defaultPlaceholder" readonlyunselectable="on">
+        <el-input v-model="defaultSelect" :placeholder="defaultPlaceholder" readonlyunselectable="on" :width="width">
           <i v-if="visible" slot="suffix" class="el-input__icon el-icon-arrow-up"/>
           <i v-else slot="suffix" class="el-input__icon el-icon-arrow-down"/>
         </el-input>
         <div v-if="showTags.length>0" class="infinite-selected-tag">
-          <el-tag v-for="(item,i) in showTags" v-show="i<3" :key="item">{{ item }}</el-tag>
-          <el-tag v-if="showTags.length>3" class="last-tag">+{{ showTags.length-3 }}</el-tag>
+          <el-tag v-for="(item,i) in showTags" v-show="i < tagsNum" :key="item">{{ item }}</el-tag>
+          <el-tag v-if="showTags.length>3" class="last-tag">+{{ showTags.length-tagsNum }}</el-tag>
         </div>
       </div>
       <div class="infinite-select-group">
-        <ul>
-          <li v-for="(item,index) in options" :key="item.id">
-            <el-checkbox
+        <div v-for="(item,index) in options" :key="item.id" class="infinite-select-group-box">
+           <el-checkbox
             v-model="item.isChecked"
             :disabled="item.disabled"
             @change="checkChange(item,index,$event)">
             {{ item.name }}</el-checkbox>
-          </li>
-        </ul>
+        </div>
       </div>
       <div class="infinite-select-button">
         <el-checkbox v-model="allChecked" @change="allSelect">全选</el-checkbox>
-        <el-button @click="makesureSelect">确定</el-button>
+        <infinite-button type="primary" @click="makeSure">确定</infinite-button>
       </div>
   </el-popover>
   </div>
@@ -36,11 +35,16 @@
 
 <script>
 export default {
+  name: 'InfiniteSelectTags',
   props: {
     options: {
       // checkbox-group遍历的数据
       type: Array,
       default: () => []
+    },
+    tagsNum: {
+      type: Number,
+      default: 3
     },
     placeholder: {
       type: String,
