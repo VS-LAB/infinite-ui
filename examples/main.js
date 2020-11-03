@@ -23,6 +23,7 @@ import {
   InfinitePagination,
   InfiniteLineChart,
   InfinitePieChart,
+  InfiniteSelectTags,
   InfiniteCascaders,
   InfiniteTree
 } from '../packages'
@@ -37,6 +38,7 @@ Vue.use(InfiniteButton)
   .use(InfinitePagination)
   .use(InfiniteLineChart)
   .use(InfinitePieChart)
+  .use(InfiniteSelectTags)
   .use(InfiniteCascaders)
   .use(InfiniteTree)
 

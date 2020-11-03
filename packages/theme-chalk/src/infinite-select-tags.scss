@@ -1,0 +1,77 @@
+.infinite-select-tags {
+  /deep/.el-popover__reference {
+    display: block;
+    height: 32px;
+  }
+  /deep/.infinite-select {
+    width: 420px;
+    position: relative;
+    .el-input {
+      .el-input__inner {
+        color: #fff;
+      }
+      :-ms-input-placeholder.el-input__inner {
+        color: #c0c4cc;
+      }
+    }
+    .el-input__prefix {
+      font-size: 14px;
+      color: #303133;
+      text-align: left;
+      line-height: 32px;
+      padding-left: 12px;
+    }
+    .infinite-selected-tag {
+      position: absolute;
+      top: 0;
+      left: 5px;
+      padding-top: 5px;
+      .el-tag {
+        height: 30px;
+        width: 80px;
+        text-align: center;
+        border-radius: 4px;
+        background: #f5f7fa;
+        border: none;
+        line-height: 30px;
+        font-size: 12px;
+        margin-right: 5px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        &.last-tag {
+          width: auto;
+        }
+      }
+    }
+  }
+}
+.infinite-select-popover {
+  padding: 0 !important;
+  .infinite-select-group {
+    max-height: 224px;
+    overflow: auto;
+    padding: 12px;
+    &-box {
+      height: 32px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      .el-checkbox {
+        flex: 1;
+      }
+    }
+  }
+  .infinite-select-button {
+    border-top: 1px solid#EBEEF5;
+    height: 46px;
+    padding: 0 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .el-button {
+      height: 32px;
+      color: #fff;
+    }
+  }
+}
