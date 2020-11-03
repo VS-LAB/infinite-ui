@@ -1,5 +1,5 @@
 
-import { mount, shallowMount } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import InfiniteNavMenu from '@/packages/infinite-nav-menu/src/index.vue'
 
 const getTestData = function () {

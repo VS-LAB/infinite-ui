@@ -1,0 +1,30 @@
+
+.element-doc{
+  #attributes{
+    margin: 55px 0 20px;
+  }
+  >table{
+    border-collapse: collapse;
+    width: 100%;
+    background-color: #fff;
+    font-size: 14px;
+    margin-bottom: 45px;
+    line-height: 1.5em;
+    td, th{
+    border-bottom: 1px solid #dcdfe6;
+    padding: 15px;
+    max-width: 250px;
+    }
+    td{
+      color: #606266;
+    }
+    td:first-child, th:first-child{
+      padding-left: 10px;
+    }
+  }
+  .demo-block.demo-button {
+    .el-row:last-child {
+      margin-bottom: 0;
+    }
+  }
+}

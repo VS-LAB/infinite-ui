@@ -143,9 +143,10 @@ export default {
     },
     // 双向绑定的v-model被父组件变动时，及时更新上去
     vModel: {
-      handler (val) {
-        this.keys = val.keys
-        this.value = val.value
+      handler (newV, oldV) {
+        this.keys = newV.keys
+        this.value = newV.value
+        newV.keys !== oldV.keys && this.setSelectNode()
       },
       deep: true
     }
