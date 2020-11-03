@@ -11,6 +11,7 @@ import Tree from '../docs/tree.md'
 import LineChart from '../docs/lineChart.md'
 import PieChart from '../docs/pieChart.md'
 import Cascaders from '../docs/Cascaders.md'
+import SelectTags from '../docs/selectTags.md'
 
 import VueRouter from 'vue-router'
 const routes = [
@@ -105,6 +106,14 @@ const routes = [
     path: '/guide/cascaders',
     name: 'Cascaders',
     component: Cascaders,
+    meta: {
+      type: 'component'
+    }
+  },
+  {
+    path: '/guide/selectTags',
+    name: 'SelectTags',
+    component: SelectTags,
     meta: {
       type: 'component'
     }
