@@ -1,35 +1,48 @@
 <template>
   <div class="infinite-select-tags">
-    <el-popover
-    v-model="visible"
-    placement="bottom"
-    :width="width"
-    popper-class="infinite-select-popover"
-    :visible-arrow="false">
-      <div slot="reference" class="infinite-select">
-        <el-input v-model="defaultSelect" :placeholder="defaultPlaceholder" readonlyunselectable="on" :width="width">
-          <i v-if="visible" slot="suffix" class="el-input__icon el-icon-arrow-up"/>
-          <i v-else slot="suffix" class="el-input__icon el-icon-arrow-down"/>
+    <el-popover v-model="visible"
+                placement="bottom"
+                :width="width"
+                popper-class="infinite-select-popover"
+                :visible-arrow="false">
+      <div slot="reference"
+           class="infinite-select">
+        <el-input v-model="defaultSelect"
+                  :placeholder="defaultPlaceholder"
+                  readonlyunselectable="on">
+          <i v-if="visible"
+             slot="suffix"
+             class="el-input__icon el-icon-arrow-up" />
+          <i v-else
+             slot="suffix"
+             class="el-input__icon el-icon-arrow-down" />
         </el-input>
-        <div v-if="showTags.length>0" class="infinite-selected-tag">
-          <el-tag v-for="(item,i) in showTags" v-show="i < tagsNum" :key="item">{{ item }}</el-tag>
-          <el-tag v-if="showTags.length > tagsNum" class="last-tag">+{{ showTags.length-tagsNum }}</el-tag>
+        <div v-if="showTags.length>0"
+             class="infinite-selected-tag">
+          <el-tag v-for="(item,i) in showTags"
+                  v-show="i < tagsNum"
+                  :key="item">{{ item }}</el-tag>
+          <el-tag v-if="showTags.length > tagsNum"
+                  class="last-tag">+{{ showTags.length-tagsNum }}</el-tag>
         </div>
       </div>
       <div class="infinite-select-group">
-        <div v-for="(item,index) in options" :key="item.id" class="infinite-select-group-box">
-           <el-checkbox
-            v-model="item.isChecked"
-            :disabled="item.disabled"
-            @change="checkChange(item,index,$event)">
+        <div v-for="(item,index) in options"
+             :key="item.id"
+             class="infinite-select-group-box">
+          <el-checkbox v-model="item.isChecked"
+                       :disabled="item.disabled"
+                       @change="checkChange(item,index,$event)">
             {{ item.name }}</el-checkbox>
         </div>
       </div>
       <div class="infinite-select-button">
-        <el-checkbox v-model="allChecked" @change="allSelect">全选</el-checkbox>
-        <infinite-button type="primary" @click="makeSure">确定</infinite-button>
+        <el-checkbox v-model="allChecked"
+                     @change="allSelect">全选</el-checkbox>
+        <infinite-button type="primary"
+                         @click="makeSure">确定</infinite-button>
       </div>
-  </el-popover>
+    </el-popover>
   </div>
 </template>
 

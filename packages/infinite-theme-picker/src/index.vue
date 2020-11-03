@@ -1,10 +1,10 @@
 <template>
-    <el-color-picker
-      v-model="theme"
-      class="theme-picker"
-      size="small"
-      popper-class="theme-picker-dropdown"
-    />
+  <el-color-picker v-model="theme"
+                   class="theme-picker"
+                   :size="size"
+                   @change="change"
+                   @active-change="activeChange"
+                   popper-class="theme-picker-dropdown" />
 </template>
 
 <script>
@@ -16,62 +16,86 @@ const ORIGINAL_THEME = '#409EFF'
 
 export default {
   name: 'InfiniteThemePicker',
+  model: {
+    prop: 'vModel',
+    event: 'change'
+  },
+  props: {
+    vModel: {
+      type: String,
+      default: ORIGINAL_THEME
+    },
+    size: {
+      type: String,
+      default: 'small'
+    }
+  },
   data () {
     return {
-      chalk: '', // content of theme-chalk css
-      theme: ORIGINAL_THEME
+      theme: '',
+      chalk: '' // content of theme-chalk css
     }
   },
   components: {
     ElColorPicker
   },
   watch: {
-    theme (val, oldVal) {
-      if (typeof val !== 'string') return
-      const themeCluster = this.getThemeCluster(val.replace('#', ''))
-      const originalCluster = this.getThemeCluster(oldVal.replace('#', ''))
-      const getHandler = (variable, id) => {
-        return () => {
-          const originalCluster = this.getThemeCluster(ORIGINAL_THEME.replace('#', ''))
-          const newStyle = this.updateStyle(this[variable], originalCluster, themeCluster)
-
-          let styleTag = document.getElementById(id)
-          if (!styleTag) {
-            styleTag = document.createElement('style')
-            styleTag.setAttribute('id', id)
-            document.head.appendChild(styleTag)
+    vModel: {
+      handler (val, oldVal) {
+        if (typeof val !== 'string' || !val) return
+        this.theme = val
+        if (!oldVal && val === ORIGINAL_THEME) return
+        const oldV = oldVal || ORIGINAL_THEME
+        const themeCluster = this.getThemeCluster(val.replace('#', ''))
+        const originalCluster = this.getThemeCluster(oldV.replace('#', ''))
+        const getHandler = (variable, id) => {
+          return () => {
+            const originalCluster = this.getThemeCluster(ORIGINAL_THEME.replace('#', ''))
+            const newStyle = this.updateStyle(this[variable], originalCluster, themeCluster)
+            let styleTag = document.getElementById(id)
+            if (!styleTag) {
+              styleTag = document.createElement('style')
+              styleTag.setAttribute('id', id)
+              document.head.appendChild(styleTag)
+            }
+            styleTag.innerText = newStyle
           }
-          styleTag.innerText = newStyle
         }
-      }
 
-      const chalkHandler = getHandler('chalk', 'chalk-style')
-      if (!this.chalk) {
-        const url = `https://unpkg.com/element-ui@${version}/lib/theme-chalk/index.css`
-        this.getCSSString(url, chalkHandler, 'chalk')
-      } else {
-        chalkHandler()
-      }
+        const chalkHandler = getHandler('chalk', 'chalk-style')
+        if (!this.chalk) {
+          const url = `https://unpkg.com/element-ui@${version}/lib/theme-chalk/index.css`
+          this.getCSSString(url, chalkHandler, 'chalk')
+        } else {
+          chalkHandler()
+        }
 
-      const styles = [].slice.call(document.querySelectorAll('style'))
-        .filter(style => {
-          const text = style.innerText
-          return new RegExp(oldVal, 'i').test(text) && !/Chalk Variables/.test(text)
+        const styles = [].slice.call(document.querySelectorAll('style'))
+          .filter(style => {
+            const text = style.innerText
+            return new RegExp(oldV, 'i').test(text) && !/Chalk Variables/.test(text)
+          })
+        styles.forEach(style => {
+          const { innerText } = style
+          if (typeof innerText !== 'string') return
+          style.innerText = this.updateStyle(innerText, originalCluster, themeCluster)
         })
-      styles.forEach(style => {
-        const { innerText } = style
-        if (typeof innerText !== 'string') return
-        style.innerText = this.updateStyle(innerText, originalCluster, themeCluster)
-      })
-      this.$emit('changeTheme', this.theme)
-      // TODO，全局设置主题色
-      this.$nextTick(() => {
-        document.body.style.setProperty('--themeColor', val)
-      })
+        this.$emit('changeTheme', this.vModel)
+      },
+      immediate: true
+    },
+    theme () {
+      this.$emit('change', this.theme)
     }
   },
 
   methods: {
+    change (val) {
+      this.$emit('change', val)
+    },
+    activeChange (val) {
+      this.$emit('activeChange', val)
+    },
     updateStyle (style, oldCluster, newCluster) {
       let newStyle = style
       oldCluster.forEach((color, index) => {
