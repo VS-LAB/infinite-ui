@@ -8,6 +8,7 @@ import InfiniteLineChart from './infinite-line-chart'
 import InfiniteNavMenu from './infinite-nav-menu'
 import InfinitePagination from './infinite-pagination'
 import InfinitePieChart from './infinite-pie-chart'
+import InfiniteSelectTags from './infinite-select-tags'
 import InfiniteTable from './infinite-table'
 import InfiniteTableColumn from './infinite-table-column'
 import InfiniteThemePicker from './infinite-theme-picker'
@@ -22,6 +23,7 @@ import InfiniteTree from './infinite-tree'
   InfiniteNavMenu,
   InfinitePagination,
   InfinitePieChart,
+  InfiniteSelectTags,
   InfiniteTable,
   InfiniteTableColumn,
   InfiniteThemePicker,
@@ -48,6 +50,7 @@ import InfiniteTree from './infinite-tree'
   InfiniteNavMenu,
   InfinitePagination,
   InfinitePieChart,
+  InfiniteSelectTags,
   InfiniteTable,
   InfiniteTableColumn,
   InfiniteThemePicker,
@@ -57,4 +60,3 @@ import InfiniteTree from './infinite-tree'
       install,
       version
     }
-  
