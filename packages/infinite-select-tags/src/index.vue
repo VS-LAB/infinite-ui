@@ -13,7 +13,7 @@
         </el-input>
         <div v-if="showTags.length>0" class="infinite-selected-tag">
           <el-tag v-for="(item,i) in showTags" v-show="i < tagsNum" :key="item">{{ item }}</el-tag>
-          <el-tag v-if="showTags.length>3" class="last-tag">+{{ showTags.length-tagsNum }}</el-tag>
+          <el-tag v-if="showTags.length > tagsNum" class="last-tag">+{{ showTags.length-tagsNum }}</el-tag>
         </div>
       </div>
       <div class="infinite-select-group">
