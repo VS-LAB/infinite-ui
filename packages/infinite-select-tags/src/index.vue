@@ -4,7 +4,7 @@
       ref="infiniteSekectTags"
       v-model="showTags"
       multiple
-      popper-class="infinite-select-tags-popover"
+      popper-class="infinite-select-popover"
       :placeholder="defaultPlaceholder"
       size="large"
     >
@@ -37,7 +37,7 @@
         <infinite-button type="primary" @click="makeSure">确定</infinite-button>
       </div>
       <template slot="prefix">
-        <div slot="reference" class="infinite-select">
+        <div slot="reference" class="infinite-selected">
           <div v-if="showTags.length > 0" class="infinite-selected-tag">
             <el-tag
               v-for="(item, i) in showTags"
@@ -78,7 +78,7 @@ export default {
       defaultSelect: '',
       allChecked: false, // 是否全选
       showTags: [], // 输入框展示的tag
-      visible: false // 控制popover是否显示
+      selectedOption: []
     }
   },
   computed: {
@@ -86,7 +86,6 @@ export default {
       if (this.showTags.length > 0) {
         return ''
       } else {
-        // debugger
         return this.placeholder
       }
     }
@@ -110,18 +109,6 @@ export default {
         }
       },
       deep: true
-    },
-    visible (val) {
-      if (!val) {
-        this.options.forEach((el, index) => {
-          if (this.showTags.includes(el.name)) {
-            el.isChecked = true
-          } else {
-            el.isChecked = false
-          }
-          this.$set(this.options, index, el)
-        })
-      }
     }
   },
   created () {
@@ -144,15 +131,14 @@ export default {
     },
     makeSure () {
       // 点击确定按钮
-      const selectedOption = this.options.filter((el) => el.isChecked === true)
-      this.showTags = Array.from(selectedOption, ({ name }) => name) // 展示前五个+...
+      this.selectedOption = this.options.filter((el) => el.isChecked === true)
+      this.showTags = Array.from(this.selectedOption, ({ name }) => name) // 展示前五个+...
       this.defaultSelect =
         this.showTags.length > 5
           ? this.showTags.slice(0, 5).join(',') + '...'
           : this.showTags.join(',')
-      this.visible = false
       this.$refs.infiniteSekectTags.blur()
-      this.$emit('selectChange', selectedOption)
+      this.$emit('selectChange', this.selectedOption)
     },
     allSelect (val) {
       // 全选按钮的点击事件
