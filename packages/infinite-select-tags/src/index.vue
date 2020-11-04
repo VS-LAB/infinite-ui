@@ -59,8 +59,16 @@
 </template>
 
 <script>
+import ElInput from 'element-ui/lib/input'
+import ElTag from 'element-ui/lib/tag'
+import ElSelect from 'element-ui/lib/select'
+import ElOption from 'element-ui/lib/option'
+import ElCheckbox from 'element-ui/lib/checkbox'
+import InfiniteButton from '../../infinite-button'
+
 export default {
   name: 'InfiniteSelectTags',
+  components: { ElInput, ElTag, ElSelect, ElOption, ElCheckbox, InfiniteButton },
   props: {
     options: {
       // checkbox-group遍历的数据
