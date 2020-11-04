@@ -19,11 +19,13 @@
         options: [
           {
             id:'USD',
-            name:'美元'
+            name:'美元',
+            disabled:true
           },
           {
             id:'GBP',
-            name:'英镑'
+            name:'英镑',
+            disabled:true
           },
           {
             id:'RMB',
@@ -40,6 +42,14 @@
           {
             id:'AUD',
             name:'澳大利亚元'
+          },
+          {
+            id:'TAD',
+            name:'泰元'
+          },
+          {
+            id:'MUD',
+            name:'孟加拉元'
           }
         ]
       };
