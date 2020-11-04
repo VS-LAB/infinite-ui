@@ -42,11 +42,10 @@ export default {
   watch: {
     vModel: {
       handler (val, oldVal) {
-        if (typeof val !== 'string' || !val) return
         this.theme = val
-        if (!oldVal && val === ORIGINAL_THEME) return
+        const nVal = val || ORIGINAL_THEME
         const oldV = oldVal || ORIGINAL_THEME
-        const themeCluster = this.getThemeCluster(val.replace('#', ''))
+        const themeCluster = this.getThemeCluster(nVal.replace('#', ''))
         const originalCluster = this.getThemeCluster(oldV.replace('#', ''))
         const getHandler = (variable, id) => {
           return () => {
