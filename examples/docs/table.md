@@ -491,6 +491,98 @@
 
 :::
 
+### 树表格
+
+选择多行数据时使用 Checkbox。
+
+:::demo 实现多选非常简单:<br/>方法一:在传入 header 属性的前提下， 设置`type`为`true`即可；<br/>方法二: 手动添加一个`infinite-table-column`，设`type`属性为`expand`即可；<br/>默认情况下若内容过多会折行显示，若需要单行显示可以使用`show-overflow-tooltip`属性，它接受一个`Boolean`，为`true`时多余的内容会在 hover 时以 tooltip 的形式显示出来。
+
+```html
+<template>
+  <infinite-table
+    ref="multipleTable"
+    :data="tableData"
+    :header="tableHeader"
+    height="200px"
+    type="selection"
+    @selection-change="handleSelectionChange"
+  >
+  </infinite-table>
+  <div style="margin-top: 20px">
+    <infinite-button @click="toggleSelection([tableData[1], tableData[2]])"
+      >切换第二、第三行的选中状态</infinite-button
+    >
+    <infinite-button @click="toggleSelection()">取消选择</infinite-button>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        tableHeader: [
+          {
+            prop: 'date',
+            label: '日期',
+            width: '180',
+          },
+          {
+            prop: 'name',
+            label: '姓名',
+            width: '180',
+          },
+          {
+            prop: 'address',
+            label: '地址',
+          },
+        ],
+        tableData: [
+          {
+            date: '2016-05-02',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1518 弄',
+          },
+          {
+            date: '2016-05-04',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1517 弄',
+          },
+          {
+            date: '2016-05-01',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1519 弄',
+          },
+          {
+            date: '2016-05-03',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1516 弄',
+          },
+        ],
+        multipleSelection: [],
+      };
+    },
+
+    methods: {
+      toggleSelection(rows) {
+        if (rows) {
+          rows.forEach((row) => {
+            this.$refs.multipleTable.toggleRowSelection(row);
+          });
+        } else {
+          this.$refs.multipleTable.clearSelection();
+        }
+      },
+      handleSelectionChange(val) {
+        this.multipleSelection = val;
+        console.log(val);
+      },
+    },
+  };
+</script>
+```
+
+:::
+
 ### 排序
 
 对表格进行排序，可快速查找或对比数据。
@@ -865,21 +957,51 @@
 
 ### Table Attributes
 
-| 参数             | 说明                                                                                    | 类型                             | 可选值                         | 默认值                                                      |
-| ---------------- | --------------------------------------------------------------------------------------- | -------------------------------- | ------------------------------ | ----------------------------------------------------------- |
-| data             | 显示的数据                                                                              | array                            | —                              | —                                                           |
-| header           | 表头的数据                                                                              | array                            | 文档 option                    | —                                                           |
-| need-auto-height | 表格的高度随父组件拉伸，不设置 height 时生效                                            | boolean                          | -                              | false                                                       |
-| height           | Table 的高度                                                                            | string/number                    | —                              | —                                                           |
-| stripe           | 是否为斑马纹 table                                                                      | boolean                          | —                              | false                                                       |
-| border           | 是否带有纵向边框                                                                        | boolean                          | —                              | false                                                       |
-| row-class-name   | 行的 className 的回调方法，也可以使用字符串为所有行设置一个固定的 className             | Function({row, rowIndex})/String | —                              | —                                                           |
-| default-sort     | 默认的排序列的 prop 和顺序。它的`prop`属性指定默认的排序的列，`order`指定默认排序的顺序 | Object                           | `order`: ascending, descending | 如果只指定了`prop`, 没有指定`order`, 则默认顺序是 ascending |
+| 参数                    | 说明                                                                                                                                                | 类型                             | 可选值                         | 默认值                                                      |
+| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------- | ------------------------------ | ----------------------------------------------------------- |
+| data                    | 显示的数据                                                                                                                                          | Array                            | —                              | —                                                           |
+| header                  | 表头的数据                                                                                                                                          | Array                            | `option` 属性                  | —                                                           |
+| need-auto-height        | 表格的高度随父组件拉伸，不设置 height 时生效                                                                                                        | Boolean                          | —                              | false                                                       |
+| height                  | Table 的高度                                                                                                                                        | String/Number                    | —                              | —                                                           |
+| Stripe                  | 是否为斑马纹 table                                                                                                                                  | Boolean                          | —                              | false                                                       |
+| border                  | 是否带有纵向边框                                                                                                                                    | Boolean                          | —                              | false                                                       |
+| row-class-name          | 行的 className 的回调方法，也可以使用字符串为所有行设置一个固定的 className                                                                         | Function({row, rowIndex})/String | —                              | —                                                           |
+| default-sort            | 默认的排序列的 prop 和顺序。它的`prop`属性指定默认的排序的列，`order`指定默认排序的顺序                                                             | Object                           | `order`: ascending, descending | 如果只指定了`prop`, 没有指定`order`, 则默认顺序是 ascending |
+| default-font-size       | 当 `option`:needAutoWidth 为 true 时,默认计算的文案大小                                                                                             | Number                           | —                              | 14                                                          |
+| default-td-atuo-padding | 当 `option`:needAutoWidth 为 true 时,默认计算的单元格间距                                                                                           | Number                           | —                              | 20                                                          |
+| type                    | 对应列的类型。如果设置了 `selection` 则显示多选框；如果设置了 index 则显示该行的索引（从 1 开始计算）；如果设置了 `expand` 则显示为一个可展开的按钮 | String                           | selection, expand              | —                                                           |
+| operations              | 操作列操作按钮。如果设置了 `prop`: 'operation' 则显示该；                                                                                           | Array                            | —                              | —                                                           |
 
 ### option Attributes
 
-| 参数   | 说明             | 类型    | 可选值      | 默认值 |
-| ------ | ---------------- | ------- | ----------- | ------ |
-| data   | 显示的数据       | array   | —           | —      |
-| header | 表头的数据       | array   | 文档 option | —      |
-| border | 是否带有纵向边框 | boolean | —           | false  |
+| 参数                | 说明                                                                                                                                                | 类型           | 可选值              | 默认值 |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | -------------- | ------------------- | ------ |
+| prop                | 列的唯一表示                                                                                                                                        | String         | —                   | —      |
+| label               | 表头的默认数据                                                                                                                                      | String         | —                   | —      |
+| fixed               | 固定列表示                                                                                                                                          | Boolean        | —                   | false  |
+| showOverflowTooltip | 当内容过长被隐藏时显示 tooltip                                                                                                                      | Boolean        | —                   | false  |
+| sortable            | 对应列是否可以排序，如果设置为 'custom'，则代表用户希望远程排序，需要监听 Table 的 sort-change 事件                                                 | Boolean/String | —                   | false  |
+| minWidth            | 最小宽度，这里不提供 width，因为 width 会存在断列的可能                                                                                             | String/Numbe   | —                   | —      |
+| type                | 对应列的类型。如果设置了 `selection` 则显示多选框；如果设置了 index 则显示该行的索引（从 1 开始计算）；如果设置了 `expand` 则显示为一个可展开的按钮 | String         | selection, expand   | —      |
+| align               | 对齐方式                                                                                                                                            | String         | left, center, right | left   |
+
+### Table Events
+
+| 事件名           | 说明                                       | 参数                    |
+| ---------------- | ------------------------------------------ | ----------------------- |
+| selection-change | 当选择项发生变化时会触发该事件             | selection               |
+| sort-change      | 当表格的排序条件发生变化的时候会触发该事件 | { column, prop, order } |
+
+### Table Methods
+
+| 事件名             | 说明                                                                                                        | 参数          |
+| ------------------ | ----------------------------------------------------------------------------------------------------------- | ------------- |
+| clearSelection     | 用于多选表格，清空用户的选择                                                                                | —             |
+| toggleRowSelection | 用于多选表格，切换某一行的选中状态，如果使用了第二个参数，则是设置这一行选中与否（selected 为 true 则选中） | row, selected |
+
+### Table-column Scoped Slot
+
+| name   | 说明                                            |
+| ------ | ----------------------------------------------- |
+| —      | 自定义列的内容，参数为 { row, column, \$index } |
+| header | 自定义表头的内容. 参数为 { column, \$index }    |

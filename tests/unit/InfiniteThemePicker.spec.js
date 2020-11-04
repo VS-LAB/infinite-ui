@@ -5,6 +5,7 @@ describe('InfiniteThemePicker.vue', () => {
   const wrapper = shallowMount(InfiniteThemePicker)
   const theme = '#F41371'
   it('renders props.v-model to match value', async () => {
+    console.log(wrapper.html())
     await wrapper.setProps({
       vModel: theme
     })
