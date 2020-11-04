@@ -9,6 +9,9 @@
       size="large"
     >
       <!-- popper展示核心内容 -->
+      <div class="infinite-select-search">
+          <el-input v-if="filterable"  placeholder="请输入字段名称" prefix-icon="el-icon-search" @input="keyWordChange" />
+      </div>
       <div class="infinite-select-group">
         <div
           v-for="(item, index) in options"
@@ -71,11 +74,16 @@ export default {
     placeholder: {
       type: String,
       default: '请选择'
+    },
+    filterable: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
     return {
       defaultSelect: '',
+      allHidden: false,
       allChecked: false, // 是否全选
       showTags: [], // 输入框展示的tag
       selectedOption: []
@@ -144,6 +152,13 @@ export default {
       // 全选按钮的点击事件
       this.options.forEach((el) => {
         (val || (!val && !el.disabled)) && (el.isChecked = val)
+      })
+    },
+    keyWordChange () {
+      this.option.forEach(el => {
+        el.resultData.forEach(item => {
+          this.$set(item, 'hidden', item.name.indexOf(this.searchKeyWord) === -1)
+        })
       })
     }
   }

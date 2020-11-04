@@ -35,6 +35,9 @@
         &.last-tag {
           width: auto;
         }
+        &:first-child {
+          margin-left: 0;
+        }
       }
     }
   }
@@ -42,10 +45,14 @@
 .infinite-select-popover {
   padding: 0 !important;
 
+  .infinite-select-search{
+    padding: 6px 12px;
+  }
+
   .infinite-select-group {
     max-height: 200px;
     overflow: auto;
-    padding: 6px 0;
+    padding-bottom: 6px;
     &-box {
       height: 32px;
       display: flex;
@@ -80,5 +87,9 @@
 
   .el-scrollbar__bar{
     display: none;
+  }
+
+  .el-select-dropdown__wrap{
+    max-height: none;
   }
 }
