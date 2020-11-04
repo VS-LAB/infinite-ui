@@ -7,6 +7,6 @@ function validateLabelPosition (value) {
   return false
 }
 
-export default {
+export {
   validateLabelPosition
 }
