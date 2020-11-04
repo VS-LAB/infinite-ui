@@ -73,7 +73,7 @@ export default {
         )
 
       case 'infinite-select-tags':
-        return (<infinite-select-tags v-model={formModels[itemData.key]} options={itemData.options} placeholder={placeholder} width={itemData.width} tagsNum={itemData.tagsNum}></infinite-select-tags>)
+        return (<infinite-select-tags v-model={formModels[itemData.key]} options={itemData.options} placeholder={itemData.placeholder} tagsNum={itemData.tagsNum}></infinite-select-tags>)
       default:
         return null
     }

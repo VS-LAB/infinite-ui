@@ -365,8 +365,7 @@
             type: 'infinite-select-tags',
             key: 'tags',
             isShow: true,
-            placeholder: '请输入查询信息',
-            width:420,
+            placeholder: '请选择查询信息',
             tagsNum:4,
             options: [
               {

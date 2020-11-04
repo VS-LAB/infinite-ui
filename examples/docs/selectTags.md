@@ -10,7 +10,6 @@
   <infinite-select-tags
     :options="options"
     :tags-num="4"
-    :width="420"
  />
 </template>
 <script>

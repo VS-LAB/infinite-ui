@@ -1,48 +1,57 @@
 <template>
   <div class="infinite-select-tags">
-    <el-popover v-model="visible"
-                placement="bottom"
-                :width="width"
-                popper-class="infinite-select-popover"
-                :visible-arrow="false">
-      <div slot="reference"
-           class="infinite-select">
-        <el-input v-model="defaultSelect"
-                  :placeholder="defaultPlaceholder"
-                  readonlyunselectable="on">
-          <i v-if="visible"
-             slot="suffix"
-             class="el-input__icon el-icon-arrow-up" />
-          <i v-else
-             slot="suffix"
-             class="el-input__icon el-icon-arrow-down" />
-        </el-input>
-        <div v-if="showTags.length>0"
-             class="infinite-selected-tag">
-          <el-tag v-for="(item,i) in showTags"
-                  v-show="i < tagsNum"
-                  :key="item">{{ item }}</el-tag>
-          <el-tag v-if="showTags.length > tagsNum"
-                  class="last-tag">+{{ showTags.length-tagsNum }}</el-tag>
-        </div>
-      </div>
+    <el-select
+      ref="infiniteSekectTags"
+      v-model="showTags"
+      multiple
+      popper-class="infinite-select-tags-popover"
+      :placeholder="defaultPlaceholder"
+      size="large"
+    >
+      <!-- popper展示核心内容 -->
       <div class="infinite-select-group">
-        <div v-for="(item,index) in options"
-             :key="item.id"
-             class="infinite-select-group-box">
-          <el-checkbox v-model="item.isChecked"
-                       :disabled="item.disabled"
-                       @change="checkChange(item,index,$event)">
-            {{ item.name }}</el-checkbox>
+        <div
+          v-for="(item, index) in options"
+          :key="item.id"
+          class="infinite-select-group-box"
+        >
+          <el-checkbox
+            v-model="item.isChecked"
+            :disabled="item.disabled"
+            @change="checkChange(item, index, $event)"
+          >
+            {{ item.name }}
+          </el-checkbox>
         </div>
       </div>
+
+      <!-- popper占位符 start -->
+      <el-option
+        v-for="item in options"
+        :key="item.id"
+        :value="item.id"
+      ></el-option>
+      <!-- popper占位符 end -->
       <div class="infinite-select-button">
-        <el-checkbox v-model="allChecked"
-                     @change="allSelect">全选</el-checkbox>
-        <infinite-button type="primary"
-                         @click="makeSure">确定</infinite-button>
+        <el-checkbox v-model="allChecked" @change="allSelect">全选</el-checkbox>
+        <infinite-button type="primary" @click="makeSure">确定</infinite-button>
       </div>
-    </el-popover>
+      <template slot="prefix">
+        <div slot="reference" class="infinite-select">
+          <div v-if="showTags.length > 0" class="infinite-selected-tag">
+            <el-tag
+              v-for="(item, i) in showTags"
+              v-show="i < tagsNum"
+              :key="item"
+              >{{ item }}</el-tag
+            >
+            <el-tag v-if="showTags.length > tagsNum" class="last-tag"
+              >+{{ showTags.length - tagsNum }}</el-tag
+            >
+          </div>
+        </div>
+      </template>
+    </el-select>
   </div>
 </template>
 
@@ -61,11 +70,7 @@ export default {
     },
     placeholder: {
       type: String,
-      default: ''
-    },
-    width: {
-      type: Number,
-      default: 200
+      default: '请选择'
     }
   },
   data () {
@@ -130,7 +135,7 @@ export default {
   methods: {
     checkChange (item, index, e) {
       console.log(item, e, 'eee')
-      this.options.forEach(el => {
+      this.options.forEach((el) => {
         if (el.id === item.id) {
           el.isChecked = e
           this.$set(this.options, index, el)
@@ -146,6 +151,7 @@ export default {
           ? this.showTags.slice(0, 5).join(',') + '...'
           : this.showTags.join(',')
       this.visible = false
+      this.$refs.infiniteSekectTags.blur()
       this.$emit('selectChange', selectedOption)
     },
     allSelect (val) {
