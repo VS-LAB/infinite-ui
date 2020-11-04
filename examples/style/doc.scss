@@ -3,6 +3,23 @@
   #attributes{
     margin: 55px 0 20px;
   }
+  .hljs {
+    line-height: 1.8;
+    font-family: Menlo,Monaco,Consolas,Courier,monospace;
+    font-size: 12px;
+    padding: 18px 24px;
+    background-color: #fafafa;
+    border: 1px solid #eaeefb;
+    margin-bottom: 25px;
+    border-radius: 4px;
+    -webkit-font-smoothing: auto;
+  }
+  code {
+    background-color: #f9fafc;
+    padding: 0 4px;
+    border: 1px solid #eaeefb;
+    border-radius: 4px;
+  }
   >table{
     border-collapse: collapse;
     width: 100%;

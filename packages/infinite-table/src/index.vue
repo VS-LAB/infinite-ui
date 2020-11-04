@@ -12,10 +12,10 @@
             width="100%">
 
     <template v-if="header.length">
-
       <template v-if="type">
         <infinite-table-column :type="type"
-                               width="60px"></infinite-table-column>
+                               width="60px">
+        </infinite-table-column>
       </template>
 
       <infinite-table-column v-for="hItem in header"
@@ -92,19 +92,12 @@ export default {
       default: ''
     },
 
-    width: [String, Number],
-
     needAutoHeight: {
       type: Boolean,
       default: false
     },
 
     height: [String, Number],
-
-    selection: {
-      type: Boolean,
-      default: false
-    },
 
     defaultSort: {
       type: Object,
