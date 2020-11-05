@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
-import router from './router'
+import router from './router/index'
 // 引入element-ui
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
@@ -24,7 +24,9 @@ import {
   InfiniteLineChart,
   InfinitePieChart,
   InfiniteCascaders,
-  InfiniteTree
+  InfiniteTree,
+  InfiniteSteps,
+  InfiniteStep
 } from '../packages'
 Vue.config.productionTip = false
 Vue.use(InfiniteButton)
@@ -39,6 +41,8 @@ Vue.use(InfiniteButton)
   .use(InfinitePieChart)
   .use(InfiniteCascaders)
   .use(InfiniteTree)
+  .use(InfiniteSteps)
+  .use(InfiniteStep)
 
 Vue.use(ElementUI)
 Vue.component('demo-block', demoBlock)
