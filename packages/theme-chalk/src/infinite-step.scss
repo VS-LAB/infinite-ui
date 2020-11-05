@@ -36,7 +36,8 @@
       color: #fff;
     };
   };
-  &.is-finish {
+  &.is-finish,&.is-success {
+    color: var(--themeColor);
     .infinite-step__line {
       background-color: var(--themeColor) !important;
       border-color: var(--themeColor);
@@ -67,4 +68,7 @@
 .infinite-step_title {
   display: inline-block;
   margin:0 4px;
+  &.is-process {
+    font-weight: 600;
+  }
 };

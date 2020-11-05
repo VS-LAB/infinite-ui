@@ -14,10 +14,10 @@
       class="infinite-step__head"
       :class="`is-${currentStatus}`"
     >
-      <div class="el-step__icon el-step_icon_finish" v-if="currentStatus === 'finish'">
+      <!-- <div class="el-step__icon el-step_icon_finish" v-if="currentStatus === 'finish'">
         <i class="el-icon-circle-check"></i>
-      </div>
-      <div v-else class="el-step__icon" :class="`is-${icon ? 'icon' : 'text'}`">
+      </div> -->
+      <div class="el-step__icon" :class="`is-${icon ? 'icon' : 'text'}`">
         <slot
           v-if="currentStatus !== 'success' && currentStatus !== 'error'"
           name="icon">
@@ -43,7 +43,7 @@
       <div
         class="infinite-step__line"
         :class='{"infinite-step-last__line": isLast}'
-        :style="{ backgroundColor: lineColor ? lineColor : '#c0c4cc' }"
+        :style="{ backgroundColor: '#c0c4cc' }"
       >
         <i class="el-step__line-inner" :style="lineStyle"></i>
       </div>
@@ -69,8 +69,7 @@ export default {
     title: String,
     icon: String,
     description: String,
-    status: String,
-    lineColor: String
+    status: String
   },
 
   data () {
