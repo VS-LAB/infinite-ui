@@ -7,7 +7,14 @@
 
 ```html
 <template>
-  <infinite-form :inline="inline" :requiredPosition="requiredPosition" :labelPosition='labelPosition' :formData="formData" :formBtns="formBtns"> </infinite-form>
+  <infinite-form
+    :inline="inline"
+    :requiredPosition="requiredPosition"
+    :labelPosition="labelPosition"
+    :formData="formData"
+    :formBtns="formBtns"
+  >
+  </infinite-form>
 </template>
 <script>
   const ElInput = require('element-ui/lib/input');
@@ -98,7 +105,7 @@
       return {
         inline: false,
         labelPosition: 'left',
-        requiredPosition: 'label', 
+        requiredPosition: 'label',
         formData: [
           {
             label: '自定义表单组件',
@@ -106,6 +113,7 @@
             key: 'cascaders',
             isShow: true,
             component: (h) => {
+              // console.log(cascaders.default);
               return h(cascaders.default, {
                 props: {
                   options: opts,
@@ -192,6 +200,7 @@
   };
 </script>
 ```
+
 :::
 
 ### 扩展
@@ -200,10 +209,16 @@
 
 :::demo
 
-
 ```html
 <template>
-  <infinite-form :inline="inline" :requiredPosition="requiredPosition" :labelPosition='labelPosition' :formData="formData" :formBtns="formBtns"> </infinite-form>
+  <infinite-form
+    :inline="inline"
+    :requiredPosition="requiredPosition"
+    :labelPosition="labelPosition"
+    :formData="formData"
+    :formBtns="formBtns"
+  >
+  </infinite-form>
 </template>
 <script>
   const ElInput = require('element-ui/lib/input');
@@ -294,7 +309,7 @@
       return {
         inline: false,
         labelPosition: 'top',
-        requiredPosition: 'value', 
+        requiredPosition: 'value',
         formData: [
           {
             label: '自定义表单组件',
@@ -366,27 +381,27 @@
             key: 'tags',
             isShow: true,
             placeholder: '请选择查询信息',
-            tagsNum:4,
+            tagsNum: 4,
             options: [
               {
-                id:'USD',
-                name:'美元'
+                id: 'USD',
+                name: '美元',
               },
               {
-                id:'GBP',
-                name:'英镑'
+                id: 'GBP',
+                name: '英镑',
               },
               {
-                id:'RMB',
-                name:'人民币'
+                id: 'RMB',
+                name: '人民币',
               },
               {
-                id:'EUR',
-                name:'欧元'
+                id: 'EUR',
+                name: '欧元',
               },
               {
-                id:'CAD',
-                name:'加元'
+                id: 'CAD',
+                name: '加元',
               },
             ],
           },

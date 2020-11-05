@@ -38,12 +38,15 @@ export default {
     formModels[itemData.key] = formModels[itemData.key] || itemData.defaultValue
     switch (itemData.type) {
       case 'component':
-        const component = itemData.component(h)
-        component.componentOptions.propsData.vModel = formModels[itemData.key]
-        component.componentOptions.listeners.change = (val) => {
-          formModels[itemData.key] = val
-        }
-        return component
+        return itemData.component((vNode, option = {}, children = []) => {
+          const component = h(vNode, option, children)
+          let flag = vNode.model && vNode.model.event && vNode.model.prop
+          component.componentOptions.propsData[flag ? vNode.model.prop : 'value'] = formModels[itemData.key]
+          component.componentOptions.listeners[flag ? vNode.model.event : 'input'] = (val) => {
+            formModels[itemData.key] = val
+          }
+          return component
+        })
       case 'input':
         return (<el-input placeholder={placeholder} class={itemData.class} v-model={formModels[itemData.key]} />)
       case 'select':
