@@ -4,6 +4,7 @@ import ElSelect from 'element-ui/lib/select'
 import ElOption from 'element-ui/lib/option'
 import DatePicker from 'element-ui/lib/date-picker'
 import ElSwitch from 'element-ui/lib/switch'
+import InfiniteSelectTags from '../../infinite-select-tags/src'
 
 export default {
   name: 'InfiniteFormItem',
@@ -17,7 +18,8 @@ export default {
     ElSelect,
     ElOption,
     DatePicker,
-    ElSwitch
+    ElSwitch,
+    InfiniteSelectTags
   },
   props: {
     itemData: {
@@ -69,6 +71,9 @@ export default {
           >
           </el-date-picker>
         )
+
+      case 'infinite-select-tags':
+        return (<infinite-select-tags v-model={formModels[itemData.key]} options={itemData.options} placeholder={itemData.placeholder} tagsNum={itemData.tagsNum}></infinite-select-tags>)
       default:
         return null
     }

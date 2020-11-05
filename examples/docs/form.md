@@ -361,6 +361,36 @@
             isShow: true,
           },
           {
+            label: '查询信息',
+            type: 'infinite-select-tags',
+            key: 'tags',
+            isShow: true,
+            placeholder: '请选择查询信息',
+            tagsNum:4,
+            options: [
+              {
+                id:'USD',
+                name:'美元'
+              },
+              {
+                id:'GBP',
+                name:'英镑'
+              },
+              {
+                id:'RMB',
+                name:'人民币'
+              },
+              {
+                id:'EUR',
+                name:'欧元'
+              },
+              {
+                id:'CAD',
+                name:'加元'
+              },
+            ],
+          },
+          {
             label: '密码',
             type: 'input',
             key: 'password',

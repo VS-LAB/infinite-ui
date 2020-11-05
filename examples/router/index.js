@@ -12,6 +12,7 @@ import LineChart from '../docs/lineChart.md'
 import PieChart from '../docs/pieChart.md'
 import Cascaders from '../docs/Cascaders.md'
 import Steps from '../docs/steps.md'
+import SelectTags from '../docs/selectTags.md'
 
 import VueRouter from 'vue-router'
 
@@ -115,6 +116,14 @@ const routes = [
     path: '/guide/steps',
     name: 'Steps',
     component: Steps,
+    meta: {
+      type: 'component'
+    }
+  },
+  {
+    path: '/guide/selectTags',
+    name: 'SelectTags',
+    component: SelectTags,
     meta: {
       type: 'component'
     }

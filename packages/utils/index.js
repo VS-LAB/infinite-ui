@@ -1,5 +1,5 @@
 // 时间格式化
-export let dateFormat = (dateTime, valueFormat) => {
+export const dateFormat = (dateTime, valueFormat) => {
   let newDate = new Date(dateTime)
   valueFormat = valueFormat || 'yyyy-MM-dd'
   let date = {
@@ -33,14 +33,14 @@ export let dateFormat = (dateTime, valueFormat) => {
 }
 
 // 处理百分比
-export let percentFormat = (value) => {
+export const percentFormat = (value) => {
   if (!value) return '0%'
   value = value * 100
   return String(value).indexOf('.') > 0 ? `${value.toFixed(1)}%` : `${parseInt(value)}%`
 }
 
 // 处理千位分隔
-export let numFormat = (value) => {
+export const numFormat = (value) => {
   if (!value) return 0
   const reg = /\d{1,3}(?=(\d{3})+$)/g
   if (String(value).indexOf('.') > 0) {
@@ -53,7 +53,7 @@ export let numFormat = (value) => {
 }
 
 // 处理浮点数或整数(浮点数取一位/整数不做处理)  问题: floatIntFormat(0.58*100) 返回 58.0
-export let floatIntFormat = (value) => {
+export const floatIntFormat = (value) => {
   if (!value) return 0
   if (String(value).indexOf('.') > 0) {
     return value.toFixed(1)
@@ -82,7 +82,7 @@ export class AxisOption {
 }
 
 // json数据平铺
-export let tiledArray = (json, props = { children: 'children' }) => {
+export const tiledArray = (json, props = { children: 'children' }) => {
   const { children } = props
   const result = []
   const tiledArraying = (data) => {
@@ -95,4 +95,14 @@ export let tiledArray = (json, props = { children: 'children' }) => {
   }
   tiledArraying(json)
   return result
+}
+
+export default {
+  dateFormat,
+  percentFormat,
+  numFormat,
+  floatIntFormat,
+  color,
+  AxisOption,
+  tiledArray
 }

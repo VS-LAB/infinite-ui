@@ -30,7 +30,6 @@ import ElCascader from 'element-ui/lib/cascader'
 import ElInput from 'element-ui/lib/input'
 import ElButton from 'element-ui/lib/button'
 import ElDatePicker from 'element-ui/lib/date-picker'
-import { tiledArray } from '../../utils'
 export default {
   name: 'InfiniteCascaders',
   components: {
@@ -112,7 +111,23 @@ export default {
         value: this.value
       }
       this.$emit('change', vModel)
+    },
+    // json数据平铺
+    tiledArray (json, props = { children: 'children' }) {
+      const { children } = props
+      const result = []
+      const tiledArraying = (data) => {
+        data.forEach(item => {
+          if (item[children] && item[children].length) {
+            tiledArraying(item[children])
+          }
+          result.push(item)
+        })
+      }
+      tiledArraying(json)
+      return result
     }
+
   },
   watch: {
     // 由于数据可能是动态的，所有在监听里边做初始化
@@ -120,7 +135,7 @@ export default {
       handler (val) {
         if (val && val.length) {
           this.initParam()
-          this.tiledOptions = tiledArray(this.options, { children: this.reProps.children })
+          this.tiledOptions = this.tiledArray(this.options, { children: this.reProps.children })
           this.setSelectNode()
         }
       },
@@ -128,9 +143,10 @@ export default {
     },
     // 双向绑定的v-model被父组件变动时，及时更新上去
     vModel: {
-      handler (val) {
-        this.keys = val.keys
-        this.value = val.value
+      handler (newV, oldV) {
+        this.keys = newV.keys
+        this.value = newV.value
+        newV.keys !== oldV.keys && this.setSelectNode()
       },
       deep: true
     }

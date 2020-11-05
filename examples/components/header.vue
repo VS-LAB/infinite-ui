@@ -1,7 +1,7 @@
 <template>
   <div class="header-model">
     <h1 class="info">
-      通用组件库
+      infinite-ui
     </h1>
   </div>
 </template>
@@ -16,16 +16,17 @@ export default {
 <style lang="scss" scoped>
 .el-header {
   position: fixed;
-  top:0;
+  top: 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 .header-model {
-  height: 40px;
+  height: 60px;
   .info {
     display: inline-block;
-    font-size: 14px;
+    font-size: 20px;
     color: #333;
     font-weight: normal;
+    font-weight: 700;
   }
 }
 </style>

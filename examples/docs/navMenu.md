@@ -10,7 +10,7 @@
 ```html
 <template>
   <infinite-nav-menu
-    v-model="menuData"
+    :data="menuData"
     mode="horizontal"
     @select="handleSelect"
     ref="infiniteNavMenu"
@@ -18,7 +18,7 @@
   </infinite-nav-menu>
   <div class="line"></div>
   <infinite-nav-menu
-    v-model="menuData"
+    :data="menuData"
     :default-active="defaultActive"
     mode="horizontal"
     background-color="#545c64"
@@ -120,7 +120,7 @@
     <el-col :span="12">
       <h5>默认颜色</h5>
       <infinite-nav-menu
-        v-model="menuData"
+        :data="menuData"
         :default-active="defaultActive"
         class="infinite-menu-vertical-demo"
         @open="handleOpen"
@@ -131,7 +131,7 @@
     <el-col :span="12">
       <h5>自定义颜色</h5>
       <infinite-nav-menu
-        v-model="menuData"
+        :data="menuData"
         :default-active="defaultActive"
         class="infinite-menu-vertical-demo"
         background-color="#545c64"
@@ -230,7 +230,7 @@
     >点击切换折叠</infinite-button
   >
   <infinite-nav-menu
-    v-model="menuData"
+    :data="menuData"
     :default-active="defaultActive"
     class="infinite-menu-vertical-demo"
     :collapse="isCollapse"
