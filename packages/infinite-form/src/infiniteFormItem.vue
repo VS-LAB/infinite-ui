@@ -2,7 +2,7 @@
 import ElInput from 'element-ui/lib/input'
 import ElSelect from 'element-ui/lib/select'
 import ElOption from 'element-ui/lib/option'
-import DatePicker from 'element-ui/lib/date-picker'
+import ElDatePicker from 'element-ui/lib/date-picker'
 import ElSwitch from 'element-ui/lib/switch'
 import InfiniteSelectTags from '../../infinite-select-tags/src'
 
@@ -17,7 +17,7 @@ export default {
     ElInput,
     ElSelect,
     ElOption,
-    DatePicker,
+    ElDatePicker,
     ElSwitch,
     InfiniteSelectTags
   },

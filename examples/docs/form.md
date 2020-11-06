@@ -9,10 +9,10 @@
 <template>
   <infinite-form
     :inline="inline"
-    :requiredPosition="requiredPosition"
-    :labelPosition="labelPosition"
-    :formData="formData"
-    :formBtns="formBtns"
+    :required-position="requiredPosition"
+    :label-position="labelPosition"
+    :form-data="formData"
+    :form-btns="formBtns"
   >
   </infinite-form>
 </template>
@@ -20,10 +20,12 @@
   const ElInput = require('element-ui/lib/input');
   const cascaders = require('../../packages/infinite-cascaders');
   const validatePass = (rule, value, callback) => {
-    if (value === '') {
-      callback(new Error('请再次输入密码'));
+    if (!value) {
+      callback(new Error('密码不能为空'));
+    } else if (value.length < 6) {
+      callback(new Error('密码不能小于6位数'));
     } else {
-      callback('密码不能为空');
+      callback();
     }
   };
   const opts = [
@@ -105,7 +107,7 @@
       return {
         inline: false,
         labelPosition: 'left',
-        requiredPosition: 'label',
+        requiredPosition: 'value',
         formData: [
           {
             label: '自定义表单组件',
@@ -178,8 +180,7 @@
             key: 'password',
             isShow: true,
             rules: [
-              { validator: validatePass, trigger: 'blur' },
-              { required: true, trigger: 'blur' },
+              { required: true, validator: validatePass, trigger: 'blur' },
             ],
           },
         ],
@@ -187,8 +188,12 @@
           {
             name: '保存',
             type: 'primary',
-            click: (val) => {
-              console.log(val);
+            click: (val, refs) => {
+              refs.validate((valid) => {
+                if (valid) {
+                  console.log(val);
+                }
+              });
             },
           },
           {
@@ -213,10 +218,10 @@
 <template>
   <infinite-form
     :inline="inline"
-    :requiredPosition="requiredPosition"
-    :labelPosition="labelPosition"
-    :formData="formData"
-    :formBtns="formBtns"
+    :required-position="requiredPosition"
+    :label-position="labelPosition"
+    :form-data="formData"
+    :form-btns="formBtns"
   >
   </infinite-form>
 </template>
@@ -224,12 +229,15 @@
   const ElInput = require('element-ui/lib/input');
   const cascaders = require('../../packages/infinite-cascaders');
   const validatePass = (rule, value, callback) => {
-    if (value === '') {
-      callback(new Error('请再次输入密码'));
+    if (!value) {
+      callback(new Error('密码不能为空'));
+    } else if (value.length < 6) {
+      callback(new Error('密码不能小于6位数'));
     } else {
-      callback('密码不能为空');
+      callback();
     }
   };
+
   const opts = [
     {
       value: 'inputs',
@@ -411,8 +419,7 @@
             key: 'password',
             isShow: true,
             rules: [
-              { validator: validatePass, trigger: 'blur' },
-              { required: true, trigger: 'blur' },
+              { required: true, validator: validatePass, trigger: 'blur' },
             ],
           },
         ],
@@ -433,3 +440,47 @@
   };
 </script>
 ```
+
+:::
+
+### Attributes
+
+| 参数              | 说明                                                                                    | 类型    | 可选值         | 默认值 |
+| ----------------- | --------------------------------------------------------------------------------------- | ------- | -------------- | ------ |
+| form-data         | 展示表单的数据`option`                                                                  | Array   | —              | —      |
+| label-position    | 表单域标签的位置，如果值为 `left` 或者 `right` 时，则需要设置 `label-width`             | String  | right/left/top | right  |
+| inline            | 行内表单模式                                                                            | Boolean | —              | —      |
+| required-position | 必填符号`*`的位置                                                                       | string  | label/value    | label  |
+| form-btns         | 表单按钮数据`btn-option`                                                                | Array   | —              | —      |
+| label-width       | 表单域标签的宽度，例如 '50px'。作为 Form 直接子元素的 form-item 会继承该值。支持 auto。 | String  | —              | 120px  |
+
+### option
+
+| 参数         | 说明                                                                                            | 类型                           | 可选值                                                | 默认值 |
+| ------------ | ----------------------------------------------------------------------------------------------- | ------------------------------ | ----------------------------------------------------- | ------ |
+| key          | 表单数据对象的`key`                                                                             | String                         | —                                                     | —      |
+| isShow       | 是否展示该行数据                                                                                | Boolean                        | —                                                     | false  |
+| label        | 标签                                                                                            | String                         | —                                                     | —      |
+| rules        | 表单验证规则                                                                                    | Object                         | —                                                     | —      |
+| class        | 该组件样式                                                                                      | String                         | —                                                     | —      |
+| defaultValue | 默认值,根据不同的组件使用不同类型的默认值来渲染                                                 | String/Object/boolean...       | —                                                     | —      |
+| type         | 需要显示的组件类型,当 `type` 设置为 `component` 时，可以使用 `component` 属性进行自定义组件传入 | String                         | input/select/switch/textarea/radio/own/date/component | —      |
+| component    | 自定义组件，这里的组件`必须`拥有`双向绑定`的值，便于组件的校验和 confirm                        | `Function(h){return h('div')}` | —                                                     | —      |
+| options      | 当 `type` 设置为 `select` 时,需要展示的下拉值                                                   | Array                          | —                                                     | —      |
+| placeholder  | 占位符文案                                                                                      | String                         | —                                                     | —      |
+
+### btn-option
+
+| 参数  | 说明                                                                      | 类型                          | 可选值 | 默认值 |
+| ----- | ------------------------------------------------------------------------- | ----------------------------- | ------ | ------ |
+| type  | 按钮类型，`type`值可以在`button`组件文档中查找                            | String                        | —      | —      |
+| name  | 按钮名称                                                                  | String                        | —      | —      |
+| click | 按钮的点击回调，这里接受两个值，表单值的`formValue`和表单 ref 的`formRef` | Function(formValue,formRef){} | —      | —      |
+
+### Form Events
+
+| 参数          | 说明                                                 | 回调参数                                                   |
+| ------------- | ---------------------------------------------------- | ---------------------------------------------------------- |
+| validate      | 任一表单项被校验后触发                               | 被校验的表单项 prop 值，校验是否通过，错误消息（如果存在） |
+| resetField    | 对该表单项进行重置，将其值重置为初始值并移除校验结果 | —                                                          |
+| clearValidate | 移除该表单项的校验结果                               | —                                                          |

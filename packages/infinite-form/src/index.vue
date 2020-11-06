@@ -18,20 +18,19 @@
     </el-form-item>
     <el-form-item v-if="formBtns.length > 0"
                   class="infinite-form-btns">
-      <el-button :type="btn.type"
-                 v-for="(btn, i) in formBtns"
-                 :key="i"
-                 class="infinite-form-btns"
-                 @click="btnClick(btn)">
+      <infinite-button :type="btn.type"
+                       v-for="(btn, i) in formBtns"
+                       :key="i"
+                       @click="btnClick(btn)">
         {{ btn.name }}
-      </el-button>
+      </infinite-button>
     </el-form-item>
   </el-form>
 </template>
 <script>
 import ElForm from 'element-ui/lib/form'
 import ElFormItem from 'element-ui/lib/form-item'
-import ElButton from '../../infinite-button'
+import InfiniteButton from '../../infinite-button'
 import InfiniteFormItem from './infiniteFormItem'
 import { validateLabelPosition } from './labelPostion'
 export default {
@@ -40,7 +39,7 @@ export default {
     ElForm,
     ElFormItem,
     InfiniteFormItem,
-    ElButton
+    InfiniteButton
   },
   props: {
     inline: {
@@ -49,6 +48,7 @@ export default {
     },
     labelPosition: {
       type: String,
+      default: 'right',
       validator: validateLabelPosition
     },
     requiredPosition: {
@@ -84,11 +84,8 @@ export default {
     }
   },
   methods: {
-    handleClick (e) {
-      this.$emit('click', e)
-    },
     btnClick (btn) {
-      btn.click && btn.click(this.formModels)
+      btn.click && btn.click(this.formModels, this.$refs['infinite-form'])
     },
     validate (func) {
       if (typeof func === 'function') {
@@ -111,7 +108,7 @@ export default {
     }
   },
   mounted () {
-    console.log(this.$attrs)
+    // console.log(this.$attrs)
   }
 }
 </script>
