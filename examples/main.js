@@ -12,39 +12,18 @@ import '../packages/theme-chalk/src/index.scss'
 // import '../packages/theme-chalk/src/infinite-form.scss'
 
 // 导入组件库
-import {
-  InfiniteButton,
-  InfiniteThemePicker,
-  InfiniteTable,
-  InfiniteTableColumn,
-  InfiniteForm,
-  InfiniteDialog,
-  InfiniteNavMenu,
-  InfinitePagination,
-  InfiniteLineChart,
-  InfinitePieChart,
-  InfiniteSelectTags,
-  InfiniteCascaders,
-  InfiniteTree,
-  InfiniteSteps,
-  InfiniteStep
-} from '../packages'
+import packages from '../packages'
+
+for (const key in packages) {
+  if (packages.hasOwnProperty(key)) {
+    const element = packages[key]
+    if (key.toLocaleLowerCase().includes('infinite')) {
+      Vue.use(element)
+    };
+  }
+}
+
 Vue.config.productionTip = false
-Vue.use(InfiniteButton)
-  .use(InfiniteThemePicker)
-  .use(InfiniteForm)
-  .use(InfiniteTable)
-  .use(InfiniteTableColumn)
-  .use(InfiniteDialog)
-  .use(InfiniteNavMenu)
-  .use(InfinitePagination)
-  .use(InfiniteLineChart)
-  .use(InfinitePieChart)
-  .use(InfiniteSelectTags)
-  .use(InfiniteCascaders)
-  .use(InfiniteTree)
-  .use(InfiniteSteps)
-  .use(InfiniteStep)
 
 Vue.use(ElementUI)
 Vue.component('demo-block', demoBlock)
