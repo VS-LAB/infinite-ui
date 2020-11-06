@@ -156,9 +156,10 @@ export default {
     makeSure () {
       // 点击确定按钮
       this.selectedOption = this.options.filter((el) => el.isChecked === true)
+      this.codeArr = Array.from(this.selectedOption, ({ id }) => id)
       this.keys = Array.from(this.selectedOption, ({ name }) => name) // 展示前五个+...
       this.$refs.infiniteSekectTags.blur()
-      this.$emit('change', this.keys)
+      this.$emit('change', this.codeArr)
     },
     allSelect (val) {
       // 全选按钮的点击事件
