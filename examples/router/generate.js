@@ -5,7 +5,10 @@ export function getFileList () {
   const blackList = ['./Installation.md']
   files.keys().map(key => {
     if (blackList.includes(key)) return
-    const name = key.split('./')[1].split('.')[0]
+    console.log('====================================')
+    console.log(key.replace(/\.\//g, '').replace(/.md/g, ''))
+    console.log('====================================')
+    const name = key.replace(/\.\//g, '').replace(/.md/g, '')
     const element = {
       path: `/guide/${name}`,
       name: name,
