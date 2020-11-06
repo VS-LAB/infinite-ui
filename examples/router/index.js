@@ -9,8 +9,12 @@ const generateRouters = getFileList()
 const routes = [
   {
     path: '/',
-    component: Installation,
-    name: 'default'
+    redirect: '/guide/installation'
+  },
+  {
+    path: '/guide/installation',
+    name: 'Installation',
+    component: Installation
   }
 ]
 
