@@ -47,12 +47,15 @@
 
   .infinite-select-search{
     padding: 6px 12px;
+    & + .infinite-select-group{
+      padding-top: 0;
+    }
   }
 
   .infinite-select-group {
     max-height: 200px;
     overflow: auto;
-    padding-bottom: 6px;
+    padding: 6px 0;
     &-box {
       height: 32px;
       display: flex;
@@ -61,6 +64,7 @@
       padding: 0 12px;
       .el-checkbox {
         flex: 1;
+        padding: 6px 0;
       }
       &:hover{
         background-color: #f5f7fa;
