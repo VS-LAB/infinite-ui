@@ -1,12 +1,12 @@
 const LABELPOSITION = ['right', 'left', 'top']
 
-export const validateLabelPosition = function (value) {
+const validateLabelPosition = function (value) {
   if (LABELPOSITION.includes(value)) {
     return true
   }
   return false
 }
 
-export default {
+export {
   validateLabelPosition
 }

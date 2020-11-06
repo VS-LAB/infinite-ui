@@ -13,6 +13,9 @@ import InfiniteTable from './infinite-table'
 import InfiniteTableColumn from './infinite-table-column'
 import InfiniteThemePicker from './infinite-theme-picker'
 import InfiniteTree from './infinite-tree'
+import InfiniteSteps from './infinite-steps'
+import InfiniteStep from './infinite-step'
+
 const version = '0.0.3'
 const components = [
   InfiniteButton,
@@ -27,7 +30,9 @@ const components = [
   InfiniteTable,
   InfiniteTableColumn,
   InfiniteThemePicker,
-  InfiniteTree
+  InfiniteTree,
+  InfiniteSteps,
+  InfiniteStep
 ]
 const install = Vue => {
   components.forEach(Component => {
@@ -54,7 +59,9 @@ export {
   InfiniteTable,
   InfiniteTableColumn,
   InfiniteThemePicker,
-  InfiniteTree
+  InfiniteTree,
+  InfiniteSteps,
+  InfiniteStep
 }
 export default {
   install,
