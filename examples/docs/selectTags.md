@@ -61,12 +61,11 @@
           {
             id:'USD',
             name:'美元',
-            disabled:true
+            selected:true
           },
           {
             id:'GBP',
-            name:'英镑',
-            disabled:true
+            name:'英镑'
           },
           {
             id:'RMB',
@@ -100,10 +99,80 @@
 ```
 :::
 
+### 禁用多选
+
+支持禁用选项，也支持自定义结合使用
+:::demo
+
+```html
+<template>
+  <infinite-select-tags
+    :options="options"
+    :tags-num="4"
+ />
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        options: [
+          {
+            id:'USD',
+            name:'美元',
+            disabled:true
+          },
+          {
+            id:'GBP',
+            name:'英镑',
+            disabled:true
+          },
+          {
+            id:'RMB',
+            name:'人民币',
+            selected:true,
+            disabled:true
+          },          
+          {
+            id:'EUR',
+            name:'欧元'
+          },
+          {
+            id:'CAD',
+            name:'加元'
+          },
+          {
+            id:'AUD',
+            name:'澳大利亚元'
+          },
+          {
+            id:'TAD',
+            name:'泰元'
+          },
+          {
+            id:'MUD',
+            name:'孟加拉元'
+          }
+        ]
+      };
+    },
+  };
+</script>
+```
+:::
+
 
 ### Attributes
 
-| 参数     | 说明         | 类型    | 可选值                                             | 默认值 |
-| -------- | ------------ | ------- | -------------------------------------------------- | ------ |
-| options  | 数据          | array  | —                                                   | —      |
-| tags-num | tag显示个数    | number | —                                                  | 3     |
+| 参数     | 说明                            | 类型    | 可选值                                             | 默认值 |
+| -------- | -----------------------------| ------- | -------------------------------------------------- | ------ |
+| options  | 详细参数 `Options Attributes` | array  | —                                                   | —      |
+| tags-num | 指定input内被选中选项的标签显示个数| number | —                                        | 3     |
+
+### Options Attributes
+
+| 参数     | 说明                                   | 类型   | 可选值 | 默认值     |
+| -------- | -------------------------------------- | ------ | ------ | ---------- |
+| id    | 选项的id    | String | —      | 'id'    |
+| name    | 选项的值    | String | —      | 'name'    |
+| selected | 指定选项为默认选项 | Boolean | —      | false |
+| disabled | 指定选项为禁用选项   | Boolean | —      | false |

@@ -99,7 +99,7 @@ export default {
   data () {
     return {
       allChecked: false, // 是否全选
-      isFirstTime: true,
+      isFirstTime: true, // 初始化，第一次进入
       keys: [], // 输入框展示的tag
       selectedOption: [],
       codeArr: []
@@ -150,7 +150,7 @@ export default {
       this.selectedOption = this.options.filter((el) => el.isChecked === true)
       this.codeArr = Array.from(this.selectedOption, ({ id }) => id)
       this.keys = Array.from(this.selectedOption, ({ name }) => name) // 展示前五个+...
-      this.$refs.infiniteSekectTags.blur()
+      // this.$refs.infiniteSekectTags.blur()
       this.$emit('change', this.codeArr)
     },
     allSelect (val) {
