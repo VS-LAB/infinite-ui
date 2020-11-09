@@ -99,10 +99,12 @@
     {
       id: 'USD',
       name: '美元',
+      selected:true
     },
     {
       id: 'GBP',
       name: '英镑',
+      disabled:true
     },
     {
       id: 'RMB',

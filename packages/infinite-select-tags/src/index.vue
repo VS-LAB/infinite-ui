@@ -98,8 +98,8 @@ export default {
   },
   data () {
     return {
-      allHidden: false,
       allChecked: false, // 是否全选
+      isFirstTime: true,
       keys: [], // 输入框展示的tag
       selectedOption: [],
       codeArr: []
@@ -116,32 +116,24 @@ export default {
   },
   watch: {
     options: {
-      handler (val, oldval) {
-        if (oldval.length === 0) {
-          // 仅仅是首次进入时生效
+      handler (val) {
+        if (val && val.length) {
           this.options.forEach((el) => {
-            if (el.disabled) {
+            if (el.selected) {
               el.isChecked = true
               this.keys.push(el.name)
             }
           })
-        }
-        if (val.every((el) => el.isChecked === true)) {
-          this.allChecked = true
-        } else {
-          this.allChecked = false
+          this.allChecked = val.every(o => o.isAllChecked)
+          if (this.isFirstTime) {
+            this.isFirstTime = false
+            this.makeSure()
+          }
         }
       },
-      deep: true
+      deep: true,
+      immediate: true
     }
-  },
-  created () {
-    this.options.forEach((el) => {
-      if (el.disabled) {
-        el.isChecked = true
-        this.keys.push(el.name)
-      }
-    })
   },
   methods: {
     checkChange (item, index, e) {
