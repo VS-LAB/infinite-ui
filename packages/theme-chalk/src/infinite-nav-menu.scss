@@ -2,14 +2,4 @@
 @import '../../../node_modules/element-ui/packages/theme-chalk/src/menu-item.scss';
 @import '../../../node_modules/element-ui/packages/theme-chalk/src/menu-item-group.scss';
 @import '../../../node_modules/element-ui/packages/theme-chalk/src/submenu.scss';
-.demo-block.demo-NavMenu .tac{
-  text-align: center;
-}
-.demo-block.demo-NavMenu .tac .infinite-menu-vertical-demo{
-  display: inline-block;
-  text-align: left;
-}
-.demo-block.demo-NavMenu .infinite-menu-vertical-demo:not(.el-menu--collapse){
-  width: 240px;
-  min-height: 400px;
-}
+

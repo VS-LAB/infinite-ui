@@ -10,7 +10,7 @@ export default {
       } else {
         return G2
       }
-    }, 
+    },
     DataSet: function () {
       if (typeof window !== 'undefined' && window.DataSet) {
         return window.DataSet
@@ -73,6 +73,6 @@ export default {
     }
   },
   mounted () {
-    this.drawChart(this.data)
+    this.data && this.data.length && this.drawChart(this.data)
   }
 }

@@ -44,12 +44,14 @@
                 label: '数字输入框',
                 component: 'input',
                 type: 'number',
+                placeholder: '请输入数字',
               },
               {
                 value: 'input-2',
                 label: '文本输入框',
                 component: 'input',
                 type: 'text',
+                placeholder: '请输入文本',
               },
             ],
           },
@@ -96,6 +98,7 @@
                 label: '日选择器',
                 component: 'date-picker',
                 type: 'date',
+                placeholder: '请选择日期',
               },
             ],
           },
@@ -118,7 +121,7 @@
 
 ### Options Attributes
 
-| 参数      | 说明                          | 类型   | 可选值                   | 默认值 |
+| 属性      | 说明                          | 类型   | 可选值                   | 默认值 |
 | --------- | ----------------------------- | ------ | ------------------------ | ------ |
 | value     | 选项的值                      | String | —                        | —      |
 | label     | 选项标签                      | String | —                        | —      |
@@ -129,7 +132,7 @@
 
 ### Props Attributes
 
-| 参数     | 说明                                   | 类型   | 可选值 | 默认值     |
+| 属性     | 说明                                   | 类型   | 可选值 | 默认值     |
 | -------- | -------------------------------------- | ------ | ------ | ---------- |
 | value    | 指定选项的值为选项对象的某个属性值     | String | —      | 'value'    |
 | label    | 指定选项标签为选项对象的某个属性值     | String | —      | 'label'    |
