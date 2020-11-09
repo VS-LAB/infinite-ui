@@ -107,3 +107,38 @@
 ```
 
 :::
+
+### Attributes
+
+| 参数    | 说明                                                                                    | 类型   | 可选值 | 默认值 |
+| ------- | --------------------------------------------------------------------------------------- | ------ | ------ | ------ |
+| v-model | 绑定的数据                                                                              | Object | —      | —      |
+| options | 详细参数 `Options Attributes`                                                           | Array  | —      | —      |
+| props   | 当 options 的 key 值不一样的时候，你可以使用`props`进行配置，详细使用`props Attributes` | Object | —      | —      |
+
+### Options Attributes
+
+| 参数      | 说明                          | 类型   | 可选值                   | 默认值 |
+| --------- | ----------------------------- | ------ | ------------------------ | ------ |
+| value     | 选项的值                      | String | —                        | —      |
+| label     | 选项标签                      | String | —                        | —      |
+| children  | 子选项                        | String | —                        | —      |
+| component | 组件名                        | String | —                        | —      |
+| type      | 组件属性                      | String | input/button/date-picker | —      |
+| name      | `component`为`button`时才生效 | String | —                        | —      |
+
+### Props Attributes
+
+| 参数     | 说明                                   | 类型   | 可选值 | 默认值     |
+| -------- | -------------------------------------- | ------ | ------ | ---------- |
+| value    | 指定选项的值为选项对象的某个属性值     | String | —      | 'value'    |
+| label    | 指定选项标签为选项对象的某个属性值     | String | —      | 'label'    |
+| children | 指定选项的子选项为选项对象的某个属性值 | String | —      | 'children' |
+| disabled | 指定选项的禁用为选项对象的某个属性值   | String | —      | 'disabled' |
+
+### Form Events
+
+| 参数           | 说明                       | 回调参数      |
+| -------------- | -------------------------- | ------------- |
+| componentEvent | 组件值变化或组件点击时触发 | 组件值        |
+| cascaderChange | 当选中节点变化时触发       | —选中节点的值 |

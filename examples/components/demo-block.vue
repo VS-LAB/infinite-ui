@@ -26,16 +26,6 @@
       <transition name="text-slide">
         <span v-show="hovering">{{ controlText }}</span>
       </transition>
-      <el-tooltip effect="dark"
-                  :content="langConfig['tooltip-text']"
-                  placement="right">
-        <transition name="text-slide">
-          <el-button v-show="hovering || isExpanded"
-                     size="small"
-                     type="text"
-                     class="control-button">{{ langConfig['button-text'] }}</el-button>
-        </transition>
-      </el-tooltip>
     </div>
   </div>
 </template>
@@ -186,7 +176,8 @@
 }
 </style>
 
-<script>
+<script type="text/babel">
+import { version } from 'element-ui/package.json'
 import { stripScript, stripStyle, stripTemplate } from '../util'
 export default {
   data () {
@@ -199,41 +190,68 @@ export default {
       hovering: false,
       isExpanded: false,
       fixedControl: false,
-      scrollParent: null
+      scrollParent: null,
+      langConfig: {
+        'hide-text': '隐藏代码',
+        'show-text': '显示代码',
+        'button-text': '在线运行',
+        'tooltip-text': '前往 codepen.io 运行此示例'
+      }
     }
   },
 
   methods: {
+    goCodepen () {
+      // since 2.6.2 use code rather than jsfiddle https://blog.codepen.io/documentation/api/prefill/
+      const { script, html, style } = this.codepen
+      const resourcesTpl = '<scr' + 'ipt src="//unpkg.com/vue/dist/vue.js"></scr' + 'ipt>' +
+        '\n<scr' + `ipt src="//unpkg.com/element-ui@${version}/lib/index.js"></scr` + 'ipt>'
+      let jsTpl = (script || '').replace(/export default/, 'var Main =').trim()
+      let htmlTpl = `${resourcesTpl}\n<div id="app">\n${html.trim()}\n</div>`
+      let cssTpl = `@import url("//unpkg.com/element-ui@${version}/lib/theme-chalk/index.css");\n${(style || '').trim()}\n`
+      jsTpl = jsTpl
+        ? jsTpl + '\nvar Ctor = Vue.extend(Main)\nnew Ctor().$mount(\'#app\')'
+        : 'new Vue().$mount(\'#app\')'
+      const data = {
+        js: jsTpl,
+        css: cssTpl,
+        html: htmlTpl
+      }
+      const form = document.getElementById('fiddle-form') || document.createElement('form')
+      while (form.firstChild) {
+        form.removeChild(form.firstChild)
+      }
+      form.method = 'POST'
+      form.action = 'https://codepen.io/pen/define/'
+      form.target = '_blank'
+      form.style.display = 'none'
+
+      const input = document.createElement('input')
+      input.setAttribute('name', 'data')
+      input.setAttribute('type', 'hidden')
+      input.setAttribute('value', JSON.stringify(data))
+
+      form.appendChild(input)
+      document.body.appendChild(form)
+
+      form.submit()
+    },
+
     scrollHandler () {
       const { top, bottom, left } = this.$refs.meta.getBoundingClientRect()
-      this.fixedControl =
-        bottom > document.documentElement.clientHeight &&
+      this.fixedControl = bottom > document.documentElement.clientHeight &&
         top + 44 <= document.documentElement.clientHeight
       this.$refs.control.style.left = this.fixedControl ? `${left}px` : '0'
     },
 
     removeScrollHandler () {
-      this.scrollParent &&
-        this.scrollParent.removeEventListener('scroll', this.scrollHandler)
+      this.scrollParent && this.scrollParent.removeEventListener('scroll', this.scrollHandler)
     }
   },
 
   computed: {
-    lang () {
-      return this.$route.path.split('/')[1]
-    },
-
-    langConfig () {
-      return {
-        'hide-text': '隐藏代码',
-        'show-text': '显示代码'
-      }
-    },
-
     blockClass () {
-      return `demo-${this.lang} demo-${this.$router.currentRoute.path
-        .split('/')
-        .pop()}`
+      return `demo-${this.lang} demo-${this.$router.currentRoute.path.split('/').pop()}`
     },
 
     iconClass () {
@@ -241,9 +259,7 @@ export default {
     },
 
     controlText () {
-      return this.isExpanded
-        ? this.langConfig['hide-text']
-        : this.langConfig['show-text']
+      return this.isExpanded ? this.langConfig['hide-text'] : this.langConfig['show-text']
     },
 
     codeArea () {
@@ -252,11 +268,8 @@ export default {
 
     codeAreaHeight () {
       if (this.$el.getElementsByClassName('description').length > 0) {
-        return (
-          this.$el.getElementsByClassName('description')[0].clientHeight +
-          this.$el.getElementsByClassName('highlight')[0].clientHeight +
-          20
-        )
+        return this.$el.getElementsByClassName('description')[0].clientHeight +
+          this.$el.getElementsByClassName('highlight')[0].clientHeight + 20
       }
       return this.$el.getElementsByClassName('highlight')[0].clientHeight
     }
@@ -272,11 +285,8 @@ export default {
         return
       }
       setTimeout(() => {
-        this.scrollParent = document.querySelector(
-          '.page-component__scroll > .el-scrollbar__wrap'
-        )
-        this.scrollParent &&
-          this.scrollParent.addEventListener('scroll', this.scrollHandler)
+        this.scrollParent = document.querySelector('.el-main')
+        this.scrollParent && this.scrollParent.addEventListener('scroll', this.scrollHandler)
         this.scrollHandler()
       }, 200)
     }
@@ -287,7 +297,7 @@ export default {
     if (highlight && highlight[0]) {
       let code = ''
       let cur = highlight[0]
-      if (cur.tag === 'pre' && cur.children && cur.children[0]) {
+      if (cur.tag === 'pre' && (cur.children && cur.children[0])) {
         cur = cur.children[0]
         if (cur.tag === 'code') {
           code = cur.children[0].text

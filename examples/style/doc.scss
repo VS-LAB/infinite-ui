@@ -1,4 +1,14 @@
 
+.view-container{
+  height: calc(100% - 60px);
+  margin-top: 60px;
+  overflow: auto;
+}
+.view-container .el-container{
+  width: 1140px;
+  margin: 0 auto;
+}
+
 .element-doc{
   #attributes{
     margin: 55px 0 20px;

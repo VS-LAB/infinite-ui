@@ -61,7 +61,7 @@ export default {
         return (<el-input placeholder={placeholder} class={itemData.class} v-model={formModels[itemData.key]} />)
       case 'own':
         return ''
-      case 'date':
+      case 'date-picker':
         return (
           <el-date-picker
             v-model={formModels[itemData.key]}

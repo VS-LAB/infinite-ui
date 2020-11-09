@@ -3,6 +3,7 @@
     <el-cascader class="cascader-container-cascader"
                  v-model="keys"
                  :options="options"
+                 :props="props"
                  @change="handleChange">
     </el-cascader>
 
@@ -67,14 +68,10 @@ export default {
       value: '',
       selectNode: {},
       reProps: {
-        expandTrigger: 'click',
-        multiple: false,
-        checkStrictly: false,
         value: 'value',
         label: 'label',
         children: 'children',
-        disabled: 'disabled',
-        leaf: 'leaf'
+        disabled: 'disabled'
       }
     }
   },
