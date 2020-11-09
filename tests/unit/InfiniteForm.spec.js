@@ -56,7 +56,7 @@ const getTestData = function () {
     },
     {
       label: '出生日期',
-      type: 'date',
+      type: 'date-picker',
       key: 'birthday',
       isShow: true
     },
@@ -127,7 +127,7 @@ describe('InfiniteForm.vue', () => {
         case 'radio':
           expect(formItems.at(index).findComponent(ElRadio).exists()).toBe(true)
           break
-        case 'date':
+        case 'date-picker':
           expect(formItems.at(index).findComponent(ElDatePicker).exists()).toBe(true)
           break
         default:

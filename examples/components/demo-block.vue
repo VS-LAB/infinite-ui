@@ -285,7 +285,7 @@ export default {
         return
       }
       setTimeout(() => {
-        this.scrollParent = document.querySelector('.el-main')
+        this.scrollParent = document.querySelector('.view-container')
         this.scrollParent && this.scrollParent.addEventListener('scroll', this.scrollHandler)
         this.scrollHandler()
       }, 200)
