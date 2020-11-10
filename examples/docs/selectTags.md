@@ -179,3 +179,9 @@
 | name    | 选项的值    | String | —      | 'name'    |
 | disabled | 指定选项为禁用选项   | Boolean | —      | false |
 
+### Events
+
+| 参数           | 说明                       | 回调参数      |
+| -------------- | -------------------------- | ------------- |
+| makeSure | 确认选中的值 | id        |
+| allSelect | 全选/取消全选      | 选中节点的isChecked的状态 |
