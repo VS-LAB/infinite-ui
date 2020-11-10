@@ -58,7 +58,7 @@
   export default {
     data() {
       return {
-        selecteds:['USD'],
+        selecteds:['USD','GBP','RMB','EUR','CAD','AUD','TAD','MUD'],
         options: [
           {
             id:'USD',

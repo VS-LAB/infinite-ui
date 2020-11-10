@@ -120,17 +120,14 @@ export default {
       handler (val) {
         if (val && val.length) {
           this.options.forEach((el) => {
-            if (this.selecteds.indexOf(el.id) > -1) {
+            if (this.selecteds.indexOf(el.id) > -1 && this.isFirstTime) {
               el.isChecked = true
-              el.selected = true
               this.keys.push(el.name)
+              this.makeSure()
             }
           })
-          this.allChecked = val.every(o => o.isAllChecked)
-          if (this.isFirstTime) {
-            this.isFirstTime = false
-            this.makeSure()
-          }
+          this.isFirstTime = false
+          this.allChecked = val.every(o => o.isChecked)
         }
       },
       deep: true,
@@ -158,7 +155,7 @@ export default {
     allSelect (val) {
       // 全选按钮的点击事件
       this.options.forEach((el) => {
-        ((val || (!val && !el.selected)) && !el.disabled) && (el.isChecked = val)
+        ((val || (!val && el.isChecked)) && !el.disabled) && (el.isChecked = val)
       })
     }
   }
