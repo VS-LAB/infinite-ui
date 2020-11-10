@@ -1,23 +1,21 @@
 <template>
-  <el-pagination 
-    :small="small"
-    :background="background"
-    :page-size="pageSize"
-    :total="total"
-    :pager-count="pagerCount"
-    :current-page="currentPage"
-    :layout="layout"
-    :page-sizes="pageSizes"
-    :popper-class="popperClass"
-    :prev-text="prevText"
-    :next-text="nextText"
-    :disabled="disabled"
-    :hide-on-single-page="hideOnSinglePage"
-    @size-change="sizeChange"
-    @current-change="currentChange"
-    @prev-click="prevClick"
-    @next-click="nextClick"
-  >
+  <el-pagination :small="small"
+                 :background="background"
+                 :page-size="pageSize"
+                 :total="total"
+                 :pager-count="pagerCount"
+                 :current-page="currentPage"
+                 :layout="layout"
+                 :page-sizes="pageSizes"
+                 :popper-class="popperClass"
+                 :prev-text="prevText"
+                 :next-text="nextText"
+                 :disabled="disabled"
+                 :hide-on-single-page="hideOnSinglePage"
+                 @size-change="sizeChange"
+                 @current-change="currentChange"
+                 @prev-click="prevClick"
+                 @next-click="nextClick">
     <slot />
   </el-pagination>
 </template>
@@ -75,7 +73,7 @@ export default {
       type: Array[Number],
       default: () => [10, 20, 30, 40, 50, 100]
     },
-    // 	每页显示个数选择器的下拉框类名
+    // 每页显示个数选择器的下拉框类名
     popperClass: {
       type: String,
       default: ''

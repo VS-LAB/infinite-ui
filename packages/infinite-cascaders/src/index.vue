@@ -11,6 +11,7 @@
       <el-input v-if="selectNode.component === 'input'"
                 :type="selectNode.type"
                 @input="componentEvent"
+                :placeholder="selectNode.placeholder || ''"
                 v-model="value" />
 
       <el-button v-if="selectNode.component === 'button'"
@@ -22,6 +23,7 @@
                       v-model="value"
                       @change="componentEvent"
                       value-format="yyyy-MM-dd"
+                      :placeholder="selectNode.placeholder || ''"
                       :type="selectNode.type" />
     </div>
   </div>

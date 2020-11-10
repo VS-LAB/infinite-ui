@@ -315,3 +315,35 @@
 ```
 
 :::
+
+### Attributes
+
+| 参数                | 说明                                                                                | 类型    | 可选值                | 默认值   |
+| ------------------- | ----------------------------------------------------------------------------------- | ------- | --------------------- | -------- |
+| data                | 渲染数据 `Data Attributes`                                                          | Array   | —                     | —        |
+| mode                | 模式                                                                                | String  | horizontal / vertical | vertical |
+| default-active      | 当前激活菜单的 index                                                                | String  | —                     | —        |
+| default-openeds     | 当前打开的 sub-menu 的 index 的数组                                                 | Array   | —                     | —        |
+| collapse            | 是否水平折叠收起菜单（仅在`mode`为`vertical`时可用）                                | Boolean | —                     | false    |
+| collapse-transition | 是否开启折叠动画                                                                    | Boolean | —                     | true     |
+| background-color    | 菜单的背景色（仅支持 hex 格式）                                                     | String  | —                     | #ffffff  |
+| text-color          | 菜单的文字颜色（仅支持 hex 格式）                                                   | String  | —                     | #303133  |
+| active-text-color   | 当前激活菜单的文字颜色（仅支持 hex 格式）                                           | String  | —                     | #409EFF  |
+| router              | 是否使用 vue-router 的模式，启用该模式会在激活导航时以 index 作为 path 进行路由跳转 | Boolean | —                     | false    |
+
+### Data Attributes
+
+| 属性      | 说明                | 类型                           | 可选值 | 默认值 |
+| --------- | ------------------- | ------------------------------ | ------ | ------ |
+| index     | 唯一标志            | String                         | —      | —      |
+| route     | Vue Router 路径对象 | Object                         | —      | —      |
+| disabled  | 是否禁用            | Boolean                        | —      | false  |
+| component | 自定义组件          | `Function(h){return h('div')}` | —      | —      |
+
+### Menu Events
+
+| 事件名称 | 说明                | 回调参数                                                                   |
+| -------- | ------------------- | -------------------------------------------------------------------------- |
+| select   | 菜单激活回调        | index: 选中菜单项的 index, indexPath: 选中菜单项的 index path              |
+| open     | sub-menu 展开的回调 | index: 打开的 sub-menu 的 index， indexPath: 打开的 sub-menu 的 index path |
+| close    | sub-menu 收起的回调 | index: 收起的 sub-menu 的 index， indexPath: 收起的 sub-menu 的 index path |

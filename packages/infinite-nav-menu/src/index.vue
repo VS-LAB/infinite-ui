@@ -84,7 +84,6 @@ export default {
       mode,
       defaultActive,
       defaultOpeneds,
-      activeIndex,
       collapse,
       collapseTransition,
       backgroundColor,
@@ -123,7 +122,6 @@ export default {
     let el = h('el-menu', {
       props: {
         mode,
-        activeIndex,
         defaultActive,
         defaultOpeneds,
         collapse,

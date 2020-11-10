@@ -13,20 +13,7 @@ export default {
     // 数据
     data: {
       type: Array,
-      default: () => [
-        { name: '1997', value: 86085, type: 'America' },
-        { name: '2007', value: 144776, type: 'America' },
-        { name: '2017', value: 193868, type: 'America' },
-        { name: '1997', value: 9616, type: 'China' },
-        { name: '2007', value: 35715, type: 'China' },
-        { name: '2017', value: 122503, type: 'China' },
-        { name: '1997', value: 44122, type: 'Japan' },
-        { name: '2007', value: 45153, type: 'Japan' },
-        { name: '2017', value: 48675, type: 'Japan' },
-        { name: '1997', value: 22159, type: 'Germany' },
-        { name: '2007', value: 34447, type: 'Germany' },
-        { name: '2017', value: 36865, type: 'Germany' }
-      ]
+      default: () => []
     },
     // 坐标轴名称
     axisName: {
@@ -116,7 +103,7 @@ export default {
 
       // 是否使用tooltip
       if (this.useTooltip) {
-      // 配置图表tooltip
+        // 配置图表tooltip
         this.chart.tooltip(true, {
           crosshairs: {
             type: 'line'
