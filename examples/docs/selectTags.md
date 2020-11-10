@@ -50,6 +50,7 @@
 <template>
   <infinite-select-tags
     :options="options"
+    :selecteds="selecteds"
     :tags-num="4"
  />
 </template>
@@ -57,11 +58,11 @@
   export default {
     data() {
       return {
+        selecteds:['USD'],
         options: [
           {
             id:'USD',
-            name:'美元',
-            selected:true
+            name:'美元'
           },
           {
             id:'GBP',
@@ -108,6 +109,7 @@
 <template>
   <infinite-select-tags
     :options="options"
+    :selecteds="selecteds"
     :tags-num="4"
  />
 </template>
@@ -115,6 +117,7 @@
   export default {
     data() {
       return {
+        selecteds:['USD','RMB'],
         options: [
           {
             id:'USD',
@@ -129,7 +132,6 @@
           {
             id:'RMB',
             name:'人民币',
-            selected:true,
             disabled:true
           },          
           {
@@ -166,6 +168,7 @@
 | 参数     | 说明                            | 类型    | 可选值                                             | 默认值 |
 | -------- | -----------------------------| ------- | -------------------------------------------------- | ------ |
 | options  | 详细参数 `Options Attributes` | array  | —                                                   | —      |
+| selecteds  |指定默认被选中的选项id数组 | array  | —                                                   | —      |
 | tags-num | 指定input内被选中选项的标签显示个数| number | —                                        | 3     |
 
 ### Options Attributes
@@ -174,5 +177,5 @@
 | -------- | -------------------------------------- | ------ | ------ | ---------- |
 | id    | 选项的id    | String | —      | 'id'    |
 | name    | 选项的值    | String | —      | 'name'    |
-| selected | 指定选项为默认选项 | Boolean | —      | false |
 | disabled | 指定选项为禁用选项   | Boolean | —      | false |
+

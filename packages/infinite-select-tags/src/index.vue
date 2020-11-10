@@ -91,7 +91,7 @@ export default {
       type: Boolean,
       default: false
     },
-    vModel: {
+    selecteds: {
       type: Array,
       default: () => []
     }
@@ -119,8 +119,9 @@ export default {
       handler (val) {
         if (val && val.length) {
           this.options.forEach((el) => {
-            if (el.selected) {
+            if (this.selecteds.indexOf(el.id) > -1) {
               el.isChecked = true
+              el.selected = true
               this.keys.push(el.name)
             }
           })
@@ -156,7 +157,7 @@ export default {
     allSelect (val) {
       // 全选按钮的点击事件
       this.options.forEach((el) => {
-        (val || (!val && !el.disabled)) && (el.isChecked = val)
+        ((val || (!val && !el.selected)) && !el.disabled) && (el.isChecked = val)
       })
     }
   }

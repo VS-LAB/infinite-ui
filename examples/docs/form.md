@@ -98,8 +98,7 @@
   const seletOpts = [
     {
       id: 'USD',
-      name: '美元',
-      selected:true
+      name: '美元'
     },
     {
       id: 'GBP',
@@ -167,6 +166,7 @@
               return h(selectTags.default, {
                 props: {
                   options: seletOpts,
+                  selecteds:['USD'],
                   placeholder: '请选择查询信息',
                   tagsNum: 4,
                 },
