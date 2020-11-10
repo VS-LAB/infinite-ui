@@ -5,6 +5,7 @@
       v-model="keys"
       multiple
       popper-class="infinite-select-popover"
+      :popper-append-to-body="false"
       :placeholder="defaultPlaceholder"
       size="large"
     >
