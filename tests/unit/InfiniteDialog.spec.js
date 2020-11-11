@@ -1,5 +1,5 @@
 
-import { shallowMount, mount, config } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import InfiniteDialog from '@/packages/infinite-dialog/src/index.vue'
 import ElDialog from 'element-ui/lib/dialog'
 
