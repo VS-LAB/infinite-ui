@@ -53,29 +53,41 @@
   }
 
   .infinite-select-group {
+    line-height: initial;
     max-height: 200px;
     overflow: auto;
-    padding: 6px 0;
     &-box {
-      height: 32px;
-      display: flex;
       flex-wrap: wrap;
       align-items: center;
       padding: 0 12px;
-      &:hover{
-        background-color: #f5f7fa;
-        // .el-checkbox{
-        //   color: #409EFF;
-        //   &.is-disabled{
-        //     color: inherit;
-        //   }
-        // }
-      }
       .el-checkbox {
+        display: flex;
+        height: 18px;
         flex: 1;
-        padding: 6px 0;
+        padding: 8px 0;
+        align-items: center;
+        .el-checkbox__input{
+          height: 14px;
+        }
       }
     }
+
+  }
+
+  .infinite-select-group-level-1{
+    >.infinite-select-group-box{
+      .infinite-select-group{
+        display: flex;
+        flex-wrap: wrap;
+        &-box{
+          // flex:30%;
+          width: 30%;
+          min-width: 30%;
+          box-sizing: border-box;
+        }
+      }
+    }
+    
   }
 
   .infinite-select-button {

@@ -1,57 +1,46 @@
 <template>
   <div class="infinite-select-tags">
-    <el-select
-      ref="infiniteSekectTags"
-      v-model="keys"
-      multiple
-      popper-class="infinite-select-popover"
-      :popper-append-to-body="false"
-      :placeholder="defaultPlaceholder"
-      size="large"
-    >
+    <el-select ref="infiniteSekectTags"
+               :value="[]"
+               multiple
+               popper-class="infinite-select-popover"
+               :popper-append-to-body="false"
+               :placeholder="defaultPlaceholder"
+               @visible-change="visibleChange"
+               size="large">
       <!-- popper展示核心内容 -->
-      <div class="infinite-select-search" v-if="filterable">
-          <el-input placeholder="请输入字段名称" prefix-icon="el-icon-search" @input="keyWordChange" />
+      <div class="infinite-select-search"
+           v-if="filterable">
+        <el-input placeholder="请输入字段名称"
+                  prefix-icon="el-icon-search"
+                  @input="keyWordChange" />
       </div>
-      <div class="infinite-select-group">
-        <div
-          v-for="(item, index) in options"
-          :key="item.id"
-          class="infinite-select-group-box"
-        >
-          <el-checkbox
-            v-model="item.isChecked"
-            :disabled="item.disabled"
-            @change="checkChange(item, index, $event)"
-          >
-            {{ item.name }}
-          </el-checkbox>
-        </div>
-      </div>
-
+      <!-- option递归 -->
+      <infinite-select-tags-option :options="options"
+                                   :show-checked="showChecked"
+                                   @change="change"></infinite-select-tags-option>
       <!-- popper占位符 start -->
-      <el-option
-        v-for="item in options"
-        :key="item.id"
-        :value="item.id"
-      ></el-option>
+      <el-option v-for="item in options"
+                 :key="item.id"
+                 :value="item.id"></el-option>
       <!-- popper占位符 end -->
       <div class="infinite-select-button">
-        <el-checkbox v-model="allChecked" @change="allSelect">全选</el-checkbox>
-        <infinite-button type="primary" @click="makeSure">确定</infinite-button>
+        <el-checkbox v-model="allChecked"
+                     :indeterminate="indeterminate"
+                     @change="allSelect">全选</el-checkbox>
+        <infinite-button type="primary"
+                         @click="makeSure">确定</infinite-button>
       </div>
       <template slot="prefix">
-        <div slot="reference" class="infinite-selected">
-          <div v-if="keys.length > 0" class="infinite-selected-tag">
-            <el-tag
-              v-for="(item, i) in keys"
-              v-show="i < tagsNum"
-              :key="item"
-              >{{ item }}</el-tag
-            >
-            <el-tag v-if="keys.length > tagsNum" class="last-tag"
-              >+{{ keys.length - tagsNum }}</el-tag
-            >
+        <div slot="reference"
+             class="infinite-selected">
+          <div v-if="labels.length > 0"
+               class="infinite-selected-tag">
+            <el-tag v-for="(item, i) in labels"
+                    v-show="i < tagsNum"
+                    :key="item">{{ item }}</el-tag>
+            <el-tag v-if="labels.length > tagsNum"
+                    class="last-tag">+{{ labels.length - tagsNum }}</el-tag>
           </div>
         </div>
       </template>
@@ -66,10 +55,11 @@ import ElSelect from 'element-ui/lib/select'
 import ElOption from 'element-ui/lib/option'
 import ElCheckbox from 'element-ui/lib/checkbox'
 import InfiniteButton from '../../infinite-button'
+import infiniteSelectTagsOption from './infiniteSelectTagsOption'
 
 export default {
   name: 'InfiniteSelectTags',
-  components: { ElInput, ElTag, ElSelect, ElOption, ElCheckbox, InfiniteButton },
+  components: { ElInput, ElTag, ElSelect, ElOption, ElCheckbox, InfiniteButton, infiniteSelectTagsOption },
   model: {
     prop: 'vModel',
     event: 'change'
@@ -92,71 +82,201 @@ export default {
       type: Boolean,
       default: false
     },
-    selecteds: {
+    vModel: {
       type: Array,
       default: () => []
     }
   },
   data () {
     return {
-      allChecked: false, // 是否全选
-      isFirstTime: true, // 初始化，第一次进入
-      keys: [], // 输入框展示的tag
-      selectedOption: [],
-      codeArr: []
+      allChecked: false, // 是否默认选中
+      checked: {}, // 最终选中的值
+      showChecked: {} // 展示勾选的值
     }
   },
   computed: {
     defaultPlaceholder () {
-      if (this.keys.length > 0) {
-        return ''
-      } else {
-        return this.placeholder
-      }
+      return this.labels.length > 0 ? '' : this.placeholder
+    },
+    // input上展示的数据
+    labels () {
+      const labels = []
+      this.newDescOptions.forEach(el => {
+        if (this.checked[el.id]) labels.push(el.name)
+      })
+      return labels
+    },
+    // 平铺后的数据
+    newOptions () {
+      return this.tiledArray(this.options)
+    },
+    // 平铺后的数据
+    newDescOptions () {
+      return this.tiledArray(this.options, { children: 'children' }, true)
+    },
+    // 禁用了的data
+    disabledKeys () {
+      const disabledKeys = {}
+      this.newOptions.forEach(el => {
+        if (el.disabled) disabledKeys[el.id] = true
+      })
+      return disabledKeys
+    },
+    // 禁用且选中的data
+    disabledAndCheckedKeys () {
+      const disabledAndCheckedKeys = {}
+      this.newOptions.forEach(el => {
+        if (el.disabled && this.vModel.includes(el.id)) {
+          disabledAndCheckedKeys[el.id] = true
+        }
+      })
+      return disabledAndCheckedKeys
+    },
+    // 是否显示半选中状态
+    indeterminate () {
+      const showCheckedArray = Object.keys(this.showChecked).filter(key => this.showChecked[key])
+      return !!(showCheckedArray.length && showCheckedArray.length < this.newOptions.length)
+    },
+    // 父ID集合
+    parentIds () {
+      const parentIds = {}
+      this.newDescOptions.forEach(item => {
+        console.log(2)
+        if (item.children && item.children.length) {
+          item.children.forEach(cItem => {
+            console.log(3)
+            parentIds[cItem.id] = item.id
+          })
+        }
+      })
+      console.log(parentIds)
+      return parentIds
     }
   },
   watch: {
-    options: {
+    newOptions: {
       handler (val) {
-        if (val && val.length) {
-          this.options.forEach((el) => {
-            if (this.selecteds.indexOf(el.id) > -1 && this.isFirstTime) {
-              el.isChecked = true
-              this.keys.push(el.name)
-              this.makeSure()
-            }
-          })
-          this.isFirstTime = false
-          this.allChecked = val.every(o => o.isChecked)
-        }
+        this.setChecked(['showChecked'])
       },
-      deep: true,
+      immediate: true
+    },
+    vModel: {
+      handler () {
+        this.setChecked(['checked', 'showChecked'])
+      },
       immediate: true
     }
   },
   methods: {
-    checkChange (item, index, e) {
-      console.log(item, e, 'eee')
-      this.options.forEach((el) => {
-        if (el.id === item.id) {
-          el.isChecked = e
-          this.$set(this.options, index, el)
+    // json数据平铺
+    tiledArray (json, props = { children: 'children' }, desc) {
+      const { children } = props
+      const result = []
+      const tiledArraying = (data) => {
+        data.forEach(item => {
+          if (desc) {
+            result.push(item)
+          }
+          if (item[children] && item[children].length) {
+            tiledArraying(item[children])
+          }
+          if (!desc) {
+            result.push(item)
+          }
+        })
+      }
+      tiledArraying(json)
+      return result
+    },
+    // 设置选中box
+    setChecked (attrs) {
+      this.newOptions.forEach((el) => {
+        attrs.forEach(attr => {
+          this.$set(this[attr], el.id, this.vModel.includes(el.id))
+        })
+      })
+    },
+    // 初始化全选
+    initAllchecked () {
+      let flag = true // 假如全选
+      const includesArr = []
+      Object.keys(this.showChecked).forEach(el => {
+        if (this.showChecked[el]) {
+          includesArr.push(el)
         }
       })
+      this.newOptions.forEach(el => {
+        if (flag && !includesArr.includes(el.id)) {
+          flag = false
+        }
+      })
+      this.allChecked = flag
     },
     makeSure () {
       // 点击确定按钮
-      this.selectedOption = this.options.filter((el) => el.isChecked === true)
-      this.codeArr = Array.from(this.selectedOption, ({ id }) => id)
-      this.keys = Array.from(this.selectedOption, ({ name }) => name) // 展示前五个+...
-      // this.$refs.infiniteSekectTags.blur()
-      this.$emit('change', this.codeArr)
-    },
-    allSelect (val) {
-      // 全选按钮的点击事件
-      this.options.forEach((el) => {
-        ((val || (!val && el.isChecked)) && !el.disabled) && (el.isChecked = val)
+      const vModel = []
+      Object.keys(this.showChecked).map(key => {
+        if (this.showChecked[key]) vModel.push(key)
       })
+      this.$emit('change', vModel)
+      this.$refs.infiniteSekectTags.blur()
+    },
+    // 全选按钮的点击事件
+    allSelect (val) {
+      const showChecked = {}
+      this.newOptions.forEach(el => {
+        if (!this.disabledKeys[el.id]) {
+          showChecked[el.id] = val
+        }
+      })
+      this.showChecked = { ...showChecked, ...this.disabledAndCheckedKeys }
+    },
+    // 下拉框每次显示隐藏时
+    visibleChange (val) {
+      if (val) {
+        // 每次展开时
+        this.setChecked(['showChecked'])
+        this.initAllchecked()
+      }
+    },
+    // 设置父节点checkbox
+    setParentCheckbox (id, status) {
+      let newOptionsId = id
+      // 子节点找父
+      this.newOptions.forEach(item => {
+        if (item.id === newOptionsId) {
+          newOptionsId = this.parentIds[item.id] || newOptionsId
+          if (!this.parentIds[item.id] && newOptionsId !== id) {
+            this.$set(this.showChecked, item.id, newOptionsId === id ? status : this.crtNodeIsChecked(item.children || []))
+          }
+        }
+      })
+      // 父节点找子
+      let newDescOptionsIds = [id]
+      this.newDescOptions.forEach(item => {
+        if (newDescOptionsIds.includes(this.parentIds[item.id]) && !item.disabled) {
+          console.log(item.name)
+          newDescOptionsIds.push(item.id)
+          this.$set(this.showChecked, item.id, status)
+        }
+      })
+
+      console.log(this.showChecked)
+    },
+    // 改节点是否为全选中
+    crtNodeIsChecked (children) {
+      let flag = true
+      children.forEach(item => {
+        if (flag && !this.showChecked[item.id]) {
+          flag = false
+        }
+      })
+      return flag
+    },
+    // checkbox change
+    change (item, index, status) {
+      this.setParentCheckbox(item.id, status)
+      this.initAllchecked()
     }
   }
 }

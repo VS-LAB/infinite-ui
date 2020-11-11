@@ -1,72 +1,98 @@
-import { shallowMount } from '@vue/test-utils' // 创建一个包含被挂载和渲染的 Vue 组件的 Wrapper
 
-import InfiniteDialog from '@/packages/infinite-dialog/src/index.vue' // 引入组件
+import { shallowMount, mount, config } from '@vue/test-utils'
+import InfiniteDialog from '@/packages/infinite-dialog/src/index.vue'
 import ElDialog from 'element-ui/lib/dialog'
 
-describe('InfiniteDialog.vue', () => { // describe 代表一个作用域
-  it('create', () => {
-    // ‘creat’ 这里只是一个自定义的描述性文字
-    const wrapper = shallowMount(InfiniteDialog, {
-      // 通过 shallowMount 生成了一个包裹器，包括了一个挂载组件或 vnode，以及测试该组件或 vnode 的方法
-      propsData: {
-        title: '提示'
-      },
-      // 可以带参数
-      stubs: {
-        ElDialog: ElDialog
-      }
-    })
-    expect(wrapper.find('.el-dialog__header').text()).toEqual('提示')
-    expect(wrapper.vm.visible).toBe(false)
-    // .vm 可以获取当前实例对象，相当于拿到了 vue组件里的 this 对象
-    // find()可以匹配各种类型的选择器，类似于选中 DOM, text() 就是获取其中的内容
-    // toEqual 是一个断言，判断结果为 ‘title’ 时，通过测试，否则猜测是失败
-    // toBe 和toEqual 类似，区别在于toBe 更严格限于同一个对象，如果是基本类型则没什么区别
+const getTestData = function () {
+  return {
+    vModel: {
+      key: 'visible',
+      value: true
+    },
+    width: {
+      key: 'width',
+      value: '60%'
+    },
+    top: {
+      key: 'top',
+      value: '25vh'
+    },
+    modalAppendToBody: {
+      key: 'modalappendtobody',
+      value: false,
+      notTest: true
+    },
+    appendToBody: {
+      key: 'appendtobody',
+      value: true
+    },
+    customClass: {
+      key: 'customclass',
+      value: 'custom-class'
+    },
+    closeOnClickModal: {
+      key: 'closeonclickmodal',
+      value: false,
+      notTest: true
+    },
+    closeOnPressEscape: {
+      key: 'closeonpressescape',
+      value: true,
+      notTest: true
+    },
+    destroyOnClose: {
+      key: 'destroyonclose',
+      value: true,
+      notTest: true
+    },
+    containerHeight: {
+      key: 'containerheight',
+      value: 400,
+      notTest: true
+    }
+  }
+}
+describe('InfiniteCascaders.vue', () => {
+  const testData = getTestData()
+  const testDataKeys = Object.keys(testData)
+  const props = {}
+  testDataKeys.forEach(key => {
+    props[key] = testData[key].value
+  })
+  let attrsWrapper = shallowMount(InfiniteDialog, {
+    propsData: props
   })
 
-  it('needFooter', () => {
-    const wrapper = shallowMount(InfiniteDialog, {
-      propsData: {
-        title: 'needFooter',
-        needFooter: false
-      },
-      stubs: {
-        ElDialog: ElDialog
+  it('component attrs to all match', () => {
+    testDataKeys.forEach(key => {
+      if (!testData[key].notTest) {
+        expect(attrsWrapper.attributes()[testData[key].key]).toBe(String(testData[key].value))
       }
     })
-    expect(wrapper.classes('el-dialog__footer')).toBe(false)
-    // classes() 方法，返回 class 名称的数组。或在提供 class 名的时候返回一个布尔值
+    attrsWrapper.destroy()
   })
 
-  it('footer slot', () => {
-    const wrapper = shallowMount(InfiniteDialog, {
-      propsData: {
-        title: 'footer'
-      },
-      slots: {
-        footer: '<span>foo</span>'
-      },
-      stubs: {
-        ElDialog: ElDialog
-      }
-    })
-    // 这里通过slots 属性，添加了一个 slot 插槽，然后来判断插槽内容是否正确渲染进去了
-    expect(wrapper.find('.el-dialog__footer').text()).toEqual('foo')
+  let eventWrapper = shallowMount(InfiniteDialog, {
+    propsData: props,
+    stubs: { ElDialog }
   })
+  // stubs: { ElDialog }
 
-  it('close', () => {
-    const wrapper = shallowMount(InfiniteDialog, {
-      propsData: {
-        title: 'test',
-        visible: true
-      },
-      stubs: {
-        ElDialog: ElDialog
-      }
+  it('component event to all match', () => {
+    const InfiniteButtonWrappers = eventWrapper.findAllComponents({ name: 'InfiniteButton' })
+    const ElDialogWrapper = eventWrapper.findComponent({ name: 'ElDialog' })
+    // emit方法是否执行
+    const events = ['open', 'opened', 'close', 'closed']
+    events.forEach(event => {
+      ElDialogWrapper.vm.$emit(event)
+      expect(eventWrapper.emitted()[event]).toBeTruthy()
     })
-    console.log(22222, wrapper.vm.visible)
-    wrapper.find('.el-dialog__headerbtn').trigger('click')
-    expect(wrapper.vm.visible).toBe(true)
-    // trigger()可以触发一个事件，这里模拟了点击
+    // 关闭之前的函数是否执行
+    ElDialogWrapper.vm.beforeClose()
+    expect(eventWrapper.emitted().beforeClose).toBeTruthy()
+
+    // 默认确认按钮是否点击
+    InfiniteButtonWrappers.at(1).vm.$emit('click')
+    expect(InfiniteButtonWrappers.at(1).emitted().click).toBeTruthy()
   })
 })

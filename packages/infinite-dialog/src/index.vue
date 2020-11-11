@@ -1,34 +1,41 @@
 <template>
-  <el-dialog
-    class="infinite-dialog"
-    ref="infiniteDialog"
-    :visible="visible"
-    :width="width"
-    :before-close="beforeClose"
-    :top="top"
-    :center="center"
-    :append-to-body="appendToBody"
-    :show-close="showClose"
-    @open="open"
-    @opened="opened"
-    @close="close"
-    @closed="closed"
-  >
-  <template>
-    <slot>默认内容</slot>
-  </template>
-  <template slot="title">
-    <slot name="title">{{title}}</slot>
-  </template>
-  <template v-if="needFooter" slot="footer">
-    <slot name="footer">
-      <span class="dialog-footer-btn dialog-footer">
-        <infinite-button infinite-button v-for="(btn,index) in (operations.length?operations:localOperations)" :key="index" :type="btn.type" @click="handleClick(btn)">
-          {{btn.label}}
-        </infinite-button>
-      </span>
-    </slot>
-  </template>
+  <el-dialog class="infinite-dialog"
+             ref="infiniteDialog"
+             :visible="vModel"
+             :width="width"
+             :top="top"
+             :center="center"
+             :append-to-body="appendToBody"
+             :show-close="showClose"
+             :custom-class="customClass"
+             :modal-append-to-body="modalAppendToBody"
+             :close-on-click-modal="closeOnClickModal"
+             :close-on-press-escape="closeOnPressEscape"
+             :destroy-on-close="destroyOnClose"
+             :before-close="beforeClose"
+             @open="open"
+             @opened="opened"
+             @close="close"
+             @closed="closed">
+    <template>
+      <slot>默认内容</slot>
+    </template>
+    <template slot="title">
+      <slot name="title">默认标题</slot>
+    </template>
+    <template v-if="needFooter"
+              slot="footer">
+      <slot name="footer">
+        <span class="dialog-footer-btn dialog-footer">
+          <infinite-button v-for="(btn,index) in (operations.length?operations:localOperations)"
+                           :key="index"
+                           :type="btn.type"
+                           @click="handleClick(btn)">
+            {{btn.label}}
+          </infinite-button>
+        </span>
+      </slot>
+    </template>
 
   </el-dialog>
 </template>
@@ -42,21 +49,17 @@ export default {
     InfiniteButton
   },
   model: {
-    prop: 'visible',
+    prop: 'vModel',
     event: 'change'
   },
   props: {
-    visible: {
+    vModel: {
       type: Boolean,
       default: false
     },
     width: {
       type: String,
       default: '50%'
-    },
-    title: {
-      type: String,
-      default: '默认标题'
     },
     modalAppendToBody: {
       type: Boolean,
@@ -107,28 +110,30 @@ export default {
       default: true
     },
     containerHeight: {
-      type: String,
-      default: ''
+      type: Number,
+      default: 0
     }
   },
   watch: {
-    visible () {
-      if (this.visible && this.containerHeight) {
-        // 设置container-height
-        this.$nextTick(() => {
-          const infiniteDialogEl = this.$refs.infiniteDialog.$el.querySelectorAll('.el-dialog__body')[0]
-          if (infiniteDialogEl) {
-            const containerHeight = parseFloat(this.containerHeight)
-            // 情况一：高度没有单位，默认px
-            if (String(containerHeight) === this.containerHeight) {
+    vModel: {
+      handler () {
+        if (this.vModel && this.containerHeight) {
+          // 设置container-height
+          this.$nextTick(() => {
+            const infiniteDialogEl = this.$refs.infiniteDialog.$el.querySelectorAll('.el-dialog__body')[0]
+            // console.log(this.$refs.infiniteDialog.$refs.dialog)
+            // console.dir(this.$refs.infiniteDialog.$children[0].$el)
+            // console.dir(this.$refs.infiniteDialog.$el.childNodes[0])x
+            // console.log(this.$refs.infiniteDialog.$el.childNodes[0].childNodes[1])
+            // console.log(document.getElementsByClassName('el-dialog__body'))
+            // console.log(document.getElementsByClassName('el-dialog__body'))
+            if (infiniteDialogEl) {
               infiniteDialogEl.style.height = this.containerHeight + 'px'
-            } else {
-              // 情况二：高度存在单位
-              infiniteDialogEl.style.height = this.containerHeight
             }
-          }
-        })
-      }
+          })
+        }
+      },
+      immediate: true
     }
   },
   data () {

@@ -12,11 +12,7 @@ export default {
   props: {
     data: {
       type: Array,
-      default: () => [
-        { name: '2016', value: 2 },
-        { name: '2017', value: 1 },
-        { name: '2018', value: 3 }
-      ]
+      default: () => []
     },
     colorMap: {
       type: Array,

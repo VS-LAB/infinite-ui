@@ -95,29 +95,6 @@
     },
   ];
 
-  const seletOpts = [
-    {
-      id: 'USD',
-      name: '美元'
-    },
-    {
-      id: 'GBP',
-      name: '英镑',
-      disabled:true
-    },
-    {
-      id: 'RMB',
-      name: '人民币',
-    },
-    {
-      id: 'EUR',
-      name: '欧元',
-    },
-    {
-      id: 'CAD',
-      name: '加元',
-    },
-  ];
   export default {
     methods: {
       componentClick(val) {
@@ -132,6 +109,56 @@
         inline: false,
         labelPosition: 'left',
         requiredPosition: 'label',
+        seletOpts: [
+          {
+            id: 'USD',
+            name: '美元',
+            children: [
+              {
+                id: 'USD-1',
+                name: '美元-1',
+                // disabled: true,
+                // children: [
+                //   {
+                //     id: 'USD-1-1',
+                //     name: '美元-1-1',
+                //     disabled: true,
+                //   },
+                // ],
+              },
+              {
+                id: 'USD-2',
+                name: '美元-2',
+              },
+              {
+                id: 'USD-3',
+                name: '美元-3',
+              },
+              {
+                id: 'USD-4',
+                name: '美元-4',
+              },
+            ],
+          },
+          {
+            id: 'GBP',
+            name: '英镑',
+            // disabled: true,
+          },
+          {
+            id: 'RMB',
+            name: '人民币',
+            // disabled: true,
+          },
+          {
+            id: 'EUR',
+            name: '欧元',
+          },
+          {
+            id: 'CAD',
+            name: '加元',
+          },
+        ],
         formData: [
           {
             label: '自定义表单组件',
@@ -161,12 +188,13 @@
             label: '自定义表单组件',
             type: 'component',
             key: 'selectTags',
+            // defaultValue: ['USD', 'GBP'],
+            defaultValue: [],
             isShow: true,
             component: (h) => {
               return h(selectTags.default, {
                 props: {
-                  options: seletOpts,
-                  selecteds:['USD'],
+                  options: this.seletOpts,
                   placeholder: '请选择查询信息',
                   tagsNum: 4,
                 },
@@ -253,7 +281,7 @@
 
 :::
 
-### 扩展
+<!-- ### 扩展
 
 必选项提示位置为输入框。指定`labelPosition`为`top`,指定`requiredPosition`为`value`,
 
@@ -456,7 +484,7 @@
 </script>
 ```
 
-:::
+::: -->
 
 ### Attributes
 
@@ -471,7 +499,7 @@
 
 ### FormData Attributes
 
-| 属性         | 说明                                                                                            | 类型                           | 可选值                                                       | 默认值 |
+| 参数         | 说明                                                                                            | 类型                           | 可选值                                                       | 默认值 |
 | ------------ | ----------------------------------------------------------------------------------------------- | ------------------------------ | ------------------------------------------------------------ | ------ |
 | key          | 表单数据对象的`key`                                                                             | String                         | —                                                            | —      |
 | isShow       | 是否展示该行数据                                                                                | Boolean                        | —                                                            | false  |
@@ -486,7 +514,7 @@
 
 ### Btn Option
 
-| 属性  | 说明                                                                      | 类型                          | 可选值 | 默认值 |
+| 参数  | 说明                                                                      | 类型                          | 可选值 | 默认值 |
 | ----- | ------------------------------------------------------------------------- | ----------------------------- | ------ | ------ |
 | type  | 按钮类型，`type`值可以在`button`组件文档中查找                            | String                        | —      | —      |
 | name  | 按钮名称                                                                  | String                        | —      | —      |
