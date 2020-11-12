@@ -13,7 +13,6 @@ describe('InfiniteSelectTags.vue', () => {
     stubs: {
       ElSelect: ElSelect,
       ElInput: ElInput,
-      ElCheckbox: ElCheckbox,
       ElTag: ElTag,
       ElOption: ElOption,
       InfiniteButton: InfiniteButton
@@ -24,17 +23,23 @@ describe('InfiniteSelectTags.vue', () => {
   // console.log(wrapper.html())
 
   it('是否正确渲染', () => {
-    expect(wrapper.html()).toContain('<div class="infinite-select-group"></div>')
+    expect(wrapper.attributes().class).toContain('infinite-select-tags')
   })
 
   // 检查已存在的元素
   it('是否有按钮', () => {
-    expect(wrapper.find('.infinite-button-stub'))
+    expect(wrapper.find('.infinite-button').exists()).toBe(true)
   })
 
-  it('触发一个自定义事件', () => {
-    expect(wrapper.findComponent(ElCheckbox).vm.$emit('change'))
-  })
+  // it('触发一个自定义事件', async () => {
+  //   await wrapper.vm.$nextTick()
+  //   const buttonEls = wrapper.find('.infinite-select-button')
+  //   console.log(buttonEls.html())
+  //   buttonEls.findComponent(ElCheckbox)
+  //   buttonEls.vm.$emit('change')
+  //   console.log(wrapper.emitted())
+  //   expect(wrapper.emitted().allSelect).toBeTruthy()
+  // })
 
   // it('触发按钮', () => {
   //   // 获取对应按钮
