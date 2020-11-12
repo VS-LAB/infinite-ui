@@ -1,6 +1,6 @@
 {
   "name": "infinite-theme-chalk",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "infinite component chalk theme.",
   "main": "lib/index.css",
   "style": "lib/index.css",
