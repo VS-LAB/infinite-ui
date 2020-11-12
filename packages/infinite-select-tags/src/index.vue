@@ -17,24 +17,24 @@
       </div>
       <!-- option递归 -->
       <infinite-select-tags-option ref="infiniteSelectTagsOption"
-                                   :options="options"
+                                   :options="newOptions"
                                    :show-checked="showChecked"
                                    :disabled-keys="disabledKeys"
-                                   :new-desc-options="newDescOptions"
+                                   :titled-desc-options="titledDescOptions"
                                    :parent-ids="parentIds"
                                    :maxLevel='maxLevel'
-                                   @change="change"></infinite-select-tags-option>
+                                   @change="checkBoxChange"></infinite-select-tags-option>
       <!-- popper占位符 start -->
-      <el-option v-for="item in options"
+      <el-option v-for="item in newOptions"
                  :key="item.id"
                  :value="item.id"></el-option>
       <!-- popper占位符 end -->
       <div class="infinite-select-button">
         <el-checkbox v-model="allChecked"
+                     :indeterminate="indeterminate"
                      @change="allSelect">全选</el-checkbox>
         <infinite-button type="primary"
                          @click="makeSure">确定</infinite-button>
-        <!-- :indeterminate="indeterminate" -->
       </div>
       <template slot="prefix">
         <div slot="reference"
@@ -70,8 +70,12 @@ export default {
     event: 'change'
   },
   props: {
+    // checkbox-group遍历的数据
     options: {
-      // checkbox-group遍历的数据
+      type: Array,
+      default: () => []
+    },
+    defaultCheckeds: {
       type: Array,
       default: () => []
     },
@@ -107,28 +111,32 @@ export default {
     // input上展示的数据
     labels () {
       const labels = []
-      this.newDescOptions.forEach(el => {
+      this.titledDescOptions.forEach(el => {
         if (this.checked[el.id]) labels.push(el.name)
       })
       return labels
     },
     // 平铺后的子找父数据
     newOptions () {
-      return this.tiledArray(this.options)
+      return JSON.parse(JSON.stringify(this.options))
+    },
+    // 平铺后的子找父数据
+    titledOptions () {
+      return this.tiledArray(this.newOptions)
     },
     // 平铺后的父找子数据
-    newDescOptions () {
-      return this.tiledArray(this.options, { children: 'children' }, true)
+    titledDescOptions () {
+      return this.tiledArray(this.newOptions, { children: 'children' }, true)
     },
     // 禁用了的data
     disabledKeys () {
       const disabledKeys = {}
-      this.newDescOptions.forEach(el => {
+      this.options.forEach(el => {
         if (el.disabled || disabledKeys[el.id]) {
           disabledKeys[el.id] = true
           if (el.children && el.children.length) {
-            el.children.forEach(cItem => {
-              disabledKeys[cItem.id] = true
+            el.children.forEach(cEl => {
+              disabledKeys[cEl.id] = true
             })
           }
         }
@@ -138,7 +146,7 @@ export default {
     // 禁用且选中的data
     disabledAndCheckedKeys () {
       const disabledAndCheckedKeys = {}
-      this.newOptions.forEach(el => {
+      this.titledOptions.forEach(el => {
         if (this.disabledKeys[el.id] && this.vModel.includes(el.id)) {
           disabledAndCheckedKeys[el.id] = true
         }
@@ -148,12 +156,12 @@ export default {
     // 是否显示半选中状态
     indeterminate () {
       const showCheckedArray = Object.keys(this.showChecked).filter(key => this.showChecked[key])
-      return !!(showCheckedArray.length && showCheckedArray.length < this.newOptions.length)
+      return !!(showCheckedArray.length && showCheckedArray.length < this.titledOptions.length)
     },
     // 父ID集合
     parentIds () {
       const parentIds = {}
-      this.newDescOptions.forEach(item => {
+      this.titledDescOptions.forEach(item => {
         if (item.children && item.children.length) {
           item.children.forEach(cItem => {
             parentIds[cItem.id] = item.id
@@ -164,30 +172,43 @@ export default {
     }
   },
   watch: {
-    newOptions: {
+    titledOptions: {
       handler (val) {
         this.setChecked(['showChecked'])
       },
       immediate: true
     },
     vModel: {
-      handler () {
-        this.setChecked(['checked', 'showChecked'])
+      handler (val, oldVal) {
+        this.setChecked(['checked'])
+      },
+      immediate: true
+    },
+    defaultCheckeds: {
+      handler (val, oldVal) {
+        if (val && val.length) {
+          if (oldVal && oldVal.join(',') === val.join(',')) return
+          this.watchDefaultCheckedsChange(val)
+          this.makeSure()
+        }
       },
       immediate: true
     }
   },
   methods: {
-    // json数据平铺
+    // 二级树数据平铺
     tiledArray (json, props = { children: 'children' }, desc) {
       const { children } = props
       const result = []
-      const tiledArraying = (data, status) => {
+      const tiledArraying = (data, stop) => {
         data.forEach(item => {
+          if (stop) {
+            delete item.children
+          }
           if (desc) {
             result.push(item)
           }
-          if (!status && item[children] && item[children].length) {
+          if (!status && item[children] && item[children].length && !stop) {
             tiledArraying(item[children], true)
           }
           if (!desc) {
@@ -200,7 +221,7 @@ export default {
     },
     // 设置选中box
     setChecked (attrs) {
-      this.newOptions.forEach((el) => {
+      this.titledOptions.forEach((el) => {
         attrs.forEach(attr => {
           this.$set(this[attr], el.id, this.vModel.includes(el.id))
         })
@@ -215,12 +236,12 @@ export default {
           includesArr.push(el)
         }
       })
-      this.newOptions.forEach(el => {
+      this.titledOptions.forEach(el => {
         if (flag && !includesArr.includes(el.id)) {
           flag = false
         }
       })
-      // this.allChecked = flag
+      this.allChecked = flag
     },
     // 点击确定按钮
     makeSure () {
@@ -229,16 +250,18 @@ export default {
         if (this.showChecked[key]) vModel.push(key)
       })
       this.$emit('change', vModel)
-      this.$refs.infiniteSekectTags.blur()
+      const infiniteSekectTagsEl = this.$refs.infiniteSekectTags
+      infiniteSekectTagsEl && infiniteSekectTagsEl.blur()
     },
     // 全选按钮的点击事件
     allSelect (val) {
-      this.newDescOptions.forEach(item => {
+      const status = this.updateNodeStatus(null, val)
+      this.titledDescOptions.forEach(item => {
         if (!this.disabledKeys[item.id]) {
-          this.$set(this.showChecked, item.id, val)
+          this.$set(this.showChecked, item.id, status)
         }
       })
-      // this.allChecked = this.crtNodeHashCheck(null, val)
+      this.allChecked = status
     },
     // 下拉框每次显示隐藏时
     visibleChange (val) {
@@ -248,28 +271,40 @@ export default {
         this.initAllchecked()
       }
     },
+    watchDefaultCheckedsChange (val) {
+      if (val && val.length) {
+        val.forEach(v => {
+          const item = this.titledOptions.filter(nItem => nItem.id === v)[0]
+          this.setSiblingCheckbox(item, true)
+          this.makeSure()
+        })
+      }
+    },
     // 设置相邻节点checkbox
-    setAdjacentCheckboc (item, status) {
+    setSiblingCheckbox (item, status) {
       const { id } = item
-      // 父节点找子
-      console.log(this.newDescOptions)
+      // 根据父节点设置子节点
       let newDescOptionsIds = [id]
-      this.newDescOptions.forEach(item => {
-        const itemPid = this.parentIds[item.id]
-        if (newDescOptionsIds.includes(itemPid) && !this.disabledKeys[item.id]) {
-          newDescOptionsIds.push(item.id)
-          this.$set(this.showChecked, item.id, status)
+      this.titledDescOptions.forEach(nItem => {
+        // 获取当前节点父节点
+        const itemPid = this.parentIds[nItem.id]
+        // 当遍历节点为子节点时
+        if (newDescOptionsIds.includes(itemPid)) {
+          // 收集当前节点及当前节点下的所有父节点集合
+          newDescOptionsIds.push(nItem.id)
+          // 设置遍历节点状态
+          this.$set(this.showChecked, nItem.id, status)
         }
       })
-
       let newOptionsId = id
-      // 子节点找父
-      this.newOptions.forEach(item => {
-        if (item.id === newOptionsId) {
-          if (newOptionsId !== id) {
-            this.$set(this.showChecked, item.id, status)
-          }
-          newOptionsId = this.parentIds[item.id] || newOptionsId
+      // 根据子节点设置父节点及当前节点
+      this.titledOptions.forEach(nItem => {
+        // 当前节点为遍历节点时
+        if (nItem.id === newOptionsId) {
+          // 父节点操作
+          this.$set(this.showChecked, nItem.id, this.updateNodeStatus(nItem, status, true))
+          // 设置遍历节点为当前节点为
+          newOptionsId = this.parentIds[nItem.id] || newOptionsId
         }
       })
     },
@@ -286,30 +321,56 @@ export default {
       return flag
     },
     // checkbox change
-    change (item, index, status) {
-      this.setAdjacentCheckboc(item, status)
+    checkBoxChange (item, index, status) {
+      this.setSiblingCheckbox(item, this.updateNodeStatus(item, status))
       this.initAllchecked()
     },
     // 该节点的子节点是否为可以勾选的节点
-    crtNodeHashCheck (item, status) {
-      let flag = false
-      if (item && (!item.children || !item.children.length)) {
-        flag = status
-      } else {
+    updateNodeStatus (item, status, ifDisabledAttr) {
+      // 假设该节点为需要做取消勾选处理
+      let flag = !!ifDisabledAttr
+      if (!item) {
         // 父节点找子
         const allRootIds = []
-        if (!item) {
-          this.options.forEach(oItem => {
-            allRootIds.push(oItem.id)
-          })
-        }
-        let newOptionsIds = item ? [item.id] : allRootIds
-        this.newOptions.forEach(nItem => {
-          if (newOptionsIds.includes(this.parentIds[nItem.id]) && !this.disabledKeys[nItem.id]) {
-            newOptionsIds.push(nItem.id)
-            // 如果不存在选中的checkbox，说明该状态为勾选状态
-            if (flag && !this.showChecked[nItem.id]) {
-              flag = true
+        this.newOptions.forEach(oItem => {
+          allRootIds.push(oItem.id)
+        })
+        this.titledDescOptions.forEach(nItem => {
+          // 排除禁用节点
+          if (!this.disabledKeys[nItem.id]) {
+            // 判断遍历节点是否为判断条件
+            if (allRootIds.includes(nItem.id)) {
+              // 所有所有子节点为父节点
+              allRootIds.push(nItem.id)
+              // 如果存在一个未勾选的checkbox,说明该状态也不该设置为勾选状态,即返回false
+              if (!flag && !this.showChecked[nItem.id]) {
+                flag = true
+              }
+            }
+          }
+        })
+        // let newOptionsIds = item && item.id ? [item.id] : allRootIds
+      } else if (!item.children || !item.children.length) {
+        flag = status
+      } else {
+        let newOptionsIds = [item.id]
+        this.titledOptions.forEach(nItem => {
+          // 排除禁用节点
+          if (!this.disabledKeys[nItem.id] || ifDisabledAttr) {
+            // 判断遍历节点是否为为子节点
+            if (newOptionsIds.includes(this.parentIds[nItem.id])) {
+              // 所有所有子节点为父节点
+              newOptionsIds.push(nItem.id)
+              // 如果存在一个未勾选的checkbox,说明该状态也不该设置为勾选状态,即返回false
+              if (ifDisabledAttr) {
+                if (flag && !this.showChecked[nItem.id]) {
+                  flag = false
+                }
+              } else {
+                if (!flag && !this.showChecked[nItem.id]) {
+                  flag = true
+                }
+              }
             }
           }
         })

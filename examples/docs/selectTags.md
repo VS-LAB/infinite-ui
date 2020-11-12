@@ -47,13 +47,28 @@
 
 ```html
 <template>
-  <infinite-select-tags v-model="value" :options="options" :tags-num="4" />
+  <infinite-select-tags
+    v-model="value"
+    :default-checkeds="defaultCheckeds"
+    :options="options"
+    :tags-num="4"
+  />
 </template>
 <script>
   export default {
     data() {
       return {
-        value: ['USD', 'GBP', 'RMB', 'EUR', 'CAD', 'AUD', 'TAD', 'MUD'],
+        value: [],
+        defaultCheckeds: [
+          'USD',
+          'GBP',
+          'RMB',
+          'EUR',
+          'CAD',
+          'AUD',
+          'TAD',
+          'MUD',
+        ],
         options: [
           {
             id: 'USD',
@@ -103,13 +118,19 @@
 
 ```html
 <template>
-  <infinite-select-tags v-model="value" :options="options" :tags-num="4" />
+  <infinite-select-tags
+    v-model="value"
+    :options="options"
+    :default-checkeds="defaultCheckeds"
+    :tags-num="4"
+  />
 </template>
 <script>
   export default {
     data() {
       return {
-        value: ['USD', 'RMB'],
+        value: [],
+        defaultCheckeds: ['USD', 'RMB'],
         options: [
           {
             id: 'USD',

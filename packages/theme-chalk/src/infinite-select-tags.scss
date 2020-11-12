@@ -119,4 +119,10 @@
   .el-select-dropdown__wrap{
     max-height: none;
   }
+
+  .is-checked {
+    .el-checkbox__label{
+      color: #606266;
+    }
+  }
 }

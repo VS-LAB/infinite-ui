@@ -113,11 +113,47 @@
           {
             id: 'USD',
             name: '美元',
-            disabled: true,
+            children: [
+              {
+                id: 'USD-1',
+                name: '美元-1',
+              },
+              {
+                id: 'USD-2',
+                name: '美元-2',
+              },
+              {
+                id: 'USD-3',
+                name: '美元-3',
+              },
+              {
+                id: 'USD-4',
+                name: '美元-4',
+              },
+            ],
           },
           {
             id: 'GBP',
             name: '英镑',
+            disabled: true,
+            children: [
+              {
+                id: 'GBP-1',
+                name: '英镑-1',
+              },
+              {
+                id: 'GBP-2',
+                name: '英镑-2',
+              },
+              {
+                id: 'GBP-3',
+                name: '英镑-3',
+              },
+              {
+                id: 'GBP-4',
+                name: '英镑-4',
+              },
+            ],
           },
           {
             id: 'RMB',
@@ -161,8 +197,6 @@
             label: '自定义表单组件',
             type: 'component',
             key: 'selectTags',
-            defaultValue: ['USD', 'GBP'],
-            defaultValue: [],
             isShow: true,
             component: (h) => {
               return h(selectTags.default, {
@@ -170,6 +204,7 @@
                   options: this.seletOpts,
                   placeholder: '请选择查询信息',
                   tagsNum: 4,
+                  defaultCheckeds: ['GBP'],
                 },
                 on: {
                   componentEvent: (val) => {

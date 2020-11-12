@@ -4,20 +4,21 @@
     <div v-for="(item, index) in options"
          :key="item.id"
          class="infinite-select-group-box"
-         :class="item.children && item.children.length?'exist-children':''">
+         :class="item.children && item.children.length && level < maxLevel?'exist-children':''">
       <el-checkbox v-model="showChecked[item.id]"
-                   :disabled="item.disabled || disabledKeys[item.id]"
+                   :disabled="disabledKeys[item.id]"
                    :indeterminate="getIndeterminate(item)"
-                   @change="change(item, index, $event)">
+                   @change="change(item, index, $event,getIndeterminate(item))">
         {{ item.name }}
       </el-checkbox>
+      <!-- &&  -->
       <template v-if="item.children && item.children.length && maxLevel > level">
         <infinite-select-tags-option :options="item.children"
                                      :disabledKeys="disabledKeys"
                                      :show-checked="showChecked"
                                      :level="level+1"
                                      :maxLevel="maxLevel"
-                                     :new-desc-options="newDescOptions"
+                                     :titled-desc-options="titledDescOptions"
                                      :parent-ids="parentIds"
                                      @change="change" />
       </template>
@@ -36,7 +37,7 @@ export default {
       type: Array,
       defualt: () => []
     },
-    newDescOptions: {
+    titledDescOptions: {
       type: Array,
       defualt: () => []
     },
@@ -72,11 +73,11 @@ export default {
       // 选中的子节点数量
       let checkedCount = 0
       // 父节点找子
-      let newDescOptionsIds = [item.id]
-      this.newDescOptions.forEach(item => {
-        if (newDescOptionsIds.includes(this.parentIds[item.id])) {
+      let titledDescOptionsIds = [item.id]
+      this.titledDescOptions.forEach(item => {
+        if (titledDescOptionsIds.includes(this.parentIds[item.id])) {
           count += 1
-          newDescOptionsIds.push(item.id)
+          titledDescOptionsIds.push(item.id)
           if (this.showChecked[item.id]) {
             checkedCount += 1
           }
