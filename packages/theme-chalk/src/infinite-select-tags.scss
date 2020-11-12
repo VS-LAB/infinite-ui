@@ -74,6 +74,7 @@
 
   }
 
+  // 一级节点下面的递归组件样式
   .infinite-select-group-level-1{
     >.infinite-select-group-box{
       .infinite-select-group{
@@ -85,9 +86,13 @@
           min-width: 30%;
           box-sizing: border-box;
         }
+        .exist-children{
+          width: 100%;
+          min-width: 100%;
+        }
       }
     }
-    
+  
   }
 
   .infinite-select-button {

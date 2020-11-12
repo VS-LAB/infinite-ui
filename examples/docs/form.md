@@ -113,42 +113,15 @@
           {
             id: 'USD',
             name: '美元',
-            children: [
-              {
-                id: 'USD-1',
-                name: '美元-1',
-                // disabled: true,
-                // children: [
-                //   {
-                //     id: 'USD-1-1',
-                //     name: '美元-1-1',
-                //     disabled: true,
-                //   },
-                // ],
-              },
-              {
-                id: 'USD-2',
-                name: '美元-2',
-              },
-              {
-                id: 'USD-3',
-                name: '美元-3',
-              },
-              {
-                id: 'USD-4',
-                name: '美元-4',
-              },
-            ],
+            disabled: true,
           },
           {
             id: 'GBP',
             name: '英镑',
-            // disabled: true,
           },
           {
             id: 'RMB',
             name: '人民币',
-            // disabled: true,
           },
           {
             id: 'EUR',
@@ -188,7 +161,7 @@
             label: '自定义表单组件',
             type: 'component',
             key: 'selectTags',
-            // defaultValue: ['USD', 'GBP'],
+            defaultValue: ['USD', 'GBP'],
             defaultValue: [],
             isShow: true,
             component: (h) => {
@@ -281,7 +254,7 @@
 
 :::
 
-<!-- ### 扩展
+### 扩展
 
 必选项提示位置为输入框。指定`labelPosition`为`top`,指定`requiredPosition`为`value`,
 
@@ -484,7 +457,7 @@
 </script>
 ```
 
-::: -->
+:::
 
 ### Attributes
 

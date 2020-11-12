@@ -16,8 +16,13 @@
                   @input="keyWordChange" />
       </div>
       <!-- option递归 -->
-      <infinite-select-tags-option :options="options"
+      <infinite-select-tags-option ref="infiniteSelectTagsOption"
+                                   :options="options"
                                    :show-checked="showChecked"
+                                   :disabled-keys="disabledKeys"
+                                   :new-desc-options="newDescOptions"
+                                   :parent-ids="parentIds"
+                                   :maxLevel='maxLevel'
                                    @change="change"></infinite-select-tags-option>
       <!-- popper占位符 start -->
       <el-option v-for="item in options"
@@ -26,10 +31,10 @@
       <!-- popper占位符 end -->
       <div class="infinite-select-button">
         <el-checkbox v-model="allChecked"
-                     :indeterminate="indeterminate"
                      @change="allSelect">全选</el-checkbox>
         <infinite-button type="primary"
                          @click="makeSure">确定</infinite-button>
+        <!-- :indeterminate="indeterminate" -->
       </div>
       <template slot="prefix">
         <div slot="reference"
@@ -91,7 +96,8 @@ export default {
     return {
       allChecked: false, // 是否默认选中
       checked: {}, // 最终选中的值
-      showChecked: {} // 展示勾选的值
+      showChecked: {}, // 展示勾选的值
+      maxLevel: 2 // 展示最大级
     }
   },
   computed: {
@@ -106,19 +112,26 @@ export default {
       })
       return labels
     },
-    // 平铺后的数据
+    // 平铺后的子找父数据
     newOptions () {
       return this.tiledArray(this.options)
     },
-    // 平铺后的数据
+    // 平铺后的父找子数据
     newDescOptions () {
       return this.tiledArray(this.options, { children: 'children' }, true)
     },
     // 禁用了的data
     disabledKeys () {
       const disabledKeys = {}
-      this.newOptions.forEach(el => {
-        if (el.disabled) disabledKeys[el.id] = true
+      this.newDescOptions.forEach(el => {
+        if (el.disabled || disabledKeys[el.id]) {
+          disabledKeys[el.id] = true
+          if (el.children && el.children.length) {
+            el.children.forEach(cItem => {
+              disabledKeys[cItem.id] = true
+            })
+          }
+        }
       })
       return disabledKeys
     },
@@ -126,7 +139,7 @@ export default {
     disabledAndCheckedKeys () {
       const disabledAndCheckedKeys = {}
       this.newOptions.forEach(el => {
-        if (el.disabled && this.vModel.includes(el.id)) {
+        if (this.disabledKeys[el.id] && this.vModel.includes(el.id)) {
           disabledAndCheckedKeys[el.id] = true
         }
       })
@@ -141,15 +154,12 @@ export default {
     parentIds () {
       const parentIds = {}
       this.newDescOptions.forEach(item => {
-        console.log(2)
         if (item.children && item.children.length) {
           item.children.forEach(cItem => {
-            console.log(3)
             parentIds[cItem.id] = item.id
           })
         }
       })
-      console.log(parentIds)
       return parentIds
     }
   },
@@ -172,13 +182,13 @@ export default {
     tiledArray (json, props = { children: 'children' }, desc) {
       const { children } = props
       const result = []
-      const tiledArraying = (data) => {
+      const tiledArraying = (data, status) => {
         data.forEach(item => {
           if (desc) {
             result.push(item)
           }
-          if (item[children] && item[children].length) {
-            tiledArraying(item[children])
+          if (!status && item[children] && item[children].length) {
+            tiledArraying(item[children], true)
           }
           if (!desc) {
             result.push(item)
@@ -210,10 +220,10 @@ export default {
           flag = false
         }
       })
-      this.allChecked = flag
+      // this.allChecked = flag
     },
+    // 点击确定按钮
     makeSure () {
-      // 点击确定按钮
       const vModel = []
       Object.keys(this.showChecked).map(key => {
         if (this.showChecked[key]) vModel.push(key)
@@ -223,13 +233,12 @@ export default {
     },
     // 全选按钮的点击事件
     allSelect (val) {
-      const showChecked = {}
-      this.newOptions.forEach(el => {
-        if (!this.disabledKeys[el.id]) {
-          showChecked[el.id] = val
+      this.newDescOptions.forEach(item => {
+        if (!this.disabledKeys[item.id]) {
+          this.$set(this.showChecked, item.id, val)
         }
       })
-      this.showChecked = { ...showChecked, ...this.disabledAndCheckedKeys }
+      // this.allChecked = this.crtNodeHashCheck(null, val)
     },
     // 下拉框每次显示隐藏时
     visibleChange (val) {
@@ -239,44 +248,73 @@ export default {
         this.initAllchecked()
       }
     },
-    // 设置父节点checkbox
-    setParentCheckbox (id, status) {
-      let newOptionsId = id
-      // 子节点找父
-      this.newOptions.forEach(item => {
-        if (item.id === newOptionsId) {
-          newOptionsId = this.parentIds[item.id] || newOptionsId
-          if (!this.parentIds[item.id] && newOptionsId !== id) {
-            this.$set(this.showChecked, item.id, newOptionsId === id ? status : this.crtNodeIsChecked(item.children || []))
-          }
-        }
-      })
+    // 设置相邻节点checkbox
+    setAdjacentCheckboc (item, status) {
+      const { id } = item
       // 父节点找子
+      console.log(this.newDescOptions)
       let newDescOptionsIds = [id]
       this.newDescOptions.forEach(item => {
-        if (newDescOptionsIds.includes(this.parentIds[item.id]) && !item.disabled) {
-          console.log(item.name)
+        const itemPid = this.parentIds[item.id]
+        if (newDescOptionsIds.includes(itemPid) && !this.disabledKeys[item.id]) {
           newDescOptionsIds.push(item.id)
           this.$set(this.showChecked, item.id, status)
         }
       })
 
-      console.log(this.showChecked)
-    },
-    // 改节点是否为全选中
-    crtNodeIsChecked (children) {
-      let flag = true
-      children.forEach(item => {
-        if (flag && !this.showChecked[item.id]) {
-          flag = false
+      let newOptionsId = id
+      // 子节点找父
+      this.newOptions.forEach(item => {
+        if (item.id === newOptionsId) {
+          if (newOptionsId !== id) {
+            this.$set(this.showChecked, item.id, status)
+          }
+          newOptionsId = this.parentIds[item.id] || newOptionsId
         }
       })
+    },
+    // 该节点是否为全选中
+    crtNodeIsChecked (item) {
+      let flag = true
+      if (item.chiildren && item.children.length) {
+        item.children.forEach(item => {
+          if (flag && !this.showChecked[item.id]) {
+            flag = false
+          }
+        })
+      }
       return flag
     },
     // checkbox change
     change (item, index, status) {
-      this.setParentCheckbox(item.id, status)
+      this.setAdjacentCheckboc(item, status)
       this.initAllchecked()
+    },
+    // 该节点的子节点是否为可以勾选的节点
+    crtNodeHashCheck (item, status) {
+      let flag = false
+      if (item && (!item.children || !item.children.length)) {
+        flag = status
+      } else {
+        // 父节点找子
+        const allRootIds = []
+        if (!item) {
+          this.options.forEach(oItem => {
+            allRootIds.push(oItem.id)
+          })
+        }
+        let newOptionsIds = item ? [item.id] : allRootIds
+        this.newOptions.forEach(nItem => {
+          if (newOptionsIds.includes(this.parentIds[nItem.id]) && !this.disabledKeys[nItem.id]) {
+            newOptionsIds.push(nItem.id)
+            // 如果不存在选中的checkbox，说明该状态为勾选状态
+            if (flag && !this.showChecked[nItem.id]) {
+              flag = true
+            }
+          }
+        })
+      }
+      return flag
     }
   }
 }

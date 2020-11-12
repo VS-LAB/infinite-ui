@@ -3,17 +3,22 @@
        :class="`infinite-select-group-level-${level}`">
     <div v-for="(item, index) in options"
          :key="item.id"
-         class="infinite-select-group-box">
+         class="infinite-select-group-box"
+         :class="item.children && item.children.length?'exist-children':''">
       <el-checkbox v-model="showChecked[item.id]"
-                   :disabled="item.disabled"
+                   :disabled="item.disabled || disabledKeys[item.id]"
                    :indeterminate="getIndeterminate(item)"
                    @change="change(item, index, $event)">
         {{ item.name }}
       </el-checkbox>
-      <template v-if="item.children && item.children.length">
+      <template v-if="item.children && item.children.length && maxLevel > level">
         <infinite-select-tags-option :options="item.children"
+                                     :disabledKeys="disabledKeys"
                                      :show-checked="showChecked"
                                      :level="level+1"
+                                     :maxLevel="maxLevel"
+                                     :new-desc-options="newDescOptions"
+                                     :parent-ids="parentIds"
                                      @change="change" />
       </template>
     </div>
@@ -31,32 +36,53 @@ export default {
       type: Array,
       defualt: () => []
     },
+    newDescOptions: {
+      type: Array,
+      defualt: () => []
+    },
     showChecked: {
+      type: Object,
+      default: () => { }
+    },
+    disabledKeys: {
       type: Object,
       default: () => { }
     },
     level: {
       type: Number,
       default: 1
+    },
+    maxLevel: {
+      type: Number,
+      default: 6
+    },
+    parentIds: {
+      type: Object,
+      default: () => { }
     }
   },
   methods: {
     change (item, index, $event) {
       this.$emit('change', item, index, $event)
     },
-    // 该节点是否为半选中双胎
+    // 该节点是否为半选中状态
     getIndeterminate (item) {
-      // 选中数量
+      // 子节点总数
       let count = 0
-      if (item.children && item.children.length) {
-        item.children.forEach(item => {
-          Object.keys(this.showChecked)
+      // 选中的子节点数量
+      let checkedCount = 0
+      // 父节点找子
+      let newDescOptionsIds = [item.id]
+      this.newDescOptions.forEach(item => {
+        if (newDescOptionsIds.includes(this.parentIds[item.id])) {
+          count += 1
+          newDescOptionsIds.push(item.id)
           if (this.showChecked[item.id]) {
-            count++
+            checkedCount += 1
           }
-        })
-      }
-      return !!(count > 0 && count < item.children.length)
+        }
+      })
+      return !!(checkedCount > 0 && checkedCount < count)
     }
   }
 }

@@ -121,12 +121,6 @@ export default {
           // 设置container-height
           this.$nextTick(() => {
             const infiniteDialogEl = this.$refs.infiniteDialog.$el.querySelectorAll('.el-dialog__body')[0]
-            // console.log(this.$refs.infiniteDialog.$refs.dialog)
-            // console.dir(this.$refs.infiniteDialog.$children[0].$el)
-            // console.dir(this.$refs.infiniteDialog.$el.childNodes[0])x
-            // console.log(this.$refs.infiniteDialog.$el.childNodes[0].childNodes[1])
-            // console.log(document.getElementsByClassName('el-dialog__body'))
-            // console.log(document.getElementsByClassName('el-dialog__body'))
             if (infiniteDialogEl) {
               infiniteDialogEl.style.height = this.containerHeight + 'px'
             }
