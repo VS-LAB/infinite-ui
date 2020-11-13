@@ -178,11 +178,14 @@
 
 ### Attributes
 
-| 参数      | 说明                                  | 类型   | 可选值 | 默认值 |
-| --------- | ------------------------------------- | ------ | ------ | ------ |
-| options   | 详细参数 `Options Attributes`         | array  | —      | —      |
-| selecteds | 指定默认被选中的选项 id 数组          | array  | —      | —      |
-| tags-num  | 指定 input 内被选中选项的标签显示个数 | number | —      | 3      |
+| 参数            | 说明                                  | 类型    | 可选值 | 默认值 |
+| --------------- | ------------------------------------- | ------- | ------ | ------ |
+| v-model/vModel  | 返回选中的数据 id                     | Array   | —      | —      |
+| options         | 详细参数 `Options Attributes`         | Array   | —      | —      |
+| defaultCheckeds | 指定默认被选中的选项 id 数组          | Array   | —      | —      |
+| tags-num        | 指定 input 内被选中选项的标签显示个数 | number  | —      | 3      |
+| placeholder     | 输入框占位文本                        | String  | —      | 3      |
+| filterable      | 是否开启关键字搜索功能                | Boolean | —      | false  |
 
 ### Options Attributes
 
@@ -194,7 +197,14 @@
 
 ### Events
 
-| 参数      | 说明          | 回调参数                    |
-| --------- | ------------- | --------------------------- |
-| makeSure  | 确认选中的值  | id                          |
-| allSelect | 全选/取消全选 | 选中节点的 isChecked 的状态 |
+| 参数           | 说明             | 回调参数                    |
+| -------------- | ---------------- | --------------------------- |
+| makeSure       | 确认选中的值     | —                           |
+| allSelect      | 全选复选框的状态 | 选中节点的 isChecked 的状态 |
+| checkBoxChange | 节点复选框的状态 | 节点复选框的状态            |
+
+### Select-tag Slot
+
+| 参数   | 说明                |
+| ------ | ------------------- |
+| prefix | Select 组件头部内容 |

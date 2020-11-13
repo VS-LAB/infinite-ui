@@ -40,14 +40,16 @@
       <template slot="prefix">
         <div slot="reference"
              class="infinite-selected">
-          <div v-if="labels.length > 0"
-               class="infinite-selected-tag">
-            <el-tag v-for="(item, i) in labels"
-                    v-show="i < tagsNum"
-                    :key="item">{{ item }}</el-tag>
-            <el-tag v-if="labels.length > tagsNum"
-                    class="last-tag">+{{ labels.length - tagsNum }}</el-tag>
-          </div>
+          <slot name="prefix">
+            <div v-if="labels.length > 0"
+                 class="infinite-selected-tag">
+              <el-tag v-for="(item, i) in labels"
+                      v-show="i < tagsNum"
+                      :key="item">{{ item }}</el-tag>
+              <el-tag v-if="labels.length > tagsNum"
+                      class="last-tag">+{{ labels.length - tagsNum }}</el-tag>
+            </div>
+          </slot>
         </div>
       </template>
     </el-select>
@@ -264,6 +266,7 @@ export default {
         if (this.showChecked[key]) vModel.push(key)
       })
       this.$emit('change', vModel)
+      this.$emit('makeSure')
       const infiniteSekectTagsEl = this.$refs.infiniteSekectTags
       infiniteSekectTagsEl && infiniteSekectTagsEl.blur()
     },
@@ -276,6 +279,7 @@ export default {
         }
       })
       this.allChecked = status
+      this.$emit('allSelect', status)
     },
     // 下拉框每次显示隐藏时
     visibleChange (val) {
@@ -337,8 +341,10 @@ export default {
     },
     // checkbox change
     checkBoxChange (item, index, status) {
-      this.setSiblingCheckbox(item, this.updateNodeStatus(item, status))
+      const initStatus = this.updateNodeStatus(item, status)
+      this.setSiblingCheckbox(item, initStatus)
       this.initAllchecked()
+      this.$emit('checkBoxChange', initStatus)
     },
     // 该节点的子节点是否为可以勾选的节点
     updateNodeStatus (item, status, ifDisabledAttr) {
