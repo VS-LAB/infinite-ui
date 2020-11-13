@@ -1,6 +1,6 @@
 /* eslint-disable */
-const files = require.context('./', true, /\index\.js$/)
-function getImportComponents() {
+const files = require.context('./', true, /^(\.\/infinite(\-[a-z]+)+)\/index.js$/)
+function getImportComponents () {
   const result = []
   files.keys().map(key => {
     if (!key.includes('infinite')) return
@@ -11,7 +11,6 @@ function getImportComponents() {
 };
 
 const components = getImportComponents()
-
 const version = '0.0.3'
 const install = Vue => {
   components.forEach(Component => {

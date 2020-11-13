@@ -6,6 +6,7 @@
          class="infinite-select-group-box"
          :class="item.children && item.children.length && level < maxLevel?'exist-children':''">
       <el-checkbox v-model="showChecked[item.id]"
+                   v-show="showKeys[item.id]"
                    :disabled="disabledKeys[item.id]"
                    :indeterminate="getIndeterminate(item)"
                    @change="change(item, index, $event,getIndeterminate(item))">
@@ -17,6 +18,7 @@
                                      :disabledKeys="disabledKeys"
                                      :show-checked="showChecked"
                                      :level="level+1"
+                                     :showKeys="showKeys"
                                      :maxLevel="maxLevel"
                                      :titled-desc-options="titledDescOptions"
                                      :parent-ids="parentIds"
@@ -58,6 +60,10 @@ export default {
       default: 6
     },
     parentIds: {
+      type: Object,
+      default: () => { }
+    },
+    showKeys: {
       type: Object,
       default: () => { }
     }

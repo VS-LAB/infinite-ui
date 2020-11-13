@@ -22,7 +22,7 @@
 <script>
 import ElPagination from 'element-ui/lib/pagination'
 export default {
-  name: 'ElPagination',
+  name: 'InfinitePagination',
   components: {
     ElPagination
   },

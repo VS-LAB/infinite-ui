@@ -3,7 +3,7 @@
     <el-cascader class="cascader-container-cascader"
                  v-model="keys"
                  :options="options"
-                 :props="props"
+                 :props="initProps"
                  @change="handleChange">
     </el-cascader>
 
@@ -69,7 +69,7 @@ export default {
       keys: [],
       value: '',
       selectNode: {},
-      reProps: {
+      initProps: {
         value: 'value',
         label: 'label',
         children: 'children',
@@ -92,14 +92,14 @@ export default {
     },
     // 初始化本地参数
     initParam () {
-      this.reProps = { ...{}, ...this.reProps, ...this.props }
+      this.initProps = { ...this.initProps, ...this.props }
       const { keys, value } = this.vModel
       this.keys = keys
       this.value = value
     },
     // 设置选中节点
     setSelectNode () {
-      const { value } = this.reProps
+      const { value } = this.initProps
       const selectNode = this.tiledOptions.find(item => item[value] === this.keys[this.keys.length - 1])
       this.selectNode = selectNode || {}
     },
@@ -132,21 +132,23 @@ export default {
     // 由于数据可能是动态的，所有在监听里边做初始化
     options: {
       handler (val) {
-        if (val && val.length) {
-          this.initParam()
-          this.tiledOptions = this.tiledArray(this.options, { children: this.reProps.children })
-          this.setSelectNode()
-        }
+        const initVal = val || []
+        this.initParam()
+        this.tiledOptions = this.tiledArray(initVal, { children: this.initProps.children })
+        this.setSelectNode()
       },
-      immediate: true
+      immediate: true,
+      deep: true
     },
     // 双向绑定的v-model被父组件变动时，及时更新上去
     vModel: {
       handler (newV, oldV) {
-        this.keys = newV.keys
-        this.value = newV.value
-        newV.keys !== oldV.keys && this.setSelectNode()
+        const initNewV = newV || {}
+        this.keys = initNewV.keys
+        this.value = initNewV.value
+        initNewV.keys && this.setSelectNode()
       },
+      immediate: true,
       deep: true
     }
   }

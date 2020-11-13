@@ -3,17 +3,17 @@
     <el-select ref="infiniteSekectTags"
                :value="[]"
                multiple
-               popper-class="infinite-select-popover"
+               :popper-class="`infinite-select-popover ${filterable?'infinite-select-filterable':''}`"
                :popper-append-to-body="false"
                :placeholder="defaultPlaceholder"
                @visible-change="visibleChange"
                size="large">
       <!-- popper展示核心内容 -->
       <div class="infinite-select-search"
-           v-if="filterable">
-        <el-input placeholder="请输入字段名称"
-                  prefix-icon="el-icon-search"
-                  @input="keyWordChange" />
+           v-show="filterable">
+        <el-input v-model.trim="serachKeyWord"
+                  placeholder="请输入字段名称"
+                  prefix-icon="el-icon-search" />
       </div>
       <!-- option递归 -->
       <infinite-select-tags-option ref="infiniteSelectTagsOption"
@@ -23,6 +23,7 @@
                                    :titled-desc-options="titledDescOptions"
                                    :parent-ids="parentIds"
                                    :maxLevel='maxLevel'
+                                   :showKeys="showKeys"
                                    @change="checkBoxChange"></infinite-select-tags-option>
       <!-- popper占位符 start -->
       <el-option v-for="item in newOptions"
@@ -101,7 +102,8 @@ export default {
       allChecked: false, // 是否默认选中
       checked: {}, // 最终选中的值
       showChecked: {}, // 展示勾选的值
-      maxLevel: 2 // 展示最大级
+      maxLevel: 2, // 展示最大级
+      serachKeyWord: '' // 关键字搜索
     }
   },
   computed: {
@@ -169,6 +171,18 @@ export default {
         }
       })
       return parentIds
+    },
+    showKeys () {
+      const showKeys = {}
+      this.titledOptions.forEach(item => {
+        if (!this.serachKeyWord) {
+          showKeys[item.id] = true
+        } else {
+          showKeys[item.id] = item.name.includes(this.serachKeyWord)
+        }
+      })
+      console.log(showKeys)
+      return showKeys
     }
   },
   watch: {
@@ -269,6 +283,7 @@ export default {
         // 每次展开时
         this.setChecked(['showChecked'])
         this.initAllchecked()
+        this.serachKeyWord = ''
       }
     },
     watchDefaultCheckedsChange (val) {
