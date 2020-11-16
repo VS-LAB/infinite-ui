@@ -1,4 +1,6 @@
 /* eslint-disable */
+const packageJson = require('../package.json')
+const version = process.env.VERSION || packageJson.version
 const files = require.context('./', true, /^(\.\/infinite(\-[a-z]+)+)\/index.js$/)
 function getImportComponents () {
   const result = []
@@ -11,7 +13,6 @@ function getImportComponents () {
 };
 
 const components = getImportComponents()
-const version = '0.0.3'
 const install = Vue => {
   components.forEach(Component => {
     Vue.use(Component)

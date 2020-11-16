@@ -4,7 +4,7 @@ import ElInput from 'element-ui/lib/input'
 import ElTag from 'element-ui/lib/tag'
 import ElSelect from 'element-ui/lib/select'
 import ElOption from 'element-ui/lib/option'
-import ElCheckbox from 'element-ui/lib/checkbox'
+// import ElCheckbox from 'element-ui/lib/checkbox'
 import InfiniteButton from '@/packages/infinite-button/src'
 
 describe('InfiniteSelectTags.vue', () => {
