@@ -61,7 +61,7 @@
       </span>
     </el-tree>
 
-    <!-- <el-dialog
+    <el-dialog
       title="确认要删除此节点吗？"
       :visible.sync="delDialogVisible"
       width="30%"
@@ -75,7 +75,7 @@
           确 定
         </el-button>
       </span>
-    </el-dialog> -->
+    </el-dialog>
   </div>
 </template>
 
