@@ -176,6 +176,105 @@
 
 :::
 
+### 二级选项
+
+支持二级选项
+:::demo 这里可以根据根节点的`disabled`属性来禁用整块区域，也提供了`default-checkeds`属性，可以选中当前节点及子节点
+
+```html
+<template>
+  <infinite-select-tags
+    v-model="value"
+    :options="options"
+    :default-checkeds="defaultCheckeds"
+    :tags-num="4"
+  />
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        value: [],
+        defaultCheckeds: ['USD'],
+        options: [
+          {
+            id: 'USD',
+            name: '美元',
+            disabled: true,
+            children: [
+              {
+                id: 'USD-1',
+                name: '美元-1',
+              },
+              {
+                id: 'USD-2',
+                name: '美元-2',
+              },
+              {
+                id: 'USD-3',
+                name: '美元-3',
+              },
+              {
+                id: 'USD-4',
+                name: '美元-4',
+              },
+            ],
+          },
+          {
+            id: 'GBP',
+            name: '英镑',
+            children: [
+              {
+                id: 'GBP-1',
+                name: '英镑-1',
+              },
+              {
+                id: 'GBP-2',
+                name: '英镑-2',
+              },
+              {
+                id: 'GBP-3',
+                name: '英镑-3',
+              },
+              {
+                id: 'GBP-4',
+                name: '英镑-4',
+              },
+            ],
+          },
+          {
+            id: 'RMB',
+            name: '人民币',
+          },
+          {
+            id: 'EUR',
+            name: '欧元',
+          },
+          {
+            id: 'CAD',
+            name: '加元',
+          },
+          {
+            id: 'AUD',
+            name: '澳大利亚元',
+          },
+          {
+            id: 'TAD',
+            name: '泰元',
+          },
+          {
+            id: 'MUD',
+            name: '孟加拉元',
+          },
+        ],
+      };
+    },
+  };
+</script>
+```
+
+:::
+
 ### Attributes
 
 | 参数            | 说明                                  | 类型    | 可选值 | 默认值 |

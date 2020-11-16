@@ -7,11 +7,12 @@
     "test:unit": "vue-cli-service test:unit --watch",
     "lint": "vue-cli-service lint",
     "deploy": "sh build/deploy.sh",
-    "bootstrap": "npm install && cd ./packages/theme-chalk && npm install",
+    "bootstrap": "npm install && cd ./packages/theme-chalk && yarn install",
     "build:bundle": "webpack --config ./build/webpack.component.js",
     "build:docs": "vue-cli-service build",
     "build:entry": "node build/build-entry.js ",
     "build:lib": "node build/build-lib.js",
+    "build:utils": "cross-env BABEL_ENV=utils babel packages/utils --out-dir lib/utils",
     "build:style": "gulp build --gulpfile packages/theme-chalk/gulpfile.js && cp-cli packages/theme-chalk/lib lib/theme-chalk",
     "clean": "rimraf lib && rimraf packages/*/lib",
     "init": "npm install commitizen -g && commitizen init cz-conventional-changelog --save-dev --save-exact && npm run bootstrap",
@@ -20,7 +21,8 @@
   "main": "lib/infinite-ui.umd.js",
   "files": [
     "lib",
-    "packages"
+    "packages",
+    "src"
   ],
   "dependencies": {
     "@antv/data-set": "^0.11.7",
@@ -38,9 +40,11 @@
     "@vue/component-compiler-utils": "^3.1.2",
     "@vue/eslint-config-standard": "^4.0.0",
     "@vue/test-utils": "^1.0.3",
+    "babel-cli": "^6.26.0",
     "babel-eslint": "^10.0.3",
     "babel-plugin-component": "^1.1.1",
     "cp-cli": "^2.0.0",
+    "cross-env": "^7.0.2",
     "cz-conventional-changelog": "^3.2.0",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^6.2.2",

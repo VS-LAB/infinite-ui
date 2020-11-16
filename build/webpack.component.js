@@ -28,6 +28,9 @@ const webpackConfig = {
     //   }
     // }
   },
+  externals: {
+    vue: 'vue'
+  },
   resolve: {
     extensions: ['.js', '.vue', '.json']
   },

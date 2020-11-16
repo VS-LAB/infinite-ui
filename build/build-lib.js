@@ -11,6 +11,7 @@ const tasks = [
   'clean',
   // 'build:entry', 已在index.js根据文件夹动态生成
   'lib',
+  'build:utils',
   'build:style'
 ]
 
