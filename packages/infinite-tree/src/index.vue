@@ -32,7 +32,7 @@
           <div class="same-node-error" v-show="isRequired">请输入节点名称</div>
         </span>
         <!---编辑节点按钮，只在编辑状态下显示-->
-        <span v-if="isEditNode && data.type === 'text'" class="com-tree-btn">
+        <span v-if="isEditNode && data.type === 'text'" class="com-tree-btn" @click.stop="">
           <!-- 新增 -->
           <el-button
             icon="el-icon-plus"
