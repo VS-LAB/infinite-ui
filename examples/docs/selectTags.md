@@ -179,7 +179,7 @@
 ### 二级选项
 
 支持二级选项
-:::demo 这里可以根据根节点的`disabled`属性来禁用整块区域，也提供了`default-checkeds`属性，可以选中当前节点及子节点
+:::demo 这里可以根据根节点的`disabled`属性来禁用整块区域，也提供了`default-checkeds`属性，可以选中当前节点以及子节点
 
 ```html
 <template>
