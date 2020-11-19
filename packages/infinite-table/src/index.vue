@@ -8,6 +8,7 @@
             @selection-change="selectionChange"
             @sort-change="sortChange"
             :default-sort="defaultSort"
+            :header-cell-style="{background: '#F5F7FA'}"
             class="infinite-table"
             width="100%">
 

@@ -6,4 +6,10 @@
         margin-left: 5px;
       }
     }
+}
+.infinite-table{
+  &.el-table thead{
+    color: #606266;
+    font-weight: 700;
   }
+}
