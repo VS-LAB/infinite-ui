@@ -1,44 +1,44 @@
 <template>
-  <div class="cascader-container">
-    <el-cascader class="cascader-container-cascader"
+  <div class="infinite-cascader">
+    <el-cascader class="infinite-cascader-cascader"
                  v-model="keys"
                  :options="options"
                  :props="initProps"
                  @change="handleChange">
     </el-cascader>
 
-    <div class="cascader-container-component">
+    <div class="infinite-cascader-component">
       <el-input v-if="selectNode.component === 'input'"
-                :type="selectNode.type"
+                :type="selectNode.type || 'text'"
                 @input="componentEvent"
                 :placeholder="selectNode.placeholder || ''"
                 v-model="value" />
 
-      <el-button v-if="selectNode.component === 'button'"
-                 @click="componentEvent"
-                 :type="selectNode.type">
-        {{selectNode.name}}</el-button>
+      <infinite-button v-if="selectNode.component === 'button'"
+                       @click="componentEvent"
+                       :type="selectNode.type">
+        {{selectNode.name}}</infinite-button>
 
       <el-date-picker v-if="selectNode.component === 'date-picker'"
                       v-model="value"
                       @change="componentEvent"
                       value-format="yyyy-MM-dd"
                       :placeholder="selectNode.placeholder || ''"
-                      :type="selectNode.type" />
+                      :type="selectNode.type ||'date' " />
     </div>
   </div>
 </template>
 <script>
 import ElCascader from 'element-ui/lib/cascader'
 import ElInput from 'element-ui/lib/input'
-import ElButton from 'element-ui/lib/button'
+import InfiniteButton from '../../infinite-button/src/index.vue'
 import ElDatePicker from 'element-ui/lib/date-picker'
 export default {
   name: 'InfiniteCascaders',
   components: {
     ElCascader,
     ElInput,
-    ElButton,
+    InfiniteButton,
     ElDatePicker
   },
   model: {

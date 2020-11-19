@@ -23,30 +23,30 @@ function buildPackagesEntry () {
   )
 
   const content = `${tips}
-    ${importList.join('\n')}
-    const version = '${version}'
-    const components = [
-      ${installList.join(',\n  ')}
-    ]
-    const install = Vue => {
-      components.forEach(Component => {
-        Vue.use(Component)
-      })
-
-    };
-    /* istanbul ignore if */
-    if (typeof window !== 'undefined' && window.Vue) {
-      install(window.Vue)
-    }
-    export {
-      install,
-      version,
-      ${exportList.join(',\n  ')}
-    }
-    export default {
-      install,
-      version
-    }
+${importList.join('\n')}
+const version = '${version}'
+const components = [
+  ${installList.join(',\n  ')}
+]
+const install = Vue => {
+  components.forEach(Component => {
+    Vue.use(Component)
+  })
+};  
+/* istanbul ignore if */
+if (typeof window !== 'undefined' && window.Vue) {
+  install(window.Vue)
+}
+export {
+  install,
+  version,
+  ${exportList.join(',\n  ')}
+}
+export default {
+  install,
+  version,
+  ${exportList.join(',\n  ')}
+}
   `
   fs.writeFileSync(path.join(__dirname, '../packages/index.js'), content)
 }

@@ -1,12 +1,14 @@
 @import '../../../node_modules/element-ui/packages/theme-chalk/src/cascader.scss';
 @import '../../../node_modules/element-ui/packages/theme-chalk/src/input.scss';
-@import '../../../node_modules/element-ui/packages/theme-chalk/src/button.scss';
-.cascader-container{
+@import './infinite-button.scss';
+@import '../../../node_modules/element-ui/packages/theme-chalk/src/date-picker.scss';
+.infinite-cascader{
+  display: inline-flex;
   &-cascader{
     display: inline-block;
   }
   &-component{
     display: inline-block;
-    width: 240px;
+    max-width: 240px;
   }
 }

@@ -113,11 +113,11 @@
 
 ### Attributes
 
-| 参数    | 说明                                                                                    | 类型   | 可选值 | 默认值 |
-| ------- | --------------------------------------------------------------------------------------- | ------ | ------ | ------ |
-| v-model | 绑定的数据                                                                              | Object | —      | —      |
-| options | 详细参数 `Options Attributes`                                                           | Array  | —      | —      |
-| props   | 当 options 的 key 值不一样的时候，你可以使用`props`进行配置，详细使用`props Attributes` | Object | —      | —      |
+| 参数           | 说明                                                                                    | 类型   | 可选值 | 默认值 |
+| -------------- | --------------------------------------------------------------------------------------- | ------ | ------ | ------ |
+| v-model/vModel | 绑定的数据                                                                              | Object | —      | —      |
+| options        | 详细参数 `Options Attributes`                                                           | Array  | —      | —      |
+| props          | 当 options 的 key 值不一样的时候，你可以使用`props`进行配置，详细使用`props Attributes` | Object | —      | —      |
 
 ### Options Attributes
 
@@ -126,8 +126,8 @@
 | value     | 选项的值                      | String | —                        | —      |
 | label     | 选项标签                      | String | —                        | —      |
 | children  | 子选项                        | String | —                        | —      |
-| component | 组件名                        | String | —                        | —      |
-| type      | 组件属性                      | String | input/button/date-picker | —      |
+| component | 组件名                        | String | input/button/date-picker | —      |
+| type      | 组件属性                      | String | —                        | —      |
 | name      | `component`为`button`时才生效 | String | —                        | —      |
 
 ### Props Attributes

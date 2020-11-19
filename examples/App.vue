@@ -10,7 +10,6 @@
             <menu-model></menu-model>
           </el-aside>
           <el-main>
-
             <router-view></router-view>
           </el-main>
         </el-container>
@@ -40,6 +39,7 @@ export default {
   padding: 0 0 0 270px;
   padding-bottom: 100px;
   box-sizing: border-box;
+  overflow: initial;
 }
 .el-aside {
   width: 240px;
