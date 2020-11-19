@@ -6,9 +6,20 @@
   display: inline-flex;
   &-cascader{
     display: inline-block;
+    .el-input__inner{
+      border-radius: 4px 0 0 4px;
+    }
   }
   &-component{
     display: inline-block;
     max-width: 240px;
+    line-height: 1;
+    .el-input__inner{
+      border-radius: 0 4px 4px 0;
+    }
+  }
+  .el-input__inner,.el-cascader,.el-input__icon{
+    height: 32px;
+    line-height: 32px;
   }
 }
