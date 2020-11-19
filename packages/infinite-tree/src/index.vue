@@ -1,79 +1,75 @@
 <template>
   <div class="tree-container">
-    <el-tree
-      ref="getNode"
-      class="tree"
-      :data="treeData"
-      :props="defaultProps"
-      :draggable="isDraggable"
-      :showCheckbox="showCheckbox"
-      :default-expand-all="defaultExpandAll"
-      :default-expanded-keys="defaultExpandedKeys"
-      :node-key="nodeKey"
-      :expand-on-click-node="expandOnClickNode"
-    >
-      <span class="custom-tree-node" slot-scope="{ node, data }">
+    <el-tree ref="getNode"
+             class="tree"
+             :data="treeData"
+             :props="defaultProps"
+             :draggable="isDraggable"
+             :showCheckbox="showCheckbox"
+             :default-expand-all="defaultExpandAll"
+             :default-expanded-keys="defaultExpandedKeys"
+             :node-key="nodeKey"
+             :expand-on-click-node="expandOnClickNode">
+      <span class="custom-tree-node"
+            slot-scope="{ node, data }">
         <!-- 非编辑状态 -->
         <span v-if="data.type === 'text'">{{ node.label }}</span>
         <!--编辑状态-->
         <span v-else-if="data.type === 'input'">
-          <el-input
-            id="node-input"
-            v-model="nodeInput"
-            placeholder="节点名称不能为空"
-          ></el-input>
-          <!-- 确定保存按钮 -->
-          <i class="btn-text" @click="() => saveNode(data)">确定</i>
-          <!-- 取消按钮 -->
-          <i class="btn-text" @click="() => cancelEdit(data, node)">取消</i>
-          <div class="same-node-error" v-show="sameNodeName">
-            已存在同名节点
+          <div>
+            <el-input id="node-input"
+                      v-model.trim="nodeInput"
+                      placeholder="节点名称不能为空"></el-input>
+            <!-- 确定保存按钮 -->
+            <infinite-button class="btn-text"
+                             type="text"
+                             @click="() => saveNode(data)">确定</infinite-button>
+            <!-- 取消按钮 -->
+            <infinite-button class="btn-text"
+                             type="text"
+                             @click="() => cancelEdit(data, node)">取消</infinite-button>
           </div>
-          <div class="same-node-error" v-show="isRequired">请输入节点名称</div>
         </span>
         <!---编辑节点按钮，只在编辑状态下显示-->
-        <span v-if="isEditNode && data.type === 'text'" class="com-tree-btn" @click.stop="">
+        <span v-if="isEditNode && data.type === 'text'"
+              class="com-tree-btn"
+              @click.stop="">
           <!-- 新增 -->
-          <el-button
-            icon="el-icon-plus"
-            size="mini"
-            circle
-            type="primary"
-            @click="append(data, node)"
-          ></el-button>
+          <infinite-button icon="el-icon-plus"
+                           size="mini"
+                           circle
+                           type="primary"
+                           @click="append(data, node)"></infinite-button>
           <!-- 编辑 -->
-          <el-button
-            icon="el-icon-edit"
-            size="mini"
-            circle
-            type="info"
-            @click="() => editNode(data)"
-          ></el-button>
+          <infinite-button icon="el-icon-edit"
+                           size="mini"
+                           circle
+                           type="info"
+                           @click="() => editNode(data)"></infinite-button>
           <!-- 删除 -->
-          <el-button
-            icon="el-icon-delete"
-            size="mini"
-            circle
-            type="danger"
-            @click="() => remove(node, true)"
-          ></el-button>
+          <infinite-button icon="el-icon-delete"
+                           size="mini"
+                           circle
+                           type="danger"
+                           @click="() => remove(node, true)"></infinite-button>
         </span>
       </span>
     </el-tree>
 
-    <el-dialog
-      title="确认要删除此节点吗？"
-      :visible.sync="delDialogVisible"
-      width="30%"
-      :append-to-body="true"
-    >
+    <el-dialog title="确认要删除此节点吗？"
+               :visible.sync="delDialogVisible"
+               width="30%"
+               :append-to-body="true">
       <span slot="footer">
-        <el-button size="small" @click="delDialogVisible = false">
+        <infinite-button size="small"
+                         @click="delDialogVisible = false">
           取 消
-        </el-button>
-        <el-button size="small" type="primary" @click="delSelect(true)">
+        </infinite-button>
+        <infinite-button size="small"
+                         type="primary"
+                         @click="delSelect(true)">
           确 定
-        </el-button>
+        </infinite-button>
       </span>
     </el-dialog>
   </div>
@@ -85,12 +81,14 @@ import ElInput from 'element-ui/lib/input'
 // import ElButton from 'element-ui/lib/button'
 import { props } from './props'
 import TreeCtrl from './tree'
+import InfiniteButton from '../../infinite-button/src/index.vue'
 export default {
   name: 'InfiniteTree',
   props: props,
   components: {
     ElTree,
-    ElInput
+    ElInput,
+    InfiniteButton
     // ElButton
   },
   data () {
@@ -163,6 +161,7 @@ export default {
       // 非空校验
       this.isRequired = this.nodeInput === ''
       if (this.nodeInput === '') {
+        this.$message.error('请输入节点名称')
         return
       }
       // 修改节点名称重名判断
@@ -172,6 +171,7 @@ export default {
         data
       )
       if (this.sameNodeName) {
+        this.$message.error('已存在同名节点')
         return
       }
       data.label = this.nodeInput

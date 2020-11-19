@@ -1,3 +1,4 @@
+@import './common/var.scss';
 @import '../../../node_modules/element-ui/packages/theme-chalk/src/step.scss';
 
 .infinite-step{
@@ -31,21 +32,21 @@
   }
   &.is-process{
     .el-step__icon {
-      background-color: var(--themeColor);
-      border-color: var(--themeColor);
+      background-color: $--color-primary;
+      border-color: $--color-primary;
       color: #fff;
     };
   };
   &.is-finish,&.is-success {
-    color: var(--themeColor);
+    color: $--color-primary;
     .infinite-step__line {
-      background-color: var(--themeColor) !important;
-      border-color: var(--themeColor);
+      background-color: $--color-primary !important;
+      border-color: $--color-primary;
     };
     .el-step_icon_finish{
       font-size: 24px;
       >i {
-        color: var(--themeColor);
+        color: $--color-primary;
       };
     }
   }

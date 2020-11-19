@@ -31,6 +31,7 @@
 </template>
 
 <style lang="scss">
+@import "../../packages/theme-chalk/src/common/var.scss";
 .demo-block {
   border: solid 1px #ebebeb;
   border-radius: 3px;
@@ -147,7 +148,7 @@
     }
 
     &:hover {
-      color: #409eff;
+      color: $--color-primary;
       background-color: #f9fafc;
     }
 

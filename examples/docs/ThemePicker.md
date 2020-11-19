@@ -13,7 +13,7 @@
   export default {
     data() {
       return {
-        theme: '#409EFF',
+        theme: '#FF7635',
       };
     },
   };
@@ -26,7 +26,7 @@
 
 | 参数    | 说明   | 类型   | 可选值                | 默认值  |
 | ------- | ------ | ------ | --------------------- | ------- |
-| v-model | 绑定值 | string | —                     | #409EFF |
+| v-model | 绑定值 | string | —                     | #FF7635 |
 | size    | 尺寸   | string | medium / small / mini | small   |
 
 ### Events

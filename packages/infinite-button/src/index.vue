@@ -4,15 +4,17 @@
              @click="handleClick"
              :plain="plain"
              :round="round"
+             :circle="circle"
              :size="size"
              :type="type">
     <i :class="icon"
        v-if="icon">
     </i>
     <!-- 如果没有传入插槽的时候才显示 -->
-    <span v-if="$slots.default">
+    <template v-if="$slots.default">
       <slot></slot>
-    </span>
+    </template>
+
   </el-button>
 </template>
 <script>
@@ -51,7 +53,18 @@ export default {
     }
   },
   methods: {
+    // 向上递归查找button DOM
+    recursionSetBtnRmFocus (target) {
+      if (target) {
+        if (target.nodeName === 'BUTTON') {
+          target.blur()
+        } else {
+          this.recursionSetBtnRmFocus(target.parentNode)
+        }
+      }
+    },
     handleClick (e) {
+      this.recursionSetBtnRmFocus(e.target)
       this.$emit('click', e)
     }
   }

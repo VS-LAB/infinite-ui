@@ -1,1 +1,7 @@
+@import './common/var.scss';
 @import '../../../node_modules/element-ui/packages/theme-chalk/src/pagination.scss';
+.infinite-pagination{
+  &.el-pagination{
+    font-weight: initial;
+  }
+}

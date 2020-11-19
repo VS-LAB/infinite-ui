@@ -1,5 +1,7 @@
 <template>
-  <el-pagination :small="small"
+  <el-pagination class="infinite-pagination"
+                 id="dsadsada"
+                 :small="small"
                  :background="background"
                  :page-size="pageSize"
                  :total="total"

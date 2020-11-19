@@ -73,6 +73,20 @@
 
 :::
 
+### 文字按钮
+
+没有边框和背景色的按钮。
+:::demo
+
+```html
+<el-row>
+  <infinite-button type="text">文字按钮</infinite-button>
+  <infinite-button type="text" disabled>文字按钮</infinite-button>
+</el-row>
+```
+
+:::
+
 ### 不同尺寸
 
 Button 组件提供除了默认值以外的三种尺寸，可以在不同场景下选择合适的按钮尺寸。

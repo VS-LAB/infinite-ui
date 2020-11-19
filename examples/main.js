@@ -8,6 +8,7 @@ import './style/index.scss'
 import demoBlock from './components/demo-block'
 import hljs from 'highlight.js'
 import '../packages/theme-chalk/src/index.scss'
+// import '../packages/theme-chalk/src/infinite-theme-blue-color.scss'
 
 // 导入组件库
 import packages from '../packages'
