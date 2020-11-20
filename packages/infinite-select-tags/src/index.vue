@@ -7,7 +7,7 @@
                :popper-append-to-body="false"
                :placeholder="defaultPlaceholder"
                @visible-change="visibleChange"
-               size="large">
+               :size="size">
       <!-- popper展示核心内容 -->
       <div class="infinite-select-search"
            v-show="filterable">
@@ -35,6 +35,7 @@
                      :indeterminate="indeterminate"
                      @change="allSelect">全选</el-checkbox>
         <infinite-button type="primary"
+                         :size="size"
                          @click="makeSure">确定</infinite-button>
       </div>
       <template slot="prefix">
@@ -45,8 +46,10 @@
                  class="infinite-selected-tag">
               <el-tag v-for="(item, i) in labels"
                       v-show="i < tagsNum"
+                      :size="size"
                       :key="item">{{ item }}</el-tag>
               <el-tag v-if="labels.length > tagsNum"
+                      :size="size"
                       class="last-tag">+{{ labels.length - tagsNum }}</el-tag>
             </div>
           </slot>
@@ -97,6 +100,10 @@ export default {
     vModel: {
       type: Array,
       default: () => []
+    },
+    size: {
+      type: String,
+      default: 'small'
     }
   },
   data () {

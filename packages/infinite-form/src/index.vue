@@ -5,6 +5,7 @@
            :rules="formModels.rules"
            :model="formModels.models"
            :label-position="labelPosition"
+           :size="size"
            :label-width="labelWidth">
     <el-form-item v-for="formItem in formData"
                   :key="formItem.key"
@@ -67,6 +68,10 @@ export default {
     formBtns: {
       type: Array,
       default: () => []
+    },
+    size: {
+      type: String,
+      default: 'small'
     }
   },
   computed: {

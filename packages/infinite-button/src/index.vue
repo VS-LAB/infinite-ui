@@ -49,7 +49,7 @@ export default {
     },
     size: {
       type: String,
-      default: ''
+      default: 'small'
     }
   },
   methods: {

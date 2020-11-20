@@ -12,14 +12,9 @@
 
   .el-input--prefix{
     right: 0;
-    height: 32px;
-    line-height: 32px;
     .el-input__inner{
       width: 424px;
       padding-left: 15px;
-    }
-    .el-input__icon{
-      line-height: 32px;
     }
   } 
 
@@ -32,13 +27,13 @@
       left: 0;
       padding-top: 3px;
       .el-tag {
-        height: 22px;
+        // height: 22px;
+        // line-height: 22px;
         width: 80px;
         text-align: center;
         border-radius: 4px;
         background: #f5f7fa;
         border: none;
-        line-height: 22px;
         font-size: 12px;
         overflow: hidden;
         white-space: nowrap;
@@ -91,7 +86,7 @@
       align-items: center;
       padding: 0 12px;
       &:hover{
-        background-color: #f5f7fa;
+        background-color: transparent;
       }
       .el-checkbox {
         display: flex;

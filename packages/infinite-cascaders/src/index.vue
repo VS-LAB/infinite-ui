@@ -4,6 +4,7 @@
                  v-model="keys"
                  :options="options"
                  :props="initProps"
+                 :size="size"
                  @change="handleChange">
     </el-cascader>
 
@@ -11,11 +12,13 @@
       <el-input v-if="selectNode.component === 'input'"
                 :type="selectNode.type || 'text'"
                 @input="componentEvent"
+                :size="size"
                 :placeholder="selectNode.placeholder || ''"
                 v-model="value" />
 
       <infinite-button v-if="selectNode.component === 'button'"
                        @click="componentEvent"
+                       :size="size"
                        :type="selectNode.type">
         {{selectNode.name}}</infinite-button>
 
@@ -23,6 +26,7 @@
                       v-model="value"
                       @change="componentEvent"
                       value-format="yyyy-MM-dd"
+                      :size="size"
                       :placeholder="selectNode.placeholder || ''"
                       :type="selectNode.type ||'date' " />
     </div>
@@ -62,6 +66,10 @@ export default {
     props: {
       type: Object,
       default: () => { }
+    },
+    size: {
+      type: String,
+      default: 'small'
     }
   },
   data () {

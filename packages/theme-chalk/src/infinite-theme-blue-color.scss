@@ -1,5 +1,11 @@
+/* Colors
+-------------------------- */
+$--color-primary: #409EFF;
+$--color-text-primary: #303133;
+/* Background
+-------------------------- */
+$--background-color-base:#f5f7fa;
 @import './base.scss';
-@import './common/var.scss';
 @import './infinite-button.scss';
 @import './infinite-theme-picker.scss';
 @import './infinite-table.scss';
