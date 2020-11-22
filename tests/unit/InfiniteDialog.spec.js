@@ -76,7 +76,6 @@ describe('InfiniteCascaders.vue', () => {
     propsData: props,
     stubs: { ElDialog }
   })
-  // stubs: { ElDialog }
 
   it('component event to all match', () => {
     const InfiniteButtonWrappers = eventWrapper.findAllComponents({ name: 'InfiniteButton' })

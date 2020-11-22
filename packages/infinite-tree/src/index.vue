@@ -56,22 +56,12 @@
       </span>
     </el-tree>
 
-    <el-dialog title="确认要删除此节点吗？"
-               :visible.sync="delDialogVisible"
-               width="30%"
-               :append-to-body="true">
-      <span slot="footer">
-        <infinite-button size="small"
-                         @click="delDialogVisible = false">
-          取 消
-        </infinite-button>
-        <infinite-button size="small"
-                         type="primary"
-                         @click="delSelect(true)">
-          确 定
-        </infinite-button>
-      </span>
-    </el-dialog>
+    <infinite-dialog title="确认要删除此节点吗？"
+                     v-model="delDialogVisible"
+                     width="30%"
+                     :operations="operations"
+                     :append-to-body="true">
+    </infinite-dialog>
   </div>
 </template>
 
@@ -82,14 +72,15 @@ import ElInput from 'element-ui/lib/input'
 import { props } from './props'
 import TreeCtrl from './tree'
 import InfiniteButton from '../../infinite-button/src/index.vue'
+import InfiniteDialog from '../../infinite-dialog/src/index.vue'
 export default {
   name: 'InfiniteTree',
   props: props,
   components: {
     ElTree,
     ElInput,
-    InfiniteButton
-    // ElButton
+    InfiniteButton,
+    InfiniteDialog
   },
   data () {
     return {
@@ -99,7 +90,22 @@ export default {
       sameNodeName: false, // 是否存在重名节点
       isRequired: false, // 是否显示非空错误提示
       delDialogVisible: false, // 删除节点确认弹出框
-      selectNode: null // 当前选中的节点
+      selectNode: null, // 当前选中的节点
+      operations: [
+        {
+          label: '取消',
+          click: () => {
+            this.delDialogVisible = false
+          }
+        },
+        {
+          label: '确定',
+          type: 'primary',
+          click: () => {
+            this.delSelect(true)
+          }
+        }
+      ]
     }
   },
   watch: {

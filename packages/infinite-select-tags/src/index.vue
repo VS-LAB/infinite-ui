@@ -154,16 +154,6 @@ export default {
       })
       return disabledKeys
     },
-    // 禁用且选中的data
-    disabledAndCheckedKeys () {
-      const disabledAndCheckedKeys = {}
-      this.titledOptions.forEach(el => {
-        if (this.disabledKeys[el.id] && this.vModel.includes(el.id)) {
-          disabledAndCheckedKeys[el.id] = true
-        }
-      })
-      return disabledAndCheckedKeys
-    },
     // 是否显示半选中状态
     indeterminate () {
       const showCheckedArray = Object.keys(this.showChecked).filter(key => this.showChecked[key])
@@ -190,7 +180,6 @@ export default {
           showKeys[item.id] = item.name.includes(this.serachKeyWord)
         }
       })
-      console.log(showKeys)
       return showKeys
     }
   },
@@ -333,18 +322,6 @@ export default {
           newOptionsId = this.parentIds[nItem.id] || newOptionsId
         }
       })
-    },
-    // 该节点是否为全选中
-    crtNodeIsChecked (item) {
-      let flag = true
-      if (item.chiildren && item.children.length) {
-        item.children.forEach(item => {
-          if (flag && !this.showChecked[item.id]) {
-            flag = false
-          }
-        })
-      }
-      return flag
     },
     // checkbox change
     checkBoxChange (item, index, status) {

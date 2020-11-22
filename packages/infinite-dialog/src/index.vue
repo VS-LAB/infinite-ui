@@ -2,6 +2,7 @@
   <el-dialog class="infinite-dialog"
              ref="infiniteDialog"
              :visible="vModel"
+             :title="title"
              :width="width"
              :top="top"
              :center="center"
@@ -18,10 +19,11 @@
              @close="close"
              @closed="closed">
     <template>
-      <slot>默认内容</slot>
+      <slot></slot>
     </template>
-    <template slot="title">
-      <slot name="title">默认标题</slot>
+    <template v-if="!title"
+              slot="title">
+      <slot name="title">{{$slots}}</slot>
     </template>
     <template v-if="needFooter"
               slot="footer">
@@ -29,8 +31,9 @@
         <span class="dialog-footer-btn dialog-footer">
           <infinite-button v-for="(btn,index) in (operations.length?operations:localOperations)"
                            :key="index"
+                           :size="btn.size"
                            :type="btn.type"
-                           @click="handleClick(btn)">
+                           @click="handleClick(btn,index)">
             {{btn.label}}
           </infinite-button>
         </span>
@@ -56,6 +59,10 @@ export default {
     vModel: {
       type: Boolean,
       default: false
+    },
+    title: {
+      type: String,
+      default: '默认标题'
     },
     width: {
       type: String,
@@ -170,8 +177,8 @@ export default {
       this.$emit('closed')
     },
     // 默认按钮点击event
-    handleClick (btn) {
-      btn.click && btn.click()
+    handleClick (btn, index) {
+      btn.click && btn.click(btn, index)
     },
     // 点击默认确定按钮
     confirm () {
