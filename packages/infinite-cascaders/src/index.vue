@@ -14,7 +14,7 @@
                 @input="componentEvent"
                 :size="size"
                 :placeholder="selectNode.placeholder || ''"
-                v-model="value" />
+                v-model.trim="value" />
 
       <infinite-button v-if="selectNode.component === 'button'"
                        @click="componentEvent"

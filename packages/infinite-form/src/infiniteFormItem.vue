@@ -38,9 +38,14 @@ export default {
       case 'component':
         const component = itemData.component(h)
         const componentOptions = component.componentOptions
-        const model = componentOptions.Ctor.sealedOptions.model
+        const sealedOptions = componentOptions.Ctor.sealedOptions
+        const model = sealedOptions.model
         let flag = model && model.event && model.prop
         componentOptions.propsData[flag ? model.prop : 'value'] = formModels[itemData.key]
+        const listenersFlag = !componentOptions.listeners
+        if (listenersFlag) {
+          componentOptions.listeners = {}
+        }
         componentOptions.listeners[flag ? model.event : 'input'] = (val) => {
           formModels[itemData.key] = val
         }
@@ -49,18 +54,14 @@ export default {
         return (<el-input placeholder={placeholder} class={itemData.class} v-model={formModels[itemData.key]} />)
       case 'select':
         return (<el-select popper-append-to-body={false} placeholder={placeholder} class={itemData.class} clearable={itemData.clearable} v-model={formModels[itemData.key]}>
-          {
-            (itemData.options || []).map(o => (<el-option label={o.label} value={o.id} />))
-          }
+          {(itemData.options || []).map(o => (<el-option label={o.label} value={o.id} />))}
         </el-select>)
       case 'switch':
         return (<el-switch v-model={formModels[itemData.key]}></el-switch>)
       case 'textarea':
         return (<el-input type="textarea" placeholder={placeholder} class={itemData.class} v-model={formModels[itemData.key]} />)
-      case 'radio':
-        return (<el-input placeholder={placeholder} class={itemData.class} v-model={formModels[itemData.key]} />)
-      case 'own':
-        return ''
+      // case 'radio':
+      //   return (<el-radio placeholder={placeholder} class={itemData.class} v-model={formModels[itemData.key]} />)
       case 'date-picker':
         return (
           <el-date-picker
@@ -73,7 +74,6 @@ export default {
           >
           </el-date-picker>
         )
-
       default:
         return null
     }

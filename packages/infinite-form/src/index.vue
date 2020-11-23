@@ -33,7 +33,6 @@ import ElForm from 'element-ui/lib/form'
 import ElFormItem from 'element-ui/lib/form-item'
 import InfiniteButton from '../../infinite-button/src/index.vue'
 import InfiniteFormItem from './infiniteFormItem'
-import { validateLabelPosition } from './labelPostion'
 export default {
   name: 'InfiniteForm',
   components: {
@@ -49,8 +48,7 @@ export default {
     },
     labelPosition: {
       type: String,
-      default: 'right',
-      validator: validateLabelPosition
+      default: 'right'
     },
     requiredPosition: {
       type: String,
@@ -58,8 +56,7 @@ export default {
     },
     formData: {
       type: Array,
-      default: () => [],
-      required: true
+      default: () => []
     },
     labelWidth: {
       type: String,
@@ -76,12 +73,11 @@ export default {
   },
   computed: {
     formModels () {
-      const { formData = [] } = this
       const result = {
         models: {},
         rules: {}
       }
-      formData.forEach((v) => {
+      this.formData.forEach((v) => {
         result['models'][v.key] = ''
         result['rules'][v.key] = v.rules || []
       })

@@ -5,7 +5,7 @@ import ElTag from 'element-ui/lib/tag'
 import ElSelect from 'element-ui/lib/select'
 import ElOption from 'element-ui/lib/option'
 import ElCheckbox from 'element-ui/lib/checkbox'
-import InfiniteButton from '@/packages/infinite-button/src'
+import InfiniteButton from '@/packages/infinite-button/src/index.vue'
 import InfiniteSelectTagsOption from '@/packages/infinite-select-tags-option'
 const getTestData = function () {
   return [
@@ -79,12 +79,6 @@ const getTestData = function () {
       name: '孟加拉元'
     }
   ]
-}
-
-const later = (delay = 0) => {
-  return new Promise((resolve) => {
-    setTimeout(resolve, delay)
-  })
 }
 
 describe('InfiniteSelectTags.vue', () => {

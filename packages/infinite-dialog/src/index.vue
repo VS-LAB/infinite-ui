@@ -19,9 +19,11 @@
              @close="close"
              @closed="closed">
     <template>
-      <div :style="{height:`${containerHeight}px`}">
+      <div v-if="containerHeight"
+           :style="{height:`${containerHeight}px`}">
         <slot></slot>
       </div>
+      <slot v-else></slot>
     </template>
     <template v-if="!title"
               slot="title">

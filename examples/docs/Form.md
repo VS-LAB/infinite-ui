@@ -174,8 +174,11 @@
             type: 'component',
             key: 'cascaders',
             isShow: true,
+            defaultValue: {
+              keys: ['button', 'button-1'],
+              value: '',
+            },
             component: (h) => {
-              // console.log(cascaders.default);
               return h(cascaders.default, {
                 props: {
                   options: opts,
@@ -507,18 +510,18 @@
 
 ### FormData Attributes
 
-| 参数         | 说明                                                                                            | 类型                           | 可选值                                                       | 默认值 |
-| ------------ | ----------------------------------------------------------------------------------------------- | ------------------------------ | ------------------------------------------------------------ | ------ |
-| key          | 表单数据对象的`key`                                                                             | String                         | —                                                            | —      |
-| isShow       | 是否展示该行数据                                                                                | Boolean                        | —                                                            | false  |
-| label        | 标签                                                                                            | String                         | —                                                            | —      |
-| rules        | 表单验证规则                                                                                    | Object                         | —                                                            | —      |
-| class        | 该组件样式                                                                                      | String                         | —                                                            | —      |
-| defaultValue | 默认值,根据不同的组件使用不同类型的默认值来渲染                                                 | String/Object/boolean...       | —                                                            | —      |
-| type         | 需要显示的组件类型,当 `type` 设置为 `component` 时，可以使用 `component` 属性进行自定义组件传入 | String                         | input/select/switch/textarea/radio/own/date-picker/component | —      |
-| component    | 自定义组件，这里的组件`必须`拥有`双向绑定`的值，便于组件的校验和 confirm                        | `Function(h){return h('div')}` | —                                                            | —      |
-| options      | 当 `type` 设置为 `select` 时,需要展示的下拉值                                                   | Array                          | —                                                            | —      |
-| placeholder  | 占位符文案                                                                                      | String                         | —                                                            | —      |
+| 参数         | 说明                                                                                            | 类型                           | 可选值                                                 | 默认值 |
+| ------------ | ----------------------------------------------------------------------------------------------- | ------------------------------ | ------------------------------------------------------ | ------ |
+| key          | 表单数据对象的`key`                                                                             | String                         | —                                                      | —      |
+| isShow       | 是否展示该行数据                                                                                | Boolean                        | —                                                      | false  |
+| label        | 标签                                                                                            | String                         | —                                                      | —      |
+| rules        | 表单验证规则                                                                                    | Object                         | —                                                      | —      |
+| class        | 该组件样式                                                                                      | String                         | —                                                      | —      |
+| defaultValue | 默认值,根据不同的组件使用不同类型的默认值来渲染                                                 | String/Object/boolean...       | —                                                      | —      |
+| type         | 需要显示的组件类型,当 `type` 设置为 `component` 时，可以使用 `component` 属性进行自定义组件传入 | String                         | input/select/switch/textarea/own/date-picker/component | —      |
+| component    | 自定义组件，这里的组件`必须`拥有`双向绑定`的值，便于组件的校验和 confirm                        | `Function(h){return h('div')}` | —                                                      | —      |
+| options      | 当 `type` 设置为 `select` 时,需要展示的下拉值                                                   | Array                          | —                                                      | —      |
+| placeholder  | 占位符文案                                                                                      | String                         | —                                                      | —      |
 
 ### Btn Option
 

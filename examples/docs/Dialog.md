@@ -7,9 +7,9 @@ Dialog 弹出一个对话框，适合需要定制性更大的场景。
 
 ```html
 <template>
-  <infinite-button type="text" @click="visible = true"
-    >点击打开 Dialog</infinite-button
-  >
+  <infinite-button type="text" @click="visible = true">
+    点击打开 Dialog
+  </infinite-button>
   <infinite-dialog v-model="visible" title="提示" width="30%">
     <span>
       这是一段信息
@@ -42,9 +42,9 @@ Dialog 弹出一个对话框，适合需要定制性更大的场景。
 
 ```html
 <template>
-  <infinite-button type="text" @click="visible = true"
-    >点击打开外层 Dialog</infinite-button
-  >
+  <infinite-button type="text" @click="visible = true">
+    点击打开外层 Dialog
+  </infinite-button>
   <infinite-dialog v-model="visible">
     <infinite-dialog
       width="30%"
@@ -83,9 +83,9 @@ Dialog 组件的内容可以是任意的，甚至可以是表格或表单，下�
 
 ```html
 <template>
-  <infinite-button type="text" @click="visible = true"
-    >点击打开外层 Dialog</infinite-button
-  >
+  <infinite-button type="text" @click="visible = true">
+    点击打开外层 Dialog
+  </infinite-button>
   <infinite-dialog
     v-model="visible"
     :needFooter="false"

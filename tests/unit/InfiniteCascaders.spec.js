@@ -80,7 +80,6 @@ describe('InfiniteCascaders.vue', () => {
   const wrapper = shallowMount(InfiniteCascaders)
 
   it('component event emited', async () => {
-    console.log(wrapper.html())
     await wrapper.setProps({
       vModel,
       options
