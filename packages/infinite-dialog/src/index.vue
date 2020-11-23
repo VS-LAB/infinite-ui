@@ -44,7 +44,7 @@
 </template>
 <script>
 import ElDialog from 'element-ui/lib/dialog'
-import InfiniteButton from '../../infinite-button/src/index'
+import InfiniteButton from '../../infinite-button/src/index.vue'
 export default {
   name: 'InfiniteDialog',
   components: {

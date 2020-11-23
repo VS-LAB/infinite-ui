@@ -31,7 +31,7 @@
 <script>
 import ElForm from 'element-ui/lib/form'
 import ElFormItem from 'element-ui/lib/form-item'
-import InfiniteButton from '../../infinite-button'
+import InfiniteButton from '../../infinite-button/src/index.vue'
 import InfiniteFormItem from './infiniteFormItem'
 import { validateLabelPosition } from './labelPostion'
 export default {

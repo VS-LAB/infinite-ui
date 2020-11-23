@@ -50,7 +50,7 @@
 </template>
 <script>
 import InfiniteTableColumn from './infiniteTableColumn'
-import InfiniteButton from '../../infinite-button/src/index'
+import InfiniteButton from '../../infinite-button/src/index.vue'
 import ElTable from 'element-ui/lib/table'
 export default {
   name: 'InfiniteTable',

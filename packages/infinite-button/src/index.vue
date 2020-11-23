@@ -55,12 +55,10 @@ export default {
   methods: {
     // 向上递归查找button DOM
     recursionSetBtnRmFocus (target) {
-      if (target) {
-        if (target.nodeName === 'BUTTON') {
-          target.blur()
-        } else {
-          this.recursionSetBtnRmFocus(target.parentNode)
-        }
+      if (target.nodeName === 'BUTTON') {
+        target.blur()
+      } else {
+        this.recursionSetBtnRmFocus(target.parentNode)
       }
     },
     handleClick (e) {
