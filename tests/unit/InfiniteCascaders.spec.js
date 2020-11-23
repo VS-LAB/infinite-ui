@@ -73,35 +73,28 @@ const getTestData = function () {
 
 describe('InfiniteCascaders.vue', () => {
   const options = getTestData()
-  let wrapper = shallowMount(InfiniteCascaders, {
-    propsData: {
+  const vModel = {
+    keys: ['button', 'button-1'],
+    value: ''
+  }
+  const wrapper = shallowMount(InfiniteCascaders)
+
+  it('component event emited', async () => {
+    console.log(wrapper.html())
+    await wrapper.setProps({
+      vModel,
       options
-    }
-  })
-
-  it('InfiniteCascaders selected component checked', async () => {
-    await wrapper.setProps({
-      vModel: {
-        keys: ['inputs', 'input-1']
-      }
     })
-    expect(wrapper.findComponent({ name: 'ElInput' }).exists()).toBe(true)
+    // 创建infinite-cascader对应组件event
+    const ElButton = wrapper.findComponent({ name: 'InfiniteButton' })
+    ElButton.vm.$emit('click')
+    expect(wrapper.emitted().componentEvent).toBeTruthy()
 
-    await wrapper.setProps({
-      vModel: {
-        keys: ['button', 'button-1']
-      }
-    })
+    // 创建el-cascader change事件
+    const ElCascader = wrapper.findComponent({ name: 'ElCascader' })
+    ElCascader.vm.$emit('change')
+    expect(wrapper.emitted().cascaderChange).toBeTruthy()
 
-    // expect(wrapper.findComponent({ name: 'ElButton' }).exists()).toBe(true)
-
-    // await wrapper.setProps({
-    //   vModel: {
-    //     keys: ['date-picker', 'date-picker-1']
-    //   }
-    // })
-
-    // expect(wrapper.findComponent({ name: 'ElDatePicker' }).exists()).toBe(true)
     wrapper.destroy()
   })
 })

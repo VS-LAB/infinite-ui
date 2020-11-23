@@ -120,7 +120,7 @@ export default {
       this.$emit('change', vModel)
     },
     // json数据平铺
-    tiledArray (json, props = { children: 'children' }) {
+    tiledArray (json, props) {
       const { children } = props
       const result = []
       const tiledArraying = (data) => {
@@ -140,7 +140,7 @@ export default {
     // 由于数据可能是动态的，所有在监听里边做初始化
     options: {
       handler (val) {
-        const initVal = val || []
+        const initVal = val
         this.initParam()
         this.tiledOptions = this.tiledArray(initVal, { children: this.initProps.children })
         this.setSelectNode()
@@ -151,7 +151,7 @@ export default {
     // 双向绑定的v-model被父组件变动时，及时更新上去
     vModel: {
       handler (newV, oldV) {
-        const initNewV = newV || {}
+        const initNewV = newV
         this.keys = initNewV.keys
         this.value = initNewV.value
         initNewV.keys && this.setSelectNode()

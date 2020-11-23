@@ -19,7 +19,9 @@
              @close="close"
              @closed="closed">
     <template>
-      <slot></slot>
+      <div :style="{height:`${containerHeight}px`}">
+        <slot></slot>
+      </div>
     </template>
     <template v-if="!title"
               slot="title">
@@ -119,22 +121,6 @@ export default {
     containerHeight: {
       type: Number,
       default: 0
-    }
-  },
-  watch: {
-    vModel: {
-      handler () {
-        if (this.vModel && this.containerHeight) {
-          // 设置container-height
-          this.$nextTick(() => {
-            const infiniteDialogEl = this.$refs.infiniteDialog.$el.querySelectorAll('.el-dialog__body')[0]
-            if (infiniteDialogEl) {
-              infiniteDialogEl.style.height = this.containerHeight + 'px'
-            }
-          })
-        }
-      },
-      immediate: true
     }
   },
   data () {
