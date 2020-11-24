@@ -68,7 +68,6 @@ export default {
         } else {
           chalkHandler()
         }
-
         const styles = [].slice.call(document.querySelectorAll('style'))
           .filter(style => {
             const text = style.innerText
