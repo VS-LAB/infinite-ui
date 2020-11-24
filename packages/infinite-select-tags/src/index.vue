@@ -12,7 +12,7 @@
       <div class="infinite-select-search"
            v-show="filterable">
         <el-input v-model.trim="serachKeyWord"
-                  placeholder="请输入字段名称"
+                  :placeholder="serachPlaceholder"
                   prefix-icon="el-icon-search" />
       </div>
       <!-- option递归 -->
@@ -104,6 +104,10 @@ export default {
     size: {
       type: String,
       default: 'small'
+    },
+    serachPlaceholder: {
+      type: String,
+      default: '请输入字段名称'
     }
   },
   data () {
@@ -207,6 +211,9 @@ export default {
       immediate: true
     }
   },
+  mounted () {
+    this.blur = this.$refs.infiniteSekectTags.blur
+  },
   methods: {
     // 二级树数据平铺
     tiledArray (json, props = { children: 'children' }, desc) {
@@ -256,15 +263,14 @@ export default {
       this.allChecked = flag
     },
     // 点击确定按钮
-    makeSure () {
+    makeSure (flag) {
       const vModel = []
       Object.keys(this.showChecked).map(key => {
         if (this.showChecked[key]) vModel.push(key)
       })
       this.$emit('change', vModel)
-      this.$emit('makeSure')
-      const infiniteSekectTagsEl = this.$refs.infiniteSekectTags
-      infiniteSekectTagsEl && infiniteSekectTagsEl.blur()
+      !flag && this.$emit('makeSure')
+      this.blur && this.blur()
     },
     // 全选按钮的点击事件
     allSelect (val) {
@@ -287,13 +293,11 @@ export default {
       }
     },
     watchDefaultCheckedsChange (val) {
-      if (val && val.length) {
-        val.forEach(v => {
-          const item = this.titledOptions.filter(nItem => nItem.id === v)[0]
-          this.setSiblingCheckbox(item, true)
-          this.makeSure()
-        })
-      }
+      val.forEach(v => {
+        const item = this.titledOptions.filter(nItem => nItem.id === v)[0]
+        this.setSiblingCheckbox(item, true)
+        this.makeSure(true)
+      })
     },
     // 设置相邻节点checkbox
     setSiblingCheckbox (item, status) {

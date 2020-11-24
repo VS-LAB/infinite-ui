@@ -70,13 +70,11 @@ export default {
     },
     handleClose (key, keyPath) {
       this.$emit('close', key, keyPath)
-    },
-    open (index) {
-      this.$refs.infiniteNavMenu.open(index)
-    },
-    close (index) {
-      this.$refs.infiniteNavMenu.close(index)
     }
+  },
+  mounted () {
+    this.open = this.$refs.infiniteNavMenu.open
+    this.close = this.$refs.infiniteNavMenu.close
   },
   render (h, context) {
     const {
@@ -93,11 +91,8 @@ export default {
     } = this.$props
     function iterate (arr) {
       return arr.map((item, index) => {
-        let children = []
         const flat = item.children && item.children.length
-        if (flat) {
-          children = iterate(item.children)
-        }
+        let children = !flat ? [] : iterate(item.children)
         if (flat) {
           const tamplateTitleEl = (<template slot='title'>{item.icon ? <i class={item.icon}></i> : ''}<span>{item.label}</span></template>)
           return h('el-submenu', {
@@ -142,4 +137,5 @@ export default {
     return el
   }
 }
+
 </script>

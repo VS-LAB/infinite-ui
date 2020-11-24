@@ -6,7 +6,7 @@ import ElSelect from 'element-ui/lib/select'
 import ElOption from 'element-ui/lib/option'
 import ElCheckbox from 'element-ui/lib/checkbox'
 import InfiniteButton from '@/packages/infinite-button/src/index.vue'
-import InfiniteSelectTagsOption from '@/packages/infinite-select-tags-option'
+import InfiniteSelectTagsOption from '@/packages/infinite-select-tags/src/InfiniteSelectTagsOption.vue'
 const getTestData = function () {
   return [
     {
@@ -56,7 +56,8 @@ const getTestData = function () {
     },
     {
       id: 'RMB',
-      name: '人民币'
+      name: '人民币',
+      disabled: true
     },
     {
       id: 'EUR',
@@ -83,11 +84,11 @@ const getTestData = function () {
 
 describe('InfiniteSelectTags.vue', () => {
   const placeholder = '测试placeholder'
-  const defaultCheckeds = ['USD']
+  const defaultCheckeds = ['USD', 'GBP-1', 'TAD']
   const options = getTestData()
   const wrapper = shallowMount(InfiniteSelectTags, {
     propsData: {
-      placeholder
+      filterable: true
     },
     stubs: {
       ElSelect,
@@ -113,9 +114,16 @@ describe('InfiniteSelectTags.vue', () => {
   it('component event emited', async () => {
     await wrapper.setProps({
       options,
-      defaultCheckeds
+      defaultCheckeds,
+      placeholder
     })
-    // console.log(wrapper.html())
+    // 勾选选中数据
+    const checked = {}
+    defaultCheckeds.forEach(async item => {
+      checked[item] = true
+      await wrapper.setData({ checked })
+    })
+
     const rootCheckboxInput = wrapper.findAll('.infinite-select-group-level-1 .exist-children > .el-checkbox input[type="checkbox"]').at(1)
     // 选中根节点
     await rootCheckboxInput.setChecked()
@@ -130,8 +138,18 @@ describe('InfiniteSelectTags.vue', () => {
     expect(wrapper.emitted('allSelect')).toBeTruthy()
 
     // 下拉框弹出
-    const selectTags = wrapper.find('.el-select.el-select--small')
+    const selectTags = wrapper.find('.el-select')
     await selectTags.trigger('click')
     expect(wrapper.vm.visibleChange).toBeTruthy()
+    wrapper.vm.blur()
+    expect(wrapper.vm.visibleChange.length).toBeTruthy()
+  })
+
+  // 关键字搜索方法控制显隐
+  it('reader search Fun', async () => {
+    const inputWrapper = wrapper.find('.infinite-select-search input[type="text"]')
+    await inputWrapper.setValue(options[2].name)
+    expect(inputWrapper.element.value).toBe(options[2].name)
+    wrapper.destroy()
   })
 })

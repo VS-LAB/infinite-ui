@@ -1,7 +1,7 @@
 
 import { shallowMount } from '@vue/test-utils'
 import InfiniteNavMenu from '@/packages/infinite-nav-menu/src/index.vue'
-
+import ElMenu from 'element-ui/lib/menu.js'
 const getTestData = function () {
   return [
     {
@@ -70,13 +70,10 @@ const getTestData = function () {
 
 describe('InfiniteNavMenu.vue', () => {
   const data = getTestData()
-  let wrapper = shallowMount(InfiniteNavMenu, {
-    propsData: {
-      data
-    }
-  })
+  let wrapper = shallowMount(InfiniteNavMenu)
 
-  it('InfiniteNavMenu data to checked', () => {
+  it('InfiniteNavMenu data to checked', async () => {
+    await wrapper.setProps({ data })
     const circulation = (menuData, element) => {
       menuData.forEach((item, index) => {
         const curElement = element.filter(w => w.attributes('index') === item.index)
@@ -88,6 +85,20 @@ describe('InfiniteNavMenu.vue', () => {
       })
     }
     circulation(data, wrapper.findAll('.infinite-nav-menu-container *'))
+  })
+
+  it('InfiniteNavMenu event to toBeTruthy', async () => {
+    const ElMenuWrapper = wrapper.findComponent(ElMenu)
+    ElMenuWrapper.vm.$emit('select')
+    expect(wrapper.emitted('select')).toBeTruthy()
+    ElMenuWrapper.vm.$emit('open')
+    expect(wrapper.emitted('open')).toBeTruthy()
+    ElMenuWrapper.vm.$emit('close')
+    expect(wrapper.emitted('close')).toBeTruthy()
+    // wrapper.vm.open()
+    // expect(ElMenuWrapper.vm.open).toBeTruthy()
+    // wrapper.vm.close()
+    // expect(ElMenuWrapper.vm.close).toBeTruthy()
     wrapper.destroy()
   })
 })

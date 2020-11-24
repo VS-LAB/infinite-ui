@@ -17,7 +17,7 @@
         <infinite-select-tags-option :options="item.children"
                                      :disabledKeys="disabledKeys"
                                      :show-checked="showChecked"
-                                     :level="level+1"
+                                     :level="(level)+1"
                                      :showKeys="showKeys"
                                      :maxLevel="maxLevel"
                                      :titled-desc-options="titledDescOptions"
@@ -36,12 +36,10 @@ export default {
   components: { ElCheckbox },
   props: {
     options: {
-      type: Array,
-      defualt: () => []
+      type: Array
     },
     titledDescOptions: {
-      type: Array,
-      defualt: () => []
+      type: Array
     },
     showChecked: {
       type: Object,

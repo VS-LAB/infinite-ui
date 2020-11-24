@@ -111,6 +111,78 @@
 
 :::
 
+### 模糊查询
+
+根据输入的内容展示匹配到内容
+:::demo
+
+```html
+<template>
+  <infinite-select-tags
+    v-model="value"
+    :default-checkeds="defaultCheckeds"
+    :options="options"
+    :tags-num="4"
+    :filterable="true"
+  />
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        value: [],
+        defaultCheckeds: [
+          'USD',
+          'GBP',
+          'RMB',
+          'EUR',
+          'CAD',
+          'AUD',
+          'TAD',
+          'MUD',
+        ],
+        options: [
+          {
+            id: 'USD',
+            name: '美元',
+          },
+          {
+            id: 'GBP',
+            name: '英镑',
+          },
+          {
+            id: 'RMB',
+            name: '人民币',
+          },
+          {
+            id: 'EUR',
+            name: '欧元',
+          },
+          {
+            id: 'CAD',
+            name: '加元',
+          },
+          {
+            id: 'AUD',
+            name: '澳大利亚元',
+          },
+          {
+            id: 'TAD',
+            name: '泰元',
+          },
+          {
+            id: 'MUD',
+            name: '孟加拉元',
+          },
+        ],
+      };
+    },
+  };
+</script>
+```
+
+:::
+
 ### 禁用多选
 
 支持禁用选项，也支持自定义结合使用
@@ -277,14 +349,15 @@
 
 ### Attributes
 
-| 参数            | 说明                                  | 类型    | 可选值 | 默认值 |
-| --------------- | ------------------------------------- | ------- | ------ | ------ |
-| v-model/vModel  | 返回选中的数据 id                     | Array   | —      | —      |
-| options         | 详细参数 `Options Attributes`         | Array   | —      | —      |
-| defaultCheckeds | 指定默认被选中的选项 id 数组          | Array   | —      | —      |
-| tags-num        | 指定 input 内被选中选项的标签显示个数 | number  | —      | 3      |
-| placeholder     | 输入框占位文本                        | String  | —      | 3      |
-| filterable      | 是否开启关键字搜索功能                | Boolean | —      | false  |
+| 参数              | 说明                                                            | 类型    | 可选值 | 默认值         |
+| ----------------- | --------------------------------------------------------------- | ------- | ------ | -------------- |
+| v-model/vModel    | 返回选中的数据 id                                               | Array   | —      | —              |
+| options           | 详细参数 `Options Attributes`                                   | Array   | —      | —              |
+| defaultCheckeds   | 指定默认被选中的选项 id 数组                                    | Array   | —      | —              |
+| tags-num          | 指定 input 内被选中选项的标签显示个数                           | number  | —      | 3              |
+| placeholder       | 输入框占位文本                                                  | String  | —      | 3              |
+| filterable        | 是否开启关键字搜索功能                                          | Boolean | —      | false          |
+| serachPlaceholder | 开启关键字搜索功能时可以设置`serachPlaceholder`为搜索框占位文本 | String  | —      | 请输入字段名称 |
 
 ### Options Attributes
 
