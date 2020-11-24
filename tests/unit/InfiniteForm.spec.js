@@ -367,6 +367,7 @@ describe('InfiniteForm.vue', () => {
     const ElForm = wrapper.findComponent({ name: 'ElForm' })
     wrapper.vm.validate()
     wrapper.vm.validate(() => { })
+    // toBeTruthy重写ing ...
     expect(ElForm.vm.validate).toBeTruthy()
     wrapper.vm.clearValidate()
     expect(ElForm.vm.clearValidate).toBeTruthy()

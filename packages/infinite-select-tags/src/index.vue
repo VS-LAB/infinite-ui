@@ -42,15 +42,15 @@
         <div slot="reference"
              class="infinite-selected">
           <slot name="prefix">
-            <div v-if="labels.length > 0"
+            <div v-if="filterShowLabels.length > 0"
                  class="infinite-selected-tag">
-              <el-tag v-for="(item, i) in labels"
+              <el-tag v-for="(item, i) in filterShowLabels"
                       v-show="i < tagsNum"
                       :size="size"
                       :key="item">{{ item }}</el-tag>
-              <el-tag v-if="labels.length > tagsNum"
+              <el-tag v-if="filterShowLabels.length > tagsNum"
                       :size="size"
-                      class="last-tag">+{{ labels.length - tagsNum }}</el-tag>
+                      class="last-tag">+{{ filterShowLabels.length - tagsNum }}</el-tag>
             </div>
           </slot>
         </div>
@@ -108,6 +108,12 @@ export default {
     serachPlaceholder: {
       type: String,
       default: '请输入字段名称'
+    },
+    filterLabels: {
+      type: Function,
+      default: (ids) => {
+        return ids
+      }
     }
   },
   data () {
@@ -122,6 +128,25 @@ export default {
   computed: {
     defaultPlaceholder () {
       return this.labels.length > 0 ? '' : this.placeholder
+    },
+    labelKeys () {
+      const labelKeys = {}
+      this.titledDescOptions.forEach(el => {
+        labelKeys[el.id] = el.name
+      })
+      return labelKeys
+    },
+    filterShowLabels () {
+      const treeIds = []
+      this.titledDescOptions.forEach(el => {
+        if (this.checked[el.id]) treeIds.push(el.id)
+      })
+      const newTreeIds = this.filterLabels(treeIds)
+      const labels = []
+      newTreeIds.forEach(id => {
+        labels.push(this.labelKeys[id])
+      })
+      return labels
     },
     // input上展示的数据
     labels () {

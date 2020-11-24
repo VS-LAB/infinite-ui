@@ -163,6 +163,7 @@ describe('InfiniteSelectTags.vue', function () {
             return regeneratorRuntime.awrap(selectTags.trigger('click'));
 
           case 19:
+            // toBeTruthy重写ing ...
             expect(wrapper.vm.visibleChange).toBeTruthy();
             wrapper.vm.blur();
             expect(wrapper.vm.visibleChange.length).toBeTruthy();

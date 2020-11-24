@@ -363,7 +363,8 @@ describe('InfiniteForm.vue', function () {
       name: 'ElForm'
     });
     wrapper.vm.validate();
-    wrapper.vm.validate(function () {});
+    wrapper.vm.validate(function () {}); // toBeTruthy重写ing ...
+
     expect(ElForm.vm.validate).toBeTruthy();
     wrapper.vm.clearValidate();
     expect(ElForm.vm.clearValidate).toBeTruthy();

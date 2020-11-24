@@ -140,6 +140,7 @@ describe('InfiniteSelectTags.vue', () => {
     // 下拉框弹出
     const selectTags = wrapper.find('.el-select')
     await selectTags.trigger('click')
+    // toBeTruthy重写ing ...
     expect(wrapper.vm.visibleChange).toBeTruthy()
     wrapper.vm.blur()
     expect(wrapper.vm.visibleChange.length).toBeTruthy()

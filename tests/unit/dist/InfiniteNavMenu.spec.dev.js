@@ -108,11 +108,7 @@ describe('InfiniteNavMenu.vue', function () {
             ElMenuWrapper.vm.$emit('open');
             expect(wrapper.emitted('open')).toBeTruthy();
             ElMenuWrapper.vm.$emit('close');
-            expect(wrapper.emitted('close')).toBeTruthy(); // wrapper.vm.open()
-            // expect(ElMenuWrapper.vm.open).toBeTruthy()
-            // wrapper.vm.close()
-            // expect(ElMenuWrapper.vm.close).toBeTruthy()
-
+            expect(wrapper.emitted('close')).toBeTruthy();
             wrapper.destroy();
 
           case 8:

@@ -155,6 +155,7 @@ describe('InfiniteTable.vue', function () {
             return regeneratorRuntime.awrap(InfiniteButtonWrapper.trigger('click'));
 
           case 3:
+            // toBeTruthy重写ing ...
             expect(wrapper.vm.handleClick).toBeTruthy();
 
           case 4:
@@ -166,7 +167,8 @@ describe('InfiniteTable.vue', function () {
   }); // resize evnet 
 
   it('resize evnet test', function () {
-    window.dispatchEvent(new Event('resize'));
+    window.dispatchEvent(new Event('resize')); // toBeTruthy重写ing ...
+
     expect(wrapper.vm.computedHeightData).toBeTruthy();
   }); // 高度自动拉伸
 
