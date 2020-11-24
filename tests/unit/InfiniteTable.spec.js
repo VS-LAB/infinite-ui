@@ -1,7 +1,8 @@
 
 import { mount } from '@vue/test-utils'
 import InfiniteTable from '@/packages/infinite-table/src/index.vue'
-
+import InfiniteTableColumn from '@/packages/infinite-table/src/infiniteTableColumn.vue'
+import ElTable from 'element-ui/lib/table.js'
 const getTestData = function () {
   return [
     {
@@ -38,51 +39,94 @@ const getTestHeader = function () {
     },
     {
       prop: 'address',
-      label: '地址'
+      label: '地址',
+      needAutoWidth: true
+    },
+    {
+      prop: 'operation',
+      label: '操作',
+      align: 'center',
+      width: '200'
+    }
+  ]
+}
+const getoperations = function () {
+  return [
+    {
+      label: 'Edit',
+      click: _ => { }
+    },
+    {
+      label: 'Delete',
+      type: 'danger',
+      click: _ => { }
     }
   ]
 }
 
+const later = time => new Promise((resolve) => {
+  setTimeout(() => { resolve() }, time)
+})
 describe('InfiniteTable.vue', () => {
   const data = getTestData()
   const header = getTestHeader()
+  const operations = getoperations()
   const defaultTdAtuoPadding = 20
   const needAutoHeight = true
-  let wrapper = mount(InfiniteTable, {
+  const rowClassName = 'row-class-name'
+  const border = true
+  const type = 'selection'
+  const wrapper = mount(InfiniteTable, {
     propsData: {
-      data,
-      header,
-      defaultTdAtuoPadding
+      defaultTdAtuoPadding,
+      operations,
+      border,
+      needAutoHeight,
+      rowClassName,
+      type
+    },
+    slots: {
+      header: '<div />'
     }
   })
 
-  it('tableData to checked', () => {
-    const wrapperArrayCell = wrapper.findAll('.el-table__header-wrapper thead .cell')
-    header.forEach((hItem, hIndex) => {
-      expect(wrapperArrayCell.at(hIndex).text()).toBe(hItem.label)
+  // 属性测试
+  it('table props test toBe', async () => {
+    await wrapper.setProps({
+      data,
+      header
     })
-
-    const wrapperArrayRow = wrapper.findAll('.el-table__body-wrapper .el-table__row')
-    data.forEach((dItem, dIndex) => {
-      const wrapperArrayRowCell = wrapperArrayRow.at(dIndex).findAll('.cell')
-      header.forEach((hItem, hIndex) => {
-        expect(wrapperArrayRowCell.at(hIndex).text()).toBe(dItem[hItem.prop])
-      })
-    })
-    wrapper.destroy()
+    await later()
+    const ElTableWrapper = wrapper.findComponent(ElTable)
+    const ElTableWrapperVm = ElTableWrapper.vm
+    expect(ElTableWrapperVm.data).toBe(data)
+    expect(ElTableWrapperVm.border).toBe(border)
+    expect(ElTableWrapperVm.rowClassName).toBe(rowClassName)
   })
 
-  it('table colAutoWidth test', () => {
-    header.forEach(async (hItem, hIndex) => {
-      if (hItem.needAutoWidth) {
-        // 自适应宽度在table组件中使用 creatElement 不被识别，导致获取宽度为0，这里只测试自适应宽度列的默认宽度
-        const wrapperColgroupCols = wrapper.findAll('.el-table__body-wrapper colgroup col')
-        expect(wrapperColgroupCols.at(hIndex).attributes('width')).toBe(String(defaultTdAtuoPadding + 1))
-      }
-    })
-    wrapper.destroy()
+  // 排序回调
+  it('table sort event toBeTruthy', async () => {
+    const ElTableWrapper = wrapper.findComponent(ElTable)
+    ElTableWrapper.vm.$emit('selection-change')
+    expect(wrapper.emitted('selection-change')).toBeTruthy()
+    ElTableWrapper.vm.$emit('sort-change')
+    expect(wrapper.emitted('sort-change')).toBeTruthy()
   })
 
+  // 按钮回调
+  it('operations button clicked', async () => {
+    const InfiniteButtonWrapper = wrapper.findAll('.infinite-table-operation-btn .infinite-button').at(0)
+    await InfiniteButtonWrapper.trigger('click')
+    expect(wrapper.vm.handleClick).toBeTruthy()
+  })
+
+  // resize evnet 
+  it('resize evnet test', () => {
+    window.dispatchEvent(new Event('resize'))
+    expect(wrapper.vm.computedHeightData).toBeTruthy()
+  })
+
+  // 高度自动拉伸
   const autoHeightWrapper = mount({
     render: (h) => {
       return h('div', {
@@ -99,8 +143,46 @@ describe('InfiniteTable.vue', () => {
     }
   })
 
+  // 高度自适应
   it('table autoHeight test', () => {
     expect(autoHeightWrapper.find('.infinite-table').attributes('style')).toContain('height: 100px')
+  })
+
+  // 插槽使用
+  const headerSlotName = '姓名'
+  const slotWrapper = mount({
+    render: (h) => {
+      return h(
+        InfiniteTable,
+        {
+          props: {
+            data: [
+              {
+                name: '王小虎'
+              }
+            ]
+          }
+        }, [h(InfiniteTableColumn, {
+          props: {
+            prop: 'name'
+          },
+          scopedSlots: {
+            header: () => h('div', {
+              domProps: {
+                innerHTML: headerSlotName
+              }
+            })
+          }
+        }
+        )]
+      )
+    }
+  })
+  // 插槽值匹配
+  it('table slot header toBo', () => {
+    expect(slotWrapper.find('.el-table__header-wrapper .cell>span').html()).toBe(`<span><div>${headerSlotName}</div></span>`)
+    wrapper.destroy()
     autoHeightWrapper.destroy()
+    slotWrapper.destroy()
   })
 })

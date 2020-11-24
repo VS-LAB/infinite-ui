@@ -957,20 +957,26 @@
 
 ### Table Attributes
 
-| 参数                    | 说明                                                                                                                                                | 类型                             | 可选值                         | 默认值                                                      |
-| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------- | ------------------------------ | ----------------------------------------------------------- |
-| data                    | 显示的数据                                                                                                                                          | Array                            | —                              | —                                                           |
-| header                  | 表头的数据                                                                                                                                          | Array                            | `option` 属性                  | —                                                           |
-| need-auto-height        | 表格的高度随父组件拉伸，不设置 height 时生效                                                                                                        | Boolean                          | —                              | false                                                       |
-| height                  | Table 的高度                                                                                                                                        | String/Number                    | —                              | —                                                           |
-| Stripe                  | 是否为斑马纹 table                                                                                                                                  | Boolean                          | —                              | false                                                       |
-| border                  | 是否带有纵向边框                                                                                                                                    | Boolean                          | —                              | false                                                       |
-| row-class-name          | 行的 className 的回调方法，也可以使用字符串为所有行设置一个固定的 className                                                                         | Function({row, rowIndex})/String | —                              | —                                                           |
-| default-sort            | 默认的排序列的 prop 和顺序。它的`prop`属性指定默认的排序的列，`order`指定默认排序的顺序                                                             | Object                           | `order`: ascending, descending | 如果只指定了`prop`, 没有指定`order`, 则默认顺序是 ascending |
-| default-font-size       | 当 `option`:needAutoWidth 为 true 时,默认计算的文案大小                                                                                             | Number                           | —                              | 14                                                          |
-| default-td-atuo-padding | 当 `option`:needAutoWidth 为 true 时,默认计算的单元格间距                                                                                           | Number                           | —                              | 20                                                          |
-| type                    | 对应列的类型。如果设置了 `selection` 则显示多选框；如果设置了 index 则显示该行的索引（从 1 开始计算）；如果设置了 `expand` 则显示为一个可展开的按钮 | String                           | selection, expand              | —                                                           |
-| operations              | 操作列操作按钮。如果设置了 `prop`: 'operation' 则显示该；                                                                                           | Array                            | —                              | —                                                           |
+| 参数                   | 说明                                                                                          | 类型                                                  | 可选值        | 默认值 |
+| ---------------------- | --------------------------------------------------------------------------------------------- | ----------------------------------------------------- | ------------- | ------ |
+| data                   | 显示的数据                                                                                    | Array                                                 | —             | —      |
+| header                 | 表头的数据                                                                                    | Array                                                 | `option` 属性 | —      |
+| need-auto-height       | 表格的高度随父组件拉伸，不设置 height 时生效                                                  | Boolean                                               | —             | false  |
+| height                 | Table 的高度                                                                                  | String/Number                                         | —             | —      |
+| Stripe                 | 是否为斑马纹 table                                                                            | Boolean                                               | —             | false  |
+| border                 | 是否带有纵向边框                                                                              | Boolean                                               | —             | false  |
+| row-class-name         | 行的 className 的回调方法，也可以使用字符串为所有行设置一个固定的 className                   | Function({row, rowIndex})/String                      | —             | —      |
+| cell-class-name        | 单元格的 className 的回调方法，也可以使用字符串为所有单元格设置一个固定的 className。         | Function({row, column, rowIndex, columnIndex})/String | —             | —      |
+| header-row-class-name  | 表头行的 className 的回调方法，也可以使用字符串为所有表头行设置一个固定的 className。         | Function({row, rowIndex})/String                      | —             | —      |
+| header-row-style       | 表头行的 style 的回调方法，也可以使用一个固定的 Object 为所有表头行设置一样的 Style。         | Function({row, rowIndex})/Object                      | —             | —      |
+| header-cell-class-name | 表头单元格的 className 的回调方法，也可以使用字符串为所有表头单元格设置一个固定的 className。 | Function({row, column, rowIndex, columnIndex})/String | —             | —      |
+| header-cell-style      | 表头单元格的 style 的回调方法，也可以使用一个固定的 Object 为所有表头单元格设置一样的 Style。 | Function({row, column, rowIndex, columnIndex})/Object | —             | —      |
+
+| default-sort | 默认的排序列的 prop 和顺序。它的`prop`属性指定默认的排序的列，`order`指定默认排序的顺序 | Object | `order`: ascending, descending | 如果只指定了`prop`, 没有指定`order`, 则默认顺序是 ascending |
+| default-font-size | 当 `option`:needAutoWidth 为 true 时,默认计算的文案大小 | Number | — | 14 |
+| default-td-atuo-padding | 当 `option`:needAutoWidth 为 true 时,默认计算的单元格间距 | Number | — | 20 |
+| type | 对应列的类型。如果设置了 `selection` 则显示多选框；如果设置了 index 则显示该行的索引（从 1 开始计算）；如果设置了 `expand` 则显示为一个可展开的按钮 | String | selection, expand | — |
+| operations | 操作列操作按钮。如果设置了 `prop`: 'operation' 则显示该； | Array | — | — |
 
 ### option Attributes
 

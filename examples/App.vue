@@ -36,6 +36,7 @@ export default {
 /* 引入代码高亮样式 */
 @import "~highlight.js/styles/color-brewer.css";
 .el-container .el-main {
+  width: 100%;
   padding: 0 0 0 270px;
   padding-bottom: 100px;
   box-sizing: border-box;
@@ -48,6 +49,7 @@ export default {
   bottom: 0;
   margin-top: 60px;
   transition: padding-top 0.3s;
+  z-index: 10;
 }
 .el-header {
   position: fixed;

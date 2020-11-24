@@ -5,10 +5,14 @@
             :border="border"
             :height="height || computedHeight || 'auto'"
             :row-class-name="rowClassName"
+            :cell-class-name="cellClassName"
+            :header-row-class-name="headerRowClassName"
+            :header-row-style="headerRowStyle"
+            :header-cell-class-name="headerCellClassName"
+            :header-cell-style="headerCellStyle"
             @selection-change="selectionChange"
             @sort-change="sortChange"
             :default-sort="defaultSort"
-            :header-cell-style="{background: '#F5F7FA'}"
             class="infinite-table"
             width="100%">
 
@@ -88,10 +92,17 @@ export default {
       default: false
     },
 
-    rowClassName: {
-      type: String,
-      default: ''
-    },
+    rowClassName: [String, Function],
+
+    cellClassName: [String, Function],
+
+    headerRowClassName: [String, Function],
+
+    headerRowStyle: [Object, Function],
+
+    headerCellClassName: [String, Function],
+
+    headerCellStyle: [Object, Function],
 
     needAutoHeight: {
       type: Boolean,
@@ -130,18 +141,11 @@ export default {
     computedHeightFun () {
       this.$nextTick(() => {
         // 获取父节点及高度
-        const parentElement = this.$el.parentElement || {}
-        const parentElementClientHeight = parseFloat(getComputedStyle(parentElement).height)
-        this.computedHeight = parentElementClientHeight || ''
+        const parentElement = this.$refs.infiniteTableRef.$el.parentNode
+        if (parentElement) {
+          this.computedHeight = parseFloat(window.getComputedStyle(parentElement).height)
+        }
       })
-    },
-    // 切换选中状态
-    toggleRowSelection (row) {
-      this.$refs.infiniteTableRef.toggleRowSelection(row)
-    },
-    // 取消选中
-    clearSelection () {
-      this.$refs.infiniteTableRef.clearSelection()
     },
     // 选中change
     selectionChange (val) {
@@ -201,6 +205,12 @@ export default {
     }
   },
   mounted () {
+    // 设置tabel methods
+    // 切换选中状态
+    this.toggleRowSelection = this.$refs.infiniteTableRef.toggleRowSelection
+    // 取消选中
+    this.clearSelection = this.$refs.infiniteTableRef.clearSelection
+
     // 设置高度拉伸
     if (!this.height && this.needAutoHeight) {
       this.computedHeightData()
