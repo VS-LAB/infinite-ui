@@ -1,14 +1,14 @@
-"use strict";
+'use strict'
 
-var _testUtils = require("@vue/test-utils");
+var _testUtils = require('@vue/test-utils')
 
-var _index = _interopRequireDefault(require("@/packages/infinite-nav-menu/src/index.vue"));
+var _index = _interopRequireDefault(require('@/packages/infinite-nav-menu/src/index.vue'))
 
-var _menu = _interopRequireDefault(require("element-ui/lib/menu.js"));
+var _menu = _interopRequireDefault(require('element-ui/lib/menu.js'))
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+function _interopRequireDefault (obj) { return obj && obj.__esModule ? obj : { 'default': obj } }
 
-var getTestData = function getTestData() {
+var getTestData = function getTestData () {
   return [{
     index: '1',
     label: '处理中心'
@@ -45,7 +45,7 @@ var getTestData = function getTestData() {
   }, {
     index: '4',
     label: '订单管理',
-    component: function component(h) {
+    component: function component (h) {
       return h('a', {
         attrs: {
           href: 'https://www.ele.me',
@@ -53,69 +53,69 @@ var getTestData = function getTestData() {
         }
       }, [h('span', {
         slot: 'title'
-      }, '订单管理')]);
+      }, '订单管理')])
     }
-  }];
-};
+  }]
+}
 
 describe('InfiniteNavMenu.vue', function () {
-  var data = getTestData();
-  var wrapper = (0, _testUtils.shallowMount)(_index["default"]);
-  it('InfiniteNavMenu data to checked', function _callee() {
-    var circulation;
-    return regeneratorRuntime.async(function _callee$(_context) {
+  var data = getTestData()
+  var wrapper = (0, _testUtils.shallowMount)(_index['default'])
+  it('InfiniteNavMenu data to checked', function _callee () {
+    var circulation
+    return regeneratorRuntime.async(function _callee$ (_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            _context.next = 2;
+            _context.next = 2
             return regeneratorRuntime.awrap(wrapper.setProps({
               data: data
-            }));
+            }))
 
           case 2:
-            circulation = function circulation(menuData, element) {
+            circulation = function circulation (menuData, element) {
               menuData.forEach(function (item, index) {
                 var curElement = element.filter(function (w) {
-                  return w.attributes('index') === item.index;
-                });
+                  return w.attributes('index') === item.index
+                })
 
                 if (item.children && item.children.length) {
-                  circulation(item.children, element);
+                  circulation(item.children, element)
                 } else {
-                  expect(curElement.at(0).html()).toContain(item.label);
+                  expect(curElement.at(0).html()).toContain(item.label)
                 }
-              });
-            };
+              })
+            }
 
-            circulation(data, wrapper.findAll('.infinite-nav-menu-container *'));
+            circulation(data, wrapper.findAll('.infinite-nav-menu-container *'))
 
           case 4:
-          case "end":
-            return _context.stop();
+          case 'end':
+            return _context.stop()
         }
       }
-    });
-  });
-  it('InfiniteNavMenu event to toBeTruthy', function _callee2() {
-    var ElMenuWrapper;
-    return regeneratorRuntime.async(function _callee2$(_context2) {
+    })
+  })
+  it('InfiniteNavMenu event to toBeTruthy', function _callee2 () {
+    var ElMenuWrapper
+    return regeneratorRuntime.async(function _callee2$ (_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
-            ElMenuWrapper = wrapper.findComponent(_menu["default"]);
-            ElMenuWrapper.vm.$emit('select');
-            expect(wrapper.emitted('select')).toBeTruthy();
-            ElMenuWrapper.vm.$emit('open');
-            expect(wrapper.emitted('open')).toBeTruthy();
-            ElMenuWrapper.vm.$emit('close');
-            expect(wrapper.emitted('close')).toBeTruthy();
-            wrapper.destroy();
+            ElMenuWrapper = wrapper.findComponent(_menu['default'])
+            ElMenuWrapper.vm.$emit('select')
+            expect(wrapper.emitted('select')).toBeTruthy()
+            ElMenuWrapper.vm.$emit('open')
+            expect(wrapper.emitted('open')).toBeTruthy()
+            ElMenuWrapper.vm.$emit('close')
+            expect(wrapper.emitted('close')).toBeTruthy()
+            wrapper.destroy()
 
           case 8:
-          case "end":
-            return _context2.stop();
+          case 'end':
+            return _context2.stop()
         }
       }
-    });
-  });
-});
+    })
+  })
+})
