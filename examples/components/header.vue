@@ -1,7 +1,7 @@
 <template>
   <div class="header-model">
     <h1 class="info">
-      infinite-ui
+      Infinite-ui
     </h1>
   </div>
 </template>
