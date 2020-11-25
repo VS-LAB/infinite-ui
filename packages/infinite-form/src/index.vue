@@ -100,16 +100,11 @@ export default {
           })
         })
       }
-    },
-    resetFields () {
-      this.$refs['infinite-form'].resetFields()
-    },
-    clearValidate () {
-      this.$refs['infinite-form'].clearValidate()
     }
   },
   mounted () {
-    // console.log(this.$attrs)
+    this.resetFields = this.$refs['infinite-form'].resetFields
+    this.clearValidate = this.$refs['infinite-form'].clearValidate
   }
 }
 </script>

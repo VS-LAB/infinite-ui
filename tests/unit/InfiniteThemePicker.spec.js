@@ -14,8 +14,7 @@ describe('InfiniteThemePicker.vue', () => {
   it('origin style get methods', async () => {
     // 等待资源响应
     await later(3000)
-    // toBeTruthy重写ing ...
-    expect(wrapper.vm.updateStyle).toBeTruthy()
+    expect(wrapper.vm.chalk === '').toBe(false)
   })
 
   // v-model属性匹配

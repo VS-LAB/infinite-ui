@@ -364,15 +364,11 @@ describe('InfiniteForm.vue', () => {
   })
 
   it('renders form validate Funcs emited', () => {
-    const ElForm = wrapper.findComponent({ name: 'ElForm' })
-    wrapper.vm.validate()
-    wrapper.vm.validate(() => { })
-    // toBeTruthy重写ing ...
-    expect(ElForm.vm.validate).toBeTruthy()
-    wrapper.vm.clearValidate()
-    expect(ElForm.vm.clearValidate).toBeTruthy()
-    wrapper.vm.resetFields()
-    expect(ElForm.vm.resetFields).toBeTruthy()
+    // 手动调用 validate 方法
+    const mackValidate = jest.fn(wrapper.vm.validate)
+    mackValidate()
+    mackValidate(() => { })
+    expect(mackValidate).toBeCalledTimes(2)
   })
 
   it('renders component v-model test', async () => {

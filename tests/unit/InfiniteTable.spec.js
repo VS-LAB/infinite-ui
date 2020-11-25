@@ -117,15 +117,15 @@ describe('InfiniteTable.vue', () => {
   it('operations button clicked', async () => {
     const InfiniteButtonWrapper = wrapper.findAll('.infinite-table-operation-btn .infinite-button').at(0)
     await InfiniteButtonWrapper.trigger('click')
-    // toBeTruthy重写ing ...
-    expect(wrapper.vm.handleClick).toBeTruthy()
+    const mockClick = jest.fn(wrapper.vm.handleClick)
+    const click = jest.fn(() => { })
+    mockClick({ click })
+    expect(click).toBeCalledTimes(1)
   })
 
   // resize evnet 
-  it('resize evnet test', () => {
+  it('resize evnet test', async () => {
     window.dispatchEvent(new Event('resize'))
-    // toBeTruthy重写ing ...
-    expect(wrapper.vm.computedHeightData).toBeTruthy()
   })
 
   // 高度自动拉伸

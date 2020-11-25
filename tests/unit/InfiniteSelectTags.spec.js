@@ -136,14 +136,15 @@ describe('InfiniteSelectTags.vue', () => {
     const selectAllInput = wrapper.find('.infinite-select-button input[type="checkbox"]')
     await selectAllInput.setChecked()
     expect(wrapper.emitted('allSelect')).toBeTruthy()
-
     // 下拉框弹出
     const selectTags = wrapper.find('.el-select')
     await selectTags.trigger('click')
-    // toBeTruthy重写ing ...
-    expect(wrapper.vm.visibleChange).toBeTruthy()
-    wrapper.vm.blur()
-    expect(wrapper.vm.visibleChange.length).toBeTruthy()
+    expect(selectTags.emitted('visible-change').length).toBe(1)
+    const mockBlur = jest.fn(wrapper.vm.blur)
+    mockBlur()
+    expect(mockBlur).toBeCalledTimes(1)
+    await wrapper.vm.$nextTick()
+    expect(selectTags.emitted('visible-change').length).toBe(2)
   })
 
   // 关键字搜索方法控制显隐

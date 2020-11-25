@@ -29,8 +29,7 @@ describe('InfiniteThemePicker.vue', function () {
             return regeneratorRuntime.awrap(later(3000));
 
           case 2:
-            // toBeTruthy重写ing ...
-            expect(wrapper.vm.updateStyle).toBeTruthy();
+            expect(wrapper.vm.chalk === '').toBe(false);
 
           case 3:
           case "end":
