@@ -441,15 +441,9 @@
       };
     },
     methods: {
-      removeIds(ids, removeIds) {
-        const newIds = [];
-        ids.forEach((id) => {
-          if (!removeIds.includes(id)) newIds.push(id);
-        });
-        return newIds;
-      },
       filterLabels(ids) {
-        return this.removeIds(ids, ['USD', 'GBP']);
+        const removeIds = ['USD', 'GBP'];
+        return ids.filter((id) => !removeIds.includes(id));
       },
     },
   };

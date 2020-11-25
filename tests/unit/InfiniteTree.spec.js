@@ -1,8 +1,8 @@
-import { mount } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import InfiniteTree from '@/packages/infinite-tree/src/index.vue'
-import InfiniteButton from '@/packages/infinite-button/src/index.vue'
 import ElTree from 'element-ui/lib/tree'
-import ElInput from 'element-ui/lib/input'
+import $message from 'element-ui/lib/message'
+import $notify from 'element-ui/lib/notification'
 const getTestData = function () {
   return [
     {
@@ -152,37 +152,121 @@ const getTestData = function () {
 }
 
 describe('InfiniteSelectTags.vue', () => {
-  // console.log(InfiniteSelectTags)
-  const defaultExpandedKeys = [20, 21]
   const defaultProps = {
     children: 'children',
     label: 'label'
   }
   const isEditNode = true
   const treeData = getTestData()
-  const wrapper = mount(InfiniteTree, {
-    isEditNode,
-    defaultProps,
-    treeData
+  const wrapper = shallowMount(InfiniteTree, {
+    mocks: {
+      $message,
+      $notify
+    }
   })
 
   it('test noData toContain', () => {
-    expect(wrapper.html()).toContain('暂无数据')
+    expect(wrapper.findComponent(ElTree).attributes('emptytext')).toBe('暂无数据')
   })
 
   // 数据是否正确传入
   it('render data attr toBe', async () => {
-    // await wrapper.setProps({
-    //   treeData
-    // })
-    await wrapper.vm.$nextTick()
+    await wrapper.setProps({
+      treeData,
+      defaultProps,
+      isEditNode
+    })
     expect(wrapper.findComponent(ElTree).vm.data).toBe(treeData)
+    expect(wrapper.findComponent(ElTree).vm.props).toBe(defaultProps)
+    expect(wrapper.findComponent(ElTree).vm.expandOnClickNode).toBe(!isEditNode)
   })
 
-  // 取消编辑操作
-  it('cancel event toBeTruthy', async () => {
-    console.log(wrapper.html())
-    console.log(wrapper.findAllComponents(InfiniteButton).at(0))
-    expect(wrapper.findComponent(ElTree).vm.data).toBe(treeData)
+  // 编辑中非确定的场景
+  it('editting noConfirm scenario', () => {
+    // 模拟编辑数据
+    const mockEditNode = jest.fn(wrapper.vm.editNode)
+    mockEditNode(treeData[0])
+    // 模拟再次编辑
+    mockEditNode(treeData[1])
+    expect(mockEditNode).toBeCalledTimes(2)
+    // 模拟取消操作
+    const mockCancelEdit = jest.fn(wrapper.vm.cancelEdit)
+    mockCancelEdit(treeData[0])
+    expect(mockCancelEdit).toBeCalledTimes(1)
+  })
+
+  // 新增中非确定的场景
+  it('add noConfirm scenario', async () => {
+    // 模拟新增数据
+    const mockAppende = jest.fn(wrapper.vm.append)
+    mockAppende(treeData[0])
+    // 再次新增数据
+    mockAppende(treeData[1])
+    expect(mockAppende).toBeCalledTimes(2)
+    // emited测试
+    expect(wrapper.emitted('handlerAdd').length).toBe(1)
+    // 模拟取消操作
+    const mockCancelEdit = jest.fn(wrapper.vm.cancelEdit)
+    const data = treeData[0].children[treeData[0].children.length - 1]
+    const editNode = {
+      parent: {
+        data: treeData[0],
+        children: data
+      },
+      data
+    }
+    mockCancelEdit(data, editNode)
+    expect(mockCancelEdit).toBeCalledTimes(1)
+
+    // 模拟新增无子节点数据
+    mockAppende(treeData[0].children[0].children[0])
+    expect(mockAppende).toBeCalledTimes(3)
+  })
+
+  // 确定场景
+  it('confirm scenario', async () => {
+    // 模拟新增数据
+    const mockAppende = jest.fn(wrapper.vm.append)
+    mockAppende(treeData[0])
+    // 再次新增数据
+    expect(mockAppende).toBeCalledTimes(1)
+    // 模拟无输入值保存操作
+    const mockSaveNode = jest.fn(wrapper.vm.saveNode)
+    const data = treeData[0].children[treeData[0].children.length - 1]
+    mockSaveNode(data)
+    // 模拟同名输入值保存操作
+    wrapper.vm.nodeInput = treeData[0].label
+    mockSaveNode(data)
+    // 模拟正常输入值保存操作
+    wrapper.vm.nodeInput = treeData[0].label + '测试数据'
+    mockSaveNode(data)
+    expect(mockSaveNode).toBeCalledTimes(3)
+  })
+
+  // 删除弹窗场景
+  it('add noConfirm scenario', async () => {
+    // 创建无子节点数据操作 
+    const data = treeData[1].children[0].children[0]
+    const editNode = {
+      parent: {
+        data: treeData[1].children[0],
+        children: data
+      },
+      data
+    }
+    const mockRemove = jest.fn(wrapper.vm.remove)
+    // 模拟点击删除打开弹窗
+    mockRemove(editNode, true)
+    expect(mockRemove).toBeCalledTimes(1)
+    // 模拟取消点击
+    const mockCancelClick = jest.fn(wrapper.vm.operations[0].click)
+    mockCancelClick()
+    expect(mockCancelClick).toBeCalledTimes(1)
+    // 模拟打开删除弹窗
+    await wrapper.setData({ delDialogVisible: true })
+    // 模拟确定点击
+    const mockConfirmClick = jest.fn(wrapper.vm.operations[1].click)
+    mockConfirmClick(true)
+    expect(mockConfirmClick).toBeCalledTimes(1)
   })
 })

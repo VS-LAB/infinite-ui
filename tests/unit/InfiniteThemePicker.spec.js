@@ -13,7 +13,7 @@ describe('InfiniteThemePicker.vue', () => {
   // 远端样式获取
   it('origin style get methods', async () => {
     // 等待资源响应
-    await later(2000)
+    await later(3000)
     // toBeTruthy重写ing ...
     expect(wrapper.vm.updateStyle).toBeTruthy()
   })
