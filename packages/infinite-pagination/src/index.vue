@@ -28,12 +28,6 @@ export default {
   components: {
     ElPagination
   },
-  data () {
-    return {
-      computedHeight: '',
-      computedHeightData: this.computedHeightFun
-    }
-  },
   props: {
     // 是否使用小型分页样式
     small: {
@@ -105,7 +99,7 @@ export default {
   methods: {
     // pageSize 改变时会触发
     sizeChange (val) {
-      this.$emit('sizeChanfe', val)
+      this.$emit('sizeChange', val)
     },
     // currentPage 改变时会触发
     currentChange (val) {

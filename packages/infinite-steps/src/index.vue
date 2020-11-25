@@ -1,14 +1,12 @@
 <template>
   <div class="infinite-steps-container">
-    <ElSteps
-      :active="active"
-      :align-center="alignCenter"
-      :direction="direction"
-      :finish-status="finishStatus"
-      :simple="simple"
-      :space="space"
-      :process-status="processStatus"
-    >
+    <ElSteps :active="active"
+             :align-center="alignCenter"
+             :direction="direction"
+             :finish-status="finishStatus"
+             :simple="simple"
+             :space="space"
+             :process-status="processStatus">
       <slot></slot>
     </ElSteps>
   </div>
@@ -22,14 +20,6 @@ export default {
   props: props,
   components: {
     ElSteps
-  },
-  data () {
-    return {
-    }
-  },
-  watch: {
-  },
-  methods: {
   }
 }
 </script>

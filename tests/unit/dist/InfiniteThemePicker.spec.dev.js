@@ -26,7 +26,7 @@ describe('InfiniteThemePicker.vue', function () {
         switch (_context.prev = _context.next) {
           case 0:
             _context.next = 2;
-            return regeneratorRuntime.awrap(later(3000));
+            return regeneratorRuntime.awrap(later(5000));
 
           case 2:
             expect(wrapper.vm.chalk === '').toBe(false);
