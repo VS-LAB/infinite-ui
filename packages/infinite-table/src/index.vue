@@ -219,7 +219,7 @@ export default {
       })
     }
   },
-  destroyed () {
+  beforeDestroy () {
     this.computedHeightData = () => { }
   }
 }
