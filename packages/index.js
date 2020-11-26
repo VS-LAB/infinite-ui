@@ -10,8 +10,6 @@ import InfinitePagination from './infinite-pagination'
 import InfinitePieChart from './infinite-pie-chart'
 import InfiniteSelectTags from './infinite-select-tags'
 import InfiniteSelectTagsOption from './infinite-select-tags-option'
-import InfiniteStep from './infinite-step'
-import InfiniteSteps from './infinite-steps'
 import InfiniteTable from './infinite-table'
 import InfiniteTableColumn from './infinite-table-column'
 import InfiniteThemePicker from './infinite-theme-picker'
@@ -28,8 +26,6 @@ const components = [
   InfinitePieChart,
   InfiniteSelectTags,
   InfiniteSelectTagsOption,
-  InfiniteStep,
-  InfiniteSteps,
   InfiniteTable,
   InfiniteTableColumn,
   InfiniteThemePicker,
@@ -39,7 +35,7 @@ const install = Vue => {
   components.forEach(Component => {
     Vue.use(Component)
   })
-};  
+};
 /* istanbul ignore if */
 if (typeof window !== 'undefined' && window.Vue) {
   install(window.Vue)
@@ -57,8 +53,6 @@ export {
   InfinitePieChart,
   InfiniteSelectTags,
   InfiniteSelectTagsOption,
-  InfiniteStep,
-  InfiniteSteps,
   InfiniteTable,
   InfiniteTableColumn,
   InfiniteThemePicker,
@@ -77,11 +71,8 @@ export default {
   InfinitePieChart,
   InfiniteSelectTags,
   InfiniteSelectTagsOption,
-  InfiniteStep,
-  InfiniteSteps,
   InfiniteTable,
   InfiniteTableColumn,
   InfiniteThemePicker,
   InfiniteTree
 }
-  
