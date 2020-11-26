@@ -12,10 +12,11 @@ var version = require('element-ui/package.json').version;
 
 describe('InfiniteThemePicker.vue', function () {
   var wrapper = (0, _testUtils.shallowMount)(_index["default"]);
+  var defaultVmodel = '#409EFF';
   var vModel = '#F41371'; // 远端样式获取
 
   it('origin style get methods', function _callee() {
-    var url, mockGetCSSString, chalk;
+    var url, mockGetCSSString, chalk, mockGetThemeCluster, mockUpdateStyle, themeCluster, originalCluster, newStyle;
     return regeneratorRuntime.async(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
@@ -28,9 +29,21 @@ describe('InfiniteThemePicker.vue', function () {
 
           case 4:
             chalk = _context.sent;
-            expect(chalk === '').toBe(false);
+            expect(chalk === '').toBe(false); // 模拟替换主题方法
 
-          case 6:
+            mockGetThemeCluster = jest.fn(wrapper.vm.getThemeCluster);
+            mockUpdateStyle = jest.fn(wrapper.vm.updateStyle); // 获取新旧主题色
+
+            themeCluster = mockGetThemeCluster(defaultVmodel.replace('#', ''));
+            originalCluster = mockGetThemeCluster(vModel.replace('#', ''));
+            expect(mockGetThemeCluster).toBeCalledTimes(2); // 替换主题色
+
+            newStyle = mockUpdateStyle(chalk, originalCluster, themeCluster);
+            expect(mockUpdateStyle).toBeCalledTimes(1); // 主题style不为空
+
+            expect(newStyle === '').toBe(false);
+
+          case 14:
           case "end":
             return _context.stop();
         }

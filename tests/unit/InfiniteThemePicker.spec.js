@@ -5,6 +5,7 @@ const version = require('element-ui/package.json').version
 
 describe('InfiniteThemePicker.vue', () => {
   const wrapper = shallowMount(InfiniteThemePicker)
+  const defaultVmodel = '#409EFF'
   const vModel = '#F41371'
 
   // 远端样式获取
@@ -14,6 +15,18 @@ describe('InfiniteThemePicker.vue', () => {
     const mockGetCSSString = jest.fn(wrapper.vm.getCSSString)
     const chalk = await mockGetCSSString(url)
     expect(chalk === '').toBe(false)
+    // 模拟替换主题方法
+    const mockGetThemeCluster = jest.fn(wrapper.vm.getThemeCluster)
+    const mockUpdateStyle = jest.fn(wrapper.vm.updateStyle)
+    // 获取新旧主题色
+    const themeCluster = mockGetThemeCluster(defaultVmodel.replace('#', ''))
+    const originalCluster = mockGetThemeCluster(vModel.replace('#', ''))
+    expect(mockGetThemeCluster).toBeCalledTimes(2)
+    // 替换主题色
+    const newStyle = mockUpdateStyle(chalk, originalCluster, themeCluster)
+    expect(mockUpdateStyle).toBeCalledTimes(1)
+    // 主题style不为空
+    expect(newStyle === '').toBe(false)
   })
 
   // v-model属性匹配
