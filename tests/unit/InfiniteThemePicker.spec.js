@@ -1,10 +1,7 @@
 import { shallowMount } from '@vue/test-utils'
 import InfiniteThemePicker from '@/packages/infinite-theme-picker/src/index.vue'
 import ElColorPicker from 'element-ui/lib/color-picker'
-
-const later = time => new Promise((resolve) => {
-  setTimeout(() => { resolve() }, time)
-})
+const version = require('element-ui/package.json').version
 
 describe('InfiniteThemePicker.vue', () => {
   const wrapper = shallowMount(InfiniteThemePicker)
@@ -13,8 +10,10 @@ describe('InfiniteThemePicker.vue', () => {
   // 远端样式获取
   it('origin style get methods', async () => {
     // 等待资源响应
-    await later(5000)
-    expect(wrapper.vm.chalk === '').toBe(false)
+    const url = `https://unpkg.com/element-ui@${version}/lib/theme-chalk/index.css`
+    const mockGetCSSString = jest.fn(wrapper.vm.getCSSString)
+    const chalk = await mockGetCSSString(url)
+    expect(chalk === '').toBe(false)
   })
 
   // v-model属性匹配

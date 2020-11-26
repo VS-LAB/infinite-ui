@@ -64,7 +64,10 @@ export default {
         const chalkHandler = getHandler('chalk', 'chalk-style')
         if (!this.chalk) {
           const url = `https://unpkg.com/element-ui@${version}/lib/theme-chalk/index.css`
-          this.getCSSString(url, chalkHandler, 'chalk')
+          this.getCSSString(url).then((val) => {
+            this.chalk = val
+            chalkHandler()
+          })
         } else {
           chalkHandler()
         }
@@ -102,16 +105,17 @@ export default {
       return newStyle
     },
 
-    getCSSString (url, callback, variable) {
-      const xhr = new XMLHttpRequest()
-      xhr.onreadystatechange = () => {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-          this[variable] = xhr.responseText.replace(/@font-face{[^}]+}/, '')
-          callback()
+    getCSSString (url) {
+      return new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest()
+        xhr.onreadystatechange = () => {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            resolve(xhr.responseText.replace(/@font-face{[^}]+}/, ''))
+          }
         }
-      }
-      xhr.open('GET', url)
-      xhr.send()
+        xhr.open('GET', url)
+        xhr.send()
+      })
     },
 
     getThemeCluster (theme) {

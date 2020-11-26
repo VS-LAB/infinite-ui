@@ -8,30 +8,29 @@ var _colorPicker = _interopRequireDefault(require("element-ui/lib/color-picker")
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var later = function later(time) {
-  return new Promise(function (resolve) {
-    setTimeout(function () {
-      resolve();
-    }, time);
-  });
-};
+var version = require('element-ui/package.json').version;
 
 describe('InfiniteThemePicker.vue', function () {
   var wrapper = (0, _testUtils.shallowMount)(_index["default"]);
   var vModel = '#F41371'; // 远端样式获取
 
   it('origin style get methods', function _callee() {
+    var url, mockGetCSSString, chalk;
     return regeneratorRuntime.async(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            _context.next = 2;
-            return regeneratorRuntime.awrap(later(5000));
+            // 等待资源响应
+            url = "https://unpkg.com/element-ui@".concat(version, "/lib/theme-chalk/index.css");
+            mockGetCSSString = jest.fn(wrapper.vm.getCSSString);
+            _context.next = 4;
+            return regeneratorRuntime.awrap(mockGetCSSString(url));
 
-          case 2:
-            expect(wrapper.vm.chalk === '').toBe(false);
+          case 4:
+            chalk = _context.sent;
+            expect(chalk === '').toBe(false);
 
-          case 3:
+          case 6:
           case "end":
             return _context.stop();
         }
