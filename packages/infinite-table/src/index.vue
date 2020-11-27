@@ -18,9 +18,9 @@
 
     <template v-if="header.length">
       <template v-if="type">
-        <infinite-table-column :type="type"
-                               width="60px">
-        </infinite-table-column>
+        <el-table-column :type="type"
+                         width="60px">
+        </el-table-column>
       </template>
 
       <infinite-table-column v-for="hItem in header"
@@ -28,9 +28,11 @@
                              :prop="hItem.prop"
                              :label="hItem.label"
                              :fixed="isFixed(hItem)"
+                             :width="getColumnWidth(hItem)"
                              :min-width="getColumnWidth(hItem)"
                              :sortable="hItem.sortable"
                              :align="hItem.align"
+                             :tooltip-filter="tooltipFilter"
                              :show-overflow-tooltip="hItem.showOverflowTooltip">
         <template v-if="hItem.prop === 'operation'"
                   slot-scope="scope">
@@ -134,6 +136,16 @@ export default {
     operations: {
       type: Array,
       default: () => { }
+    },
+    tooltipFilter: {
+      type: Function,
+      default: (val) => {
+        return val
+      }
+    },
+    tooltipOption: {
+      type: Object,
+      default: () => { }
     }
   },
   methods: {
@@ -186,7 +198,7 @@ export default {
         document.body.append(rEl)
       }
       // 删除DOM
-      clearTimeout(this.clearREl)
+      this.clearREl && clearTimeout(this.clearREl)
       this.clearREl = setTimeout(() => {
         rEl.remove()
       })

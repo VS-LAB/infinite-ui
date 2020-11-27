@@ -31,18 +31,19 @@
           {
             prop: 'address',
             label: '地址',
+            showOverflowTooltip: true,
           },
         ],
         tableData: [
           {
             date: '2016-05-02',
             name: '王小虎',
-            address: '上海市普陀区金沙江路 1518 弄',
+            address: '上海市普陀区金',
           },
           {
             date: '2016-05-04',
             name: '王小虎',
-            address: '上海市普陀区金沙江路 1517 弄',
+            address: '上海市普陀区金沙',
           },
           {
             date: '2016-05-01',
@@ -56,6 +57,91 @@
           },
         ],
       };
+    },
+  };
+</script>
+```
+
+:::
+
+### tooltip 自定义插槽表格使用
+
+tooltip 的表格展示用法。
+
+:::demo 使用`showOverflowTooltip`属性后，可以使该列在溢出内容时，鼠标移入显示 tooltip,这里支持`tooltipFilter`属性可以用来过滤出你想要的数据，下面测试过换行展示。
+
+```html
+<template>
+  <infinite-table :data="tableData">
+    <infinite-table-column
+      v-for="hItem in tableHeader"
+      :key="hItem.prop"
+      :prop="hItem.prop"
+      :label="hItem.label"
+      :width="hItem.width"
+      :showOverflowTooltip="hItem.showOverflowTooltip"
+      :tooltipFilter="tooltipFilter"
+      :tooltipOption="{
+        effect:'light',
+        placement:'top'
+      }"
+    >
+      <template slot-scope="scope">
+        {{scope.row[hItem.prop]}}
+      </template>
+    </infinite-table-column>
+  </infinite-table>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        tableHeader: [
+          {
+            prop: 'date',
+            label: '日期',
+            width: '320',
+          },
+          {
+            prop: 'name',
+            label: '姓名',
+            width: '320',
+          },
+          {
+            prop: 'address',
+            label: '地址',
+            showOverflowTooltip: true,
+          },
+        ],
+        tableData: [
+          {
+            date: '2016-05-02',
+            name: '王小虎',
+            address: '上海市普陀区金',
+          },
+          {
+            date: '2016-05-04',
+            name: '王小虎',
+            address: '上海市普陀区金沙',
+          },
+          {
+            date: '2016-05-01',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路1519 弄',
+          },
+          {
+            date: '2016-05-03',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路1516 弄',
+          },
+        ],
+      };
+    },
+    methods: {
+      tooltipFilter(val) {
+        return val.slice(0, 10) + '\r\n' + val.slice(10);
+      },
     },
   };
 </script>
@@ -404,98 +490,6 @@
 选择多行数据时使用 Checkbox。
 
 :::demo 实现多选非常简单:<br/>方法一:在传入 header 属性的前提下， 设置`type`为`true`即可；<br/>方法二: 手动添加一个`infinite-table-column`，设`type`属性为`selection`即可；<br/>默认情况下若内容过多会折行显示，若需要单行显示可以使用`show-overflow-tooltip`属性，它接受一个`Boolean`，为`true`时多余的内容会在 hover 时以 tooltip 的形式显示出来。
-
-```html
-<template>
-  <infinite-table
-    ref="multipleTable"
-    :data="tableData"
-    :header="tableHeader"
-    height="200px"
-    type="selection"
-    @selection-change="handleSelectionChange"
-  >
-  </infinite-table>
-  <div style="margin-top: 20px">
-    <infinite-button @click="toggleSelection([tableData[1], tableData[2]])"
-      >切换第二、第三行的选中状态</infinite-button
-    >
-    <infinite-button @click="toggleSelection()">取消选择</infinite-button>
-  </div>
-</template>
-
-<script>
-  export default {
-    data() {
-      return {
-        tableHeader: [
-          {
-            prop: 'date',
-            label: '日期',
-            width: '180',
-          },
-          {
-            prop: 'name',
-            label: '姓名',
-            width: '180',
-          },
-          {
-            prop: 'address',
-            label: '地址',
-          },
-        ],
-        tableData: [
-          {
-            date: '2016-05-02',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1518 弄',
-          },
-          {
-            date: '2016-05-04',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1517 弄',
-          },
-          {
-            date: '2016-05-01',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1519 弄',
-          },
-          {
-            date: '2016-05-03',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1516 弄',
-          },
-        ],
-        multipleSelection: [],
-      };
-    },
-
-    methods: {
-      toggleSelection(rows) {
-        if (rows) {
-          rows.forEach((row) => {
-            this.$refs.multipleTable.toggleRowSelection(row);
-          });
-        } else {
-          this.$refs.multipleTable.clearSelection();
-        }
-      },
-      handleSelectionChange(val) {
-        this.multipleSelection = val;
-        console.log(val);
-      },
-    },
-  };
-</script>
-```
-
-:::
-
-### 树表格
-
-选择多行数据时使用 Checkbox。
-
-:::demo 实现多选非常简单:<br/>方法一:在传入 header 属性的前提下， 设置`type`为`true`即可；<br/>方法二: 手动添加一个`infinite-table-column`，设`type`属性为`expand`即可；<br/>默认情况下若内容过多会折行显示，若需要单行显示可以使用`show-overflow-tooltip`属性，它接受一个`Boolean`，为`true`时多余的内容会在 hover 时以 tooltip 的形式显示出来。
 
 ```html
 <template>
@@ -957,26 +951,27 @@
 
 ### Table Attributes
 
-| 参数                   | 说明                                                                                          | 类型                                                  | 可选值        | 默认值 |
-| ---------------------- | --------------------------------------------------------------------------------------------- | ----------------------------------------------------- | ------------- | ------ |
-| data                   | 显示的数据                                                                                    | Array                                                 | —             | —      |
-| header                 | 表头的数据                                                                                    | Array                                                 | `option` 属性 | —      |
-| need-auto-height       | 表格的高度随父组件拉伸，不设置 height 时生效                                                  | Boolean                                               | —             | false  |
-| height                 | Table 的高度                                                                                  | String/Number                                         | —             | —      |
-| Stripe                 | 是否为斑马纹 table                                                                            | Boolean                                               | —             | false  |
-| border                 | 是否带有纵向边框                                                                              | Boolean                                               | —             | false  |
-| row-class-name         | 行的 className 的回调方法，也可以使用字符串为所有行设置一个固定的 className                   | Function({row, rowIndex})/String                      | —             | —      |
-| cell-class-name        | 单元格的 className 的回调方法，也可以使用字符串为所有单元格设置一个固定的 className。         | Function({row, column, rowIndex, columnIndex})/String | —             | —      |
-| header-row-class-name  | 表头行的 className 的回调方法，也可以使用字符串为所有表头行设置一个固定的 className。         | Function({row, rowIndex})/String                      | —             | —      |
-| header-row-style       | 表头行的 style 的回调方法，也可以使用一个固定的 Object 为所有表头行设置一样的 Style。         | Function({row, rowIndex})/Object                      | —             | —      |
-| header-cell-class-name | 表头单元格的 className 的回调方法，也可以使用字符串为所有表头单元格设置一个固定的 className。 | Function({row, column, rowIndex, columnIndex})/String | —             | —      |
-| header-cell-style      | 表头单元格的 style 的回调方法，也可以使用一个固定的 Object 为所有表头单元格设置一样的 Style。 | Function({row, column, rowIndex, columnIndex})/Object | —             | —      |
-
-| default-sort | 默认的排序列的 prop 和顺序。它的`prop`属性指定默认的排序的列，`order`指定默认排序的顺序 | Object | `order`: ascending, descending | 如果只指定了`prop`, 没有指定`order`, 则默认顺序是 ascending |
-| default-font-size | 当 `option`:needAutoWidth 为 true 时,默认计算的文案大小 | Number | — | 14 |
-| default-td-atuo-padding | 当 `option`:needAutoWidth 为 true 时,默认计算的单元格间距 | Number | — | 20 |
-| type | 对应列的类型。如果设置了 `selection` 则显示多选框；如果设置了 index 则显示该行的索引（从 1 开始计算）；如果设置了 `expand` 则显示为一个可展开的按钮 | String | selection, expand | — |
-| operations | 操作列操作按钮。如果设置了 `prop`: 'operation' 则显示该； | Array | — | — |
+| 参数                    | 说明                                                                                                                                                | 类型                                                  | 可选值                         | 默认值                                                      |
+| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------- | ------------------------------ | ----------------------------------------------------------- |
+| data                    | 显示的数据                                                                                                                                          | Array                                                 | —                              | —                                                           |
+| header                  | 表头的数据                                                                                                                                          | Array                                                 | `option` 属性                  | —                                                           |
+| need-auto-height        | 表格的高度随父组件拉伸，不设置 height 时生效                                                                                                        | Boolean                                               | —                              | false                                                       |
+| height                  | Table 的高度                                                                                                                                        | String/Number                                         | —                              | —                                                           |
+| Stripe                  | 是否为斑马纹 table                                                                                                                                  | Boolean                                               | —                              | false                                                       |
+| border                  | 是否带有纵向边框                                                                                                                                    | Boolean                                               | —                              | false                                                       |
+| row-class-name          | 行的 className 的回调方法，也可以使用字符串为所有行设置一个固定的 className                                                                         | Function({row, rowIndex})/String                      | —                              | —                                                           |
+| cell-class-name         | 单元格的 className 的回调方法，也可以使用字符串为所有单元格设置一个固定的 className。                                                               | Function({row, column, rowIndex, columnIndex})/String | —                              | —                                                           |
+| header-row-class-name   | 表头行的 className 的回调方法，也可以使用字符串为所有表头行设置一个固定的 className。                                                               | Function({row, rowIndex})/String                      | —                              | —                                                           |
+| header-row-style        | 表头行的 style 的回调方法，也可以使用一个固定的 Object 为所有表头行设置一样的 Style。                                                               | Function({row, rowIndex})/Object                      | —                              | —                                                           |
+| header-cell-class-name  | 表头单元格的 className 的回调方法，也可以使用字符串为所有表头单元格设置一个固定的 className。                                                       | Function({row, column, rowIndex, columnIndex})/String | —                              | —                                                           |
+| header-cell-style       | 表头单元格的 style 的回调方法，也可以使用一个固定的 Object 为所有表头单元格设置一样的 Style。                                                       | Function({row, column, rowIndex, columnIndex})/Object | —                              | —                                                           |
+| default-sort            | 默认的排序列的 prop 和顺序。它的`prop`属性指定默认的排序的列，`order`指定默认排序的顺序                                                             | Object                                                | `order`: ascending, descending | 如果只指定了`prop`, 没有指定`order`, 则默认顺序是 ascending |
+| default-font-size       | 当 `option`:needAutoWidth 为 true 时,默认计算的文案大小                                                                                             | Number                                                | —                              | 14                                                          |
+| default-td-atuo-padding | 当 `option`:needAutoWidth 为 true 时,默认计算的单元格间距                                                                                           | Number                                                | —                              | 20                                                          |
+| type                    | 对应列的类型。如果设置了 `selection` 则显示多选框；如果设置了 index 则显示该行的索引（从 1 开始计算）；如果设置了 `expand` 则显示为一个可展开的按钮 | String                                                | selection, expand              | —                                                           |
+| operations              | 操作列操作按钮。如果设置了 `prop`: 'operation' 则显示该；                                                                                           | Array                                                 | —                              | —                                                           |
+| tooltipFilter           | 如果在`header`或者`column`上设置了`showOverflowTooltip`属性，可以根据该方法自定义你想要渲染的`tootip`内容                                           | Function(tooltipText)                                 | —                              | —                                                           |
+| tooltipOption           | `tooltip`组件的配置，详情可查看`tooltipOption Attributes`                                                                                           | Object                                                | —                              | —                                                           |
 
 ### option Attributes
 
@@ -990,6 +985,14 @@
 | minWidth            | 最小宽度，这里不提供 width，因为 width 会存在断列的可能                                                                                             | String/Numbe   | —                   | —      |
 | type                | 对应列的类型。如果设置了 `selection` 则显示多选框；如果设置了 index 则显示该行的索引（从 1 开始计算）；如果设置了 `expand` 则显示为一个可展开的按钮 | String         | selection, expand   | —      |
 | align               | 对齐方式                                                                                                                                            | String         | left, center, right | left   |
+
+### tooltipOption Attributes
+
+| 参数        | 说明                          | 类型   | 可选值                                                                                                    | 默认值 |
+| ----------- | ----------------------------- | ------ | --------------------------------------------------------------------------------------------------------- | ------ |
+| effect      | 默认提供的主题                | String | dark/light                                                                                                | dark   |
+| popperClass | 为 Tooltip 的 popper 添加类名 | String | —                                                                                                         | —      |
+| placement   | Tooltip 的出现位置            | String | top/top-start/top-end/bottom/bottom-start/bottom-end/left/left-start/left-end/right/right-start/right-end | bottom |
 
 ### Table Events
 

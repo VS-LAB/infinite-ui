@@ -5,7 +5,8 @@
   overflow: auto;
 }
 .view-container .el-container{
-  width: 1140px;
+  min-width: 980px;
+  max-width: 1140px;
   margin: 0 auto;
 }
 

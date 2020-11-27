@@ -13,4 +13,27 @@
     color: #606266;
     font-weight: 700;
   }
+  &-column-tooltip{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    >span{
+      white-space: nowrap;
+      >*{
+        display: inline;
+      }
+    }
+  }
+}
+
+.infinite-table-column-tooltip-popper{
+  transition: initial !important;
+  white-space: break-spaces;
+  max-width: 200px;
+  max-height:200px ;
+  box-sizing: border-box;
+  &-container{
+    max-height:180px ;
+    overflow-y: auto;
+  }
 }
