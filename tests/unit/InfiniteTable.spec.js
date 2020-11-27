@@ -30,7 +30,8 @@ const getTestHeader = function () {
     {
       prop: 'date',
       label: '日期',
-      width: '180'
+      width: '30',
+      showOverflowTooltip: true
     },
     {
       prop: 'name',
@@ -166,14 +167,17 @@ describe('InfiniteTable.vue', () => {
           }
         }, [h(InfiniteTableColumn, {
           props: {
-            prop: 'name'
+            prop: 'name',
+            showOverflowTooltip: true,
+            width: '20px'
           },
           scopedSlots: {
             header: () => h('div', {
               domProps: {
                 innerHTML: headerSlotName
               }
-            })
+            }),
+            default: () => '大'
           }
         }
         )]

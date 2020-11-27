@@ -34,7 +34,8 @@ var getTestHeader = function getTestHeader() {
   return [{
     prop: 'date',
     label: '日期',
-    width: '180'
+    width: '30',
+    showOverflowTooltip: true
   }, {
     prop: 'name',
     label: '姓名',
@@ -216,7 +217,9 @@ describe('InfiniteTable.vue', function () {
         }
       }, [h(_infiniteTableColumn["default"], {
         props: {
-          prop: 'name'
+          prop: 'name',
+          showOverflowTooltip: true,
+          width: '20px'
         },
         scopedSlots: {
           header: function header() {
@@ -225,6 +228,9 @@ describe('InfiniteTable.vue', function () {
                 innerHTML: headerSlotName
               }
             });
+          },
+          "default": function _default() {
+            return '大';
           }
         }
       })]);

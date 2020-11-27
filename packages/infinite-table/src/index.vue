@@ -18,9 +18,9 @@
 
     <template v-if="header.length">
       <template v-if="type">
-        <el-table-column :type="type"
-                         width="60px">
-        </el-table-column>
+        <infinite-table-column :type="type"
+                               width="60px">
+        </infinite-table-column>
       </template>
 
       <infinite-table-column v-for="hItem in header"
