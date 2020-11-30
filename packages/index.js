@@ -1,6 +1,5 @@
 /* eslint-disable */
 // This file is auto gererated by build/build-entry.js
-import Dist from './dist'
 import InfiniteButton from './infinite-button'
 import InfiniteCascaders from './infinite-cascaders'
 import InfiniteDialog from './infinite-dialog'
@@ -11,14 +10,12 @@ import InfinitePagination from './infinite-pagination'
 import InfinitePieChart from './infinite-pie-chart'
 import InfiniteSelectTags from './infinite-select-tags'
 import InfiniteSelectTagsOption from './infinite-select-tags-option'
-import InfiniteStep from './infinite-step'
 import InfiniteTable from './infinite-table'
 import InfiniteTableColumn from './infinite-table-column'
 import InfiniteThemePicker from './infinite-theme-picker'
 import InfiniteTree from './infinite-tree'
 const version = '0.0.4'
 const components = [
-  Dist,
   InfiniteButton,
   InfiniteCascaders,
   InfiniteDialog,
@@ -29,7 +26,6 @@ const components = [
   InfinitePieChart,
   InfiniteSelectTags,
   InfiniteSelectTagsOption,
-  InfiniteStep,
   InfiniteTable,
   InfiniteTableColumn,
   InfiniteThemePicker,
@@ -47,7 +43,6 @@ if (typeof window !== 'undefined' && window.Vue) {
 export {
   install,
   version,
-  Dist,
   InfiniteButton,
   InfiniteCascaders,
   InfiniteDialog,
@@ -58,7 +53,6 @@ export {
   InfinitePieChart,
   InfiniteSelectTags,
   InfiniteSelectTagsOption,
-  InfiniteStep,
   InfiniteTable,
   InfiniteTableColumn,
   InfiniteThemePicker,
@@ -67,7 +61,6 @@ export {
 export default {
   install,
   version,
-  Dist,
   InfiniteButton,
   InfiniteCascaders,
   InfiniteDialog,
@@ -78,7 +71,6 @@ export default {
   InfinitePieChart,
   InfiniteSelectTags,
   InfiniteSelectTagsOption,
-  InfiniteStep,
   InfiniteTable,
   InfiniteTableColumn,
   InfiniteThemePicker,
