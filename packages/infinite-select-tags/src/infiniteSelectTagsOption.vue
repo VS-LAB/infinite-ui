@@ -40,10 +40,11 @@
 
 <script>
 import ElCheckbox from 'element-ui/lib/checkbox'
+import ElTooltip from 'element-ui/lib/tooltip'
 
 export default {
   name: 'InfiniteSelectTagsOption',
-  components: { ElCheckbox },
+  components: { ElCheckbox, ElTooltip },
   props: {
     options: {
       type: Array
@@ -109,12 +110,8 @@ export default {
       this.$nextTick(() => {
         this.options.forEach(item => {
           const selfEl = this.$refs['infinite-select-tags-tooltip' + item.id][0]
-          if (item.id === 'USD-1') {
-            console.log(selfEl)
-          }
           this.$set(this.tooltipDisable, item.id, selfEl.parentNode.offsetWidth >= selfEl.offsetWidth)
         })
-        console.log(this.tooltipDisable)
         const childRefs = this.$refs.infiniteSelectTagsOptionChildrenRef
         childRefs && childRefs.forEach(item => {
           item.setTooltipDisabledFun()

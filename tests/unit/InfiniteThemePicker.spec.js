@@ -2,7 +2,7 @@ import { shallowMount } from '@vue/test-utils'
 import InfiniteThemePicker from '@/packages/infinite-theme-picker/src/index.vue'
 import ElColorPicker from 'element-ui/lib/color-picker'
 const version = require('element-ui/package.json').version
-
+jest.setTimeout(30000)
 describe('InfiniteThemePicker.vue', () => {
   const wrapper = shallowMount(InfiniteThemePicker)
   const defaultVmodel = '#409EFF'

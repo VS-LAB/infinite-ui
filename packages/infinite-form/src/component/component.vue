@@ -1,10 +1,8 @@
 <template>
-  <component
-    v-if="typeof component !== 'string'"
-    v-bind="component.props"
-    v-on="component.events"
-    :is="component.name">
-    <!-- <infinite-dynamic-component v-for="(item, index) in children" :key="index" :component="item"></infinite-dynamic-component> -->
+  <component v-if="typeof component !== 'string'"
+             v-bind="component.props"
+             v-on="component.events"
+             :is="component.name">
   </component>
   <span v-else>{{ component.name }}</span>
 </template>
@@ -33,13 +31,6 @@ export default {
       }
       return []
     }
-  },
-  data () {
-    return {}
-  },
-  mounted () {
-    console.log(this.props, 'dynamic')
-  },
-  methods: {}
+  }
 }
 </script>
