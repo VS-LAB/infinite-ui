@@ -7,16 +7,71 @@
   display: inline-flex;
   &-cascader{
     display: inline-block;
-    .el-input__inner{
-      border-radius: 4px 0 0 4px;
-    }
   }
   &-component{
     display: inline-block;
     max-width: 240px;
     line-height: 1;
-    .el-input__inner{
-      border-radius: 0 4px 4px 0;
-    }
   }
+}
+
+.infinite-cascader-popper .el-cascader-menu__item.is-active{
+  font-weight: 700;
+  &::after{
+    font-weight: 500;
+  }
+}
+
+// 日期选择器样式
+.infinite-cascader-picker-popper{
+  .el-date-table td span{
+    border-radius: 2px;
+  }
+
+  .el-date-table td.today span{
+    border: 1px solid;
+  }
+
+  .el-date-table td.available:hover span{
+    color: #606266;
+    background-color: $--background-color-base;
+  }
+
+  .el-date-table td.available.today:hover span{
+    color: $--color-primary;
+    background-color: #fff;
+    border-color:$--color-primary;
+  }
+
+  .el-date-table td.current:not(.disabled) span{
+    background-color:$--color-primary;
+    color: #fff;
+  }
+
+  .el-month-table td .cell{
+    border-radius: 2px;
+  }
+  
+  .el-month-table td.current:not(.disabled) .cell{
+    border: 1px solid;
+  }
+  .el-month-table td .cell:hover{
+    color: #606266;
+    background-color: $--background-color-base;
+  }
+  .el-month-table td.current:not(.disabled) .cell:hover{
+    background-color: #fff;
+  }
+
+  .el-year-table td.current:not(.disabled) .cell{
+    border: 1px solid;
+  }
+  .el-year-table td .cell:hover{
+    color: #606266;
+    background-color: $--background-color-base;
+  }
+  .el-year-table td.current:not(.disabled) .cell:hover{
+    background-color: #fff;
+  }
+
 }

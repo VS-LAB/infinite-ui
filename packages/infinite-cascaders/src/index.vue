@@ -5,6 +5,7 @@
                  :options="options"
                  :props="initProps"
                  :size="size"
+                 popper-class="infinite-cascader-popper"
                  @change="handleChange">
     </el-cascader>
 
@@ -27,6 +28,7 @@
                       @change="componentEvent"
                       value-format="yyyy-MM-dd"
                       :size="size"
+                      popper-class="infinite-cascader-picker-popper"
                       :placeholder="selectNode.placeholder || ''"
                       :type="selectNode.type ||'date' " />
     </div>

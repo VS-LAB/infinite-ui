@@ -10,11 +10,21 @@
                    :disabled="disabledKeys[item.id]"
                    :indeterminate="getIndeterminate(item)"
                    @change="change(item, index, $event,getIndeterminate(item))">
-        {{ item.name }}
+        <el-tooltip :content="item.name"
+                    placement="top"
+                    popper-class="infinite-select-tags-tooltip-popper"
+                    :disabled="tooltipDisable[item.id]">
+          <div class="infinite-select-tags-tooltip">
+            <span :ref="`infinite-select-tags-tooltip${item.id}`">
+              {{ item.name }}
+            </span>
+          </div>
+        </el-tooltip>
       </el-checkbox>
       <!-- &&  -->
       <template v-if="item.children && item.children.length && maxLevel > level">
-        <infinite-select-tags-option :options="item.children"
+        <infinite-select-tags-option ref="infiniteSelectTagsOptionChildrenRef"
+                                     :options="item.children"
                                      :disabledKeys="disabledKeys"
                                      :show-checked="showChecked"
                                      :level="(level)+1"
@@ -66,6 +76,11 @@ export default {
       default: () => { }
     }
   },
+  data () {
+    return {
+      tooltipDisable: {}
+    }
+  },
   methods: {
     change (item, index, $event) {
       this.$emit('change', item, index, $event)
@@ -88,6 +103,23 @@ export default {
         }
       })
       return !!(checkedCount > 0 && checkedCount < count)
+    },
+    // 该节点是否禁用tooltip
+    setTooltipDisabledFun () {
+      this.$nextTick(() => {
+        this.options.forEach(item => {
+          const selfEl = this.$refs['infinite-select-tags-tooltip' + item.id][0]
+          if (item.id === 'USD-1') {
+            console.log(selfEl)
+          }
+          this.$set(this.tooltipDisable, item.id, selfEl.parentNode.offsetWidth >= selfEl.offsetWidth)
+        })
+        console.log(this.tooltipDisable)
+        const childRefs = this.$refs.infiniteSelectTagsOptionChildrenRef
+        childRefs && childRefs.forEach(item => {
+          item.setTooltipDisabledFun()
+        })
+      })
     }
   }
 }

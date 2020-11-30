@@ -737,16 +737,20 @@ tooltip 的表格展示用法。
     </infinite-table-column>
     <infinite-table-column prop="address" label="地址">
       <template slot="header" slot-scope="scope">
-        <infinite-button @click="handleFreedom">自定义</infinite-button>
+        <infinite-button @click="handleFreedom" type="text"
+          >自定义</infinite-button
+        >
       </template>
 
       <template slot-scope="scope">
-        <infinite-button @click="handleEdit(scope.$index, scope.row)"
+        <infinite-button
+          @click="handleEdit(scope.$index, scope.row)"
+          type="text"
           >Edit</infinite-button
         >
         <infinite-button
-          type="danger"
           @click="handleDelete(scope.$index, scope.row)"
+          type="text"
           >Delete</infinite-button
         >
       </template>
@@ -934,8 +938,7 @@ tooltip 的表格展示用法。
             },
           },
           {
-            label: 'Delete',
-            type: 'danger',
+            icon: 'el-icon-delete',
             click: (index, row) => {
               console.log(index, row);
             },

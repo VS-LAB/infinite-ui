@@ -16,7 +16,7 @@
                   prefix-icon="el-icon-search" />
       </div>
       <!-- option递归 -->
-      <infinite-select-tags-option ref="infiniteSelectTagsOption"
+      <infinite-select-tags-option ref="infiniteSelectTagsOptionRef"
                                    :options="newOptions"
                                    :show-checked="showChecked"
                                    :disabled-keys="disabledKeys"
@@ -314,6 +314,7 @@ export default {
         // 每次展开时
         this.setChecked(['showChecked'])
         this.initAllchecked()
+        this.$refs.infiniteSelectTagsOptionRef.setTooltipDisabledFun()
         this.serachKeyWord = ''
       }
     },

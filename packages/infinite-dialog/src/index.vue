@@ -1,5 +1,6 @@
 <template>
   <el-dialog class="infinite-dialog"
+             :custom-class="`${customClass} infinite-dialog-popper`"
              ref="infiniteDialog"
              :visible="vModel"
              :title="title"
@@ -8,7 +9,6 @@
              :center="center"
              :append-to-body="appendToBody"
              :show-close="showClose"
-             :custom-class="customClass"
              :modal-append-to-body="modalAppendToBody"
              :close-on-click-modal="closeOnClickModal"
              :close-on-press-escape="closeOnPressEscape"

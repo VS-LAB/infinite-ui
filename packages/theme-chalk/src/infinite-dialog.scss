@@ -1,6 +1,35 @@
 @import './common/var.scss';
 @import '../../../node_modules/element-ui/packages/theme-chalk/src/dialog.scss';
-/deep/ .el-dialog__body{
-  overflow: auto;
-  box-sizing: initial;
+
+.infinite-dialog-popper{
+  .el-dialog__header{
+    display: flex;
+    align-items: center;
+    height: 48px;
+    font-size: 14px;
+    padding: 18px 24px 10px;
+    position: relative;
+    box-sizing: border-box;
+    border-bottom: 1px solid $--border-color-lighter;
+    .el-dialog__title{
+      font-size: 14px;
+      line-height: 20px;
+    }
+    .el-dialog__headerbtn{
+      top: 18px;
+    }
+  }
+  .el-dialog__body{
+    overflow: auto;
+    box-sizing: initial;
+  }
+
+  .el-dialog__footer{
+    padding:10px 24px 12px;
+    border-top: 1px solid $--border-color-lighter;
+    .dialog-footer{
+      display: inline-block;
+    }
+  }
+  
 }

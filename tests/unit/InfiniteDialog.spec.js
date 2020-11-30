@@ -66,7 +66,7 @@ describe('InfiniteCascaders.vue', () => {
   it('component attrs to all match', () => {
     testDataKeys.forEach(key => {
       if (!testData[key].notTest) {
-        expect(attrsWrapper.attributes()[testData[key].key]).toBe(String(testData[key].value))
+        expect(attrsWrapper.attributes()[testData[key].key]).toContain(String(testData[key].value))
       }
     })
     attrsWrapper.destroy()

@@ -84,13 +84,13 @@ Dialog 组件的内容可以是任意的，甚至可以是表格或表单，下�
 ```html
 <template>
   <infinite-button type="text" @click="visible = true">
-    点击打开外层 Dialog
+    点击打开嵌套表格 Dialog
   </infinite-button>
   <infinite-dialog
     v-model="visible"
     :needFooter="false"
     width="620px"
-    :container-height="500"
+    :container-height="300"
     title="收货地址"
   >
     <infinite-table

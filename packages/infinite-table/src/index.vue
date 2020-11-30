@@ -39,7 +39,8 @@
           <div class="infinite-table-operation-btn">
             <template v-for="(btn,index) in operations">
               <infinite-button :key="index"
-                               :type="btn.type"
+                               type="text"
+                               :class="btn.icon"
                                @click="handleClick(btn,scope.$index, scope.row)">{{btn.label}}</infinite-button>
             </template>
           </div>

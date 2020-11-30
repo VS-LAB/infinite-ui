@@ -12,6 +12,9 @@
   &.el-table thead{
     color: #606266;
     font-weight: 700;
+    th{
+      background-color: #f5f7fa;
+    }
   }
   &-column-tooltip{
     white-space: nowrap;
@@ -22,6 +25,22 @@
       >*{
         display: inline;
       }
+    }
+  }
+  .el-table__body-wrapper{
+    .infinite-button + .infinite-button {
+      margin-left: 1px;
+      position: relative;
+      &::after{
+        content:'';
+        width: 1px;
+        height: 14px;
+        background-color:#E9E9E9;
+        position: absolute;
+        left: -2px;
+        top: 50%;
+        transform: translateY(-50%);
+      } 
     }
   }
 }
