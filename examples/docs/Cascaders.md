@@ -118,17 +118,20 @@
 | v-model/vModel | 绑定的数据                                                                              | Object | —      | —      |
 | options        | 详细参数 `Options Attributes`                                                           | Array  | —      | —      |
 | props          | 当 options 的 key 值不一样的时候，你可以使用`props`进行配置，详细使用`props Attributes` | Object | —      | —      |
+| popperClass    | 自定义浮层类名                                                                          | String | —      | —      |
 
 ### Options Attributes
 
-| 参数      | 说明                          | 类型   | 可选值                   | 默认值 |
-| --------- | ----------------------------- | ------ | ------------------------ | ------ |
-| value     | 选项的值                      | String | —                        | —      |
-| label     | 选项标签                      | String | —                        | —      |
-| children  | 子选项                        | String | —                        | —      |
-| component | 组件名                        | String | input/button/date-picker | —      |
-| type      | 组件属性                      | String | —                        | —      |
-| name      | `component`为`button`时才生效 | String | —                        | —      |
+| 参数        | 说明                                           | 类型   | 可选值                     | 默认值     |
+| ----------- | ---------------------------------------------- | ------ | -------------------------- | ---------- |
+| value       | 选项的值                                       | String | —                          | —          |
+| label       | 选项标签                                       | String | —                          | —          |
+| children    | 子选项                                         | String | —                          | —          |
+| component   | 组件名                                         | String | input/button/date-picker   | —          |
+| type        | 组件属性                                       | String | 可参照`elementio`文档      | —          |
+| name        | `component`为`button`时才生效                  | String | —                          | —          |
+| format      | 显示在输入框中的格式                           | String | 可参照`el-date-picker`文档 | yyyy-MM-dd |
+| valueFormat | 可选，绑定值的格式。不指定则绑定值为 Date 对象 | String | 可参照`el-date-picker`文档 | —          |
 
 ### Props Attributes
 

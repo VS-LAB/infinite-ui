@@ -29,7 +29,8 @@
   }
 
   .el-date-table td.today span{
-    border: 1px solid;
+    color:$--color-primary;
+    border: 1px solid $--color-primary;
   }
 
   .el-date-table td.available:hover span{

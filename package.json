@@ -18,7 +18,7 @@
     "init": "npm install commitizen -g && commitizen init cz-conventional-changelog --save-dev --save-exact && npm run bootstrap",
     "lib": "vue-cli-service build --target lib --name infinite-ui --dest lib packages/index.js && webpack --config ./build/webpack.component.js"
   },
-  "main": "lib/infinite-ui.umd.min.js",
+  "main": "lib/infinite-ui.umd.js",
   "files": [
     "lib",
     "packages",

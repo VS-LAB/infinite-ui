@@ -341,6 +341,14 @@
         ],
       };
     },
+    watch: {
+      value: {
+        handler() {
+          console.log(123);
+        },
+        deep: true,
+      },
+    },
   };
 </script>
 ```
@@ -452,6 +460,86 @@
 
 :::
 
+### prefix 插槽
+
+:::demo
+
+```html
+<template>
+  <infinite-select-tags
+    v-model="value"
+    :options="options"
+    :default-checkeds="defaultCheckeds"
+    :tags-num="3"
+    :filterable="true"
+  >
+    <span slot="prefix" style="display:inline-block;width:86px;color:#000;"
+      >各国币种</span
+    >
+  </infinite-select-tags>
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        value: [],
+        defaultCheckeds: [],
+        options: [
+          {
+            id: 'GBP',
+            name: '英镑',
+            children: [
+              {
+                id: 'GBP-1',
+                name: '英镑-1',
+              },
+              {
+                id: 'GBP-2',
+                name: '英镑-2',
+              },
+              {
+                id: 'GBP-3',
+                name: '英镑-3',
+              },
+              {
+                id: 'GBP-4',
+                name: '英镑-4',
+              },
+            ],
+          },
+          {
+            id: 'RMB',
+            name: '人民币',
+          },
+          {
+            id: 'EUR',
+            name: '欧元',
+          },
+          {
+            id: 'CAD',
+            name: '加元',
+          },
+          {
+            id: 'AUD',
+            name: '澳大利亚元',
+          },
+          {
+            id: 'TAD',
+            name: '泰元',
+          },
+          {
+            id: 'MUD',
+            name: '孟加拉元',
+          },
+        ],
+      };
+    },
+  };
+</script>
+```
+
+:::
+
 ### Attributes
 
 | 参数              | 说明                                                            | 类型    | 可选值 | 默认值         |
@@ -460,7 +548,7 @@
 | options           | 详细参数 `Options Attributes`                                   | Array   | —      | —              |
 | defaultCheckeds   | 指定默认被选中的选项 id 数组                                    | Array   | —      | —              |
 | tags-num          | 指定 input 内被选中选项的标签显示个数                           | number  | —      | 3              |
-| placeholder       | 输入框占位文本                                                  | String  | —      | 3              |
+| placeholder       | 输入框占位文本                                                  | String  | —      | 请选择         |
 | filterable        | 是否开启关键字搜索功能                                          | Boolean | —      | false          |
 | serachPlaceholder | 开启关键字搜索功能时可以设置`serachPlaceholder`为搜索框占位文本 | String  | —      | 请输入字段名称 |
 

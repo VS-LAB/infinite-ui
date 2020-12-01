@@ -5,7 +5,7 @@
                  :options="options"
                  :props="initProps"
                  :size="size"
-                 popper-class="infinite-cascader-popper"
+                 :popper-class="`infinite-cascader-popper ${popperClass}`"
                  @change="handleChange">
     </el-cascader>
 
@@ -26,7 +26,8 @@
       <el-date-picker v-if="selectNode.component === 'date-picker'"
                       v-model="value"
                       @change="componentEvent"
-                      value-format="yyyy-MM-dd"
+                      :value-format="selectNode.valueFormat || 'yyyy-MM-dd'"
+                      :format="selectNode.format"
                       :size="size"
                       popper-class="infinite-cascader-picker-popper"
                       :placeholder="selectNode.placeholder || ''"
@@ -72,6 +73,10 @@ export default {
     size: {
       type: String,
       default: 'small'
+    },
+    popperClass: {
+      type: String,
+      default: ''
     }
   },
   data () {

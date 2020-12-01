@@ -10,9 +10,11 @@
                :size="size">
       <!-- popper展示核心内容 -->
       <div class="infinite-select-search"
+           :class="infiniteSelectTagsOptionRefScrollTop?'is-shadow':''"
            v-show="filterable">
         <el-input v-model.trim="serachKeyWord"
                   :placeholder="serachPlaceholder"
+                  :size="size"
                   prefix-icon="el-icon-search" />
       </div>
       <!-- option递归 -->
@@ -41,18 +43,21 @@
       <template slot="prefix">
         <div slot="reference"
              class="infinite-selected">
-          <slot name="prefix">
-            <div v-if="filterShowLabels.length > 0"
-                 class="infinite-selected-tag">
-              <el-tag v-for="(item, i) in filterShowLabels"
-                      v-show="i < tagsNum"
-                      :size="size"
-                      :key="item">{{ item }}</el-tag>
-              <el-tag v-if="filterShowLabels.length > tagsNum"
-                      :size="size"
-                      class="last-tag">+{{ filterShowLabels.length - tagsNum }}</el-tag>
-            </div>
-          </slot>
+          <span ref="infiniteSelectedTagPrefixRef"
+                class="infinite-selected-tag-prefix">
+            <slot name="prefix"></slot>
+          </span>
+          <div v-if="filterShowLabels.length > 0"
+               class="infinite-selected-tag"
+               ref="infiniteSelectedTagRef">
+            <el-tag v-for="(item, i) in filterShowLabels"
+                    v-show="i < tagsNum"
+                    :size="size"
+                    :key="item">{{ item }}</el-tag>
+            <el-tag v-if="filterShowLabels.length > tagsNum"
+                    :size="size"
+                    class="last-tag">+{{ filterShowLabels.length - tagsNum }}</el-tag>
+          </div>
         </div>
       </template>
     </el-select>
@@ -122,7 +127,8 @@ export default {
       checked: {}, // 最终选中的值
       showChecked: {}, // 展示勾选的值
       maxLevel: 2, // 展示最大级
-      serachKeyWord: '' // 关键字搜索
+      serachKeyWord: '', // 关键字搜索
+      infiniteSelectTagsOptionRefScrollTop: 0 // 内容区域滚动条滚动位置
     }
   },
   computed: {
@@ -238,6 +244,14 @@ export default {
   },
   mounted () {
     this.blur = this.$refs.infiniteSekectTags.blur
+    this.$nextTick(() => {
+      // 当使用插槽时,输入框里占位符需要设置textIndent属性
+      const infiniteSelectedTagPrefixRefEl = this.$refs.infiniteSelectedTagPrefixRef
+      if (infiniteSelectedTagPrefixRefEl.childNodes.length || infiniteSelectedTagPrefixRefEl.innerText) {
+        console.log(this.$refs.infiniteSekectTags.$el.querySelector('input').style)
+        this.$refs.infiniteSekectTags.$el.querySelector('input').style.textIndent = infiniteSelectedTagPrefixRefEl.offsetWidth + 'px'
+      }
+    })
   },
   methods: {
     // 二级树数据平铺
@@ -310,13 +324,23 @@ export default {
     },
     // 下拉框每次显示隐藏时
     visibleChange (val) {
+      const infiniteSelectTagsOptionRef = this.$refs.infiniteSelectTagsOptionRef
       if (val) {
         // 每次展开时
         this.setChecked(['showChecked'])
         this.initAllchecked()
-        this.$refs.infiniteSelectTagsOptionRef.setTooltipDisabledFun()
+        infiniteSelectTagsOptionRef.setTooltipDisabledFun()
+        // 添加scroll事件，滚动时在模糊查询下显示阴影
+        this.infiniteSelectTagsOptionRefScrollTop = 0
+        infiniteSelectTagsOptionRef.$el.addEventListener('scroll', this.infiniteSelectTagsOptionRefScroll)
         this.serachKeyWord = ''
+      } else {
+        // 关闭弹窗时，移除scroll事件
+        infiniteSelectTagsOptionRef.$el.removeEventListener('scroll', this.infiniteSelectTagsOptionRefScroll)
       }
+    },
+    infiniteSelectTagsOptionRefScroll () {
+      this.infiniteSelectTagsOptionRefScrollTop = this.$refs.infiniteSelectTagsOptionRef.$el.scrollTop
     },
     watchDefaultCheckedsChange (val) {
       val.forEach(v => {
