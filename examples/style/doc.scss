@@ -1,13 +1,22 @@
 
 .view-container{
-  height: calc(100% - 60px);
-  margin-top: 60px;
+  height: calc(100% - 80px);
+  margin-top: 80px;
   overflow: auto;
 }
 .view-container .el-container{
   min-width: 980px;
   max-width: 1140px;
   margin: 0 auto;
+}
+.el-aside{
+  margin-top: 80px;
+}
+
+/*定义滑块颜色、内阴影及圆角*/
+::-webkit-scrollbar-thumb{
+  border-radius: 10px;
+  background-color: rgba(0,0,0,.2);
 }
 
 .element-doc{

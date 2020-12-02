@@ -1,61 +1,45 @@
 <template>
-  <div style="height:100%">
-    <el-container style="height:100%">
-      <el-header height="40">
+  <div style="height: 100%">
+    <el-container :class="{ 'home-container': isFixed }">
+      <el-header height="80" :class="{ 'header-fixed': !isFixed }">
         <header-model></header-model>
       </el-header>
-      <div class="view-container">
-        <el-container>
-          <el-aside width="240px">
-            <menu-model></menu-model>
-          </el-aside>
-          <el-main>
-            <router-view></router-view>
-          </el-main>
-        </el-container>
+      <div :class="{ 'view-container': !isFixed }">
+         <router-view></router-view>
       </div>
-
     </el-container>
   </div>
 </template>
 <script>
 import HeaderModel from './components/header'
-import MenuModel from './components/menu'
 export default {
   components: {
-    HeaderModel,
-    MenuModel
+    HeaderModel
   },
   data () {
     return {}
   },
-  methods: {}
+  computed: {
+    isFixed () {
+      console.log(this.$route.name.includes('home'))
+      return this.$route.name.includes('home')
+    }
+  }
 }
 </script>
-<style>
-/* 引入代码高亮样式 */
-@import "~highlight.js/styles/color-brewer.css";
-.el-container .el-main {
-  width: 100%;
-  padding: 0 0 0 270px;
-  padding-bottom: 100px;
-  box-sizing: border-box;
-  overflow: initial;
-}
-.el-aside {
-  width: 240px;
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  margin-top: 60px;
-  transition: padding-top 0.3s;
-  z-index: 10;
-}
-.el-header {
+<style lang='scss' scoped>
+.header-fixed {
   position: fixed;
   width: 100%;
   left: 0;
   top: 0;
   z-index: 1500;
+  .header-model{
+  border-bottom: 1px solid rgba(151,151,151,.1);
+  }
+}
+.home-container{
+  background: url('./assets/bg_header.png') no-repeat top;
+  background-size: 2556px;
 }
 </style>
