@@ -31,6 +31,9 @@ export default {
   text-align: right;
   .info {
    width: 190px;
+   &:hover{
+    cursor:pointer;
+   }
   }
   .header-menu{
     flex: 1;

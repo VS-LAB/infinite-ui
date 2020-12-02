@@ -219,6 +219,10 @@ export default {
 .explain{
   max-width: 1200px;
   margin: 0 auto;
+  .img-ui{
+    width: 78%;
+    margin:0  -240px  200px 0;
+  }
 }
 
 //****非通用定义****//
@@ -239,10 +243,6 @@ export default {
       letter-spacing: 0;
       margin:20px 0 40px 0;
     }
-  }
-  .img-ui{
-    width: 78%;
-    margin:0  -200px  200px 0;
   }
 }
 
