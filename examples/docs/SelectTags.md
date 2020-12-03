@@ -328,7 +328,8 @@
           },
           {
             id: 'AUD',
-            name: '澳大利亚元',
+            name:
+              '澳大利亚澳大利澳大利澳大利dsadadadasdadasd大萨达的阿萨德撒元',
           },
           {
             id: 'TAD',
@@ -340,14 +341,6 @@
           },
         ],
       };
-    },
-    watch: {
-      value: {
-        handler() {
-          console.log(123);
-        },
-        deep: true,
-      },
     },
   };
 </script>
