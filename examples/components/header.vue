@@ -22,8 +22,9 @@ export default {
 </script>
 <style lang="scss" scoped>
 .header-model {
-  width: 1140px;
+  width: 1200px;
   height: 80px;
+  background: #fff;
   box-sizing: border-box;
   margin: 0 auto;
   display:flex;
