@@ -110,7 +110,7 @@ export default {
       this.$nextTick(() => {
         this.options.forEach(item => {
           const selfEl = this.$refs['infinite-select-tags-tooltip' + item.id][0]
-          this.$set(this.tooltipDisable, item.id, selfEl.parentNode.offsetWidth >= selfEl.offsetWidth)
+          this.$set(this.tooltipDisable, item.id, parseFloat(getComputedStyle(selfEl.parentNode).width) >= selfEl.offsetWidth)
         })
         const childRefs = this.$refs.infiniteSelectTagsOptionChildrenRef
         childRefs && childRefs.forEach(item => {

@@ -328,8 +328,7 @@
           },
           {
             id: 'AUD',
-            name:
-              '澳大利亚澳大利澳大利澳大利dsadadadasdadasd大萨达的阿萨德撒元',
+            name: '澳大利亚',
           },
           {
             id: 'TAD',
