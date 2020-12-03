@@ -38,7 +38,7 @@
                      @change="allSelect">全选</el-checkbox>
         <infinite-button type="primary"
                          :size="size"
-                         @click="makeSure">确定</infinite-button>
+                         @click="makeSure(false)">确定</infinite-button>
       </div>
       <template slot="prefix">
         <div slot="reference"
@@ -236,7 +236,7 @@ export default {
         if (val && val.length) {
           if (oldVal && oldVal.join(',') === val.join(',')) return
           this.watchDefaultCheckedsChange(val)
-          this.makeSure()
+          this.makeSure(true)
         }
       },
       immediate: true
@@ -248,7 +248,6 @@ export default {
       // 当使用插槽时,输入框里占位符需要设置textIndent属性
       const infiniteSelectedTagPrefixRefEl = this.$refs.infiniteSelectedTagPrefixRef
       if (infiniteSelectedTagPrefixRefEl.childNodes.length || infiniteSelectedTagPrefixRefEl.innerText) {
-        console.log(this.$refs.infiniteSekectTags.$el.querySelector('input').style)
         this.$refs.infiniteSekectTags.$el.querySelector('input').style.textIndent = infiniteSelectedTagPrefixRefEl.offsetWidth + 'px'
       }
     })
@@ -308,7 +307,9 @@ export default {
         if (this.showChecked[key]) vModel.push(key)
       })
       this.$emit('change', vModel)
-      !flag && this.$emit('makeSure')
+      if (!flag) {
+        this.$emit('makeSure')
+      }
       this.blur && this.blur()
     },
     // 全选按钮的点击事件
