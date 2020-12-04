@@ -65,6 +65,7 @@
     "vue-markdown-loader": "^2.4.1",
     "vue-router": "^3.3.2",
     "vue-template-compiler": "^2.6.11",
+    "webpack-bundle-analyzer": "^4.2.0",
     "webpack-cli": "^3.3.11"
   },
   "peerDependencies": {

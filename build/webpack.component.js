@@ -2,8 +2,9 @@ const path = require('path')
 const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const Components = require('./get-components')()
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const { getExternalsEl } = require('./get-externals-elements')
 const entry = {}
-
 Components.forEach(c => {
   entry[c] = `./packages/${c}/index.js`
 })
@@ -20,10 +21,11 @@ const webpackConfig = {
   optimization: {
     // splitChunks: {
     //   cacheGroups: {
-    //     commons: {
-    //       name: 'commons',
+    //     common: {
     //       chunks: 'initial',
-    //       minChunks: 2
+    //       name: 'common.js',
+    //       minChunks: 2,
+    //       priority: 10
     //     }
     //   }
     // }
@@ -34,7 +36,8 @@ const webpackConfig = {
       commonjs: 'vue',
       commonjs2: 'vue',
       amd: 'vue'
-    }
+    },
+    ...getExternalsEl()
   },
   resolve: {
     extensions: ['.js', '.vue', '.json']
@@ -56,7 +59,9 @@ const webpackConfig = {
   },
   plugins: [
     new ProgressBarPlugin(),
-    new VueLoaderPlugin()
+    new VueLoaderPlugin(),
+    new BundleAnalyzerPlugin()
+
   ]
 }
 

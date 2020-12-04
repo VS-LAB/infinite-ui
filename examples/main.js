@@ -2,7 +2,16 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router/index'
 // 引入element-ui
-import ElementUI from 'element-ui'
+import {
+  Menu,
+  MenuItem,
+  Col,
+  Row,
+  Container,
+  Header,
+  Main,
+  Aside
+} from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import './style/index.scss'
 import demoBlock from './components/demo-block'
@@ -12,6 +21,15 @@ import '../packages/theme-chalk/src/index.scss'
 
 // 导入组件库
 import packages from '../packages'
+import InfiniteButton from '../packages/infinite-button'
+Vue.use(Menu)
+  .use(MenuItem)
+  .use(Col)
+  .use(Row)
+  .use(Container)
+  .use(Header)
+  .use(Main)
+  .use(Aside)
 
 for (const key in packages) {
   if (packages.hasOwnProperty(key)) {
@@ -21,10 +39,10 @@ for (const key in packages) {
     };
   }
 }
-
+console.log(InfiniteButton)
+Vue.use(InfiniteButton)
 Vue.config.productionTip = false
 
-Vue.use(ElementUI)
 Vue.component('demo-block', demoBlock)
 router.afterEach(route => {
   Vue.nextTick(() => {

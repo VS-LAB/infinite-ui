@@ -10,11 +10,13 @@
 <template>
   <div class="block">
     <span class="demonstration">页数较少时的效果</span>
-    <el-pagination layout="prev, pager, next" :total="50"> </el-pagination>
+    <infinite-pagination layout="prev, pager, next" :total="50">
+    </infinite-pagination>
   </div>
   <div class="block">
     <span class="demonstration">大于 7 页时的效果</span>
-    <el-pagination layout="prev, pager, next" :total="1000"> </el-pagination>
+    <infinite-pagination layout="prev, pager, next" :total="1000">
+    </infinite-pagination>
   </div>
 </template>
 ```
@@ -27,13 +29,13 @@
 
 ```html
 <template>
-  <el-pagination
+  <infinite-pagination
     :page-size="20"
     :pager-count="11"
     layout="prev, pager, next"
     :total="1000"
   >
-  </el-pagination>
+  </infinite-pagination>
 </template>
 ```
 
@@ -45,8 +47,8 @@
 
 ```html
 <template>
-  <el-pagination background layout="prev, pager, next" :total="1000">
-  </el-pagination>
+  <infinite-pagination background layout="prev, pager, next" :total="1000">
+  </infinite-pagination>
 </template>
 ```
 
@@ -59,7 +61,8 @@
 
 ```html
 <template>
-  <el-pagination small layout="prev, pager, next" :total="50"> </el-pagination>
+  <infinite-pagination small layout="prev, pager, next" :total="50">
+  </infinite-pagination>
 </template>
 ```
 
@@ -74,7 +77,7 @@
 <template>
   <div class="block">
     <span class="demonstration">显示总数</span>
-    <el-pagination
+    <infinite-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
       :current-page.sync="currentPage1"
@@ -82,11 +85,11 @@
       layout="total, prev, pager, next"
       :total="1000"
     >
-    </el-pagination>
+    </infinite-pagination>
   </div>
   <div class="block">
     <span class="demonstration">调整每页显示条数</span>
-    <el-pagination
+    <infinite-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
       :current-page.sync="currentPage2"
@@ -95,11 +98,11 @@
       layout="sizes, prev, pager, next"
       :total="1000"
     >
-    </el-pagination>
+    </infinite-pagination>
   </div>
   <div class="block">
     <span class="demonstration">直接前往</span>
-    <el-pagination
+    <infinite-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
       :current-page.sync="currentPage3"
@@ -107,11 +110,11 @@
       layout="prev, pager, next, jumper"
       :total="1000"
     >
-    </el-pagination>
+    </infinite-pagination>
   </div>
   <div class="block">
     <span class="demonstration">完整功能</span>
-    <el-pagination
+    <infinite-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
       :current-page="currentPage4"
@@ -120,7 +123,7 @@
       layout="total, sizes, prev, pager, next, jumper"
       :total="400"
     >
-    </el-pagination>
+    </infinite-pagination>
   </div>
 </template>
 <script>

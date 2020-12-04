@@ -8,79 +8,77 @@
         <p class="last">
           一套基于 Vue 2.0 ，为平安内部前端开发者提供的<br />桌面端组件库，旨在打造敏捷迭代的开发体验
         </p>
-        <el-button class="btn" @click="toPath()">立即体验</el-button>
+        <infinite-button class="btn"
+                         @click="toPath()">立即体验</infinite-button>
       </div>
-      <img src="@/assets/img_header.png" alt="桌面端组件库" class="img-ui" />
+      <img src="@/assets/img_header.png"
+           alt="桌面端组件库"
+           class="img-ui" />
     </div>
     <!--内容模块-->
-    <section
-      v-for="(item, i) in explainArray"
-      :key="i"
-      :class="'list' + i"
-      class="explain-list"
-    >
-      <div class="explain" :class="{ flex: item.isFlex }">
-        <img
-          v-if="item.imgLeft"
-          :src="item.imgSrc"
-          :alt="item.title"
-          :class="'img' + i"
-          :style="{ width: item.width }"
-        />
-        <div :class="{ 'flex-1': item.isFlex }" class="explain-txt">
-          <p
-            class="fs-48"
-            :class="[
+    <section v-for="(item, i) in explainArray"
+             :key="i"
+             :class="'list' + i"
+             class="explain-list">
+      <div class="explain"
+           :class="{ flex: item.isFlex }">
+        <img v-if="item.imgLeft"
+             :src="item.imgSrc"
+             :alt="item.title"
+             :class="'img' + i"
+             :style="{ width: item.width }" />
+        <div :class="{ 'flex-1': item.isFlex }"
+             class="explain-txt">
+          <p class="fs-48"
+             :class="[
               { black: item.titleCl === 'black' },
               { white: item.titleCl === 'white' },
               { tags: item.isTags },
               { 'mb-32': item.isFlex },
               { 'mb-16': !item.isFlex },
-            ]"
-          >
+            ]">
             {{ item.title }}
           </p>
-          <p
-            class="fs-18"
-            :class="[
+          <p class="fs-18"
+             :class="[
               { 'word-warp': item.isWarp },
               { gray: item.titleCl === 'black' },
               { white: item.titleCl === 'white' },
-            ]"
-          >
+            ]">
             {{ item.txt }}
           </p>
-          <el-button v-if="item.isBtn" class="btn" @click="toPath()"
-            >立即体验</el-button
-          >
+          <infinite-button v-if="item.isBtn"
+                           class="btn"
+                           @click="toPath()">立即体验</infinite-button>
         </div>
-        <img
-          v-if="item.imgRight"
-          :src="item.imgSrc"
-          :alt="item.title"
-          :class="'img' + i"
-          :style="{ width: item.width }"
-        />
+        <img v-if="item.imgRight"
+             :src="item.imgSrc"
+             :alt="item.title"
+             :class="'img' + i"
+             :style="{ width: item.width }" />
         <!--内容模块第一部分的特殊内容-->
-        <div v-if="item.model" class="explain-base">
-          <div class="explain-base-list" v-for="(item, i) in baseList" :key="i">
-            <img
-              :src="item.imgSrc"
-              :alt="item.title"
-              :style="{ width: item.width }"
-            />
+        <div v-if="item.model"
+             class="explain-base">
+          <div class="explain-base-list"
+               v-for="(item, i) in baseList"
+               :key="i">
+            <img :src="item.imgSrc"
+                 :alt="item.title"
+                 :style="{ width: item.width }" />
             <p class="base-title">{{ item.title }}</p>
             <p class="base-txt">{{ item.txt }}</p>
-            <el-button :disabled="!item.toPath" @click="toPath()">{{
+            <infinite-button :disabled="!item.toPath"
+                             @click="toPath()">{{
               item.tips
-            }}</el-button>
+            }}</infinite-button>
           </div>
         </div>
       </div>
     </section>
     <!--底部模块-->
     <div class="explain-footer">
-      <img src="@/assets/log_footer.png" alt="Infinite-ui" />
+      <img src="@/assets/log_footer.png"
+           alt="Infinite-ui" />
       <p>Copyright&copy;2020 信贷风险及数据分析数据中台可视化</p>
     </div>
   </div>

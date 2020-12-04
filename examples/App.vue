@@ -1,11 +1,12 @@
 <template>
   <div style="height: 100%">
     <el-container :class="{ 'home-container': isFixed }">
-      <el-header height="80" :class="{ 'header-fixed': !isFixed }">
+      <el-header height="80"
+                 :class="{ 'header-fixed': !isFixed }">
         <header-model></header-model>
       </el-header>
       <div :class="{ 'view-container': !isFixed }">
-         <router-view></router-view>
+        <router-view></router-view>
       </div>
     </el-container>
   </div>
@@ -21,7 +22,6 @@ export default {
   },
   computed: {
     isFixed () {
-      console.log(this.$route.name.includes('home'))
       return this.$route.name.includes('home')
     }
   }
@@ -34,12 +34,12 @@ export default {
   left: 0;
   top: 0;
   z-index: 1500;
-  .header-model{
-  border-bottom: 1px solid rgba(151,151,151,.1);
+  .header-model {
+    border-bottom: 1px solid rgba(151, 151, 151, 0.1);
   }
 }
-.home-container{
-  background: url('./assets/bg_header.png') no-repeat top;
+.home-container {
+  background: url("./assets/bg_header.png") no-repeat top;
   background-size: 2556px;
 }
 </style>
