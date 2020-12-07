@@ -21,8 +21,6 @@ import '../packages/theme-chalk/src/index.scss'
 
 // 导入组件库
 import packages from '../packages'
-console.log(packages)
-
 Vue.use(Menu)
   .use(MenuItem)
   .use(Col)

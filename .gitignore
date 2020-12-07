@@ -3,6 +3,8 @@ node_modules
 /dist
 /tests/unit/coverage
 /tests/unit/dist
+lib
+docs
 # local env files
 .env.local
 .env.*.local

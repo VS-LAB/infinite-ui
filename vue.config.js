@@ -1,10 +1,9 @@
 const path = require('path')
-const { getExternalsEl } = require('./build/get-externals-elements')
 const resolve = (dir) => {
   return path.join(__dirname, dir)
 }
 const { getExternalsEl } = require('./build/get-externals-elements')
-const propElExternals = process.env.NODE_ENV === 'production' ? getExternalsEl() : {}
+const propElExternals = process.env.NODE_ENV === 'lib' ? getExternalsEl() : {}
 module.exports = {
   publicPath: './',
   lintOnSave: false,

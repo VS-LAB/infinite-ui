@@ -66,10 +66,10 @@ const webpackConfig = {
   },
   plugins: [
     new ProgressBarPlugin(),
-    new VueLoaderPlugin(),
-    new BundleAnalyzerPlugin({
-      analyzerPort: 8191
-    })
+    new VueLoaderPlugin()
+    // new BundleAnalyzerPlugin({
+    //   analyzerPort: 8191
+    // })
 
   ]
 }
