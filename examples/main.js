@@ -21,7 +21,8 @@ import '../packages/theme-chalk/src/index.scss'
 
 // 导入组件库
 import packages from '../packages'
-import InfiniteButton from '../packages/infinite-button'
+console.log(packages)
+
 Vue.use(Menu)
   .use(MenuItem)
   .use(Col)
@@ -39,8 +40,6 @@ for (const key in packages) {
     };
   }
 }
-console.log(InfiniteButton)
-Vue.use(InfiniteButton)
 Vue.config.productionTip = false
 
 Vue.component('demo-block', demoBlock)

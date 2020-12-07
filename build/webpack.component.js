@@ -18,7 +18,7 @@ const webpackConfig = {
     libraryTarget: 'umd'
   },
   optimization: {
-   
+
     splitChunks: {
       name: true,
       // chunks: 'all', // 指定打包同步加载还是异步加载

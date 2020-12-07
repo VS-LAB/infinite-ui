@@ -27,7 +27,7 @@
   "dependencies": {
     "@antv/g2": "4.1.1",
     "core-js": "^3.3.4",
-    "element-ui": "^2.14.1"
+    "element-ui": "^2.10.1"
   },
   "devDependencies": {
     "@vue/babel-preset-app": "^4.5.6",

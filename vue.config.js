@@ -1,4 +1,5 @@
 const path = require('path')
+const { getExternalsEl } = require('./build/get-externals-elements')
 const resolve = (dir) => {
   return path.join(__dirname, dir)
 }
@@ -14,7 +15,7 @@ module.exports = {
       entry: 'examples/main.js'
     }
   },
-  configureWebpack: { 
+  configureWebpack: {
     performance: {
       hints: 'warning',
       // 入口起点的最大体积
@@ -36,6 +37,7 @@ module.exports = {
       ...propElExternals
     }
   },
+
   chainWebpack: config => {
     config.module
       .rule('js')
@@ -45,7 +47,7 @@ module.exports = {
       .tap(options => {
         return options
       })
-   
+
     config.module
       .rule('md')
       .test(/\.md/)
