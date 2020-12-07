@@ -2,6 +2,8 @@ const path = require('path')
 const resolve = (dir) => {
   return path.join(__dirname, dir)
 }
+const { getExternalsEl } = require('./build/get-externals-elements')
+const propElExternals = process.env.NODE_ENV === 'production' ? getExternalsEl() : {}
 module.exports = {
   publicPath: './',
   lintOnSave: false,
@@ -12,7 +14,7 @@ module.exports = {
       entry: 'examples/main.js'
     }
   },
-  configureWebpack: {
+  configureWebpack: { 
     performance: {
       hints: 'warning',
       // 入口起点的最大体积
@@ -29,6 +31,9 @@ module.exports = {
       alias: {
         '@': resolve('examples')
       }
+    },
+    externals: {
+      ...propElExternals
     }
   },
   chainWebpack: config => {

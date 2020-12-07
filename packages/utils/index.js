@@ -67,7 +67,7 @@ export const color = ['#1890FF', '#2FC25B', '#FACC14', '#223273', '#8543E0', '#1
 
 // axis配置类
 export class AxisOption {
-  constructor(type, axisColor, showGrid) {
+  constructor (type, axisColor, showGrid) {
     let axisOption = { label: { textStyle: { fill: axisColor.labelColor } }, line: {} }
     if (type === 'x' || type === 'name') {
       axisOption['line']['stroke'] = axisColor.lineColor
@@ -96,7 +96,12 @@ export const tiledArray = (json, props = { children: 'children' }) => {
   tiledArraying(json)
   return result
 }
-
+export const uuidv4 = () => {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+    var r = Math.random() * 16 | 0; var v = c === 'x' ? r : (r & 0x3 | 0x8)
+    return v.toString(16)
+  })
+}
 export default {
   dateFormat,
   percentFormat,
@@ -104,5 +109,6 @@ export default {
   floatIntFormat,
   color,
   AxisOption,
-  tiledArray
+  tiledArray,
+  uuidv4
 }

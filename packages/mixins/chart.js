@@ -1,25 +1,30 @@
-import { v4 } from 'uuid'
-const DataSet = require('@antv/data-set')
-const G2 = require('@antv/g2')
+import { Chart, registerEngine, registerGeometry, registerComponentController } from '@antv/g2/lib/core'
+import Line from '@antv/g2/lib/geometry/line'
+import Point from '@antv/g2/lib/geometry/point'
+import Interval from '@antv/g2/lib/geometry/interval'
+import Axis from '@antv/g2/lib/chart/controller/axis'
+import Tooltip from '@antv/g2/lib/chart/controller/tooltip'
+import Legend from '@antv/g2/lib/chart/controller/legend'
+import Coordinate from '@antv/coord/lib/factory'
+import * as G from '@antv/g-canvas'
+import { uuidv4 } from '../utils'
+
+// 按需注入
+registerEngine('canvas', G)
+
+registerGeometry('line', Line)
+registerGeometry('point', Point)
+registerGeometry('interval', Interval)
+
+registerComponentController('axis', Axis)
+registerComponentController('tooltip', Tooltip)
+registerComponentController('legend', Legend)
+registerComponentController('coordinate', Coordinate)
 
 export default {
   computed: {
-    G2: function () {
-      if (typeof window !== 'undefined' && window.G2) {
-        return window.G2
-      } else {
-        return G2
-      }
-    },
-    DataSet: function () {
-      if (typeof window !== 'undefined' && window.DataSet) {
-        return window.DataSet
-      } else {
-        return DataSet
-      }
-    },
     id: function () {
-      return v4()
+      return uuidv4()
     }
   },
   data () {
@@ -44,11 +49,12 @@ export default {
       if (dom && dom.innerHTML) {
         dom.innerHTML = ''
       }
-      return new this.G2.Chart({
+      return new Chart({
         container: this.id,
         width: dom.offsetWidth || 800,
         height: dom.offsetHeight || 500,
-        padding: this.padding || ['auto', 'auto']
+        padding: this.padding || ['auto', 'auto'],
+        renderer: 'canvas'
       })
     },
     drawChart (data) {
@@ -60,6 +66,7 @@ export default {
 
       // 绘制
       this.chart.render()
+      console.log(this.chart, 'chart')
 
       const e = document.createEvent('Event')
       e.initEvent('resize', true, true)

@@ -80,15 +80,8 @@ export default {
   methods: {
     setChartConfig: function (data) {
       // 生成占比数据percent
-      const ds = new this.DataSet()
-      const dv = ds.createView()
+      const dv = this.chart
         .source(data)
-        .transform({
-          type: 'percent',
-          field: 'value',
-          dimension: 'name',
-          as: 'percent'
-        })
 
       // 设置数据的显示别名并格式化数据
       let _this = this
