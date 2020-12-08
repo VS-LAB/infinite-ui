@@ -41,10 +41,14 @@ for (const key in packages) {
 Vue.config.productionTip = false
 
 Vue.component('demo-block', demoBlock)
+
 router.afterEach(route => {
   Vue.nextTick(() => {
     const blocks = document.querySelectorAll('pre code')
     Array.prototype.forEach.call(blocks, hljs.highlightBlock)
+
+    const scrollParent = document.querySelector('.view-container-scroll')
+    scrollParent.scrollTop = 0
   })
 })
 new Vue({

@@ -6,7 +6,9 @@
         <header-model></header-model>
       </el-header>
       <div :class="{ 'view-container': !isFixed }">
-        <router-view></router-view>
+        <div class="view-container-scroll">
+          <router-view></router-view>
+        </div>
       </div>
     </el-container>
   </div>

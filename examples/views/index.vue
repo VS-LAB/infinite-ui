@@ -24,6 +24,9 @@ export default {
 <style>
 /* 引入代码高亮样式 */
 @import "~highlight.js/styles/color-brewer.css";
+body {
+  overflow: hidden;
+}
 .el-container .el-main {
   width: 100%;
   padding: 0 0 0 270px;

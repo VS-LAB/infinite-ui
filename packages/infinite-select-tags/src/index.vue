@@ -17,6 +17,12 @@
                   :size="size"
                   prefix-icon="el-icon-search" />
       </div>
+
+      <div class="search-before-component"
+           v-if="!hasFilterData">
+        <slot name="not-filter-data"></slot>
+      </div>
+
       <!-- option递归 -->
       <infinite-select-tags-option ref="infiniteSelectTagsOptionRef"
                                    :options="newOptions"
@@ -26,6 +32,7 @@
                                    :parent-ids="parentIds"
                                    :maxLevel='maxLevel'
                                    :showKeys="showKeys"
+                                   :tooltip-popper="tooltipPopper"
                                    @change="checkBoxChange"></infinite-select-tags-option>
       <!-- popper占位符 start -->
       <el-option v-for="item in newOptions"
@@ -45,7 +52,7 @@
              class="infinite-selected">
           <span ref="infiniteSelectedTagPrefixRef"
                 class="infinite-selected-tag-prefix">
-            <slot name="prefix"></slot>
+            <slot name="prefix-label"></slot>
           </span>
           <div v-if="filterShowLabels.length > 0"
                class="infinite-selected-tag"
@@ -72,8 +79,8 @@ import ElOption from 'element-ui/lib/option'
 import ElCheckbox from 'element-ui/lib/checkbox'
 import InfiniteButton from '../../infinite-button/src/index.vue'
 import infiniteSelectTagsOption from './infiniteSelectTagsOption'
-
-export default {
+import { jsonFlat } from '../../utils'
+const vue = {
   name: 'InfiniteSelectTags',
   components: { ElInput, ElTag, ElSelect, ElOption, ElCheckbox, InfiniteButton, infiniteSelectTagsOption },
   model: {
@@ -119,6 +126,10 @@ export default {
       default: (ids) => {
         return ids
       }
+    },
+    tooltipPopper: {
+      type: String,
+      default: ''
     }
   },
   data () {
@@ -168,11 +179,12 @@ export default {
     },
     // 平铺后的子找父数据
     titledOptions () {
-      return this.tiledArray(this.newOptions)
+      return jsonFlat(this.newOptions)
     },
     // 平铺后的父找子数据
     titledDescOptions () {
-      return this.tiledArray(this.newOptions, { children: 'children' }, true)
+      const titledDescOptions = jsonFlat(this.newOptions, { children: 'children' }, true, 2)
+      return titledDescOptions
     },
     // 禁用了的data
     disabledKeys () {
@@ -206,6 +218,7 @@ export default {
       })
       return parentIds
     },
+    // 搜索后需要展示和隐藏的数据状态
     showKeys () {
       const showKeys = {}
       this.titledOptions.forEach(item => {
@@ -215,7 +228,17 @@ export default {
           showKeys[item.id] = item.name.includes(this.serachKeyWord)
         }
       })
+      Object.keys(showKeys).forEach(key => {
+        if (showKeys[key] && this.parentIds[key]) {
+          showKeys[this.parentIds[key]] = true
+        }
+      })
       return showKeys
+    },
+    // 是否存在查询到的数据
+    hasFilterData () {
+      const flag = Object.values(this.showKeys).some(item => item)
+      return flag
     }
   },
   watch: {
@@ -253,29 +276,6 @@ export default {
     })
   },
   methods: {
-    // 二级树数据平铺
-    tiledArray (json, props = { children: 'children' }, desc) {
-      const { children } = props
-      const result = []
-      const tiledArraying = (data, stop) => {
-        data.forEach(item => {
-          if (stop) {
-            delete item.children
-          }
-          if (desc) {
-            result.push(item)
-          }
-          if (!status && item[children] && item[children].length && !stop) {
-            tiledArraying(item[children], true)
-          }
-          if (!desc) {
-            result.push(item)
-          }
-        })
-      }
-      tiledArraying(json)
-      return result
-    },
     // 设置选中box
     setChecked (attrs) {
       this.titledOptions.forEach((el) => {
@@ -333,6 +333,9 @@ export default {
         infiniteSelectTagsOptionRef.setTooltipDisabledFun()
         // 添加scroll事件，滚动时在模糊查询下显示阴影
         this.infiniteSelectTagsOptionRefScrollTop = 0
+        this.$nextTick(() => {
+          this.$refs.infiniteSelectTagsOptionRef.$el.scrollTop = 0
+        })
         infiniteSelectTagsOptionRef.$el.addEventListener('scroll', this.infiniteSelectTagsOptionRefScroll)
         this.serachKeyWord = ''
       } else {
@@ -439,4 +442,5 @@ export default {
     }
   }
 }
+export default vue
 </script>

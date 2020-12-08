@@ -3,16 +3,17 @@
        :class="`infinite-select-group-level-${level}`">
     <div v-for="(item, index) in options"
          :key="item.id"
+         v-show="showKeys[item.id] || level === 1"
          class="infinite-select-group-box"
          :class="item.children && item.children.length && level < maxLevel?'exist-children':''">
       <el-checkbox v-model="showChecked[item.id]"
                    v-show="showKeys[item.id]"
                    :disabled="disabledKeys[item.id]"
                    :indeterminate="getIndeterminate(item)"
-                   @change="change(item, index, $event,getIndeterminate(item))">
+                   @change="change(item, index, $event)">
         <el-tooltip :content="item.name"
                     placement="top"
-                    popper-class="infinite-select-tags-tooltip-popper"
+                    :popper-class="`infinite-select-tags-tooltip-popper ${tooltipPopper}`"
                     :disabled="tooltipDisable[item.id]">
           <div class="infinite-select-tags-tooltip">
             <span :ref="`infinite-select-tags-tooltip${item.id}`">
@@ -75,6 +76,10 @@ export default {
     showKeys: {
       type: Object,
       default: () => { }
+    },
+    tooltipPopper: {
+      type: String,
+      default: ''
     }
   },
   data () {

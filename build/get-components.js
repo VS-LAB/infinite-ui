@@ -1,8 +1,6 @@
 const fs = require('fs')
 const path = require('path')
 const excludes = [
-  'infinite-line-chart',
-  'infinite-pie-chart',
   'index.js',
   'theme-chalk',
   'mixins',

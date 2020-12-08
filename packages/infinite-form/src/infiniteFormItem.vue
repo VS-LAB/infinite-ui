@@ -53,7 +53,7 @@ export default {
       case 'input':
         return (<el-input placeholder={placeholder} class={itemData.class} v-model={formModels[itemData.key]} />)
       case 'select':
-        return (<el-select popper-append-to-body={false} placeholder={placeholder} class={itemData.class} clearable={itemData.clearable} v-model={formModels[itemData.key]}>
+        return (<el-select placeholder={placeholder} class={itemData.class} clearable={itemData.clearable} v-model={formModels[itemData.key]}>
           {(itemData.options || []).map(o => (<el-option label={o.label} value={o.id} />))}
         </el-select>)
       case 'switch':
@@ -65,7 +65,6 @@ export default {
       case 'date-picker':
         return (
           <el-date-picker
-            append-to-body={false}
             v-model={formModels[itemData.key]}
             align="right"
             type="date"

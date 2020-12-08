@@ -260,6 +260,7 @@
     :options="options"
     :default-checkeds="defaultCheckeds"
     :tags-num="4"
+    :filterable="true"
   />
 </template>
 <script>
@@ -465,7 +466,9 @@
     :tags-num="3"
     :filterable="true"
   >
-    <span slot="prefix" style="display:inline-block;width:86px;color:#000;"
+    <span
+      slot="prefix-label"
+      style="display:inline-block;width:86px;color:#000;"
       >各国币种</span
     >
   </infinite-select-tags>
@@ -484,6 +487,79 @@
               {
                 id: 'GBP-1',
                 name: '英镑-1',
+              },
+              {
+                id: 'GBP-2',
+                name: '英镑-2',
+              },
+              {
+                id: 'GBP-3',
+                name: '英镑-3',
+              },
+              {
+                id: 'GBP-4',
+                name: '英镑-4',
+              },
+            ],
+          },
+          {
+            id: 'RMB',
+            name: '人民币',
+          },
+          {
+            id: 'EUR',
+            name: '欧元',
+          },
+          {
+            id: 'CAD',
+            name: '加元',
+          },
+          {
+            id: 'AUD',
+            name: '澳大利亚元',
+          },
+          {
+            id: 'TAD',
+            name: '泰元',
+          },
+          {
+            id: 'MUD',
+            name: '孟加拉元',
+          },
+        ],
+      };
+    },
+  };
+</script>
+```
+
+:::
+
+### 搜索结果为空时的 not-filter-data 插槽使用
+
+:::demo
+
+```html
+<template>
+  <infinite-select-tags v-model="value" :options="options" :filterable="true">
+    <template slot="not-filter-data">
+      暂无搜索结果
+    </template>
+  </infinite-select-tags>
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        value: [],
+        options: [
+          {
+            id: 'GBP',
+            name: '英镑',
+            children: [
+              {
+                id: 'GBP-1',
+                name: '英镑-1英镑-1英镑-1英镑-1',
               },
               {
                 id: 'GBP-2',
@@ -562,6 +638,7 @@
 
 ### Select-tag Slot
 
-| 参数   | 说明                |
-| ------ | ------------------- |
-| prefix | Select 组件头部内容 |
+| 参数            | 说明                   |
+| --------------- | ---------------------- |
+| prefix-label    | Select 组件头部内容    |
+| not-filter-data | 搜索结果为空时的插槽位 |

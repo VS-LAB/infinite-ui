@@ -188,6 +188,9 @@ export default {
 }
 </script>
 <style lang='scss' scoped>
+body {
+  overflow: auto;
+}
 //****通用定义****//
 .flex {
   display: flex;

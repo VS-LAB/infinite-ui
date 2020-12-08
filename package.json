@@ -12,7 +12,7 @@
     "build:docs": "vue-cli-service build",
     "build:entry": "node build/build-entry.js ",
     "build:lib": "node build/build-lib.js",
-    "build:utils": "cross-env BABEL_ENV=utils babel packages/utils --out-dir lib/utils",
+    "build:utils": "cp-cli packages/utils lib/utils  && cp-cli packages/mixins lib/mixins",
     "build:style": "gulp build --gulpfile packages/theme-chalk/gulpfile.js && cp-cli packages/theme-chalk/lib lib/theme-chalk",
     "clean": "rimraf lib && rimraf packages/*/lib",
     "init": "npm install commitizen -g && commitizen init cz-conventional-changelog --save-dev --save-exact && npm run bootstrap",
