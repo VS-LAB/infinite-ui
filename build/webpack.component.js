@@ -2,6 +2,8 @@ const path = require('path')
 const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const Components = require('./get-components')()
+const portfinder = require('portfinder')
+
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const { getExternalsEl } = require('./get-externals-elements')
 const entry = {}
@@ -18,7 +20,6 @@ const webpackConfig = {
     libraryTarget: 'umd'
   },
   optimization: {
-
     splitChunks: {
       name: true,
       // chunks: 'all', // 指定打包同步加载还是异步加载
@@ -52,7 +53,7 @@ const webpackConfig = {
   performance: {
     hints: false
   },
-  stats: 'normal',
+  stats: 'none',
   module: {
     rules: [
       {
@@ -66,10 +67,12 @@ const webpackConfig = {
   },
   plugins: [
     new ProgressBarPlugin(),
-    new VueLoaderPlugin()
-    // new BundleAnalyzerPlugin({
-    //   analyzerPort: 8191
-    // })
+    new VueLoaderPlugin(),
+    new BundleAnalyzerPlugin({
+      analyzerPort: async () => {
+        await portfinder.getPortPromise()
+      }
+    })
 
   ]
 }
