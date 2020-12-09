@@ -80,100 +80,101 @@ export default {
   },
   methods: {
     setChartConfig: function (data) {
-      console.log(data, 'data')
+      console.log(this.chart, 'this.chart')
       // 为 chart 装载数据
-      this.chart.source(data)
-      this.chart.render()
+      // this.chart.source(data)
+      this.chart.data(data)
+      // this.chart.render()
 
-      // // 进行列定义
-      // let _this = this
-      // let scaleConfig = (function () {
-      //   let obj = {}
-      //   for (const key in _this.axisName) {
-      //     if (_this.axisName.hasOwnProperty(key)) {
-      //       obj[key] = {}
-      //       obj[key]['alias'] = _this.axisName[key]
-      //       if (key === 'value') {
-      //         // 数据格式, 将数据转为百分数或浮点数(保留一位小数), 整数不做处理
-      //         obj[key]['formatter'] = _this.isPercent ? percentFormat : floatIntFormat
-      //       }
-      //     }
-      //   }
-      //   return obj
-      // }())
-      // this.chart.scale(scaleConfig)
+      // 进行列定义
+      let _this = this
+      let scaleConfig = (function () {
+        let obj = {}
+        for (const key in _this.axisName) {
+          if (_this.axisName.hasOwnProperty(key)) {
+            obj[key] = {}
+            obj[key]['alias'] = _this.axisName[key]
+            if (key === 'value') {
+              // 数据格式, 将数据转为百分数或浮点数(保留一位小数), 整数不做处理
+              obj[key]['formatter'] = _this.isPercent ? percentFormat : floatIntFormat
+            }
+          }
+        }
+        return obj
+      }())
+      this.chart.scale(scaleConfig)
 
-      // // 是否使用tooltip
-      // if (this.useTooltip) {
-      //   // 配置图表tooltip
-      //   this.chart.tooltip(true, {
-      //     crosshairs: {
-      //       type: 'line'
-      //     }
-      //   })
-      // } else {
-      //   this.chart.tooltip(false)
-      // }
+      // 是否使用tooltip
+      if (this.useTooltip) {
+        // 配置图表tooltip
+        this.chart.tooltip(true, {
+          crosshairs: {
+            type: 'line'
+          }
+        })
+      } else {
+        this.chart.tooltip(false)
+      }
 
-      // // 配置图表图例
-      // if (this.showLegend) {
-      //   this.chart.legend('type', {
-      //     position: 'bottom-center'
-      //   })
-      // } else {
-      //   this.chart.legend('type', false)
-      // }
+      // 配置图表图例
+      if (this.showLegend) {
+        this.chart.legend('type', {
+          position: 'bottom-center'
+        })
+      } else {
+        this.chart.legend('type', false)
+      }
 
-      // // 坐标轴配置
-      // this.chart.axis('name', {
-      //   tickLine: false
-      // })
-      // this.chart.axis('value', {
-      //   grid: {
-      //     lineStyle: {
-      //       lineDash: null,
-      //       stroke: '#d9d9d9',
-      //       lineWidth: 1
-      //     }
-      //   },
-      //   label: {
-      //     autoRotate: false,
-      //     rotate: 0,
-      //     formatter: (text, item, index) => {
-      //       return text + ''
-      //     }
-      //   },
-      //   tickLine: false
-      // })
+      // 坐标轴配置
+      this.chart.axis('name', {
+        tickLine: false
+      })
+      this.chart.axis('value', {
+        grid: {
+          lineStyle: {
+            lineDash: null,
+            stroke: '#d9d9d9',
+            lineWidth: 1
+          }
+        },
+        label: {
+          autoRotate: false,
+          rotate: 0,
+          formatter: (text, item, index) => {
+            return text + ''
+          }
+        },
+        tickLine: false
+      })
 
-      // // 配置折线和散点的颜色、形状等
-      // let line = this.chart.line().position('name*value')
-      // let point
+      // 配置折线和散点的颜色、形状等
+      let line = this.chart.line().position('name*value')
+      let point
 
-      // if (this.showPoint) {
-      //   point = this.chart.point().position('name*value').size(4).shape('circle').style({
-      //     stroke: '#fff',
-      //     lineWidth: 1
-      //   })
-      // }
+      if (this.showPoint) {
+        point = this.chart.point().position('name*value').size(4).shape('circle').style({
+          stroke: '#fff',
+          lineWidth: 1
+        })
+      }
 
-      // // 配置多条折线时的颜色
-      // if (this.data.length > 0 && this.data[0].hasOwnProperty('type')) {
-      //   line.color('type')
-      //   if (this.showPoint) {
-      //     point.color('type')
-      //   }
-      // } else {
-      //   line.color(this.singleColor)
-      //   if (this.showPoint) {
-      //     point.color(this.singleColor)
-      //   }
-      // }
+      // 配置多条折线时的颜色
+      if (this.data.length > 0 && this.data[0].hasOwnProperty('type')) {
+        line.color('type')
+        if (this.showPoint) {
+          point.color('type')
+        }
+      } else {
+        line.color(this.singleColor)
+        if (this.showPoint) {
+          point.color(this.singleColor)
+        }
+      }
 
-      // // 折线是否显示为曲线
-      // if (this.isSmooth) {
-      //   line.shape('smooth')
-      // }
+      // 折线是否显示为曲线
+      if (this.isSmooth) {
+        line.shape('smooth')
+      }
     }
   }
 }

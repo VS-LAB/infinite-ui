@@ -53,7 +53,7 @@ export default {
         container: this.id,
         width: dom.offsetWidth || 800,
         height: dom.offsetHeight || 500,
-        padding: this.padding || ['auto', 'auto'],
+        // padding: this.padding || ['auto', 'auto'],
         renderer: 'canvas'
       })
     },

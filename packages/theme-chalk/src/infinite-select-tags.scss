@@ -196,9 +196,10 @@ $popperWidth : 424px;
     max-height: none;
   }
 
-  .is-focus .el-checkbox__inner {
+  .el-checkbox__input.is-focus .el-checkbox__inner {
     border-color: $--border-color-base;
   }
+
 
   .is-checked {
     .el-checkbox__label {
@@ -207,6 +208,12 @@ $popperWidth : 424px;
 
     .el-checkbox__inner {
       border-color: $--color-primary;
+    }
+
+    .el-checkbox__input.is-focus {
+      .el-checkbox__inner {
+        border-color: $--color-primary;
+      }
     }
   }
 

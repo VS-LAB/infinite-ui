@@ -184,13 +184,13 @@ export default {
     toPath () {
       this.$router.push('/guide/installation')
     }
+  },
+  mounted () {
+    document.body.style.overflow = 'auto'
   }
 }
 </script>
 <style lang='scss' scoped>
-body {
-  overflow: auto;
-}
 //****通用定义****//
 .flex {
   display: flex;

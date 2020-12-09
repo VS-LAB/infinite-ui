@@ -80,8 +80,7 @@ export default {
   methods: {
     setChartConfig: function (data) {
       // 生成占比数据percent
-      const dv = this.chart
-        .source(data)
+      this.chart.data(data)
 
       // 设置数据的显示别名并格式化数据
       let _this = this
@@ -103,7 +102,7 @@ export default {
         }
       }
       // 为 chart 装载数据
-      this.chart.source(dv, scaleConfig)
+      // this.chart.data(dv, scaleConfig)
 
       // 配置辅助元素
       if (this.guide.name || this.guide.value) {
@@ -121,17 +120,17 @@ export default {
       let interval = ''
       // 根据图表类型(ring,pie,nightingale)选择不同的坐标系(theta,polar)以及设置内半径
       if (this.type === 'ring') {
-        this.chart.coord('theta', {
+        this.chart.coordinate('theta', {
           innerRadius: this.innerRadius === null ? 0.75 : this.innerRadius
         })
         interval = this.chart.interval().adjust('stack').position('value')
       } else if (this.type === 'pie') {
-        this.chart.coord('theta', {
+        this.chart.coordinate('theta', {
           innerRadius: this.innerRadius === null ? 0 : this.innerRadius
         })
         interval = this.chart.interval().adjust('stack').position('value')
       } else if (this.type === 'nightingale') {
-        this.chart.coord('polar', {
+        this.chart.coordinate('polar', {
           innerRadius: this.innerRadius === null ? 0.2 : this.innerRadius
         })
         interval = this.chart.interval().position('name*value')

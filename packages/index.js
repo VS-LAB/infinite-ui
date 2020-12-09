@@ -4,8 +4,10 @@ import InfiniteButton from './infinite-button'
 import InfiniteCascaders from './infinite-cascaders'
 import InfiniteDialog from './infinite-dialog'
 import InfiniteForm from './infinite-form'
+import InfiniteLineChart from './infinite-line-chart'
 import InfiniteNavMenu from './infinite-nav-menu'
 import InfinitePagination from './infinite-pagination'
+import InfinitePieChart from './infinite-pie-chart'
 import InfiniteSelectTags from './infinite-select-tags'
 import InfiniteSelectTagsOption from './infinite-select-tags-option'
 import InfiniteTable from './infinite-table'
@@ -18,8 +20,10 @@ const components = [
   InfiniteCascaders,
   InfiniteDialog,
   InfiniteForm,
+  InfiniteLineChart,
   InfiniteNavMenu,
   InfinitePagination,
+  InfinitePieChart,
   InfiniteSelectTags,
   InfiniteSelectTagsOption,
   InfiniteTable,
@@ -43,8 +47,10 @@ export {
   InfiniteCascaders,
   InfiniteDialog,
   InfiniteForm,
+  InfiniteLineChart,
   InfiniteNavMenu,
   InfinitePagination,
+  InfinitePieChart,
   InfiniteSelectTags,
   InfiniteSelectTagsOption,
   InfiniteTable,
@@ -59,8 +65,10 @@ export default {
   InfiniteCascaders,
   InfiniteDialog,
   InfiniteForm,
+  InfiniteLineChart,
   InfiniteNavMenu,
   InfinitePagination,
+  InfinitePieChart,
   InfiniteSelectTags,
   InfiniteSelectTagsOption,
   InfiniteTable,

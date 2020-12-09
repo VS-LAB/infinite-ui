@@ -12,20 +12,20 @@
     "build:docs": "vue-cli-service build",
     "build:entry": "node build/build-entry.js ",
     "build:lib": "node build/build-lib.js",
-    "build:utils": "cp-cli packages/utils lib/utils  && cp-cli packages/mixins lib/mixins",
-    "build:style": "gulp build --gulpfile packages/theme-chalk/gulpfile.js && cp-cli packages/theme-chalk/lib lib/theme-chalk",
+    "build:utils": "cross-env BABEL_ENV=utils babel packages/utils --out-dir lib/utils && babel packages/mixins --out-dir lib/mixins",
+    "build:style": "gulp build --gulpfile packages/theme-chalk/gulpfile.js && cp-cli packages/theme-chalk/lib lib/theme-chalk && cp-cli packages/theme-chalk/fonts lib/theme-chalk/fonts",
     "clean": "rimraf lib && rimraf packages/*/lib",
     "init": "npm install commitizen -g && commitizen init cz-conventional-changelog --save-dev --save-exact && npm run bootstrap",
     "lib": "vue-cli-service build --target lib --name infinite-ui --mode lib --dest lib packages/index.js && webpack --config ./build/webpack.component.js"
   },
-  "main": "lib/infinite-ui.umd.min.js",
+  "main": "lib/infinite-ui.umd.js",
   "files": [
     "lib",
     "packages",
     "src"
   ],
   "dependencies": {
-    "@antv/g2": "4.1.1",
+    "@antv/g2": "^4.0.1",
     "core-js": "^3.3.4",
     "element-ui": "^2.10.1",
     "vue-router": "^3.4.9"
