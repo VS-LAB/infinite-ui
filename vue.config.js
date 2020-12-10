@@ -3,6 +3,9 @@ const resolve = (dir) => {
   return path.join(__dirname, dir)
 }
 const { getExternalsEl } = require('./build/get-externals-elements')
+const isProduction = process.env.NODE_ENV === 'production'
+const vendorPackage = isProduction ? { vue: 'Vue',
+  'vue-router': 'VueRouter' } : {}
 const propElExternals = process.env.NODE_ENV === 'lib' ? getExternalsEl() : {}
 module.exports = {
   publicPath: './',
@@ -33,7 +36,9 @@ module.exports = {
       }
     },
     externals: {
-      ...propElExternals
+      ...propElExternals,
+      ...vendorPackage
+     
     }
   },
 
@@ -49,7 +54,7 @@ module.exports = {
 
     config.module
       .rule('md')
-      .test(/\.md/)
+      .test(/\.md/) 
       .use('vue-loader')
       .loader('vue-loader')
       .end()

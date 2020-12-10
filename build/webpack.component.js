@@ -67,12 +67,12 @@ const webpackConfig = {
   },
   plugins: [
     new ProgressBarPlugin(),
-    new VueLoaderPlugin(),
-    new BundleAnalyzerPlugin({
-      analyzerPort: async () => {
-        await portfinder.getPortPromise()
-      }
-    })
+    new VueLoaderPlugin()
+    // new BundleAnalyzerPlugin({
+    //   analyzerPort: async () => {
+    //     await portfinder.getPortPromise()
+    //   }
+    // })
 
   ]
 }
