@@ -79,7 +79,7 @@ import ElOption from 'element-ui/lib/option'
 import ElCheckbox from 'element-ui/lib/checkbox'
 import InfiniteButton from '../../infinite-button/src/index.vue'
 import infiniteSelectTagsOption from './infiniteSelectTagsOption'
-import { jsonFlat } from '../../utils'
+import { jsonFlat } from 'infinite-ui/packages/utils/index'
 const vue = {
   name: 'InfiniteSelectTags',
   components: { ElInput, ElTag, ElSelect, ElOption, ElCheckbox, InfiniteButton, infiniteSelectTagsOption },

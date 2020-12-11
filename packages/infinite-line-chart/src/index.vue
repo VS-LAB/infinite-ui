@@ -3,8 +3,8 @@
 </template>
 
 <script>
-import mixinChart from '../../mixins/chart'
-import { percentFormat, floatIntFormat, AxisOption } from './../utils/index'
+import mixinChart from 'infinite-ui/packages/mixins/chart'
+import { percentFormat, floatIntFormat } from 'infinite-ui/packages/utils/index'
 
 export default {
   name: 'InfiniteLineChart',

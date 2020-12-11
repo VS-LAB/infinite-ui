@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import { Installation,
+import {
+  Installation,
   Button,
   Cascaders,
   Dialog,
@@ -13,7 +14,8 @@ import { Installation,
   SelectTags,
   Table,
   ThemePicker,
-  Tree } from './docs'
+  Tree
+} from './docs'
 import Home from '@/views/home'
 import Layout from '@/views'
 import { getFileList } from './generate'

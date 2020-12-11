@@ -13,6 +13,7 @@
                    @change="change(item, index, $event)">
         <el-tooltip :content="item.name"
                     placement="top"
+                    transition="none"
                     :popper-class="`infinite-select-tags-tooltip-popper ${tooltipPopper}`"
                     :disabled="tooltipDisable[item.id]">
           <div class="infinite-select-tags-tooltip">

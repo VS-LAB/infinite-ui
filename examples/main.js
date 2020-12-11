@@ -17,18 +17,25 @@ import hljs from 'highlight.js'
 import '../packages/theme-chalk/src/index.scss'
 
 // 导入组件库
-// import packages from '../packages'
-import infiniteUi from '../lib/infinite-ui.umd'
-import '../lib/theme-chalk/index.css'
-console.log(infiniteUi)
+import packages from '../packages'
+// import infiniteUi from '../lib/infinite-ui.umd'
+// import '../lib/theme-chalk/index.css'
 Vue.use(Col)
   .use(Row)
   .use(Container)
   .use(Header)
   .use(Main)
   .use(Aside)
+for (const key in packages) {
+  if (packages.hasOwnProperty(key)) {
+    const element = packages[key]
+    if (key.toLocaleLowerCase().includes('infinite')) {
+      Vue.use(element)
+    };
+  }
+}
 
-Vue.use(infiniteUi)
+// Vue.use(infiniteUi)
 
 Vue.config.productionTip = false
 

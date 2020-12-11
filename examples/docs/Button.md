@@ -34,6 +34,18 @@
   <infinite-button type="warning" round>警告按钮</infinite-button>
   <infinite-button type="danger" round>危险按钮</infinite-button>
 </el-row>
+<el-row>
+  <infinite-button icon="el-icon-search" circle></infinite-button>
+  <infinite-button type="primary" icon="el-icon-edit" circle></infinite-button>
+  <infinite-button type="success" icon="el-icon-check" circle></infinite-button>
+  <infinite-button type="info" icon="el-icon-message" circle></infinite-button>
+  <infinite-button
+    type="warning"
+    icon="el-icon-star-off"
+    circle
+  ></infinite-button>
+  <infinite-button type="danger" icon="el-icon-delete" circle></infinite-button>
+</el-row>
 <script>
   export default {
     methods: {

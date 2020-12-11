@@ -1,9 +1,11 @@
 const path = require('path')
+const resolve = (dir) => {
+  return path.join(__dirname, '../', dir)
+}
 const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const Components = require('./get-components')()
 const portfinder = require('portfinder')
-
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const { getExternalsEl } = require('./get-externals-elements')
 const entry = {}
@@ -45,10 +47,13 @@ const webpackConfig = {
       commonjs2: 'vue',
       amd: 'vue'
     },
-    ...getExternalsEl()
+    ...getExternalsEl('antv')
   },
   resolve: {
-    extensions: ['.js', '.vue', '.json']
+    extensions: ['.js', '.vue', '.json'],
+    alias: {
+      'infinite-ui': resolve('./')
+    }
   },
   performance: {
     hints: false

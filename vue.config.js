@@ -2,10 +2,14 @@ const path = require('path')
 const resolve = (dir) => {
   return path.join(__dirname, dir)
 }
+const html = require('html-webpack-plugin')
+
 const { getExternalsEl } = require('./build/get-externals-elements')
 const isProduction = process.env.NODE_ENV === 'production'
-const vendorPackage = isProduction ? { vue: 'Vue',
-  'vue-router': 'VueRouter' } : {}
+const vendorPackage = isProduction ? {
+  vue: 'Vue',
+  'vue-router': 'VueRouter'
+} : {}
 const propElExternals = process.env.NODE_ENV === 'lib' ? getExternalsEl() : {}
 module.exports = {
   publicPath: './',
@@ -17,8 +21,8 @@ module.exports = {
       entry: 'examples/main.js'
     }
   },
-  configureWebpack: {
-    performance: {
+  configureWebpack: config => {
+    config.performance = {
       hints: 'warning',
       // 入口起点的最大体积
       maxEntrypointSize: 50000000,
@@ -28,20 +32,23 @@ module.exports = {
       assetFilter: function (assetFilename) {
         return assetFilename.endsWith('.js')
       }
-    },
+    }
+    config.resolve.alias['@'] = resolve('examples')
+    config.resolve.alias['infinite-ui'] = resolve('./')
 
-    resolve: {
-      alias: {
-        '@': resolve('examples')
-      }
-    },
-    externals: {
+    config.externals = {
       ...propElExternals,
       ...vendorPackage
-     
+    }
+
+    if (process.env.NODE_ENV === 'lib') {
+      config.plugins.forEach((plugin, index) => {
+        if (plugin instanceof html) {
+          config.plugins.splice(index, 1)
+        }
+      })
     }
   },
-
   chainWebpack: config => {
     config.module
       .rule('js')
@@ -54,7 +61,7 @@ module.exports = {
 
     config.module
       .rule('md')
-      .test(/\.md/) 
+      .test(/\.md/)
       .use('vue-loader')
       .loader('vue-loader')
       .end()

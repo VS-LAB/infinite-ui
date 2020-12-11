@@ -68,7 +68,7 @@
 <script>
 import ElTree from 'element-ui/lib/tree'
 import ElInput from 'element-ui/lib/input'
-// import ElButton from 'element-ui/lib/button'
+import ElMessage from 'element-ui/lib/message'
 import { props } from './props'
 import TreeCtrl from './tree'
 import InfiniteButton from '../../infinite-button/src/index.vue'
@@ -81,6 +81,9 @@ export default {
     ElInput,
     InfiniteButton,
     InfiniteDialog
+  },
+  beforeCreate () {
+    this.$message = ElMessage
   },
   data () {
     return {

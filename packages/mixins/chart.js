@@ -7,7 +7,7 @@ import Tooltip from '@antv/g2/lib/chart/controller/tooltip'
 import Legend from '@antv/g2/lib/chart/controller/legend'
 import Coordinate from '@antv/coord/lib/factory'
 import * as G from '@antv/g-canvas'
-import { uuidv4 } from '../utils'
+import { uuidv4 } from 'infinite-ui/packages/utils/index'
 
 // 按需注入
 registerEngine('canvas', G)

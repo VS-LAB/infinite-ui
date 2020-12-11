@@ -2,24 +2,21 @@
 @import './mixins/mixins.scss';
 @import '../../../node_modules/element-ui/packages/theme-chalk/src/button.scss';
 
-.infinite-button{
-  &.el-button--medium{
-    padding: 8px 16px;
+.infinite-button {
+  &.el-button--medium {
     font-size: 16px;
-    border-radius: 4px;
   }
-  &.el-button--small{
-    padding: 8px 16px;
+
+  &.el-button--small {
     font-size: 14px;
-    border-radius: 4px;
   }
-  &.el-button--mini{
-    padding: 4px 8px;
+
+  &.el-button--mini {
     font-size: 14px;
-    border-radius: 3px;
   }
-  &.el-button--text{
-    padding:8px;
+
+  &.el-button--text {
+    padding: 8px;
+    padding: 12px;
   }
 }
-
