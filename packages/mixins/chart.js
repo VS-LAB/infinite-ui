@@ -7,7 +7,6 @@ import Tooltip from '@antv/g2/lib/chart/controller/tooltip'
 import Legend from '@antv/g2/lib/chart/controller/legend'
 import Coordinate from '@antv/coord/lib/factory'
 import * as G from '@antv/g-canvas'
-import { uuidv4 } from 'infinite-ui/packages/utils/index'
 
 // 按需注入
 registerEngine('canvas', G)
@@ -24,7 +23,7 @@ registerComponentController('coordinate', Coordinate)
 export default {
   computed: {
     id: function () {
-      return uuidv4()
+      return this.uuidv4()
     }
   },
   data () {
@@ -66,8 +65,6 @@ export default {
 
       // 绘制
       this.chart.render()
-      console.log(this.chart, 'chart')
-
       const e = document.createEvent('Event')
       e.initEvent('resize', true, true)
       window.dispatchEvent(e)

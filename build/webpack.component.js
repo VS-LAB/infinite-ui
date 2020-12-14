@@ -22,23 +22,23 @@ const webpackConfig = {
     libraryTarget: 'umd'
   },
   optimization: {
-    splitChunks: {
-      name: true,
-      // chunks: 'all', // 指定打包同步加载还是异步加载
-      // minSize: 100000, // 构建出来的chunk大于30000才会被分割 
-      // maxSize: 0, // 会尝试根据这个大小进行代码分割
-      // minChunks: 2, // 制定用了几次才进行代码分割
-      // maxAsyncRequests: 6,
-      // maxInitialRequests: 4,
-      cacheGroups: {
-        g2: {
-          test: /[\\/]node_modules[\\/]((@antv).*)[\\/]/, // 检测引入的库是否在node_modlues目录下的
-          filename: 'infinite-g2.js',
-          chunks: 'all'
-          // priority: -5
-        }
-      }
-    }
+    // splitChunks: {
+    //   name: true,
+    //   // chunks: 'all', // 指定打包同步加载还是异步加载
+    //   // minSize: 100000, // 构建出来的chunk大于30000才会被分割 
+    //   // maxSize: 0, // 会尝试根据这个大小进行代码分割
+    //   // minChunks: 2, // 制定用了几次才进行代码分割
+    //   // maxAsyncRequests: 6,
+    //   // maxInitialRequests: 4,
+    //   cacheGroups: {
+    //     g2: {
+    //       test: /[\\/]node_modules[\\/]((@antv).*)[\\/]/, // 检测引入的库是否在node_modlues目录下的
+    //       filename: 'infinite-g2.js',
+    //       chunks: 'all'
+    //       // priority: -5
+    //     }
+    //   }
+    // }
   },
   externals: {
     vue: {

@@ -1,21 +1,25 @@
-.header-anchor{
+.header-anchor {
   display: none;
 }
-.el-submenu__title{
+
+.el-aside .el-submenu__title {
   font-weight: 600;
 }
-.el-row{
-    margin-bottom: 20px;
+
+.el-row {
+  margin-bottom: 20px;
 }
 
 // nav-menu start
-.demo-block.demo-navMenu{
-  .tac{
+.demo-block.demo-navMenu {
+  .tac {
     text-align: center;
-    .infinite-menu-vertical-demo{
+
+    .infinite-menu-vertical-demo {
       display: inline-block;
       text-align: left;
-      &:not(.el-menu--collapse){
+
+      &:not(.el-menu--collapse) {
         width: 240px;
         min-height: 400px;
       }

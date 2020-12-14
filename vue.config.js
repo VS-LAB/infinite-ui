@@ -3,7 +3,7 @@ const resolve = (dir) => {
   return path.join(__dirname, dir)
 }
 const html = require('html-webpack-plugin')
-
+const portfinder = require('portfinder')
 const { getExternalsEl } = require('./build/get-externals-elements')
 const isProduction = process.env.NODE_ENV === 'production'
 const vendorPackage = isProduction ? {
@@ -67,6 +67,18 @@ module.exports = {
       .end()
       .use('./build/md-loader/index.js')
       .loader('./build/md-loader/index.js')
+
+    // config
+    //   .plugin('webpack-bundle-analyzer')
+    //   .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
+    //   .tap(options => {
+    //     options.push({
+    //       analyzerPort: async () => {
+    //         await portfinder.getPortPromise()
+    //       }
+    //     })
+    //     return options
+    //   })
   },
   devServer: {
     overlay: {

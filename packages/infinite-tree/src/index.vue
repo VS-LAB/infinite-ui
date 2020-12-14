@@ -69,6 +69,7 @@
 import ElTree from 'element-ui/lib/tree'
 import ElInput from 'element-ui/lib/input'
 import ElMessage from 'element-ui/lib/message'
+import ElNotify from 'element-ui/lib/notification'
 import { props } from './props'
 import TreeCtrl from './tree'
 import InfiniteButton from '../../infinite-button/src/index.vue'
@@ -84,6 +85,7 @@ export default {
   },
   beforeCreate () {
     this.$message = ElMessage
+    this.$notify = ElNotify
   },
   data () {
     return {

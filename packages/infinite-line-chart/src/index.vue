@@ -4,10 +4,15 @@
 
 <script>
 import mixinChart from 'infinite-ui/packages/mixins/chart'
-import { percentFormat, floatIntFormat } from 'infinite-ui/packages/utils/index'
+import { percentFormat, floatIntFormat, uuidv4 } from 'infinite-ui/packages/utils/index'
 
 export default {
   name: 'InfiniteLineChart',
+  data () {
+    return {
+      uuidv4
+    }
+  },
   mixins: [mixinChart],
   props: {
     // 数据
@@ -80,7 +85,6 @@ export default {
   },
   methods: {
     setChartConfig: function (data) {
-      console.log(this.chart, 'this.chart')
       // 为 chart 装载数据
       // this.chart.source(data)
       this.chart.data(data)

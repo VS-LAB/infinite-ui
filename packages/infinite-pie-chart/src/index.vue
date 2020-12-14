@@ -4,10 +4,14 @@
 
 <script>
 import mixinChart from 'infinite-ui/packages/mixins/chart'
-import { percentFormat } from 'infinite-ui/packages/utils/index'
-
+import { percentFormat, uuidv4 } from 'infinite-ui/packages/utils/index'
 export default {
   name: 'InfinitePieChart',
+  data () {
+    return {
+      uuidv4
+    }
+  },
   mixins: [mixinChart],
   props: {
     data: {
