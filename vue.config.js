@@ -3,7 +3,7 @@ const resolve = (dir) => {
   return path.join(__dirname, dir)
 }
 const html = require('html-webpack-plugin')
-const portfinder = require('portfinder')
+// const portfinder = require('portfinder')
 const { getExternalsEl } = require('./build/get-externals-elements')
 const isProduction = process.env.NODE_ENV === 'production'
 const vendorPackage = isProduction ? {
