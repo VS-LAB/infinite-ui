@@ -47,7 +47,7 @@ const webpackConfig = {
       commonjs2: 'vue',
       amd: 'vue'
     },
-    ...getExternalsEl('antv')
+    ...getExternalsEl()
   },
   resolve: {
     extensions: ['.js', '.vue', '.json'],
