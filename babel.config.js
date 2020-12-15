@@ -1,6 +1,9 @@
 module.exports = {
-  'presets': ['@vue/app'],
-  'plugins': [
+  presets: [
+    '@vue/app'
+  ],
+  plugins: [
+    'syntax-dynamic-import',
     [
       'component',
       {
