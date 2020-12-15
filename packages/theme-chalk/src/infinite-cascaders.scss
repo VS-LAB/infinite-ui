@@ -1,0 +1,110 @@
+@import './common/var.scss';
+@import '../../../node_modules/element-ui/packages/theme-chalk/src/cascader.scss';
+@import '../../../node_modules/element-ui/packages/theme-chalk/src/input.scss';
+@import './infinite-button.scss';
+@import '../../../node_modules/element-ui/packages/theme-chalk/src/date-picker.scss';
+
+.infinite-cascader {
+  display: inline-flex;
+
+  &-cascader {
+    display: inline-block;
+  }
+
+  &-component {
+    display: inline-block;
+    max-width: 240px;
+    line-height: 1;
+
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
+
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+}
+
+.infinite-cascader-popper {
+
+  .el-cascader-node:not(.is-disabled):hover,
+  .el-cascader-node:not(.is-disabled):focus {
+    background-color: $--background-color-base;
+  }
+
+  .el-cascader-menu__item.is-active {
+    font-weight: 700;
+
+    &::after {
+      font-weight: 500;
+    }
+  }
+
+  .el-cascader-menu__wrap {
+    height: initial;
+    max-height: 258px;
+  }
+}
+
+
+// 日期选择器样式
+.infinite-cascader-picker-popper {
+  .el-date-table td span {
+    border-radius: 2px;
+  }
+
+  .el-date-table td.today span {
+    color: $--color-primary;
+    border: 1px solid $--color-primary;
+  }
+
+  .el-date-table td.available:hover span {
+    color: #606266;
+    background-color: $--background-color-base;
+  }
+
+  .el-date-table td.available.today:hover span {
+    color: $--color-primary;
+    background-color: #fff;
+    border-color: $--color-primary;
+  }
+
+  .el-date-table td.current:not(.disabled) span {
+    background-color: $--color-primary;
+    color: #fff;
+  }
+
+  .el-month-table td .cell {
+    border-radius: 2px;
+  }
+
+  .el-month-table td.current:not(.disabled) .cell {
+    border: 1px solid;
+  }
+
+  .el-month-table td .cell:hover {
+    color: #606266;
+    background-color: $--background-color-base;
+  }
+
+  .el-month-table td.current:not(.disabled) .cell:hover {
+    background-color: #fff;
+  }
+
+  .el-year-table td.current:not(.disabled) .cell {
+    border: 1px solid;
+  }
+
+  .el-year-table td .cell:hover {
+    color: #606266;
+    background-color: $--background-color-base;
+  }
+
+  .el-year-table td.current:not(.disabled) .cell:hover {
+    background-color: #fff;
+  }
+
+}

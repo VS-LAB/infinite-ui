@@ -1,0 +1,22 @@
+@import './common/var.scss';
+@import './mixins/mixins.scss';
+@import '../../../node_modules/element-ui/packages/theme-chalk/src/button.scss';
+
+.infinite-button {
+  &.el-button--medium {
+    font-size: 16px;
+  }
+
+  &.el-button--small {
+    font-size: 14px;
+  }
+
+  &.el-button--mini {
+    font-size: 14px;
+  }
+
+  &.el-button--text {
+    padding: 8px;
+    padding: 12px;
+  }
+}

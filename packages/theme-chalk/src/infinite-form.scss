@@ -1,0 +1,33 @@
+@import './common/var.scss';
+@import '../../../node_modules/element-ui/packages/theme-chalk/src/form.scss';
+@import '../../../node_modules/element-ui/packages/theme-chalk/src/form-item.scss';
+@import '../../../node_modules/element-ui/packages/theme-chalk/src/input.scss';
+@import '../../../node_modules/element-ui/packages/theme-chalk/src/switch.scss';
+@import '../../../node_modules/element-ui/packages/theme-chalk/src/select.scss';
+@import '../../../node_modules/element-ui/packages/theme-chalk/src/option.scss';
+@import '../../../node_modules/element-ui/packages/theme-chalk/src/date-picker.scss';
+@import './infinite-select-tags.scss';
+.infinite-form-btns:nth-child(1){
+  // margin-right: 16px;
+}
+
+.el-form-item.is-required-value:not(.is-no-asterisk){
+  >.el-form-item__label:before{
+    content: '' !important;
+  }
+  >.el-form-item__content{
+    position: relative;
+    &::before{
+      content: "*";
+      position: absolute;
+      left: -10px;
+      color: $--color-primary;
+    }
+  }
+}
+// .el-form-item{
+//   .el-input__inner{
+//     // height: 32px;
+//   }
+// }
+

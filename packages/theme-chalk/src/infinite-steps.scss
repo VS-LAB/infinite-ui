@@ -1,0 +1,8 @@
+@import './common/var.scss';
+@import '../../../node_modules/element-ui/packages/theme-chalk/src/steps.scss';
+
+.infinite-steps-container {
+  /deep/.el-steps--horizontal{
+    white-space: normal;
+  };
+};

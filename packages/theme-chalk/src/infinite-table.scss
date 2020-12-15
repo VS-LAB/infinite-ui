@@ -1,0 +1,58 @@
+@import './common/var.scss';
+@import '../../../node_modules/element-ui/packages/theme-chalk/src/table.scss';
+
+.infinite-table-operation-btn{
+    .infinite-button{
+      &+.infinite-button{
+        margin-left: 5px;
+      }
+    }
+}
+.infinite-table{
+  &.el-table thead{
+    color: #606266;
+    font-weight: 700;
+    th{
+      background-color: #f5f7fa;
+    }
+  }
+  &-column-tooltip{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    >span{
+      white-space: nowrap;
+      >*{
+        display: inline;
+      }
+    }
+  }
+  .el-table__body-wrapper{
+    .infinite-button + .infinite-button {
+      margin-left: 1px;
+      position: relative;
+      &::after{
+        content:'';
+        width: 1px;
+        height: 14px;
+        background-color:#E9E9E9;
+        position: absolute;
+        left: -2px;
+        top: 50%;
+        transform: translateY(-50%);
+      } 
+    }
+  }
+}
+
+.infinite-table-column-tooltip-popper{
+  transition: initial !important;
+  white-space: break-spaces;
+  max-width: 200px;
+  max-height:200px ;
+  box-sizing: border-box;
+  &-container{
+    max-height:180px ;
+    overflow-y: auto;
+  }
+}
