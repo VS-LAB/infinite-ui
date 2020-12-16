@@ -5,8 +5,8 @@ const shell = require('shelljs')
 const signale = require('signale')
 
 const { Signale } = signale
-// 'bootstrap',
 const tasks = [
+  'bootstrap',
   'lint',
   'clean',
   'build:entry',
