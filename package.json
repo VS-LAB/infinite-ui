@@ -1,6 +1,6 @@
 {
   "name": "infinite-ui",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "An Vue UI Toolkit For Web",
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -86,6 +86,13 @@
   ],
   "repository": {
     "type": "git",
-    "url": ""
-  }
+    "url": "https://github.com/VS-LAB/infinite-ui"
+  },
+  "directories": {
+    "example": "examples",
+    "lib": "lib",
+    "test": "tests"
+  },
+  "author": "",
+  "license": "ISC"
 }
