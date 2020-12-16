@@ -72,39 +72,61 @@
     border-color: $--color-primary;
   }
 
+
   .el-date-table td.current:not(.disabled) span {
     background-color: $--color-primary;
     color: #fff;
   }
 
+
   .el-month-table td .cell {
     border-radius: 2px;
   }
 
-  .el-month-table td.current:not(.disabled) .cell {
-    border: 1px solid;
+  .el-month-table td.today .cell {
+    color: $--color-primary;
+    border: 1px solid $--color-primary;
   }
 
-  .el-month-table td .cell:hover {
+  .el-month-table td:hover .cell {
     color: #606266;
     background-color: $--background-color-base;
   }
 
-  .el-month-table td.current:not(.disabled) .cell:hover {
+  .el-month-table td.today:hover .cell {
+    color: $--color-primary;
     background-color: #fff;
+    border-color: $--color-primary;
+  }
+
+  .el-month-table td.current:not(.disabled) .cell {
+    background-color: $--color-primary;
+    color: #fff;
+  }
+
+  .el-year-table td .cell {
+    border-radius: 2px;
+  }
+
+  .el-year-table td.today .cell {
+    color: $--color-primary;
+    border: 1px solid $--color-primary;
+  }
+
+  .el-year-table td:hover .cell {
+    color: #606266;
+    background-color: $--background-color-base;
+  }
+
+  .el-year-table td.today:hover .cell {
+    color: $--color-primary;
+    background-color: #fff;
+    border-color: $--color-primary;
   }
 
   .el-year-table td.current:not(.disabled) .cell {
-    border: 1px solid;
-  }
-
-  .el-year-table td .cell:hover {
-    color: #606266;
-    background-color: $--background-color-base;
-  }
-
-  .el-year-table td.current:not(.disabled) .cell:hover {
-    background-color: #fff;
+    background-color: $--color-primary;
+    color: #fff;
   }
 
 }
