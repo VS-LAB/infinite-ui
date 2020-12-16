@@ -1,6 +1,6 @@
 {
   "name": "infinite-ui",
-  "version": "0.0.10",
+  "version": "1.0.0",
   "description": "An Vue UI Toolkit For Web",
   "scripts": {
     "serve": "vue-cli-service serve",
