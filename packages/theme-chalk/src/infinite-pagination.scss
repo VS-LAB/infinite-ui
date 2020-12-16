@@ -1,0 +1,5 @@
+@import './common/var.scss';
+@import '../../../node_modules/element-ui/packages/theme-chalk/src/pagination.scss';
+.el-pagination{
+  font-weight: 400;
+}

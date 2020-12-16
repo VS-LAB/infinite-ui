@@ -16,7 +16,7 @@ describe('ThemePicker.vue', () => {
   })
 
   it('renders ThemePicker when passed', () => {
-    const elPicker = wrapper.find('.theme-picker')
-    console.log(wrapper.classes(), 'elPicker')
+    // const elPicker = wrapper.find('.theme-picker')
+    // console.log(wrapper.classes(), 'elPicker')
   })
 })

@@ -1,25 +1,33 @@
 module.exports = {
-  root: true,
-  env: {
-    node: true
+  "root": true,
+
+  "parserOptions": {
+    "parser": "babel-eslint",
+    "sourceType": "module"
   },
-  'extends': [
-    'plugin:vue/essential',
-    '@vue/standard'
+
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+
+  "extends": [
+    "plugin:vue/essential",
+    "@vue/standard"
   ],
-  rules: {
-    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
+
+  "rules": {
+    'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    "no-trailing-spaces": 0
   },
-  parserOptions: {
-    parser: 'babel-eslint'
-  },
-  overrides: [
+  "overrides": [
     {
-      files: [
-        '**/__tests__/*.{j,t}s?(x)'
+      "files": [
+        '**/__tests__/*.{j,t}s?(x)',
+        '**/tests/unit/**/*.spec.{j,t}s?(x)'
       ],
-      env: {
+      "env": {
         jest: true
       }
     }

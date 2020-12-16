@@ -1,11 +1,12 @@
 .DS_Store
 node_modules
 /dist
-
+/tests/unit/coverage
+/tests/unit/dist
 # local env files
 .env.local
 .env.*.local
-
+package-lock.json
 # Log files
 npm-debug.log*
 yarn-debug.log*
