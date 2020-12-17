@@ -1,18 +1,24 @@
 <template>
   <div :class="`infinite-home-animation-icon-page infinite-home-animation-icon-page-step${showAni}`">
     <button class="start" @click.stop="showAniFunc">start</button>
-    <div class="infinite-icon-page-bg"></div>
+    <!-- <div class="infinite-icon-page-bg"></div> -->
+    <div class="orange-circle" :class="showDefaultBg"></div>
+    <div class="icon-bg-circle blue-circle" :class="bgAnimateName"></div>
+    <div class="icon-bg-circle black-circle" :class="bgAnimateName"></div>
     <div class="infinite-icon-page-content flex fdc aic jcc">
-      <h3 class="infinite-icon-page-title-h3">
+      <div class="icons-introduce" :class="showIconsIntroduce">
+        <h3 class="infinite-icon-page-title-h3">
         随心图标库
-      </h3>
-      <p class="infinite-icon-page-title-p-top">
-        基于平安项目的矢量图标库，实时预览编辑、一键定制
-      </p>
-      <p class="infinite-icon-page-title-p-bottom">
-        图标颜色、粗细等各种样式随心选择，完美贴合您的项目产品
-      </p>
-      <div class="infinite-icon-page-window flex">
+        </h3>
+        <p class="infinite-icon-page-title-p-top">
+          基于平安项目的矢量图标库，实时预览编辑、一键定制
+        </p>
+        <p class="infinite-icon-page-title-p-bottom">
+          图标颜色、粗细等各种样式随心选择，完美贴合您的项目产品
+        </p>
+      </div>
+  
+      <div class="infinite-icon-page-window flex" :class="rotateAnimateName">
         <div class="infinite-icon-page-window-menu">
           <div class="infinite-icon-page-menu-top flex aic jcfs"><i class="el-icon-picture-outline"></i>Wireframe</div>
           <div class="infinite-icon-page-menu-center flex aic jcfs"><i class="el-icon-picture"></i>Filled</div>
@@ -40,13 +46,15 @@
 </template>
 
 <script>
-// import ElIcon from 'element-ui/lib/icon'
 export default {
   components: {
-    // ElIcon
   },
   data () {
     return {
+      bgAnimateName: '',
+      rotateAnimateName: '',
+      showIconsIntroduce: '',
+      showDefaultBg: '',
       iconList: [
         {
           icon: 'el-icon-warning-outline',
@@ -118,6 +126,20 @@ export default {
   },
   methods: {
     showAniFunc () {
+      this.bgAnimateName = 'circle-animate'
+      this.showIconsIntroduce = 'slide-up-animate'
+      this.showDefaultBg = 'slide-up-bg'
+      if(this.rotateAnimateName === 'rotate-in'){
+        this.rotateAnimateName = '';
+      } else {
+        this.rotateAnimateName = 'rotate-in';
+      }
+      if (this.bgAnimateName === 'circle-animate') {
+        this.bgAnimateName = ''
+        setTimeout(() => {
+          this.bgAnimateName = 'circle-animate'
+        }, 1000);
+      }
       // this.showAni = this.showAni > 4 ? 0 : this.showAni += 1
       // console.log('this.showAni == ', this.showAni)
       setTimeout(() => {
@@ -150,6 +172,7 @@ export default {
   position: relative;
   width: 100vw;
   height: 100vh;
+  background: #fff;
 
   .start {
     position: fixed;
@@ -191,6 +214,52 @@ export default {
     // background-image: linear-gradient(180deg, #45AAFF 0%, #1890FF 100%); // 蓝
     // background-image: linear-gradient(180deg, #FFB240 0%, #FF8D38 100%); // 橙
   }
+  .icon-bg-circle {
+    position: absolute;
+    left: -100vw;
+    top: -70vw;
+    margin:150px auto;
+    width:100vw;
+    height:100vw;
+    border-radius: 50%;
+    background: linear-gradient(180deg, #FFB240 0%, #FF8D38 100%);
+  }
+  .circle-animate {
+    animation: circleWave 1s cubic-bezier(0.41, 0.14, 1, 0.74);
+    animation-fill-mode:forwards;
+  }
+  // 随心图标库文字上滑动画
+  .slide-up-animate {
+    animation: slideUp 0.5s ease-out;
+    animation-fill-mode:forwards;
+    animation-delay: 0.5s;
+  }
+  // 第一个橙色背景上滑动画
+  .slide-up-bg {
+    animation: slideUpBg 0.6s cubic-bezier(0.44, 0.01, 1, 1);
+    animation-fill-mode:forwards;
+  }
+  .rotate-in {
+    animation: rotateIn 0.7s cubic-bezier(0.29, 0.07, 0.88, 0.8);
+    animation-fill-mode:forwards;
+  }
+  .orange-circle {
+    position: absolute;
+    top: 100vh;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(180deg, #FFB240 0%, #FF8D38 100%);
+    opacity: 0;
+  }
+  .blue-circle {
+    background: linear-gradient(180deg, #45AAFF 0%, #1890FF 100%);
+    animation-delay: 2s;
+  }
+  .black-circle {
+    background: linear-gradient(180deg, #32303F 0%, #201E2B 100%);
+    animation-delay: 4s;
+  }
+    
   .infinite-icon-page-content {
     position: absolute;
     top: 0;
@@ -200,6 +269,11 @@ export default {
     text-align: center;
     color: #fff;
     font-family: PingFangSC-Semibold;
+    .icons-introduce {
+      position: absolute;
+      opacity: 0;
+      top: 7vw;
+    }
     .infinite-icon-page-title-h3 {
       font-size: 2.186vw;
       font-weight: 400;
@@ -214,10 +288,22 @@ export default {
       margin-top: 2px;
     }
     .infinite-icon-page-window {
+      position: absolute;
+      top: 20vh;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      margin: auto;
+      width: 42vw;
       height: 42vw;
       max-height: 58.5%;
       margin-top: 2.34vw;
       border-radius: 7px;
+
+      //   top: -77vh;
+      // left: 198vw;
+      // transform: rotateZ(50deg) skewY(158deg) scale(5);
+      // transform-origin: -128px -43px;
       // overflow: hidden;
       // box-shadow: 0 0 16px 8px rgba(24, 144, 255, 0.6);
       .infinite-icon-page-window-menu {
@@ -246,6 +332,7 @@ export default {
       }
       .infinite-icon-page-window-icon-list {
         height: 100%;
+        background: #f7fafc;
         // background: rgba(247,250,252,.8);
         .infinite-icon-page-list-mask {
 
@@ -652,6 +739,55 @@ export default {
     100% {
       transform: translate(-0px, -0px);
       opacity: 1;
+    }
+  }
+
+  /* 背景纯色圆环仿水波效果 */
+  @keyframes circleWave {
+    from {
+      transform: scale(1);
+    }
+    to {
+      transform: scale(3.5);
+      top: -45vw;
+    }
+  }
+  /* 元素以一定角度旋转飞入效果 */
+  @keyframes rotateIn {
+    0% {
+      top: -77vh;
+      left: 170vw;
+      transform: rotateZ(50deg) skewY(158deg) scale(5);
+      transform-origin: -128px -43px;
+    }
+    60% {
+      top: -72vh;
+    }
+    100% {
+      top: 20vh;
+      left: 0vw;
+      transform: rotateZ(0deg) skewY(180deg) scale(1);
+      transform-origin: -128px -43px;
+    }
+  }
+  @keyframes slideUp {
+    0% {
+      opacity: 0;
+      top: 20vh;
+    }
+    100% {
+      opacity: 1;
+      top: 7vh;
+    }
+  }
+  @keyframes slideUpBg {
+    0% {
+      opacity: 0;
+      top: 100vh;
+    }
+    100% {
+      opacity: 1;
+      top: 0vh;
     }
   }
 }
