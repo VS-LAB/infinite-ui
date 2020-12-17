@@ -17,6 +17,7 @@ import {
   Tree
 } from './docs'
 import Home from '@/views/home'
+import HomeAnimation from '@/views/homeAnimation.vue'
 import Layout from '@/views'
 import { getFileList } from './generate'
 
@@ -32,6 +33,18 @@ const routes = [
       {
         path: 'home',
         name: 'home'
+      }
+    ]
+  },
+  {
+    path: '/ani',
+    name: '/Ani',
+    redirect: '/ani/homeAnimation',
+    component: HomeAnimation,
+    children: [
+      {
+        path: 'homeAnimation',
+        name: 'homeAnimation'
       }
     ]
   },
