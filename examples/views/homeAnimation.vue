@@ -240,7 +240,8 @@ export default {
     background: linear-gradient(180deg, #FFB240 0%, #FF8D38 100%);
   }
   .circle-animate {
-    animation: circleWave 0.8s cubic-bezier(0.41, 0.14, 1, 0.74);
+    // cubic-bezier(0.33,-0.05, 0.4, 0.49)  ease-in-out
+    animation: circleWave 1.5s cubic-bezier(0.32, 0.04, 0.63, 1.04);
     animation-fill-mode:forwards;
   }
   // 随心图标库文字上滑动画
@@ -274,7 +275,7 @@ export default {
   }
   .black-circle {
     background: linear-gradient(180deg, #32303F 0%, #201E2B 100%);
-    animation-delay: 3.5s;
+    animation-delay: 3.6s;
   }
     
   .infinite-icon-page-content {
