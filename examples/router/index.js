@@ -18,6 +18,7 @@ import {
 } from './docs'
 import Home from '@/views/home'
 import Layout from '@/views'
+import Standard from '@/views/standard'
 import { getFileList } from './generate'
 
 const generateRouters = getFileList()
@@ -34,6 +35,11 @@ const routes = [
         name: 'home'
       }
     ]
+  },
+  {
+    path: '/standard',
+    name: 'standard',
+    component: Standard,
   },
   {
     path: '/guide',

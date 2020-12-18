@@ -1,0 +1,283 @@
+@import './animation.scss';
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.bottomIcon{
+    display: inline-block;
+    width: 24px;
+    height: 27px;
+    margin-left: 24px;
+    margin-right: 10px;
+}
+
+@mixin paddingLeft($leftval:60) {  
+    padding-left: $leftval;
+}
+
+@mixin top($val:55) {  
+    top: $val;
+}
+@mixin left($val:55) {  
+    left: $val;
+}
+@mixin right($val:55) {  
+    right: $val;
+}
+@mixin bottom($val:55) {  
+    bottom: $val;
+}
+.infinite-standard{
+    @extend .center;
+    &-top{
+       text-align: center;
+       transform: translateY(160%);
+       opacity: 0.3;
+       z-index: 2;
+       animation: showTop 1s forwards;
+        &_title{
+            font-family: PingFangSC-Semibold;
+            font-size: 60px;
+            color: #222222;
+            letter-spacing: 0;
+            margin-bottom: 24px;
+        }
+        &_subTitle {
+            width: 720px;
+            height: 64px;
+            margin: 0 auto;
+            opacity: 0.6;
+            font-family: PingFangSC-Regular;
+            font-size: 20px;
+            color: #222222;
+            letter-spacing: 0;
+            text-align: center;
+            line-height: 32px;
+        }
+    }
+    &_content{
+        display: flex;
+        flex-direction:row;
+        margin-top: 100px;
+    }
+    &-line{
+        z-index: 20;
+        opacity: 0;
+        animation: cardLine 1.5s forwards 1.5s;
+        &_horizontal{
+            position: absolute;
+            left: -60px;
+            top: 0;
+            height: 1px;
+            width: 774px;
+            border-top:1px dashed #cccccc;
+        }
+        &_vertical{
+            position: absolute;
+            top: -60px;
+            height: 570px;
+            width: 1px;
+            border-left:1px dashed #cccccc;
+        }
+        &_vertical-small{
+            position: absolute;
+            bottom: 30px;
+            height: 60px;
+            width: 1px;
+            border-left:1px dashed #cccccc;
+        }
+        .top55{
+            @include top(55px);
+        }
+        .top90{
+            @include top(90px);
+        }
+        .top135{
+            @include top(135px);
+        }
+        .top195{
+            @include top(195px);
+        }
+        .top255{
+            @include top(255px);
+        }
+        .top295{
+            @include top(295px);
+        }
+        .top370{
+            @include top(370px);
+        }
+        .top410{
+            @include top(410px);
+        }
+        .top450{
+            @include top(450px);
+        }
+        .left0{
+            @include left(0px);
+        }
+
+        .left55{
+            @include left(55px);
+        }
+        .left55{
+            @include left(55px);
+        }
+        .right0{
+            @include right(0px);
+        }
+        .right70{
+            @include right(70px);
+        }
+        .right110{
+            @include right(110px);
+        } 
+
+        .left135{
+            @include left(135px);
+        }
+        .left175{
+            @include left(175px);
+        }
+        .left200{
+            @include left(200px);
+        }
+        .left210{
+            @include left(210px);
+        }
+        .right140{
+            @include right(140px);
+        }
+        .right176{
+            @include right(176px);
+        }
+        .right150{
+            @include right(150px);
+        }
+        .right180{
+            @include right(180px);
+        }
+        .right210{
+            @include right(210px);
+        }
+    } 
+    img{
+        max-width: 100%;
+        max-height: 100%;
+    }
+    &-card{
+        position: relative;
+        width: 652px;
+        height: 450px;
+        z-index: 10;
+        box-shadow: 0px 18px 104px #DFE5F6;
+        animation: showCard 1.5s forwards 1.5s;
+       
+        // .d_f_r{
+        //     display: flex;
+        //     flex-direction: row;
+        //     align-items: center;
+        //     justify-content: space-between;
+        // }
+        // .card-top{
+        //     @extend .d_f_r;
+        //     &_explain{
+        //         display: inline-block;
+        //         width: 34px;
+        //         height: 34px;
+        //         background: url('../../assets/icons/explain.svg');
+        //     }
+        //     p{
+        //         font-family: PingFangSC-Regular;
+        //         font-size: 33.6px;
+        //         color: #606266;
+        //         line-height: 52.8px;
+        //     }
+        // }
+        // .card-content{
+        //     p{
+        //         font-family: HelveticaNeue;
+        //         font-size: 78px;
+        //         color: #303133;
+        //         line-height: 91.2px;
+        //     }
+        //     &_progress{
+        //         width: 537px;
+        //         height: 19px;
+        //         background-color: #F0F2F5;
+        //         border-radius: 20px;
+        //     }
+        //     &_innerProgress{
+        //         width: 62.5%;
+        //         height: 19px;
+        //         background-image: linear-gradient(270deg, #FFA874 0%, #FF7979 100%);
+        //         border-radius: 100px;
+        //     }
+        // }
+        // .card-bottom{
+        //     @extend .d_f_r;
+        //     padding-top: 20px;
+        //     border-top: 2.4px solid #EBEEF5;
+        //     &_container-text{
+        //         font-family: PingFangSC-Regular;
+        //         font-size: 33.6px;
+        //         color: #606266;
+        //         line-height: 52.8px;
+        //         span{
+        //             font-family: HelveticaNeue;
+        //         }
+        //     }
+        //     &_container-redUp{
+        //         @extend .bottomIcon;
+        //         background: url('../../assets/icons/up.svg');
+        //     }
+        //     &_container-greenDown{
+        //         @extend .bottomIcon;
+        //         background: url('../../assets/icons/down.svg');
+        //     }
+    }
+   
+    &-code{
+        width: 600px;
+        height: 418px;
+        z-index: 1;
+        animation: showCode 1.5s forwards;
+        padding: 16px 26px 16px 26px;
+        background: #F3F7FE;
+        border-radius: 20px;
+        p{
+            font-size: 22px;
+            font-family: PingFangSC-Semibold;
+            letter-spacing: 0;
+            line-height: 38px;
+            color: #0F2237;
+        }
+        .typing_normal {
+            display: none;
+        }
+        .typing_active {
+            display: block;
+            width: 600px;
+            height: 30px;
+            white-space: nowrap;
+            animation: typing 2.5s steps(600, end);
+            overflow: hidden;
+        }
+        .typing_opacity {
+            animation: opacity100 1s;
+        }
+        .typing_pl20{
+            @include paddingLeft(20px);
+        }
+        .typing_pl30{
+            @include paddingLeft(30px);
+        }
+        .typing_pl45{
+            @include paddingLeft(45px);
+        }
+        
+    }
+}
