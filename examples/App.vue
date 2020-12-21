@@ -1,16 +1,16 @@
 <template>
   <div style="height: 100%">
-    <!-- <el-container :class="{ 'home-container': isFixed }">
+    <el-container :class="{ 'home-container': isFixed }">
       <el-header height="80"
                  :class="{ 'header-fixed': !isFixed }">
         <header-model></header-model>
       </el-header>
       <div :class="{ 'view-container': !isFixed }">
-        <div class="view-container-scroll"> -->
+        <div class="view-container-scroll">
           <router-view></router-view>
-        <!-- </div> -->
-      <!-- </div> -->
-    <!-- </el-container> -->
+        </div>
+      </div>
+    </el-container>
   </div>
 </template>
 <script>
