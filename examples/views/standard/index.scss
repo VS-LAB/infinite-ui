@@ -31,13 +31,14 @@
   bottom: $val;
 }
 .infinite-standard {
+  position: relative;
   @extend .center;
   &-top {
     text-align: center;
     transform: translateY(160%);
-    opacity: 0.3;
+    opacity: 0;
     z-index: 2;
-    animation: showTop 1s forwards;
+    animation: showTop 1.5s forwards 0.5s;
     &_title {
       font-family: PingFangSC-Semibold;
       font-size: 60px;
@@ -66,12 +67,12 @@
   }
   .line-box {
     opacity: 0;
-    animation: cardLineBox 1s forwards 1.5s;
+    animation: cardLineBox 1s forwards 1.7s;
   }
   &-line {
     z-index: 20;
     opacity: 0;
-    animation: cardLine 2s forwards 1.5s;
+    animation: cardLine 2s forwards 1.7s;
     &_horizontal {
       position: absolute;
       left: -60px;
@@ -174,91 +175,16 @@
     max-width: 100%;
     max-height: 100%;
   }
+  &-card-wrapper {
+    position: relative;
+  }
   &-card {
     position: relative;
     width: 652px;
     height: 450px;
     z-index: 10;
     box-shadow: 0px 18px 104px #dfe5f6;
-    animation: showCard 1.5s forwards 2.5s;
-
-    &-exclamatory-mark {
-      position: absolute;
-      right: 68px;
-      top: 47px;
-      transform-origin: center;
-      background: url("../../assets/icons/exclamatory mark.svg") center
-      no-repeat;
-      background-color: #fff;
-      box-shadow: 0 5px 20px 0 rgba(255, 214, 176, 0.6);
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      animation: showMask 1.5s forwards;
-    }
-
-    // .d_f_r{
-    //     display: flex;
-    //     flex-direction: row;
-    //     align-items: center;
-    //     justify-content: space-between;
-    // }
-    // .card-top{
-    //     @extend .d_f_r;
-    //     &_explain{
-    //         display: inline-block;
-    //         width: 34px;
-    //         height: 34px;
-    //         background: url('../../assets/icons/explain.svg');
-    //     }
-    //     p{
-    //         font-family: PingFangSC-Regular;
-    //         font-size: 33.6px;
-    //         color: #606266;
-    //         line-height: 52.8px;
-    //     }
-    // }
-    // .card-content{
-    //     p{
-    //         font-family: HelveticaNeue;
-    //         font-size: 78px;
-    //         color: #303133;
-    //         line-height: 91.2px;
-    //     }
-    //     &_progress{
-    //         width: 537px;
-    //         height: 19px;
-    //         background-color: #F0F2F5;
-    //         border-radius: 20px;
-    //     }
-    //     &_innerProgress{
-    //         width: 62.5%;
-    //         height: 19px;
-    //         background-image: linear-gradient(270deg, #FFA874 0%, #FF7979 100%);
-    //         border-radius: 100px;
-    //     }
-    // }
-    // .card-bottom{
-    //     @extend .d_f_r;
-    //     padding-top: 20px;
-    //     border-top: 2.4px solid #EBEEF5;
-    //     &_container-text{
-    //         font-family: PingFangSC-Regular;
-    //         font-size: 33.6px;
-    //         color: #606266;
-    //         line-height: 52.8px;
-    //         span{
-    //             font-family: HelveticaNeue;
-    //         }
-    //     }
-    //     &_container-redUp{
-    //         @extend .bottomIcon;
-    //         background: url('../../assets/icons/up.svg');
-    //     }
-    //     &_container-greenDown{
-    //         @extend .bottomIcon;
-    //         background: url('../../assets/icons/down.svg');
-    //     }
+    animation: showCard 4s forwards;
   }
 
   &-code {
@@ -266,10 +192,20 @@
     width: 600px;
     height: 418px;
     z-index: 1;
-    animation: showCode 1.5s forwards;
+    opacity: 0;
+    animation: showCode 1s forwards;
     padding: 16px 26px 16px 26px;
     background: #f3f7fe;
     border-radius: 20px;
+    &-mask {
+      top: 8px;
+      left: -360px;
+      position: absolute;
+      background-color: rgba(0, 0, 0, 0.2);
+      width: 97%;
+      height: 96%;
+      animation: codeMask 1s forwards;
+    }
     p {
       font-size: 22px;
       font-family: PingFangSC-Semibold;
@@ -300,5 +236,27 @@
     .typing_pl45 {
       @include paddingLeft(45px);
     }
+  }
+
+  .end-top {
+    animation: endTop 1s forwards;
+  }
+
+  .infinite-standard-card-exclamatory-mark {
+    position: absolute;
+    margin-left: -340px;
+    margin-top: -40px;
+    z-index: 99;
+    transform-origin: center;
+    background: url("../../assets/icons/exclamatory mark.svg") center no-repeat;
+    background-color: #fff;
+    box-shadow: 0 5px 20px 0 rgba(255, 214, 176, 0.6);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    animation: showMask 1.5s forwards;
+  }
+  .end-mask {
+    animation: endMask 1s forwards;
   }
 }
