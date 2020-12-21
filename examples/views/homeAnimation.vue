@@ -122,7 +122,8 @@ export default {
           text: 'file'
         }
       ],
-      showAni: 0
+      showAni: 0, // 动画状态
+      timing: 500 // 动画开始时间
     }
   },
   methods: {
@@ -130,37 +131,37 @@ export default {
       this.bgAnimateName = 'circle-animate'
       this.showIconsIntroduce = 'slide-up-animate'
       this.showDefaultBg = 'slide-up-bg'
-      if(this.rotateAnimateName === 'rotate-in'){
-        this.rotateAnimateName = '';
+      if (this.rotateAnimateName === 'rotate-in') {
+        this.rotateAnimateName = ''
       } else {
-        this.rotateAnimateName = 'rotate-in';
+        this.rotateAnimateName = 'rotate-in'
       }
       if (this.bgAnimateName === 'circle-animate') {
         this.bgAnimateName = ''
         setTimeout(() => {
           this.bgAnimateName = 'circle-animate'
-        }, 1000);
+        }, 1000)
       }
       // this.showAni = this.showAni > 4 ? 0 : this.showAni += 1
       // console.log('this.showAni == ', this.showAni)
       setTimeout(() => {
         this.showAni = 1
-      }, 500)
+      }, this.timing + 500)
       setTimeout(() => {
         this.showAni = 2
-      }, 2000)
+      }, this.timing + 2000)
       setTimeout(() => {
         this.showAni = 3
-      }, 2500)
+      }, this.timing + 2500)
       setTimeout(() => {
         this.showAni = 4
-      }, 4000)
+      }, this.timing + 4000)
       setTimeout(() => {
         this.showAni = 5
-      }, 4500)
+      }, this.timing + 4500)
       setTimeout(() => {
         this.showAni = 6
-      }, 6000)
+      }, this.timing + 6000)
     },
     showAniFuncReset () {
       this.showAni = 0
@@ -182,18 +183,26 @@ export default {
   .start {
     position: fixed;
     top: 0;
-    left: 0;
+    left: 1px;
     width: 60px;
     height: 30px;
     z-index: 999;
+    &:focus {
+      outline: 1px dotted Highlight;
+      // outline: 1px auto #fff;
+    }
   }
   .reset {
     position: fixed;
     top: 0;
-    left: 60px;
+    left: 62px;
     width: 60px;
     height: 30px;
     z-index: 999;
+    &:focus {
+      outline: 1px dotted Highlight;
+      // outline: 1px auto #fff;
+    }
   }
 
   //****通用定义****//
@@ -275,7 +284,7 @@ export default {
   }
   .black-circle {
     background: linear-gradient(180deg, #32303F 0%, #201E2B 100%);
-    animation-delay: 3.6s;
+    animation-delay: 3.7s;
   }
     
   .infinite-icon-page-content {
@@ -321,6 +330,7 @@ export default {
       .infinite-icon-page-window-menu {
         width: 7.2vw;
         height: 100%;
+        background: rgba(255,255,255,0);
         // background: rgba(24,144,255,1);
         .infinite-icon-page-menu-top {
           height: 10.5%;
@@ -339,13 +349,13 @@ export default {
           font-size: 8px;
         }
         i {
-          margin: 0 6px 0 12px;
+          margin: 0 6% 0 12%;
         }
       }
       .infinite-icon-page-window-icon-list {
         height: 100%;
-        background: #f7fafc;
-        // background: rgba(247,250,252,.8);
+        // background: #f7fafc;
+        background: rgba(247,250,252,1);
         .infinite-icon-page-list-mask {
 
         }
@@ -577,7 +587,7 @@ export default {
       }
       .infinite-icon-page-window {
         .infinite-icon-page-window-menu {
-          background: rgba(255,141,56,1);
+          // background: rgba(255,141,56,1);
           .infinite-icon-page-menu-top {
             background: rgba(255,255,255,0.16);
           }
@@ -632,7 +642,7 @@ export default {
       .infinite-icon-page-window {
         .infinite-icon-page-window-menu {
           // animation: sectionOfMenuTransparency 1.5s linear 0s;
-          background: rgba(255,141,56,1);
+          // background: rgba(255,141,56,1);
           .infinite-icon-page-menu-top {
             background: rgba(255,255,255,0.16);
           }
@@ -901,7 +911,7 @@ export default {
       }
       .infinite-icon-page-window {
         .infinite-icon-page-window-menu {
-          background: rgba(255,141,56,1);
+          // background: rgba(255,141,56,1);
           .infinite-icon-page-menu-top {
             background: rgba(255,255,255,0.16);
           }
@@ -913,7 +923,9 @@ export default {
           }
         }
         .infinite-icon-page-window-icon-list {
-          background: rgba(247,250,252,1);
+          // background: rgba(247,250,252,1);
+          animation: sectionOfListO 1.5s linear 0s;
+          // background: rgba(247,250,252,.8);
           .infinite-icon-page-list-mask {
 
           }
@@ -958,7 +970,8 @@ export default {
       }
       .infinite-icon-page-window {
         .infinite-icon-page-window-menu {
-          animation: sectionOfMenuTransparency3 1.5s linear 0s;
+          // animation: sectionOfMenuTransparency3 1s linear 0s;
+          // background: rgba(24,144,255,1);
           .infinite-icon-page-menu-top {
             background: rgba(255,255,255,0.16);
           }
@@ -973,8 +986,9 @@ export default {
           }
         }
         .infinite-icon-page-window-icon-list {
-          animation: sectionOfList 1.5s linear 0s;
-          background: rgba(247,250,252,1);
+          animation: OsectionOfList 1.5s linear 0s;
+          // background: rgba(247,250,252,.8);
+          // background: rgba(247,250,252,1);
           .infinite-icon-page-list-mask {
 
           }
@@ -1224,7 +1238,7 @@ export default {
       }
       .infinite-icon-page-window {
         .infinite-icon-page-window-menu {
-          background: rgba(24,144,255,1);
+          // background: rgba(24,144,255,1);
           .infinite-icon-page-menu-top {
             background: rgba(255,255,255,0.16);
           }
@@ -1236,7 +1250,8 @@ export default {
           }
         }
         .infinite-icon-page-window-icon-list {
-          background: rgba(247,250,252,1);
+          animation: sectionOfListO 1.5s linear 0s;
+          // background: rgba(247,250,252,.8);
           .infinite-icon-page-list-mask {
 
           }
@@ -1281,7 +1296,8 @@ export default {
       }
       .infinite-icon-page-window {
         .infinite-icon-page-window-menu {
-          animation: sectionOfMenuTransparency5 1.5s linear 0s;
+          // animation: sectionOfMenuTransparency5 1s linear 0s;
+          // background: rgba(43,41,57,1);
           .infinite-icon-page-menu-top {
             background: rgba(255,255,255,0.16);
           }
@@ -1296,8 +1312,8 @@ export default {
           }
         }
         .infinite-icon-page-window-icon-list {
-          animation: sectionOfList 1.5s linear 0s;
-          background: rgba(247,250,252,1);
+          animation: OsectionOfList 1.5s linear 0s;
+          // background: rgba(247,250,252,1);
           .infinite-icon-page-list-mask {
 
           }
@@ -1547,7 +1563,7 @@ export default {
       }
       .infinite-icon-page-window {
         .infinite-icon-page-window-menu {
-          background: rgba(43,41,57,1);
+          // background: rgba(43,41,57,1);
           .infinite-icon-page-menu-top {
             background: rgba(255,255,255,0.16);
           }
@@ -1783,15 +1799,23 @@ export default {
       // opacity: 1;
     }
   }
-  @keyframes sectionOfList {
+  @keyframes sectionOfListO {
     0% {
       background: rgba(247,250,252,1);
     }
-    15% {
+    40% {
       background: rgba(247,250,252,1);
     }
-    50% {
-      background: rgba(247,250,252,.8);
+    100% {
+      background: rgba(247,250,252,.9);
+    }
+  }
+  @keyframes OsectionOfList {
+    0% {
+      background: rgba(247,250,252,.9);
+    }
+    60% {
+      background: rgba(247,250,252,1);
     }
     75% {
       background: rgba(247,250,252,1);
