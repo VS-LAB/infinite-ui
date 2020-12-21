@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-12-21 09:47:44
+ * @LastEditTime: 2020-12-21 09:57:14
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /infinite-ui/examples/App.vue
+-->
 <template>
   <div style="height: 100%">
     <el-container :class="{ 'home-container': isFixed }">

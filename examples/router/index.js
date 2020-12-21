@@ -40,7 +40,9 @@ const routes = [
   {
     path: '/standard',
     name: 'standard',
-    component: Standard,
+    component: Standard
+  },
+  {
     path: '/ani',
     name: '/Ani',
     redirect: '/ani/homeAnimation',
