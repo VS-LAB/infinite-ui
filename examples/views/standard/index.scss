@@ -34,10 +34,10 @@
   position: relative;
   @extend .center;
   &-top {
+    position: relative;
     text-align: center;
-    transform: translateY(180%);
     opacity: 0;
-    z-index: 2;
+    z-index: 1;
     animation: showTop 1s forwards;
     &_title {
       font-family: PingFangSC-Semibold;
@@ -64,14 +64,23 @@
     flex-direction: row;
     margin-top: 100px;
     position: relative;
+    z-index: 100;
   }
   .line-box {
     opacity: 0;
-    animation: cardLineBox 1s forwards 1.7s;
+    animation: cardLineBox 1s forwards 2s;
+    .infinite-standard-line_horizontal {
+      transform: scaleX(1);
+      opacity: 1;
+    }
+    .infinite-standard-line_vertical {
+      transform: scaleX(1);
+      opacity: 1;
+    }
   }
   &-line {
     z-index: 20;
-    opacity: 0;
+    opacity: 1;
     animation: cardLine 2s forwards 1s;
     &_horizontal {
       position: absolute;
@@ -79,14 +88,18 @@
       top: 0;
       height: 1px;
       width: 774px;
-      border-top: 1px dashed #cccccc;
+      opacity: 0.4;
+      border-top: 2px dashed rgba(170, 178, 220, 0.4);
+      transform: scaleX(0);
     }
     &_vertical {
       position: absolute;
       top: -60px;
       height: 570px;
       width: 1px;
-      border-left: 1px dashed #cccccc;
+      opacity: 0.4;
+      border-left: 2px dashed rgba(170, 178, 220, 0.4);
+      transform: scaleX(0);
     }
     &_vertical-small {
       position: absolute;
@@ -94,6 +107,37 @@
       height: 60px;
       width: 1px;
       border-left: 1px dashed #cccccc;
+    }
+
+    .fade-in-box {
+      $an: fadeInBox 1s forwards 0.5s;
+      $anSec: fadeInBox 1s forwards 0.8s;
+
+      // 虚线6-15 从左到右
+      &-6 {
+        transform-origin: left center;
+        animation: $an;
+      }
+      // 虚线1-5 上到下
+      &-1 {
+        transform-origin: center top;
+        animation: $an;
+      }
+      // 7,8,11 从右往左
+      &-7 {
+        transform-origin: right center;
+        animation: $anSec;
+      }
+      // 9,10,12,13,14 从左往右
+      &-9 {
+        transform-origin: left center;
+        animation: $anSec;
+      }
+      // 2,3,4 从下往上
+      &-2 {
+        transform-origin: center bottom;
+        animation: $anSec;
+      }
     }
 
     .top55 {
@@ -177,6 +221,7 @@
   }
   &-card-wrapper {
     position: relative;
+    z-index: 10;
   }
   &-card {
     position: relative;
@@ -185,6 +230,7 @@
     z-index: 10;
     box-shadow: 0px 18px 104px #dfe5f6;
     animation: showCard 4s forwards;
+    background-color: #fff;
   }
 
   &-code {

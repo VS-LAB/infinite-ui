@@ -19,25 +19,25 @@
           <div class="infinite-standard-line">
 
             <!-- horizontal line -->
-            <div class="infinite-standard-line_horizontal line-box"></div>
-            <div class="infinite-standard-line_horizontal top55"></div>
-            <div class="infinite-standard-line_horizontal top90"></div>
-            <div class="infinite-standard-line_horizontal top135"></div>
-            <div class="infinite-standard-line_horizontal top195"></div>
-            <div class="infinite-standard-line_horizontal top255"></div>
-            <div class="infinite-standard-line_horizontal top295"></div>
-            <div class="infinite-standard-line_horizontal top370"></div>
-            <div class="infinite-standard-line_horizontal top410"></div>
-            <div class="infinite-standard-line_horizontal top450 line-box"></div>
+            <div class="infinite-standard-line_horizontal fade-in-box-6"></div>
+            <div class="infinite-standard-line_horizontal top55 fade-in-box-7"></div>
+            <div class="infinite-standard-line_horizontal top90 fade-in-box-7"></div>
+            <div class="infinite-standard-line_horizontal top135 fade-in-box-9"></div>
+            <div class="infinite-standard-line_horizontal top195 fade-in-box-9"></div>
+            <div class="infinite-standard-line_horizontal top255 fade-in-box-7"></div>
+            <div class="infinite-standard-line_horizontal top295 fade-in-box-9"></div>
+            <div class="infinite-standard-line_horizontal top370 fade-in-box-9"></div>
+            <div class="infinite-standard-line_horizontal top410 fade-in-box-9"></div>
+            <div class="infinite-standard-line_horizontal top450 fade-in-box-6"></div>
 
             <!-- vertical line -->
-            <div class="infinite-standard-line_vertical left0 line-box"></div>
-            <div class="infinite-standard-line_vertical left55"></div>
-            <div class="infinite-standard-line_vertical left55"></div>
-            <div class="infinite-standard-line_vertical right110"></div>
+            <div class="infinite-standard-line_vertical left0 fade-in-box-1"></div>
+            <div class="infinite-standard-line_vertical left55 fade-in-box-2"></div>
+            <div class="infinite-standard-line_vertical left55 fade-in-box-2"></div>
+            <div class="infinite-standard-line_vertical right110 fade-in-box-2"></div>
 
-            <div class="infinite-standard-line_vertical right70"></div>
-            <div class="infinite-standard-line_vertical right0 line-box"></div>
+            <div class="infinite-standard-line_vertical right70 fade-in-box-2"></div>
+            <div class="infinite-standard-line_vertical right0 fade-in-box-1"></div>
 
             <!-- small line -->
             <div class="infinite-standard-line_vertical-small left135"></div>

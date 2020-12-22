@@ -16,10 +16,11 @@
 }
 @keyframes showTop {
   from {
-    opacity: 0;
+    opacity: 0.5;
+    transform: translateY(380px);
   }
   to {
-    transform: translateY(0%);
+    transform: translateY(0);
     opacity: 1;
   }
 }
@@ -48,7 +49,7 @@
   }
 
   50% {
-    opacity: .3;
+    opacity: 0.3;
   }
 
   100% {
@@ -58,8 +59,8 @@
 }
 @keyframes codeMask {
   0% {
-      transform: translateX(0);
-      background-color: rgba(255, 255, 255, 0.2);
+    transform: translateX(0);
+    background-color: rgba(255, 255, 255, 0.2);
   }
 
   100% {
@@ -75,13 +76,13 @@
   }
 
   to {
-    transform: translate(20px,950px) scale(1);
+    transform: translate(20px, 950px) scale(1);
     opacity: 1;
   }
 }
 @keyframes showCard {
   0% {
-    transform: translateX(0px) scale(0.5);
+    transform: translateX(0px) scale(0.7);
   }
   20% {
     transform: translateX(0px) scale(1);
@@ -96,14 +97,14 @@
 @keyframes cardLine {
   0% {
     left: 0px;
-    opacity: 0;
+    opacity: 0.5;
   }
   10% {
     opacity: 1;
     left: -60px;
   }
 
-  50% {
+  70% {
     opacity: 1;
     left: -60px;
   }
@@ -119,6 +120,19 @@
   }
 
   100% {
+    opacity: 1;
+  }
+}
+
+// 卡片线进入
+@keyframes fadeInBox {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1);
     opacity: 1;
   }
 }
