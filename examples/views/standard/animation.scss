@@ -38,8 +38,8 @@
     opacity: 1;
   }
   to {
-    opacity: 0;
-    transform: translateY(-750px);
+    opacity: 1;
+    transform: translateY(-950px);
   }
 }
 @keyframes showCode {
@@ -70,13 +70,12 @@
 // 鼠标移动后 图标恢复100%
 @keyframes endMask {
   from {
-    transform: scale(2);
+    transform: translate(0) scale(2);
     opacity: 1;
   }
 
   to {
-    left: 39%;
-    transform: scale(1);
+    transform: translate(20px,950px) scale(1);
     opacity: 1;
   }
 }

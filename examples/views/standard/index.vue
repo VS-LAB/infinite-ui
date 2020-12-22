@@ -1,10 +1,6 @@
 <template>
   <div class="infinite-standard">
-    <div
-      class="infinite-standard-card-exclamatory-mark"
-      :class="{'end-mask':endTop}"
-      v-if="showMask"
-    />
+
     <div
       class="infinite-standard-top"
       :class="{'end-top':endTop}"
@@ -14,11 +10,12 @@
         完善的设计指引、设计资源，帮助产品等非设计者快速产出高质量的产品原型帮助设计者完善产品设计、统一设计规范
       </div>
     </div>
-    <div class="infinite-standard_content" :class="{'end-top':endTop}">
+    <div
+      class="infinite-standard_content"
+      :class="{'end-top':endTop}"
+    >
       <div class="infinite-standard-card-wrapper">
-        <div
-          class="infinite-standard-card"
-        >
+        <div class="infinite-standard-card">
           <div class="infinite-standard-line">
 
             <!-- horizontal line -->
@@ -55,9 +52,7 @@
           </div>
 
           <!-- 外框线 -->
-          <div
-            class="infinite-standard-line line-box"
-          >
+          <div class="infinite-standard-line line-box">
             <!-- horizontal line -->
             <div class="infinite-standard-line_horizontal"></div>
             <div class="infinite-standard-line_horizontal top450"></div>
@@ -71,6 +66,11 @@
             class="infinite-standard-card_img"
             :src="require('@/assets/cardComponent.png')"
           />
+          <div
+            class="infinite-standard-card-exclamatory-mark"
+            :class="{'end-mask':endTop}"
+            v-if="showMask"
+          />
         </div>
 
       </div>
@@ -79,7 +79,7 @@
         class="infinite-standard-code"
         v-show="isShowCode"
       >
-      <div class="infinite-standard-code-mask"></div>
+        <div class="infinite-standard-code-mask"></div>
         <p
           :class="showCode(index)"
           v-for="(code, index) in codes"
