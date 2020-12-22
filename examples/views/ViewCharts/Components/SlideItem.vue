@@ -5,7 +5,7 @@
     }">
     <div class="slider-title flex flex-align flex-content-space">
       <slot name='header'>
-        <div class="flex-1 font-16 font-color-light ">{{title}}</div>
+        <div class="flex-1 font font-color-light ">{{title}}</div>
       </slot>
       <div class="icon" v-if="showIcon">
         <!-- <embed src="~@/assets/info.svg" type="image/svg+xml" /> -->
@@ -25,17 +25,17 @@
     </div>
     <div class="desc-container" v-if="desc.length">
       <div class="bg-white desc flex flex-align flex-content-space"  v-for="item in desc" :key="item.title">
-        <div class="desc-title font-36 font-color-dark">
+        <div class="desc-title font-color-dark">
           {{item.title}}
         </div>
-        <div class="flex font-16">
+        <div class="flex">
           <div class="sub-title font-color-light">{{item.sub_title}}</div>
           <div class="sub-value font-color-dark">{{item.sub_value}}</div>
         </div>
       </div>
     </div>
     <div class="chart-containr">
-      <component :is="showCard" :id="id" :height='height'></component>
+      <component :ref="this.cardType" :is="showCard" :id="id" :height='height' :showType='showType'></component>
     </div>
   </div>
 </template>
@@ -90,11 +90,14 @@ export default {
       return 'kkk' + Math.round(Math.random() * 100000000)
     },
     height () {
-      const { showType } = this
+      const { showType, width } = this
       if (showType === 'large') {
-        return 300
+        return 15.625 * width
       }
-      return 116
+      return 6.042 * width
+    },
+    width () {
+      return document.documentElement.clientWidth / 100
     }
   }
 }
@@ -103,7 +106,7 @@ export default {
 <style lang='scss' scoped>
 @import '../common.scss';
 
-$default-padding: 24px;
+$default-padding: 1.25vw;
 
 .slider-container{
   background: #FFFFFF;
@@ -111,17 +114,27 @@ $default-padding: 24px;
   border-radius: 10px;
   overflow: hidden;
   .slider-title{
-    height: 27px;
+    height: 1.41vw;
     margin: $default-padding $default-padding 11px $default-padding;
+    .font{
+      font-size: 0.834vw;
+    }
   }
   .desc-container {
     margin: 0 $default-padding;
-  };
-  .desc {
-    height: 46px;
-    .sub-title{
-      margin-right: 10px
+    .desc-title{
+      font-size: 1.875vw;
     }
+  }
+  .desc {
+    height: 2.396vw;
+    .sub-title{
+      margin-right: 0.52vw
+    }
+    .sub-title, .sub-value{
+      font-size: 0.834vw;
+    }
+
   };
 }
 .small-item{
@@ -133,10 +146,10 @@ $default-padding: 24px;
   height: 100%;
 }
 .icon {
-  width: 26px;
-  height: 26px;
+  width: 1.2542vw;
+  height: 1.2542vw;
   cursor: pointer;
-  margin-right: -8px;
+  margin-right: -0.42vw;
   svg {
     width: 100%;
     height: 100%;

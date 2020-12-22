@@ -9,7 +9,11 @@ import { Chart, registerShape } from '@antv/g2'
 export default {
   name: 'BarChart',
   props: {
-    id: String
+    id: String,
+    height: {
+      type: Number,
+      default: 116
+    }
   },
   mounted () {
     this.initComponent()
@@ -36,6 +40,9 @@ export default {
   },
   methods: {
     initComponent () {
+      const width = document.documentElement.clientWidth
+      const padding = [(24 * width / 1920), (16 * width / 1920)]
+      const size = 8 * width / 1920
       // 自定义 shape, 支持图片形式的气泡
       registerShape('interval', 'borderRadius', {
         draw: function draw (cfg, container) {
@@ -62,10 +69,10 @@ export default {
 
       const chart = new Chart({
         container: this.id,
-        width: 325,
-        height: 116,
-        smooth: true,
-        padding: [24, 16]
+        height: this.height,
+        autoFit: true,
+        padding
+        // padding: [24, 16]
       })
       chart.data(this.data, {
         genre: {
@@ -77,13 +84,15 @@ export default {
       })
       chart
         .interval()
-        .size(8)
+        .size(size)
         .position('genre*sold')
         .shape('borderRadius')
-        .color('l(179) 0:#FFA874 1:#FF7979')
+        .color('l(90) 0:#FFA874 1:#FF7979')
       chart.axis(false)
       chart.legend(false)
       this.chart = chart
+    },
+    render () {
       this.chart.render()
     }
   }

@@ -24,8 +24,8 @@ export default {
 <style lang='scss' scoped>
 
 $radiusColor1: #FF8678 ;
-$width: 10em;
-$radius:0.5em;
+$width: 7.292vw;
+$radius:1vw;
 
 .loading {
   width: $width;
@@ -34,18 +34,18 @@ $radius:0.5em;
 }
 
 .loading .content {
-    position: absolute;
-    width: $width - 1em;
-    height: $width - 1em;
-    background-color: white;
-    border-radius: 50%;
-    left: $radius;
-    top: $radius;
-    line-height: $width;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  position: absolute;
+  width: $width - $radius;
+  height: $width - $radius;
+  background-color: white;
+  border-radius: 50%;
+  left: $radius/2;
+  top: $radius/2;
+  line-height: $width;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .left,
@@ -64,6 +64,7 @@ $radius:0.5em;
 
 .right {
   border-radius: 0 $width $width 0;
+  margin-left: -0.1px;
 }
 
 .left .inner,
@@ -87,7 +88,7 @@ $radius:0.5em;
     height: $radius;
     border-radius: 50%;
     background-color: $radiusColor1;
-    left: -0.25em;
+    left: -$radius/4;
 }
 
 .right .inner {
@@ -104,7 +105,7 @@ $radius:0.5em;
     top: 0;
     border-radius: 50%;
     display: block;
-    left: -0.25em;
+    left: -$radius/4;
     z-index: 1;
   };
 }

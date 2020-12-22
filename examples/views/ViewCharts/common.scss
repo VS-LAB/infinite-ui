@@ -73,9 +73,15 @@ $bg-white: #fff;
 };
 
 .main-view {
-  width: 100%;
-  max-width: 10.14rem;
+  width: 100vw;
+  height: 100vh;
+  // max-width: 10.14rem;
   margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  overflow: hidden;
 }
 
 .hide {
@@ -95,5 +101,6 @@ $bg-white: #fff;
     background-color: $color;
     left: 50%;
     transform: translateX(-50%);
+    border-radius: $height;
   }
 }

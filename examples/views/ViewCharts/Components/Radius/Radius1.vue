@@ -24,8 +24,9 @@ export default {
 <style lang='scss' scoped>
 
 $radiusColor1: #AC7AFF;
-$width: 7em;
-$radius:0.5em;
+$width: 5.21vw;
+// $radius:0.5em;
+$radius:1vw;
 
 .loading {
   width: $width;
@@ -34,19 +35,19 @@ $radius:0.5em;
 }
 
 .loading .content {
-    position: absolute;
-    width: $width - 1em;
-    height: $width - 1em;
-    background-color: white;
-    border-radius: 50%;
-    left: $radius;
-    top: $radius;
-    line-height: $width;
-    text-align: center;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  position: absolute;
+  width: $width - $radius;
+  height: $width - $radius;
+  background-color: white;
+  border-radius: 50%;
+  left: $radius / 2;
+  top: $radius/2;
+  line-height: $width;
+  text-align: center;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .left,
@@ -88,7 +89,7 @@ $radius:0.5em;
     height: $radius;
     border-radius: 50%;
     background-color: $radiusColor1;
-    left: -0.25em;
+    left: -$radius/4;
 }
 
 .right .inner {
@@ -105,7 +106,7 @@ $radius:0.5em;
     top: 0;
     border-radius: 50%;
     display: block;
-    left: -0.25em;
+    left: -$radius/4;
     z-index: 1;
   };
 }
@@ -122,7 +123,7 @@ $radius:0.5em;
     bottom: 0;
     border-radius: 50%;
     display: block;
-    right: -0.25em;
+    right:-$radius/4;
     z-index: 1;
   };
 }
@@ -140,7 +141,7 @@ $radius:0.5em;
     bottom: 0;
     border-radius: 50%;
     display: block;
-    left: -0.25em;
+    left: -$radius/4;
     z-index: 1;
   };
 }

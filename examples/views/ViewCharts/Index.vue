@@ -1,9 +1,11 @@
 <template>
   <div class="view-chart view-container">
     <div class="main-view">
+      <div class="main-view-content">
+
       <section class="align-center header" data-animation='header' id="J_animation">
-        <div class="title font-60">丰富的可视化图表</div>
-        <p class="desc font-20">
+        <div class="title">丰富的可视化图表</div>
+        <p class="desc">
           Infinite提供一套具有良好视觉和交互的数据可视化图表库<br>
           从数据出发，基于图形语法，灵活构建各类图表，满足你的各种数据可视化需求
         </p>
@@ -20,7 +22,7 @@
               'chart-3 chart-item-3': item.id === 3
             }"
           >
-            <SliderItem v-bind="item"></SliderItem>
+            <SliderItem :ref="item.refs" v-bind="item"></SliderItem>
           </div>
         </section>
         <section class="charts" v-if="largecardlist && largecardlist.length">
@@ -29,7 +31,7 @@
           :class="{
             'chart-4 chart-item-4': item.id === 4,
           }" v-for="item in largecardlist" :key="item.id">
-            <SliderItem v-bind="item">
+            <SliderItem :ref="item.refs" v-bind="item">
               <template slot='header'>
                 <div class="flex sub-title">
                   <span class="flex-1 ti">{{item.title}}</span>
@@ -96,6 +98,7 @@
       </div>
     </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -117,6 +120,7 @@ export default {
       cardList: [{
         id: 1,
         title: '查询次数',
+        refs: 'smallline',
         cardType: 'line',
         desc: [{
           title: '8,626',
@@ -127,6 +131,7 @@ export default {
       {
         id: 2,
         cardType: 'bar',
+        refs: 'Bar',
         title: '访问量',
         desc: [{
           title: '4,259',
@@ -137,6 +142,7 @@ export default {
       {
         id: 3,
         cardType: 'RadialBar',
+        refs: 'RadialBar',
         title: '数据分析'
       }
       ],
@@ -154,6 +160,7 @@ export default {
         id: 4,
         showType: 'large',
         cardType: 'line',
+        refs: 'bigLine',
         title: '访问量',
         showIcon: false
       }]
@@ -174,11 +181,15 @@ export default {
         dd.destroy()
       }
     })
-    document.querySelector('.view-chart').addEventListener('scroll', function (e) {
+    const _this = this
+    setTimeout(() => {
       console.log('====================================')
-      console.log(e)
+      console.log(_this.$refs.Bar[0].$refs)
       console.log('====================================')
-    })
+      _this.$refs.smallline[0].$refs.line.render()
+      _this.$refs.bigLine[0].$refs.line.render()
+      _this.$refs.Bar[0].$refs.bar.render()
+    }, 2000)
   },
   methods: {
     setDataAttribute (id) {
@@ -348,24 +359,24 @@ export default {
   background: #201E2B;
 };
 
-body, html {
+html, body  {
   font-size: 100px !important;
 }
 
 @media screen and (max-width: 1400px) {
-  html {
+  html, body {
     font-size: 100px !important;
   }
 }
 
 @media screen and (max-width: 1000px) {
-  html {
+  html, body {
     font-size: 70px !important;
   }
 }
 
 @media screen and (max-width: 600px) {
-  html {
+  html, body {
     font-size: 50px !important;
   }
 }
@@ -386,7 +397,8 @@ $laptopAni-time:1s;
   }
   100%{
     // transform: translate(10px, 7px) scale(0.36);
-    transform: translate(88px, 60px) scale(0.52);
+    // transform: translate(88px, 60px) scale(0.52);
+    transform: translate(90px, 59px) scale(0.54,0.5);
     opacity: 1;
     z-index: 1;
   }
@@ -425,7 +437,8 @@ $laptopAni-time:1s;
   }
   100%{
     // transform: translate(-100px, 7px) scale(0.36);
-    transform: translate(-76px, 60px) scale(0.52);
+    // transform: translate(-76px, 60px) scale(0.52);
+    transform: translate(-76px, 59px) scale(0.5,0.5);
     opacity: 1;
     z-index: 1;
   }
@@ -464,7 +477,8 @@ $laptopAni-time:1s;
   }
   100%{
     // transform: translate(10px, 7px) scale(0.36);
-        transform: translate(-241px, 59px) scale(0.52);
+    // transform: translate(-241px, 59px) scale(0.52);
+    transform: translate(-244px, 59px) scale(0.51,0.5);
     opacity: 1;
     z-index: 1;
   }
@@ -501,7 +515,10 @@ $laptopAni-time:1s;
   }
   100%{
     // transform: translate(-63px, -188px) scale(0.5,0.35);
-    transform: translate(-87px, -90px) scale(0.51);
+    // transform: translate(-87px, -90px) scale(0.51);
+    // transform: translate(-88px, -99px) scale(0.505);
+    // transform: translate(-4vw, -3.2vw) scale(0.57);
+    transform: translate(-4vw, -3.2vw) scale(0.62834);
     opacity: 1;
     z-index: 1;
   }
@@ -543,14 +560,14 @@ $laptopAni-time:1s;
 
 .showlaptop {
   animation: showlaptop $laptopAni-time linear;
-  transform: scale(1.98) translateY(450px);
+  transform: scale(1.98) translateY(100vh);
   animation-fill-mode: forwards;
 }
 
 // 笔记本动画效果-上移1
 @keyframes showlaptop {
   0% {
-    transform: scale(1.98) translateY(450px);
+    transform: scale(1.98) translateY(100vh);
   }
   100% {
     transform: scale(1) translateY(0);
@@ -622,9 +639,9 @@ $laptopAni-time:1s;
     left: 67%;
   }
   100%{
-     opacity: 1;
+    opacity: 1;
     position: absolute;
-    left: 90%;
+    left: 80%;
   }
 }
 
@@ -654,7 +671,7 @@ $laptopAni-time:1s;
     transform: scale(1) translate(-100px, 0)
   }
   100% {
-    transform: scale(1) translate(-400px, -100px)
+    transform: scale(1) translate(-40vw, -100px)
   }
 }
 
@@ -744,12 +761,15 @@ $laptopAni-time:1s;
 }
 
 .view-container {
-  padding-top: 0.20rem;
+  // padding-top: 0.20rem;
   box-sizing: border-box;
   section {
     color: #fff;
-    font-size: 0.20rem;
+    font-size: 1.042vw;
     letter-spacing: 0;
+    .title {
+      font-size: 3.125vw;
+    }
     .desc {
       opacity: 0.6;
       margin:  0.30rem 0 0.4rem;
@@ -757,32 +777,41 @@ $laptopAni-time:1s;
   };
   .charts {
     width: 100%;
-    max-width: 10.14rem;
+    max-width: 65.26vw;
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
   .chart-item {
     display: inline-block;
-    margin-right: 0.20rem;
-    margin-bottom: 0.20rem;
+    margin-right: 1.0427vw;
+    margin-bottom: 1.0427vw;
+    width: 16.9271vw;
+    height: 11.6667vw;
+    border-radius: 0.5208vw;
     flex:1;
-    &:nth-last-of-type(){
+    overflow: hidden;
+    &:last-of-type {
       margin-right: 0;
     }
     &.full-item {
-      width: 100%;
+      // width: 100%;
+      width: 52.8125vw;
+      height: 18.801vw;
       display: block;
       margin-right: 0;
       color: $light-font-color;
       .sub-title {
         width: 100%;
         justify-content: space-between;
+        font-size: 0.7292vw;
+        @include bottom-border(#DDE1EE , 1px, -14px);
         .change {
           li {
-            width: 100px;
+            width: 5.2083vw;
             text-align: center;
             position: relative;
+            font-size: 0.7292vw;
             &.active span{
               @include bottom-border(#FF7D4D,3px,-15px)
             }
@@ -797,6 +826,11 @@ $laptopAni-time:1s;
   animation: flow linear 1s forwards;
   transform: translateY(400px);
   opacity: 0;
+  font-size: 3.125vw;
+  // margin-top: 10vw;
+  .desc {
+    font-size: 1.042vw;
+  }
 };
 
 $aniChart: 1s; // 折线图和柱状图 执行时间
@@ -901,6 +935,8 @@ $AniChartDelay2: 1.2s;
 
 .chart-box {
   height: 100%;
+  width: 52.82vw;
+  margin: 0 auto;
   // animation: hideBox 1s ease;
   animation-fill-mode: forwards;
 }
@@ -923,7 +959,7 @@ $laptopAni-time: 1s;
 
 .laptop {
   width: 100%;
-  height: 6rem;
+  height: 38vw;
   position: relative;
   .laptop-container{
     // overflow: hidden;
@@ -937,39 +973,55 @@ $laptopAni-time: 1s;
   }
   .laptop-main-container{
     width: 69.4%;
-    height: 73%;
     margin-left: 15.3%;
-    margin-top: 6%;
+    height: 75%;
+    margin-top: 3.4%;
+    overflow: hidden;
+    // width: 45.8vw;
+    // height: 80%;
+    // margin-top: 2.2vw;
+    // margin-left: 27.1vw;
     overflow: hidden;
   }
   .laptop-main {
+    transform: translateY(100vh);
     position: relative;
-    width: 100%;
+    // width: 100%;
+    // height: 100%;
+    width: 65.26vw;
     height: 100%;
     margin: 0 auto;
-    background: url('../../assets/visualization-chart/laptop.png') center center no-repeat;
+    background: url('../../assets/visualization-chart/laptop.png') center top no-repeat;
     background-size: contain;
     overflow: hidden;
   }
   .laptop-contain {
     position: relative;
     width: 100%;
-    height: 34%;
+    // height: 34%;
+    height: 28.45vw;
     left: 0;
     top: 0;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
     .nav{
       width: 100%;
     }
     .bottom {
-      width: 100%;
+      width: 98%;
+      margin: 1%;
     }
     .content {
       display: flex;
       flex:1;
       margin: 0 1%;
       .right {
-        width: 25%;
+        width: 23%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
         img{
           width: 100%;
         }
@@ -1015,7 +1067,12 @@ $laptopAni-time: 1s;
 }
 
 .phone{
-  width: 20%;
+  // width: 20%;
+  // height: 68%;
+  // position: absolute;
+  // left: 60%;
+  // top: 50%;
+  width: 12vw;
   height: 68%;
   position: absolute;
   left: 60%;
@@ -1029,7 +1086,7 @@ $laptopAni-time: 1s;
 
   .phone-container {
     width: 100%;
-    height: 86%;
+    height: 78%;
     overflow: hidden;
     margin-top: 36px;
     margin-left: 3%;
@@ -1051,25 +1108,25 @@ $laptopAni-time: 1s;
 .show-colorful {
   position: absolute;
   top: 10%;
-  right: -60%;
+  right: -30%;
   z-index: 2;
   transform: translateY(100vh);
   .title{
     color: #fff;
+    font-size: 3.125vw;
   }
   p{
-    margin: 0.32rem 0 0.56rem;
+    margin: 1.667vw 0 2.927vw;
     opacity: 0.6;
-    font-size: 0.20rem;
+    font-size: 1.427vw;
     color: #fff;
     letter-spacing: 0;
-    line-height: 0.32rem;
+    line-height: 1.667vw;
   }
-  .check-box
-  {
+  .check-box{
     .checks{
-      width: 0.46rem;
-      height: 0.46rem;
+      width: 2.396vw;
+      height: 2.396vw;
       border: 4px solid rgba(255,255,255,0.20);
       display: inline-block;
       border-radius: 50%;
@@ -1096,4 +1153,11 @@ $laptopAni-time: 1s;
   }
 }
 
+
+.main-view-content {
+  // position: absolute;
+  // left: 50%;
+  // top: 50%;
+  // transform: translate(-50%, -50%);
+}
 </style>

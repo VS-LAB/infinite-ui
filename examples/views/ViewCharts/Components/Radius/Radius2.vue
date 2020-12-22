@@ -24,24 +24,24 @@ export default {
 <style lang='scss' scoped>
 
 $radiusColor1: #4CA9FF;
-$width: 4em;
-$radius:0.5em;
+$width: 3.52vw;
+$radius:1vw;
 
 .loading {
   width: $width;
   height: $width;
   position: relative;
-  margin: 0.5em;
+  // margin: 1vw;
 }
 
 .loading .content {
     position: absolute;
-    width: $width - 1em;
-    height: $width - 1em;
+    width: $width - 1vw;
+    height: $width - 1vw;
     background-color: white;
     border-radius: 50%;
-    left: $radius;
-    top: $radius;
+    left: $radius /2;
+    top: $radius/2;
     line-height: $width;
     text-align: center;
 }
@@ -85,7 +85,7 @@ $radius:0.5em;
     // height: $radius;
     // border-radius: 50%;
     // background-color: $radiusColor1;
-    // left: -0.25em;
+    // left: -$radius/4;
 }
 
 .right .inner {
@@ -102,7 +102,7 @@ $radius:0.5em;
     top: 0;
     border-radius: 50%;
     display: block;
-    left: -0.25em;
+    left: -$radius/4;
     z-index: 1;
   };
 }
@@ -118,7 +118,7 @@ $radius:0.5em;
     top: 0;
     border-radius: 50%;
     display: block;
-    right: -0.25em;
+    right: -$radius/4;
     z-index: 1;
   }
 }

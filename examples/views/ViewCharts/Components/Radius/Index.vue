@@ -55,7 +55,9 @@ export default {
 <style lang='scss' scoped>
 @import '../../common.scss';
 .radius{
-  margin: 0 24px ;
+  // margin: 0.3125vw 1.25vw;
+  height: 8.4375vw;
+  margin: 0 1.25vw;
   .radius-content{
     align-items: center;
     justify-content: center;
@@ -69,10 +71,10 @@ export default {
   dl{
     display: flex;
     align-items: baseline;
-    margin-bottom: 0.15rem;
+    // margin-bottom: 0.84vw;
     dt{
-      width: 0.1rem;
-      height: 0.1rem;
+      width: 0.521vw;
+      height: 0.521vw;
       border-radius: 3px;
       margin-right: 4px;
     }
@@ -81,10 +83,10 @@ export default {
       display: flex;
       flex-direction: column;
       .name{
-        font-size: 0.12rem;
+        font-size: 0.625vw
       }
       .value{
-        font-size: 0.14rem;
+        font-size: 0.7292vw
       }
     };
   };
