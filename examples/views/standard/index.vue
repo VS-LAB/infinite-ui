@@ -94,7 +94,6 @@
 </template>
 <script>
 let timer
-let timerout
 export default {
   data () {
     return {
@@ -117,20 +116,21 @@ export default {
       ]
     }
   },
-  watch: {
-    isShowCode (showCode) {
-      if (showCode) {
+  // watch: {
+  //   isShowCode (showCode) {
+  //     if (showCode) {
 
-      }
-    }
-  },
+  //     }
+  //   }
+  // },
   computed: {
     showCode () {
       return function (currentIndex) {
+        // console.log(this.row, currentIndex)
         return {
           typing_active: this.row === currentIndex,
           typing_normal: this.row < currentIndex,
-          typing_opacity: currentIndex === 1,
+          // typing_opacity: currentIndex === 1,
           typing_pl45: currentIndex >= 6,
           typing_pl20: currentIndex === 4,
           typing_pl30: currentIndex === 5
@@ -145,7 +145,7 @@ export default {
       this.isShowCode = true
       setTimeout(() => {
         _that.codeShowLine()
-      }, 1500)
+      }, 500)
     }, 2500)
   },
   methods: {
@@ -158,7 +158,7 @@ export default {
           clearInterval(timer)
           this.showMark()
         }
-      }, 200)
+      }, 100)
     },
     // 显示感叹号
     showMark () {

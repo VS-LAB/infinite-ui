@@ -35,10 +35,10 @@
   @extend .center;
   &-top {
     text-align: center;
-    transform: translateY(160%);
+    transform: translateY(180%);
     opacity: 0;
     z-index: 2;
-    animation: showTop 1.5s forwards 0.5s;
+    animation: showTop 1s forwards;
     &_title {
       font-family: PingFangSC-Semibold;
       font-size: 60px;
@@ -72,7 +72,7 @@
   &-line {
     z-index: 20;
     opacity: 0;
-    animation: cardLine 2s forwards 1.7s;
+    animation: cardLine 2s forwards 1s;
     &_horizontal {
       position: absolute;
       left: -60px;
@@ -221,11 +221,14 @@
       width: 600px;
       height: 30px;
       white-space: nowrap;
-      animation: typing 3s steps(600, end);
+      animation: typing 1s steps(600, end);
       overflow: hidden;
     }
     .typing_opacity {
       animation: opacity100 1s;
+    }
+    .typing_pl10 {
+      @include paddingLeft(10px);
     }
     .typing_pl20 {
       @include paddingLeft(20px);
@@ -244,8 +247,8 @@
 
   .infinite-standard-card-exclamatory-mark {
     position: absolute;
-    margin-left: -340px;
-    margin-top: -40px;
+    left: 35.5%;
+    top: 44%;
     z-index: 99;
     transform-origin: center;
     background: url("../../assets/icons/exclamatory mark.svg") center no-repeat;
@@ -254,7 +257,7 @@
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    animation: showMask 1.5s forwards;
+    animation: showMask 1s forwards;
   }
   .end-mask {
     animation: endMask 1s forwards;
