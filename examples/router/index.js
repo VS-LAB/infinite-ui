@@ -18,6 +18,7 @@ import {
 } from './docs'
 import Home from '@/views/home'
 import Layout from '@/views'
+import viewChart from '../views/ViewCharts/Index.vue'
 import { getFileList } from './generate'
 
 const generateRouters = getFileList()
@@ -34,6 +35,12 @@ const routes = [
         name: 'home'
       }
     ]
+  },
+  {
+    path: '/view',
+    name: 'view',
+    // redirect: '/view',
+    component: viewChart
   },
   {
     path: '/guide',
