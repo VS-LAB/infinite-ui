@@ -22,10 +22,10 @@
   </div>
 </template>
 <script>
-import HeaderModel from './components/header'
+// import HeaderModel from './components/header'
 export default {
   components: {
-    HeaderModel
+    // HeaderModel
   },
   data () {
     return {}

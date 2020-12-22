@@ -22,6 +22,7 @@ import Layout from '@/views'
 import Standard from '@/views/standard'
 import lastPage from '@/views/lastPage'
 import animateIndex from '@/views/animateIndex'
+import viewChart from '../views/ViewCharts/Index.vue'
 import { getFileList } from './generate'
 
 const generateRouters = getFileList()
@@ -59,12 +60,18 @@ const routes = [
   {
     path: '/last',
     name: '/homelast',
-    component: lastPage,
+    component: lastPage
   },
   {
+    path: '/view',
+    name: '/view',
+    component: viewChart
+  },
+  {
+
     path: '/index',
     name: '/homeAnimationIndex',
-    component: animateIndex,
+    component: animateIndex
   },
   {
     path: '/guide',
