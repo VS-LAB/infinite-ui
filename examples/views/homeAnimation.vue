@@ -45,6 +45,7 @@ export default {
     }
   },
   mounted () {
+    this.showAniFunc()
     document.body.style.overflow = 'auto'
     setTimeout(() => {
       this.pageOneAnimateName = 'slide-up-animate'
