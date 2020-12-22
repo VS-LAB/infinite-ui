@@ -224,28 +224,6 @@ export default {
 
 //****非通用定义****//
 
-// 头部模块
-.explain-total {
-  padding: 140px 0 510px 0;
-  position: relative;
-  animation: lightSpeedIn 1.5s ease-in-out infinite;
-  animation-iteration-count: 1;
-  p {
-    font-size: 40px;
-    font-weight: 600;
-    color: #000d2b;
-    letter-spacing: 6px;
-
-    &.last {
-      font-size: 20px;
-      font-weight: normal;
-      color: rgba(0, 15, 47, 0.8);
-      letter-spacing: 0;
-      margin: 20px 0 40px 0;
-    }
-  }
-}
-
 // 内容模块
 .explain-container {
   background: #F3F7FE;
@@ -255,7 +233,7 @@ export default {
   overflow: hidden;
   .explain-txt {
     text-align: center;
-    margin-top: 110px;
+    margin-top: 60px;
     .title {
       font-family: PingFangSC-Semibold;
       font-size: 56px;
@@ -280,7 +258,7 @@ export default {
   background-color: #fff;
   box-shadow: 0 2px 50px 0 #eaf1fc;
   border-radius: 8px;
-  margin-top: 100px;
+  margin-top: 80px;
   &-list {
     flex: 1;
     padding: 94px 0 110px 0;
