@@ -1,0 +1,311 @@
+@import "./animation.scss";
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.bottomIcon {
+  display: inline-block;
+  width: 24px;
+  height: 27px;
+  margin-left: 24px;
+  margin-right: 10px;
+}
+
+@mixin paddingLeft($leftval: 60) {
+  padding-left: $leftval;
+}
+
+@mixin top($val: 55) {
+  top: $val;
+}
+@mixin left($val: 55) {
+  left: $val;
+}
+@mixin right($val: 55) {
+  right: $val;
+}
+@mixin bottom($val: 55) {
+  bottom: $val;
+}
+.infinite-standard {
+  position: relative;
+  @extend .center;
+  &-top {
+    position: relative;
+    text-align: center;
+    opacity: 0;
+    z-index: 1;
+    animation: showTop 1s forwards;
+    &_title {
+      font-family: PingFangSC-Semibold;
+      font-size: 60px;
+      color: #222222;
+      letter-spacing: 0;
+      margin-bottom: 24px;
+    }
+    &_subTitle {
+      width: 720px;
+      height: 64px;
+      margin: 0 auto;
+      opacity: 0.6;
+      font-family: PingFangSC-Regular;
+      font-size: 20px;
+      color: #222222;
+      letter-spacing: 0;
+      text-align: center;
+      line-height: 32px;
+    }
+  }
+  &_content {
+    display: flex;
+    flex-direction: row;
+    margin-top: 100px;
+    position: relative;
+    z-index: 100;
+  }
+  .line-box {
+    opacity: 0;
+    animation: cardLineBox 1s forwards 2s;
+    .infinite-standard-line_horizontal {
+      transform: scaleX(1);
+      opacity: 1;
+    }
+    .infinite-standard-line_vertical {
+      transform: scaleX(1);
+      opacity: 1;
+    }
+  }
+  &-line {
+    z-index: 20;
+    opacity: 1;
+    animation: cardLine 2s forwards 1s;
+    &_horizontal {
+      position: absolute;
+      left: -60px;
+      top: 0;
+      height: 1px;
+      width: 774px;
+      opacity: 0.4;
+      border-top: 2px dashed rgba(170, 178, 220, 0.4);
+      transform: scaleX(0);
+    }
+    &_vertical {
+      position: absolute;
+      top: -60px;
+      height: 570px;
+      width: 1px;
+      opacity: 0.4;
+      border-left: 2px dashed rgba(170, 178, 220, 0.4);
+      transform: scaleX(0);
+    }
+    &_vertical-small {
+      position: absolute;
+      bottom: 30px;
+      height: 60px;
+      width: 1px;
+      border-left: 1px dashed #cccccc;
+    }
+
+    .fade-in-box {
+      $an: fadeInBox 1s forwards 0.5s;
+      $anSec: fadeInBox 1s forwards 0.8s;
+
+      // 虚线6-15 从左到右
+      &-6 {
+        transform-origin: left center;
+        animation: $an;
+      }
+      // 虚线1-5 上到下
+      &-1 {
+        transform-origin: center top;
+        animation: $an;
+      }
+      // 7,8,11 从右往左
+      &-7 {
+        transform-origin: right center;
+        animation: $anSec;
+      }
+      // 9,10,12,13,14 从左往右
+      &-9 {
+        transform-origin: left center;
+        animation: $anSec;
+      }
+      // 2,3,4 从下往上
+      &-2 {
+        transform-origin: center bottom;
+        animation: $anSec;
+      }
+    }
+
+    .top55 {
+      @include top(55px);
+    }
+    .top90 {
+      @include top(90px);
+    }
+    .top135 {
+      @include top(135px);
+    }
+    .top195 {
+      @include top(195px);
+    }
+    .top255 {
+      @include top(255px);
+    }
+    .top295 {
+      @include top(295px);
+    }
+    .top370 {
+      @include top(370px);
+    }
+    .top410 {
+      @include top(410px);
+    }
+    .top450 {
+      @include top(450px);
+    }
+    .left0 {
+      @include left(0px);
+    }
+
+    .left55 {
+      @include left(55px);
+    }
+    .left55 {
+      @include left(55px);
+    }
+    .right0 {
+      @include right(0px);
+    }
+    .right70 {
+      @include right(70px);
+    }
+    .right110 {
+      @include right(110px);
+    }
+
+    .left135 {
+      @include left(135px);
+    }
+    .left175 {
+      @include left(175px);
+    }
+    .left200 {
+      @include left(200px);
+    }
+    .left210 {
+      @include left(210px);
+    }
+    .right140 {
+      @include right(140px);
+    }
+    .right176 {
+      @include right(176px);
+    }
+    .right150 {
+      @include right(150px);
+    }
+    .right180 {
+      @include right(180px);
+    }
+    .right210 {
+      @include right(210px);
+    }
+  }
+  img {
+    max-width: 100%;
+    max-height: 100%;
+  }
+  &-card-wrapper {
+    position: relative;
+    z-index: 10;
+  }
+  &-card {
+    position: relative;
+    width: 652px;
+    height: 450px;
+    z-index: 10;
+    box-shadow: 0px 18px 104px #dfe5f6;
+    animation: showCard 4s forwards;
+    background-color: #fff;
+  }
+
+  &-code {
+    position: absolute;
+    width: 600px;
+    height: 418px;
+    z-index: 1;
+    opacity: 0;
+    animation: showCode 1s forwards;
+    padding: 16px 26px 16px 26px;
+    background: #f3f7fe;
+    border-radius: 20px;
+    &-mask {
+      top: 8px;
+      left: -360px;
+      position: absolute;
+      background-color: rgba(0, 0, 0, 0.2);
+      width: 97%;
+      height: 96%;
+      animation: codeMask 1s forwards;
+    }
+    p {
+      font-size: 22px;
+      font-family: PingFangSC-Semibold;
+      letter-spacing: 0;
+      line-height: 38px;
+      color: #0f2237;
+    }
+    .typing_normal {
+      display: none;
+    }
+    .typing_active {
+      display: block;
+      width: 600px;
+      height: 30px;
+      white-space: nowrap;
+      animation: typing 1s steps(600, end);
+      overflow: hidden;
+    }
+    .typing_opacity {
+      animation: opacity100 1s;
+    }
+    .typing_pl10 {
+      @include paddingLeft(10px);
+    }
+    .typing_pl20 {
+      @include paddingLeft(20px);
+    }
+    .typing_pl30 {
+      @include paddingLeft(30px);
+    }
+    .typing_pl45 {
+      @include paddingLeft(45px);
+    }
+  }
+
+  .end-top {
+    animation: endTop 1s forwards;
+  }
+
+  .infinite-standard-card-exclamatory-mark {
+    position: absolute;
+    right: 10.5%;
+    top: 10%;
+    z-index: 99;
+    transform-origin: center;
+    background: url("../../assets/icons/exclamatory mark.svg") center no-repeat;
+    background-color: #fff;
+    box-shadow: 0 5px 20px 0 rgba(255, 214, 176, 0.6);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    animation: showMask 1s forwards;
+  }
+  .end-mask {
+    animation: endMask 1s forwards;
+  }
+}

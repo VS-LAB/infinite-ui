@@ -17,7 +17,9 @@ import {
   Tree
 } from './docs'
 import Home from '@/views/home'
+import HomeAnimation from '@/views/homeAnimation.vue'
 import Layout from '@/views'
+import Standard from '@/views/standard'
 import { getFileList } from './generate'
 
 const generateRouters = getFileList()
@@ -32,6 +34,23 @@ const routes = [
       {
         path: 'home',
         name: 'home'
+      }
+    ]
+  },
+  {
+    path: '/standard',
+    name: 'standard',
+    component: Standard
+  },
+  {
+    path: '/ani',
+    name: '/Ani',
+    redirect: '/ani/homeAnimation',
+    component: HomeAnimation,
+    children: [
+      {
+        path: 'homeAnimation',
+        name: 'homeAnimation'
       }
     ]
   },
