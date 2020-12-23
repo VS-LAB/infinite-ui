@@ -15,7 +15,7 @@ import CardsAnimation from '@/views/CardsAnimation'
 import Standard from '@/views/standard'
 import ViewChart from '@/views/ViewCharts/Index.vue'
 import LastPage from '@/views/lastPage'
-import ViewCharts from '../views/ViewCharts/Index2'
+import ViewCharts from '../views/ViewCharts/Index4'
 import IconPage from '@/views/IconPage'
 
 export default {

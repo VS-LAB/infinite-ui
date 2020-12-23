@@ -22,7 +22,7 @@ import Layout from '@/views'
 import Standard from '@/views/standard'
 import lastPage from '@/views/lastPage'
 import animateIndex from '@/views/animateIndex'
-import viewChart from '@/views/ViewCharts/Index.vue'
+import viewChart from '@/views/ViewCharts/Index3.vue'
 import { getFileList } from './generate'
 
 const generateRouters = getFileList()
