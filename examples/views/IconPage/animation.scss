@@ -229,6 +229,20 @@
     background: rgba(247,250,252,1);
   }
 }
+@keyframes sectionOfList {
+  0% {
+    background: rgba(247,250,252,1);
+  }
+  30% {
+    background: rgba(247,250,252,.9);
+  }
+  65% {
+    background: rgba(247,250,252,1);
+  }
+  100% {
+    background: rgba(247,250,252,1);
+  }
+}
 
 /* 背景纯色圆环仿水波效果 */
 @keyframes circleWave {

@@ -5,8 +5,9 @@
       <!-- <button class="reset" @click.stop="showAniFuncReset">reset</button> -->
       <!-- <div class="infinite-icon-page-bg"></div> -->
       <div class="orange-circle" :class="showDefaultBg"></div>
-      <div class="icon-bg-circle blue-circle" :class="bgAnimateName"></div>
-      <div class="icon-bg-circle black-circle" :class="bgAnimateName"></div>
+      <div class="icon-bg-circle blue-circle" :class="blueBgAnimateName"></div>
+      <div class="icon-bg-circle black-circle" :class="blackBgAnimateName"></div>
+      <!-- <div :class="bgIconPageAnimateName"></div> -->
       <div class="infinite-icon-page-content flex fdc aic jcc">
         <div class="icons-introduce" :class="showIconsIntroduce">
           <h3 class="infinite-icon-page-title-h3">
@@ -62,7 +63,8 @@ export default {
   data () {
     return {
       // pageOneAnimateName: '', // 第一个页面动画
-      bgAnimateName: '',
+      blueBgAnimateName: '',
+      blackBgAnimateName: '',
       rotateAnimateName: '',
       showIconsIntroduce: '',
       showDefaultBg: '',
@@ -133,38 +135,133 @@ export default {
         }
       ],
       showAni: 0, // 动画状态
-      timing: 500 // 动画开始时间
+      timing: 500, // 动画开始时间
       // pageOneZindex: 0,
       // pageTwoZindex: 0
+      bgIconPageAnimateName: '',
+      animesFun: [this.showAniStep1, this.showAniStep2, this.showAniStep3, this.showAniStep4]
     }
   },
   watch: {
-    pageCurrentZindex: {
-      handler (val) {
-        console.log('pageCurrentZindex -watch == ', this.pageCurrentZindex)
-        if (val === 3) {
-          this.showAniFunc()
-        } else {
-          this.bgAnimateName = ''
-          this.rotateAnimateName = ''
-          this.showIconsIntroduce = ''
-          this.showDefaultBg = ''
-          this.showAni = 0
-        }
-      }
-    }
+    // pageCurrentZindex: {
+    //   handler (val) {
+    //     console.log('pageCurrentZindex -watch == ', this.pageCurrentZindex)
+    //     if (val === 3) {
+    //       this.showAniFunc()
+    //     } else {
+    //       this.bgAnimateName = ''
+    //       this.rotateAnimateName = ''
+    //       this.showIconsIntroduce = ''
+    //       this.showDefaultBg = ''
+    //       this.showAni = 0
+    //     }
+    //   }
+    // }
   },
   methods: {
+    // 
+    showAniStep1 (reversal) {
+      return new Promise((resolve, reject) => {
+        if (!reversal) {
+          this.showIconsIntroduce = 'slide-up-animate'
+          this.showDefaultBg = 'slide-up-bg'
+          this.rotateAnimateName = 'rotate-in'
+          this.bgIconPageAnimateName = 
+          setTimeout(_ => {
+            resolve(true)
+          }, 700)
+        } else {
+          this.showIconsIntroduce = ''
+          this.showDefaultBg = ''
+          this.rotateAnimateName = ''
+          setTimeout(_ => {
+            resolve(true)
+          }, 1500)
+        }
+      })
+    },
+    // 
+    showAniStep2 (reversal) {
+      return new Promise((resolve, reject) => {
+        const _that = this
+        if (!reversal) {
+          _that.showAni = 1
+          setTimeout(_ => {
+            _that.showAni = 2
+            // setTimeout(_ => {
+            resolve(true)
+            // }, 500)
+          }, 1500)
+        } else {
+          // setTimeout(_ => {
+          _that.showAni = 0
+          resolve(true)
+          // }, 1500)
+        }
+      })
+    },
+    // 
+    showAniStep3 (reversal) {
+      return new Promise((resolve, reject) => {
+        const _that = this
+        if (!reversal) {
+          this.blueBgAnimateName = 'circle-animate'
+          setTimeout(_ => {
+            _that.showAni = 3
+            setTimeout(_ => {
+              _that.showAni = 4
+              // setTimeout(_ => {
+              resolve(true)
+            // }, 500)
+            }, 1500)
+          }, 500)
+        } else {
+          // setTimeout(_ => {
+          _that.showAni = 2
+          this.blueBgAnimateName = ''
+          resolve(true)
+          // }, 1500)
+        }
+      })
+    },
+    // 
+    showAniStep4 (reversal) {
+      return new Promise((resolve, reject) => {
+        const _that = this
+        if (!reversal) {
+          this.blackBgAnimateName = 'circle-animate'
+          setTimeout(_ => {
+            _that.showAni = 5
+            setTimeout(_ => {
+              _that.showAni = 6
+              // setTimeout(_ => {
+              resolve(true)
+            // }, 500)
+            }, 1500)
+          }, 500)
+        } else {
+          // setTimeout(_ => {
+          this.blackBgAnimateName = ''
+          _that.showAni = 4
+          resolve(true)
+          // }, 1500)
+        }
+      })
+    },
     showAniFunc () {
+      // <div class="orange-circle" :class="showDefaultBg"></div>
+      // <div class="icon-bg-circle blue-circle" :class="bgAnimateName"></div>
+      // <div class="icon-bg-circle black-circle" :class="bgAnimateName"></div>
       // this.pageTwoZindex = 1
+
       this.bgAnimateName = 'circle-animate'
-      this.showIconsIntroduce = 'slide-up-animate'
-      this.showDefaultBg = 'slide-up-bg'
+      // this.showIconsIntroduce = 'slide-up-animate'
+      // this.showDefaultBg = 'slide-up-bg'
       console.log('this.rotateAnimateName', this.rotateAnimateName)
       if (this.rotateAnimateName === 'rotate-in') {
         this.rotateAnimateName = ''
       } else {
-        this.rotateAnimateName = 'rotate-in'
+        // this.rotateAnimateName = 'rotate-in'
       }
       console.log('this.rotateAnimateName after', this.rotateAnimateName)
 

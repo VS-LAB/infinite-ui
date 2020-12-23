@@ -16,6 +16,7 @@ import Standard from '@/views/standard'
 import HomeAnimation from '@/views/homeAnimation'
 import ViewChart from '@/views/ViewCharts/Index.vue'
 import LastPage from '@/views/lastPage'
+import IconPage from '@/views/IconPage'
 
 export default {
   components: {
@@ -25,18 +26,20 @@ export default {
     HomeAnimation,
     ViewChart,
     LastPage,
+    IconPage
   },
   data () {
     return {
       animesFun: [],
       animeIndex: 0,
       completeAnimation: false,
-      pageNameArr: ['LogAnimation', 'CardsAnimation', 'Standard', 'HomeAnimation', 'ViewChart', 'LastPage'],
+      pageNameArr: ['LogAnimation', 'CardsAnimation', 'Standard', 'IconPage', 'HomeAnimation', 'ViewChart', 'LastPage']
       // pageNameArr: ['LogAnimation', 'CardsAnimation', 'Standard', 'homeAnimation', 'LastPage'],
     }
   },
   methods: {
     async next () {
+      console.log('next == ', this.animesFun, this.animeIndex)
       this.completeAnimation = false
       const currAnimate = this.animesFun[this.animeIndex]
       const animateName = currAnimate.name
@@ -44,15 +47,16 @@ export default {
       this.completeAnimation = await currAnimate()
     },
     async prev () {
+      console.log('prev == ', this.animeIndex + 1)
       this.completeAnimation = false
       const currAnimate = this.animesFun[this.animeIndex + 1]
       const animateName = currAnimate.name
       this.setComponentZindex(animateName)
       this.completeAnimation = await currAnimate(true)
     },
-    setComponentZindex(animateName) {
+    setComponentZindex (animateName) {
       this.$refs.componnet.forEach((component, componentIndex) => {
-        component.$el.style.zIndex = 100-componentIndex
+        component.$el.style.zIndex = 100 - componentIndex
         if (animateName.includes(`page${componentIndex}`)) {
           component.$el.style.zIndex = 101
         }
@@ -67,62 +71,59 @@ export default {
     this.animesFun = animesFun
     this.next()
     function debounce (fn, wait, immediate) {
-      immediate = immediate || false;
-      var timer = null;
-      var count = 0;
+      immediate = immediate || false
+      var timer = null
+      var count = 0
       return function () {
-        var _this = this;
-        var _arg = arguments;
-        clearTimeout(timer);
+        var _this = this
+        var _arg = arguments
+        clearTimeout(timer)
         if (immediate) {
-          fn.apply(_this, _arg);
-          count++;
+          fn.apply(_this, _arg)
+          count++
         } else {
           timer = setTimeout(function () {
-            fn.apply(_this, _arg);
-            count++;
-          }, wait);
+            fn.apply(_this, _arg)
+            count++
+          }, wait)
         }
       }
     }
 
-
-    windowAddMouseWheel();
-    let self = this;
+    windowAddMouseWheel()
+    let self = this
     function windowAddMouseWheel () {
       var scrollFunc = function (e) {
-        e = e || window.event;
-        let wheelDistance; // 滑轮滚动距离
-        if (e.wheelDelta) {  //判断浏览器IE，谷歌滑轮事件
+        e = e || window.event
+        let wheelDistance // 滑轮滚动距离
+        if (e.wheelDelta) { // 判断浏览器IE，谷歌滑轮事件
           wheelDistance = e.wheelDelta
-        } else if (e.detail) {  //Firefox滑轮事件
+        } else if (e.detail) { // Firefox滑轮事件
           wheelDistance = e.detail
         }
-        console.log('completeAnimation', self.completeAnimation);
+        console.log('completeAnimation', self.completeAnimation)
         if (self.completeAnimation) {
-          if (wheelDistance > 0 && self.animeIndex >= 1) { //当滑轮向上滚动时
+          if (wheelDistance > 0 && self.animeIndex >= 1) { // 当滑轮向上滚动时
             self.animeIndex -= 1
-            console.log("滑轮向上滚动");
+            console.log('滑轮向上滚动')
             self.prev()
           }
-          console.log(self.animeIndex, self.animesFun.length);
-          console.log(self.animeIndex < self.animesFun.length - 1);
-          if (wheelDistance < 0 && self.animeIndex < self.animesFun.length - 1) { //当滑轮向下滚动时
+          console.log(self.animeIndex, self.animesFun.length)
+          console.log(self.animeIndex < self.animesFun.length - 1)
+          if (wheelDistance < 0 && self.animeIndex < self.animesFun.length - 1) { // 当滑轮向下滚动时
             self.animeIndex += 1
-            console.log("滑轮向下滚动");
+            console.log('滑轮向下滚动')
             self.next()
           }
         }
-      };
-      //给页面绑定滑轮滚动事件
-      if (document.addEventListener) {
-        document.addEventListener('DOMMouseScroll', debounce(scrollFunc, 20), false);
       }
-      //滚动滑轮触发scrollFunc方法
-      document.addEventListener('mousewheel', debounce(scrollFunc, 20));
+      // 给页面绑定滑轮滚动事件
+      if (document.addEventListener) {
+        document.addEventListener('DOMMouseScroll', debounce(scrollFunc, 20), false)
+      }
+      // 滚动滑轮触发scrollFunc方法
+      document.addEventListener('mousewheel', debounce(scrollFunc, 20))
     }
-
-
   }
 }
 </script>
