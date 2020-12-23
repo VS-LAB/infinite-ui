@@ -1,6 +1,10 @@
 <template>
   <div class="infinite-standard">
     <div
+      class="infinite-standard-card-exclamatory-mark"
+      :class="{'end-mask':endTop,'show-tip':showMask}"
+    />
+    <div
       class="infinite-standard-top"
       :class="{'end-top':endTop,'show-top':showTop}"
     >
@@ -149,10 +153,6 @@
             class="infinite-standard-card_img"
             :src="require('@/assets/cardComponent.png')"
           />
-          <div
-            class="infinite-standard-card-exclamatory-mark"
-            :class="{'end-mask':endTop,'show-tip':showMask}"
-          />
         </div>
 
       </div>
@@ -227,6 +227,7 @@ export default {
     // 步骤1 显示头部与卡片
     page2_goShowTop () {
       return new Promise((resolve, reject) => {
+        document.querySelector('.imgs_9').style.display = 'none'
         this.showTop = !this.showTop
         setTimeout(_ => {
           resolve(true)
@@ -286,25 +287,7 @@ export default {
       setTimeout(() => {
         this.endTop = true
       }, 1000)
-    },
-    page2_animeStep (reversal) {
-      console.log('animeStep standard');
-      const _that = this
-      return new Promise((resolve, reject) => {
-        setTimeout(() => {
-          _that.isShowCode = true
-          setTimeout(() => {
-      console.log('animeStep codeShowLine');
-
-            _that.codeShowLine()
-          }, 500)
-        }, 2500)
-        setTimeout(_ => {
-          resolve(true)
-        }, 2500)
-      })
-
-    },
+    }
   }
 }
 </script>
