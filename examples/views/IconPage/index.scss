@@ -109,11 +109,13 @@
   }
   .blue-circle {
     background: linear-gradient(180deg, #45AAFF 0%, #1890FF 100%);
-    animation-delay: 1.7s;
+    // animation-delay: 1.7s;
+    // animation-delay: 1.7s;
   }
   .black-circle {
     background: linear-gradient(180deg, #32303F 0%, #201E2B 100%);
-    animation-delay: 3.7s;
+    // animation-delay: 3.7s;
+    // animation-delay: 3.7s;
   }
     
   .infinite-icon-page-content {
@@ -758,7 +760,7 @@
         }
         .infinite-icon-page-window-icon-list {
           // background: rgba(247,250,252,1);
-          animation: sectionOfListO 1.5s linear 0s;
+          // animation: sectionOfListO 1.5s linear 0s;
           // background: rgba(247,250,252,.8);
           .infinite-icon-page-list-mask {
 
@@ -820,7 +822,8 @@
           }
         }
         .infinite-icon-page-window-icon-list {
-          animation: OsectionOfList 1.5s linear 0s;
+          animation: sectionOfList 1.5s linear 0s;
+          // animation: OsectionOfList 1.5s linear 0s;
           // background: rgba(247,250,252,.8);
           // background: rgba(247,250,252,1);
           .infinite-icon-page-list-mask {
@@ -1084,7 +1087,8 @@
           }
         }
         .infinite-icon-page-window-icon-list {
-          animation: sectionOfListO 1.5s linear 0s;
+          // animation: sectionOfList 1.5s linear 0s;
+          // animation: sectionOfListO 1.5s linear 0s;
           // background: rgba(247,250,252,.8);
           .infinite-icon-page-list-mask {
 
@@ -1146,7 +1150,8 @@
           }
         }
         .infinite-icon-page-window-icon-list {
-          animation: OsectionOfList 1.5s linear 0s;
+          animation: sectionOfList 1.5s linear 0s;
+          // animation: OsectionOfList 1.5s linear 0s;
           // background: rgba(247,250,252,1);
           .infinite-icon-page-list-mask {
 

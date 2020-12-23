@@ -17,6 +17,7 @@ import HomeAnimation from '@/views/homeAnimation'
 import ViewChart from '@/views/ViewCharts/Index.vue'
 import LastPage from '@/views/lastPage'
 import ViewCharts from '../views/ViewCharts/Index2'
+import IconPage from '@/views/IconPage'
 
 export default {
   components: {
@@ -26,19 +27,21 @@ export default {
     HomeAnimation,
     ViewChart,
     LastPage,
-    ViewCharts
+    ViewCharts,
+    IconPage
   },
   data () {
     return {
       animesFun: [],
       animeIndex: 0,
       completeAnimation: false,
-      pageNameArr: ['LogAnimation', 'CardsAnimation', 'Standard', 'HomeAnimation', 'ViewCharts', 'LastPage']
+      pageNameArr: ['LogAnimation', 'CardsAnimation', 'Standard', 'IconPage', 'HomeAnimation', 'ViewChart', 'LastPage']
       // pageNameArr: ['LogAnimation', 'CardsAnimation', 'Standard', 'homeAnimation', 'LastPage'],
     }
   },
   methods: {
     async next () {
+      console.log('next == ', this.animesFun, this.animeIndex)
       this.completeAnimation = false
       const currAnimate = this.animesFun[this.animeIndex]
       const animateName = currAnimate.name
@@ -46,6 +49,7 @@ export default {
       this.completeAnimation = await currAnimate()
     },
     async prev () {
+      console.log('prev == ', this.animeIndex + 1)
       this.completeAnimation = false
       const currAnimate = this.animesFun[this.animeIndex + 1]
       const animateName = currAnimate.name
