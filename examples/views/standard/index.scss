@@ -323,10 +323,14 @@
   }
 
   .infinite-standard-card-exclamatory-mark {
-    position: absolute;
-    right: 7.5%;
-    top: 10%;
-    z-index: 99;
+    // position: absolute;
+    // right: 7.5%;
+    // top: 10%;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    // transform: translate(11.36vw, -2.2vw) scale(1);
+    transform: translate(-9.51vw, -2.2vw) scale(1);
     transform-origin: center;
     background: url("../../assets/icons/exclamatory mark.svg") center no-repeat;
     background-color: #fff;
@@ -335,15 +339,19 @@
     height: 50px;
     border-radius: 50%;
     opacity: 0;
-    transform: scale(1);
+    z-index: 101;
+    // transform: scale(1);
     transition: all 1s;
   }
   .show-tip {
     opacity: 1;
-    transform: scale(1.5);
+    // transform: scale(1.5);
+    // transform: translate(11.36vw, -2.2vw) scale(1.5);
+    transform: translate(-9.51vw, -2.2vw) scale(1.5);
   }
   .end-mask {
-    transform: translate(20px, 1250px) scale(1);
+    // transform: translate(20px, 1250px) scale(1);
+    transform: translate(-9.51vw, -2.2vw) scale(1);
     opacity: 1;
     box-shadow: none;
   }

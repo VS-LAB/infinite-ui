@@ -13,7 +13,7 @@
 import LogAnimation from '@/views/LogAnimation'
 import CardsAnimation from '@/views/CardsAnimation'
 import Standard from '@/views/standard'
-import HomeAnimation from '@/views/homeAnimation'
+// import HomeAnimation from '@/views/homeAnimation'
 import ViewChart from '@/views/ViewCharts/Index.vue'
 import LastPage from '@/views/lastPage'
 import ViewCharts from '../views/ViewCharts/Index2'
@@ -24,7 +24,7 @@ export default {
     LogAnimation,
     CardsAnimation,
     Standard,
-    HomeAnimation,
+    // HomeAnimation,
     ViewChart,
     LastPage,
     ViewCharts,
@@ -35,7 +35,7 @@ export default {
       animesFun: [],
       animeIndex: 0,
       completeAnimation: false,
-      pageNameArr: ['LogAnimation', 'CardsAnimation', 'Standard', 'IconPage', 'HomeAnimation', 'ViewCharts', 'LastPage']
+      pageNameArr: ['LogAnimation', 'CardsAnimation', 'Standard', 'IconPage', 'ViewCharts', 'LastPage']
       // pageNameArr: ['LogAnimation', 'CardsAnimation', 'Standard', 'homeAnimation', 'LastPage'],
     }
   },

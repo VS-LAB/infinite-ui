@@ -1,6 +1,10 @@
 <template>
   <div class="infinite-standard">
     <div
+      class="infinite-standard-card-exclamatory-mark"
+      :class="{'end-mask':endTop,'show-tip':showMask}"
+    />
+    <div
       class="infinite-standard-top"
       :class="{'end-top':endTop,'show-top':showTop}"
     >
@@ -149,10 +153,6 @@
             class="infinite-standard-card_img"
             :src="require('@/assets/cardComponent.png')"
           />
-          <div
-            class="infinite-standard-card-exclamatory-mark"
-            :class="{'end-mask':endTop,'show-tip':showMask}"
-          />
         </div>
 
       </div>
@@ -288,13 +288,13 @@ export default {
       }, 1000)
     },
     page2_animeStep (reversal) {
-      console.log('animeStep standard');
+      console.log('animeStep standard')
       const _that = this
       return new Promise((resolve, reject) => {
         setTimeout(() => {
           _that.isShowCode = true
           setTimeout(() => {
-      console.log('animeStep codeShowLine');
+            console.log('animeStep codeShowLine')
 
             _that.codeShowLine()
           }, 500)
@@ -303,8 +303,7 @@ export default {
           resolve(true)
         }, 2500)
       })
-
-    },
+    }
   }
 }
 </script>
