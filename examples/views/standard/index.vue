@@ -161,10 +161,6 @@
         class="infinite-standard-code"
         :class="{'show-code':showCardMoveToLeft}"
       >
-        <div
-          class="infinite-standard-code-mask"
-          :class="{'show-code-mask':showCardMoveToLeft}"
-        ></div>
         <p
           :class="showCode(index)"
           v-for="(code, index) in codes"
@@ -253,7 +249,7 @@ export default {
         this.codeShowLine()
         setTimeout(_ => {
           resolve(true)
-        }, 2000)
+        }, 1000)
       })
     },
     // 步骤4 显示感叹号

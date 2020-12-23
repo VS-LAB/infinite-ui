@@ -34,13 +34,17 @@
   position: relative;
   @extend .center;
   .show-top {
-    animation: showTop 1s forwards;
+    transform: translateY(0);
+    opacity: 1;
   }
   &-top {
     position: relative;
     text-align: center;
     opacity: 0;
     z-index: 1;
+    transition: all 1s;
+    transform: translateY(380px);
+    opacity: 0;
 
     &_title {
       font-family: PingFangSC-Semibold;
@@ -68,15 +72,16 @@
     margin-top: 100px;
     position: relative;
     z-index: 100;
+    transition: all 1s;
   }
   .line-box {
     opacity: 0;
     .infinite-standard-line_horizontal {
-      transform: scaleX(1);
+      transform: scale(1);
       opacity: 1;
     }
     .infinite-standard-line_vertical {
-      transform: scaleX(1);
+      transform: scale(1);
       opacity: 1;
     }
   }
@@ -84,7 +89,7 @@
     opacity: 1;
   }
   .hide-line {
-    animation: hideLine 1s forwards;
+    opacity: 0;
   }
   &-line {
     z-index: 20;
@@ -96,8 +101,10 @@
       height: 1px;
       width: 774px;
       opacity: 0.4;
-      border-top: 2px dashed rgba(170, 178, 220, 0.4);
-      transform: scaleX(0);
+      border-top: 3px dashed rgba(170, 178, 220, 0.4);
+      // border-top: 5px dashed red;
+      transform: scale(0);
+      transition: all 1s;
     }
     &_vertical {
       position: absolute;
@@ -105,46 +112,52 @@
       height: 570px;
       width: 1px;
       opacity: 0.4;
-      border-left: 2px dashed rgba(170, 178, 220, 0.4);
-      transform: scaleX(0);
+      border-left: 3px dashed rgba(170, 178, 220, 0.4);
+      transition: all 1s;
+      // border-left: 5px dashed red;
+      transform: scale(0);
     }
     &_vertical-small {
       position: absolute;
       bottom: 30px;
       height: 60px;
       width: 1px;
-      border-left: 2px dashed rgba(170, 178, 220, 0.4);
-      transform: scaleX(0);
+      border-left: 3px dashed rgba(170, 178, 220, 0.4);
+      transition: all 1s;
+      // border-left: 5px dashed red;
+      transform: scale(0);
     }
 
     .fade-in-box {
-      $an: fadeInBox 1s forwards;
-      $anSec: fadeInBox 1s forwards 0.8s;
-
       // 虚线6-15 从左到右
       &-6 {
         transform-origin: left center;
-        animation: $an;
+        transform: scale(1);
+        opacity: 1;
       }
       // 虚线1-5 上到下
       &-1 {
         transform-origin: center top;
-        animation: $an;
+        transform: scaleX(1);
+        opacity: 1;
       }
       // 7,8,11 从右往左
       &-7 {
         transform-origin: right center;
-        animation: $anSec;
+        transform: scaleY(1);
+        opacity: 1;
       }
       // 9,10,12,13,14 从左往右
       &-9 {
         transform-origin: left center;
-        animation: $anSec;
+        transform: scale(1);
+        opacity: 1;
       }
       // 2,3,4 从下往上
       &-2 {
         transform-origin: center bottom;
-        animation: $anSec;
+        transform: scale(1);
+        opacity: 1;
       }
     }
 
@@ -186,13 +199,13 @@
       @include left(55px);
     }
     .right0 {
-      @include right(0px);
+      @include right(-4px);
     }
     .right70 {
-      @include right(70px);
+      @include right(50px);
     }
     .right110 {
-      @include right(110px);
+      @include right(86px);
     }
 
     .left135 {
@@ -208,19 +221,19 @@
       @include left(210px);
     }
     .right140 {
-      @include right(140px);
+      @include right(120px);
     }
     .right176 {
-      @include right(176px);
+      @include right(155px);
     }
     .right150 {
-      @include right(150px);
+      @include right(130px);
     }
     .right180 {
       @include right(180px);
     }
     .right210 {
-      @include right(210px);
+      @include right(192px);
     }
   }
   img {
@@ -233,18 +246,20 @@
   }
   &-card {
     position: relative;
-    width: 652px;
+    // width: 652px;
     height: 450px;
     z-index: 10;
     box-shadow: 0px 18px 104px #dfe5f6;
     background-color: #fff;
+    transition: all 1s;
   }
 
   .move-card {
-    animation: showCard 2s forwards;
+    transform: translateX(-401px);
   }
   .show-code {
-    animation: showCode 1s forwards;
+    opacity: 1;
+    transform: translateX(367px);
   }
 
   &-code {
@@ -253,7 +268,7 @@
     height: 418px;
     z-index: 1;
     opacity: 0;
-
+    transition: all 1s;
     padding: 16px 26px 16px 26px;
     background: #f3f7fe;
     border-radius: 20px;
@@ -265,7 +280,7 @@
       width: 97%;
       height: 96%;
     }
-    .show-code-mask{
+    .show-code-mask {
       animation: codeMask 1s forwards;
     }
     p {
@@ -304,12 +319,12 @@
   }
 
   .end-top {
-    animation: endTop 1s forwards;
+    transform: translateY(-1250px);
   }
 
   .infinite-standard-card-exclamatory-mark {
     position: absolute;
-    right: 10.5%;
+    right: 7.5%;
     top: 10%;
     z-index: 99;
     transform-origin: center;
@@ -320,12 +335,17 @@
     height: 50px;
     border-radius: 50%;
     opacity: 0;
+    transform: scale(1);
+    transition: all 1s;
   }
   .show-tip {
-    animation: showMask 1s forwards;
+    opacity: 1;
+    transform: scale(1.5);
   }
   .end-mask {
-    animation: endMask 1s forwards;
+    transform: translate(20px, 1250px) scale(1);
+    opacity: 1;
+    box-shadow: none;
   }
 }
 
