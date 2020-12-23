@@ -199,7 +199,7 @@ export default {
         'let flag = model && model.event && model.prop'
         // "const listenersFlag = !componentOptions.listeners",
       ],
-      wrapAnimate: '',
+      wrapAnimate: ''
     }
   },
   computed: {
@@ -228,7 +228,7 @@ export default {
     // 步骤1 显示头部与卡片 把上卡片的图片隐藏 当前卡片显示
     page2_goShowTop () {
       return new Promise((resolve, reject) => {
-        document.querySelector('.imgs_9').style.display = 'none'
+        document.querySelector('.imgs_content_9').style.display = 'none'
         document.querySelector('.infinite-standard-card_img').style.display = 'block'
         this.showTop = !this.showTop
         setTimeout(_ => {

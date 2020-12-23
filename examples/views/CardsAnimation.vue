@@ -44,7 +44,7 @@
         </div>
       </div>
     </div>
-    <img class="img_connect"
+    <img class="img_connect imgs_content_9"
          :style="imgConnectStyle"
          :class="imgConnectAnime"
          :src="require(`@/assets/component/card (9).png`)"
@@ -68,16 +68,16 @@ export default {
             [2, 6, 7],
             [3, 9, 10],
             [12, 13],
-            [15, 16],
+            [15, 16]
           ]
-        },
+        }
       ],
       addImgCards: [
         {
           data: [
             [4],
             [11],
-            [14],
+            [14]
           ]
         },
         {
@@ -85,20 +85,20 @@ export default {
           data: [
             [17, 18, 19],
             [22, 23, 24],
-            [27, 28],
+            [27, 28]
           ]
         },
         {
           data: [
             [20],
             [25],
-            [8],
+            [8]
           ]
         },
         {
           data: [
             [21],
-            [26],
+            [26]
           ]
         },
         {
@@ -108,28 +108,28 @@ export default {
             [2, 6, 7],
             [3, 9, 10],
             [12, 13],
-            [15, 16],
+            [15, 16]
           ]
         },
         {
           data: [
             [4],
             [11],
-            [14],
+            [14]
           ]
-        },
+        }
       ],
-      animeCanvasAnime: '',//画布动画
-      headerTextAnime: '',//头部文案动画
-      componentViewNotebookAnime: '',// 笔记本动画
-      tableImgsPosition: 'table_imgs_position',//图片集合初始化位置
+      animeCanvasAnime: '', // 画布动画
+      headerTextAnime: '', // 头部文案动画
+      componentViewNotebookAnime: '', // 笔记本动画
+      tableImgsPosition: 'table_imgs_position', // 图片集合初始化位置
       scrollTop: 0,
-      imgsAnimed: false,//是否开启遮罩及其他imgs数据
+      imgsAnimed: false, // 是否开启遮罩及其他imgs数据
       timeStep3: null,
       imgConnectStyle: null,
-      imgConnectAnime: '',//连接下个图片图画
-      lastAnimeCompile: false,//最后一个动画状态
-      animeContinue: false,//动画是否进行当中
+      imgConnectAnime: '', // 连接下个图片图画
+      lastAnimeCompile: false, // 最后一个动画状态
+      animeContinue: false // 动画是否进行当中
     }
   },
   methods: {
@@ -190,17 +190,15 @@ export default {
             resolve(true)
           }, 800)
         }
-
       })
     },
     page1_animeStep4 (reversal) {
       return new Promise((resolve, reject) => {
-
         this.animeContinue = true
         this.$nextTick(() => {
           const imgEl = this.$refs.imgRef9[1]
           const removedBoundingClientRect = document.querySelector('.infinite-standard-card_img').getBoundingClientRect()
-          console.log(removedBoundingClientRect);
+          console.log(removedBoundingClientRect)
           if (imgEl) {
             const boundingClientRect = imgEl.getBoundingClientRect()
             this.imgConnectStyle = this.imgConnectStyle || {
@@ -219,7 +217,7 @@ export default {
             document.querySelector('.infinite-standard-card_img').style.display = 'none'
           }
           setTimeout(() => {
-            this.imgConnectAnime = reversal ? "" : 'img_connect-anime_start'
+            this.imgConnectAnime = reversal ? '' : '-anime_start'
             setTimeout(() => {
               this.imgConnectStyle.display = reversal ? 'none' : 'block'
             }, 800)
@@ -244,13 +242,13 @@ export default {
   mounted () {
     this.imgCards = [...this.initImgCards]
     document.body.addEventListener('mousewheel', (e) => {
-      const event = e || window.event;
+      const event = e || window.event
       const el = this.$refs.componentViewImgsContainerRef
       if (el && this.imgCards.length > 1) {
-        let wheelDistance; // 滑轮滚动距离
-        if (e.wheelDelta) {  //判断浏览器IE，谷歌滑轮事件
+        let wheelDistance // 滑轮滚动距离
+        if (e.wheelDelta) { // 判断浏览器IE，谷歌滑轮事件
           wheelDistance = e.wheelDelta
-        } else if (e.detail) {  //Firefox滑轮事件
+        } else if (e.detail) { // Firefox滑轮事件
           wheelDistance = e.detail
         }
         const scrollTopSpace = el.children[0].clientHeight - el.clientHeight
@@ -262,10 +260,8 @@ export default {
         el.scrollTop = this.scrollTop
         event.stopPropagation()
         event.cancelBubble = true
-        console.log(wheelDistance);
+        console.log(wheelDistance)
       }
-
-
     })
   }
 }
