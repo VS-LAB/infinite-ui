@@ -116,13 +116,6 @@ export default {
       ]
     }
   },
-  // watch: {
-  //   isShowCode (showCode) {
-  //     if (showCode) {
-
-  //     }
-  //   }
-  // },
   computed: {
     showCode () {
       return function (currentIndex) {
