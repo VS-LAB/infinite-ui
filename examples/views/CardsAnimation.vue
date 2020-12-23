@@ -215,6 +215,9 @@ export default {
             }
           }
           this.imgConnectStyle.display = 'block'
+          if (!reversal) {
+            document.querySelector('.infinite-standard-card_img').style.display = 'none'
+          }
           setTimeout(() => {
             this.imgConnectAnime = reversal ? "" : 'img_connect-anime_start'
             setTimeout(() => {

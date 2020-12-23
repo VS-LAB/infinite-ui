@@ -224,10 +224,11 @@ export default {
      * 4. 感叹号出现
      * 5. 感叹号右移20px 其他部件上滑至透明
      */
-    // 步骤1 显示头部与卡片
+    // 步骤1 显示头部与卡片 把上卡片的图片隐藏 当前卡片显示
     page2_goShowTop () {
       return new Promise((resolve, reject) => {
         document.querySelector('.imgs_9').style.display = 'none'
+        document.querySelector('.infinite-standard_content').style.display = 'block'
         this.showTop = !this.showTop
         setTimeout(_ => {
           resolve(true)
