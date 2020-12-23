@@ -3,11 +3,6 @@
     <div class="anime-canvas"
          ref="animeCanvasAnimeRef"
          :class="animeCanvasAnime">
-      <!-- <div style="position:fixed;z-index:10">
-      <button @click="()=>{statusStep1 =!statusStep1;animeStep1(statusStep1)}">步骤1</button>
-      <button @click="()=>{statusStep2 =!statusStep2;animeStep2(statusStep2)}">步骤2</button>
-      <button @click="()=>{statusStep3 = !statusStep3;animeStep3(statusStep3)}">步骤3</button>
-    </div> -->
       <div class="header_text"
            ref="headerTextRef"
            :class="headerTextAnime">
@@ -60,7 +55,7 @@
 export default {
   data () {
     return {
-      animesFun: [this.animeStep1, this.animeStep2, this.animeStep3, this.animeStep4],
+      animesFun: [this.animeStep1, this.animeStep4],
       // 图片数据
       imgCards: [],
       initImgCards: [
@@ -136,38 +131,19 @@ export default {
     }
   },
   methods: {
-    initParams () {
-      this.headerTextAnime = ''
-      this.componentViewNotebookAnime = ''
-      this.tableImgsPosition = 'table_imgs_position'
-      this.imgsAnimed = false
-      setTimeout(() => {
-        this.imgCards = [...this.initImgCards]
-        this.init()
-      })
-    },
-    init () {
-      setTimeout(async () => {
-        // this.animeStep1()
-        // await this.animeStep2()
-        // await this.animeStep3()
-        // setTimeout(async () => {
-        // await this.animeStep4()
-        // }, 3000)
-        // await this.animeStep4(true)
-        // await this.animeStep3(true)
-        // this.animeStep1(true)/
-        // await this.animeStep2(true)
-        // this.initParams()
-      })
-    },
     // 头部文案动画
     animeStep1 (reversal) {
-      return new Promise((resolve, reject) => {
-        this.headerTextAnime = reversal ? '' : 'header_text-anime_start'
-        setTimeout(() => {
-          resolve(true)
-        }, 500)
+      return new Promise(async (resolve, reject) => {
+        if (!reversal) {
+          this.headerTextAnime = 'header_text-anime_start'
+          await this.animeStep2()
+          await this.animeStep3()
+        } else {
+          await this.animeStep3(true)
+          this.headerTextAnime = ''
+          await this.animeStep2(true)
+        }
+        resolve(true)
       })
     },
     // 组件视图区域
@@ -191,8 +167,10 @@ export default {
         }
         if (!reversal) {
           this.imgCards = [...this.initImgCards, ...this.addImgCards]
-          this.timeStep3 = setTimeout(() => {
-            this.imgsAnimed = true
+          this.$nextTick(() => {
+            this.timeStep3 = setTimeout(() => {
+              this.imgsAnimed = true
+            })
           })
           setTimeout(_ => {
             resolve(true)
@@ -234,7 +212,10 @@ export default {
   },
   mounted () {
     this.imgCards = [...this.initImgCards]
-    this.init()
+    document.addEventListener('mousewheel', (event) => {
+      event.stopPropagation()
+      console.log(123);
+    })
   }
 }
 </script>
@@ -271,7 +252,7 @@ export default {
       width: 100%;
       padding-top: 130px;
       text-align: center;
-      transition: all 1s;
+      transition: all 0.8s;
       z-index: 1;
       h1 {
         margin: 0 0 32px;

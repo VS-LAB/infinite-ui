@@ -1,13 +1,14 @@
 <template>
   <div v-if="resetCanvas"
-       class="anime-one-canvas">
-    <div ref="animeOneContainer"
-         class="anime-one-container">
+       class="anime_container">
+    <div ref="animeLogContainer"
+         class="anime_log_container">
       <!-- 正+菱+infinite动画 -->
-      <div :class="animeOneContainerTopAnime">
+      <div class="anime_log_container-group"
+           :class="animeLogContainerTopAnime">
         <!-- 正菱动画 -->
-        <div class="anime-one-container-logs"
-             :class="animeOneContainerLogsAnime">
+        <div class="anime_log_container-logs"
+             :class="animeLogContainerLogsAnime">
           <!-- 菱形动画 -->
           <div class="group_rhombus">
             <img class="rhombus-svf"
@@ -62,7 +63,7 @@ export default {
   },
   data () {
     return {
-      animesFun: [this.animeStep1, this.animeStep2, this.animeStep3, this.animeStep4, this.animeStep5],
+      animesFun: [this.animeStep1, this.animeStep5],
       resetCanvas: true,
       timer: null,//cube计时器
       count: 0,//计数
@@ -103,11 +104,11 @@ export default {
       ],
       rhombusSvfAnime: '',//菱形动画
       shadeAnime: '',//菱形遮罩动画
-      animeOneContainerLogsAnime: '',// 正菱logs动画
+      animeLogContainerLogsAnime: '',// 正菱logs动画
       infiniteEnglishSvfAnime: '',//infinite动画
       footerTextAnime: '',//创造无限可能动画 footer-text-anime_start
       moveWhiteBackgroundAnime: '',//背景动画
-      animeOneContainerTopAnime: '',//左上角log动画
+      animeLogContainerTopAnime: '',//左上角log动画
       headerModelAnime: '',//菜单动画
     }
   },
@@ -119,26 +120,17 @@ export default {
         this.count = 0//计数
         this.rhombusSvfAnime = ''//菱形动画
         this.shadeAnime = ''//菱形遮罩动画
-        this.animeOneContainerLogsAnime = ''// 正菱logs动画
+        this.animeLogContainerLogsAnime = ''// 正菱logs动画
         this.infiniteEnglishSvfAnime = ''//infinite动画
         this.footerTextAnime = ''//创造无限可能动画 footer-text-anime_start
         this.moveWhiteBackgroundAnime = ''//背景动画
-        this.animeOneContainerTopAnime = ''//左上角log动画
+        this.animeLogContainerTopAnime = ''//左上角log动画
         this.animes.forEach(item => {
           item.startClass = ''
         })
         this.resetCanvas = true
-        this.init()
       })
 
-    },
-    async init () {
-      // await this.animeStep1()
-      // await this.animeStep2()
-      // await this.animeStep3()
-      // await this.animeStep4()
-      // await this.animeStep5()
-      // this.resetCanvas = false
     },
     setAnimes () {
       this.count += 1
@@ -147,9 +139,12 @@ export default {
     // 立方体动画
     animeStep1 () {
       return new Promise((resolve, reject) => {
-        this.timer = setInterval(_ => {
+        this.timer = setInterval(async _ => {
           if (this.count === this.animes.length) {
             clearInterval(this.timer)
+            await this.animeStep2()
+            await this.animeStep3()
+            await this.animeStep4()
             resolve(true)
             return
           }
@@ -190,7 +185,7 @@ export default {
     //正菱logs + infinite 动画
     animeStep3 (reversal) {
       return new Promise((resolve, reject) => {
-        this.animeOneContainerLogsAnime = reversal ? '' : "anime-one-container-logs_start"
+        this.animeLogContainerLogsAnime = reversal ? '' : "anime_log_container-logs_start"
         this.infiniteEnglishSvfAnime = reversal ? '' : "infinite-english-svf-anime_start"
         setTimeout(_ => {
           resolve(true)
@@ -210,29 +205,41 @@ export default {
     // 最终动画
     animeStep5 (reversal) {
       return new Promise((resolve, reject) => {
-        this.moveWhiteBackgroundAnime = reversal ? '' : "move-white-background-anime_start"
-        this.animeOneContainerTopAnime = reversal ? '' : "anime-one-container-top-anime_start"
-        this.footerTextAnime = reversal ? '' : "footer-text-anime_end"
-        setTimeout(_ => {
-          this.animeOneContainerTopAnime = reversal ? '' : "anime-one-container-top-anime_end"
-          this.headerModelAnime = reversal ? '' : "header-model-anime_start"
+        if (!reversal) {
+          this.moveWhiteBackgroundAnime = "move-white-background-anime_start"
+          this.animeLogContainerTopAnime = "anime_log_container-top-anime_start"
+          this.footerTextAnime = "footer-text-anime_end"
           setTimeout(_ => {
-            resolve(true)
-          }, 500)
-        }, 1000)
-
+            this.animeLogContainerTopAnime = "anime_log_container-top-anime_end"
+            this.headerModelAnime = "header-model-anime_start"
+            setTimeout(_ => {
+              resolve(true)
+            }, 300)
+          }, 1000)
+        } else {
+          this.moveWhiteBackgroundAnime = "_"
+          this.animeLogContainerTopAnime = "anime_log_container-top-anime_end_reversal"
+          this.headerModelAnime = ""
+          setTimeout(_ => {
+            this.animeLogContainerTopAnime = "anime_log_container-top-anime_start_reversal"
+            setTimeout(_ => {
+              this.footerTextAnime = "footer-text-anime_start"
+              this.moveWhiteBackgroundAnime = ""
+              setTimeout(() => {
+                resolve(true)
+              }, 300)
+            }, 1000)
+          }, 300)
+        }
       })
     }
-  },
-  mounted () {
-    this.init()
   }
 }
 </script>
 
 <style lang="scss" scoped>
 // 画布
-.anime-one-canvas {
+.anime_container {
   height: 100%;
   // 中心点
   .center-dot {
@@ -243,7 +250,7 @@ export default {
     top: 40vh;
     z-index: 1;
   }
-  .anime-one-container {
+  .anime_log_container {
     @extend .center-dot;
 
     // 立方体start
@@ -416,13 +423,24 @@ export default {
   // 白色背景 end
 
   // 正-菱-infinite动画 start
-  .anime-one-container-top-anime_start {
+  .anime_log_container-group {
+  }
+  .anime_log_container-top-anime_start {
     transition: all 1s;
     transform: translate(-300px, -38vh) scale(0.5);
   }
-  .anime-one-container-top-anime_end {
+
+  .anime_log_container-top-anime_end {
     transition: all 0.3s;
     transform: translate(-300px, -48vh) scale(0.5);
+  }
+  // 倒动画
+  .anime_log_container-top-anime_end_reversal {
+    transition: all 0.3s;
+    transform: translate(-300px, -38vh) scale(0.5);
+  }
+  .anime_log_container-top-anime_start_reversal {
+    transition: all 1s;
   }
   // 正-菱-infinite动画 end
 
