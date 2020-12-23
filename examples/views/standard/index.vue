@@ -1,54 +1,141 @@
 <template>
   <div class="infinite-standard">
-
-    <div class="infinite-standard-top"
-         :class="{'end-top':endTop}">
+    <div
+      class="infinite-standard-top"
+      :class="{'end-top':endTop,'show-top':showTop}"
+    >
       <div class="infinite-standard-top_title">组件设计规范</div>
       <div class="infinite-standard-top_subTitle">
         完善的设计指引、设计资源，帮助产品等非设计者快速产出高质量的产品原型帮助设计者完善产品设计、统一设计规范
       </div>
     </div>
-    <div class="infinite-standard_content"
-         :class="{'end-top':endTop}">
+    <div
+      class="infinite-standard_content"
+      :class="{'end-top':endTop}"
+    >
       <div class="infinite-standard-card-wrapper">
-        <div class="infinite-standard-card">
-          <div class="infinite-standard-line">
+        <div
+          class="infinite-standard-card"
+          :class="{'move-card':showCardMoveToLeft}"
+        >
+          <div
+            class="infinite-standard-line"
+            :class="{'hide-line':showCardMoveToLeft}"
+          >
 
             <!-- horizontal line -->
-            <div class="infinite-standard-line_horizontal fade-in-box-6"></div>
-            <div class="infinite-standard-line_horizontal top55 fade-in-box-7"></div>
-            <div class="infinite-standard-line_horizontal top90 fade-in-box-7"></div>
-            <div class="infinite-standard-line_horizontal top135 fade-in-box-9"></div>
-            <div class="infinite-standard-line_horizontal top195 fade-in-box-9"></div>
-            <div class="infinite-standard-line_horizontal top255 fade-in-box-7"></div>
-            <div class="infinite-standard-line_horizontal top295 fade-in-box-9"></div>
-            <div class="infinite-standard-line_horizontal top370 fade-in-box-9"></div>
-            <div class="infinite-standard-line_horizontal top410 fade-in-box-9"></div>
-            <div class="infinite-standard-line_horizontal top450 fade-in-box-6"></div>
+            <div
+              class="infinite-standard-line_horizontal"
+              :class="{'fade-in-box-6':showLine}"
+            ></div>
+            <div
+              class="infinite-standard-line_horizontal top55"
+              :class="{'fade-in-box-7':showLine}"
+            ></div>
+            <div
+              class="infinite-standard-line_horizontal top90 "
+              :class="{'fade-in-box-7':showLine}"
+            ></div>
+            <div
+              class="infinite-standard-line_horizontal top135"
+              :class="{'fade-in-box-9':showLine}"
+            ></div>
+            <div
+              class="infinite-standard-line_horizontal top195"
+              :class="{'fade-in-box-9':showLine}"
+            ></div>
+            <div
+              class="infinite-standard-line_horizontal top255"
+              :class="{'fade-in-box-7':showLine}"
+            ></div>
+            <div
+              class="infinite-standard-line_horizontal top295"
+              :class="{'fade-in-box-9':showLine}"
+            ></div>
+            <div
+              class="infinite-standard-line_horizontal top370 "
+              :class="{'fade-in-box-9':showLine}"
+            ></div>
+            <div
+              class="infinite-standard-line_horizontal top410 "
+              :class="{'fade-in-box-9':showLine}"
+            ></div>
+            <div
+              class="infinite-standard-line_horizontal top450 "
+              :class="{'fade-in-box-6':showLine}"
+            ></div>
 
             <!-- vertical line -->
-            <div class="infinite-standard-line_vertical left0 fade-in-box-1"></div>
-            <div class="infinite-standard-line_vertical left55 fade-in-box-2"></div>
-            <div class="infinite-standard-line_vertical left55 fade-in-box-2"></div>
-            <div class="infinite-standard-line_vertical right110 fade-in-box-2"></div>
+            <div
+              class="infinite-standard-line_vertical left0 "
+              :class="{'fade-in-box-1':showLine}"
+            ></div>
+            <div
+              class="infinite-standard-line_vertical left55"
+              :class="{'fade-in-box-2':showLine}"
+            ></div>
+            <div
+              class="infinite-standard-line_vertical left55 "
+              :class="{'fade-in-box-2':showLine}"
+            ></div>
+            <div
+              class="infinite-standard-line_vertical right110 "
+              :class="{'fade-in-box-2':showLine}"
+            ></div>
 
-            <div class="infinite-standard-line_vertical right70 fade-in-box-2"></div>
-            <div class="infinite-standard-line_vertical right0 fade-in-box-1"></div>
+            <div
+              class="infinite-standard-line_vertical right70 "
+              :class="{'fade-in-box-2':showLine}"
+            ></div>
+            <div
+              class="infinite-standard-line_vertical right0 "
+              :class="{'fade-in-box-1':showLine}"
+            ></div>
 
             <!-- small line -->
-            <div class="infinite-standard-line_vertical-small left135"></div>
-            <div class="infinite-standard-line_vertical-small left175"></div>
-            <div class="infinite-standard-line_vertical-small left200"></div>
-            <div class="infinite-standard-line_vertical-small left210"></div>
-            <div class="infinite-standard-line_vertical-small right140"></div>
-            <div class="infinite-standard-line_vertical-small right176"></div>
-            <div class="infinite-standard-line_vertical-small right150"></div>
-            <div class="infinite-standard-line_vertical-small righ180"></div>
-            <div class="infinite-standard-line_vertical-small right210"></div>
+            <div
+              class="infinite-standard-line_vertical-small left135"
+              :class="{'fade-in-box-2':showLine}"
+            ></div>
+            <div
+              class="infinite-standard-line_vertical-small left175"
+              :class="{'fade-in-box-2':showLine}"
+            ></div>
+            <div
+              class="infinite-standard-line_vertical-small left200"
+              :class="{'fade-in-box-2':showLine}"
+            ></div>
+            <div
+              class="infinite-standard-line_vertical-small left210"
+              :class="{'fade-in-box-2':showLine}"
+            ></div>
+            <div
+              class="infinite-standard-line_vertical-small right140"
+              :class="{'fade-in-box-2':showLine}"
+            ></div>
+            <div
+              class="infinite-standard-line_vertical-small right176"
+              :class="{'fade-in-box-2':showLine}"
+            ></div>
+            <div
+              class="infinite-standard-line_vertical-small right150"
+              :class="{'fade-in-box-2':showLine}"
+            ></div>
+            <div
+              class="infinite-standard-line_vertical-small righ180"
+              :class="{'fade-in-box-2':showLine}"
+            ></div>
+            <div
+              class="infinite-standard-line_vertical-small right210"
+              :class="{'fade-in-box-2':showLine}"
+            ></div>
           </div>
 
           <!-- 外框线 -->
-          <div class="infinite-standard-line line-box">
+          <div
+            class="infinite-standard-line line-box"
+            :class="{'show-sec-line':showCardMoveToLeft}"
+          >
             <!-- horizontal line -->
             <div class="infinite-standard-line_horizontal"></div>
             <div class="infinite-standard-line_horizontal top450"></div>
@@ -58,21 +145,31 @@
             <div class="infinite-standard-line_vertical right0"></div>
           </div>
           <!-- end of 外框线 -->
-          <img class="infinite-standard-card_img"
-               :src="require('@/assets/cardComponent.png')" />
-          <div class="infinite-standard-card-exclamatory-mark"
-               :class="{'end-mask':endTop}"
-               v-if="showMask" />
+          <img
+            class="infinite-standard-card_img"
+            :src="require('@/assets/cardComponent.png')"
+          />
+          <div
+            class="infinite-standard-card-exclamatory-mark"
+            :class="{'end-mask':endTop,'show-tip':showMask}"
+          />
         </div>
 
       </div>
       <!-- 代码打字效果 -->
-      <div class="infinite-standard-code"
-           v-show="isShowCode">
-        <div class="infinite-standard-code-mask"></div>
-        <p :class="showCode(index)"
-           v-for="(code, index) in codes"
-           :key="index">
+      <div
+        class="infinite-standard-code"
+        :class="{'show-code':showCardMoveToLeft}"
+      >
+        <div
+          class="infinite-standard-code-mask"
+          :class="{'show-code-mask':showCardMoveToLeft}"
+        ></div>
+        <p
+          :class="showCode(index)"
+          v-for="(code, index) in codes"
+          :key="index"
+        >
           {{ code }}
         </p>
       </div>
@@ -85,10 +182,14 @@ let timer
 export default {
   data () {
     return {
+      animesFun: [this.goShowTop, this.goShowLine, this.goShowCardMoveToLeft, this.goShowExlamatoryMark, this.goEndTop],
       isShowCode: false,
       row: 0,
       endTop: false,
+      showTop: false,
       showMask: false,
+      showLine: false,
+      showCardMoveToLeft: false,
       codes: [
         'const { itemData, formModels } = this',
         "const placeholder = itemData.placeholder || ''",
@@ -111,7 +212,6 @@ export default {
         return {
           typing_active: this.row === currentIndex,
           typing_normal: this.row < currentIndex,
-          // typing_opacity: currentIndex === 1,
           typing_pl45: currentIndex >= 6,
           typing_pl20: currentIndex === 4,
           typing_pl30: currentIndex === 5
@@ -119,17 +219,61 @@ export default {
       }
     }
   },
-  mounted () {
-    const _that = this
-    // 设置代码框显示时间
-    setTimeout(() => {
-      this.isShowCode = true
-      setTimeout(() => {
-        // _that.codeShowLine()
-      }, 500)
-    }, 2500)
-  },
   methods: {
+    /**  
+     * 动画执行顺序
+     * 1. 显示 头部信息 卡片出现
+     * 2. 显示边框描线
+     * 3. 边框描线消失 保留四周描线 卡片左移 出现右侧code 并显示完成代码
+     * 4. 感叹号出现
+     * 5. 感叹号右移20px 其他部件上滑至透明
+     */
+    // 步骤1 显示头部与卡片
+    goShowTop () {
+      return new Promise((resolve, reject) => {
+        this.showTop = !this.showTop
+        setTimeout(_ => {
+          resolve(true)
+        }, 1000)
+      })
+    },
+    // 步骤2 显示边框线
+    goShowLine () {
+      return new Promise((resolve, reject) => {
+        this.showLine = !this.showLine
+        setTimeout(_ => {
+          resolve(true)
+        }, 1000)
+      })
+    },
+    // 步骤3 卡片位移
+    goShowCardMoveToLeft () {
+      return new Promise((resolve, reject) => {
+        this.showCardMoveToLeft = !this.showCardMoveToLeft
+        this.codeShowLine()
+        setTimeout(_ => {
+          resolve(true)
+        }, 2000)
+      })
+    },
+    // 步骤4 显示感叹号
+    goShowExlamatoryMark () {
+      return new Promise((resolve, reject) => {
+        this.showMask = !this.showMask
+        setTimeout(_ => {
+          resolve(true)
+        }, 1000)
+      })
+    },
+    // 步骤5 保留感叹号 其他部分上滑
+    goEndTop () {
+      return new Promise((resolve, reject) => {
+        this.endTop = !this.endTop
+        setTimeout(_ => {
+          resolve(true)
+        }, 1000)
+      })
+    },
     // 计时器
     codeShowLine () {
       // 设置计时器
@@ -137,9 +281,8 @@ export default {
         this.row += 1
         if (this.row === this.codes.length) {
           clearInterval(timer)
-          this.showMark()
         }
-      }, 100)
+      }, 150)
     },
     // 显示感叹号
     showMark () {
