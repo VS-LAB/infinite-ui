@@ -110,7 +110,7 @@ export default {
   },
   data () {
     return {
-      animesFun: [this.page4_animeStep1, this.page4_animeStep1, this.page4_animeStep1, this.page4_animeStep1, this.page4_animeStep1],
+      animesFun: [this.page4_animeStep1, this.page4_animeStep1, this.page4_animeStep1, this.page4_animeStep1, this.page4_animeStep1, this.page4_animeStep1],
       showOrange: false,
       animation: {
         time: 0, // 动画执行次数
@@ -323,7 +323,6 @@ export default {
         }
       };
       animation.clock = false
-
       if (animation.time === 2) {
         this.showOrange = true
       };

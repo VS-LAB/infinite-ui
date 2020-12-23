@@ -40,6 +40,7 @@ export default {
   components: {},
   data () {
     return {
+      animesFun: [this.page5_animeStep1],
       baseList: [
         // 内容模块第一部分的特殊内容数据
         {
@@ -134,6 +135,12 @@ export default {
     // 目前已有的跳转，都只能跳到组件文档页面
     toPath () {
       this.$router.push('/guide/installation')
+    },
+    page5_animeStep1 () {
+      console.log('page5_animeStep1');
+      return new Promise((resolve, reject) => {
+        resolve(true)
+      })
     }
   },
   mounted () {
