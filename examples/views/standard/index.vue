@@ -1,5 +1,5 @@
 <template>
-  <div class="infinite-standard" :class="wrapAnimate">
+  <div class="infinite-standard">
     <div
       class="infinite-standard-card-exclamatory-mark"
       :class="{'end-mask':endTop,'show-tip':showMask}"
@@ -198,8 +198,7 @@ export default {
         'const model = sealedOptions.model',
         'let flag = model && model.event && model.prop'
         // "const listenersFlag = !componentOptions.listeners",
-      ],
-      wrapAnimate: ''
+      ]
     }
   },
   computed: {
@@ -268,7 +267,6 @@ export default {
     page2_goEndTop () {
       return new Promise((resolve, reject) => {
         this.endTop = !this.endTop
-        this.wrapAnimate = 'fade-out'
         setTimeout(_ => {
           resolve(true)
         }, 1000)
@@ -283,13 +281,6 @@ export default {
           clearInterval(timer)
         }
       }, 150)
-    },
-    // 显示感叹号
-    showMark () {
-      this.showMask = true
-      setTimeout(() => {
-        this.endTop = true
-      }, 1000)
     }
   }
 }
