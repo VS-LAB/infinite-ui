@@ -218,7 +218,7 @@ export default {
           setTimeout(() => {
             this.imgConnectAnime = reversal ? "" : 'img_connect-anime_start'
             setTimeout(() => {
-              this.imgConnectStyle.display = 'none'
+              this.imgConnectStyle.display = reversal ? 'none' : 'block'
             }, 800)
           }, 200)
           this.animeCanvasAnime = reversal ? '' : 'anime-canvas-anime_start'
@@ -252,7 +252,7 @@ export default {
         }
         const scrollTopSpace = el.children[0].clientHeight - el.clientHeight
         // 判断是否不可以滚动了，此时需要走上一步或者下一步动画
-        if ((el.scrollTop === 0 && wheelDistance > 0) || (el.scrollTop === scrollTopSpace && wheelDistance < 0) || this.lastAnimeCompile || this.animeContinue) return
+        if ((this.scrollTop === 0 && wheelDistance > 0) || (this.scrollTop === scrollTopSpace && wheelDistance < 0) || this.lastAnimeCompile || this.animeContinue) return
         // 设置电脑区域滚动位置
         const top = el.scrollTop - (wheelDistance / 5)
         this.scrollTop = top < 0 ? 0 : (top > scrollTopSpace ? scrollTopSpace : top)
