@@ -35,7 +35,7 @@ export default {
       animesFun: [],
       animeIndex: 0,
       completeAnimation: false,
-      pageNameArr: ['LogAnimation', 'CardsAnimation', 'Standard', 'IconPage', 'HomeAnimation', 'ViewChart', 'LastPage']
+      pageNameArr: ['LogAnimation', 'CardsAnimation', 'Standard', 'IconPage', 'HomeAnimation', 'ViewCharts', 'LastPage']
       // pageNameArr: ['LogAnimation', 'CardsAnimation', 'Standard', 'homeAnimation', 'LastPage'],
     }
   },
