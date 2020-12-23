@@ -60,6 +60,7 @@
 export default {
   data () {
     return {
+      animesFun: [this.animeStep1, this.animeStep2, this.animeStep3, this.animeStep4],
       // 图片数据
       imgCards: [],
       initImgCards: [
@@ -147,12 +148,12 @@ export default {
     },
     init () {
       setTimeout(async () => {
-        this.animeStep1()
-        await this.animeStep2()
-        await this.animeStep3()
-        setTimeout(async () => {
-          await this.animeStep4()
-        }, 3000)
+        // this.animeStep1()
+        // await this.animeStep2()
+        // await this.animeStep3()
+        // setTimeout(async () => {
+        // await this.animeStep4()
+        // }, 3000)
         // await this.animeStep4(true)
         // await this.animeStep3(true)
         // this.animeStep1(true)/
@@ -164,6 +165,9 @@ export default {
     animeStep1 (reversal) {
       return new Promise((resolve, reject) => {
         this.headerTextAnime = reversal ? '' : 'header_text-anime_start'
+        setTimeout(() => {
+          resolve(true)
+        }, 500)
       })
     },
     // 组件视图区域
@@ -174,7 +178,7 @@ export default {
         // 动画执行完成后
         this.$refs.componentViewNotebookRef.ontransitionend = (event) => {
           if (event.propertyName == 'transform') {
-            resolve()
+            resolve(true)
           }
         }
       })
@@ -191,13 +195,13 @@ export default {
             this.imgsAnimed = true
           })
           setTimeout(_ => {
-            resolve()
+            resolve(true)
           }, 800)
         } else {
           this.imgsAnimed = false
           this.timeStep3 = setTimeout(() => {
             this.imgCards = [...this.initImgCards]
-            resolve()
+            resolve(true)
           }, 800)
         }
 
@@ -222,7 +226,7 @@ export default {
         this.animeCanvasAnime = reversal ? '' : 'anime-canvas-anime_start'
         this.$refs.animeCanvasAnimeRef.ontransitionend = (event) => {
           if (event.propertyName == 'transform') {
-            resolve()
+            resolve(true)
           }
         }
       })

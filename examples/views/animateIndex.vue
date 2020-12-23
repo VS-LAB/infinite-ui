@@ -1,41 +1,56 @@
 <template>
-  <div class="container" @click="changePage">
-    <component :is="componentName">
+  <div class="container">
+    <component ref="componnet"
+               :style="{zIndex:100-index,position:'fixed',width:'100vw',height:'100vh'}"
+               v-for="(component,index) in pageNameArr"
+               :is="component"
+               :key="component">
     </component>
   </div>
 </template>
 
 <script>
+import LogAnimation from '@/views/LogAnimation'
+import CardsAnimation from '@/views/CardsAnimation'
 import Standard from '@/views/standard'
 import homeAnimation from '@/views/homeAnimation'
 import LastPage from '@/views/lastPage'
 
 export default {
   components: {
+    LogAnimation,
+    CardsAnimation,
     Standard,
     homeAnimation,
     LastPage,
   },
   data () {
     return {
-      componentName: 'Standard',
-      pageIndex: 0,
-      pageNameArr: ['Standard', 'homeAnimation', 'LastPage'],
+      animesFun: [],
+      animeIndex: 0,
+      completeAnimation: false,
+      pageNameArr: ['LogAnimation', 'CardsAnimation', 'Standard'],
+      // pageNameArr: ['LogAnimation', 'CardsAnimation', 'Standard', 'homeAnimation', 'LastPage'],
     }
   },
-  methods:{
-    changePage() {
-      console.log('changePagechangePagechangePage');
-      console.log('pageNameArr index', this.pageNameArr[this.pageIndex]);
-      if (this.pageNameArr[this.pageIndex]) {
-        this.componentName = this.pageNameArr[this.pageIndex]
-      }
+  methods: {
+    async next () {
+      this.completeAnimation = false
+      this.completeAnimation = await this.animesFun[this.animeIndex]()
+    },
+    async prev () {
+      this.completeAnimation = false
+      this.completeAnimation = await this.animesFun[this.animeIndex + 1](true)
     }
   },
   mounted () {
-
-
-    function debounce(fn, wait, immediate) {
+    let animesFun = []
+    this.$refs.componnet.forEach(c => {
+      animesFun = [...animesFun, ...(c.animesFun || [])]
+    })
+    this.animesFun = animesFun
+    this.next()
+    function debounce (fn, wait, immediate) {
       immediate = immediate || false;
       var timer = null;
       var count = 0;
@@ -48,7 +63,6 @@ export default {
           count++;
         } else {
           timer = setTimeout(function () {
-            console.log(this);
             fn.apply(_this, _arg);
             count++;
           }, wait);
@@ -59,7 +73,7 @@ export default {
 
     windowAddMouseWheel();
     let self = this;
-    function windowAddMouseWheel() {
+    function windowAddMouseWheel () {
       var scrollFunc = function (e) {
         e = e || window.event;
         let wheelDistance; // 滑轮滚动距离
@@ -68,15 +82,21 @@ export default {
         } else if (e.detail) {  //Firefox滑轮事件
           wheelDistance = e.detail
         }
-        if (wheelDistance > 0 && self.pageIndex>=1) { //当滑轮向上滚动时
-          self.pageIndex--
-          console.log("滑轮向上滚动");
+        console.log(self.completeAnimation);
+        if (self.completeAnimation) {
+          if (wheelDistance > 0 && self.animeIndex >= 1) { //当滑轮向上滚动时
+            self.animeIndex -= 1
+            console.log("滑轮向上滚动");
+            self.prev()
+          }
+          console.log(self.animeIndex, self.animesFun.length);
+          console.log(self.animeIndex < self.animesFun.length - 1);
+          if (wheelDistance < 0 && self.animeIndex < self.animesFun.length - 1) { //当滑轮向下滚动时
+            self.animeIndex += 1
+            console.log("滑轮向下滚动");
+            self.next()
+          }
         }
-        if (wheelDistance < 0 && self.pageIndex < self.pageNameArr.length - 1) { //当滑轮向下滚动时
-          self.pageIndex++
-        }
-        console.log('[pageIndex]', self.pageIndex);
-        self.changePage()
       };
       //给页面绑定滑轮滚动事件
       if (document.addEventListener) {
@@ -85,13 +105,13 @@ export default {
       //滚动滑轮触发scrollFunc方法
       document.addEventListener('mousewheel', debounce(scrollFunc, 300));
     }
-    
+
 
   }
 }
 </script>
 <style lang="scss" scoped>
-  .container {
-    background: #fff;
-  }
+.container {
+  background: #fff;
+}
 </style>

@@ -62,6 +62,7 @@ export default {
   },
   data () {
     return {
+      animesFun: [this.animeStep1, this.animeStep2, this.animeStep3, this.animeStep4, this.animeStep5],
       resetCanvas: true,
       timer: null,//cube计时器
       count: 0,//计数
@@ -132,11 +133,11 @@ export default {
 
     },
     async init () {
-      await this.animeStep1()
-      await this.animeStep2()
-      await this.animeStep3()
-      await this.animeStep4()
-      await this.animeStep5()
+      // await this.animeStep1()
+      // await this.animeStep2()
+      // await this.animeStep3()
+      // await this.animeStep4()
+      // await this.animeStep5()
       // this.resetCanvas = false
     },
     setAnimes () {
@@ -149,7 +150,7 @@ export default {
         this.timer = setInterval(_ => {
           if (this.count === this.animes.length) {
             clearInterval(this.timer)
-            resolve()
+            resolve(true)
             return
           }
           this.setAnimes()
@@ -171,7 +172,7 @@ export default {
           setTimeout(_ => {
             this.rhombusSvfAnime = ""
             setTimeout(_ => {
-              resolve()
+              resolve(true)
             }, 400)
           }, 400)
         } else {
@@ -179,7 +180,7 @@ export default {
           setTimeout(_ => {
             this.shadeAnime = "group_rhombus-shade-start"
             setTimeout(_ => {
-              resolve()
+              resolve(true)
             }, 400)
           }, 400)
         }
@@ -192,7 +193,7 @@ export default {
         this.animeOneContainerLogsAnime = reversal ? '' : "anime-one-container-logs_start"
         this.infiniteEnglishSvfAnime = reversal ? '' : "infinite-english-svf-anime_start"
         setTimeout(_ => {
-          resolve()
+          resolve(true)
         }, 500)
       })
 
@@ -202,7 +203,7 @@ export default {
       return new Promise((resolve, reject) => {
         this.footerTextAnime = reversal ? '' : "footer-text-anime_start"
         setTimeout(_ => {
-          resolve()
+          resolve(true)
         }, 500)
       })
     },
@@ -216,7 +217,7 @@ export default {
           this.animeOneContainerTopAnime = reversal ? '' : "anime-one-container-top-anime_end"
           this.headerModelAnime = reversal ? '' : "header-model-anime_start"
           setTimeout(_ => {
-            resolve()
+            resolve(true)
           }, 500)
         }, 1000)
 

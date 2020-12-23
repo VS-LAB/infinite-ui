@@ -1,19 +1,15 @@
 <template>
   <div class="infinite-standard">
 
-    <div
-      class="infinite-standard-top"
-      :class="{'end-top':endTop}"
-    >
+    <div class="infinite-standard-top"
+         :class="{'end-top':endTop}">
       <div class="infinite-standard-top_title">组件设计规范</div>
       <div class="infinite-standard-top_subTitle">
         完善的设计指引、设计资源，帮助产品等非设计者快速产出高质量的产品原型帮助设计者完善产品设计、统一设计规范
       </div>
     </div>
-    <div
-      class="infinite-standard_content"
-      :class="{'end-top':endTop}"
-    >
+    <div class="infinite-standard_content"
+         :class="{'end-top':endTop}">
       <div class="infinite-standard-card-wrapper">
         <div class="infinite-standard-card">
           <div class="infinite-standard-line">
@@ -62,29 +58,21 @@
             <div class="infinite-standard-line_vertical right0"></div>
           </div>
           <!-- end of 外框线 -->
-          <img
-            class="infinite-standard-card_img"
-            :src="require('@/assets/cardComponent.png')"
-          />
-          <div
-            class="infinite-standard-card-exclamatory-mark"
-            :class="{'end-mask':endTop}"
-            v-if="showMask"
-          />
+          <img class="infinite-standard-card_img"
+               :src="require('@/assets/cardComponent.png')" />
+          <div class="infinite-standard-card-exclamatory-mark"
+               :class="{'end-mask':endTop}"
+               v-if="showMask" />
         </div>
 
       </div>
       <!-- 代码打字效果 -->
-      <div
-        class="infinite-standard-code"
-        v-show="isShowCode"
-      >
+      <div class="infinite-standard-code"
+           v-show="isShowCode">
         <div class="infinite-standard-code-mask"></div>
-        <p
-          :class="showCode(index)"
-          v-for="(code, index) in codes"
-          :key="index"
-        >
+        <p :class="showCode(index)"
+           v-for="(code, index) in codes"
+           :key="index">
           {{ code }}
         </p>
       </div>
@@ -144,7 +132,7 @@ export default {
     setTimeout(() => {
       this.isShowCode = true
       setTimeout(() => {
-        _that.codeShowLine()
+        // _that.codeShowLine()
       }, 500)
     }, 2500)
   },
