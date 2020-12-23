@@ -198,7 +198,6 @@ export default {
         this.$nextTick(() => {
           const imgEl = this.$refs.imgRef9[1]
           const removedBoundingClientRect = document.querySelector('.infinite-standard-card_img').getBoundingClientRect()
-          console.log(removedBoundingClientRect)
           if (imgEl) {
             const boundingClientRect = imgEl.getBoundingClientRect()
             this.imgConnectStyle = this.imgConnectStyle || {
@@ -217,7 +216,7 @@ export default {
             document.querySelector('.infinite-standard-card_img').style.display = 'none'
           }
           setTimeout(() => {
-            this.imgConnectAnime = reversal ? '' : '-anime_start'
+            this.imgConnectAnime = reversal ? '' : 'img_connect-anime_start'
             setTimeout(() => {
               this.imgConnectStyle.display = reversal ? 'none' : 'block'
             }, 800)
