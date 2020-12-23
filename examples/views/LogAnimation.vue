@@ -58,6 +58,7 @@
 <script>
 import Cube from '@/components/Cube'
 export default {
+  name: 'LogAnimation',
   components: {
     Cube
   },
