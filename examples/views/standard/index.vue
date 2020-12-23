@@ -228,7 +228,7 @@ export default {
     page2_goShowTop () {
       return new Promise((resolve, reject) => {
         document.querySelector('.imgs_9').style.display = 'none'
-        document.querySelector('.infinite-standard_content').style.display = 'block'
+        document.querySelector('.infinite-standard-card_img').style.display = 'block'
         this.showTop = !this.showTop
         setTimeout(_ => {
           resolve(true)
