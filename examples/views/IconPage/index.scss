@@ -159,8 +159,10 @@
       border-radius: 7px;
       box-shadow: 0 0 16px 8px rgba(0,0,0,0.1);
 
-      // -webkit-backface-visibility: hidden;
-      // backface-visibility: hidden;
+      top: 10vh;
+      left: 170vw;
+      transform: rotateZ(50deg) skewY(158deg) scale(5);
+      transform-origin: -128px -43px;
 
 
       .infinite-icon-page-window-menu {
