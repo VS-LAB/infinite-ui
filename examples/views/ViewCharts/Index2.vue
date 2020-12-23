@@ -9,10 +9,6 @@
           从数据出发，基于图形语法，灵活构建各类图表，满足你的各种数据可视化需求
         </p>
       </section>
-      <button class="btn2" @click="handleAnimationControl()">{{ animation.time }}</button>
-      <button class="btn3" @click="goBack()"> -- {{ animation.time }}</button>
-      <button class="btn4" @click="goFront()"> ++ {{ animation.time }}</button>
-      <!-- <button class="btn" @click="handleAnimation">点击动画执行</button> -->
       <div class="chart-box" v-if="!showOrange">
         <section class="charts">
           <div class="chart-item" v-for="item in cardList" :key="item.id"
@@ -105,7 +101,7 @@
 
 <script>
 import SliderItem from './Components/SlideItem'
-import { MouseWheel } from './scroll'
+// import { MouseWheel } from './scroll'
 
 export default {
   name: 'viewChart',
@@ -114,7 +110,7 @@ export default {
   },
   data () {
     return {
-      animesFun: [this.handle(1, true), this.animeStep2, this.animeStep3, this.animeStep4, this.animeStep5],
+      animesFun: [this.page4_animeStep1, this.page4_animeStep1, this.page4_animeStep1, this.page4_animeStep1, this.page4_animeStep1],
       showOrange: false,
       animation: {
         time: 0, // 动画执行次数
@@ -166,24 +162,11 @@ export default {
         refs: 'bigLine',
         title: '访问量',
         showIcon: false
-      }]
+      }],
+      completeAnimation: false
     }
   },
   mounted () {
-    let obj = document.querySelector('#J_animation')
-    let dd = new MouseWheel({ stepLength: 10, ele: obj })
-    dd.onWheel(function (e) {
-      // console.log('2', e)
-      // // // 偏移距离 默认为最小
-      // let translate = 400 - e * 400
-      // let curScale = e
-      // // obj.style.transform = `matrix(${curScale}, 0, 0, ${curScale}, 0, ${translate})`
-      // obj.style.opacity = e
-      // // 成功之后销毁
-      // if (e === 1) {
-      //   dd.destroy()
-      // }
-    })
     const _this = this
     setTimeout(() => {
       console.log('====================================')
@@ -195,6 +178,12 @@ export default {
     }, 2000)
   },
   methods: {
+    page4_animeStep1 () {
+      return new Promise((resolve, reject) => {
+        this.handleAnimationControl()
+        resolve(true)
+      })
+    },
     setDataAttribute (id) {
       return `chart-${id}`
     },
@@ -773,6 +762,7 @@ $laptopAni-time:1s;
     transform: translateY(-67%);
   };
 }
+
 
 .leave {
   animation: leave 0.5s linear forwards;

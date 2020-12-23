@@ -46,7 +46,7 @@
 import LineChart from './Charts/LineChart'
 import BarChart from './Charts/BarChart'
 import RadialBar from './Charts/RadialBar'
-import Radius from './Radius/Index'
+import Radius from './Radius/Index2'
 export default {
   name: 'SliderItem',
   components: { LineChart, BarChart, Radius },
