@@ -2,7 +2,6 @@
   <div class="view-chart view-container">
     <div class="main-view">
       <div class="main-view-content">
-
       <section class="align-center header" data-animation='header' id="J_animation">
         <div class="title">丰富的可视化图表</div>
         <p class="desc">
@@ -135,7 +134,7 @@ export default {
         title: '访问量',
         desc: [{
           title: '4,259',
-          sub_title: '4,259',
+          sub_title: '新增',
           sub_value: '+852'
         }]
       },
@@ -396,9 +395,7 @@ $laptopAni-time:1s;
     opacity: 1;
   }
   100%{
-    // transform: translate(10px, 7px) scale(0.36);
-    // transform: translate(88px, 60px) scale(0.52);
-    transform: translate(90px, 59px) scale(0.54,0.5);
+    transform: translate(1.2vw, 3.7vw) scale(0.61846);
     opacity: 1;
     z-index: 1;
   }
@@ -436,9 +433,7 @@ $laptopAni-time:1s;
     z-index: 1;
   }
   100%{
-    // transform: translate(-100px, 7px) scale(0.36);
-    // transform: translate(-76px, 60px) scale(0.52);
-    transform: translate(-76px, 59px) scale(0.5,0.5);
+    transform: translate(-5.7vw, 3.7vw) scale(0.61846);
     opacity: 1;
     z-index: 1;
   }
@@ -476,9 +471,7 @@ $laptopAni-time:1s;
     z-index: 1;
   }
   100%{
-    // transform: translate(10px, 7px) scale(0.36);
-    // transform: translate(-241px, 59px) scale(0.52);
-    transform: translate(-244px, 59px) scale(0.51,0.5);
+    transform: translate(-12.6vw, 3.7vw) scale(0.61846);
     opacity: 1;
     z-index: 1;
   }
@@ -518,7 +511,7 @@ $laptopAni-time:1s;
     // transform: translate(-87px, -90px) scale(0.51);
     // transform: translate(-88px, -99px) scale(0.505);
     // transform: translate(-4vw, -3.2vw) scale(0.57);
-    transform: translate(-4vw, -3.2vw) scale(0.62834);
+    transform: translate(-5.7vw, -2.4vw) scale(0.61834);
     opacity: 1;
     z-index: 1;
   }
@@ -671,7 +664,7 @@ $laptopAni-time:1s;
     transform: scale(1) translate(-100px, 0)
   }
   100% {
-    transform: scale(1) translate(-40vw, -100px)
+    transform: scale(1) translate(-40vw, -5.42vw)
   }
 }
 
@@ -827,7 +820,7 @@ $laptopAni-time:1s;
   transform: translateY(400px);
   opacity: 0;
   font-size: 3.125vw;
-  // margin-top: 10vw;
+  margin-top: 120px;
   .desc {
     font-size: 1.042vw;
   }
@@ -999,7 +992,8 @@ $laptopAni-time: 1s;
     position: relative;
     width: 100%;
     // height: 34%;
-    height: 28.45vw;
+    height: 28.5vw;
+    background: #f3f7fe;
     left: 0;
     top: 0;
     overflow: hidden;
@@ -1007,17 +1001,18 @@ $laptopAni-time: 1s;
     flex-direction: column;
     .nav{
       width: 100%;
+      margin-bottom: 0.3vw;
     }
     .bottom {
       width: 98%;
-      margin: 1%;
+      margin: 0 1%;
     }
     .content {
       display: flex;
       flex:1;
       margin: 0 1%;
       .right {
-        width: 23%;
+        width: 24.8%;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -1088,7 +1083,8 @@ $laptopAni-time: 1s;
     width: 100%;
     height: 78%;
     overflow: hidden;
-    margin-top: 36px;
+    // margin-top: 36px;
+    margin-top: 3.4vw;
     margin-left: 3%;
     z-index: -1;
     position: absolute;
@@ -1107,7 +1103,7 @@ $laptopAni-time: 1s;
 
 .show-colorful {
   position: absolute;
-  top: 10%;
+  top: 20%;
   right: -30%;
   z-index: 2;
   transform: translateY(100vh);

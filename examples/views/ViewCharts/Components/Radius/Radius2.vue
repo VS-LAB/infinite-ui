@@ -95,8 +95,8 @@ $radius:1vw;
   border-radius: 0 $width $width 0;
   &::before{
     content: "";
-    width: $radius;
-    height: $radius;
+    width: $radius /2;
+    height: $radius /2;
     background: $radiusColor1;
     position: absolute;
     top: 0;
@@ -111,8 +111,8 @@ $radius:1vw;
   transform: rotateZ(-135deg);
   &::before{
     content: "";
-    width: $radius;
-    height: $radius;
+    width: $radius /2;
+    height: $radius /2 ;
     background: $radiusColor1;
     position: absolute;
     top: 0;

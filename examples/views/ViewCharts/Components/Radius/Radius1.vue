@@ -85,8 +85,8 @@ $radius:1vw;
     content: "";
     position: absolute;
     display: block;
-    width: $radius;
-    height: $radius;
+    width: $radius / 2;
+    height: $radius / 2;
     border-radius: 50%;
     background-color: $radiusColor1;
     left: -$radius/4;
@@ -99,8 +99,8 @@ $radius:1vw;
   border-radius: 0 $width $width 0;
   &::before{
     content: "";
-    width: $radius;
-    height: $radius;
+    width: $radius / 2;
+    height: $radius / 2;
     background: $radiusColor1;
     position: absolute;
     top: 0;
@@ -116,8 +116,8 @@ $radius:1vw;
   position: relative;
   &::before{
     content: "";
-    width: $radius;
-    height: $radius;
+    width: $radius /2;
+    height: $radius/2;
     background: $radiusColor1;
     position: absolute;
     bottom: 0;
@@ -130,12 +130,12 @@ $radius:1vw;
 
 .right .inner {
   transform-origin: left center;
-  transform: rotateZ(-5deg);
+  transform: rotateZ(-10deg);
   position: relative;
   &::after{
     content: "";
-    width: $radius;
-    height: $radius;
+    width: $radius / 2;
+    height: $radius / 2;
     background: $radiusColor1;
     position: absolute;
     bottom: 0;

@@ -71,12 +71,12 @@ export default {
   dl{
     display: flex;
     align-items: baseline;
-    // margin-bottom: 0.84vw;
+    margin-bottom: 8px;
     dt{
       width: 0.521vw;
       height: 0.521vw;
       border-radius: 3px;
-      margin-right: 4px;
+      margin-right: 10px;
     }
     dd{
       flex: 1;
