@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <component ref="componnet"
+    <component ref="componnet" class="component"
       :style="{zIndex:100-index,position:'fixed',width:'100vw',height:'100vh'}"
       v-for="(component,index) in pageNameArr"
       :is="component"
@@ -97,9 +97,10 @@ export default {
     let self = this
     function windowAddMouseWheel () {
       var scrollFunc = function (e) {
-        e = e || window.event
-        let wheelDistance // 滑轮滚动距离
-        if (e.wheelDelta) { // 判断浏览器IE，谷歌滑轮事件
+        e = e || window.event;
+        console.log('scrollFunc e', e);
+        let wheelDistance; // 滑轮滚动距离
+        if (e.wheelDelta) {  //判断浏览器IE，谷歌滑轮事件
           wheelDistance = e.wheelDelta
         } else if (e.detail) { // Firefox滑轮事件
           wheelDistance = e.detail
@@ -122,16 +123,18 @@ export default {
       }
       // 给页面绑定滑轮滚动事件
       if (document.addEventListener) {
-        document.addEventListener('DOMMouseScroll', debounce(scrollFunc, 200), false)
+        document.addEventListener('DOMMouseScroll', scrollFunc, false);
+        window.addEventListener('DOMMouseScroll', scrollFunc, false);
       }
-      // 滚动滑轮触发scrollFunc方法
-      document.addEventListener('mousewheel', debounce(scrollFunc, 200))
+      //滚动滑轮触发scrollFunc方法
+      document.addEventListener('mousewheel', scrollFunc);
+      window.addEventListener('mousewheel', scrollFunc);
     }
   }
 }
 </script>
 <style lang="scss" scoped>
-.container {
+.component {
   background: #fff;
 }
 </style>
