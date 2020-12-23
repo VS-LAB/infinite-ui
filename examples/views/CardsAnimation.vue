@@ -18,7 +18,8 @@
           <div class="component_view-imgs_padding">
             <div class="component_view-imgs-linear_gradient"
                  :class="imgsAnimed?'imgs_animed':''">
-              <div class="component_view-imgs_container"
+              <div ref="componentViewImgsContainerRef"
+                   class="component_view-imgs_container"
                    :style="{overflow:imgCards.length > 1?'hidden auto':''}">
                 <div class="imgs_container-table"
                      :class="tableImgsPosition">
@@ -53,6 +54,7 @@
 
 <script>
 export default {
+  name: 'CardsAnimation',
   data () {
     return {
       animesFun: [this.page1_animeStep1, this.page1_animeStep4],
@@ -117,23 +119,26 @@ export default {
           ]
         },
       ],
-      animeCanvasAnime: '',//
+      animeCanvasAnime: '',//画布动画
       headerTextAnime: '',//头部文案动画
       componentViewNotebookAnime: '',// 笔记本动画
       tableImgsPosition: 'table_imgs_position',//图片集合初始化位置
+      scrollTop: 0,
       imgsAnimed: false,//是否开启遮罩及其他imgs数据
-      statusStep1: true,
-      statusStep2: true,
-      statusStep3: true,
       timeStep3: null,
-      imgConnectStyle: {},
-      imgConnectAnime: ''
+      imgConnectStyle: null,
+      imgConnectAnime: '',//连接下个图片图画
+      lastAnimeCompile: false,//最后一个动画状态
+      animeContinue: false,//动画是否进行当中
     }
   },
   methods: {
     // 头部文案动画
     page1_animeStep1 (reversal) {
       return new Promise(async (resolve, reject) => {
+        this.animeContinue = true
+        const el = this.$refs.componentViewImgsContainerRef
+        this.scrollTop = el.scrollTop = 0
         if (!reversal) {
           this.headerTextAnime = 'header_text-anime_start'
           await this.page1_animeStep2()
@@ -144,19 +149,22 @@ export default {
           await this.page1_animeStep2(true)
         }
         resolve(true)
+        this.animeContinue = false
       })
     },
     // 组件视图区域
     page1_animeStep2 (reversal) {
       return new Promise((resolve, reject) => {
-        this.componentViewNotebookAnime = reversal ? '' : 'component_view-notebook-anime_start'
-        this.tableImgsPosition = reversal ? 'table_imgs_position' : ''
-        // 动画执行完成后
-        this.$refs.componentViewNotebookRef.ontransitionend = (event) => {
-          if (event.propertyName == 'transform') {
-            resolve(true)
+        this.$nextTick(() => {
+          this.componentViewNotebookAnime = reversal ? '' : 'component_view-notebook-anime_start'
+          this.tableImgsPosition = reversal ? 'table_imgs_position' : ''
+          // 动画执行完成后
+          this.$refs.componentViewNotebookRef.ontransitionend = (event) => {
+            if (event.propertyName == 'transform') {
+              resolve(true)
+            }
           }
-        }
+        })
       })
     },
     // 遮罩层+渲染新的数据动画
@@ -168,13 +176,13 @@ export default {
         if (!reversal) {
           this.imgCards = [...this.initImgCards, ...this.addImgCards]
           this.$nextTick(() => {
-            this.timeStep3 = setTimeout(() => {
+            setTimeout(() => {
               this.imgsAnimed = true
-            })
+              setTimeout(_ => {
+                resolve(true)
+              }, 800)
+            }, 100)
           })
-          setTimeout(_ => {
-            resolve(true)
-          }, 800)
         } else {
           this.imgsAnimed = false
           this.timeStep3 = setTimeout(() => {
@@ -187,34 +195,74 @@ export default {
     },
     page1_animeStep4 (reversal) {
       return new Promise((resolve, reject) => {
-        const imgEl = this.$refs.imgRef9[1]
-        const boundingClientRect = imgEl.getBoundingClientRect()
-        this.imgConnectStyle = {
-          width: imgEl.offsetWidth + 'px',
-          height: imgEl.offsetHeight + 'px',
-          opacity: 1,
-          left: boundingClientRect.left + 'px',
-          top: boundingClientRect.top + 'px',
-          zIndex: 1,
-          transition: 'all 1s'
-        }
-        setTimeout(() => {
-          this.imgConnectAnime = reversal ? "" : 'img_connect-anime_start'
-        })
-        this.animeCanvasAnime = reversal ? '' : 'anime-canvas-anime_start'
-        this.$refs.animeCanvasAnimeRef.ontransitionend = (event) => {
-          if (event.propertyName == 'transform') {
-            resolve(true)
+
+        this.animeContinue = true
+        this.$nextTick(() => {
+          const imgEl = this.$refs.imgRef9[1]
+          const removedBoundingClientRect = document.querySelector('.infinite-standard-card_img').getBoundingClientRect()
+          console.log(removedBoundingClientRect);
+          if (imgEl) {
+            const boundingClientRect = imgEl.getBoundingClientRect()
+            this.imgConnectStyle = this.imgConnectStyle || {
+              width: imgEl.offsetWidth + 'px',
+              height: imgEl.offsetHeight + 'px',
+              opacity: 1,
+              left: boundingClientRect.left + 'px',
+              top: boundingClientRect.top + 'px',
+              zIndex: 1,
+              transition: 'all 1s',
+              display: 'block'
+            }
           }
-        }
+          this.imgConnectStyle.display = 'block'
+          setTimeout(() => {
+            this.imgConnectAnime = reversal ? "" : 'img_connect-anime_start'
+            setTimeout(() => {
+              this.imgConnectStyle.display = reversal ? 'none' : 'block'
+            }, 800)
+          }, 200)
+          this.animeCanvasAnime = reversal ? '' : 'anime-canvas-anime_start'
+          this.$refs.animeCanvasAnimeRef.ontransitionend = (event) => {
+            if (event.propertyName == 'transform') {
+              this.lastAnimeCompile = !reversal
+              resolve(true)
+              this.animeContinue = false
+            }
+          }
+        })
       })
+    },
+    parentMousewheel () {
+      if (this.imgCards.length > 1) {
+        return true
+      }
     }
   },
   mounted () {
     this.imgCards = [...this.initImgCards]
-    document.addEventListener('mousewheel', (event) => {
-      event.stopPropagation()
-      console.log(123);
+    document.body.addEventListener('mousewheel', (e) => {
+      const event = e || window.event;
+      const el = this.$refs.componentViewImgsContainerRef
+      if (el && this.imgCards.length > 1) {
+        let wheelDistance; // 滑轮滚动距离
+        if (e.wheelDelta) {  //判断浏览器IE，谷歌滑轮事件
+          wheelDistance = e.wheelDelta
+        } else if (e.detail) {  //Firefox滑轮事件
+          wheelDistance = e.detail
+        }
+        const scrollTopSpace = el.children[0].clientHeight - el.clientHeight
+        // 判断是否不可以滚动了，此时需要走上一步或者下一步动画
+        if ((this.scrollTop === 0 && wheelDistance > 0) || (this.scrollTop === scrollTopSpace && wheelDistance < 0) || this.lastAnimeCompile || this.animeContinue) return
+        // 设置电脑区域滚动位置
+        const top = el.scrollTop - (wheelDistance / 5)
+        this.scrollTop = top < 0 ? 0 : (top > scrollTopSpace ? scrollTopSpace : top)
+        el.scrollTop = this.scrollTop
+        event.stopPropagation()
+        event.cancelBubble = true
+        console.log(wheelDistance);
+      }
+
+
     })
   }
 }
@@ -228,10 +276,11 @@ export default {
     pointer-events: none;
   }
   .img_connect-anime_start {
-    width: 500px !important;
-    height: 300px !important;
+    width: auto !important;
+    height: 450px !important;
     left: 50% !important;
     top: 50% !important;
+    margin-top: 7.09vw;
     transform: translate(-50%, -50%);
   }
 
@@ -244,7 +293,7 @@ export default {
     height: 100%;
     background: #f3f7fe;
     overflow: hidden;
-    transition: all 1s;
+    transition: all 0.8s;
 
     // 头部文案动画 start
     .header_text {
