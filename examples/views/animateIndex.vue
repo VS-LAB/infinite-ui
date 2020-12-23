@@ -55,6 +55,7 @@ export default {
       this.completeAnimation = await currAnimate(true)
     },
     setComponentZindex (animateName) {
+      console.log('animateName', animateName);
       this.$refs.componnet.forEach((component, componentIndex) => {
         component.$el.style.zIndex = 100 - componentIndex
         if (animateName.includes(`page${componentIndex}`)) {
@@ -102,6 +103,7 @@ export default {
         } else if (e.detail) { // Firefox滑轮事件
           wheelDistance = e.detail
         }
+        console.log('self.completeAnimation', self.completeAnimation);
         if (self.completeAnimation) {
           if (wheelDistance > 0 && self.animeIndex >= 1) { // 当滑轮向上滚动时
             self.animeIndex -= 1
