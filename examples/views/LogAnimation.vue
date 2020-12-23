@@ -65,8 +65,8 @@ export default {
     return {
       animesFun: [this.page0_animeStep1, this.page0_animeStep5],
       resetCanvas: true,
-      timer: null,//cube计时器
-      count: 0,//计数
+      timer: null, // cube计时器
+      count: 0, // 计数
       // 立方体动画
       animes: [
         {
@@ -100,7 +100,7 @@ export default {
         {
           defaultClass: 'anime-8',
           startClass: ''
-        },
+        }
       ],
       rhombusSvfAnime: '',//菱形动画
       shadeAnime: '',//菱形遮罩动画
@@ -114,7 +114,6 @@ export default {
   },
   methods: {
     initParams () {
-
       setTimeout(() => {
         this.timer = null//cube计时器
         this.count = 0//计数
@@ -130,7 +129,6 @@ export default {
         })
         this.resetCanvas = true
       })
-
     },
     setAnimes () {
       this.count += 1
@@ -163,23 +161,22 @@ export default {
     page0_animeStep2 (reversal) {
       return new Promise((resolve, reject) => {
         if (reversal) {
-          this.shadeAnime = ""
+          this.shadeAnime = ''
           setTimeout(_ => {
-            this.rhombusSvfAnime = ""
+            this.rhombusSvfAnime = ''
             setTimeout(_ => {
               resolve(true)
             }, 400)
           }, 400)
         } else {
-          this.rhombusSvfAnime = "rhombus-svf-start"
+          this.rhombusSvfAnime = 'rhombus-svf-start'
           setTimeout(_ => {
-            this.shadeAnime = "group_rhombus-shade-start"
+            this.shadeAnime = 'group_rhombus-shade-start'
             setTimeout(_ => {
               resolve(true)
             }, 400)
           }, 400)
         }
-
       })
     },
     //正菱logs + infinite 动画
@@ -191,12 +188,11 @@ export default {
           resolve(true)
         }, 500)
       })
-
     },
     // 创造无限可能动画
     page0_animeStep4 (reversal) {
       return new Promise((resolve, reject) => {
-        this.footerTextAnime = reversal ? '' : "footer-text-anime_start"
+        this.footerTextAnime = reversal ? '' : 'footer-text-anime_start'
         setTimeout(_ => {
           resolve(true)
         }, 500)
