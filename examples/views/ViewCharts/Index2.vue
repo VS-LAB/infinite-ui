@@ -306,6 +306,10 @@ export default {
         }, {
           ele: '.laptop-container',
           classes: 'show-dark-laotop'
+        }],
+        6: [{
+          ele: '.view-chart',
+          classes: 'leave'
         }]
       }
       if (!animation.clock) return
@@ -757,6 +761,20 @@ $laptopAni-time:1s;
   100%{
     transform: translateY(-67%);
   };
+}
+
+
+.leave {
+  animation: leave 0.5s linear forwards;
+}
+
+@keyframes leave {
+  0%{
+    transform: translateY(0)
+  }
+  100%{
+    transform: translateY(-100vh)
+  }
 }
 
 </style>
