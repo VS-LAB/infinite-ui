@@ -1,0 +1,286 @@
+@keyframes labelOfLi1 {
+  0% {
+    background: rgba(255,255,255,1);
+    box-shadow: 0 0 4px 1px rgba(233, 231, 251, 1);
+  }
+  100% {
+    background: rgba(255,255,255,1);
+    box-shadow: 0 0 4px 1px rgba(233, 231, 251, 1);
+  }
+}
+
+@keyframes labelOfLiBeat {
+  0% {
+    transform: translate(-16px, -20px);
+    background: rgba(255,255,255,0);
+    box-shadow: 0 0 4px 1px rgba(233, 231, 251, 0);
+  }
+  50% {
+    transform: translate(-0px, -0px);
+    background: rgba(255,255,255,1);
+    box-shadow: 0 0 4px 1px rgba(233, 231, 251, 1);
+    // background: rgba(255,255,255,0.9);
+  }
+  51% {
+    box-shadow: 0 0 4px 1px rgba(233, 231, 251, 0);
+  }
+  100% {
+    // transform: translate(-0px, -0px);
+    background: rgba(255,255,255,0);
+  }
+}
+
+@keyframes labelOfTextBeat {
+  0% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 0;
+    color: rgba(72,89,104,1);
+  }
+  50% {
+    opacity: 1;
+    color: rgba(72,89,104,1);
+  }
+  100% {
+    opacity: 1;
+    color: rgba(72,89,104,1);
+  }
+}
+
+@keyframes labelOfIconBeat {
+  0% {
+    transform: translate(-6px, -14px);
+    opacity: 0;
+  }
+  1% {
+    transform: translate(-6px, -14px);
+    opacity: 1;
+  }
+  25% {
+    transform: translate(-6px, -14px);
+    opacity: 1;
+  }
+  75% {
+    transform: translate(-0px, -0px);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-0px, -0px);
+    opacity: 1;
+  }
+}
+
+@keyframes labelOfIconBeat1 {
+  0% {
+    transform: translate(-6px, -14px);
+    opacity: 0;
+    // color: rgba(255,118,53,1);
+  }
+  1% {
+    transform: translate(-6px, -14px);
+    opacity: 0;
+    color: rgba(255,118,53,1);
+  }
+  5% {
+    transform: translate(-6px, -14px);
+    opacity: 0;
+  }
+  15% {
+    transform: translate(-0px, -0px);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-0px, -0px);
+    opacity: 1;
+    color: rgba(255,118,53,1);
+  }
+}
+
+@keyframes labelOfIconBeat3 {
+  0% {
+    transform: translate(-6px, -14px);
+    opacity: 0;
+    color: rgba(24,144,255,1);
+  }
+  1% {
+    transform: translate(-6px, -14px);
+    opacity: 0;
+  }
+  // 1~5是白色从出现到完全遮挡时间
+  5% {
+    transform: translate(-6px, -14px);
+    opacity: 0;
+  }
+  15% {
+    transform: translate(-0px, -0px);
+    opacity: 1;
+    color: rgba(24,144,255,1);
+  }
+  100% {
+    transform: translate(-0px, -0px);
+    opacity: 1;
+    color: rgba(24,144,255,1);
+  }
+}
+
+@keyframes labelOfIconBeat5 {
+  0% {
+    transform: translate(-6px, -14px);
+    opacity: 0;
+    color: rgba(48,49,51,1);
+  }
+  1% {
+    transform: translate(-6px, -14px);
+    opacity: 0;
+  }
+  // 1~5是白色从出现到完全遮挡时间
+  5% {
+    transform: translate(-6px, -14px);
+    opacity: 0;
+  }
+  15% {
+    transform: translate(-0px, -0px);
+    opacity: 1;
+    color: rgba(48,49,51,1);
+  }
+  100% {
+    transform: translate(-0px, -0px);
+    opacity: 1;
+    color: rgba(48,49,51,1);
+  }
+}
+
+@keyframes sectionOfMenuTransparency1 {
+  0% {
+    background: rgba(255,141,56,1);
+  }
+  100% {
+    // background: rgba(24,144,255,1);
+    // opacity: 1;
+  }
+}
+
+@keyframes sectionOfMenuTransparency3 {
+  0% {
+    background: rgba(255,141,56,1);
+    // opacity: 1;
+  }
+  25% {
+    background: rgba(255,141,56,.5);
+    // opacity: 1;
+  }
+  // 50% {
+  //   opacity: .5;
+  // }
+  75% {
+    background: rgba(24,144,255,.5);
+    // opacity: 1;
+  }
+  100% {
+    background: rgba(24,144,255,1);
+    // opacity: 1;
+  }
+}
+
+@keyframes sectionOfMenuTransparency5 {
+  0% {
+    background: rgba(24,144,255,1);
+    // opacity: 1;
+  }
+  25% {
+    background: rgba(24,144,255,.5);
+    // opacity: 1;
+  }
+  // 50% {
+  //   opacity: .5;
+  // }
+  75% {
+    background: rgba(43,41,57,.5);
+    // opacity: 1;
+  }
+  100% {
+    background: rgba(43,41,57,1);
+    // opacity: 1;
+  }
+}
+@keyframes sectionOfListO {
+  0% {
+    background: rgba(247,250,252,1);
+  }
+  40% {
+    background: rgba(247,250,252,1);
+  }
+  100% {
+    background: rgba(247,250,252,.9);
+  }
+}
+@keyframes OsectionOfList {
+  0% {
+    background: rgba(247,250,252,.9);
+  }
+  60% {
+    background: rgba(247,250,252,1);
+  }
+  75% {
+    background: rgba(247,250,252,1);
+  }
+  100% {
+    background: rgba(247,250,252,1);
+  }
+}
+
+/* 背景纯色圆环仿水波效果 */
+@keyframes circleWave {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(3.5);
+    top: -45vw;
+  }
+}
+/* 元素以一定角度旋转飞入效果 */
+@keyframes rotateIn {
+  0% {
+    top: -77vh;
+    left: 170vw;
+    // translateZ(0)
+    transform: rotateZ(50deg) skewY(158deg) scale(5);
+    transform-origin: -128px -43px;
+  }
+  30% {
+    // top: -66vh;
+
+  }
+  60% {
+    // transform: rotateZ(20deg) skewY(172deg) scale(3.5);
+
+  }
+  100% {
+    top: 20vh;
+    left: 0vw;
+    transform: rotateZ(0deg) skewY(180deg) scale(1);
+    transform-origin: -128px -43px;
+  }
+}
+@keyframes slideUp {
+  0% {
+    opacity: 0;
+    top: 20vh;
+  }
+  100% {
+    opacity: 1;
+    top: 7vh;
+  }
+}
+@keyframes slideUpBg {
+  0% {
+    opacity: 0;
+    top: 100vh;
+  }
+  100% {
+    opacity: 1;
+    top: 0vh;
+  }
+}

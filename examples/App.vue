@@ -9,10 +9,10 @@
 <template>
   <div style="height: 100%">
     <el-container :class="{ 'home-container': isFixed }">
-      <el-header height="80"
+      <!-- <el-header height="80"
                  :class="{ 'header-fixed': !isFixed }">
         <header-model></header-model>
-      </el-header>
+      </el-header> -->
       <div :class="{ 'view-container': !isFixed }">
         <div class="view-container-scroll">
           <router-view></router-view>
@@ -22,16 +22,17 @@
   </div>
 </template>
 <script>
-import HeaderModel from './components/header'
+// import HeaderModel from './components/header'
 export default {
   components: {
-    HeaderModel
+    // HeaderModel
   },
   data () {
     return {}
   },
   computed: {
     isFixed () {
+      console.log('this.$route.name', this.$route.name);
       return this.$route.name.includes('home')
     }
   }
