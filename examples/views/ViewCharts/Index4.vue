@@ -311,7 +311,12 @@ export default {
     },
     page4_animation_play_step5 (dirction) {
       return new Promise((resolve, reject) => {
-        this.activeColor = 5
+        // this.activeColor = 5
+        if (dirction) {
+          this.activeColor = 4
+        } else {
+          this.activeColor = 5
+        }
         const animationList = this.animationList[4]
         this.handleElementsAnimation(dirction, animationList)
         setTimeout(() => {
@@ -321,7 +326,11 @@ export default {
     },
     page4_animation_play_step6 (dirction) {
       return new Promise((resolve, reject) => {
-        this.activeColor = 6
+        if (dirction) {
+          this.activeColor = 5
+        } else {
+          this.activeColor = 6
+        }
         const animationList = this.animationList[5]
         this.handleElementsAnimation(dirction, animationList)
         setTimeout(() => {
