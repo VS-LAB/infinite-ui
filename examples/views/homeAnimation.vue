@@ -28,6 +28,7 @@ export default {
   },
   data () {
     return {
+      animesFun: [this.page3_animeStep1],
       // pageOneZindex: 0,
       // pageTwoZindex: 0
       pageOneAnimateName: '', // 第一个页面动画
@@ -35,6 +36,20 @@ export default {
     }
   },
   methods: {
+    page3_animeStep1 (reversal) {
+      return new Promise((resolve, reject) => {
+        this.showAniFunc()
+        document.body.style.overflow = 'auto'
+        setTimeout(() => {
+          this.pageOneAnimateName = 'slide-up-animate'
+          this.pageOneZindex = 1
+        }, 2000)
+        setTimeout(_ => {
+          resolve(true)
+        }, 500)
+      })
+
+    },
     // start
     showAniFunc () {
       this.pageCurrentZindex === 3 ? this.pageCurrentZindex = 0 : this.pageCurrentZindex = 3
@@ -45,12 +60,12 @@ export default {
     }
   },
   mounted () {
-    this.showAniFunc()
-    document.body.style.overflow = 'auto'
-    setTimeout(() => {
-      this.pageOneAnimateName = 'slide-up-animate'
-      this.pageOneZindex = 1
-    }, 2000)
+    // this.showAniFunc()
+    // document.body.style.overflow = 'auto'
+    // setTimeout(() => {
+    //   this.pageOneAnimateName = 'slide-up-animate'
+    //   this.pageOneZindex = 1
+    // }, 2000)
 
     function debounce (fn, wait, immediate) {
       immediate = immediate || false
@@ -91,12 +106,6 @@ export default {
           self.showAniFunc()
         }
       }
-      // 给页面绑定滑轮滚动事件
-      if (document.addEventListener) {
-        document.addEventListener('DOMMouseScroll', debounce(scrollFunc, 300), false)
-      }
-      // 滚动滑轮触发scrollFunc方法
-      document.addEventListener('mousewheel', debounce(scrollFunc, 300))
     }
   }
 }

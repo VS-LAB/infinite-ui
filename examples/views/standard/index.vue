@@ -182,7 +182,7 @@ let timer
 export default {
   data () {
     return {
-      animesFun: [this.goShowTop, this.goShowLine, this.goShowCardMoveToLeft, this.goShowExlamatoryMark, this.goEndTop],
+      animesFun: [this.page2_goShowTop, this.page2_goShowLine, this.page2_goShowCardMoveToLeft, this.page2_goShowExlamatoryMark, this.page2_goEndTop],
       isShowCode: false,
       row: 0,
       endTop: false,
@@ -229,7 +229,7 @@ export default {
      * 5. 感叹号右移20px 其他部件上滑至透明
      */
     // 步骤1 显示头部与卡片
-    goShowTop () {
+    page2_goShowTop () {
       return new Promise((resolve, reject) => {
         this.showTop = !this.showTop
         setTimeout(_ => {
@@ -238,7 +238,7 @@ export default {
       })
     },
     // 步骤2 显示边框线
-    goShowLine () {
+    page2_goShowLine () {
       return new Promise((resolve, reject) => {
         this.showLine = !this.showLine
         setTimeout(_ => {
@@ -247,7 +247,7 @@ export default {
       })
     },
     // 步骤3 卡片位移
-    goShowCardMoveToLeft () {
+    page2_goShowCardMoveToLeft () {
       return new Promise((resolve, reject) => {
         this.showCardMoveToLeft = !this.showCardMoveToLeft
         this.codeShowLine()
@@ -257,7 +257,7 @@ export default {
       })
     },
     // 步骤4 显示感叹号
-    goShowExlamatoryMark () {
+    page2_goShowExlamatoryMark () {
       return new Promise((resolve, reject) => {
         this.showMask = !this.showMask
         setTimeout(_ => {
@@ -266,7 +266,7 @@ export default {
       })
     },
     // 步骤5 保留感叹号 其他部分上滑
-    goEndTop () {
+    page2_goEndTop () {
       return new Promise((resolve, reject) => {
         this.endTop = !this.endTop
         setTimeout(_ => {
@@ -290,7 +290,25 @@ export default {
       setTimeout(() => {
         this.endTop = true
       }, 1000)
-    }
+    },
+    page2_animeStep (reversal) {
+      console.log('animeStep standard');
+      const _that = this
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          _that.isShowCode = true
+          setTimeout(() => {
+      console.log('animeStep codeShowLine');
+
+            _that.codeShowLine()
+          }, 500)
+        }, 2500)
+        setTimeout(_ => {
+          resolve(true)
+        }, 2500)
+      })
+
+    },
   }
 }
 </script>

@@ -13,7 +13,8 @@
 import LogAnimation from '@/views/LogAnimation'
 import CardsAnimation from '@/views/CardsAnimation'
 import Standard from '@/views/standard'
-import homeAnimation from '@/views/homeAnimation'
+import HomeAnimation from '@/views/homeAnimation'
+import ViewChart from '@/views/ViewCharts/Index.vue'
 import LastPage from '@/views/lastPage'
 
 export default {
@@ -21,7 +22,8 @@ export default {
     LogAnimation,
     CardsAnimation,
     Standard,
-    homeAnimation,
+    HomeAnimation,
+    ViewChart,
     LastPage,
   },
   data () {
@@ -29,24 +31,38 @@ export default {
       animesFun: [],
       animeIndex: 0,
       completeAnimation: false,
-      pageNameArr: ['LogAnimation', 'CardsAnimation', 'Standard'],
+      pageNameArr: ['LogAnimation', 'CardsAnimation', 'Standard', 'HomeAnimation', 'ViewChart', 'LastPage'],
       // pageNameArr: ['LogAnimation', 'CardsAnimation', 'Standard', 'homeAnimation', 'LastPage'],
     }
   },
   methods: {
     async next () {
       this.completeAnimation = false
-      this.completeAnimation = await this.animesFun[this.animeIndex]()
+      const currAnimate = this.animesFun[this.animeIndex]
+      const animateName = currAnimate.name
+      this.setComponentZindex(animateName)
+      this.completeAnimation = await currAnimate()
     },
     async prev () {
       this.completeAnimation = false
-      this.completeAnimation = await this.animesFun[this.animeIndex + 1](true)
+      const currAnimate = this.animesFun[this.animeIndex + 1]
+      const animateName = currAnimate.name
+      this.setComponentZindex(animateName)
+      this.completeAnimation = await currAnimate(true)
+    },
+    setComponentZindex(animateName) {
+      this.$refs.componnet.forEach((component, componentIndex) => {
+        component.$el.style.zIndex = 100-componentIndex
+        if (animateName.includes(`page${componentIndex}`)) {
+          component.$el.style.zIndex = 101
+        }
+      })
     }
   },
   mounted () {
     let animesFun = []
-    this.$refs.componnet.forEach(c => {
-      animesFun = [...animesFun, ...(c.animesFun || [])]
+    this.$refs.componnet.forEach((component) => {
+      animesFun = [...animesFun, ...(component.animesFun || [])]
     })
     this.animesFun = animesFun
     this.next()
@@ -82,7 +98,7 @@ export default {
         } else if (e.detail) {  //Firefox滑轮事件
           wheelDistance = e.detail
         }
-        console.log(self.completeAnimation);
+        console.log('completeAnimation', self.completeAnimation);
         if (self.completeAnimation) {
           if (wheelDistance > 0 && self.animeIndex >= 1) { //当滑轮向上滚动时
             self.animeIndex -= 1
@@ -100,10 +116,10 @@ export default {
       };
       //给页面绑定滑轮滚动事件
       if (document.addEventListener) {
-        document.addEventListener('DOMMouseScroll', debounce(scrollFunc, 300), false);
+        document.addEventListener('DOMMouseScroll', debounce(scrollFunc, 20), false);
       }
       //滚动滑轮触发scrollFunc方法
-      document.addEventListener('mousewheel', debounce(scrollFunc, 300));
+      document.addEventListener('mousewheel', debounce(scrollFunc, 20));
     }
 
 

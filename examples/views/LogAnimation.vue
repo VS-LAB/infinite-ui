@@ -63,7 +63,7 @@ export default {
   },
   data () {
     return {
-      animesFun: [this.animeStep1, this.animeStep5],
+      animesFun: [this.page0_animeStep1, this.page0_animeStep5],
       resetCanvas: true,
       timer: null,//cube计时器
       count: 0,//计数
@@ -137,14 +137,14 @@ export default {
       this.animes[this.count - 1].startClass = `anime-start-${this.count}`
     },
     // 立方体动画
-    animeStep1 () {
+    page0_animeStep1 () {
       return new Promise((resolve, reject) => {
         this.timer = setInterval(async _ => {
           if (this.count === this.animes.length) {
             clearInterval(this.timer)
-            await this.animeStep2()
-            await this.animeStep3()
-            await this.animeStep4()
+            await this.page0_animeStep2()
+            await this.page0_animeStep3()
+            await this.page0_animeStep4()
             resolve(true)
             return
           }
@@ -160,7 +160,7 @@ export default {
       })
     },
     // 菱形动画
-    animeStep2 (reversal) {
+    page0_animeStep2 (reversal) {
       return new Promise((resolve, reject) => {
         if (reversal) {
           this.shadeAnime = ""
@@ -183,7 +183,7 @@ export default {
       })
     },
     //正菱logs + infinite 动画
-    animeStep3 (reversal) {
+    page0_animeStep3 (reversal) {
       return new Promise((resolve, reject) => {
         this.animeLogContainerLogsAnime = reversal ? '' : "anime_log_container-logs_start"
         this.infiniteEnglishSvfAnime = reversal ? '' : "infinite-english-svf-anime_start"
@@ -194,7 +194,7 @@ export default {
 
     },
     // 创造无限可能动画
-    animeStep4 (reversal) {
+    page0_animeStep4 (reversal) {
       return new Promise((resolve, reject) => {
         this.footerTextAnime = reversal ? '' : "footer-text-anime_start"
         setTimeout(_ => {
@@ -203,7 +203,7 @@ export default {
       })
     },
     // 最终动画
-    animeStep5 (reversal) {
+    page0_animeStep5 (reversal) {
       return new Promise((resolve, reject) => {
         if (!reversal) {
           this.moveWhiteBackgroundAnime = "move-white-background-anime_start"

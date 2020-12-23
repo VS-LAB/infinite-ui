@@ -55,7 +55,7 @@
 export default {
   data () {
     return {
-      animesFun: [this.animeStep1, this.animeStep4],
+      animesFun: [this.page1_animeStep1, this.page1_animeStep4],
       // 图片数据
       imgCards: [],
       initImgCards: [
@@ -132,22 +132,22 @@ export default {
   },
   methods: {
     // 头部文案动画
-    animeStep1 (reversal) {
+    page1_animeStep1 (reversal) {
       return new Promise(async (resolve, reject) => {
         if (!reversal) {
           this.headerTextAnime = 'header_text-anime_start'
-          await this.animeStep2()
-          await this.animeStep3()
+          await this.page1_animeStep2()
+          await this.page1_animeStep3()
         } else {
-          await this.animeStep3(true)
+          await this.page1_animeStep3(true)
           this.headerTextAnime = ''
-          await this.animeStep2(true)
+          await this.page1_animeStep2(true)
         }
         resolve(true)
       })
     },
     // 组件视图区域
-    animeStep2 (reversal) {
+    page1_animeStep2 (reversal) {
       return new Promise((resolve, reject) => {
         this.componentViewNotebookAnime = reversal ? '' : 'component_view-notebook-anime_start'
         this.tableImgsPosition = reversal ? 'table_imgs_position' : ''
@@ -160,7 +160,7 @@ export default {
       })
     },
     // 遮罩层+渲染新的数据动画
-    animeStep3 (reversal) {
+    page1_animeStep3 (reversal) {
       return new Promise((resolve, reject) => {
         if (this.timeStep3) {
           clearTimeout(this.timeStep3)
@@ -185,7 +185,7 @@ export default {
 
       })
     },
-    animeStep4 (reversal) {
+    page1_animeStep4 (reversal) {
       return new Promise((resolve, reject) => {
         const imgEl = this.$refs.imgRef9[1]
         const boundingClientRect = imgEl.getBoundingClientRect()
