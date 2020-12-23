@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <component ref="componnet"
-      :style="{zIndex:100-index,position:'fixed',width:'100vw',height:'100vh'}"
+      :style="{zIndex:100-index, position:'fixed',width:'100vw',height:'100vh'}"
       v-for="(component,index) in pageNameArr"
       :is="component"
       :key="component">
@@ -13,7 +13,6 @@
 import LogAnimation from '@/views/LogAnimation'
 import CardsAnimation from '@/views/CardsAnimation'
 import Standard from '@/views/standard'
-// import HomeAnimation from '@/views/homeAnimation'
 import ViewChart from '@/views/ViewCharts/Index.vue'
 import LastPage from '@/views/lastPage'
 import ViewCharts from '../views/ViewCharts/Index2'
@@ -24,7 +23,6 @@ export default {
     LogAnimation,
     CardsAnimation,
     Standard,
-    // HomeAnimation,
     ViewChart,
     LastPage,
     ViewCharts,
@@ -97,22 +95,20 @@ export default {
     let self = this
     function windowAddMouseWheel () {
       var scrollFunc = function (e) {
-        e = e || window.event
-        let wheelDistance // 滑轮滚动距离
-        if (e.wheelDelta) { // 判断浏览器IE，谷歌滑轮事件
+        e = e || window.event;
+        let wheelDistance; // 滑轮滚动距离
+        if (e.wheelDelta) {  //判断浏览器IE，谷歌滑轮事件
           wheelDistance = e.wheelDelta
         } else if (e.detail) { // Firefox滑轮事件
           wheelDistance = e.detail
         }
-        console.log('completeAnimation', self.completeAnimation)
         if (self.completeAnimation) {
           if (wheelDistance > 0 && self.animeIndex >= 1) { // 当滑轮向上滚动时
             self.animeIndex -= 1
             console.log('滑轮向上滚动')
             self.prev()
           }
-          console.log(self.animeIndex, self.animesFun.length)
-          console.log(self.animeIndex < self.animesFun.length - 1)
+          console.log('self.animeIndex < self.animesFun.length', self.animeIndex < self.animesFun.length - 1)
           if (wheelDistance < 0 && self.animeIndex < self.animesFun.length - 1) { // 当滑轮向下滚动时
             self.animeIndex += 1
             console.log('滑轮向下滚动')
@@ -122,16 +118,15 @@ export default {
       }
       // 给页面绑定滑轮滚动事件
       if (document.addEventListener) {
-        document.addEventListener('DOMMouseScroll', debounce(scrollFunc, 200), false)
+        document.addEventListener('DOMMouseScroll', scrollFunc, false);
+        window.addEventListener('DOMMouseScroll', scrollFunc, false);
       }
-      // 滚动滑轮触发scrollFunc方法
-      document.addEventListener('mousewheel', debounce(scrollFunc, 200))
+      //滚动滑轮触发scrollFunc方法
+      document.addEventListener('mousewheel', scrollFunc);
+      window.addEventListener('mousewheel', scrollFunc);
     }
   }
 }
 </script>
 <style lang="scss" scoped>
-.container {
-  background: #fff;
-}
 </style>

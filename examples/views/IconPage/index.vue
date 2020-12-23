@@ -139,7 +139,7 @@ export default {
       // pageOneZindex: 0,
       // pageTwoZindex: 0
       bgIconPageAnimateName: '',
-      animesFun: [this.showAniStep1, this.showAniStep2, this.showAniStep3, this.showAniStep4, this.showAniStep5]
+      animesFun: [this.page3_showAniStep1, this.page3_showAniStep2, this.page3_showAniStep3, this.page3_showAniStep4, this.page3_showAniStep5]
     }
   },
   watch: {
@@ -160,7 +160,7 @@ export default {
   },
   methods: {
     // 
-    showAniStep1 (reversal) {
+    page3_showAniStep1 (reversal) {
       return new Promise((resolve, reject) => {
         if (!reversal) {
           this.showIconsIntroduce = 'slide-up-animate'
@@ -181,7 +181,7 @@ export default {
       })
     },
     // 
-    showAniStep2 (reversal) {
+    page3_showAniStep2 (reversal) {
       return new Promise((resolve, reject) => {
         const _that = this
         if (!reversal) {
@@ -201,7 +201,7 @@ export default {
       })
     },
     // 
-    showAniStep3 (reversal) {
+    page3_showAniStep3 (reversal) {
       return new Promise((resolve, reject) => {
         const _that = this
         if (!reversal) {
@@ -225,7 +225,7 @@ export default {
       })
     },
     // 
-    showAniStep4 (reversal) {
+    page3_showAniStep4 (reversal) {
       return new Promise((resolve, reject) => {
         const _that = this
         if (!reversal) {
@@ -249,7 +249,7 @@ export default {
       })
     },
     // 
-    showAniStep5 (reversal) {
+    page3_showAniStep5 (reversal) {
       return new Promise((resolve, reject) => {
         const _that = this
         if (!reversal) {
