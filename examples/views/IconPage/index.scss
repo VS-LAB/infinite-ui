@@ -506,7 +506,7 @@
                 }
                 & .infinite-icon-page-li-icon {
                   .infinite-icon-page-li-icon-i {
-                    animation: labelOfIconBeat1 1.5s linear .15s;
+                    // animation: labelOfIconBeat1 1.5s linear .15s;
                   }
                   .infinite-icon-page-li-icon-text {
                     animation: labelOfTextBeat 1.5s linear .15s;
@@ -1401,6 +1401,68 @@
 
       }
       .infinite-icon-page-window {
+        .infinite-icon-page-window-menu {
+          // background: rgba(43,41,57,1);
+          .infinite-icon-page-menu-top {
+            background: rgba(255,255,255,0.16);
+          }
+          .infinite-icon-page-menu-center {
+
+          }
+          .infinite-icon-page-menu-bottom {
+
+          }
+        }
+        .infinite-icon-page-window-icon-list {
+          background: rgba(247,250,252,1);
+          .infinite-icon-page-list-mask {
+
+          }
+          .infinite-icon-page-list-main {
+            .infinite-icon-page-list-main-li {
+              background: rgba(255,255,255,1);
+              box-shadow: 0 0 4px 1px rgba(233, 231, 251, 1);
+              .infinite-icon-page-li-beat {
+
+              }
+              .infinite-icon-page-li-icon {
+                .infinite-icon-page-li-icon-i {
+                  color: rgba(48,49,51,1);
+                  opacity: 1;
+                }
+                .infinite-icon-page-li-icon-text {
+                  color: rgba(72,89,104,1);
+                  opacity: 1;
+                } 
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // 黑 => 无
+  &.infinite-home-animation-icon-page-step7 {
+    animation: hideIconPageStep7 .5s linear forwards;
+    .infinite-icon-page-bg {
+      background-image: linear-gradient(180deg, #32303F 0%, #201E2B 100%);
+    }
+    .infinite-icon-page-content {
+      .infinite-icon-page-title-h3 {
+
+      }
+      .infinite-icon-page-title-p-top {
+
+      }
+      .infinite-icon-page-title-p-bottom {
+
+      }
+      .infinite-icon-page-window {
+        // animation: hideIconPageWindow .5s linear forwards;
+        .icon-bg-move {
+          animation: hideIconBgMove .5s linear forwards;
+        }
         .infinite-icon-page-window-menu {
           // background: rgba(43,41,57,1);
           .infinite-icon-page-menu-top {

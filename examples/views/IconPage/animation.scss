@@ -298,3 +298,31 @@
     top: 0vh;
   }
 }
+@keyframes hideIconBgMove {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: .3;
+  }
+}
+@keyframes hideIconPageWindow {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: .6;
+  }
+}
+@keyframes hideIconPageStep7 {
+  0% {
+    // background: rgba(255,255,255,1);
+    transform: translateY(0%);
+    opacity: 1;
+  }
+  100% {
+    // background: rgba(255,255,255,.6);
+    transform: translateY(-100%);
+    opacity: .6;
+  }
+}

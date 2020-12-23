@@ -1,6 +1,10 @@
 <template>
   <div class="infinite-standard">
     <div
+      class="infinite-standard-card-exclamatory-mark"
+      :class="{'end-mask':endTop,'show-tip':showMask}"
+    />
+    <div
       class="infinite-standard-top"
       :class="{'end-top':endTop,'show-top':showTop}"
     >
@@ -148,10 +152,6 @@
           <img
             class="infinite-standard-card_img"
             :src="require('@/assets/cardComponent.png')"
-          />
-          <div
-            class="infinite-standard-card-exclamatory-mark"
-            :class="{'end-mask':endTop,'show-tip':showMask}"
           />
         </div>
 

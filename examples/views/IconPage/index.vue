@@ -4,9 +4,9 @@
       <!-- <button class="start" @click.stop="showAniFunc">start</button> -->
       <!-- <button class="reset" @click.stop="showAniFuncReset">reset</button> -->
       <!-- <div class="infinite-icon-page-bg"></div> -->
-      <div class="orange-circle" :class="showDefaultBg"></div>
-      <div class="icon-bg-circle blue-circle" :class="blueBgAnimateName"></div>
-      <div class="icon-bg-circle black-circle" :class="blackBgAnimateName"></div>
+      <div class="icon-bg-move orange-circle" :class="showDefaultBg"></div>
+      <div class="icon-bg-move icon-bg-circle blue-circle" :class="blueBgAnimateName"></div>
+      <div class="icon-bg-move icon-bg-circle black-circle" :class="blackBgAnimateName"></div>
       <!-- <div :class="bgIconPageAnimateName"></div> -->
       <div class="infinite-icon-page-content flex fdc aic jcc">
         <div class="icons-introduce" :class="showIconsIntroduce">
@@ -139,7 +139,7 @@ export default {
       // pageOneZindex: 0,
       // pageTwoZindex: 0
       bgIconPageAnimateName: '',
-      animesFun: [this.showAniStep1, this.showAniStep2, this.showAniStep3, this.showAniStep4]
+      animesFun: [this.showAniStep1, this.showAniStep2, this.showAniStep3, this.showAniStep4, this.showAniStep5]
     }
   },
   watch: {
@@ -243,6 +243,30 @@ export default {
           // setTimeout(_ => {
           this.blackBgAnimateName = ''
           _that.showAni = 4
+          resolve(true)
+          // }, 1500)
+        }
+      })
+    },
+    // 
+    showAniStep5 (reversal) {
+      return new Promise((resolve, reject) => {
+        const _that = this
+        if (!reversal) {
+          // this.blackBgAnimateName = 'circle-animate'
+          setTimeout(_ => {
+            _that.showAni = 7
+            setTimeout(_ => {
+              // _that.showAni = 6
+              // setTimeout(_ => {
+              resolve(true)
+            // }, 500)
+            }, 500)
+          }, 500)
+        } else {
+          // setTimeout(_ => {
+          // this.blackBgAnimateName = ''
+          _that.showAni = 6
           resolve(true)
           // }, 1500)
         }
