@@ -326,11 +326,13 @@ export default {
       animationList.map(item => {
         const { ele, className } = item
         const element = document.querySelector(ele)
-        if (dirction) {
-          element.classList.add(className)
-        } else {
-          element.classList.remove(className)
-        };
+        if (element) {
+          if (!dirction) {
+            element.classList.add(className)
+          } else {
+            element.classList.remove(className)
+          };
+        }
       })
     },
     checkAnimationStatus (animationList) {

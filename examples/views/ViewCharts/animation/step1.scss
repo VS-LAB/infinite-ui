@@ -96,8 +96,9 @@
   opacity: 1;
   transition: all 0.01s linear;
   &.scale-chart-box-height-step1{
-    height: 1px;
-    opacity: 0;
+    height: 0;
+    // height: 1px;
+    // opacity: 0;
   }
 }
 
