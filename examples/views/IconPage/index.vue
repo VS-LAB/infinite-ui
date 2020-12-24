@@ -150,7 +150,7 @@ export default {
       noShow: true,
       showIcon: false,
       bgAnimateNameZindex: 1,
-      animesFun: [this.page3_showAniStep2, this.page3_showAniStep3, this.page3_showAniStep4]
+      animesFun: [this.page3_showAniStep2, this.page3_showAniStep3, this.page3_showAniStep4, this.page3_showAniStep5]
       // animesFun: [this.page3_showAniStep1, this.page3_showAniStep2, this.page3_showAniStep3, this.page3_showAniStep4, this.page3_showAniStep5]
     }
   },
@@ -295,7 +295,7 @@ export default {
     page3_showAniStep4 (reversal) {
       return new Promise((resolve, reject) => {
         const _that = this
-              this.showIcon = false
+        this.showIcon = false
         if (!reversal) {
           console.log('next page3_showAniStep4')
           this.blackBgAnimateName = 'circle-animate'
@@ -340,25 +340,27 @@ export default {
     page3_showAniStep5 (reversal) {
       return new Promise((resolve, reject) => {
         const _that = this
+        EventBus.$emit('page3_showAniStep5', reversal)
         if (!reversal) {
           console.log('next page3_showAniStep5')
-          // this.blackBgAnimateName = 'circle-animate'
+          //   // this.blackBgAnimateName = 'circle-animate'
           setTimeout(_ => {
             _that.showAni = 7
-            setTimeout(_ => {
-              // _that.showAni = 6
-              // setTimeout(_ => {
-              resolve(true)
-            // }, 500)
-            }, 500)
+            //     setTimeout(_ => {
+            //       // _that.showAni = 6
+            //       // setTimeout(_ => {
+            resolve(true)
+            //     // }, 500)
+            //     }, 500)
           }, 500)
         } else {
           console.log('prev page3_showAniStep5')
-          // setTimeout(_ => {
-          // this.blackBgAnimateName = ''
-          _that.showAni = 6
-          resolve(true)
-          // }, 1500)
+          setTimeout(_ => {
+            _that.showAni = 6
+            //   // this.blackBgAnimateName = ''
+            //   _that.showAni = 6
+            resolve(true)
+          }, 500)
         }
       })
     },
