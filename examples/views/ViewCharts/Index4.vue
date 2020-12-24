@@ -977,170 +977,6 @@ $laptopAni-time:1s;
 <style lang="scss" scoped>
 @import "./common.scss";
 
-.btn2 {
-  position: fixed;
-  width: 100px;
-  height: 40px;
-  line-height: 40px;
-  right: 0;
-  bottom: 50%;
-  cursor: pointer;
-  z-index: 100000;
-}
-
-.btn3 {
-  position: fixed;
-  width: 100px;
-  height: 40px;
-  line-height: 40px;
-  left: 0;
-  top: 10%;
-  cursor: pointer;
-  z-index: 100000;
-}
-
-.btn4 {
-  position: fixed;
-  width: 100px;
-  height: 40px;
-  line-height: 40px;
-  left: 0;
-  top: calc( 10% + 60px);
-  cursor: pointer;
-  z-index: 100000;
-}
-
-.btn5 {
-  position: fixed;
-  width: 100px;
-  height: 40px;
-  line-height: 40px;
-  left: 0;
-  top: calc( 10% + 120px);
-  cursor: pointer;
-  z-index: 100000;
-}
-
-.btn6 {
-  position: fixed;
-  width: 100px;
-  height: 40px;
-  line-height: 40px;
-  left: 0;
-  top: calc( 10% + 180px);
-  cursor: pointer;
-  z-index: 100000;
-}
-
-.btn7 {
-  position: fixed;
-  width: 100px;
-  height: 40px;
-  line-height: 40px;
-  left: 0;
-  top: calc( 10% + 240px);
-  cursor: pointer;
-  z-index: 100000;
-}
-
-.btn8 {
-  position: fixed;
-  width: 100px;
-  height: 40px;
-  line-height: 40px;
-  left: 0;
-  top: calc( 10% + 300px);
-  cursor: pointer;
-  z-index: 100000;
-}
-
-.btn9 {
-  position: fixed;
-  width: 100px;
-  height: 40px;
-  line-height: 40px;
-  left: 0;
-  top: calc( 10% + 360px);
-  cursor: pointer;
-  z-index: 100000;
-}
-
-.btn10 {
-  position: fixed;
-  width: 100px;
-  height: 40px;
-  line-height: 40px;
-  left: 0;
-  top: calc( 10% + 420px);
-  cursor: pointer;
-  z-index: 100000;
-}
-
-.btn11 {
-  position: fixed;
-  width: 100px;
-  height: 40px;
-  line-height: 40px;
-  right: 0;
-  top: calc( 10%);
-  cursor: pointer;
-  z-index: 100000;
-}
-
-.btn12 {
-  position: fixed;
-  width: 100px;
-  height: 40px;
-  line-height: 40px;
-  right: 0;
-  top: calc( 10% + 60px);
-  cursor: pointer;
-  z-index: 100000;
-}
-
-.btn13 {
-  position: fixed;
-  width: 100px;
-  height: 40px;
-  line-height: 40px;
-  right: 0;
-  top: calc( 10% + 120px);
-  cursor: pointer;
-  z-index: 100000;
-}
-
-.btn14 {
-  position: fixed;
-  width: 100px;
-  height: 40px;
-  line-height: 40px;
-  right: 0;
-  top: calc( 10% + 180px);
-  cursor: pointer;
-  z-index: 100000;
-}
-
-.btn15 {
-  position: fixed;
-  width: 100px;
-  height: 40px;
-  line-height: 40px;
-  right: 0;
-  top: calc( 10% + 240px);
-  cursor: pointer;
-  z-index: 100000;
-}
-
-.btn16 {
-  position: fixed;
-  width: 100px;
-  height: 40px;
-  line-height: 40px;
-  right: 0;
-  top: calc( 10% + 300px);
-  cursor: pointer;
-  z-index: 100000;
-}
 .view-container {
   // padding-top: 0.20rem;
   box-sizing: border-box;
@@ -1327,19 +1163,6 @@ $AniChartDelay2: 1.2s;
   }
 }
 
-// .chart-box {
-//   height: 100%;
-//   width: 52.82vw;
-//   margin: 0 auto;
-//   // animation: hideBox 1s ease;
-//   animation-fill-mode: forwards;
-// }
-
-.laptop-container {
-  // max-width: 12.53rem;
-  // margin: 0.30rem 0;
-};
-
 $laptopAni-time: 1s;
 
 .laptop {
@@ -1347,11 +1170,6 @@ $laptopAni-time: 1s;
   height: 38vw;
   position: relative;
   .laptop-container{
-    // overflow: hidden;
-    // width: 70%;
-    // height: 273%;
-    // margin-left: 15%;
-    // margin-top: 6%;
     >img{
       width: 100%;
       vertical-align: bottom
@@ -1363,16 +1181,10 @@ $laptopAni-time: 1s;
     height: 75%;
     margin-top: 3.4%;
     overflow: hidden;
-    // width: 45.8vw;
-    // height: 80%;
-    // margin-top: 2.2vw;
-    // margin-left: 27.1vw;
     overflow: hidden;
   }
   .laptop-main {
     position: relative;
-    // width: 100%;
-    // height: 100%;
     width: 65.26vw;
     height: 100%;
     margin: 0 auto;
@@ -1414,13 +1226,6 @@ $laptopAni-time: 1s;
         }
       }
     }
-    .desc-item, .radius, .nav, .bottom {
-      // opacity: 0;
-      // animation: laptopAniRadius;
-      // animation-duration: $laptopAni-time * 0.1;
-      // animation-delay: $laptopAni-time * 0.9;
-      // animation-fill-mode: forwards;
-    }
   }
 }
 
@@ -1454,36 +1259,23 @@ $laptopAni-time: 1s;
 }
 
 .phone{
-  // width: 20%;
-  // height: 68%;
-  // position: absolute;
-  // left: 60%;
-  // top: 50%;
-    width: 12vw;
-    height: 63%;
+  width: 12vw;
+  height: 63%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  overflow: hidden;
+  border-radius: 40px;
+  .phone-img{
+    width: 100%;
+    height: 100%;
     position: absolute;
-    // left: 60%;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 2;
-    overflow: hidden;
-    .phone-img{
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      z-index: 10;
-      left: 0;
-      top: 0;
-    }
+    z-index: 10;
+    left: 0;
+    top: 0;
+  }
   .phone-container {
-    // width: 100%;
-    // height: 78%;
-    // overflow: hidden;
-    // // margin-top: 36px;
-    // margin-top: 3.4vw;
-    // margin-left: 3%;
-    // z-index: -1;
-    // position: absolute;
     img{
       width: 100%;
     };
@@ -1492,7 +1284,6 @@ $laptopAni-time: 1s;
       width: 100%;
       height: 300%;
       overflow: hidden;
-      // transform: translateY(-2%);
     }
   }
 }
@@ -1545,11 +1336,5 @@ $laptopAni-time: 1s;
   }
 }
 
-.main-view-content {
-  // position: absolute;
-  // left: 50%;
-  // top: 50%;
-  // transform: translate(-50%, -50%);
-}
 
 </style>
