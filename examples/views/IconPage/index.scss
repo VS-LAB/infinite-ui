@@ -1278,6 +1278,9 @@
 
   // 黑
   &.infinite-home-animation-icon-page-step6 {
+    transition: all 0.5s;
+    opacity: 1;
+    transform: translateY(0vh);
     .infinite-icon-page-bg {
       background-image: linear-gradient(180deg, #32303F 0%, #201E2B 100%);
     }
@@ -1335,7 +1338,10 @@
 
   // 黑 => 无
   &.infinite-home-animation-icon-page-step7 {
-    animation: hideIconPageStep7 .5s linear forwards;
+    transition: all 0.5s;
+    opacity: 0;
+    transform: translateY(-100vh);
+    // animation: hideIconPageStep7 .5s linear forwards;
     .infinite-icon-page-bg {
       background-image: linear-gradient(180deg, #32303F 0%, #201E2B 100%);
     }

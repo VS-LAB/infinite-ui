@@ -106,6 +106,8 @@
 
 <script>
 import SliderItem from './Components/SlideItem'
+import EventBus from '@/EventBus'
+
 // import { MouseWheel } from './scroll'
 
 export default {
@@ -115,7 +117,7 @@ export default {
   },
   data () {
     return {
-      animesFun: [this.page4_animation_play_step1, this.page4_animation_play_step2, this.page4_animation_play_step3, this.page4_animation_play_step4, this.page4_animation_play_step5, this.page4_animation_play_step6, this.page4_animation_play_step7],
+      animesFun: [this.page4_animation_play_step2, this.page4_animation_play_step3, this.page4_animation_play_step4, this.page4_animation_play_step5, this.page4_animation_play_step6, this.page4_animation_play_step7],
       showOrange: false,
       activeColor: 4,
       animation: {
@@ -260,6 +262,9 @@ export default {
   },
   mounted () {
     const _this = this
+    EventBus.$on('page3_showAniStep5', (reversal) => {
+      _this.page4_animation_play_step1(reversal)
+    })
     setTimeout(() => {
       console.log('====================================')
       console.log(_this.$refs.Bar[0].$refs)
@@ -277,7 +282,7 @@ export default {
         this.handleElementsAnimation(dirction, animationList)
         setTimeout(_ => {
           resolve(true)
-        }, 1200)
+        }, 1000)
       })
     },
     page4_animation_play_step2 (dirction) {
@@ -598,8 +603,6 @@ html, body  {
 </style>
 
 <style lang="scss">
-@import './animation/step1.scss';
-
 $laptopAni-time:1s;
 .floow-line-2 {
   animation: floow-line-2 $laptopAni-time linear;
@@ -970,6 +973,7 @@ $laptopAni-time:1s;
 </style>
 
 <style lang="scss" scoped>
+@import './animation/step1.scss';
 @import "./common.scss";
 .view-container {
   height: 100vh;
