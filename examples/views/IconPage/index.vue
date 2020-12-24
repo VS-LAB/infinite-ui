@@ -95,7 +95,7 @@ export default {
         },
         {
           icon: 'el-icon-refresh',
-          text: 'Refresh'
+          text: 'refresh'
         },
         {
           icon: 'el-icon-chat-dot-square',
@@ -107,7 +107,7 @@ export default {
         },
         {
           icon: 'el-icon-picture-outline',
-          text: 'Report'
+          text: 'report'
         },
         {
           icon: 'el-icon-time',

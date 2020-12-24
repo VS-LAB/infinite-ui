@@ -185,7 +185,7 @@ $laptopAni-time: 1s;
 
 .view-chart{
   transform: translateY(0);
-  transition: all 1s linear;
+  transition: all 0.5s linear;
   &.leave-step1{
     transform: translateY(-100vh)
   }
