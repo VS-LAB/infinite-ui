@@ -389,36 +389,6 @@ export default {
 }
 </script>
 
-<style lang='scss'>
-.view-container {
-  height: 100vh;
-  background: #201E2B;
-};
-
-html, body  {
-  font-size: 100px !important;
-}
-
-@media screen and (max-width: 1400px) {
-  html, body {
-    font-size: 100px !important;
-  }
-}
-
-@media screen and (max-width: 1000px) {
-  html, body {
-    font-size: 70px !important;
-  }
-}
-
-@media screen and (max-width: 600px) {
-  html, body {
-    font-size: 50px !important;
-  }
-}
-
-</style>
-
 <style lang="scss">
 $laptopAni-time:1s;
 .floow-line-2 {
