@@ -301,7 +301,7 @@ export default {
           }
           setTimeout(_ => {
             EventBus.$emit('page2_goEndTop', reversal)
-          }, 20)
+          }, 100)
         } else {
           const { iconMask } = this.$refs
           // const c = document.body.clientWidth * 0.008352
