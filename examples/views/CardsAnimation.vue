@@ -198,9 +198,10 @@ export default {
           const imgEl = this.$refs.imgRef9[1]
           const removedBoundingClientRect = document.querySelector('.infinite-standard-card_img').getBoundingClientRect()
           if (imgEl) {
+            console.log('设置imgConnectStyle');
             const boundingClientRect = imgEl.getBoundingClientRect()
             // this.imgConnectStyle || 
-            this.imgConnectStyle = {
+            this.imgConnectStyle = this.imgConnectStyle || {
               width: imgEl.offsetWidth + 'px',
               height: imgEl.offsetHeight + 'px',
               opacity: 1,
@@ -210,6 +211,8 @@ export default {
               transition: 'all 1s',
               display: 'block'
             }
+
+            console.log(this.imgConnectStyle);
           }
           if (!reversal) {
             document.querySelector('.infinite-standard-card_img').style.display = 'none'
@@ -252,7 +255,6 @@ export default {
           this.padScrollSwitch = false
           return
         }
-        console.log(wheelDistance);
         // 兼容键盘滑动时距离
         if ((wheelDistance / 8) <= 1 && (wheelDistance / 8) >= 0) {
           wheelDistance = 1
@@ -263,11 +265,9 @@ export default {
         } else {
           wheelDistance = wheelDistance / 8
         }
-        console.log(wheelDistance);
         // 设置电脑区域滚动位置
         const top = el.scrollTop - wheelDistance
         this.scrollTop = top < 0 ? 0 : (top > scrollTopSpace ? scrollTopSpace : top)
-        console.log(this.scrollTop);
         el.scrollTop = this.scrollTop
         // this.scrollToTop(el)
         event.stopPropagation()
