@@ -7,9 +7,9 @@
       <!-- <button class="start" @click.stop="showAniFunc">start</button> -->
       <!-- <button class="reset" @click.stop="showAniFuncReset">reset</button> -->
       <!-- <div class="infinite-icon-page-bg"></div> -->
-      <div class="icon-bg-move orange-circle" :class="showDefaultBg"></div>
-      <div class="icon-bg-move icon-bg-circle blue-circle" :class="blueBgAnimateName"></div>
-      <div class="icon-bg-move icon-bg-circle black-circle" :class="blackBgAnimateName"></div>
+      <div class="orange-circle" :class="`${showDefaultBg} ${orangeBgAnimateName}`"></div>
+      <div class="icon-bg-circle blue-circle" :class="blueBgAnimateName"></div>
+      <div class="icon-bg-circle black-circle" :class="blackBgAnimateName"></div>
       <!-- <div :class="bgIconPageAnimateName"></div> -->
       <div class="infinite-icon-page-content flex fdc aic jcc">
         <div class="icons-introduce" :class="showIconsIntroduce">
@@ -54,6 +54,8 @@
 </template>
 
 <script>
+
+import EventBus from '@/EventBus'
 export default {
   name: 'IconPage',
   components: {
@@ -67,6 +69,7 @@ export default {
   data () {
     return {
       // pageOneAnimateName: '', // 第一个页面动画
+      orangeBgAnimateName: 'hide-orange-circle',
       blueBgAnimateName: '',
       blackBgAnimateName: '',
       rotateAnimateName: '',
@@ -146,7 +149,8 @@ export default {
       bgIconPageAnimateName: '',
       noShow: true,
       showIcon: true,
-      animesFun: [this.page3_showAniStep1, this.page3_showAniStep2, this.page3_showAniStep3, this.page3_showAniStep4, this.page3_showAniStep5]
+      animesFun: [this.page3_showAniStep1, this.page3_showAniStep2, this.page3_showAniStep3, this.page3_showAniStep4]
+      // animesFun: [this.page3_showAniStep1, this.page3_showAniStep2, this.page3_showAniStep3, this.page3_showAniStep4, this.page3_showAniStep5]
     }
   },
   watch: {
@@ -168,11 +172,12 @@ export default {
   methods: {
     // 
     page3_showAniStep1 (reversal) {
-      console.log('page3_showAniStep1')
       return new Promise((resolve, reject) => {
         if (!reversal) {
+          console.log('next page3_showAniStep1')
           this.showIconsIntroduce = 'slide-up-animate'
-          this.showDefaultBg = 'slide-up-bg'
+          // this.showDefaultBg = 'slide-up-bg'
+          this.orangeBgAnimateName = 'show-orange-circle'
           this.rotateAnimateName = 'rotate-in'
           this.noShow = false
           // this.bgIconPageAnimateName = 
@@ -180,9 +185,11 @@ export default {
             resolve(true)
           }, 700)
         } else {
-          this.showIconsIntroduce = ''
-          this.showDefaultBg = ''
-          this.rotateAnimateName = ''
+          console.log('prev page3_showAniStep1')
+          // this.showIconsIntroduce = ''
+          // this.showDefaultBg = ''
+          // this.rotateAnimateName = ''
+          this.orangeBgAnimateName = 'hide-orange-circle'
           this.noShow = true
           setTimeout(_ => {
             resolve(true)
@@ -196,6 +203,7 @@ export default {
         const m = document.querySelector('.infinite-standard-card-exclamatory-mark')
         const _that = this
         if (!reversal) {
+          console.log('next page3_showAniStep2')
           _that.showAni = 1
           setTimeout(_ => {
             console.log('m next == ', m)
@@ -210,12 +218,13 @@ export default {
             // }, 500)
           }, 1500)
         } else {
+          console.log('prev page3_showAniStep2')
           // setTimeout(_ => {
-          console.log('m prev == ', m)
-          if (m) {
-            m.style.display = ''
-          }
-          _that.showAni = 0
+          // console.log('m prev == ', m)
+          // if (m) {
+          //   m.style.display = ''
+          // }
+          // _that.showAni = 0
           resolve(true)
           // }, 1500)
         }
@@ -226,6 +235,7 @@ export default {
       return new Promise((resolve, reject) => {
         const _that = this
         if (!reversal) {
+          console.log('next page3_showAniStep3')
           this.blueBgAnimateName = 'circle-animate'
           setTimeout(_ => {
             _that.showAni = 3
@@ -237,9 +247,10 @@ export default {
             }, 1500)
           }, 500)
         } else {
+          console.log('prev page3_showAniStep4')
           // setTimeout(_ => {
-          _that.showAni = 2
-          this.blueBgAnimateName = ''
+          // _that.showAni = 2
+          // this.blueBgAnimateName = ''
           resolve(true)
           // }, 1500)
         }
@@ -250,6 +261,7 @@ export default {
       return new Promise((resolve, reject) => {
         const _that = this
         if (!reversal) {
+          console.log('next page3_showAniStep4')
           this.blackBgAnimateName = 'circle-animate'
           setTimeout(_ => {
             _that.showAni = 5
@@ -261,21 +273,23 @@ export default {
             }, 1500)
           }, 500)
         } else {
+          console.log('prev page3_showAniStep4')
           // setTimeout(_ => {
-          this.blueBgAnimateName = ''
-          setTimeout(_ => {
-            this.blueBgAnimateName = 'circle-animate'
-            setTimeout(_ => {
-              _that.showAni = 3
-              setTimeout(_ => {
-                _that.showAni = 4
-                this.blackBgAnimateName = ''
-                // setTimeout(_ => {
-                resolve(true)
-                // }, 500)
-              }, 1500)
-            }, 500)
-          }, 500)
+          // this.blueBgAnimateName = ''
+          // setTimeout(_ => {
+          //   this.blueBgAnimateName = 'circle-animate'
+          //   setTimeout(_ => {
+          //     _that.showAni = 3
+          //     setTimeout(_ => {
+          //       _that.showAni = 4
+          //       this.blackBgAnimateName = ''
+          //       // setTimeout(_ => {
+          //       resolve(true)
+          //       // }, 500)
+          //     }, 1500)
+          //   }, 500)
+          // }, 500)
+
           resolve(true)
           // }, 1500)
         }
@@ -286,6 +300,7 @@ export default {
       return new Promise((resolve, reject) => {
         const _that = this
         if (!reversal) {
+          console.log('next page3_showAniStep5')
           // this.blackBgAnimateName = 'circle-animate'
           setTimeout(_ => {
             _that.showAni = 7
@@ -297,6 +312,7 @@ export default {
             }, 500)
           }, 500)
         } else {
+          console.log('prev page3_showAniStep5')
           // setTimeout(_ => {
           // this.blackBgAnimateName = ''
           _that.showAni = 6
@@ -354,6 +370,9 @@ export default {
     }
   },
   mounted () {
+    EventBus.$on('page2_goEndTop', (reversal) => {
+      this.page3_showAniStep1(reversal)
+    })
     const { hideIcon } = this.$refs
     console.log('hideIcon == ', hideIcon)
     // hideIcon[0].style.position = 'fixed'

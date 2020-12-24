@@ -175,6 +175,7 @@
   </div>
 </template>
 <script>
+import EventBus from '@/EventBus'
 let timer
 export default {
   data () {
@@ -278,6 +279,8 @@ export default {
     // 步骤5 保留感叹号 其他部分上滑
     page2_goEndTop (reversal) {
       return new Promise((resolve, reject) => {
+        // 告诉动画页-4此时我的运动状态
+        EventBus.$emit('page2_goEndTop', reversal)
         const a = document.querySelector('.hideIcon')
         const m = document.querySelector('.infinite-icon-page-li-icon-i-showIcon')
         if (a) {
@@ -294,7 +297,7 @@ export default {
           m.style.top = `${Math.floor(b.top) - Math.ceil(c)}px`
         }
         this.endTop = !this.endTop
-        this.wrapAnimate = reversal ? '' : 'fade-out'
+        // this.wrapAnimate = reversal ? '' : 'fade-out'
         setTimeout(_ => {
           resolve(true)
         }, 1000)

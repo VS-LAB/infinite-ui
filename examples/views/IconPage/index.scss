@@ -108,11 +108,18 @@
   }
   .orange-circle {
     position: absolute;
-    top: 100vh;
     width: 100vw;
     height: 100vh;
     background: linear-gradient(180deg, #FFB240 0%, #FF8D38 100%);
+    transition: all 0.6s;
+  }
+  .hide-orange-circle {
+    top: 100vh;
     opacity: 0;
+  }
+  .show-orange-circle {
+    top: 0;
+    opacity: 1;
   }
   .blue-circle {
     background: linear-gradient(180deg, #45AAFF 0%, #1890FF 100%);
