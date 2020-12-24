@@ -194,41 +194,38 @@ export default {
       this.padScrollSwitch = false
       return new Promise((resolve, reject) => {
         this.animeContinue = true
+        const imgEl = this.$refs.imgRef9[1]
+        if (imgEl) {
+          const boundingClientRect = imgEl.getBoundingClientRect()
+          this.imgConnectStyle = {
+            width: imgEl.offsetWidth + 'px',
+            height: imgEl.offsetHeight + 'px',
+            opacity: 1,
+            left: boundingClientRect.left + 'px',
+            top: !reversal ? boundingClientRect.top + 'px' : `calc(${boundingClientRect.top + 'px' + '150vh'})`,
+            zIndex: 1,
+            transition: 'all 1s',
+            display: 'block'
+          }
+          document.querySelector('.imgs_content_9').style.display = 'block'
+          document.querySelector('.infinite-standard-card_img').style.display = 'none'
+        }
         this.$nextTick(() => {
-          const imgEl = this.$refs.imgRef9[1]
-          const removedBoundingClientRect = document.querySelector('.infinite-standard-card_img').getBoundingClientRect()
-          if (imgEl) {
-            console.log('设置imgConnectStyle');
-            const boundingClientRect = imgEl.getBoundingClientRect()
-            // this.imgConnectStyle || 
-            this.imgConnectStyle = this.imgConnectStyle || {
-              width: imgEl.offsetWidth + 'px',
-              height: imgEl.offsetHeight + 'px',
-              opacity: 1,
-              left: boundingClientRect.left + 'px',
-              top: boundingClientRect.top + 'px',
-              zIndex: 1,
-              transition: 'all 1s',
-              display: 'block'
-            }
-
-            console.log(this.imgConnectStyle);
-          }
-          if (!reversal) {
-            document.querySelector('.infinite-standard-card_img').style.display = 'none'
-          }
           setTimeout(() => {
             this.imgConnectAnime = reversal ? '' : 'img_connect-anime_start'
+            this.animeCanvasAnime = reversal ? '' : 'anime-canvas-anime_start'
             setTimeout(() => {
               this.lastAnimeCompile = !reversal
               this.animeContinue = false
               if (reversal) {
+                document.querySelector('.imgs_content_9').style.display = 'none'
+              }
+              if (reversal) {
                 this.padScrollSwitch = true
               }
               resolve(true)
-            }, 800)
+            }, 1000)
           }, 200)
-          this.animeCanvasAnime = reversal ? '' : 'anime-canvas-anime_start'
         })
       })
     },
