@@ -1,0 +1,189 @@
+// 第一步执行的动画组
+// header
+.header{
+  transition: all 1s linear;
+  opacity: 0;
+  transform: translateY(400px);
+  &.flow {
+    transition: all 1s linear;
+    transform: translateY(0px);
+    opacity: 1;
+    &.flow-step2{
+      transform: translateY(-400px);
+    }
+  }
+}
+
+// 小折线图动画
+.chart-line-small-step1{
+  transform: translate3d(-400px, 0, 0);
+  opacity: 0;
+  transition: all 1s ;
+  transition-delay: 0.2s;
+  z-index: 1;
+  &.chart-line-small-step2 {
+    transform: translateX(0px);
+    opacity: 1;
+    z-index: 1;
+    transition: all 1s ;
+    &.chart-line-small-step3{
+      transform: translate(1.2vw, 3.7vw) scale(0.61846);
+      opacity: 1;
+      z-index: 1;
+    }
+  }
+}
+
+// 原始状态 小柱状图动画
+.chart-bar-small-step1{
+  transform: translate3d(-400px, 0, 0);
+  opacity: 0;
+  transition: all 1s ;
+  z-index: 1;
+  &.chart-bar-small-step2 {
+    transform: translateX(0px);
+    opacity: 1;
+    z-index: 1;
+    transition: all 1s;
+    &.chart-bar-small-step3{
+      transform: translate(-5.7vw, 3.7vw) scale(0.61846);
+      opacity: 1;
+      z-index: 1;
+    }
+  }
+}
+
+// 原始状态
+.chart-radius-small-step1{
+  transform: translate3d(400px, 0, 0);
+  opacity: 0;
+  transition: all 1s ;
+  z-index: 1;
+  &.chart-radius-small-step2 {
+    transform: translateX(0px);
+    opacity: 1;
+    transition: all 1s;
+    &.chart-radius-small-step3{
+      transform: translate(-12.6vw, 3.7vw) scale(0.61846);
+      opacity: 1;
+      z-index: 1;
+    }
+  }
+}
+
+.chart-line-big-step1{
+  transform: translate3d(1000px, 0, 0);
+  opacity: 0;
+  transition: all 1s ;
+  z-index: 1;
+  &.chart-line-big-step2 {
+    transform: translateX(0px);
+    opacity: 1;
+    z-index: 1;
+    transition: all 1s ;
+    &.chart-line-big-step3{
+      transform: translate(-5.7vw, -2.4vw) scale(0.61834);
+      opacity: 1;
+      z-index: 1;
+    }
+  }
+}
+
+.chart-box {
+  height: 100%;
+  width: 52.82vw;
+  margin: 0 auto;
+  opacity: 1;
+  transition: all 0.01s linear;
+  &.scale-chart-box-height-step1{
+    height: 1px;
+    // height: 0;
+    // opacity: 0;
+  }
+}
+
+$laptopAni-time: 1s;
+//laptop 动画
+.laptop-main {
+  position: relative;
+  transform: scale(1.98) translateY(100vh);
+  transition: all $laptopAni-time linear;
+  &.showlaptop-step1{
+    transform: scale(1) translateY(0);
+  }
+}
+
+
+// 内部 图片动画
+.laptop {
+  .desc-item, .radius, .nav, .bottom{
+    opacity: 0;
+    transition: all $laptopAni-time * 0.9;
+    transition-delay: $laptopAni-time * 0.1;
+    &.shownav-step1{
+      opacity: 1;
+    }
+  }
+}
+
+.laptop{
+  transform: scale(1) translate(0);
+  transition: all 1s linear;
+  &.laptop-move-left-step1{
+    transform: scale(1) translate(-100px, 0);
+    transition: all 1s linear;
+    &.laptop-move-left-step2{
+      transform: scale(1) translate(-40vw, -5.42vw)
+    }
+  }
+}
+
+.phone {
+  opacity: 0;
+  position: absolute;
+  left: 60%;
+  transition: all ease 1s;
+  &.showphone-step1 {
+    opacity: 1;
+    left: 80%;
+  }
+  .phone-contain{
+    transform: translateY(0%);
+    transition: all 1s linear;
+    &.show-blue-phone-step1{
+      transform: translateY(-33.6%);
+      transition: all 1s linear;
+      &.show-blue-phone-step2{
+        transform: translateY(-67.1%);
+      }
+    }
+  }
+}
+
+.show-colorful{
+  transform: translateY(100vh);
+  transition:  all linear 1s;
+  &.show-colorfull-step1{
+    transform: translateY(0);
+  }
+}
+
+.laptop-container{
+  transform: translateY(0);
+  transition: all 1s linear;
+  &.show-colorfullaotop-step1{
+    transform: translateY(-33.3%);
+    transition: all 1s linear;
+    &.show-colorfullaotop-step2{
+      transform: translateY(-67%);
+    }
+  }
+}
+
+.view-chart{
+  transform: translateY(0);
+  transition: all 1s linear;
+  &.leave-step1{
+    transform: translateY(-100vh)
+  }
+}

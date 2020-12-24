@@ -20,7 +20,7 @@
                  :class="imgsAnimed?'imgs_animed':''">
               <div ref="componentViewImgsContainerRef"
                    class="component_view-imgs_container"
-                   :style="{overflow:imgCards.length > 1?'hidden auto':''}">
+                   :style="{overflow:isOverflowAutoPad?'hidden auto':''}">
                 <div class="imgs_container-table"
                      :class="tableImgsPosition">
                   <div class="imgs_container-table-tr"
@@ -129,12 +129,16 @@ export default {
       imgConnectStyle: null,
       imgConnectAnime: '', // 连接下个图片图画
       lastAnimeCompile: false, // 最后一个动画状态
-      animeContinue: false // 动画是否进行当中
+      animeContinue: false, // 动画是否进行当中
+      isOverflowAutoPad: false,//是否在pad上进行滚动
+      padScrollSwitch: false,//电脑上下滑动开关
     }
   },
   methods: {
     // 头部文案动画
     page1_animeStep1 (reversal) {
+      this.padScrollSwitch = false
+      console.log('this.padScrollSwitch+', this.padScrollSwitch);
       return new Promise(async (resolve, reject) => {
         this.animeContinue = true
         const el = this.$refs.componentViewImgsContainerRef
@@ -174,25 +178,23 @@ export default {
           clearTimeout(this.timeStep3)
         }
         if (!reversal) {
-          this.imgCards = [...this.initImgCards, ...this.addImgCards]
-          this.$nextTick(() => {
-            setTimeout(() => {
-              this.imgsAnimed = true
-              setTimeout(_ => {
-                resolve(true)
-              }, 800)
-            }, 100)
-          })
+          this.imgsAnimed = true
+          this.isOverflowAutoPad = true
+          setTimeout(_ => {
+            this.padScrollSwitch = true
+            resolve(true)
+          }, 1000)
         } else {
           this.imgsAnimed = false
           this.timeStep3 = setTimeout(() => {
-            this.imgCards = [...this.initImgCards]
+            this.isOverflowAutoPad = false
             resolve(true)
-          }, 800)
+          }, 1000)
         }
       })
     },
     page1_animeStep4 (reversal) {
+      this.padScrollSwitch = false
       return new Promise((resolve, reject) => {
         this.animeContinue = true
         this.$nextTick(() => {
@@ -200,7 +202,8 @@ export default {
           const removedBoundingClientRect = document.querySelector('.infinite-standard-card_img').getBoundingClientRect()
           if (imgEl) {
             const boundingClientRect = imgEl.getBoundingClientRect()
-            this.imgConnectStyle = this.imgConnectStyle || {
+            // this.imgConnectStyle || 
+            this.imgConnectStyle = {
               width: imgEl.offsetWidth + 'px',
               height: imgEl.offsetHeight + 'px',
               opacity: 1,
@@ -211,14 +214,16 @@ export default {
               display: 'block'
             }
           }
-          this.imgConnectStyle.display = 'block'
           if (!reversal) {
             document.querySelector('.infinite-standard-card_img').style.display = 'none'
           }
           setTimeout(() => {
             this.imgConnectAnime = reversal ? '' : 'img_connect-anime_start'
             setTimeout(() => {
-              this.imgConnectStyle.display = reversal ? 'none' : 'block'
+              if (reversal) {
+                this.padScrollSwitch = true
+              }
+              resolve(true)
             }, 800)
           }, 200)
           this.animeCanvasAnime = reversal ? '' : 'anime-canvas-anime_start'
@@ -231,19 +236,16 @@ export default {
           }
         })
       })
-    },
-    parentMousewheel () {
-      if (this.imgCards.length > 1) {
-        return true
-      }
     }
   },
   mounted () {
-    this.imgCards = [...this.initImgCards]
+    this.imgCards = [...this.initImgCards, ...this.addImgCards]
+
+    // this.imgCards = [...this.initImgCards]
     document.body.addEventListener('mousewheel', (e) => {
       const event = e || window.event
       const el = this.$refs.componentViewImgsContainerRef
-      if (el && this.imgCards.length > 1) {
+      if (el && this.padScrollSwitch) {
         let wheelDistance // 滑轮滚动距离
         if (e.wheelDelta) { // 判断浏览器IE，谷歌滑轮事件
           wheelDistance = e.wheelDelta
@@ -254,7 +256,7 @@ export default {
         // 判断是否不可以滚动了，此时需要走上一步或者下一步动画
         if ((this.scrollTop === 0 && wheelDistance > 0) || (this.scrollTop === scrollTopSpace && wheelDistance < 0) || this.lastAnimeCompile || this.animeContinue) return
         // 设置电脑区域滚动位置
-        const top = el.scrollTop - (wheelDistance / 5)
+        const top = el.scrollTop - (wheelDistance / 10)
         this.scrollTop = top < 0 ? 0 : (top > scrollTopSpace ? scrollTopSpace : top)
         el.scrollTop = this.scrollTop
         event.stopPropagation()
@@ -272,9 +274,10 @@ export default {
     opacity: 0;
     position: fixed;
     pointer-events: none;
+    box-shadow: 0px 0.9375vw 5.41667vw #dfe5f6;
   }
   .img_connect-anime_start {
-    width: auto !important;
+    width: 632px !important;
     height: 450px !important;
     left: 50% !important;
     top: 50% !important;
@@ -454,6 +457,7 @@ export default {
                 transition: all 1s;
                 transform-origin: 0 0;
                 box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.1);
+                border-radius: 12px;
                 + img {
                   margin-top: calc(0.9vw - 4px);
                 }

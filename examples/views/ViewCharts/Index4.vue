@@ -573,11 +573,6 @@ export default {
 </script>
 
 <style lang='scss'>
-.view-container {
-  height: 100vh;
-  background: #201E2B;
-};
-
 html, body  {
   font-size: 100px !important;
 }
@@ -976,6 +971,10 @@ $laptopAni-time:1s;
 
 <style lang="scss" scoped>
 @import "./common.scss";
+.view-container {
+  height: 100vh;
+  background: #201E2B;
+};
 
 .view-container {
   // padding-top: 0.20rem;

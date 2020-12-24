@@ -16,7 +16,7 @@ export default {
 }
 </script>
 
-<style lang='scss'>
+<style lang="scss" scoped>
 .view-container {
   height: 100vh;
   background: #201E2B;
@@ -24,9 +24,7 @@ export default {
 .align-center {
   text-align: center;
 }
-</style>
 
-<style lang="scss" scoped>
 .view-container {
   section {
     color: #fff;

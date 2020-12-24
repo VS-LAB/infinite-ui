@@ -24,7 +24,7 @@
       <button class="btn14" @click="animation_play_step6()"> 6++ </button>
       <button class="btn15" @click="animation_play_step7(true)"> 7-- </button>
       <button class="btn16" @click="animation_play_step7()"> 7++ </button>
-      <div class="chart-box"
+      <!-- <div class="chart-box"
         :class="{
           'hide':showOrange
         }"
@@ -62,7 +62,7 @@
             </SliderItem>
           </div>
         </section>
-      </div>
+      </div> -->
       <div class="laptop">
         <!-- <img class="laptop" src="../../assets/laptop.png" alt=""> -->
         <div class="laptop-main">
@@ -71,7 +71,41 @@
               <div v-show="!showOrange" class="laptop-contain">
                 <img class="nav" src="../../assets/visualization-chart/nav.png" alt="">
                 <div class="content flex">
-                  <div class="left flex-1"></div>
+                  <div class="left flex-1">
+                    <section class="charts">
+                      <div class="chart-item" v-for="item in cardList" :key="item.id"
+                        :data-animation = setDataAttribute(item.id)
+                        :class="{
+                          'chart-item-1 chart-line-small-step1': item.id === 1,
+                          'chart-bar-small-step1 chart-item-2': item.id === 2,
+                          'chart-radius-small-step1 chart-item-3': item.id === 3
+                        }"
+                      >
+                        <SliderItem :ref="item.refs" v-bind="item"></SliderItem>
+                      </div>
+                    </section>
+                    <section class="charts" v-if="largecardlist && largecardlist.length">
+                      <div class="chart-item full-item"
+                      :data-animation = setDataAttribute(item.id)
+                      :class="{
+                        'chart-line-big-step1 chart-item-4': item.id === 4,
+                      }" v-for="item in largecardlist" :key="item.id">
+                        <SliderItem :ref="item.refs" v-bind="item">
+                          <template slot='header'>
+                            <div class="flex sub-title">
+                              <span class="flex-1 ti">{{item.title}}</span>
+                              <ul class="flex change">
+                                <li><span>近24小时</span></li>
+                                <li><span>近一周</span></li>
+                                <li class="active"><span>近一个月</span></li>
+                                <li><span>近一年</span></li>
+                              </ul>
+                            </div>
+                          </template>
+                        </SliderItem>
+                      </div>
+                    </section>
+                  </div>
                   <div class="right">
                       <img class="desc-item" src="../../assets/visualization-chart/chart1.png" alt="">
                       <img class="radius" src="../../assets/visualization-chart/chart2.png" alt="">
@@ -562,411 +596,15 @@ export default {
 }
 </script>
 
-<style lang='scss'>
+<style lang="scss" scoped>
+
+@import './animation/step2.scss';
+@import "./common.scss";
+
 .view-container {
   height: 100vh;
   background: #201E2B;
 };
-
-html, body  {
-  font-size: 100px !important;
-}
-
-@media screen and (max-width: 1400px) {
-  html, body {
-    font-size: 100px !important;
-  }
-}
-
-@media screen and (max-width: 1000px) {
-  html, body {
-    font-size: 70px !important;
-  }
-}
-
-@media screen and (max-width: 600px) {
-  html, body {
-    font-size: 50px !important;
-  }
-}
-
-</style>
-
-<style lang="scss">
-
-@import './animation/step1.scss';
-
-$laptopAni-time:1s;
-.floow-line-2 {
-  animation: floow-line-2 $laptopAni-time linear;
-  animation-fill-mode: forwards;
-}
-
-@keyframes floow-line-2 {
-  0% {
-    transform: translateX(0px);
-    opacity: 1;
-  }
-  100%{
-    transform: translate(1.2vw, 3.7vw) scale(0.61846);
-    opacity: 1;
-    z-index: 1;
-  }
-}
-
-.floow-line-3 {
-  animation: floow-line-3 1s linear;
-  animation-fill-mode: forwards;
-  z-index: 1;
-}
-
-@keyframes floow-line-3 {
-  0%{
-    transform: translate(10px, 7px) scale(0.36);
-    opacity: 1;
-    z-index: 1;
-  }
-  100%{
-    transform: translate(-110px, 7px) scale(0.36);
-    opacity: 1;
-    z-index: 1;
-  }
-}
-
-.floow-bar-2 {
-  animation: floow-bar-2 $laptopAni-time linear;
-  animation-fill-mode: forwards;
-  z-index: 1;
-}
-
-@keyframes floow-bar-2 {
-  0% {
-    transform: translateX(0px);
-    opacity: 1;
-    z-index: 1;
-  }
-  100%{
-    transform: translate(-5.7vw, 3.7vw) scale(0.61846);
-    opacity: 1;
-    z-index: 1;
-  }
-}
-
-.floow-bar-3 {
-  animation: floow-bar-3 1s linear;
-  animation-fill-mode: forwards;
-  z-index: 1;
-}
-
-@keyframes floow-bar-3 {
-  0% {
-    transform: translate(-100px, 7px) scale(0.36);
-    opacity: 1;
-    z-index: 1;
-  }
-  100%{
-    transform: translate(-200px, 7px) scale(0.36);
-    opacity: 1;
-    z-index: 1;
-  }
-}
-
-.floow-radius-2 {
-  animation: floow-radius-2 $laptopAni-time linear;
-  animation-fill-mode: forwards;
-  z-index: 1;
-}
-
-@keyframes floow-radius-2 {
-  0% {
-    transform: translateX(0px);
-    opacity: 1;
-    z-index: 1;
-  }
-  100%{
-    transform: translate(-12.6vw, 3.7vw) scale(0.61846);
-    opacity: 1;
-    z-index: 1;
-  }
-}
-.floow-radius-3 {
-  animation: floow-radius-3 1s linear;
-  animation-fill-mode: forwards;
-  z-index: 1;
-}
-
-@keyframes floow-radius-3 {
-  0% {
-    transform: translate(10px, 7px) scale(0.36);
-    opacity: 1;
-    z-index: 1;
-  }
-  100%{
-    transform: translate(-90px, 7px) scale(0.36);
-    opacity: 1;
-    z-index: 1;
-  }
-}
-
-.floow-big-line-2 {
-  animation: floow-big-line-2 $laptopAni-time linear;
-  animation-fill-mode: forwards;
-}
-
-@keyframes floow-big-line-2 {
-  0%{
-    transform: translateX(0px);
-    opacity: 1;
-    z-index: 1;
-  }
-  100%{
-    // transform: translate(-63px, -188px) scale(0.5,0.35);
-    // transform: translate(-87px, -90px) scale(0.51);
-    // transform: translate(-88px, -99px) scale(0.505);
-    // transform: translate(-4vw, -3.2vw) scale(0.57);
-    transform: translate(-5.7vw, -2.4vw) scale(0.61834);
-    opacity: 1;
-    z-index: 1;
-  }
-}
-
-.floow-big-line-3 {
-  animation: floow-big-line-3 1s linear;
-  animation-fill-mode: forwards;
-}
-
-@keyframes floow-big-line-3 {
-  0%{
-    transform: translate(-63px, -188px) scale(0.5,0.35);
-    opacity: 1;
-    z-index: 1;
-  }
-  100%{
-    transform: translate(-163px, -188px) scale(0.5,0.35);
-    opacity: 1;
-    z-index: 1;
-  }
-}
-
-// 高度
-.scale-height{
-  height: 100%;
-  animation: scale-height 0.1s linear;
-  animation-fill-mode: forwards;
-}
-
-@keyframes scale-height {
-  0%{
-    height: 100%;
-  }
-  100% {
-    height: 0px;
-  }
-}
-
-.showlaptop {
-  animation: showlaptop $laptopAni-time linear;
-  transform: scale(1.98) translateY(100vh);
-  animation-fill-mode: forwards;
-}
-
-// 笔记本动画效果-上移1
-@keyframes showlaptop {
-  0% {
-    transform: scale(1.98) translateY(100vh);
-  }
-  100% {
-    transform: scale(1) translateY(0);
-  };
-}
-
-.opactyAni {
-  opacity: 0;
-  animation: opactyAni;
-  animation-duration: $laptopAni-time * 0.1;
-  animation-delay: $laptopAni-time * 0.9;
-  animation-fill-mode: forwards;
-}
-
-// 动画显隐藏
-@keyframes opactyAni {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  };
-}
-
-.laptopanileft {
-  animation: laptopanileft 1s linear;
-  animation-fill-mode: forwards;
-}
-
-@keyframes laptopanileft {
-  0%{
-    transform: scale(1) translate(0);
-  }
-  100%{
-    transform: scale(1) translate(-100px, 0);
-  }
-}
-
-.chartboxanileft .chart-item{
-  animation: chartboxanileft 1s linear;
-  animation-fill-mode: forwards;
-}
-
-@keyframes chartboxanileft {
-  0%{
-    transform: scale(1) translate(0);
-    z-index: 1;
-  }
-  100%{
-    z-index: 1;
-    transform: scale(1) translate(-100px, 0);
-  }
-}
-
-.showphone{
-  animation: showphone 1s linear;
-  animation-fill-mode: forwards;
-}
-
-@keyframes showphone {
-  0%{
-    opacity: 0;
-    position: absolute;
-    left: 60%;
-  }
-  67%{
-     opacity: 0;
-    position: absolute;
-    left: 67%;
-  }
-  100%{
-    opacity: 1;
-    position: absolute;
-    left: 80%;
-  }
-}
-
-.floow-up{
-  animation: floow-up 1s linear;
-  animation-fill-mode: forwards;
-}
-
-@keyframes floow-up {
-  0%{
-    transform: translateY(0px);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(-400px);
-    opacity: 1;
-  }
-}
-
-.floow-laptop-left{
-  animation: floow-laptop-left 1s linear;
-  animation-fill-mode: forwards;
-}
-
-@keyframes floow-laptop-left {
-  0%{
-    transform: scale(1) translate(-100px, 0)
-  }
-  100% {
-    transform: scale(1) translate(-40vw, -5.42vw)
-  }
-}
-
-.show-colorfull{
-  animation: show-colorfull 1s linear;
-  animation-fill-mode: forwards;
-}
-
-@keyframes show-colorfull {
-  0%{
-    transform: translateY(100vh);
-  };
-  100%{
-    transform: translateY(0);
-  };
-}
-
-.show-blue-phone{
-  animation: show-blue-phone 1s linear;
-  animation-fill-mode: forwards;
-}
-
-@keyframes show-blue-phone {
-  0%{
-    transform: translateY(-2%);
-  };
-  100%{
-    transform: translateY(-33.6%);
-  };
-}
-
-.show-dark-phone{
-  animation: show-dark-phone 1s linear;
-  animation-fill-mode: forwards;
-  transform: translateY(-33.6%);
-}
-
-@keyframes show-dark-phone {
-  0%{
-    transform: translateY(-35.6%);
-  };
-  100%{
-    transform: translateY(-67.1%);
-  };
-}
-
-.show-blue-laotop{
-  animation: show-blue-laotop 1s linear forwards;
-};
-
-@keyframes show-blue-laotop {
-  0%{
-    transform: translateY(0);
-  };
-  100%{
-    transform: translateY(-33.3%);
-  };
-}
-
-.show-dark-laotop{
-  animation: show-dark-laotop 1s linear forwards;
-};
-
-@keyframes show-dark-laotop {
-  0%{
-    transform: translateY(-33.3%);
-  };
-  100%{
-    transform: translateY(-67%);
-  };
-}
-
-.leave {
-  animation: leave 0.5s linear forwards;
-}
-
-@keyframes leave {
-  0%{
-    transform: translateY(0)
-  }
-  100%{
-    transform: translateY(-100vh)
-  }
-}
-
-</style>
-
-<style lang="scss" scoped>
-@import "./common.scss";
 
 .btn2 {
   position: fixed;
@@ -1156,11 +794,10 @@ $laptopAni-time:1s;
   }
   .chart-item {
     display: inline-block;
-    margin-right: 1.0427vw;
-    margin-bottom: 1.0427vw;
-    width: 16.9271vw;
-    height: 11.6667vw;
-    border-radius: 0.5208vw;
+    width: 201px;
+    height: 138.5px;
+    border-radius: 6px;
+    margin: 0 12px 12px 0;
     flex:1;
     overflow: hidden;
     &:last-of-type {
@@ -1168,15 +805,15 @@ $laptopAni-time:1s;
     }
     &.full-item {
       // width: 100%;
-      width: 52.8125vw;
-      height: 18.801vw;
+      width: 627px;
+      height: 223.2px;
       display: block;
       margin-right: 0;
       color: $light-font-color;
       .sub-title {
         width: 100%;
         justify-content: space-between;
-        font-size: 0.7292vw;
+        font-size: 10px;
         @include bottom-border(#DDE1EE , 1px, -14px);
         .change {
           li {
