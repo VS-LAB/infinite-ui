@@ -243,7 +243,7 @@ export default {
     width: 0;
     height: 0;
     position: relative;
-    left: calc(50% - 34px);
+    left: calc(50% - 120px);
     top: 40vh;
     z-index: 1;
   }
@@ -251,7 +251,12 @@ export default {
     @extend .center-dot;
 
     // 立方体start
+    $cubeWidth: 64px;
     .group_cube {
+      width: 64px;
+      height: 70px;
+      text-indent: 21px;
+      line-height: 70px;
       &-class {
         position: absolute;
         transition: all 0.2s cubic-bezier(0.25, 0.1, 0.24, 0.71);
@@ -330,10 +335,15 @@ export default {
 
     // 菱形start
     .group_rhombus {
+      width: 64px;
+      min-width: 64px;
+      height: 70px;
+      line-height: 70px;
+      transform: translatex(84px);
       .rhombus-svf {
         position: absolute;
         height: 70px;
-        margin: -22px 0 0 -30px;
+        margin: 0 0 0 -30px;
         opacity: 0;
         transition: all 1s;
       }
@@ -344,7 +354,7 @@ export default {
       &-shade {
         position: absolute;
         left: 0;
-        top: -56px;
+        top: -36px;
         width: 0;
         height: 0;
         border: 70px solid transparent;
@@ -360,6 +370,7 @@ export default {
 
     // 正菱logs start
     &-logs {
+      display: flex;
       transition: all 0.5s;
     }
     &-logs_start {
@@ -370,13 +381,17 @@ export default {
     // infinite-English start
     .group_infinite_english {
       width: 330px;
+      min-width: 330px;
+      height: 40px;
       position: relative;
       top: -3px;
       margin-left: -90px;
+      text-indent: -40px;
       overflow: hidden;
       .infinite-english-svf {
-        transition: all 0.5s;
         width: 220px;
+        height: 100%;
+        transition: all 0.5s;
         opacity: 0;
       }
       .infinite-english-svf-anime_start {
@@ -395,14 +410,14 @@ export default {
       white-space: nowrap;
       transition: all 0.5s;
       opacity: 0;
-      transform: translate(-140px, 120px);
+      transform: translate(-54px, 120px);
     }
     .footer-text-anime_start {
-      transform: translate(-140px, 60px);
+      transform: translate(-54px, 60px);
       opacity: 1;
     }
     .footer-text-anime_end {
-      transform: translate(-140px, 00px);
+      transform: translate(-54px, 00px);
       opacity: 0;
     }
     // 创造无限可能 end
@@ -421,6 +436,8 @@ export default {
 
   // 正-菱-infinite动画 start
   .anime_log_container-group {
+    display: flex;
+    align-items: center;
   }
   .anime_log_container-top-anime_start {
     transition: all 1s;
@@ -444,7 +461,7 @@ export default {
   // 顶部菜单动画 start
   .header-model {
     white-space: nowrap;
-    transform: translate(200px, -42vh);
+    transform: translate(200px, -43vh);
     transition: all 0.3s;
     .header-menu {
       font-size: 16px;

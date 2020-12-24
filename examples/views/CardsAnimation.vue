@@ -18,27 +18,29 @@
           <div class="component_view-imgs_padding">
             <div class="component_view-imgs-linear_gradient"
                  :class="imgsAnimed?'imgs_animed':''">
-              <div ref="componentViewImgsContainerRef"
-                   class="component_view-imgs_container"
-                   :style="{overflow:isOverflowAutoPad?'hidden auto':''}">
-                <div class="imgs_container-table"
-                     :class="tableImgsPosition">
-                  <div class="imgs_container-table-tr"
-                       :class="tr.col?`imgs-col_${tr.col}`:''"
-                       v-for="(tr,trIndex) in imgCards"
-                       :key="trIndex">
-                    <div class="imgs_container-table-tr-td"
-                         v-for="(td,tdIndex) in tr.data"
-                         :key="tdIndex">
-                      <img v-for="img in td"
-                           :ref="`imgRef${img}`"
-                           :key="img"
-                           :class="`imgs_${img}`"
-                           :src="require(`@/assets/component/card (${img}).png`)">
+              <transition>
+                <div ref="componentViewImgsContainerRef"
+                     class="component_view-imgs_container"
+                     :style="{overflow:isOverflowAutoPad?'hidden auto':''}">
+                  <div class="imgs_container-table"
+                       :class="tableImgsPosition">
+                    <div class="imgs_container-table-tr"
+                         :class="tr.col?`imgs-col_${tr.col}`:''"
+                         v-for="(tr,trIndex) in imgCards"
+                         :key="trIndex">
+                      <div class="imgs_container-table-tr-td"
+                           v-for="(td,tdIndex) in tr.data"
+                           :key="tdIndex">
+                        <img v-for="img in td"
+                             :ref="`imgRef${img}`"
+                             :key="img"
+                             :class="`imgs_${img}`"
+                             :src="require(`@/assets/component/card (${img}).png`)">
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </transition>
             </div>
           </div>
         </div>
@@ -59,66 +61,61 @@ export default {
     return {
       animesFun: [this.page1_animeStep1, this.page1_animeStep4],
       // 图片数据
-      imgCards: [],
-      initImgCards: [
-        {
-          col: 5,
-          data: [
-            [1, 5],
-            [2, 6, 7],
-            [3, 9, 10],
-            [12, 13],
-            [15, 16]
-          ]
-        }
-      ],
-      addImgCards: [
-        {
-          data: [
-            [4],
-            [11],
-            [14]
-          ]
-        },
-        {
-          col: 3,
-          data: [
-            [17, 18, 19],
-            [22, 23, 24],
-            [27, 28]
-          ]
-        },
-        {
-          data: [
-            [20],
-            [25],
-            [8]
-          ]
-        },
-        {
-          data: [
-            [21],
-            [26]
-          ]
-        },
-        {
-          col: 5,
-          data: [
-            [1, 5],
-            [2, 6, 7],
-            [3, 9, 10],
-            [12, 13],
-            [15, 16]
-          ]
-        },
-        {
-          data: [
-            [4],
-            [11],
-            [14]
-          ]
-        }
-      ],
+      imgCards: [{
+        col: 5,
+        data: [
+          [1, 5],
+          [2, 6, 7],
+          [3, 9, 10],
+          [12, 13],
+          [15, 16]
+        ]
+      },
+      {
+        data: [
+          [4],
+          [11],
+          [14]
+        ]
+      },
+      {
+        col: 3,
+        data: [
+          [17, 18, 19],
+          [22, 23, 24],
+          [27, 28]
+        ]
+      },
+      {
+        data: [
+          [20],
+          [25],
+          [8]
+        ]
+      },
+      {
+        data: [
+          [21],
+          [26]
+        ]
+      },
+      {
+        col: 5,
+        data: [
+          [1, 5],
+          [2, 6, 7],
+          [3, 9, 10],
+          [12, 13],
+          [15, 16]
+        ]
+      },
+      {
+        data: [
+          [4],
+          [11],
+          [14]
+        ]
+      }],
       animeCanvasAnime: '', // 画布动画
       headerTextAnime: '', // 头部文案动画
       componentViewNotebookAnime: '', // 笔记本动画
@@ -132,13 +129,13 @@ export default {
       animeContinue: false, // 动画是否进行当中
       isOverflowAutoPad: false,//是否在pad上进行滚动
       padScrollSwitch: false,//电脑上下滑动开关
+      continueSlide: false,//持续滑动
     }
   },
   methods: {
     // 头部文案动画
     page1_animeStep1 (reversal) {
       this.padScrollSwitch = false
-      console.log('this.padScrollSwitch+', this.padScrollSwitch);
       return new Promise(async (resolve, reject) => {
         this.animeContinue = true
         const el = this.$refs.componentViewImgsContainerRef
@@ -220,6 +217,8 @@ export default {
           setTimeout(() => {
             this.imgConnectAnime = reversal ? '' : 'img_connect-anime_start'
             setTimeout(() => {
+              this.lastAnimeCompile = !reversal
+              this.animeContinue = false
               if (reversal) {
                 this.padScrollSwitch = true
               }
@@ -227,25 +226,20 @@ export default {
             }, 800)
           }, 200)
           this.animeCanvasAnime = reversal ? '' : 'anime-canvas-anime_start'
-          this.$refs.animeCanvasAnimeRef.ontransitionend = (event) => {
-            if (event.propertyName == 'transform') {
-              this.lastAnimeCompile = !reversal
-              resolve(true)
-              this.animeContinue = false
-            }
-          }
         })
       })
-    }
+    },
+
   },
   mounted () {
-    this.imgCards = [...this.initImgCards, ...this.addImgCards]
-
-    // this.imgCards = [...this.initImgCards]
     document.body.addEventListener('mousewheel', (e) => {
       const event = e || window.event
       const el = this.$refs.componentViewImgsContainerRef
       if (el && this.padScrollSwitch) {
+        this.continueSlide = true
+        setTimeout(() => {
+          this.continueSlide = false
+        }, 300)
         let wheelDistance // 滑轮滚动距离
         if (e.wheelDelta) { // 判断浏览器IE，谷歌滑轮事件
           wheelDistance = e.wheelDelta
@@ -254,14 +248,30 @@ export default {
         }
         const scrollTopSpace = el.children[0].clientHeight - el.clientHeight
         // 判断是否不可以滚动了，此时需要走上一步或者下一步动画
-        if ((this.scrollTop === 0 && wheelDistance > 0) || (this.scrollTop === scrollTopSpace && wheelDistance < 0) || this.lastAnimeCompile || this.animeContinue) return
+        if ((this.scrollTop === 0 && wheelDistance > 0) || (this.scrollTop === scrollTopSpace && wheelDistance < 0) || this.lastAnimeCompile || this.animeContinue) {
+          this.padScrollSwitch = false
+          return
+        }
+        console.log(wheelDistance);
+        // 兼容键盘滑动时距离
+        if ((wheelDistance / 8) <= 1 && (wheelDistance / 8) >= 0) {
+          wheelDistance = 1
+        } else if ((wheelDistance / 8) >= -1 && (wheelDistance / 8) <= 0) {
+          wheelDistance = -1
+        } else if (!wheelDistance) {
+          wheelDistance = 0
+        } else {
+          wheelDistance = wheelDistance / 8
+        }
+        console.log(wheelDistance);
         // 设置电脑区域滚动位置
-        const top = el.scrollTop - (wheelDistance / 10)
+        const top = el.scrollTop - wheelDistance
         this.scrollTop = top < 0 ? 0 : (top > scrollTopSpace ? scrollTopSpace : top)
+        console.log(this.scrollTop);
         el.scrollTop = this.scrollTop
+        // this.scrollToTop(el)
         event.stopPropagation()
         event.cancelBubble = true
-        console.log(wheelDistance)
       }
     })
   }
@@ -396,6 +406,7 @@ export default {
       }
       &-imgs_container {
         height: 100%;
+        pointer-events: none;
         scrollbar-width: none; /* firefox */
         -ms-overflow-style: none; /* IE 10+ */
         &::-webkit-scrollbar {
