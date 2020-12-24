@@ -9,7 +9,11 @@
           从数据出发，基于图形语法，灵活构建各类图表，满足你的各种数据可视化需求
         </p>
       </section>
-      <div class="chart-box" v-if="!showOrange">
+      <div class="chart-box"
+       :class="{
+          'hide':showOrange
+        }"
+      >
         <section class="charts">
           <div class="chart-item" v-for="item in cardList" :key="item.id"
             :data-animation = setDataAttribute(item.id)
@@ -278,6 +282,9 @@ export default {
     },
     page4_animation_play_step2 (dirction) {
       return new Promise((resolve, reject) => {
+        if (dirction) {
+          this.showOrange = false
+        }
         const animationList = this.animationList[1]
         this.handleElementsAnimation(dirction, animationList)
         setTimeout(_ => {
@@ -299,9 +306,7 @@ export default {
     },
     page4_animation_play_step4 (dirction) {
       return new Promise((resolve, reject) => {
-        if (dirction) {
-          this.showOrange = false
-        };
+        this.showOrange = true
         const animationList = this.animationList[3]
         this.handleElementsAnimation(dirction, animationList)
         setTimeout(() => {
@@ -566,16 +571,6 @@ export default {
       // this.handleAnimationControl('', 'down')
       const ele = document.querySelector('.header')
       ele.classList.add('flow2')
-    },
-    /**
-     * @param { direction } 向上还是向下, true 向上执行，
-     */
-    handle (direction) {
-      return new Promise((resolve, reject) => {
-        if (direction) {
-
-        }
-      })
     }
   }
 }

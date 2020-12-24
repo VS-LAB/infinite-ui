@@ -10,21 +10,25 @@
         </p>
       </section>
       <button class="btn2" @click="handleAnimationControl()">{{ animation.time }}</button>
-      <button class="btn3" @click="animation_play_step1()"> 1-- </button>
-      <button class="btn4" @click="animation_play_step1(true)"> 1++ </button>
-      <button class="btn5" @click="animation_play_step2()"> 2-- </button>
-      <button class="btn6" @click="animation_play_step2(true)"> 2++ </button>
-      <button class="btn7" @click="animation_play_step3()"> 3-- </button>
-      <button class="btn8" @click="animation_play_step3(true)"> 3++ </button>
-      <button class="btn9" @click="animation_play_step4()"> 4-- </button>
-      <button class="btn10" @click="animation_play_step4(true)"> 4++ </button>
-      <button class="btn11" @click="animation_play_step5()"> 5-- </button>
-      <button class="btn12" @click="animation_play_step5(true)"> 5++ </button>
-      <button class="btn13" @click="animation_play_step6()"> 6-- </button>
-      <button class="btn14" @click="animation_play_step6(true)"> 6++ </button>
-      <button class="btn15" @click="animation_play_step7()"> 7-- </button>
-      <button class="btn16" @click="animation_play_step7(true)"> 7++ </button>
-      <div class="chart-box" v-if="!showOrange">
+      <button class="btn3" @click="animation_play_step1(true)"> 1-- </button>
+      <button class="btn4" @click="animation_play_step1()"> 1++ </button>
+      <button class="btn5" @click="animation_play_step2(true)"> 2-- </button>
+      <button class="btn6" @click="animation_play_step2()"> 2++ </button>
+      <button class="btn7" @click="animation_play_step3(true)"> 3-- </button>
+      <button class="btn8" @click="animation_play_step3()"> 3++ </button>
+      <button class="btn9" @click="animation_play_step4(true)"> 4-- </button>
+      <button class="btn10" @click="animation_play_step4()"> 4++ </button>
+      <button class="btn11" @click="animation_play_step5(true)"> 5-- </button>
+      <button class="btn12" @click="animation_play_step5()"> 5++ </button>
+      <button class="btn13" @click="animation_play_step6(true)"> 6-- </button>
+      <button class="btn14" @click="animation_play_step6()"> 6++ </button>
+      <button class="btn15" @click="animation_play_step7(true)"> 7-- </button>
+      <button class="btn16" @click="animation_play_step7()"> 7++ </button>
+      <div class="chart-box"
+        :class="{
+          'hide':showOrange
+        }"
+      >
         <section class="charts">
           <div class="chart-item" v-for="item in cardList" :key="item.id"
             :data-animation = setDataAttribute(item.id)
@@ -287,11 +291,14 @@ export default {
       this.handleElementsAnimation(dirction, animationList)
     },
     animation_play_step2 (dirction) {
+      if (dirction) {
+        this.showOrange = false
+      }
       const animationList = this.animationList[1]
       this.handleElementsAnimation(dirction, animationList)
     },
     animation_play_step3 (dirction) {
-      if (dirction) {
+      if (!dirction) {
         this.showOrange = true
       }
       const animationList = this.animationList[2]
@@ -299,14 +306,14 @@ export default {
       this.handleElementsAnimation(dirction, animationList)
     },
     animation_play_step4 (dirction) {
-      if (!dirction) {
-        this.showOrange = false
-      };
+      this.showOrange = true
+
       const animationList = this.animationList[3]
       this.handleElementsAnimation(dirction, animationList)
     },
     animation_play_step5 (dirction) {
       // if(dirction){
+      this.showOrange = true
       this.activeColor = 5
       // }
       const animationList = this.animationList[4]
