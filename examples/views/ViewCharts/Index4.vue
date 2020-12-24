@@ -403,15 +403,11 @@ export default {
     },
     changeColor (id) {
       // this.handleAnimationControl(id)
-      if (id === 4) {
-        this.page4_animation_play_step4()
-      }
-      if (id === 5) {
-        this.page4_animation_play_step5()
-      }
-      if (id === 6) {
-        this.page4_animation_play_step6()
-      }
+      const { activeColor } = this
+      // 获取前进步数
+      if (activeColor === id) return
+      const step = id - activeColor
+      this.$emit('doStep', step)
     },
     handleAnimationControl (id, direction = 'up') {
       console.log('====================================')

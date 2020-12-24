@@ -4,6 +4,7 @@
       :style="{zIndex:100-index, position:'fixed',width:'100vw',height:'100vh'}"
       v-for="(component,index) in pageNameArr"
       :is="component"
+      @doStep=doStep
       :key="component">
     </component>
   </div>
@@ -38,7 +39,16 @@ export default {
     }
   },
   methods: {
-    async next () {
+    doStep (step) {
+      if (!step) return
+      this.animeIndex = this.animeIndex + step
+      if (step > 0) {
+        this.next()
+      } else {
+        this.prev()
+      };
+    },
+    async next (step = 0) {
       console.log('next == ', this.animesFun, this.animeIndex)
       this.completeAnimation = false
       const currAnimate = this.animesFun[this.animeIndex]
@@ -55,7 +65,7 @@ export default {
       this.completeAnimation = await currAnimate(true)
     },
     setComponentZindex (animateName) {
-      console.log('animateName', animateName);
+      console.log('animateName', animateName)
       this.$refs.componnet.forEach((component, componentIndex) => {
         component.$el.style.zIndex = 100 - componentIndex
         if (animateName.includes(`page${componentIndex}`)) {
@@ -96,14 +106,14 @@ export default {
     let self = this
     function windowAddMouseWheel () {
       var scrollFunc = function (e) {
-        e = e || window.event;
-        let wheelDistance; // 滑轮滚动距离
-        if (e.wheelDelta) {  //判断浏览器IE，谷歌滑轮事件
+        e = e || window.event
+        let wheelDistance // 滑轮滚动距离
+        if (e.wheelDelta) { // 判断浏览器IE，谷歌滑轮事件
           wheelDistance = e.wheelDelta
         } else if (e.detail) { // Firefox滑轮事件
           wheelDistance = e.detail
         }
-        console.log('self.completeAnimation', self.completeAnimation);
+        console.log('self.completeAnimation', self.completeAnimation)
         if (self.completeAnimation) {
           if (wheelDistance > 0 && self.animeIndex >= 1) { // 当滑轮向上滚动时
             self.animeIndex -= 1
@@ -120,12 +130,12 @@ export default {
       }
       // 给页面绑定滑轮滚动事件
       if (document.addEventListener) {
-        document.addEventListener('DOMMouseScroll', scrollFunc, false);
-        window.addEventListener('DOMMouseScroll', scrollFunc, false);
+        document.addEventListener('DOMMouseScroll', scrollFunc, false)
+        window.addEventListener('DOMMouseScroll', scrollFunc, false)
       }
-      //滚动滑轮触发scrollFunc方法
-      document.addEventListener('mousewheel', scrollFunc);
-      window.addEventListener('mousewheel', scrollFunc);
+      // 滚动滑轮触发scrollFunc方法
+      document.addEventListener('mousewheel', scrollFunc)
+      window.addEventListener('mousewheel', scrollFunc)
     }
   }
 }
