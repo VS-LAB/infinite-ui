@@ -173,6 +173,8 @@ export default {
     // 
     page3_showAniStep1 (reversal) {
       return new Promise((resolve, reject) => {
+        // 当前页动画才展示icon 回到上页动画则icon消失
+        this.showIcon = reversal ? false : true
         if (!reversal) {
           console.log('next page3_showAniStep1')
           // this.showIconsIntroduce = 'slide-up-animate'
@@ -208,6 +210,7 @@ export default {
     page3_showAniStep2 (reversal) {
       return new Promise((resolve, reject) => {
         const m = document.querySelector('.infinite-standard-card-exclamatory-mark')
+
         const _that = this
         if (!reversal) {
           console.log('next page3_showAniStep2')
@@ -271,6 +274,7 @@ export default {
     page3_showAniStep4 (reversal) {
       return new Promise((resolve, reject) => {
         const _that = this
+              this.showIcon = false
         if (!reversal) {
           console.log('next page3_showAniStep4')
           this.blackBgAnimateName = 'circle-animate'

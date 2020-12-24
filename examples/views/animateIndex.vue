@@ -71,10 +71,13 @@ export default {
         if (animateName.includes(`page${componentIndex}`)) {
           component.$el.style.zIndex = 101
         }
-        if (isNext && animateName.includes('page4_animation_play_step7')) {// 切换到最后一页需要提前将zindex设高，鼠标事件才能生效
-          setTimeout(() => {
-            this.$refs.componnet[this.$refs.componnet.length - 1].$el.style.zIndex = 101
-          }, 1000)
+        if (animateName.includes('page4_animation_play_step7')) {
+          this.$refs.componnet[this.$refs.componnet.length - 1].$el.style.zIndex = 98
+          if (isNext) {// 切换到最后一页需要提前将zindex设高，鼠标事件才能生效
+            setTimeout(() => {
+              this.$refs.componnet[this.$refs.componnet.length - 1].$el.style.zIndex = 101
+            }, 1000)
+          }
         }
       })
     }
