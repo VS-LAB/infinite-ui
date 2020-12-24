@@ -1,7 +1,7 @@
 <template>
   <div class="template-container">
     <i :class="`el-icon-warning-outline infinite-icon-page-li-icon-i-showIcon`" :style="{opacity: showIcon ? 1 : 0}"></i>
-    <div :class="`infinite-home-animation-icon-page 
+    <div :class="`infinite-home-animation-icon-page
       infinite-home-animation-icon-page-step${showAni}
       ${noShow ? 'infinite-home-animation-icon-page-noShow' : ''}`">
       <!-- <button class="start" @click.stop="showAniFunc">start</button> -->
@@ -23,7 +23,7 @@
             图标颜色、粗细等各种样式随心选择，完美贴合您的项目产品
           </p>
         </div>
-    
+
         <div class="infinite-icon-page-window flex" :class="rotateAnimateName">
           <div class="infinite-icon-page-window-menu">
             <div class="infinite-icon-page-menu-top flex aic jcfs"><i class="el-icon-picture-outline"></i>Wireframe</div>
@@ -33,7 +33,7 @@
           <div class="infinite-icon-page-window-icon-list">
             <div class="infinite-icon-page-list-mask"></div>
             <ul class="infinite-icon-page-list-main flex jcsb aic fww">
-              <li 
+              <li
                 class="infinite-icon-page-list-main-li fn"
                 v-for="(item, index) in iconList"
                 :key="index"
@@ -171,7 +171,7 @@ export default {
     // }
   },
   methods: {
-    // 
+    //
     page3_showAniStep1 (reversal) {
       const _that = this
       return new Promise((resolve, reject) => {
@@ -189,7 +189,7 @@ export default {
             _that.rotateAnimateName = 'show-rotate-in'
           }, 100)
           this.noShow = false
-          // this.bgIconPageAnimateName = 
+          // this.bgIconPageAnimateName =
           setTimeout(_ => {
             _that.showIcon = true
             resolve(true)
@@ -210,7 +210,7 @@ export default {
         }
       })
     },
-    // 
+    //
     page3_showAniStep2 (reversal) {
       return new Promise((resolve, reject) => {
         const m = document.querySelector('.infinite-standard-card-exclamatory-mark')
@@ -245,7 +245,7 @@ export default {
         }
       })
     },
-    // 
+    //
     page3_showAniStep3 (reversal) {
       return new Promise((resolve, reject) => {
         const _that = this
@@ -291,7 +291,7 @@ export default {
         }
       })
     },
-    // 
+    //
     page3_showAniStep4 (reversal) {
       return new Promise((resolve, reject) => {
         const _that = this
@@ -336,29 +336,29 @@ export default {
         }
       })
     },
-    // 
+    //
     page3_showAniStep5 (reversal) {
       return new Promise((resolve, reject) => {
         const _that = this
         EventBus.$emit('page3_showAniStep5', reversal)
         if (!reversal) {
+          _that.showAni = 7
           console.log('next page3_showAniStep5')
           //   // this.blackBgAnimateName = 'circle-animate'
           setTimeout(_ => {
-            _that.showAni = 7
             //     setTimeout(_ => {
             //       // _that.showAni = 6
             //       // setTimeout(_ => {
             resolve(true)
             //     // }, 500)
             //     }, 500)
-          }, 500)
+          }, 1500)
         } else {
-          console.log('prev page3_showAniStep5')
+          _that.showAni = 6
           setTimeout(_ => {
-            _that.showAni = 6
             //   // this.blackBgAnimateName = ''
             //   _that.showAni = 6
+            console.log('prev page3_showAniStep5')
             resolve(true)
           }, 500)
         }
