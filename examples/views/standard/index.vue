@@ -151,6 +151,7 @@
           </div>
           <!-- end of 外框线 -->
           <img
+            style="height: 450px"
             class="infinite-standard-card_img"
             :src="require('@/assets/cardComponent.png')"
           />
@@ -250,6 +251,9 @@ export default {
     // 步骤3 卡片位移
     page2_goShowCardMoveToLeft () {
       return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          this.row = 0
+        }, 100)
         this.showCardMoveToLeft = !this.showCardMoveToLeft
         this.codeShowLine()
         setTimeout(_ => {
