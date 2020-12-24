@@ -241,7 +241,7 @@
   }
   img {
     max-width: 100%;
-    max-height: 100%;
+    max-height: 450px;
   }
   &-card-wrapper {
     position: relative;
@@ -250,10 +250,9 @@
   &-card {
     position: relative;
     // width: 652px;
-    height: 450px;
+    
     z-index: 10;
     box-shadow: 0px 18px 104px #dfe5f6;
-    background-color: #fff;
     transition: all 1s;
   }
 
