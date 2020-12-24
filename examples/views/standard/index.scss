@@ -122,7 +122,7 @@
     }
     &_vertical-small {
       position: absolute;
-      bottom: 30px;
+      bottom: 20px;
       height: 60px;
       width: 1px;
       border-left: 3px dashed rgba(170, 178, 220, 0.4);
@@ -168,25 +168,25 @@
       @include top(55px);
     }
     .top90 {
-      @include top(90px);
+      @include top(92px);
     }
     .top135 {
       @include top(135px);
     }
     .top195 {
-      @include top(195px);
+      @include top(199px);
     }
     .top255 {
-      @include top(255px);
+      @include top(265px);
     }
     .top295 {
-      @include top(295px);
+      @include top(300px);
     }
     .top370 {
-      @include top(370px);
+      @include top(382px);
     }
     .top410 {
-      @include top(410px);
+      @include top(415px);
     }
     .top450 {
       @include top(450px);
@@ -205,10 +205,10 @@
       @include right(-4px);
     }
     .right70 {
-      @include right(50px);
+      @include right(52px);
     }
     .right110 {
-      @include right(86px);
+      @include right(88px);
     }
 
     .left135 {
