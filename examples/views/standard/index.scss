@@ -34,9 +34,7 @@
   animation: fadeOut 1s forwards;
 }
 .infinite-standard {
-  background-color: #fff;
   position: relative;
-  background: #fff;
   @extend .center;
   .show-top {
     transform: translateY(0);

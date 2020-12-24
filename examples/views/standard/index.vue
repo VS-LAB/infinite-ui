@@ -1,5 +1,5 @@
 <template>
-  <div class="infinite-standard">
+  <div class="infinite-standard" :class="wrapAnimate">
     <div
       class="infinite-standard-card-exclamatory-mark"
       :class="{'end-mask':endTop,'show-tip':showMask}"
@@ -198,7 +198,8 @@ export default {
         'const model = sealedOptions.model',
         'let flag = model && model.event && model.prop'
         // "const listenersFlag = !componentOptions.listeners",
-      ]
+      ],
+      wrapAnimate: ''
     }
   },
   computed: {
@@ -264,9 +265,10 @@ export default {
       })
     },
     // 步骤5 保留感叹号 其他部分上滑
-    page2_goEndTop () {
+    page2_goEndTop (reversal) {
       return new Promise((resolve, reject) => {
         this.endTop = !this.endTop
+        this.wrapAnimate = reversal ? '' : 'fade-out'
         setTimeout(_ => {
           resolve(true)
         }, 1000)

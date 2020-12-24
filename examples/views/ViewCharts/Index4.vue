@@ -404,13 +404,13 @@ export default {
     changeColor (id) {
       // this.handleAnimationControl(id)
       if (id === 4) {
-        this.animation_play_step4()
+        this.page4_animation_play_step4()
       }
       if (id === 5) {
-        this.animation_play_step5()
+        this.page4_animation_play_step5()
       }
       if (id === 6) {
-        this.animation_play_step6()
+        this.page4_animation_play_step6()
       }
     },
     handleAnimationControl (id, direction = 'up') {
