@@ -1,6 +1,6 @@
 <template>
   <div class="template-container">
-    <i :class="`el-icon-warning-outline infinite-icon-page-li-icon-i-showIcon`" v-if="showIcon"></i>
+    <i :class="`el-icon-warning-outline infinite-icon-page-li-icon-i-showIcon`" :style="{opacity: showIcon ? 1 : 0}"></i>
     <div :class="`infinite-home-animation-icon-page 
       infinite-home-animation-icon-page-step${showAni}
       ${noShow ? 'infinite-home-animation-icon-page-noShow' : ''}`">
@@ -73,7 +73,7 @@ export default {
       blueBgAnimateName: '',
       blackBgAnimateName: '',
       rotateAnimateName: '',
-      showIconsIntroduce: '',
+      showIconsIntroduce: 'hide-icons-introduce',
       showDefaultBg: '',
       iconList: [
         {
@@ -149,7 +149,7 @@ export default {
       bgIconPageAnimateName: '',
       noShow: true,
       showIcon: true,
-      animesFun: [this.page3_showAniStep1, this.page3_showAniStep2, this.page3_showAniStep3, this.page3_showAniStep4]
+      animesFun: [this.page3_showAniStep2, this.page3_showAniStep3, this.page3_showAniStep4]
       // animesFun: [this.page3_showAniStep1, this.page3_showAniStep2, this.page3_showAniStep3, this.page3_showAniStep4, this.page3_showAniStep5]
     }
   },
@@ -175,10 +175,15 @@ export default {
       return new Promise((resolve, reject) => {
         if (!reversal) {
           console.log('next page3_showAniStep1')
-          this.showIconsIntroduce = 'slide-up-animate'
+          // this.showIconsIntroduce = 'slide-up-animate'
+          this.showIconsIntroduce = 'show-icons-introduce'
           // this.showDefaultBg = 'slide-up-bg'
           this.orangeBgAnimateName = 'show-orange-circle'
-          this.rotateAnimateName = 'rotate-in'
+          // this.rotateAnimateName = 'rotate-in'
+          this.rotateAnimateName = 'hide-rotate-in'
+          setTimeout(_ => {
+            this.rotateAnimateName = 'show-rotate-in'
+          }, 100)
           this.noShow = false
           // this.bgIconPageAnimateName = 
           setTimeout(_ => {
@@ -187,8 +192,10 @@ export default {
         } else {
           console.log('prev page3_showAniStep1')
           // this.showIconsIntroduce = ''
+          this.showIconsIntroduce = 'hide-icons-introduce'
           // this.showDefaultBg = ''
           // this.rotateAnimateName = ''
+          this.rotateAnimateName = ''
           this.orangeBgAnimateName = 'hide-orange-circle'
           this.noShow = true
           setTimeout(_ => {
@@ -219,14 +226,15 @@ export default {
           }, 1500)
         } else {
           console.log('prev page3_showAniStep2')
-          // setTimeout(_ => {
+          if (m) {
+            m.style.display = ''
+            this.showIcon = true
+          }
+          _that.showAni = 0
+          setTimeout(_ => {
           // console.log('m prev == ', m)
-          // if (m) {
-          //   m.style.display = ''
-          // }
-          // _that.showAni = 0
-          resolve(true)
-          // }, 1500)
+            resolve(true)
+          }, 1500)
         }
       })
     },
@@ -248,10 +256,13 @@ export default {
           }, 500)
         } else {
           console.log('prev page3_showAniStep4')
+          _that.showAni = 2
+          this.blueBgAnimateName = ''
+          setTimeout(_ => {
+            this.page3_showAniStep3(!reversal)
+          }, 100)
           // setTimeout(_ => {
-          // _that.showAni = 2
-          // this.blueBgAnimateName = ''
-          resolve(true)
+          //   resolve(true)
           // }, 1500)
         }
       })
