@@ -168,7 +168,7 @@ export default {
   methods: {
     // 
     page3_showAniStep1 (reversal) {
-      console.log('page3_showAniStep1')
+      console.log('iconpage page3_showAniStep1');
       return new Promise((resolve, reject) => {
         if (!reversal) {
           this.showIconsIntroduce = 'slide-up-animate'
@@ -354,63 +354,6 @@ export default {
     }
   },
   mounted () {
-    const { hideIcon } = this.$refs
-    console.log('hideIcon == ', hideIcon)
-    // hideIcon[0].style.position = 'fixed'
-    // hideIcon[0].style.top = '50%'
-    // hideIcon[0].style.left = '50%'
-    // document.body.style.overflow = 'auto'
-    // setTimeout(() => {
-    //   this.pageOneAnimateName = 'slide-up-animate'
-    //   this.pageOneZindex = 1
-    // }, 2000)
-
-    // function debounce (fn, wait, immediate) {
-    //   immediate = immediate || false
-    //   var timer = null
-    //   var count = 0
-    //   return function () {
-    //     var _this = this
-    //     var _arg = arguments
-    //     clearTimeout(timer)
-    //     if (immediate) {
-    //       fn.apply(_this, _arg)
-    //       count++
-    //     } else {
-    //       timer = setTimeout(function () {
-    //         console.log(this)
-    //         fn.apply(_this, _arg)
-    //         count++
-    //       }, wait)
-    //     }
-    //   }
-    // }
-
-    // windowAddMouseWheel()
-    // let self = this
-    // function windowAddMouseWheel () {
-    //   var scrollFunc = function (e) {
-    //     e = e || window.event
-    //     let wheelDistance // 滑轮滚动距离
-    //     if (e.wheelDelta) { // 判断浏览器IE，谷歌滑轮事件
-    //       wheelDistance = e.wheelDelta
-    //     } else if (e.detail) { // Firefox滑轮事件
-    //       wheelDistance = e.detail
-    //     }
-    //     if (wheelDistance > 0) { // 当滑轮向上滚动时
-    //       console.log('滑轮向上滚动')
-    //     }
-    //     if (wheelDistance < 0) { // 当滑轮向下滚动时
-    //       self.showAniFunc()
-    //     }
-    //   }
-    //   // 给页面绑定滑轮滚动事件
-    //   if (document.addEventListener) {
-    //     document.addEventListener('DOMMouseScroll', debounce(scrollFunc, 300), false)
-    //   }
-    //   // 滚动滑轮触发scrollFunc方法
-    //   document.addEventListener('mousewheel', debounce(scrollFunc, 300))
-    // }
   }
 }
 </script>

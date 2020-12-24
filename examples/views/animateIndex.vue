@@ -53,7 +53,7 @@ export default {
       this.completeAnimation = false
       const currAnimate = this.animesFun[this.animeIndex]
       const animateName = currAnimate.name
-      this.setComponentZindex(animateName)
+      this.setComponentZindex(animateName, true)
       this.completeAnimation = await currAnimate()
     },
     async prev () {
@@ -61,15 +61,20 @@ export default {
       this.completeAnimation = false
       const currAnimate = this.animesFun[this.animeIndex + 1]
       const animateName = currAnimate.name
-      this.setComponentZindex(animateName)
+      this.setComponentZindex(animateName, false)
       this.completeAnimation = await currAnimate(true)
     },
-    setComponentZindex (animateName) {
+    setComponentZindex (animateName, isNext) {
       console.log('animateName', animateName)
       this.$refs.componnet.forEach((component, componentIndex) => {
         component.$el.style.zIndex = 100 - componentIndex
         if (animateName.includes(`page${componentIndex}`)) {
           component.$el.style.zIndex = 101
+        }
+        if (isNext && animateName.includes('page4_animation_play_step7')) {// 切换到最后一页需要提前将zindex设高，鼠标事件才能生效
+          setTimeout(() => {
+            this.$refs.componnet[this.$refs.componnet.length - 1].$el.style.zIndex = 101
+          }, 1000)
         }
       })
     }

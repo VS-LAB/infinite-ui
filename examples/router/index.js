@@ -17,7 +17,8 @@ import {
   Tree
 } from './docs'
 import Home from '@/views/home'
-import HomeAnimation from '@/views/homeAnimation.vue'
+// import HomeAnimation from '@/views/homeAnimation.vue'
+import HomeAnimation from '@/views/IconPage'
 import Layout from '@/views'
 import Standard from '@/views/standard'
 import lastPage from '@/views/lastPage'
