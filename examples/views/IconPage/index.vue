@@ -176,7 +176,7 @@ export default {
       const _that = this
       return new Promise((resolve, reject) => {
         // 当前页动画才展示icon 回到上页动画则icon消失
-        this.showIcon = reversal ? false : true
+        this.showIcon = false
         if (!reversal) {
           console.log('next page3_showAniStep1')
           // this.showIconsIntroduce = 'slide-up-animate'
