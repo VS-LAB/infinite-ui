@@ -151,9 +151,8 @@
           </div>
           <!-- end of 外框线 -->
           <img
-            style="height: 450px"
             class="infinite-standard-card_img"
-            :src="require('@/assets/cardComponent.png')"
+            :src="require('@/assets/bigcardComponent.png')"
           />
         </div>
 
