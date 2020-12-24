@@ -2,6 +2,7 @@
   <div class="infinite-standard" :class="wrapAnimate">
     <div
       class="infinite-standard-card-exclamatory-mark"
+      ref="iconMask"
       :class="{'end-mask':endTop,'show-tip':showMask}"
     />
     <div
@@ -259,6 +260,16 @@ export default {
     page2_goShowExlamatoryMark () {
       return new Promise((resolve, reject) => {
         this.showMask = !this.showMask
+        const { iconMask } = this.$refs
+        // const c = document.body.clientWidth * 0.008352
+        //  left: calc(50% - 9.51vw);
+        // top: calc(50% - 2.2vw);
+        const c = document.body.clientWidth
+        const d = document.body.clientHeight
+        console.log('c 4 == ', c)
+        console.log('d 4 == ', d)
+        iconMask.style.left = `${c * 0.5 - c * 0.0951}px`
+        iconMask.style.top = `${d * 0.5 - c * 0.022}px`
         setTimeout(_ => {
           resolve(true)
         }, 1000)
@@ -267,6 +278,21 @@ export default {
     // 步骤5 保留感叹号 其他部分上滑
     page2_goEndTop (reversal) {
       return new Promise((resolve, reject) => {
+        const a = document.querySelector('.hideIcon')
+        const m = document.querySelector('.infinite-icon-page-li-icon-i-showIcon')
+        if (a) {
+          const b = a.getBoundingClientRect() // 计算点居中
+          const { iconMask } = this.$refs
+          // const c = document.body.clientWidth * 0.008352
+          const c = document.body.clientWidth * 0.007
+          console.log('b 5 == ', b)
+          console.log('c 5 == ', c)
+          iconMask.style.left = `${Math.floor(b.left) - Math.ceil(c) + 3}px`
+          iconMask.style.top = `${Math.floor(b.top) - Math.ceil(c) + 2}px`
+          m.style.position = `fixed`
+          m.style.left = `${Math.floor(b.left) - Math.ceil(c)}px`
+          m.style.top = `${Math.floor(b.top) - Math.ceil(c)}px`
+        }
         this.endTop = !this.endTop
         this.wrapAnimate = reversal ? '' : 'fade-out'
         setTimeout(_ => {

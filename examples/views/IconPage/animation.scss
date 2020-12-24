@@ -259,6 +259,7 @@
   0% {
     top: -77vh;
     left: 170vw;
+    opacity: 1;
     // translateZ(0)
     transform: rotateZ(50deg) skewY(158deg) scale(5);
     transform-origin: -128px -43px;
@@ -274,6 +275,7 @@
   100% {
     top: 20vh;
     left: 0vw;
+    opacity: 1;
     transform: rotateZ(0deg) skewY(180deg) scale(1);
     transform-origin: -128px -43px;
   }

@@ -1,6 +1,13 @@
 
 @import "./animation.scss";
 
+.infinite-icon-page-li-icon-i-showIcon {
+  font-size: 1.4vw;
+  color: rgba(255,118,53,1);
+  opacity: 1;
+  margin: 0.8vw;
+  z-index: 999;
+}
 .infinite-home-animation-icon-page {
   position: absolute;
   top: 0;
@@ -159,10 +166,11 @@
       border-radius: 7px;
       box-shadow: 0 0 16px 8px rgba(0,0,0,0.1);
 
-      top: 10vh;
-      left: 170vw;
-      transform: rotateZ(50deg) skewY(158deg) scale(5);
-      transform-origin: -128px -43px;
+      // top: 10vh;
+      // left: 170vw;
+      // transform: rotateZ(50deg) skewY(158deg) scale(5);
+      // transform-origin: -128px -43px;
+      // opacity: 0;
 
 
       .infinite-icon-page-window-menu {
@@ -227,7 +235,7 @@
             .infinite-icon-page-li-icon {
               height: 100%;
               .infinite-icon-page-li-icon-i {
-                margin: 10%;
+                margin: 0.8vw;
                 font-size: 1.4vw;
                 transform: translate(-0px, -0px);
                 // color: #1890FF;
@@ -455,6 +463,14 @@
                   // color: rgba(72,89,104,0);
                 } 
               }
+              // &:nth-child(1) {
+              //   & .infinite-icon-page-li-icon {
+              //     .infinite-icon-page-li-icon-i {
+              //       color: rgba(255,118,53,1);
+              //       opacity: 1;
+              //     }
+              //   }
+              // }
             }
           }
         }
@@ -1497,6 +1513,59 @@
                 .infinite-icon-page-li-icon-text {
                   color: rgba(72,89,104,1);
                   opacity: 1;
+                } 
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // 刚进来无展示
+  &.infinite-home-animation-icon-page-noShow {
+    background: rgba(255,255,255,0);
+    .infinite-icon-page-content {
+      .infinite-icon-page-title-h3 {
+
+      }
+      .infinite-icon-page-title-p-top {
+
+      }
+      .infinite-icon-page-title-p-bottom {
+
+      }
+      .infinite-icon-page-window {
+        box-shadow: 0 0 0 0 rgba(0,0,0,0);
+        .infinite-icon-page-window-menu {
+          background: rgba(255,141,56,0);
+          .infinite-icon-page-menu-top {
+            background: rgba(255,255,255,0);
+          }
+          .infinite-icon-page-menu-center {
+
+          }
+          .infinite-icon-page-menu-bottom {
+
+          }
+        }
+        .infinite-icon-page-window-icon-list {
+          background: rgba(247,250,252,0);
+          .infinite-icon-page-list-mask {
+
+          }
+          .infinite-icon-page-list-main {
+            .infinite-icon-page-list-main-li {
+              // background: rgba(255,255,255,0);
+              .infinite-icon-page-li-beat {
+
+              }
+              .infinite-icon-page-li-icon {
+                .infinite-icon-page-li-icon-i {
+                  // color: rgba(255,118,53,0);
+                }
+                .infinite-icon-page-li-icon-text {
+                  // color: rgba(72,89,104,0);
                 } 
               }
             }

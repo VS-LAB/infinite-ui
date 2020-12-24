@@ -1,6 +1,9 @@
 <template>
   <div class="template-container">
-    <div :class="`infinite-home-animation-icon-page infinite-home-animation-icon-page-step${showAni}`">
+    <i :class="`el-icon-warning-outline infinite-icon-page-li-icon-i-showIcon`" v-if="showIcon"></i>
+    <div :class="`infinite-home-animation-icon-page 
+      infinite-home-animation-icon-page-step${showAni}
+      ${noShow ? 'infinite-home-animation-icon-page-noShow' : ''}`">
       <!-- <button class="start" @click.stop="showAniFunc">start</button> -->
       <!-- <button class="reset" @click.stop="showAniFuncReset">reset</button> -->
       <!-- <div class="infinite-icon-page-bg"></div> -->
@@ -37,7 +40,8 @@
               >
                 <div class="infinite-icon-page-li-beat"></div>
                 <div class="infinite-icon-page-li-icon flex fdc aic jcc">
-                  <i :class="`infinite-icon-page-li-icon-i ${item.icon}`"></i>
+                  <i :class="`infinite-icon-page-li-icon-i ${item.icon} ${item.other || ''}`"
+                    :ref="item.other"></i>
                   <p class="infinite-icon-page-li-icon-text">{{item.text}}</p>
                 </div>
               </li>
@@ -71,7 +75,8 @@ export default {
       iconList: [
         {
           icon: 'el-icon-warning-outline',
-          text: 'annotate'
+          text: 'annotate',
+          other: 'hideIcon'
         },
         {
           icon: 'el-icon-edit',
@@ -139,6 +144,8 @@ export default {
       // pageOneZindex: 0,
       // pageTwoZindex: 0
       bgIconPageAnimateName: '',
+      noShow: true,
+      showIcon: true,
       animesFun: [this.page3_showAniStep1, this.page3_showAniStep2, this.page3_showAniStep3, this.page3_showAniStep4, this.page3_showAniStep5]
     }
   },
@@ -161,12 +168,14 @@ export default {
   methods: {
     // 
     page3_showAniStep1 (reversal) {
+      console.log('page3_showAniStep1')
       return new Promise((resolve, reject) => {
         if (!reversal) {
           this.showIconsIntroduce = 'slide-up-animate'
           this.showDefaultBg = 'slide-up-bg'
           this.rotateAnimateName = 'rotate-in'
-          this.bgIconPageAnimateName = 
+          this.noShow = false
+          // this.bgIconPageAnimateName = 
           setTimeout(_ => {
             resolve(true)
           }, 700)
@@ -174,6 +183,7 @@ export default {
           this.showIconsIntroduce = ''
           this.showDefaultBg = ''
           this.rotateAnimateName = ''
+          this.noShow = true
           setTimeout(_ => {
             resolve(true)
           }, 1500)
@@ -183,10 +193,17 @@ export default {
     // 
     page3_showAniStep2 (reversal) {
       return new Promise((resolve, reject) => {
+        const m = document.querySelector('.infinite-standard-card-exclamatory-mark')
         const _that = this
         if (!reversal) {
           _that.showAni = 1
           setTimeout(_ => {
+            console.log('m next == ', m)
+            if (m) {
+              m.style.display = 'none'
+              this.showIcon = false
+            }
+
             _that.showAni = 2
             // setTimeout(_ => {
             resolve(true)
@@ -194,6 +211,10 @@ export default {
           }, 1500)
         } else {
           // setTimeout(_ => {
+          console.log('m prev == ', m)
+          if (m) {
+            m.style.display = ''
+          }
           _that.showAni = 0
           resolve(true)
           // }, 1500)
@@ -241,8 +262,20 @@ export default {
           }, 500)
         } else {
           // setTimeout(_ => {
-          this.blackBgAnimateName = ''
-          _that.showAni = 4
+          this.blueBgAnimateName = ''
+          setTimeout(_ => {
+            this.blueBgAnimateName = 'circle-animate'
+            setTimeout(_ => {
+              _that.showAni = 3
+              setTimeout(_ => {
+                _that.showAni = 4
+                this.blackBgAnimateName = ''
+                // setTimeout(_ => {
+                resolve(true)
+                // }, 500)
+              }, 1500)
+            }, 500)
+          }, 500)
           resolve(true)
           // }, 1500)
         }
@@ -321,6 +354,11 @@ export default {
     }
   },
   mounted () {
+    const { hideIcon } = this.$refs
+    console.log('hideIcon == ', hideIcon)
+    // hideIcon[0].style.position = 'fixed'
+    // hideIcon[0].style.top = '50%'
+    // hideIcon[0].style.left = '50%'
     // document.body.style.overflow = 'auto'
     // setTimeout(() => {
     //   this.pageOneAnimateName = 'slide-up-animate'
