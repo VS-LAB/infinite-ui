@@ -7,9 +7,9 @@
       <!-- <button class="start" @click.stop="showAniFunc">start</button> -->
       <!-- <button class="reset" @click.stop="showAniFuncReset">reset</button> -->
       <!-- <div class="infinite-icon-page-bg"></div> -->
-      <div class="orange-circle" :class="`${showDefaultBg} ${orangeBgAnimateName}`"></div>
-      <div class="icon-bg-circle blue-circle" :class="blueBgAnimateName"></div>
-      <div class="icon-bg-circle black-circle" :class="blackBgAnimateName"></div>
+      <div class="orange-circle" :class="`${showDefaultBg} ${orangeBgAnimateName}`" :style="{zIndex: bgAnimateNameZindex === 1 ? 1 : ''}"></div>
+      <div class="icon-bg-circle blue-circle" :class="blueBgAnimateName" :style="{zIndex: bgAnimateNameZindex === 2 ? 1 : ''}"></div>
+      <div class="icon-bg-circle black-circle" :class="blackBgAnimateName" :style="{zIndex: bgAnimateNameZindex === 3 ? 1 : ''}"></div>
       <!-- <div :class="bgIconPageAnimateName"></div> -->
       <div class="infinite-icon-page-content flex fdc aic jcc">
         <div class="icons-introduce" :class="showIconsIntroduce">
@@ -149,6 +149,7 @@ export default {
       bgIconPageAnimateName: '',
       noShow: true,
       showIcon: false,
+      bgAnimateNameZindex: 1,
       animesFun: [this.page3_showAniStep2, this.page3_showAniStep3, this.page3_showAniStep4]
       // animesFun: [this.page3_showAniStep1, this.page3_showAniStep2, this.page3_showAniStep3, this.page3_showAniStep4, this.page3_showAniStep5]
     }
@@ -251,10 +252,12 @@ export default {
         if (!reversal) {
           console.log('next page3_showAniStep3')
           this.blueBgAnimateName = 'circle-animate'
+          this.bgAnimateNameZindex = 2
           setTimeout(_ => {
             _that.showAni = 3
             setTimeout(_ => {
               _that.showAni = 4
+              this.showDefaultBg = ''
               // setTimeout(_ => {
               resolve(true)
             // }, 500)
@@ -262,14 +265,29 @@ export default {
           }, 500)
         } else {
           console.log('prev page3_showAniStep3')
-          _that.showAni = 2
-          this.blueBgAnimateName = ''
+          // _that.showAni = 2
+          // this.blueBgAnimateName = ''
+          // this.bgAnimateNameZindex = 1
+          // // setTimeout(_ => {
+          // //   this.page3_showAniStep3(!reversal)
+          // // }, 100)
           // setTimeout(_ => {
-          //   this.page3_showAniStep3(!reversal)
-          // }, 100)
+          //   resolve(true)
+          // }, 1500)
+
+          this.showDefaultBg = 'circle-animate'
+          this.bgAnimateNameZindex = 1
           setTimeout(_ => {
-            resolve(true)
-          }, 1500)
+            _that.showAni = 9
+            setTimeout(_ => {
+              _that.showAni = 2
+              this.blueBgAnimateName = ''
+              //       this.blackBgAnimateName = ''
+              // setTimeout(_ => {
+              resolve(true)
+            // }, 500)
+            }, 1500)
+          }, 500)
         }
       })
     },
@@ -281,10 +299,12 @@ export default {
         if (!reversal) {
           console.log('next page3_showAniStep4')
           this.blackBgAnimateName = 'circle-animate'
+          this.bgAnimateNameZindex = 3
           setTimeout(_ => {
             _that.showAni = 5
             setTimeout(_ => {
               _that.showAni = 6
+              this.blueBgAnimateName = ''
               // setTimeout(_ => {
               resolve(true)
             // }, 500)
@@ -292,26 +312,27 @@ export default {
           }, 500)
         } else {
           console.log('prev page3_showAniStep4')
-          _that.showAni = 4
-          this.blackBgAnimateName = ''
-          setTimeout(_ => {
+          // _that.showAni = 4
+          // setTimeout(_ => {
           // this.blueBgAnimateName = ''
           // setTimeout(_ => {
-          //   this.blueBgAnimateName = 'circle-animate'
-          //   setTimeout(_ => {
-          //     _that.showAni = 3
-          //     setTimeout(_ => {
-          //       _that.showAni = 4
-          //       this.blackBgAnimateName = ''
-          //       // setTimeout(_ => {
-          //       resolve(true)
-          //       // }, 500)
-          //     }, 1500)
-          //   }, 500)
+          this.blueBgAnimateName = 'circle-animate'
+          this.bgAnimateNameZindex = 2
+          setTimeout(_ => {
+            _that.showAni = 8
+            setTimeout(_ => {
+              _that.showAni = 4
+              this.blackBgAnimateName = ''
+              //       this.blackBgAnimateName = ''
+              // setTimeout(_ => {
+              resolve(true)
+            // }, 500)
+            }, 1500)
+          }, 500)
           // }, 500)
 
-            resolve(true)
-          }, 1500)
+          // resolve(true)
+          // }, 1500)
         }
       })
     },
