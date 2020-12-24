@@ -148,7 +148,7 @@ export default {
       // pageTwoZindex: 0
       bgIconPageAnimateName: '',
       noShow: true,
-      showIcon: true,
+      showIcon: false,
       animesFun: [this.page3_showAniStep2, this.page3_showAniStep3, this.page3_showAniStep4]
       // animesFun: [this.page3_showAniStep1, this.page3_showAniStep2, this.page3_showAniStep3, this.page3_showAniStep4, this.page3_showAniStep5]
     }
@@ -172,6 +172,7 @@ export default {
   methods: {
     // 
     page3_showAniStep1 (reversal) {
+      const _that = this
       return new Promise((resolve, reject) => {
         if (!reversal) {
           console.log('next page3_showAniStep1')
@@ -182,15 +183,17 @@ export default {
           // this.rotateAnimateName = 'rotate-in'
           this.rotateAnimateName = 'hide-rotate-in'
           setTimeout(_ => {
-            this.rotateAnimateName = 'show-rotate-in'
+            _that.rotateAnimateName = 'show-rotate-in'
           }, 100)
           this.noShow = false
           // this.bgIconPageAnimateName = 
           setTimeout(_ => {
+            _that.showIcon = true
             resolve(true)
           }, 700)
         } else {
           console.log('prev page3_showAniStep1')
+          this.showIcon = false
           // this.showIconsIntroduce = ''
           this.showIconsIntroduce = 'hide-icons-introduce'
           // this.showDefaultBg = ''
@@ -255,15 +258,15 @@ export default {
             }, 1500)
           }, 500)
         } else {
-          console.log('prev page3_showAniStep4')
+          console.log('prev page3_showAniStep3')
           _that.showAni = 2
           this.blueBgAnimateName = ''
-          setTimeout(_ => {
-            this.page3_showAniStep3(!reversal)
-          }, 100)
           // setTimeout(_ => {
-          //   resolve(true)
-          // }, 1500)
+          //   this.page3_showAniStep3(!reversal)
+          // }, 100)
+          setTimeout(_ => {
+            resolve(true)
+          }, 1500)
         }
       })
     },
@@ -285,7 +288,9 @@ export default {
           }, 500)
         } else {
           console.log('prev page3_showAniStep4')
-          // setTimeout(_ => {
+          _that.showAni = 4
+          this.blackBgAnimateName = ''
+          setTimeout(_ => {
           // this.blueBgAnimateName = ''
           // setTimeout(_ => {
           //   this.blueBgAnimateName = 'circle-animate'
@@ -301,8 +306,8 @@ export default {
           //   }, 500)
           // }, 500)
 
-          resolve(true)
-          // }, 1500)
+            resolve(true)
+          }, 1500)
         }
       })
     },
