@@ -94,9 +94,9 @@ export default {
     height () {
       const { showType, width } = this
       if (showType === 'large') {
-        return 15.625 * width
+        return 15.625 * 2 * width
       }
-      return 6.042 * width
+      return 12.08 * width
     },
     width () {
       return document.documentElement.clientWidth / 100
@@ -108,50 +108,54 @@ export default {
 <style lang='scss' scoped>
 @import '../common.scss';
 
-$default-padding: 1.25vw;
+$default-padding: 48px;
 
 .slider-container{
   background: #FFFFFF;
-  box-shadow: 0 0 5px 0 rgba(137,137,152,0.10);
-  border-radius: 10px;
+  box-shadow: 0 0 10px 0 rgba(137,137,152,0.10);
+  border-radius: 20px;
   overflow: hidden;
   .slider-title{
-    height: 1.41vw;
-    margin: $default-padding $default-padding 11px $default-padding;
+    height: 62px;
+    padding: $default-padding $default-padding 11px $default-padding;
     .font{
-      font-size: 0.834vw;
+      font-size: 32px;
     }
   }
   .desc-container {
     margin: 0 $default-padding;
+    height:  92px;
     .desc-title{
-      font-size: 1.875vw;
+      font-size: 72px;
     }
   }
   .desc {
-    height: 2.396vw;
+    height: 92px;
     .sub-title{
-      margin-right: 0.52vw
+      margin-right: 20px;
     }
     .sub-title, .sub-value{
-      font-size: 0.834vw;
+      font-size: 32px
     }
 
   };
 }
 .small-item{
-  // width: 325px;
-  // height: 224px;
+  width: 650px;
+  height: 448px;
+  transform: scale(0.5);
+  transform-origin: top left;
 }
 .large-item {
-  width: 100%;
-  height: 100%;
+  width: 1014 * 2px;
+  height: 361 * 2px;
+  transform: scale(0.5);
+  transform-origin: top left;
 }
 .icon {
-  width: 0.834vw;
-  height: 0.834vw;
+  width: 32px;
+  height: 32px;
   cursor: pointer;
-  // margin-right: -0.42vw;
   svg {
     width: 100%;
     height: 100%;
