@@ -52,7 +52,12 @@
         <!-- <img class="laptop" src="../../assets/laptop.png" alt=""> -->
         <div class="laptop-main">
           <div class="laptop-main-container">
-            <div class="laptop-container">
+            <div class="laptop-container"
+              :class="{
+                'show-colorfullaotop-step1': activeColor === 5,
+                'show-colorfullaotop-step2': activeColor === 6,
+              }"
+            >
               <div v-show="!showOrange" class="laptop-contain">
                 <img class="nav" src="../../assets/visualization-chart/nav.png" alt="">
                 <div class="content flex">
@@ -73,7 +78,12 @@
         <div class="phone">
           <div class="phone-container">
             <img class="phone-img" src="../../assets/visualization-chart/phone.png" alt="">
-            <div class="phone-contain">
+            <div class="phone-contain"
+              :class="{
+                'show-blue-phone-step1': activeColor === 5,
+                'show-blue-phone-step2': activeColor === 6,
+              }"
+            >
               <img src="../../assets/visualization-chart/phone-orange.png" alt="">
               <img src="../../assets/visualization-chart/phone-blue.png" alt="">
               <img src="../../assets/visualization-chart/phone-dark.png" alt="">
@@ -240,18 +250,22 @@ export default {
           className: 'show-colorfull-step1'
         }],
         4: [{
-          ele: '.phone .phone-contain',
-          className: 'show-blue-phone-step1'
+          // ele: '.phone .phone-contain',
+          // removeList: ['show-blue-phone-step2'],
+          // className: 'show-blue-phone-step1'
         }, {
-          ele: '.laptop-container',
-          className: 'show-colorfullaotop-step1'
+          // ele: '.laptop-container',
+          // removeList: ['show-colorfullaotop-step2'],
+          // className: 'show-colorfullaotop-step1'
         }],
         5: [{
-          ele: '.phone .phone-contain',
-          className: 'show-blue-phone-step2'
+          // ele: '.phone .phone-contain',
+          // removeList: ['show-blue-phone-step1'],
+          // className: 'show-blue-phone-step2'
         }, {
-          ele: '.laptop-container',
-          className: 'show-colorfullaotop-step2'
+          // ele: '.laptop-container',
+          // removeList: ['show-colorfullaotop-step1'],
+          // className: 'show-colorfullaotop-step2'
         }],
         6: [{
           ele: '.view-chart',
@@ -309,6 +323,7 @@ export default {
     page4_animation_play_step4 (dirction) {
       return new Promise((resolve, reject) => {
         this.showOrange = true
+        this.activeColor = 4
         const animationList = this.animationList[3]
         this.handleElementsAnimation(dirction, animationList)
         setTimeout(() => {
@@ -347,6 +362,7 @@ export default {
     },
     page4_animation_play_step7 (dirction) {
       return new Promise((resolve, reject) => {
+        this.activeColor = 6
         const animationList = this.animationList[6]
         this.handleElementsAnimation(dirction, animationList)
         setTimeout(() => {
@@ -357,9 +373,13 @@ export default {
     handleElementsAnimation (dirction, animationList) {
       // 添加动画
       animationList.map(item => {
-        const { ele, className } = item
+        const { ele, className, removeList } = item
         const element = document.querySelector(ele)
         if (element) {
+          if (removeList) {
+            element.classList.remove(...removeList)
+            element.style.transitionDuration = ''
+          }
           if (!dirction) {
             element.classList.add(className)
           } else {
@@ -409,565 +429,14 @@ export default {
       // 获取前进步数
       if (activeColor === id) return
       const step = id - activeColor
+      console.log('====================================')
+      console.log(step)
+      console.log('====================================')
       this.$emit('doStep', step)
-    },
-    handleAnimationControl (id, direction = 'up') {
-      console.log('====================================')
-      console.log(id)
-      console.log('====================================')
-      let { animation } = this
-      // 获取配置表
-      const aniConfig = {
-        // 0: [{
-        //   ele: ['.main-view .header'], // 顶部标题动画
-        //   class: 'floow-down'
-        // }, {
-        //   ele: ['.charts .chart-1'], // 小line动画
-        //   class: 'floow-line-1'
-        // }, {
-        //   ele: ['.charts .chart-2'], // bar 动画
-        //   class: 'floow-bar-1'
-        // }, {
-        //   ele: ['.charts .chart-3'], // 雷达图动画
-        //   class: 'floow-radius-1'
-        // }, {
-        //   ele: ['.charts .chart-4'],
-        //   class: 'floow-line-big-1'
-        // }],
-        1: [{
-          ele: '.charts .chart-item-1', // 小line动画
-          classes: 'floow-line-2'
-        }, {
-          ele: '.charts .chart-item-2', // 小line动画
-          classes: 'floow-bar-2'
-        },
-        {
-          ele: '.charts .chart-item-3', // 小line动画
-          classes: 'floow-radius-2'
-        },
-        {
-          ele: '.charts .chart-item-4', // 小line动画
-          classes: 'floow-big-line-2'
-        },
-        {
-          ele: '.chart-box', // 盒子高度缩微0
-          classes: 'scale-height'
-        }, {
-          ele: '.laptop .laptop-main', // laptop
-          classes: 'showlaptop'
-        }, {
-          ele: '.laptop .nav', // 导航
-          classes: 'opactyAni'
-        }, {
-          ele: '.laptop .desc-item', // 导航
-          classes: 'opactyAni'
-        }, {
-          ele: '.laptop .radius', // 导航
-          classes: 'opactyAni'
-        }, {
-          ele: '.laptop .bottom', // 导航
-          classes: 'opactyAni'
-        }],
-        2: [{
-          ele: '.laptop', // 导航
-          classes: 'laptopanileft'
-        }, {
-          ele: '.charts .chart-item-1', // 导航
-          classes: 'floow-line-3'
-        },
-        {
-          ele: '.charts .chart-item-2', // 导航
-          classes: 'floow-bar-3'
-        },
-        {
-          ele: '.charts .chart-item-3', // 导航
-          classes: 'floow-radius-3'
-        }, {
-          ele: '.charts .chart-item-4', // 导航
-          classes: 'floow-big-line-3'
-        }, {
-          ele: '.phone', // 导航
-          classes: 'showphone'
-        }],
-        3: [{
-          ele: '.main-view .header', // 顶部标题动画
-          classes: 'floow-up'
-        }, {
-          ele: '.laptop', // 顶部标题动画
-          classes: 'floow-laptop-left'
-        }, {
-          ele: '.show-colorful',
-          classes: 'show-colorfull'
-        }],
-        4: [{
-          ele: '.phone .phone-contain',
-          classes: 'show-blue-phone'
-        }, {
-          ele: '.laptop-container',
-          classes: 'show-blue-laotop'
-        }],
-        5: [{
-          ele: '.phone .phone-contain',
-          classes: 'show-dark-phone'
-        }, {
-          ele: '.laptop-container',
-          classes: 'show-dark-laotop'
-        }],
-        6: [{
-          ele: '.view-chart',
-          classes: 'leave'
-        }]
-      }
-      if (!animation.clock) return
-      if (id) {
-        animation.time = id
-      } else {
-        if (direction === 'up') {
-          animation.time++
-        } else {
-          animation.time--
-        }
-      };
-      animation.clock = false
-
-      if (animation.time === 2) {
-        this.showOrange = true
-      };
-      // debugger
-      const animationList = aniConfig[animation.time]
-      if (!animationList) return
-      const result = animationList.map(item => {
-        try {
-          // 获取dom
-          let { ele, classes } = item
-          const element = document.querySelector(ele)
-          const animationName = element.dataset.animation
-          element.classList.remove(animationName)
-          if (direction === 'up') {
-            element.classList.add(classes)
-          }
-          element.dataset.animation = classes
-          return true
-        } catch (error) {
-          return false
-        }
-      })
-      const tag = result.every(item => {
-        return item
-      })
-      if (tag) animation.clock = true
-    },
-    goBack () {
-      // this.handleAnimationControl('', 'down')
-      const ele = document.querySelector('.header')
-      console.log('====================================')
-      console.log(ele)
-      console.log('====================================')
-      ele.classList.remove('flow2')
-    },
-    goFront () {
-      // this.handleAnimationControl('', 'down')
-      const ele = document.querySelector('.header')
-      ele.classList.add('flow2')
     }
   }
 }
 </script>
-
-<style lang='scss'>
-html, body  {
-  font-size: 100px !important;
-}
-
-@media screen and (max-width: 1400px) {
-  html, body {
-    font-size: 100px !important;
-  }
-}
-
-@media screen and (max-width: 1000px) {
-  html, body {
-    font-size: 70px !important;
-  }
-}
-
-@media screen and (max-width: 600px) {
-  html, body {
-    font-size: 50px !important;
-  }
-}
-
-</style>
-
-<style lang="scss">
-$laptopAni-time:1s;
-.floow-line-2 {
-  animation: floow-line-2 $laptopAni-time linear;
-  animation-fill-mode: forwards;
-}
-
-@keyframes floow-line-2 {
-  0% {
-    transform: translateX(0px);
-    opacity: 1;
-  }
-  100%{
-    transform: translate(1.2vw, 3.7vw) scale(0.61846);
-    opacity: 1;
-    z-index: 1;
-  }
-}
-
-.floow-line-3 {
-  animation: floow-line-3 1s linear;
-  animation-fill-mode: forwards;
-  z-index: 1;
-}
-
-@keyframes floow-line-3 {
-  0%{
-    transform: translate(10px, 7px) scale(0.36);
-    opacity: 1;
-    z-index: 1;
-  }
-  100%{
-    transform: translate(-110px, 7px) scale(0.36);
-    opacity: 1;
-    z-index: 1;
-  }
-}
-
-.floow-bar-2 {
-  animation: floow-bar-2 $laptopAni-time linear;
-  animation-fill-mode: forwards;
-  z-index: 1;
-}
-
-@keyframes floow-bar-2 {
-  0% {
-    transform: translateX(0px);
-    opacity: 1;
-    z-index: 1;
-  }
-  100%{
-    transform: translate(-5.7vw, 3.7vw) scale(0.61846);
-    opacity: 1;
-    z-index: 1;
-  }
-}
-
-.floow-bar-3 {
-  animation: floow-bar-3 1s linear;
-  animation-fill-mode: forwards;
-  z-index: 1;
-}
-
-@keyframes floow-bar-3 {
-  0% {
-    transform: translate(-100px, 7px) scale(0.36);
-    opacity: 1;
-    z-index: 1;
-  }
-  100%{
-    transform: translate(-200px, 7px) scale(0.36);
-    opacity: 1;
-    z-index: 1;
-  }
-}
-
-.floow-radius-2 {
-  animation: floow-radius-2 $laptopAni-time linear;
-  animation-fill-mode: forwards;
-  z-index: 1;
-}
-
-@keyframes floow-radius-2 {
-  0% {
-    transform: translateX(0px);
-    opacity: 1;
-    z-index: 1;
-  }
-  100%{
-    transform: translate(-12.6vw, 3.7vw) scale(0.61846);
-    opacity: 1;
-    z-index: 1;
-  }
-}
-.floow-radius-3 {
-  animation: floow-radius-3 1s linear;
-  animation-fill-mode: forwards;
-  z-index: 1;
-}
-
-@keyframes floow-radius-3 {
-  0% {
-    transform: translate(10px, 7px) scale(0.36);
-    opacity: 1;
-    z-index: 1;
-  }
-  100%{
-    transform: translate(-90px, 7px) scale(0.36);
-    opacity: 1;
-    z-index: 1;
-  }
-}
-
-.floow-big-line-2 {
-  animation: floow-big-line-2 $laptopAni-time linear;
-  animation-fill-mode: forwards;
-}
-
-@keyframes floow-big-line-2 {
-  0%{
-    transform: translateX(0px);
-    opacity: 1;
-    z-index: 1;
-  }
-  100%{
-    // transform: translate(-63px, -188px) scale(0.5,0.35);
-    // transform: translate(-87px, -90px) scale(0.51);
-    // transform: translate(-88px, -99px) scale(0.505);
-    // transform: translate(-4vw, -3.2vw) scale(0.57);
-    transform: translate(-5.7vw, -2.4vw) scale(0.61834);
-    opacity: 1;
-    z-index: 1;
-  }
-}
-
-.floow-big-line-3 {
-  animation: floow-big-line-3 1s linear;
-  animation-fill-mode: forwards;
-}
-
-@keyframes floow-big-line-3 {
-  0%{
-    transform: translate(-63px, -188px) scale(0.5,0.35);
-    opacity: 1;
-    z-index: 1;
-  }
-  100%{
-    transform: translate(-163px, -188px) scale(0.5,0.35);
-    opacity: 1;
-    z-index: 1;
-  }
-}
-
-// 高度
-.scale-height{
-  height: 100%;
-  animation: scale-height 0.1s linear;
-  animation-fill-mode: forwards;
-}
-
-@keyframes scale-height {
-  0%{
-    height: 100%;
-  }
-  100% {
-    height: 0px;
-  }
-}
-
-.showlaptop {
-  animation: showlaptop $laptopAni-time linear;
-  transform: scale(1.98) translateY(100vh);
-  animation-fill-mode: forwards;
-}
-
-// 笔记本动画效果-上移1
-@keyframes showlaptop {
-  0% {
-    transform: scale(1.98) translateY(100vh);
-  }
-  100% {
-    transform: scale(1) translateY(0);
-  };
-}
-
-.opactyAni {
-  opacity: 0;
-  animation: opactyAni;
-  animation-duration: $laptopAni-time * 0.1;
-  animation-delay: $laptopAni-time * 0.9;
-  animation-fill-mode: forwards;
-}
-
-// 动画显隐藏
-@keyframes opactyAni {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  };
-}
-
-.laptopanileft {
-  animation: laptopanileft 1s linear;
-  animation-fill-mode: forwards;
-}
-
-@keyframes laptopanileft {
-  0%{
-    transform: scale(1) translate(0);
-  }
-  100%{
-    transform: scale(1) translate(-100px, 0);
-  }
-}
-
-.chartboxanileft .chart-item{
-  animation: chartboxanileft 1s linear;
-  animation-fill-mode: forwards;
-}
-
-@keyframes chartboxanileft {
-  0%{
-    transform: scale(1) translate(0);
-    z-index: 1;
-  }
-  100%{
-    z-index: 1;
-    transform: scale(1) translate(-100px, 0);
-  }
-}
-
-.showphone{
-  animation: showphone 1s linear;
-  animation-fill-mode: forwards;
-}
-
-@keyframes showphone {
-  0%{
-    opacity: 0;
-    position: absolute;
-    left: 60%;
-  }
-  67%{
-     opacity: 0;
-    position: absolute;
-    left: 67%;
-  }
-  100%{
-    opacity: 1;
-    position: absolute;
-    left: 80%;
-  }
-}
-
-.floow-up{
-  animation: floow-up 1s linear;
-  animation-fill-mode: forwards;
-}
-
-@keyframes floow-up {
-  0%{
-    transform: translateY(0px);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(-400px);
-    opacity: 1;
-  }
-}
-
-.floow-laptop-left{
-  animation: floow-laptop-left 1s linear;
-  animation-fill-mode: forwards;
-}
-
-@keyframes floow-laptop-left {
-  0%{
-    transform: scale(1) translate(-100px, 0)
-  }
-  100% {
-    transform: scale(1) translate(-40vw, -5.42vw)
-  }
-}
-
-.show-colorfull{
-  animation: show-colorfull 1s linear;
-  animation-fill-mode: forwards;
-}
-
-@keyframes show-colorfull {
-  0%{
-    transform: translateY(100vh);
-  };
-  100%{
-    transform: translateY(0);
-  };
-}
-
-.show-blue-phone{
-  animation: show-blue-phone 1s linear;
-  animation-fill-mode: forwards;
-}
-
-@keyframes show-blue-phone {
-  0%{
-    transform: translateY(-2%);
-  };
-  100%{
-    transform: translateY(-33.6%);
-  };
-}
-
-.show-dark-phone{
-  animation: show-dark-phone 1s linear;
-  animation-fill-mode: forwards;
-  transform: translateY(-33.6%);
-}
-
-@keyframes show-dark-phone {
-  0%{
-    transform: translateY(-35.6%);
-  };
-  100%{
-    transform: translateY(-67.1%);
-  };
-}
-
-.show-blue-laotop{
-  animation: show-blue-laotop 1s linear forwards;
-};
-
-@keyframes show-blue-laotop {
-  0%{
-    transform: translateY(0);
-  };
-  100%{
-    transform: translateY(-33.3%);
-  };
-}
-
-.show-dark-laotop{
-  animation: show-dark-laotop 1s linear forwards;
-};
-
-@keyframes show-dark-laotop {
-  0%{
-    transform: translateY(-33.3%);
-  };
-  100%{
-    transform: translateY(-67%);
-  };
-}
-
-.leave {
-  animation: leave 0.5s linear forwards;
-}
-
-@keyframes leave {
-  0%{
-    transform: translateY(0)
-  }
-  100%{
-    transform: translateY(-100vh)
-  }
-}
-
-</style>
 
 <style lang="scss" scoped>
 @import './animation/step1.scss';
@@ -978,7 +447,6 @@ $laptopAni-time:1s;
 };
 
 .view-container {
-  // padding-top: 0.20rem;
   box-sizing: border-box;
   section {
     color: #fff;
@@ -1141,15 +609,6 @@ $AniChartDelay2: 1.2s;
     transform: translateX(0px);
     opacity: 1;
   }
-  // 70%{
-  //   transform: translateX(0px);
-  //   opacity: 1;
-  // }
-  // 100%{
-  //   transform: translate(-63px, -188px) scale(0.5,0.35);
-  //   opacity: 1;
-  //   z-index: 1;
-  // }
 }
 
 @keyframes flow {
@@ -1307,12 +766,12 @@ $laptopAni-time: 1s;
   }
   .check-box{
     .checks{
-      width: 2.396vw;
-      height: 2.396vw;
+      width: 46px;
+      height: 46px;
       border: 4px solid rgba(255,255,255,0.20);
       display: inline-block;
       border-radius: 50%;
-      margin-right: 0.2rem;
+      margin-right: 40px;
       cursor: pointer;
       transition: all 0.1s;
       &:hover{
@@ -1335,6 +794,5 @@ $laptopAni-time: 1s;
     }
   }
 }
-
 
 </style>
