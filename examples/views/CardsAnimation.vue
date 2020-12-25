@@ -51,6 +51,12 @@
          :class="imgConnectAnime"
          :src="require(`@/assets/component/card (9).png`)"
          alt="">
+    <div class="replace_scroll"
+         v-show="isOverflowAutoPad && !animeContinue && !lastAnimeCompile"
+         ref="replaceScrollRef"
+         @scroll="onScroll">
+      <div class="replace_scroll-placeholder"></div>
+    </div>
   </div>
 </template>
 
@@ -180,13 +186,13 @@ export default {
           setTimeout(_ => {
             this.padScrollSwitch = true
             resolve(true)
-          }, 1000)
+          }, 800)
         } else {
           this.imgsAnimed = false
           this.timeStep3 = setTimeout(() => {
             this.isOverflowAutoPad = false
             resolve(true)
-          }, 1000)
+          }, 800)
         }
       })
     },
@@ -202,7 +208,7 @@ export default {
             height: imgEl.offsetHeight + 'px',
             opacity: 1,
             left: boundingClientRect.left + 'px',
-            top: !reversal ? boundingClientRect.top + 'px' : `calc(${boundingClientRect.top + 'px' + '150vh'})`,
+            top: !reversal ? boundingClientRect.top + 'px' : `calc(${boundingClientRect.top}px + 150vh)`,
             zIndex: 1,
             transition: 'all 1s',
             display: 'block'
@@ -217,6 +223,9 @@ export default {
             setTimeout(() => {
               this.lastAnimeCompile = !reversal
               this.animeContinue = false
+              this.$nextTick(() => {
+                this.$refs.replaceScrollRef.focus()
+              })
               if (reversal) {
                 document.querySelector('.imgs_content_9').style.display = 'none'
               }
@@ -229,17 +238,17 @@ export default {
         })
       })
     },
-
+    onScroll (e) {
+      let first = this.$refs.replaceScrollRef
+      let second = this.$refs.componentViewImgsContainerRef
+      second.scrollTop = first.scrollTop / (first.scrollHeight - first.clientHeight) * (second.scrollHeight - second.clientHeight)
+    }
   },
   mounted () {
     document.body.addEventListener('mousewheel', (e) => {
       const event = e || window.event
       const el = this.$refs.componentViewImgsContainerRef
       if (el && this.padScrollSwitch) {
-        this.continueSlide = true
-        setTimeout(() => {
-          this.continueSlide = false
-        }, 300)
         let wheelDistance // 滑轮滚动距离
         if (e.wheelDelta) { // 判断浏览器IE，谷歌滑轮事件
           wheelDistance = e.wheelDelta
@@ -248,25 +257,10 @@ export default {
         }
         const scrollTopSpace = el.children[0].clientHeight - el.clientHeight
         // 判断是否不可以滚动了，此时需要走上一步或者下一步动画
-        if ((this.scrollTop === 0 && wheelDistance > 0) || (this.scrollTop === scrollTopSpace && wheelDistance < 0) || this.lastAnimeCompile || this.animeContinue) {
+        if ((el.scrollTop === 0 && wheelDistance > 0) || (scrollTopSpace - el.scrollTop < 1 && wheelDistance < 0) || this.lastAnimeCompile || this.animeContinue) {
           this.padScrollSwitch = false
-          return
         }
-        // 兼容键盘滑动时距离
-        if ((wheelDistance / 8) <= 1 && (wheelDistance / 8) >= 0) {
-          wheelDistance = 1
-        } else if ((wheelDistance / 8) >= -1 && (wheelDistance / 8) <= 0) {
-          wheelDistance = -1
-        } else if (!wheelDistance) {
-          wheelDistance = 0
-        } else {
-          wheelDistance = wheelDistance / 8
-        }
-        // 设置电脑区域滚动位置
-        const top = el.scrollTop - wheelDistance
-        this.scrollTop = top < 0 ? 0 : (top > scrollTopSpace ? scrollTopSpace : top)
-        el.scrollTop = this.scrollTop
-        // this.scrollToTop(el)
+        this.$refs.replaceScrollRef.focus()
         event.stopPropagation()
         event.cancelBubble = true
       }
@@ -277,14 +271,16 @@ export default {
 
 <style lang="scss" scoped>
 .anime-container {
+  user-select: none;
   .img_connect {
     opacity: 0;
     position: fixed;
     pointer-events: none;
     box-shadow: 0px 0.9375vw 5.41667vw #dfe5f6;
   }
+
   .img_connect-anime_start {
-    width: 632px !important;
+    width: 650.11px !important;
     height: 450px !important;
     left: 50% !important;
     top: 50% !important;
@@ -292,6 +288,21 @@ export default {
     transform: translate(-50%, -50%);
   }
 
+  // 替代滚动
+  .replace_scroll {
+    position: fixed;
+    z-index: 2;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    box-sizing: border-box;
+    overflow: hidden auto;
+    opacity: 0;
+    &-placeholder {
+      height: 400vh;
+    }
+  }
   // 画布动画
   .anime-canvas-anime_start {
     transform: translateY(-150vh);

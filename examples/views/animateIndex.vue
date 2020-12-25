@@ -1,11 +1,11 @@
 <template>
   <div class="container">
     <component ref="componnet"
-      :style="{zIndex:100-index, position:'fixed',width:'100vw',height:'100vh'}"
-      v-for="(component,index) in pageNameArr"
-      :is="component"
-      @doStep=doStep
-      :key="component">
+               :style="{zIndex:100-index, position:'fixed',width:'100vw',height:'100vh'}"
+               v-for="(component,index) in pageNameArr"
+               :is="component"
+               @doStep=doStep
+               :key="component">
     </component>
   </div>
 </template>
@@ -49,7 +49,6 @@ export default {
       };
     },
     async next (step = 0) {
-      console.log('next == ', this.animesFun, this.animeIndex)
       this.completeAnimation = false
       const currAnimate = this.animesFun[this.animeIndex]
       const animateName = currAnimate.name
@@ -57,7 +56,6 @@ export default {
       this.completeAnimation = await currAnimate()
     },
     async prev () {
-      console.log('prev == ', this.animeIndex + 1)
       this.completeAnimation = false
       const currAnimate = this.animesFun[this.animeIndex + 1]
       const animateName = currAnimate.name
@@ -65,7 +63,6 @@ export default {
       this.completeAnimation = await currAnimate(true)
     },
     setComponentZindex (animateName, isNext) {
-      console.log('animateName', animateName)
       this.$refs.componnet.forEach((component, componentIndex) => {
         component.$el.style.zIndex = 100 - componentIndex
         if (animateName.includes(`page${componentIndex}`)) {
@@ -121,17 +118,13 @@ export default {
         } else if (e.detail) { // Firefox滑轮事件
           wheelDistance = e.detail
         }
-        console.log('self.completeAnimation', self.completeAnimation)
         if (self.completeAnimation) {
           if (wheelDistance > 0 && self.animeIndex >= 1) { // 当滑轮向上滚动时
             self.animeIndex -= 1
-            console.log('滑轮向上滚动')
             self.prev()
           }
-          console.log('self.animeIndex < self.animesFun.length', self.animeIndex < self.animesFun.length - 1)
           if (wheelDistance < 0 && self.animeIndex < self.animesFun.length - 1) { // 当滑轮向下滚动时
             self.animeIndex += 1
-            console.log('滑轮向下滚动')
             self.next()
           }
         }

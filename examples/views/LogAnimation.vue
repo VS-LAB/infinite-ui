@@ -25,7 +25,6 @@
                   :cube-class="`group_cube-class ${item.defaultClass} ${item.startClass}`" />
           </div>
         </div>
-
         <!-- infinite-english动画 -->
         <div class="group_infinite_english">
           <img class="infinite-english-svf"
@@ -35,17 +34,17 @@
         </div>
       </div>
 
-      <div class="header-model"
-           :class="headerModelAnime"
-           v-if="moveWhiteBackgroundAnime">
-        <div class="header-menu">组件</div>
-      </div>
-
       <!-- footer text -->
       <div class="footer-text"
            :class="footerTextAnime">
         创造无限可能
       </div>
+    </div>
+    <div class="header-model"
+         :class="headerModelAnime"
+         v-if="moveWhiteBackgroundAnime">
+      <div class="header-menu"
+           @click="$router.push('/guide')">组件</div>
     </div>
     <!-- 移动白色背景 -->
     <div class="move-white-background"
@@ -240,10 +239,10 @@ export default {
   height: 100%;
   // 中心点
   .center-dot {
-    width: 0;
-    height: 0;
-    position: relative;
-    left: calc(50% - 120px);
+    width: calc(330px + 64px + 64px);
+    height: 80px;
+    position: fixed;
+    left: calc(50vw - 120px);
     top: 40vh;
     z-index: 1;
   }
@@ -410,6 +409,7 @@ export default {
       white-space: nowrap;
       transition: all 0.5s;
       opacity: 0;
+      user-select: none;
       transform: translate(-54px, 120px);
     }
     .footer-text-anime_start {
@@ -436,22 +436,26 @@ export default {
 
   // 正-菱-infinite动画 start
   .anime_log_container-group {
+    height: 80px;
     display: flex;
     align-items: center;
   }
+
+  $animeLogTranslateX: calc(-32vw + 120px);
+
   .anime_log_container-top-anime_start {
     transition: all 1s;
-    transform: translate(-300px, -38vh) scale(0.5);
+    transform: translate($animeLogTranslateX, -40vh) scale(0.5);
   }
 
   .anime_log_container-top-anime_end {
     transition: all 0.3s;
-    transform: translate(-300px, -48vh) scale(0.5);
+    transform: translate($animeLogTranslateX, -48vh) scale(0.5);
   }
   // 倒动画
   .anime_log_container-top-anime_end_reversal {
     transition: all 0.3s;
-    transform: translate(-300px, -38vh) scale(0.5);
+    transform: translate($animeLogTranslateX, -40vh) scale(0.5);
   }
   .anime_log_container-top-anime_start_reversal {
     transition: all 1s;
@@ -460,16 +464,24 @@ export default {
 
   // 顶部菜单动画 start
   .header-model {
+    height: 80px;
+    display: flex;
+    align-items: center;
+    padding-left: 44.4%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 2;
     white-space: nowrap;
-    transform: translate(200px, -43vh);
     transition: all 0.3s;
     .header-menu {
+      cursor: pointer;
       font-size: 16px;
       color: #ff7635;
     }
   }
   .header-model-anime_start {
-    transform: translate(200px, -52vh);
+    transform: translateY(-100%);
   }
   // 顶部菜单动画 end
 }
