@@ -412,9 +412,6 @@ export default {
       let obj = document.querySelector('#J_animation')
       let btn = document.querySelector('.btn')
       let state = obj.style['animationPlayState']
-      console.log('====================================')
-      console.log(state)
-      console.log('====================================')
       if (state !== 'running') {
         obj.style['animationPlayState'] = 'running'
         btn.innerText = 'stop'
@@ -489,16 +486,17 @@ export default {
       .sub-title {
         width: 100%;
         justify-content: space-between;
-        font-size: 0.7292vw;
-        @include bottom-border(#DDE1EE , 1px, -14px);
+        font-size: 16 * 2px;
+        @include bottom-border(#DDE1EE , 2px, -20px);
         .change {
           li {
-            width: 5.2083vw;
+            width: 100 *2px;
             text-align: center;
             position: relative;
-            font-size: 0.7292vw;
+            font-size: 13 * 2px;
+            cursor: pointer;
             &.active span{
-              @include bottom-border(#FF7D4D,3px,-15px)
+              @include bottom-border(#FF7D4D,6px,-30px)
             }
           }
         }
@@ -510,15 +508,7 @@ export default {
 .header{
   font-size: 3.125vw;
   margin-top: 120px;
-  // transition: all 1s linear;
-  // opacity: 0;
-  // transform: translateY(400px);
-  // // animation: flow linear 1s forwards;
-  // &.flow {
-  //   transition: all 1s linear;
-  //   transform: translateY(0px);
-  //   opacity: 1;
-  // }
+  margin-bottom: 84px;
   .desc {
     font-size: 1.042vw;
   }
@@ -534,93 +524,93 @@ $aniChart: 1s; // 折线图和柱状图 执行时间
 $AniChartDelay: 1s;
 $AniChartDelay2: 1.2s;
 
-.chart-1{
-  transform: translate3d(-400px, 0, 0);
-  opacity: 0;
-  transition: all 1s ;
-  animation: chartItemAnima1 $AniChartDelay linear $aniChart forwards;
-}
+// // .chart-1{
+// //   transform: translate3d(-400px, 0, 0);
+// //   opacity: 0;
+// //   transition: all 1s ;
+// //   animation: chartItemAnima1 $AniChartDelay linear $aniChart forwards;
+// // }
 
-@keyframes chartItemAnima1 {
-  0%{
-    transform: translate3d(-400px, 0, 0);
-    opacity: 0;
-    z-index: 1;
-  }
-  100% {
-    transform: translateX(0px);
-    opacity: 1;
-    z-index: 1;
-  }
-}
+// // @keyframes chartItemAnima1 {
+// //   0%{
+// //     transform: translate3d(-400px, 0, 0);
+// //     opacity: 0;
+// //     z-index: 1;
+// //   }
+// //   100% {
+// //     transform: translateX(0px);
+// //     opacity: 1;
+// //     z-index: 1;
+// //   }
+// // }
 
-.chart-2{
-  transform: translate3d(-400px, 0, 0);
-  opacity: 0;
-  animation: chartItemAnima2 $AniChartDelay linear $aniChart forwards;
-}
+// .chart-2{
+//   transform: translate3d(-400px, 0, 0);
+//   opacity: 0;
+//   animation: chartItemAnima2 $AniChartDelay linear $aniChart forwards;
+// }
 
-@keyframes chartItemAnima2 {
-  0%{
-    transform: translate3d(-400px, 0, 0);
-    opacity: 0;
-    z-index: 1;
-  }
-  100% {
-    transform: translateX(0px);
-    opacity: 1;
-    z-index: 1;
-  }
-}
+// @keyframes chartItemAnima2 {
+//   0%{
+//     transform: translate3d(-400px, 0, 0);
+//     opacity: 0;
+//     z-index: 1;
+//   }
+//   100% {
+//     transform: translateX(0px);
+//     opacity: 1;
+//     z-index: 1;
+//   }
+// }
 
-// 饼图动画
-.chart-3{
-  transform: translate3d(400px, 0, 0);
-  opacity: 0;
-  animation: chartItemAnima3 $AniChartDelay2 linear $aniChart forwards;
-  animation-fill-mode: forwards;
-}
+// // 饼图动画
+// .chart-3{
+//   transform: translate3d(400px, 0, 0);
+//   opacity: 0;
+//   animation: chartItemAnima3 $AniChartDelay2 linear $aniChart forwards;
+//   animation-fill-mode: forwards;
+// }
 
-@keyframes chartItemAnima3 {
-  0%{
-    transform: translate3d(400px, 0, 0);
-    opacity: 0;
-  }
-  100%{
-    transform: translateX(0px);
-    opacity: 1;
-  }
-}
+// @keyframes chartItemAnima3 {
+//   0%{
+//     transform: translate3d(400px, 0, 0);
+//     opacity: 0;
+//   }
+//   100%{
+//     transform: translateX(0px);
+//     opacity: 1;
+//   }
+// }
 
-// 饼图动画
-.chart-4{
-  transform: translate3d(1000px, 0, 0);
-  opacity: 0;
-  animation: chartItemAnima4 linear $aniChart forwards;
-  animation-delay: $AniChartDelay2;
-}
+// // 饼图动画
+// .chart-4{
+//   transform: translate3d(1000px, 0, 0);
+//   opacity: 0;
+//   animation: chartItemAnima4 linear $aniChart forwards;
+//   animation-delay: $AniChartDelay2;
+// }
 
-@keyframes chartItemAnima4 {
-  0%{
-    transform: translate3d(1000px, 0, 0);
-    opacity: 0;
-  }
-  100%{
-    transform: translateX(0px);
-    opacity: 1;
-  }
-}
+// @keyframes chartItemAnima4 {
+//   0%{
+//     transform: translate3d(1000px, 0, 0);
+//     opacity: 0;
+//   }
+//   100%{
+//     transform: translateX(0px);
+//     opacity: 1;
+//   }
+// }
 
-@keyframes flow {
-  0%{
-    transform: translateY(400px);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0px);
-    opacity: 1;
-  }
-}
+// @keyframes flow {
+//   0%{
+//     transform: translateY(400px);
+//     opacity: 0;
+//   }
+//   100% {
+//     transform: translateY(0px);
+//     opacity: 1;
+//   }
+// }
 
 $laptopAni-time: 1s;
 
