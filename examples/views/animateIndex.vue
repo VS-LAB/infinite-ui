@@ -11,8 +11,8 @@
 </template>
 
 <script>
-import LogAnimation from '@/views/LogAnimation'
-import CardsAnimation from '@/views/CardsAnimation'
+import LogAnimation from '@/views/LogAnimation/index.vue'
+import CardsAnimation from '@/views/CardsAnimation/index.vue'
 import Standard from '@/views/standard'
 import ViewChart from '@/views/ViewCharts/Index.vue'
 import LastPage from '@/views/lastPage'
