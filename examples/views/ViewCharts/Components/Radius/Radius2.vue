@@ -24,8 +24,11 @@ export default {
 <style lang='scss' scoped>
 
 $radiusColor1: #4CA9FF;
-$width: 3.52vw;
-$radius:1vw;
+// $width: 3.52vw;
+// $radius:1vw;
+
+$width: 70 * 2px;
+$radius: 30px;
 
 .loading {
   width: $width;
@@ -36,8 +39,8 @@ $radius:1vw;
 
 .loading .content {
     position: absolute;
-    width: $width - 1vw;
-    height: $width - 1vw;
+    width: $width - $radius;
+    height: $width - $radius;
     background-color: white;
     border-radius: 50%;
     left: $radius /2;

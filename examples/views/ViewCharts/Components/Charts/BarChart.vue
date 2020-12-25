@@ -42,7 +42,7 @@ export default {
     initComponent () {
       const width = document.documentElement.clientWidth
       const padding = [(24 * width / 1920), (16 * width / 1920)]
-      const size = 8 * width / 1920
+      const size = 8 * 2 * width / 1920
       // 自定义 shape, 支持图片形式的气泡
       registerShape('interval', 'borderRadius', {
         draw: function draw (cfg, container) {

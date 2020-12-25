@@ -6,6 +6,7 @@
 
 <script>
 import { Chart } from '@antv/g2'
+// import { throttle } from '@/util'
 export default {
   name: 'LineChart',
   props: {
@@ -20,7 +21,15 @@ export default {
     }
   },
   mounted () {
+    // const _this = this
     this.initComponent2()
+    // window.addEventListener('resize', throttle(function () {
+    //   _this.chart.changeSize({
+    //     width:200,
+    //     height:100
+    //     // height: _this.getHeight()
+    //   })
+    // }, 1000), false)
   },
   data () {
     return {
@@ -88,7 +97,7 @@ export default {
       return 'l(0) 0:#B151E0  1:#fff'
     },
     width () {
-      return document.documentElement.clientWidth
+      return document.documentElement.clientWidth / 2
     },
     padding () {
       const { showType } = this
@@ -114,14 +123,32 @@ export default {
     }
   },
   methods: {
+    getHeight () {
+      // 获取宽度
+      const { showType } = this
+      const width = document.documentElement.clientWidth / 100
+      if (showType === 'large') {
+        return 15.625 * 2 * width
+      }
+      return 12.08 * width
+    },
+    getPadding () {
+      // 获取宽度
+      const { showType } = this
+      const width = document.documentElement.clientWidth / 100
+      if (showType === 'large') {
+        return 15.625 * 2 * width
+      }
+      return 12.08 * width
+    },
     initComponent2 () {
+      // 需要重新计算高宽，取消从外部传入规则
       const chart = new Chart({
         container: this.id,
         autoFit: true,
         height: this.height,
         padding: this.padding
       })
-
       chart.data(this.showData)
       chart.scale({
         sold: this.slodScale,
@@ -137,16 +164,20 @@ export default {
       if (showType !== 'large') {
         chart.axis(false)
       }
-      //       chart.axis('value', {
-      //   label: {
-      //     formatter: (val) => {
-      //       return (+val / 10000).toFixed(1) + 'k';
-      //     },
-      //   },
-      // });
+      // else {
+      //   chart.axis({
+      //     labels: {
+      //       label: {
+      //         textAlign: 'center', // 文本对齐方向，可取值为： left center right
+      //         fill: '#f00', // 文本的颜色
+      //         fontSize: '48'
+      //       }
+      //     }
+      //   })
+      // };
 
       chart.area().position('genre*sold').shape('smooth').color(this.colorArea)
-      chart.line().position('genre*sold').shape('smooth').color(this.colorLine)
+      chart.line().size(4).position('genre*sold').shape('smooth').color(this.colorLine)
       this.chart = chart
 
       // chart.render()
