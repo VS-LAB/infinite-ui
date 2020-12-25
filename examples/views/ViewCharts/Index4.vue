@@ -264,15 +264,12 @@ export default {
     const _this = this
     EventBus.$on('page3_showAniStep5', (reversal) => {
       _this.page4_animation_play_step1(reversal)
+      setTimeout(() => {
+        _this.$refs.smallline[0].$refs.line.render()
+        _this.$refs.bigLine[0].$refs.line.render()
+        _this.$refs.Bar[0].$refs.bar.render()
+      }, 1000)
     })
-    setTimeout(() => {
-      console.log('====================================')
-      console.log(_this.$refs.Bar[0].$refs)
-      console.log('====================================')
-      _this.$refs.smallline[0].$refs.line.render()
-      _this.$refs.bigLine[0].$refs.line.render()
-      _this.$refs.Bar[0].$refs.bar.render()
-    }, 2000)
   },
   methods: {
     // 动画执行第一步
