@@ -156,9 +156,10 @@ $laptopAni-time: 1s;
     &.show-blue-phone-step1{
       transform: translateY(-33.6%);
       transition: all 1s linear;
-      &.show-blue-phone-step2{
-        transform: translateY(-67.1%);
-      }
+    }
+    &.show-blue-phone-step2{
+      transform: translateY(-67.1%);
+      transition: all 1s linear;
     }
   }
 }
@@ -176,10 +177,11 @@ $laptopAni-time: 1s;
   transition: all 1s linear;
   &.show-colorfullaotop-step1{
     transform: translateY(-33.3%);
-    transition: all 1s linear;
-    &.show-colorfullaotop-step2{
-      transform: translateY(-67%);
-    }
+    // transition: all 1s linear;
+  }
+  &.show-colorfullaotop-step2{
+    // transition: all 1s linear;
+    transform: translateY(-67%);
   }
 }
 
