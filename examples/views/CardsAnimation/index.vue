@@ -61,6 +61,7 @@
 </template>
 
 <script>
+import EventBus from '@/EventBus'
 export default {
   name: 'CardsAnimation',
   data () {
@@ -197,6 +198,7 @@ export default {
       })
     },
     page1_animeStep4 (reversal) {
+      EventBus.$emit('page1_animeStep4', reversal)
       this.padScrollSwitch = false
       return new Promise((resolve, reject) => {
         this.animeContinue = true
