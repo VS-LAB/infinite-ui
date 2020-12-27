@@ -1,10 +1,14 @@
 <template>
   <div class="infinite-standard" :class="wrapAnimate">
-    <div
-      class="infinite-standard-card-exclamatory-mark"
-      ref="iconMask"
-      :class="{'end-mask':endTop,'show-tip':showMask}"
-    />
+    <div class="infinite-standard-card-exclamatory-mark"
+        :class="{'end-mask':endTop,'show-tip':showMask,'hide-mask':hideMask}" 
+        ref="iconMask"
+      >
+      <i 
+        class="icon-annotate" 
+        :style="{transform: `scale(${clientScale})`}"
+        ></i>
+    </div>
     <div
       class="infinite-standard-top"
       :class="{'end-top':endTop,'show-top':showTop}"
@@ -154,6 +158,7 @@
             class="infinite-standard-card_img"
             :src="require('@/assets/bigcardComponent.png')"
           />
+          <div :class="`infinite-standard-card-icon ${hideGruyIcon ? 'hide-gruy-icon' : ''}`"></div>
         </div>
 
       </div>
@@ -177,6 +182,7 @@
 <script>
 import EventBus from '@/EventBus'
 let timer
+let hideMaskTimer
 export default {
   data () {
     return {
@@ -201,7 +207,9 @@ export default {
         'let flag = model && model.event && model.prop'
         // "const listenersFlag = !componentOptions.listeners",
       ],
-      wrapAnimate: ''
+      wrapAnimate: '',
+      hideGruyIcon: false,
+      hideMask: false
     }
   },
   computed: {
@@ -216,6 +224,10 @@ export default {
           typing_pl30: currentIndex === 5
         }
       }
+    },
+    clientScale () {
+      const a = (document.body.clientWidth / 1920).toFixed(1)
+      return a > 1 ? 1 : a
     }
   },
   methods: {
@@ -261,19 +273,14 @@ export default {
       })
     },
     // 步骤4 显示感叹号
-    page2_goShowExlamatoryMark () {
+    page2_goShowExlamatoryMark (reversal) {
       return new Promise((resolve, reject) => {
         this.showMask = !this.showMask
-        const { iconMask } = this.$refs
-        // const c = document.body.clientWidth * 0.008352
-        //  left: calc(50% - 9.51vw);
-        // top: calc(50% - 2.2vw);
-        const c = document.body.clientWidth
-        const d = document.body.clientHeight
-        console.log('c 4 == ', c)
-        console.log('d 4 == ', d)
-        iconMask.style.left = `${c * 0.5 - c * 0.0951}px`
-        iconMask.style.top = `${d * 0.5 - c * 0.022}px`
+        if (!reversal) {
+          this.hideGruyIcon = true
+        } else {
+          this.hideGruyIcon = false
+        }
         setTimeout(_ => {
           resolve(true)
         }, 1000)
@@ -285,34 +292,24 @@ export default {
         if (!reversal) {
           // 告诉动画页-4此时我的运动状态
           const hideIcon = document.querySelector('.hideIcon')
-          const m = document.querySelector('.infinite-icon-page-li-icon-i-showIcon')
           if (hideIcon) {
             const b = hideIcon.getBoundingClientRect() // 计算点居中
             const { iconMask } = this.$refs
-            // const c = document.body.clientWidth * 0.008352
-            const c = document.body.clientWidth * 0.007
-            console.log('b 5 == ', b)
-            console.log('c 5 == ', c)
-            iconMask.style.left = `${Math.floor(b.left) - Math.ceil(c) + 3}px`
-            iconMask.style.top = `${Math.floor(b.top) - Math.ceil(c) + 2}px`
-            m.style.position = `fixed`
-            m.style.left = `${Math.floor(b.left) - Math.ceil(c)}px`
-            m.style.top = `${Math.floor(b.top) - Math.ceil(c)}px`
+            iconMask.style.left = `${b.left}px`
+            iconMask.style.top = `${Math.floor(b.top) + 3}px`
           }
-          setTimeout(_ => {
-            EventBus.$emit('page2_goEndTop', reversal)
-          }, 100)
+          EventBus.$emit('page2_goEndTop', reversal)
+          hideMaskTimer = setTimeout(_ => {
+            this.hideMask = true
+          }, 1500)
         } else {
           const { iconMask } = this.$refs
-          // const c = document.body.clientWidth * 0.008352
-          //  left: calc(50% - 9.51vw);
-          // top: calc(50% - 2.2vw);
           const c = document.body.clientWidth
           const d = document.body.clientHeight
-          console.log('c 4 == ', c)
-          console.log('d 4 == ', d)
-          iconMask.style.left = `${c * 0.5 - c * 0.0951}px`
-          iconMask.style.top = `${d * 0.5 - c * 0.022}px`
+          clearTimeout(hideMaskTimer)
+          this.hideMask = false
+          iconMask.style.left = `${c * 0.5 - c * 0.0869}px`
+          iconMask.style.top = `${d * 0.5 - c * 0.0174}px`
           EventBus.$emit('page2_goEndTop', reversal)
         }
         

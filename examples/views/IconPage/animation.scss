@@ -73,25 +73,35 @@
 
 @keyframes labelOfIconBeat1 {
   0% {
-    transform: translate(-6px, -14px);
+    // transform: translate(-6px, -14px);
+    top: -14px;
+    left: -6px;
     opacity: 0;
     // color: rgba(255,118,53,1);
   }
   1% {
-    transform: translate(-6px, -14px);
+    // transform: translate(-6px, -14px);
+    top: -14px;
+    left: -6px;
     opacity: 0;
     color: rgba(255,118,53,1);
   }
   5% {
-    transform: translate(-6px, -14px);
+    // transform: translate(-6px, -14px);
+    top: -14px;
+    left: -6px;
     opacity: 0;
   }
   15% {
-    transform: translate(-0px, -0px);
+    // transform: translate(-0px, -0px);
+    top: 0px;
+    left: 0px;
     opacity: 1;
   }
   100% {
-    transform: translate(-0px, -0px);
+    // transform: translate(-0px, -0px);
+    top: 0px;
+    left: 0px;
     opacity: 1;
     color: rgba(255,118,53,1);
   }
@@ -99,26 +109,36 @@
 
 @keyframes labelOfIconBeat3 {
   0% {
-    transform: translate(-6px, -14px);
+    // transform: translate(-6px, -14px);
+    top: -14px;
+    left: -6px;
     opacity: 0;
     color: rgba(24,144,255,1);
   }
   1% {
-    transform: translate(-6px, -14px);
+    // transform: translate(-6px, -14px);
+    top: -14px;
+    left: -6px;
     opacity: 0;
   }
   // 1~5是白色从出现到完全遮挡时间
   5% {
-    transform: translate(-6px, -14px);
+    // transform: translate(-6px, -14px);
+    top: -14px;
+    left: -6px;
     opacity: 0;
   }
   15% {
-    transform: translate(-0px, -0px);
+    // transform: translate(-0px, -0px);
+    top: 0px;
+    left: 0px;
     opacity: 1;
     color: rgba(24,144,255,1);
   }
   100% {
-    transform: translate(-0px, -0px);
+    // transform: translate(-0px, -0px);
+    top: 0px;
+    left: 0px;
     opacity: 1;
     color: rgba(24,144,255,1);
   }
@@ -126,26 +146,36 @@
 
 @keyframes labelOfIconBeat5 {
   0% {
-    transform: translate(-6px, -14px);
+    // transform: translate(-6px, -14px);
+    top: -14px;
+    left: -6px;
     opacity: 0;
     color: rgba(48,49,51,1);
   }
   1% {
-    transform: translate(-6px, -14px);
+    // transform: translate(-6px, -14px);
+    top: -14px;
+    left: -6px;
     opacity: 0;
   }
   // 1~5是白色从出现到完全遮挡时间
   5% {
-    transform: translate(-6px, -14px);
+    // transform: translate(-6px, -14px);
+    top: -14px;
+    left: -6px;
     opacity: 0;
   }
   15% {
-    transform: translate(-0px, -0px);
+    // transform: translate(-0px, -0px);
+    top: 0px;
+    left: 0px;
     opacity: 1;
     color: rgba(48,49,51,1);
   }
   100% {
-    transform: translate(-0px, -0px);
+    // transform: translate(-0px, -0px);
+    top: 0px;
+    left: 0px;
     opacity: 1;
     color: rgba(48,49,51,1);
   }

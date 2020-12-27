@@ -254,6 +254,20 @@
     z-index: 10;
     box-shadow: 0px 18px 104px #dfe5f6;
     transition: all 1s;
+    &-icon{
+      position: absolute;
+      top: 10%;
+      right: 7%;
+      width: 9%;
+      height: 11%;
+      background: #fff;
+      opacity: 0;
+      transition: opacity .1s;
+      &.hide-gruy-icon {
+        opacity: 1;
+        transition: opacity .1s linear .5s;
+      } 
+    }
   }
 
   .move-card {
@@ -325,41 +339,38 @@
   }
 
   .infinite-standard-card-exclamatory-mark {
-    // position: absolute;
-    // right: 7.5%;
-    // top: 10%;
     position: fixed;
-    left: calc(50% - 9.51vw);
-    top: calc(50% - 2.2vw);
-    // transform: translate(11.36vw, -2.2vw) scale(1);
-    // transform: translate(-9.51vw, -2.2vw) scale(1);
-    transform-origin: center;
-    background: url("../../assets/icons/exclamatory mark.svg") center no-repeat;
-    background-color: #fff;
-    box-shadow: 0 5px 20px 0 rgba(255, 214, 176, 0.6);
-    width: 50px;
-    height: 50px;
+    left: calc(50% - 8.69vw);
+    top: calc(50% - 1.74vw);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.8vw;
+    height: 1.8vw;
+    font-size: 4.5vw;
     border-radius: 50%;
+    overflow: hidden;
+    color: rgba(255,118,53,1);
+    transform-origin: center;
+    box-shadow: 0 5px 20px 0 rgba(255, 214, 176, 0.6);
     opacity: 0;
-    z-index: 101;
-    transform: scale(.8);
-    transition: left 1s, top 1s, transform 1s, box-shadow 1s;
+    z-index: 999;
+    transition: all 1s;
   }
   .show-tip {
     opacity: 1;
-    transform: scale(1.5);
-    // transform: translate(11.36vw, -2.2vw) scale(1.5);
-    // transform: translate(-9.51vw, -2.2vw) scale(1.5);
+    transform: scale(1.8);
   }
   .end-mask {
-    // transform: translate(20px, 1250px) scale(1);
-    // transform: translate(-9.51vw, -2.2vw) scale(1);
-    // transform: translate(-10.4vw, -9.5vw) scale(.55);
-    transform: scale(.56);
-    // left: calc(50% - 9.51vw);
-    // top: calc(50% - 2.2vw);
+    z-index: 999;
+    transform: scale(1);
     opacity: 1;
     box-shadow: none;
+    transition: all 1.5s;
+  }
+  .hide-mask {
+    opacity: 0;
+    transition: opacity 0.1s;
   }
 }
 

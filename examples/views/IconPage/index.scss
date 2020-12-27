@@ -1,13 +1,5 @@
-
 @import "./animation.scss";
 
-.infinite-icon-page-li-icon-i-showIcon {
-  font-size: 1.4vw;
-  color: rgba(255,118,53,1);
-  opacity: 1;
-  margin: 0.8vw;
-  z-index: 999;
-}
 .infinite-home-animation-icon-page {
   position: absolute;
   top: 0;
@@ -15,31 +7,6 @@
   height: 100vh;
   background: #fff;
   overflow: hidden;
-
-  .start {
-    position: fixed;
-    top: 0;
-    left: 1px;
-    width: 60px;
-    height: 30px;
-    z-index: 999;
-    &:focus {
-      outline: 1px dotted Highlight;
-      // outline: 1px auto #fff;
-    }
-  }
-  .reset {
-    position: fixed;
-    top: 0;
-    left: 62px;
-    width: 60px;
-    height: 30px;
-    z-index: 999;
-    &:focus {
-      outline: 1px dotted Highlight;
-      // outline: 1px auto #fff;
-    }
-  }
 
   //****通用定义****//
   .flex {
@@ -60,6 +27,9 @@
   .jcfs {
     justify-content: flex-start;
   }
+  .jcfe {
+    justify-content: flex-end;
+  }
   .fn {
     flex: none;
   }
@@ -71,8 +41,6 @@
   .infinite-icon-page-bg {
     width: 100%;
     height: 100%;
-    // background-image: linear-gradient(180deg, #45AAFF 0%, #1890FF 100%); // 蓝
-    // background-image: linear-gradient(180deg, #FFB240 0%, #FF8D38 100%); // 橙
   }
   .icon-bg-circle {
     position: absolute;
@@ -85,35 +53,22 @@
     background: linear-gradient(180deg, #FFB240 0%, #FF8D38 100%);
   }
   .circle-animate {
-    // cubic-bezier(0.33,-0.05, 0.4, 0.49)  ease-in-out
     animation: circleWave 1.5s cubic-bezier(0.32, 0.04, 0.63, 1.04);
     animation-fill-mode:forwards;
   }
   // 随心图标库文字上滑动画
-  .slide-up-animate {
-    animation: slideUp 0.5s ease-out;
-    animation-fill-mode:forwards;
-    animation-delay: 0.7s;
-  }
   .hide-icons-introduce {
     opacity: 0;
-    top: 20vh;
+    transform: translateY(13vh);
     transition: all 0.5s cubic-bezier(0.44, 0.01, 1, 1) 0s;
   }
   .show-icons-introduce {
     opacity: 1;
-    top: 7vh;
-    transition: all 0.5s cubic-bezier(0.44, 0.01, 1, 1) 0.7s;
+    transition: all 0.5s cubic-bezier(0.44, 0.01, 1, 1) 0.5s;
   }
   // 第一个橙色背景上滑动画
-  .slide-up-bg {
-    animation: slideUpBg 0.6s cubic-bezier(0.44, 0.01, 1, 1);
-    animation-fill-mode:forwards;
-  }
-  // cubic-bezier(0.29, 0.07, 0.88, 0.8)
-  // cubic-bezier(0.15, 0.31, 0.93, 0.76)
   .rotate-in {
-    animation: rotateIn 0.7s cubic-bezier(0.15, 0.31, 0.82, 0.89);
+    animation: rotateIn 1.5s cubic-bezier(0.15, 0.31, 0.82, 0.89);
     animation-fill-mode:forwards;
   }
   .orange-circle {
@@ -121,7 +76,7 @@
     width: 100vw;
     height: 100vh;
     background: linear-gradient(180deg, #FFB240 0%, #FF8D38 100%);
-    transition: all 0.6s;
+    transition: all .8s;
   }
   .hide-orange-circle {
     top: 100vh;
@@ -131,15 +86,14 @@
     top: 0;
     opacity: 1;
   }
+  .or-circle {
+    background: linear-gradient(180deg, #FFB240 0%, #FF8D38 100%);
+  }
   .blue-circle {
     background: linear-gradient(180deg, #45AAFF 0%, #1890FF 100%);
-    // animation-delay: 1.7s;
-    // animation-delay: 1.7s;
   }
   .black-circle {
     background: linear-gradient(180deg, #32303F 0%, #201E2B 100%);
-    // animation-delay: 3.7s;
-    // animation-delay: 3.7s;
   }
     
   .infinite-icon-page-content {
@@ -150,13 +104,10 @@
     height: 100%;
     text-align: center;
     color: #fff;
-    z-index: 2;
+    z-index: 8;
     font-family: PingFangSC-Semibold;
     .icons-introduce {
-      position: absolute;
-      // opacity: 0;
-      // top: 7vw;
-      // transition: all 0.5s cubic-bezier(0.44, 0.01, 1, 1) 0.7s;
+      height: 10vw;
     }
     .infinite-icon-page-title-h3 {
       font-size: 2.186vw;
@@ -172,92 +123,70 @@
       margin-top: 2px;
     }
     .infinite-icon-page-window {
-      position: absolute;
-      top: 20vh;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      margin: auto;
+      position: relative;
+      margin: 3vw auto 0;
       width: 42vw;
-      height: 42vw;
-      max-height: 58.5%;
-      margin-top: 2.34vw;
-      border-radius: 7px;
-      box-shadow: 0 0 16px 8px rgba(0,0,0,0.1);
-
-      &.hide-rotate-in {
-        top: -77vh;
-        left: 170vw;
-        opacity: 1;
-        // translateZ(0)
-        transform: rotateZ(50deg) skewY(158deg) scale(5);
+      height: 30vw;
+      .infinite-icon-page-window-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 7px;
+        box-shadow: 0 0 16px 8px rgba(0,0,0,0.1);
         transform-origin: -128px -43px;
+        transform: translate(170vw, -97vh) rotateZ(50deg) skewY(158deg) scale(5);
+        transition: all 1.2s cubic-bezier(0.89, 0.82, 0.31, 0.15);
+        &.infinite-icon-page-window-icon-list {
+          background: rgba(247,250,252,1);
+        }
+        &.show-rotate-in {
+          transform: translate(0vw, 0vh) rotateZ(0deg) skewY(180deg) scale(1);
+          transition: all 1.2s cubic-bezier(0.15, 0.31, 0.82, 0.89);
+        }
       }
-      &.show-rotate-in {
-        top: 20vh;
-        left: 0vw;
-        opacity: 1;
-        transform: rotateZ(0deg) skewY(180deg) scale(1);
-        transform-origin: -128px -43px;
-        transition: all 0.7s;
-      }
-
-      // top: 10vh;
-      // left: 170vw;
-      // transform: rotateZ(50deg) skewY(158deg) scale(5);
-      // transform-origin: -128px -43px;
-      // opacity: 0;
-
-
       .infinite-icon-page-window-menu {
         width: 7.2vw;
         height: 100%;
         background: rgba(255,255,255,0);
-        // background: rgba(24,144,255,1);
         .infinite-icon-page-menu-top {
           height: 10.5%;
           margin-top: 29.4%;
-          font-size: 8px;
           background: rgba(255, 255, 255, 0.16);
         }
         .infinite-icon-page-menu-center {
           height: 10.5%;
           margin-top: 14.4%;
-          font-size: 8px;
         }
         .infinite-icon-page-menu-bottom {
           height: 10.5%;
           margin-top: 14.4%;
-          font-size: 8px;
         }
-        i {
-          margin: 0 6% 0 12%;
+        .infinite-icon-page-menu-i {
+          flex: none;
+          margin: 0 0.18vw 0 0.48vw;
+        }
+        p	{
+          flex: auto;
+          text-align: left;
+          font-size: 8px;
         }
       }
       .infinite-icon-page-window-icon-list {
         height: 100%;
-        // background: #f7fafc;
-        background: rgba(247,250,252,1);
-        .infinite-icon-page-list-mask {
-
-        }
+        width: 34.8vw;
+        min-width: 82.9%;
         .infinite-icon-page-list-main {
           box-sizing: border-box;
-          // width: calc(43.2vw + 24.6px);
-          // height: calc(35.2vw + 24.6px);
-          width: 34.8vw;
-          // height: 38.6vw;
           height: 100%;
-          // max-height: 21.6%;
-          padding: 1.6% 2.2%;
+          padding: 0.6vw 0.8vw;
           .infinite-icon-page-list-main-li {
             position: relative;
             width: 24%;
-            // height: 8.8vw;
             height: 23%;
             border-radius: 6px;
             background: rgba(255,255,255,0);
-            // box-shadow: 0 0 4px 1px rgba(233, 231, 251, 1);
             .infinite-icon-page-li-beat {
               position: absolute;
               top: 0;
@@ -266,22 +195,38 @@
               height: 100%;
               border-radius: 6px;
               z-index: 9;
-              // animation: labelOfLiBeat .8s linear;
             }
             .infinite-icon-page-li-icon {
               height: 100%;
               .infinite-icon-page-li-icon-i {
-                margin: 0.8vw;
-                font-size: 1.4vw;
-                transform: translate(-0px, -0px);
-                // color: #1890FF;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 1.8vw;
+                height: 1.8vw;
+                font-size: 4.5vw;
+                border-radius: 50%;
+                overflow: hidden;
                 opacity: 0;
               }
               .infinite-icon-page-li-icon-text {
+                margin-top: 1vw;
                 font-size: 0.6vw;
-                // color: #485968;
                 opacity: 0;
               } 
+            }
+          }
+        }
+        &.icon-dislocation-animation {
+          .infinite-icon-page-list-main-li {
+            &:nth-child(1) {
+              & .infinite-icon-page-li-icon {
+                .infinite-icon-page-li-icon-i {
+                  transition: opacity 0.1s linear 1.5s, color 0.1s linear 1.5s;
+                  opacity: 1;
+                  color: rgba(255,118,53,1);
+                }
+              }
             }
           }
         }
@@ -295,56 +240,16 @@
       background-image: linear-gradient(180deg, #FFB240 0%, #FF8D38 100%); // 橙
     }
     .infinite-icon-page-content {
-      .infinite-icon-page-title-h3 {
-
-      }
-      .infinite-icon-page-title-p-top {
-
-      }
-      .infinite-icon-page-title-p-bottom {
-
-      }
       .infinite-icon-page-window {
-        .infinite-icon-page-window-menu {
-          background: rgba(255,141,56,1);
-          .infinite-icon-page-menu-top {
-            background: rgba(255,255,255,0.16);
-          }
-          .infinite-icon-page-menu-center {
-
-          }
-          .infinite-icon-page-menu-bottom {
-
-          }
-        }
-        .infinite-icon-page-window-icon-list {
-          background: rgba(247,250,252,1);
-          .infinite-icon-page-list-mask {
-
-          }
-          .infinite-icon-page-list-main {
-            .infinite-icon-page-list-main-li {
-              // background: rgba(255,255,255,0);
-              .infinite-icon-page-li-beat {
-
-              }
-              .infinite-icon-page-li-icon {
-                .infinite-icon-page-li-icon-i {
-                  // color: rgba(255,118,53,0);
-                }
-                .infinite-icon-page-li-icon-text {
-                  // color: rgba(72,89,104,0);
-                } 
-              }
-              // &:nth-child(1) {
-              //   & .infinite-icon-page-li-icon {
-              //     .infinite-icon-page-li-icon-i {
-              //       color: rgba(255,118,53,1);
-              //       opacity: 1;
-              //     }
-              //   }
-              // }
+        .infinite-icon-page-window-bg {
+          .infinite-icon-page-window-menu {
+            background: rgba(255,141,56,1);
+            .infinite-icon-page-menu-top {
+              background: rgba(255,255,255,0.16);
             }
+          }
+          .infinite-icon-page-window-icon-list {
+            background: rgba(247,250,252,1);
           }
         }
       }
@@ -357,37 +262,19 @@
       background-image: linear-gradient(180deg, #FFB240 0%, #FF8D38 100%); // 橙
     }
     .infinite-icon-page-content {
-      .infinite-icon-page-title-h3 {
-
-      }
-      .infinite-icon-page-title-p-top {
-
-      }
-      .infinite-icon-page-title-p-bottom {
-
-      }
       .infinite-icon-page-window {
-        .infinite-icon-page-window-menu {
-          animation: sectionOfMenuTransparency1 1s linear 0s;
-          // background: rgba(255,141,56,1);
-          .infinite-icon-page-menu-top {
-            background: rgba(255,255,255,0.16);
+        .infinite-icon-page-window-bg {
+          .infinite-icon-page-window-menu {
+            animation: sectionOfMenuTransparency1 1s linear 0s;
+            .infinite-icon-page-menu-top {
+              background: rgba(255,255,255,0.16);
+            }
           }
-          .infinite-icon-page-menu-center {
-
-          }
-          .infinite-icon-page-menu-bottom {
-            
-          }
-          i {
-            
+          .infinite-icon-page-window-icon-list {
+            background: rgba(247,250,252,1);
           }
         }
         .infinite-icon-page-window-icon-list {
-          background: rgba(247,250,252,1);
-          .infinite-icon-page-list-mask {
-
-          }
           .infinite-icon-page-list-main {
             .infinite-icon-page-list-main-li {
               &:nth-child(1) {
@@ -396,9 +283,6 @@
                   animation: labelOfLiBeat .4s linear 0s;
                 }
                 & .infinite-icon-page-li-icon {
-                  .infinite-icon-page-li-icon-i {
-                    // animation: labelOfIconBeat1 1.5s linear .15s;
-                  }
                   .infinite-icon-page-li-icon-text {
                     animation: labelOfTextBeat 1.5s linear .15s;
                   }
@@ -627,42 +511,22 @@
       background-image: linear-gradient(180deg, #FFB240 0%, #FF8D38 100%); // 橙
     }
     .infinite-icon-page-content {
-      .infinite-icon-page-title-h3 {
-
-      }
-      .infinite-icon-page-title-p-top {
-
-      }
-      .infinite-icon-page-title-p-bottom {
-
-      }
       .infinite-icon-page-window {
-        .infinite-icon-page-window-menu {
-          // background: rgba(255,141,56,1);
-          .infinite-icon-page-menu-top {
-            background: rgba(255,255,255,0.16);
+        .infinite-icon-page-window-bg {
+          .infinite-icon-page-window-menu {
+            .infinite-icon-page-menu-top {
+              background: rgba(255,255,255,0.16);
+            }
           }
-          .infinite-icon-page-menu-center {
-
-          }
-          .infinite-icon-page-menu-bottom {
-
+          .infinite-icon-page-window-icon-list {
+            background: rgba(247,250,252,1);
           }
         }
         .infinite-icon-page-window-icon-list {
-          // background: rgba(247,250,252,1);
-          // animation: sectionOfListO 1.5s linear 0s;
-          // background: rgba(247,250,252,.8);
-          .infinite-icon-page-list-mask {
-
-          }
           .infinite-icon-page-list-main {
             .infinite-icon-page-list-main-li {
               background: rgba(255,255,255,1);
               box-shadow: 0 0 4px 1px rgba(233, 231, 251, 1);
-              .infinite-icon-page-li-beat {
-
-              }
               .infinite-icon-page-li-icon {
                 .infinite-icon-page-li-icon-i {
                   color: rgba(255,118,53,1);
@@ -686,40 +550,18 @@
       background-image: linear-gradient(180deg, #45AAFF 0%, #1890FF 100%);
     }
     .infinite-icon-page-content {
-      .infinite-icon-page-title-h3 {
-
-      }
-      .infinite-icon-page-title-p-top {
-
-      }
-      .infinite-icon-page-title-p-bottom {
-
-      }
       .infinite-icon-page-window {
-        .infinite-icon-page-window-menu {
-          // animation: sectionOfMenuTransparency3 1s linear 0s;
-          // background: rgba(24,144,255,1);
-          .infinite-icon-page-menu-top {
-            background: rgba(255,255,255,0.16);
+        .infinite-icon-page-window-bg {
+          .infinite-icon-page-window-menu {
+            .infinite-icon-page-menu-top {
+              background: rgba(255,255,255,0.16);
+            }
           }
-          .infinite-icon-page-menu-center {
-
-          }
-          .infinite-icon-page-menu-bottom {
-            
-          }
-          i {
-            
+          .infinite-icon-page-window-icon-list {
+            animation: sectionOfList 1.5s linear 0s;
           }
         }
         .infinite-icon-page-window-icon-list {
-          animation: sectionOfList 1.5s linear 0s;
-          // animation: OsectionOfList 1.5s linear 0s;
-          // background: rgba(247,250,252,.8);
-          // background: rgba(247,250,252,1);
-          .infinite-icon-page-list-mask {
-
-          }
           .infinite-icon-page-list-main {
             .infinite-icon-page-list-main-li {
               background: rgba(255,255,255,1);
@@ -955,42 +797,22 @@
       background-image: linear-gradient(180deg, #45AAFF 0%, #1890FF 100%);
     }
     .infinite-icon-page-content {
-      .infinite-icon-page-title-h3 {
-
-      }
-      .infinite-icon-page-title-p-top {
-
-      }
-      .infinite-icon-page-title-p-bottom {
-
-      }
       .infinite-icon-page-window {
-        .infinite-icon-page-window-menu {
-          // background: rgba(24,144,255,1);
-          .infinite-icon-page-menu-top {
-            background: rgba(255,255,255,0.16);
+        .infinite-icon-page-window-bg {
+          .infinite-icon-page-window-menu {
+            .infinite-icon-page-menu-top {
+              background: rgba(255,255,255,0.16);
+            }
           }
-          .infinite-icon-page-menu-center {
-
-          }
-          .infinite-icon-page-menu-bottom {
-
+          .infinite-icon-page-window-icon-list {
+            background: rgba(247,250,252,1);
           }
         }
         .infinite-icon-page-window-icon-list {
-          // animation: sectionOfList 1.5s linear 0s;
-          // animation: sectionOfListO 1.5s linear 0s;
-          // background: rgba(247,250,252,.8);
-          .infinite-icon-page-list-mask {
-
-          }
           .infinite-icon-page-list-main {
             .infinite-icon-page-list-main-li {
               background: rgba(255,255,255,1);
               box-shadow: 0 0 4px 1px rgba(233, 231, 251, 1);
-              .infinite-icon-page-li-beat {
-
-              }
               .infinite-icon-page-li-icon {
                 .infinite-icon-page-li-icon-i {
                   color: rgba(24,144,255,1);
@@ -1014,39 +836,18 @@
       background-image: linear-gradient(180deg, #32303F 0%, #201E2B 100%);
     }
     .infinite-icon-page-content {
-      .infinite-icon-page-title-h3 {
-
-      }
-      .infinite-icon-page-title-p-top {
-
-      }
-      .infinite-icon-page-title-p-bottom {
-
-      }
       .infinite-icon-page-window {
-        .infinite-icon-page-window-menu {
-          // animation: sectionOfMenuTransparency5 1s linear 0s;
-          // background: rgba(43,41,57,1);
-          .infinite-icon-page-menu-top {
-            background: rgba(255,255,255,0.16);
+        .infinite-icon-page-window-bg {
+          .infinite-icon-page-window-menu {
+            .infinite-icon-page-menu-top {
+              background: rgba(255,255,255,0.16);
+            }
           }
-          .infinite-icon-page-menu-center {
-
+          .infinite-icon-page-window-icon-list {
+            animation: sectionOfList 1.5s linear 0s;
           }
-          .infinite-icon-page-menu-bottom {
-            
-          }
-          i {
-            
-          }
-        }
+        } 
         .infinite-icon-page-window-icon-list {
-          animation: sectionOfList 1.5s linear 0s;
-          // animation: OsectionOfList 1.5s linear 0s;
-          // background: rgba(247,250,252,1);
-          .infinite-icon-page-list-mask {
-
-          }
           .infinite-icon-page-list-main {
             .infinite-icon-page-list-main-li {
               background: rgba(255,255,255,1);
@@ -1286,40 +1087,22 @@
     .infinite-icon-page-content {
       transition: transform 1.5s;
       transform: translateY(0vh);
-      .infinite-icon-page-title-h3 {
-
-      }
-      .infinite-icon-page-title-p-top {
-
-      }
-      .infinite-icon-page-title-p-bottom {
-
-      }
       .infinite-icon-page-window {
-        .infinite-icon-page-window-menu {
-          // background: rgba(43,41,57,1);
-          .infinite-icon-page-menu-top {
-            background: rgba(255,255,255,0.16);
+        .infinite-icon-page-window-bg {
+          .infinite-icon-page-window-menu {
+            .infinite-icon-page-menu-top {
+              background: rgba(255,255,255,0.16);
+            }
           }
-          .infinite-icon-page-menu-center {
-
-          }
-          .infinite-icon-page-menu-bottom {
-
+          .infinite-icon-page-window-icon-list {
+            background: rgba(247,250,252,1);
           }
         }
         .infinite-icon-page-window-icon-list {
-          background: rgba(247,250,252,1);
-          .infinite-icon-page-list-mask {
-
-          }
           .infinite-icon-page-list-main {
             .infinite-icon-page-list-main-li {
               background: rgba(255,255,255,1);
               box-shadow: 0 0 4px 1px rgba(233, 231, 251, 1);
-              .infinite-icon-page-li-beat {
-
-              }
               .infinite-icon-page-li-icon {
                 .infinite-icon-page-li-icon-i {
                   color: rgba(48,49,51,1);
@@ -1341,51 +1124,31 @@
   &.infinite-home-animation-icon-page-step7 {
     transition: opacity 1.5s;
     opacity: 0;
-    // animation: hideIconPageStep7 .5s linear forwards;
     .infinite-icon-page-bg {
       background-image: linear-gradient(180deg, #32303F 0%, #201E2B 100%);
     }
     .infinite-icon-page-content {
       transition: transform 1.5s;
       transform: translateY(-100vh);
-      .infinite-icon-page-title-h3 {
-
-      }
-      .infinite-icon-page-title-p-top {
-
-      }
-      .infinite-icon-page-title-p-bottom {
-
-      }
       .infinite-icon-page-window {
-        // animation: hideIconPageWindow .5s linear forwards;
         .icon-bg-move {
           animation: hideIconBgMove .5s linear forwards;
         }
-        .infinite-icon-page-window-menu {
-          // background: rgba(43,41,57,1);
-          .infinite-icon-page-menu-top {
-            background: rgba(255,255,255,0.16);
+        .infinite-icon-page-window-bg {
+          .infinite-icon-page-window-menu {
+            .infinite-icon-page-menu-top {
+              background: rgba(255,255,255,0.16);
+            }
           }
-          .infinite-icon-page-menu-center {
-
-          }
-          .infinite-icon-page-menu-bottom {
-
+          .infinite-icon-page-window-icon-list {
+            background: rgba(247,250,252,1);
           }
         }
         .infinite-icon-page-window-icon-list {
-          background: rgba(247,250,252,1);
-          .infinite-icon-page-list-mask {
-
-          }
           .infinite-icon-page-list-main {
             .infinite-icon-page-list-main-li {
               background: rgba(255,255,255,1);
               box-shadow: 0 0 4px 1px rgba(233, 231, 251, 1);
-              .infinite-icon-page-li-beat {
-
-              }
               .infinite-icon-page-li-icon {
                 .infinite-icon-page-li-icon-i {
                   color: rgba(48,49,51,1);
@@ -1409,39 +1172,19 @@
       background-image: linear-gradient(180deg, #45AAFF 0%, #1890FF 100%);
     }
     .infinite-icon-page-content {
-      .infinite-icon-page-title-h3 {
-
-      }
-      .infinite-icon-page-title-p-top {
-
-      }
-      .infinite-icon-page-title-p-bottom {
-
-      }
       .infinite-icon-page-window {
-        .infinite-icon-page-window-menu {
-          // animation: sectionOfMenuTransparency5 1s linear 0s;
-          // background: rgba(43,41,57,1);
-          .infinite-icon-page-menu-top {
-            background: rgba(255,255,255,0.16);
+        .infinite-icon-page-window-bg {
+          .infinite-icon-page-window-menu {
+            .infinite-icon-page-menu-top {
+              background: rgba(255,255,255,0.16);
+            }
           }
-          .infinite-icon-page-menu-center {
-
-          }
-          .infinite-icon-page-menu-bottom {
-            
-          }
-          i {
-            
+          .infinite-icon-page-window-icon-list {
+            animation: sectionOfList 1.5s linear 0s;
           }
         }
+        
         .infinite-icon-page-window-icon-list {
-          animation: sectionOfList 1.5s linear 0s;
-          // animation: OsectionOfList 1.5s linear 0s;
-          // background: rgba(247,250,252,1);
-          .infinite-icon-page-list-mask {
-
-          }
           .infinite-icon-page-list-main {
             .infinite-icon-page-list-main-li {
               background: rgba(255,255,255,1);
@@ -1677,39 +1420,18 @@
       background-image: linear-gradient(180deg, #FFB240 0%, #FF8D38 100%); // 橙
     }
     .infinite-icon-page-content {
-      .infinite-icon-page-title-h3 {
-
-      }
-      .infinite-icon-page-title-p-top {
-
-      }
-      .infinite-icon-page-title-p-bottom {
-
-      }
       .infinite-icon-page-window {
-        .infinite-icon-page-window-menu {
-          // animation: sectionOfMenuTransparency5 1s linear 0s;
-          // background: rgba(43,41,57,1);
-          .infinite-icon-page-menu-top {
-            background: rgba(255,255,255,0.16);
+        .infinite-icon-page-window-bg {
+          .infinite-icon-page-window-menu {
+            .infinite-icon-page-menu-top {
+              background: rgba(255,255,255,0.16);
+            }
           }
-          .infinite-icon-page-menu-center {
-
-          }
-          .infinite-icon-page-menu-bottom {
-            
-          }
-          i {
-            
+          .infinite-icon-page-window-icon-list {
+            animation: sectionOfList 1.5s linear 0s;
           }
         }
         .infinite-icon-page-window-icon-list {
-          animation: sectionOfList 1.5s linear 0s;
-          // animation: OsectionOfList 1.5s linear 0s;
-          // background: rgba(247,250,252,1);
-          .infinite-icon-page-list-mask {
-
-          }
           .infinite-icon-page-list-main {
             .infinite-icon-page-list-main-li {
               background: rgba(255,255,255,1);
@@ -1941,51 +1663,12 @@
 
   // 刚进来无展示
   &.infinite-home-animation-icon-page-noShow {
-    // background: rgba(255,255,255,0);
     .infinite-icon-page-content {
-      .infinite-icon-page-title-h3 {
-
-      }
-      .infinite-icon-page-title-p-top {
-
-      }
-      .infinite-icon-page-title-p-bottom {
-
-      }
       .infinite-icon-page-window {
         box-shadow: 0 0 0 0 rgba(0,0,0,0);
-        .infinite-icon-page-window-menu {
-          background: rgba(255,141,56,0);
-          .infinite-icon-page-menu-top {
-            background: rgba(255,255,255,0);
-          }
-          .infinite-icon-page-menu-center {
-
-          }
-          .infinite-icon-page-menu-bottom {
-
-          }
-        }
-        .infinite-icon-page-window-icon-list {
-          background: rgba(247,250,252,0);
-          .infinite-icon-page-list-mask {
-
-          }
-          .infinite-icon-page-list-main {
-            .infinite-icon-page-list-main-li {
-              // background: rgba(255,255,255,0);
-              .infinite-icon-page-li-beat {
-
-              }
-              .infinite-icon-page-li-icon {
-                .infinite-icon-page-li-icon-i {
-                  // color: rgba(255,118,53,0);
-                }
-                .infinite-icon-page-li-icon-text {
-                  // color: rgba(72,89,104,0);
-                } 
-              }
-            }
+        .infinite-icon-page-window-bg {
+          .infinite-icon-page-window-icon-list {
+            background: rgba(247,250,252,0);
           }
         }
       }
