@@ -53,7 +53,7 @@
     background: linear-gradient(180deg, #FFB240 0%, #FF8D38 100%);
   }
   .circle-animate {
-    animation: circleWave 1.5s cubic-bezier(0.32, 0.04, 0.63, 1.04);
+    animation: circleWave 1.2s cubic-bezier(0.32, 0.04, 0.63, 1.04);
     animation-fill-mode:forwards;
   }
   // 随心图标库文字上滑动画
@@ -68,7 +68,7 @@
   }
   // 第一个橙色背景上滑动画
   .rotate-in {
-    animation: rotateIn 1.5s cubic-bezier(0.15, 0.31, 0.82, 0.89);
+    animation: rotateIn 0.8s cubic-bezier(0.15, 0.31, 0.82, 0.89);
     animation-fill-mode:forwards;
   }
   .orange-circle {
@@ -98,10 +98,9 @@
     
   .infinite-icon-page-content {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     text-align: center;
     color: #fff;
     z-index: 8;
@@ -110,16 +109,16 @@
       height: 10vw;
     }
     .infinite-icon-page-title-h3 {
-      font-size: 2.186vw;
+      font-size: 60px;
       font-weight: 400;
       margin: 0;
     }
     .infinite-icon-page-title-p-top {
-      font-size: 0.732vw;
+      font-size: 20px;
       margin-top: 1.4vw;
     }
     .infinite-icon-page-title-p-bottom {
-      font-size: 0.732vw;
+      font-size: 20px;
       margin-top: 2px;
     }
     .infinite-icon-page-window {
@@ -143,7 +142,7 @@
         }
         &.show-rotate-in {
           transform: translate(0vw, 0vh) rotateZ(0deg) skewY(180deg) scale(1);
-          transition: all 1.2s cubic-bezier(0.15, 0.31, 0.82, 0.89);
+          transition: all 0.9s cubic-bezier(0.15, 0.31, 0.82, 0.89);
         }
       }
       .infinite-icon-page-window-menu {
@@ -1086,7 +1085,7 @@
     }
     .infinite-icon-page-content {
       transition: transform 1.5s;
-      transform: translateY(0vh);
+      transform: translate(-50%, -50%);
       .infinite-icon-page-window {
         .infinite-icon-page-window-bg {
           .infinite-icon-page-window-menu {
@@ -1129,7 +1128,7 @@
     }
     .infinite-icon-page-content {
       transition: transform 1.5s;
-      transform: translateY(-100vh);
+      transform: translate(-50%, -120vh);
       .infinite-icon-page-window {
         .icon-bg-move {
           animation: hideIconBgMove .5s linear forwards;

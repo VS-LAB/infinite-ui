@@ -15,9 +15,10 @@ import LogAnimation from '@/views/LogAnimation/index.vue'
 import CardsAnimation from '@/views/CardsAnimation/index.vue'
 import Standard from '@/views/standard'
 import ViewChart from '@/views/ViewCharts/Index.vue'
-import LastPage from '@/views/lastPage'
+import LastPage from '@/views/LastPage/index.vue'
 import ViewCharts from '../views/ViewCharts/Index4'
 import IconPage from '@/views/IconPage'
+import { isFirefox } from '@/util'
 
 export default {
   components: {
@@ -130,7 +131,7 @@ export default {
         }
       }
       // 给页面绑定滑轮滚动事件
-      if (document.addEventListener) {
+      if (isFirefox()) { // DOMMouseScroll事件只有火狐浏览器支持
         document.addEventListener('DOMMouseScroll', scrollFunc, false)
         window.addEventListener('DOMMouseScroll', scrollFunc, false)
       }

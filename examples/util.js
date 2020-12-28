@@ -15,3 +15,11 @@ export function stripTemplate (content) {
   }
   return content.replace(/<(script|style)[\s\S]+<\/\1>/g, '').trim()
 }
+
+export function isFirefox() {
+    var sAgent = window.navigator.userAgent.toLowerCase();
+    if (sAgent.indexOf("firefox") != -1) {
+       return true;
+    } 
+    return false;
+}
