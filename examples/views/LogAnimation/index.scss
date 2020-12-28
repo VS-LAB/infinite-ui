@@ -103,16 +103,25 @@
 
   // 菜單menu start
   .header-model {
+    display: flex;
     height: 80px;
     line-height: 80px;
     position: fixed;
     left: 44.4%;
     top: 0;
     z-index: 1;
-    font-size: 16px;
     color: #222222;
     transition: all 0.4s;
-    cursor: pointer;
+
+    .header-menu {
+      font-size: 16px;
+      cursor: pointer;
+      padding: 0 30px;
+
+      &.active {
+        color: #FF7635;
+      }
+    }
   }
 
   .header-model-anime_start {

@@ -28,9 +28,14 @@
          :class="{
            'header-model-anime_start':headerModelAnime
          }"
-         v-if="moveWhiteBackgroundAnime">
+         v-show="moveWhiteBackgroundAnime">
       <div class="header-menu"
-           @click="$router.push('/guide')">组件</div>
+           :class="{
+             'active':$route.path === menu.route
+           }"
+           v-for="menu in menuData"
+           :key="menu.label"
+           @click="menuClick(menu)">{{menu.label}}</div>
     </div>
     <!-- 移动白色背景 -->
     <div class="move-white-background"
@@ -47,6 +52,28 @@ export default {
   data () {
     return {
       animesFun: [this.page0_animeStep1, this.page0_animeStep3],
+      menuData: [
+        {
+          label: '首页',
+          route: '/index'
+        },
+        {
+          label: '组件',
+          route: '/guide/installation'
+        },
+        {
+          label: '图标',
+          route: ''
+        },
+        {
+          label: '图表',
+          route: '/guide/LineChart'
+        },
+        {
+          label: '下载',
+          route: '/guide/installation'
+        }
+      ],
       logoTimer: null, // cube计时器
       logoCount: 1, // 计数
       logoUrl: require('@/assets/logo.png'),
@@ -62,6 +89,11 @@ export default {
     }
   },
   methods: {
+    // 菜单点击
+    menuClick (menu) {
+      if (!menu.route || menu.route === this.$route.path) return
+      this.$router.push(menu.route)
+    },
     // 立方体动画
     page0_animeStep1 () {
       return new Promise((resolve, reject) => {
