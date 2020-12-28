@@ -1,11 +1,11 @@
 @keyframes labelOfLi1 {
   0% {
     background: rgba(255,255,255,1);
-    box-shadow: 0 0 4px 1px rgba(233, 231, 251, 1);
+    box-shadow: 0 6px 12px 0 #E9E7FB;
   }
   100% {
     background: rgba(255,255,255,1);
-    box-shadow: 0 0 4px 1px rgba(233, 231, 251, 1);
+    box-shadow: 0 6px 12px 0 #E9E7FB;
   }
 }
 
@@ -19,13 +19,11 @@
     transform: translate(-0px, -0px);
     background: rgba(255,255,255,1);
     box-shadow: 0 0 4px 1px rgba(233, 231, 251, 1);
-    // background: rgba(255,255,255,0.9);
   }
   51% {
     box-shadow: 0 0 4px 1px rgba(233, 231, 251, 0);
   }
   100% {
-    // transform: translate(-0px, -0px);
     background: rgba(255,255,255,0);
   }
 }
@@ -73,33 +71,27 @@
 
 @keyframes labelOfIconBeat1 {
   0% {
-    // transform: translate(-6px, -14px);
     top: -14px;
     left: -6px;
     opacity: 0;
-    // color: rgba(255,118,53,1);
   }
   1% {
-    // transform: translate(-6px, -14px);
     top: -14px;
     left: -6px;
     opacity: 0;
     color: rgba(255,118,53,1);
   }
   5% {
-    // transform: translate(-6px, -14px);
     top: -14px;
     left: -6px;
     opacity: 0;
   }
   15% {
-    // transform: translate(-0px, -0px);
     top: 0px;
     left: 0px;
     opacity: 1;
   }
   100% {
-    // transform: translate(-0px, -0px);
     top: 0px;
     left: 0px;
     opacity: 1;
@@ -109,34 +101,29 @@
 
 @keyframes labelOfIconBeat3 {
   0% {
-    // transform: translate(-6px, -14px);
     top: -14px;
     left: -6px;
     opacity: 0;
     color: rgba(24,144,255,1);
   }
   1% {
-    // transform: translate(-6px, -14px);
     top: -14px;
     left: -6px;
     opacity: 0;
   }
   // 1~5是白色从出现到完全遮挡时间
   5% {
-    // transform: translate(-6px, -14px);
     top: -14px;
     left: -6px;
     opacity: 0;
   }
   15% {
-    // transform: translate(-0px, -0px);
     top: 0px;
     left: 0px;
     opacity: 1;
     color: rgba(24,144,255,1);
   }
   100% {
-    // transform: translate(-0px, -0px);
     top: 0px;
     left: 0px;
     opacity: 1;
@@ -146,34 +133,29 @@
 
 @keyframes labelOfIconBeat5 {
   0% {
-    // transform: translate(-6px, -14px);
     top: -14px;
     left: -6px;
     opacity: 0;
     color: rgba(48,49,51,1);
   }
   1% {
-    // transform: translate(-6px, -14px);
     top: -14px;
     left: -6px;
     opacity: 0;
   }
   // 1~5是白色从出现到完全遮挡时间
   5% {
-    // transform: translate(-6px, -14px);
     top: -14px;
     left: -6px;
     opacity: 0;
   }
   15% {
-    // transform: translate(-0px, -0px);
     top: 0px;
     left: 0px;
     opacity: 1;
     color: rgba(48,49,51,1);
   }
   100% {
-    // transform: translate(-0px, -0px);
     top: 0px;
     left: 0px;
     opacity: 1;
@@ -186,52 +168,37 @@
     background: rgba(255,141,56,1);
   }
   100% {
-    // background: rgba(24,144,255,1);
-    // opacity: 1;
+    
   }
 }
 
 @keyframes sectionOfMenuTransparency3 {
   0% {
     background: rgba(255,141,56,1);
-    // opacity: 1;
   }
   25% {
     background: rgba(255,141,56,.5);
-    // opacity: 1;
   }
-  // 50% {
-  //   opacity: .5;
-  // }
   75% {
     background: rgba(24,144,255,.5);
-    // opacity: 1;
   }
   100% {
     background: rgba(24,144,255,1);
-    // opacity: 1;
   }
 }
 
 @keyframes sectionOfMenuTransparency5 {
   0% {
     background: rgba(24,144,255,1);
-    // opacity: 1;
   }
   25% {
     background: rgba(24,144,255,.5);
-    // opacity: 1;
   }
-  // 50% {
-  //   opacity: .5;
-  // }
   75% {
     background: rgba(43,41,57,.5);
-    // opacity: 1;
   }
   100% {
     background: rgba(43,41,57,1);
-    // opacity: 1;
   }
 }
 @keyframes sectionOfListO {
@@ -294,14 +261,6 @@
     transform: rotateZ(50deg) skewY(158deg) scale(5);
     transform-origin: -128px -43px;
   }
-  30% {
-    // top: -66vh;
-
-  }
-  60% {
-    // transform: rotateZ(20deg) skewY(172deg) scale(3.5);
-
-  }
   100% {
     top: 20vh;
     left: 0vw;
@@ -348,12 +307,10 @@
 }
 @keyframes hideIconPageStep7 {
   0% {
-    // background: rgba(255,255,255,1);
     transform: translateY(0%);
     opacity: 1;
   }
   100% {
-    // background: rgba(255,255,255,.6);
     transform: translateY(-100%);
     opacity: .6;
   }

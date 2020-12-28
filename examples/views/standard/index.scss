@@ -345,21 +345,24 @@
   .infinite-standard-card-exclamatory-mark {
     position: fixed;
     left: calc(50% - 8.69vw);
-    top: calc(50% - 1.74vw);
+    top: calc(50% - 1.62vw);
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 1.8vw;
-    height: 1.8vw;
-    font-size: 4.5vw;
+    // width: 1.8vw;
+    // height: 1.8vw;
     border-radius: 50%;
-    overflow: hidden;
+    font-size: 1.76vw;
     color: rgba(255,118,53,1);
     transform-origin: center;
     box-shadow: 0 5px 20px 0 rgba(255, 214, 176, 0.6);
     opacity: 0;
     z-index: 999;
     transition: all 1s;
+    i {
+      border-radius: 50%;
+      overflow: hidden;
+    }
   }
   .show-tip {
     opacity: 1;
