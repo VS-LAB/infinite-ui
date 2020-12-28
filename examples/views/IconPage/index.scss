@@ -1,5 +1,34 @@
 @import "./animation.scss";
 
+//****通用定义****//
+.flex {
+  display: flex;
+}
+.fdc {
+  flex-direction: column;
+}
+.aic {
+  align-items: center;
+}
+.jcc {
+  justify-content: center;
+}
+.jcsb {
+  justify-content: space-between;
+}
+.jcfs {
+  justify-content: flex-start;
+}
+.jcfe {
+  justify-content: flex-end;
+}
+.fn {
+  flex: none;
+}
+.fww {
+  flex-wrap: wrap;
+}
+
 .infinite-home-animation-icon-page {
   position: absolute;
   top: 0;
@@ -7,35 +36,6 @@
   height: 100vh;
   background: #fff;
   overflow: hidden;
-
-  //****通用定义****//
-  .flex {
-    display: flex;
-  }
-  .fdc {
-    flex-direction: column;
-  }
-  .aic {
-    align-items: center;
-  }
-  .jcc {
-    justify-content: center;
-  }
-  .jcsb {
-    justify-content: space-between;
-  }
-  .jcfs {
-    justify-content: flex-start;
-  }
-  .jcfe {
-    justify-content: flex-end;
-  }
-  .fn {
-    flex: none;
-  }
-  .fww {
-    flex-wrap: wrap;
-  }
 
   //****非通用定义****//
   .infinite-icon-page-bg {
@@ -97,16 +97,17 @@
   }
     
   .infinite-icon-page-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    // position: absolute;
+    // top: 50%;
+    // left: 50%;
+    // transform: translate(-50%, -50%);
     text-align: center;
     color: #fff;
     z-index: 8;
     font-family: PingFangSC-Semibold;
     .icons-introduce {
-      height: 10vw;
+      // height: 10vw;
+      height: 180px;
     }
     .infinite-icon-page-title-h3 {
       font-size: 60px;
@@ -115,7 +116,8 @@
     }
     .infinite-icon-page-title-p-top {
       font-size: 20px;
-      margin-top: 1.4vw;
+      // margin-top: 1.4vw;
+      margin-top: 8px;
     }
     .infinite-icon-page-title-p-bottom {
       font-size: 20px;
@@ -123,9 +125,11 @@
     }
     .infinite-icon-page-window {
       position: relative;
-      margin: 3vw auto 0;
-      width: 42vw;
-      height: 30vw;
+      margin: 58px auto 0;
+      // width: 42vw;
+      width: 806px;
+      // height: 30vw;
+      height: 556px;
       .infinite-icon-page-window-bg {
         position: absolute;
         top: 0;
@@ -148,7 +152,8 @@
         }
       }
       .infinite-icon-page-window-menu {
-        width: 7.2vw;
+        // width: 7.2vw;
+        width: 138px;
         height: 100%;
         background: rgba(255,255,255,0);
         .infinite-icon-page-menu-top {
@@ -167,23 +172,28 @@
         .infinite-icon-page-menu-i {
           flex: 4;
           // margin: 0 0.18vw 0 0.48vw;
-          font-size: 1vw;
-          text-indent: 0.3vw;
+          // font-size: 1vw;
+          font-size: 18px;
+          // text-indent: 0.3vw;
+          text-indent: 6px;
         }
         p	{
           flex: 9;
           text-align: left;
-          font-size: 0.7vw;
+          // font-size: 0.7vw;
+          font-size: 14px;
         }
       }
       .infinite-icon-page-window-icon-list {
         height: 100%;
-        width: 34.8vw;
-        min-width: 82.9%;
+        // width: 34.8vw;
+        width: 668px;
+        // min-width: 82.9%;
         .infinite-icon-page-list-main {
           box-sizing: border-box;
           height: 100%;
-          padding: 0.6vw 0.8vw;
+          // padding: 0.6vw 0.8vw;
+          padding: 12px 16px;
           .infinite-icon-page-list-main-li {
             position: relative;
             width: 24%;
@@ -207,14 +217,16 @@
                 justify-content: center;
                 // width: 1.8vw;
                 // height: 1.8vw;
-                font-size: 1.76vw;
+                // font-size: 1.76vw;
+                font-size: 36px;
                 // border-radius: 50%;
                 // overflow: hidden;
                 opacity: 0;
               }
               .infinite-icon-page-li-icon-text {
-                margin-top: 1vw;
-                font-size: 0.6vw;
+                // margin-top: 1vw;
+                margin-top: 18px;
+                font-size: 12px;
                 opacity: 0;
               } 
             }
@@ -228,6 +240,8 @@
                   transition: opacity 0.1s linear 1.5s, color 0.1s linear 1.5s;
                   opacity: 1;
                   color: rgba(255,118,53,1);
+                  background: #fff;
+                  border-radius: 50%;
                 }
               }
             }
@@ -245,7 +259,12 @@
     .infinite-icon-page-content {
       .infinite-icon-page-window {
         .infinite-icon-page-window-bg {
-          box-shadow: 0 14px 50px 0px rgba(178,79,25,0.7);
+          transition: all 0.9s cubic-bezier(0.15, 0.31, 0.82, 0.89), box-shadow 0s linear;
+          &.show-rotate-in {
+            box-shadow: 0 14px 50px 0px rgba(178,79,25,0.7);
+            // transform: translate(0vw, 0vh) rotateZ(0deg) skewY(180deg) scale(1);
+            transition: all 0.9s cubic-bezier(0.15, 0.31, 0.82, 0.89), box-shadow 0s linear 0.9s;
+          }
           .infinite-icon-page-window-menu {
             background: rgba(255,141,56,1);
             .infinite-icon-page-menu-top {
@@ -1097,7 +1116,8 @@
     }
     .infinite-icon-page-content {
       transition: transform 1.5s;
-      transform: translate(-50%, -50%);
+      transform: translate(0, 0);
+      // transform: translate(-50%, -50%);
       .infinite-icon-page-window {
         .infinite-icon-page-window-bg {
           box-shadow: 0 14px 50px 0px rgba(18,17,22,0.7);
@@ -1141,7 +1161,11 @@
     }
     .infinite-icon-page-content {
       transition: transform 1.5s;
-      transform: translate(-50%, -120vh);
+      transform: translate(0, -120vh);
+      .icons-introduce {
+        transform: translateY(-13vh);
+        transition: transform .25s;
+      }
       .infinite-icon-page-window {
         .icon-bg-move {
           animation: hideIconBgMove .5s linear forwards;

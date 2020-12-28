@@ -362,16 +362,19 @@
 
   .infinite-standard-card-exclamatory-mark {
     position: fixed;
-    left: calc(50% - 8.69vw);
-    top: calc(50% - 1.62vw);
+    // left: calc(50% - 8.69vw);
+    // top: calc(50% - 1.62vw);
+    left: calc(50% - 167.5px);
+    top: calc(50% - 34px);
     display: flex;
     align-items: center;
     justify-content: center;
     // width: 1.8vw;
     // height: 1.8vw;
     border-radius: 50%;
-    font-size: 1.76vw;
+    font-size: 36px;
     color: rgba(255,118,53,1);
+    background: #fff;
     transform-origin: center;
     box-shadow: 0 5px 20px 0 rgba(255, 214, 176, 0.6);
     opacity: 0;
@@ -380,17 +383,25 @@
     i {
       border-radius: 50%;
       overflow: hidden;
+      transform: scale(1);
+      transition: all 1.5s;
     }
   }
   .show-tip {
     opacity: 1;
-    transform: scale(1.8);
+    i {
+      transform: scale(0.7);
+    }
+    transform: scale(2.0);
   }
   .end-mask {
     z-index: 999;
     transform: scale(1);
     opacity: 1;
     box-shadow: none;
+    i {
+      transform: scale(1);
+    }
     transition: all 1.5s;
   }
   .hide-mask {

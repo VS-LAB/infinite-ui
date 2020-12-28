@@ -2,7 +2,8 @@
   <div class="template-container">
     <div :class="`infinite-home-animation-icon-page
       infinite-home-animation-icon-page-step${showAni}
-      ${noShow ? 'infinite-home-animation-icon-page-noShow' : ''}`">
+      ${noShow ? 'infinite-home-animation-icon-page-noShow' : ''}
+      flex aic jcc`">
       <div class="orange-circle" :class="`${showDefaultBg} ${orangeBgAnimateName}`" :style="{zIndex: bgAnimateNameZindex === 0 ? 1 : ''}"></div>
       <div class="icon-bg-circle or-circle" :class="orBgAnimateName" :style="{zIndex: bgAnimateNameZindex === 1 ? 2 : ''}"></div>
       <div class="icon-bg-circle blue-circle" :class="blueBgAnimateName" :style="{zIndex: bgAnimateNameZindex === 2 ? 3 : ''}"></div>
@@ -31,19 +32,19 @@
             <div class="infinite-icon-page-window-menu">
               <div class="infinite-icon-page-menu-top flex aic jcfs">
                 <div :class="`infinite-icon-page-menu-i`">
-                  <i :class="`icon-wireframe`" :style="{transform: `scale(${clientScale})`}"></i>  
+                  <i :class="`icon-wireframe`"></i>  
                 </div>
                 <p>Wireframe</p>
               </div>
               <div class="infinite-icon-page-menu-center flex aic jcfs">
                 <div :class="`infinite-icon-page-menu-i`">
-                  <i :class="`icon-filled`" :style="{transform: `scale(${clientScale})`}"></i>  
+                  <i :class="`icon-filled`"></i>  
                 </div>
                 <p>Filled</p>
               </div>
               <div class="infinite-icon-page-menu-bottom flex aic jcfs">
                 <div :class="`infinite-icon-page-menu-i`">
-                  <i :class="`icon-mixed`" :style="{transform: `scale(${clientScale})`}"></i>  
+                  <i :class="`icon-mixed`"></i>  
                 </div>
                 <p>Mixed</p>
               </div>
@@ -70,8 +71,7 @@
                 <div class="infinite-icon-page-li-icon flex fdc aic jcc">
                   <div :class="`infinite-icon-page-li-icon-i ${item.other || ''}`"
                        :ref="item.other">
-                    <i :class="`${item.icon}`"
-                       :style="{transform: `scale(${clientScale})`}"></i>
+                    <i :class="`${item.icon}`"></i>
                   </div>
                   <p class="infinite-icon-page-li-icon-text">{{item.text}}</p>
                 </div>
@@ -165,14 +165,14 @@ export default {
           text: 'history'
         },
         {
-          icon: 'icon-mail',
-          component: 'Mail',
-          text: 'mail'
-        },
-        {
           icon: 'icon-share',
           component: 'Share',
           text: 'share'
+        },
+        {
+          icon: 'icon-mail',
+          component: 'Mail',
+          text: 'mail'
         },
         {
           icon: 'icon-search',

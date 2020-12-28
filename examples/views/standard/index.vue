@@ -6,7 +6,6 @@
       >
       <i 
         class="icon-annotate" 
-        :style="{transform: `scale(${clientScale})`}"
         ></i>
     </div>
     <div
@@ -153,7 +152,7 @@
             class="infinite-standard-card_img"
             :src="require('@/assets/bigcardComponent.png')"
           />
-          <div :class="`infinite-standard-card-icon ${hideGruyIcon ? 'hide-gruy-icon' : ''}`"></div>
+          <!-- <div :class="`infinite-standard-card-icon ${hideGruyIcon ? 'hide-gruy-icon' : ''}`"></div> -->
         </div>
 
       </div>
@@ -292,20 +291,21 @@ export default {
             const b = hideIcon.getBoundingClientRect() // 计算点居中
             const { iconMask } = this.$refs
             iconMask.style.left = `${b.left}px`
-            iconMask.style.top = `${Math.floor(b.top) + 3}px`
+            // iconMask.style.top = `${Math.floor(b.top) + 3}px`
+            iconMask.style.top = `${b.top + 1.83}px`
           }
           EventBus.$emit('page2_goEndTop', reversal)
           hideMaskTimer = setTimeout(_ => {
             this.hideMask = true
-          }, 1500)
+          }, 1600)
         } else {
           const { iconMask } = this.$refs
           const c = document.body.clientWidth
           const d = document.body.clientHeight
           clearTimeout(hideMaskTimer)
           this.hideMask = false
-          iconMask.style.left = `${c * 0.5 - c * 0.0869}px`
-          iconMask.style.top = `${d * 0.5 - c * 0.0162}px`
+          iconMask.style.left = `${c * 0.5 - 167.5}px`
+          iconMask.style.top = `${d * 0.5 - 34}px`
           EventBus.$emit('page2_goEndTop', reversal)
         }
         
