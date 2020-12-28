@@ -109,6 +109,7 @@
       opacity: 0.4;
       border-top: 2px dashed rgba(170, 178, 220, 0.4);
       // border-top: 5px dashed red;
+      transform-origin: left center;
       transform: scale(0);
       transition: all 1s;
     }
@@ -132,6 +133,23 @@
       transition: all 1s;
       // border-left: 5px dashed red;
       transform: scale(0);
+    }
+    
+    .line-transition-delay{
+      transition: all 1s linear 0.3s;
+    }
+
+    .transform-origin-left{
+      transform-origin: left center;
+    }
+    .transform-origin-right{
+      transform-origin: right center;
+    }
+    .transform-origin-top{
+      transform-origin: center top;
+    }
+    .transform-origin-bottom{
+      transform-origin: center bottom;
     }
 
     .fade-in-box {
@@ -215,31 +233,31 @@
     }
 
     .left135 {
-      @include left(135px);
+      @include left(140px);
     }
     .left175 {
-      @include left(175px);
+      @include left(180px);
     }
     .left200 {
-      @include left(200px);
+      @include left(205px);
     }
     .left210 {
-      @include left(210px);
+      @include left(215px);
     }
     .right140 {
-      @include right(120px);
+      @include right(125px);
     }
     .right176 {
-      @include right(155px);
+      @include right(160px);
     }
     .right150 {
-      @include right(130px);
+      @include right(135px);
     }
     .right180 {
-      @include right(180px);
+      @include right(185px);
     }
     .right210 {
-      @include right(192px);
+      @include right(197px);
     }
   }
   img {
