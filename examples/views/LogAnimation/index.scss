@@ -1,225 +1,97 @@
 // 画布
 .anime_container {
   height: 100%;
+  user-select: none;
 
-  // 中心点
-  .center-dot {
-    width: calc(330px + 64px + 64px);
-    height: 80px;
-    position: fixed;
-    left: calc(50vw - 120px);
-    top: 40vh;
-    z-index: 1;
-  }
-
+  // 雪碧图
   .anime_log_container {
-    @extend .center-dot;
+    width: 700px;
+    height: 394px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.9s;
 
-    // 立方体start
-    $cubeWidth: 64px;
-
-    .group_cube {
-      width: 64px;
-      height: 70px;
-      text-indent: 21px;
-      line-height: 70px;
-
-      &-class {
-        position: absolute;
-        transition: all 0.2s cubic-bezier(0.25, 0.1, 0.24, 0.71);
-        filter: blur(8px);
-      }
-
-      // 设置公共模糊
-      .anime-start-common {
-        filter: blur(0px);
-      }
-
-      .anime-1 {
-        transform: translate(-20px, -20px) scale(0, 0);
-      }
-
-      .anime-start-1 {
-        transform: translate(0, 0) scale(1, 1);
-        @extend .anime-start-common;
-      }
-
-      .anime-2 {
-        transform: translate(-40px, 0px) scale(0, 0);
-      }
-
-      .anime-start-2 {
-        transform: translate(-14px, 10px) scale(1, 1);
-        @extend .anime-start-common;
-      }
-
-      .anime-3 {
-        transform: translate(30px, -20px) scale(0, 0);
-      }
-
-      .anime-start-3 {
-        transform: translate(0, -14px) scale(1, 1);
-        @extend .anime-start-common;
-      }
-
-      .anime-4 {
-        transform: translate(40px, 40px) scale(0, 0);
-      }
-
-      .anime-start-4 {
-        transform: translate(14px, 10px) scale(1, 1);
-        @extend .anime-start-common;
-      }
-
-      .anime-5 {
-        transform: translate(0, 40px) scale(0, 0);
-      }
-
-      .anime-start-5 {
-        transform: translate(0, 20px) scale(1, 1);
-        @extend .anime-start-common;
-      }
-
-      .anime-6 {
-        transform: translate(-40px, -40px) scale(0, 0);
-      }
-
-      .anime-start-6 {
-        transform: translate(-14px, -4px) scale(1, 1);
-        @extend .anime-start-common;
-      }
-
-      .anime-7 {
-        transform: translate(40px, -40px) scale(0, 0);
-      }
-
-      .anime-start-7 {
-        transform: translate(14px, -4px) scale(1, 1);
-        @extend .anime-start-common;
-      }
-
-      .anime-8 {
-        transform: translate(10px, 50px) scale(0, 0);
-      }
-
-      .anime-start-8 {
-        transform: translate(0, 6px) scale(1, 1);
-        @extend .anime-start-common;
-      }
+    &-drawing {
+      width: 100%;
     }
-
-    // 立方体end
-
-    // 菱形start
-    .group_rhombus {
-      width: 64px;
-      min-width: 64px;
-      height: 70px;
-      line-height: 70px;
-      transform: translatex(84px);
-
-      .rhombus-svf {
-        position: absolute;
-        height: 70px;
-        margin: 0 0 0 -30px;
-        opacity: 0;
-        transition: all 1s;
-      }
-
-      .rhombus-svf-start {
-        opacity: 1;
-        transform: translateX(-28px);
-      }
-
-      &-shade {
-        position: absolute;
-        left: 0;
-        top: -36px;
-        width: 0;
-        height: 0;
-        border: 70px solid transparent;
-        border-right-color: #fff;
-        border-radius: 50%;
-        transition: all 0.2s;
-      }
-
-      &-shade-start {
-        left: -114px;
-      }
-    }
-
-    // 菱形end
-
-    // 正菱logs start
-    &-logs {
-      display: flex;
-      transition: all 0.5s;
-    }
-
-    &-logs_start {
-      transform: translateX(-88px);
-    }
-
-    // 正菱logs end
-
-    // infinite-English start
-    .group_infinite_english {
-      width: 330px;
-      min-width: 330px;
-      height: 40px;
-      position: relative;
-      top: -3px;
-      margin-left: -90px;
-      text-indent: -40px;
-      overflow: hidden;
-
-      .infinite-english-svf {
-        width: 220px;
-        height: 100%;
-        transition: all 0.5s;
-        opacity: 0;
-      }
-
-      .infinite-english-svf-anime_start {
-        opacity: 1;
-        transform: translateX(74px);
-      }
-    }
-
-    // infinite-English end
-
-    // 创造无限可能 start
-    .footer-text {
-      display: inline-block;
-      letter-spacing: 48px;
-      color: #7a7a7a;
-      font-size: 17px;
-      white-space: nowrap;
-      transition: all 0.5s;
-      opacity: 0;
-      user-select: none;
-      transform: translate(-54px, 120px);
-    }
-
-    .footer-text-anime_start {
-      transform: translate(-54px, 60px);
-      opacity: 1;
-    }
-
-    .footer-text-anime_end {
-      transform: translate(-54px, 00px);
-      opacity: 0;
-    }
-
-    // 创造无限可能 end
   }
+
+  // logo初始化大小
+  .logo_init_size {
+    width: auto;
+    height: auto;
+
+    .anime_log_container-drawing {
+      width: 550px;
+    }
+  }
+
+  // 雪碧图移动至左上角
+  .logo_init_position {
+    transform: translate(-25%, calc(-50% * 0.43)) scale(0.57);
+    left: 20%;
+    top: 0;
+  }
+
+  // 雪碧图移动至隐藏
+  .logo_move_hidden {
+    transition: all 0.3s;
+    transform: translate(-25%, -100%) scale(0.57);
+  }
+
+  // 倒动画
+  &.reversal {
+    .logo_init_position {
+      transition: all 0.3s;
+    }
+  }
+
+
+  // 雪碧图end
+
+  // 创造无限可能 start
+  $footer_text_x_position : calc(-50% + 32px);
+
+  .footer-text {
+    font-size: 30px;
+    color: #222222;
+    letter-spacing: 68px;
+    text-align: center;
+    position: fixed;
+    z-index: 2;
+    left: 50%;
+    top: 50%;
+    transform: translate($footer_text_x_position, calc(-50% + 160px));
+    opacity: 0;
+    transition: all 0.4s;
+  }
+
+  // 创造无限可能动画开始n
+  .footer-text-anime_start {
+    transform: translate($footer_text_x_position, calc(-50% + 120px));
+    opacity: 1;
+  }
+
+  // 创造无限可能动画终点
+  .footer-text-anime_end {
+    transform: translate($footer_text_x_position, calc(-50% + 80px));
+    opacity: 0;
+  }
+
+  // 创造无限可能 end
 
   // 白色背景 start
   .move-white-background {
     height: 100%;
     background: #fff;
     box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.1);
-    transition: all 1.5s cubic-bezier(0.17, 0.08, 0.39, 0.97);
+    transition: all 1.2s cubic-bezier(0.17, 0.08, 0.39, 0.97);
   }
 
   .move-white-background-anime_start {
@@ -228,60 +100,24 @@
 
   // 白色背景 end
 
-  // 正-菱-infinite动画 start
-  .anime_log_container-group {
-    height: 80px;
-    display: flex;
-    align-items: center;
-  }
-
-  $animeLogTranslateX: calc(-32vw + 120px);
-
-  .anime_log_container-top-anime_start {
-    transition: all 1s;
-    transform: translate($animeLogTranslateX, -40vh) scale(0.5);
-  }
-
-  .anime_log_container-top-anime_end {
-    transition: all 0.3s;
-    transform: translate($animeLogTranslateX, -48vh) scale(0.5);
-  }
-
-  // 倒动画
-  .anime_log_container-top-anime_end_reversal {
-    transition: all 0.3s;
-    transform: translate($animeLogTranslateX, -40vh) scale(0.5);
-  }
-
-  .anime_log_container-top-anime_start_reversal {
-    transition: all 1s;
-  }
-
-  // 正-菱-infinite动画 end
-
-  // 顶部菜单动画 start
+  // 菜單menu start
   .header-model {
     height: 80px;
-    display: flex;
-    align-items: center;
-    padding-left: 44.4%;
+    line-height: 80px;
     position: fixed;
-    left: 0;
+    left: 44.4%;
     top: 0;
-    z-index: 2;
-    white-space: nowrap;
-    transition: all 0.3s;
-
-    .header-menu {
-      cursor: pointer;
-      font-size: 16px;
-      color: #ff7635;
-    }
+    z-index: 1;
+    font-size: 16px;
+    color: #222222;
+    transition: all 0.4s;
+    cursor: pointer;
   }
 
   .header-model-anime_start {
     transform: translateY(-100%);
   }
 
-  // 顶部菜单动画 end
+  // 菜單menu end
+
 }

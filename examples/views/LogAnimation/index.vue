@@ -1,47 +1,33 @@
 <template>
-  <div v-if="resetCanvas"
+  <div :class="{
+    'reversal':reversal
+  }"
        class="anime_container">
+    <!-- 雪碧图 -->
     <div ref="animeLogContainer"
+         :class="{
+          'logo_init_position':logoInitPosition,
+          'logo_move_hidden':logoMoveHidden,
+          'logo_init_size':this.logoAnimeCompile
+          }"
          class="anime_log_container">
-      <!-- 正+菱+infinite动画 -->
-      <div class="anime_log_container-group"
-           :class="animeLogContainerTopAnime">
-        <!-- 正菱动画 -->
-        <div class="anime_log_container-logs"
-             :class="animeLogContainerLogsAnime">
-          <!-- 菱形动画 -->
-          <div class="group_rhombus">
-            <img class="rhombus-svf"
-                 :class="rhombusSvfAnime"
-                 src="@/assets/rhombus.svg"
-                 alt="" />
-            <div class="group_rhombus-shade"
-                 :class="shadeAnime"></div>
-          </div>
-          <!-- 正方体动画 -->
-          <div class="group_cube">
-            <Cube v-for="(item,index) in animes"
-                  :key="index"
-                  :cube-class="`group_cube-class ${item.defaultClass} ${item.startClass}`" />
-          </div>
-        </div>
-        <!-- infinite-english动画 -->
-        <div class="group_infinite_english">
-          <img class="infinite-english-svf"
-               :class="infiniteEnglishSvfAnime"
-               src="@/assets/infinite-english.svg"
-               alt="" />
-        </div>
-      </div>
-
-      <!-- footer text -->
-      <div class="footer-text"
-           :class="footerTextAnime">
-        创造无限可能
-      </div>
+      <img class="anime_log_container-drawing"
+           v-if="!this.logoAnimeCompile"
+           :src="require(`@/assets/cube/logo (${this.logoCount}).png`)" />
+      <img v-show="this.logoAnimeCompile"
+           class="anime_log_container-drawing replace_logo"
+           :src="this.logoUrl" />
     </div>
+    <!-- 创造无限可能 -->
+    <div class="footer-text"
+         :class="footerTextAnime">
+      创造无限可能
+    </div>
+    <!-- menu -->
     <div class="header-model"
-         :class="headerModelAnime"
+         :class="{
+           'header-model-anime_start':headerModelAnime
+         }"
          v-if="moveWhiteBackgroundAnime">
       <div class="header-menu"
            @click="$router.push('/guide')">组件</div>
@@ -50,147 +36,53 @@
     <div class="move-white-background"
          :class="moveWhiteBackgroundAnime">
     </div>
+
   </div>
 
 </template>
 
 <script>
-import Cube from './components/Cube'
 export default {
   name: 'LogAnimation',
-  components: {
-    Cube
-  },
   data () {
     return {
-      animesFun: [this.page0_animeStep1, this.page0_animeStep5],
-      resetCanvas: true,
-      timer: null, // cube计时器
-      count: 0, // 计数
-      // 立方体动画
-      animes: [
-        {
-          defaultClass: 'anime-1',
-          startClass: ''
-        },
-        {
-          defaultClass: 'anime-2',
-          startClass: ''
-        },
-        {
-          defaultClass: 'anime-3',
-          startClass: ''
-        },
-        {
-          defaultClass: 'anime-4',
-          startClass: ''
-        },
-        {
-          defaultClass: 'anime-5',
-          startClass: ''
-        },
-        {
-          defaultClass: 'anime-6',
-          startClass: ''
-        },
-        {
-          defaultClass: 'anime-7',
-          startClass: ''
-        },
-        {
-          defaultClass: 'anime-8',
-          startClass: ''
-        }
-      ],
-      rhombusSvfAnime: '',//菱形动画
-      shadeAnime: '',//菱形遮罩动画
-      animeLogContainerLogsAnime: '',// 正菱logs动画
-      infiniteEnglishSvfAnime: '',//infinite动画
+      animesFun: [this.page0_animeStep1, this.page0_animeStep3],
+      logoTimer: null, // cube计时器
+      logoCount: 1, // 计数
+      logoUrl: require('@/assets/logo.png'),
+      logoNum: 30,
+      logoSwitchTime: 60,//图片切换时间
+      logoAnimeCompile: false,//logo的动画完成
+      logoInitPosition: false,//logo初始化左上角位置
+      logoMoveHidden: false,//logo是否移动至隐藏
       footerTextAnime: '',//创造无限可能动画 footer-text-anime_start
       moveWhiteBackgroundAnime: '',//背景动画
-      animeLogContainerTopAnime: '',//左上角log动画
       headerModelAnime: '',//菜单动画
+      reversal: false,//正动画或倒动画
     }
   },
   methods: {
-    initParams () {
-      setTimeout(() => {
-        this.timer = null//cube计时器
-        this.count = 0//计数
-        this.rhombusSvfAnime = ''//菱形动画
-        this.shadeAnime = ''//菱形遮罩动画
-        this.animeLogContainerLogsAnime = ''// 正菱logs动画
-        this.infiniteEnglishSvfAnime = ''//infinite动画
-        this.footerTextAnime = ''//创造无限可能动画 footer-text-anime_start
-        this.moveWhiteBackgroundAnime = ''//背景动画
-        this.animeLogContainerTopAnime = ''//左上角log动画
-        this.animes.forEach(item => {
-          item.startClass = ''
-        })
-        this.resetCanvas = true
-      })
-    },
-    setAnimes () {
-      this.count += 1
-      this.animes[this.count - 1].startClass = `anime-start-${this.count}`
-    },
     // 立方体动画
     page0_animeStep1 () {
       return new Promise((resolve, reject) => {
-        this.timer = setInterval(async _ => {
-          if (this.count === this.animes.length) {
-            clearInterval(this.timer)
-            await this.page0_animeStep2()
-            await this.page0_animeStep3()
-            await this.page0_animeStep4()
-            resolve(true)
-            return
-          }
-          this.setAnimes()
-          if (this.count === 6) {
-            this.setAnimes()
-          }
-          if (this.count === 1) {
-            this.setAnimes()
-            this.setAnimes()
-          }
-        }, 300)
-      })
-    },
-    // 菱形动画
-    page0_animeStep2 (reversal) {
-      return new Promise((resolve, reject) => {
-        if (reversal) {
-          this.shadeAnime = ''
-          setTimeout(_ => {
-            this.rhombusSvfAnime = ''
-            setTimeout(_ => {
+        this.$nextTick(() => {
+          this.logoTimer = setInterval(async () => {
+            if (this.logoCount === this.logoNum) {
+              clearInterval(this.logoTimer)
+              setTimeout(() => {
+                this.logoAnimeCompile = true
+              }, this.logoSwitchTime)
+              await this.page0_animeStep2()
               resolve(true)
-            }, 400)
-          }, 400)
-        } else {
-          this.rhombusSvfAnime = 'rhombus-svf-start'
-          setTimeout(_ => {
-            this.shadeAnime = 'group_rhombus-shade-start'
-            setTimeout(_ => {
-              resolve(true)
-            }, 400)
-          }, 400)
-        }
-      })
-    },
-    //正菱logs + infinite 动画
-    page0_animeStep3 (reversal) {
-      return new Promise((resolve, reject) => {
-        this.animeLogContainerLogsAnime = reversal ? '' : "anime_log_container-logs_start"
-        this.infiniteEnglishSvfAnime = reversal ? '' : "infinite-english-svf-anime_start"
-        setTimeout(_ => {
-          resolve(true)
-        }, 500)
+              return
+            }
+            this.logoCount += 1
+          }, this.logoSwitchTime)
+        })
       })
     },
     // 创造无限可能动画
-    page0_animeStep4 (reversal) {
+    page0_animeStep2 (reversal) {
       return new Promise((resolve, reject) => {
         this.footerTextAnime = reversal ? '' : 'footer-text-anime_start'
         setTimeout(_ => {
@@ -199,33 +91,34 @@ export default {
       })
     },
     // 最终动画
-    page0_animeStep5 (reversal) {
+    page0_animeStep3 (reversal) {
+      this.reversal = reversal
       return new Promise((resolve, reject) => {
         if (!reversal) {
+          this.logoInitPosition = true
           this.moveWhiteBackgroundAnime = "move-white-background-anime_start"
-          this.animeLogContainerTopAnime = "anime_log_container-top-anime_start"
           this.footerTextAnime = "footer-text-anime_end"
           setTimeout(_ => {
-            this.animeLogContainerTopAnime = "anime_log_container-top-anime_end"
-            this.headerModelAnime = "header-model-anime_start"
+            this.logoMoveHidden = true
+            this.headerModelAnime = true
             setTimeout(_ => {
               resolve(true)
-            }, 300)
-          }, 1000)
+            }, 500)
+          }, 700)
         } else {
           this.moveWhiteBackgroundAnime = "_"
-          this.animeLogContainerTopAnime = "anime_log_container-top-anime_end_reversal"
-          this.headerModelAnime = ""
+          this.headerModelAnime = false
+          this.logoMoveHidden = false
           setTimeout(_ => {
-            this.animeLogContainerTopAnime = "anime_log_container-top-anime_start_reversal"
+            this.logoInitPosition = false
             setTimeout(_ => {
-              this.footerTextAnime = "footer-text-anime_start"
               this.moveWhiteBackgroundAnime = ""
-              setTimeout(() => {
-                resolve(true)
-              }, 300)
-            }, 1000)
-          }, 300)
+              resolve(true)
+            }, 800)
+            setTimeout(() => {
+              this.footerTextAnime = "footer-text-anime_start"
+            }, 400)
+          }, 400)
         }
       })
     }

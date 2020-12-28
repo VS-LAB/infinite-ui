@@ -2,45 +2,51 @@
   <div class="anime-container">
     <div class="anime-canvas"
          ref="animeCanvasAnimeRef"
-         :class="animeCanvasAnime">
+         :class="{
+           'anime-canvas-anime_start':animeCanvasAnime
+         }">
       <div class="header_text"
            ref="headerTextRef"
-           :class="headerTextAnime">
+           :class="{
+             'header_text-anime_start':headerTextAnime
+           }">
         <h1>全新可视化前端组件</h1>
         <p v-html="'一套基于 Vue 2.0 , 为平安内部前端开发者提供的桌面端组件库\r打造全新一代数据可视化解决方案，致力于提供一套简单方便、专业可靠的数据可视化组件'"></p>
       </div>
       <div class="component_view">
         <img ref="componentViewNotebookRef"
              class="component_view-notebook"
-             :class="componentViewNotebookAnime"
+             :class="{
+               'component_view-notebook-anime_start':componentViewNotebookAnime
+             }"
              src="@/assets/component/notebook.png">
         <div class="component_view-container">
           <div class="component_view-imgs_padding">
             <div class="component_view-imgs-linear_gradient"
                  :class="imgsAnimed?'imgs_animed':''">
-              <transition>
-                <div ref="componentViewImgsContainerRef"
-                     class="component_view-imgs_container"
-                     :style="{overflow:isOverflowAutoPad?'hidden auto':''}">
-                  <div class="imgs_container-table"
-                       :class="tableImgsPosition">
-                    <div class="imgs_container-table-tr"
-                         :class="tr.col?`imgs-col_${tr.col}`:''"
-                         v-for="(tr,trIndex) in imgCards"
-                         :key="trIndex">
-                      <div class="imgs_container-table-tr-td"
-                           v-for="(td,tdIndex) in tr.data"
-                           :key="tdIndex">
-                        <img v-for="img in td"
-                             :ref="`imgRef${img}`"
-                             :key="img"
-                             :class="`imgs_${img}`"
-                             :src="require(`@/assets/component/card (${img}).png`)">
-                      </div>
+              <div ref="componentViewImgsContainerRef"
+                   class="component_view-imgs_container"
+                   :style="{overflow:isOverflowAutoPad?'hidden auto':''}">
+                <div class="imgs_container-table"
+                     :class="{
+                       'table_imgs_position':tableImgsPosition
+                     }">
+                  <div class="imgs_container-table-tr"
+                       :class="tr.col?`imgs-col_${tr.col}`:''"
+                       v-for="(tr,trIndex) in imgCards"
+                       :key="trIndex">
+                    <div class="imgs_container-table-tr-td"
+                         v-for="(td,tdIndex) in tr.data"
+                         :key="tdIndex">
+                      <img v-for="img in td"
+                           :ref="`imgRef${img}`"
+                           :key="img"
+                           :class="`imgs_${img}`"
+                           :src="require(`@/assets/component/card (${img}).png`)">
                     </div>
                   </div>
                 </div>
-              </transition>
+              </div>
             </div>
           </div>
         </div>
@@ -48,7 +54,9 @@
     </div>
     <img class="img_connect imgs_content_9"
          :style="imgConnectStyle"
-         :class="imgConnectAnime"
+         :class="{
+           'img_connect-anime_start':imgConnectAnime
+         }"
          :src="require(`@/assets/component/card (9).png`)"
          alt="">
     <div class="replace_scroll"
@@ -126,7 +134,7 @@ export default {
       animeCanvasAnime: '', // 画布动画
       headerTextAnime: '', // 头部文案动画
       componentViewNotebookAnime: '', // 笔记本动画
-      tableImgsPosition: 'table_imgs_position', // 图片集合初始化位置
+      tableImgsPosition: true, // 图片集合初始化位置
       scrollTop: 0,
       imgsAnimed: false, // 是否开启遮罩及其他imgs数据
       timeStep3: null,
@@ -148,12 +156,12 @@ export default {
         const el = this.$refs.componentViewImgsContainerRef
         this.scrollTop = el.scrollTop = 0
         if (!reversal) {
-          this.headerTextAnime = 'header_text-anime_start'
+          this.headerTextAnime = true
           await this.page1_animeStep2()
           await this.page1_animeStep3()
         } else {
           await this.page1_animeStep3(true)
-          this.headerTextAnime = ''
+          this.headerTextAnime = false
           await this.page1_animeStep2(true)
         }
         resolve(true)
@@ -164,8 +172,8 @@ export default {
     page1_animeStep2 (reversal) {
       return new Promise((resolve, reject) => {
         this.$nextTick(() => {
-          this.componentViewNotebookAnime = reversal ? '' : 'component_view-notebook-anime_start'
-          this.tableImgsPosition = reversal ? 'table_imgs_position' : ''
+          this.componentViewNotebookAnime = !reversal
+          this.tableImgsPosition = reversal
           // 动画执行完成后
           this.$refs.componentViewNotebookRef.ontransitionend = (event) => {
             if (event.propertyName == 'transform') {
@@ -220,8 +228,8 @@ export default {
         }
         this.$nextTick(() => {
           setTimeout(() => {
-            this.imgConnectAnime = reversal ? '' : 'img_connect-anime_start'
-            this.animeCanvasAnime = reversal ? '' : 'anime-canvas-anime_start'
+            this.imgConnectAnime = !reversal
+            this.animeCanvasAnime = !reversal
             setTimeout(() => {
               this.lastAnimeCompile = !reversal
               this.animeContinue = false

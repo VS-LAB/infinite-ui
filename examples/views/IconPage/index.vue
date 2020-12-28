@@ -3,15 +3,24 @@
     <div :class="`infinite-home-animation-icon-page
       infinite-home-animation-icon-page-step${showAni}
       ${noShow ? 'infinite-home-animation-icon-page-noShow' : ''}`">
-      <div class="orange-circle" :class="`${showDefaultBg} ${orangeBgAnimateName}`" :style="{zIndex: bgAnimateNameZindex === 0 ? 1 : ''}"></div>
-      <div class="icon-bg-circle or-circle" :class="orBgAnimateName" :style="{zIndex: bgAnimateNameZindex === 1 ? 2 : ''}"></div>
-      <div class="icon-bg-circle blue-circle" :class="blueBgAnimateName" :style="{zIndex: bgAnimateNameZindex === 2 ? 3 : ''}"></div>
-      <div class="icon-bg-circle black-circle" :class="blackBgAnimateName" :style="{zIndex: bgAnimateNameZindex === 3 ? 4 : ''}"></div>
+      <div class="orange-circle"
+           :class="`${showDefaultBg} ${orangeBgAnimateName}`"
+           :style="{zIndex: bgAnimateNameZindex === 0 ? 1 : ''}"></div>
+      <div class="icon-bg-circle or-circle"
+           :class="orBgAnimateName"
+           :style="{zIndex: bgAnimateNameZindex === 1 ? 2 : ''}"></div>
+      <div class="icon-bg-circle blue-circle"
+           :class="blueBgAnimateName"
+           :style="{zIndex: bgAnimateNameZindex === 2 ? 3 : ''}"></div>
+      <div class="icon-bg-circle black-circle"
+           :class="blackBgAnimateName"
+           :style="{zIndex: bgAnimateNameZindex === 3 ? 4 : ''}"></div>
       <div class="infinite-icon-page-content">
         <!-- title -->
-        <div class="icons-introduce flex fdc aic jcfe" :class="showIconsIntroduce">
+        <div class="icons-introduce flex fdc aic jcfe"
+             :class="showIconsIntroduce">
           <h3 class="infinite-icon-page-title-h3">
-          随心图标库
+            随心图标库
           </h3>
           <p class="infinite-icon-page-title-p-top">
             基于平安项目的矢量图标库，实时预览编辑、一键定制
@@ -24,19 +33,23 @@
         <!-- 中间白色区域 -->
         <div class="infinite-icon-page-window flex">
           <!-- 白色区域旋转动画部分 -->
-          <div class="infinite-icon-page-window-bg flex" :class="rotateAnimateName">
+          <div class="infinite-icon-page-window-bg flex"
+               :class="rotateAnimateName">
             <!-- 左侧菜单 -->
             <div class="infinite-icon-page-window-menu">
               <div class="infinite-icon-page-menu-top flex aic jcfs">
-                <Wireframe class="infinite-icon-page-menu-i" :style="{transform: `scale(${clientScale})`}" />
+                <Wireframe class="infinite-icon-page-menu-i"
+                           :style="{transform: `scale(${clientScale})`}" />
                 <p>Wireframe</p>
               </div>
               <div class="infinite-icon-page-menu-center flex aic jcfs">
-                <Filled class="infinite-icon-page-menu-i" :style="{transform: `scale(${clientScale})`}" />
+                <Filled class="infinite-icon-page-menu-i"
+                        :style="{transform: `scale(${clientScale})`}" />
                 <p>Filled</p>
               </div>
               <div class="infinite-icon-page-menu-bottom flex aic jcfs">
-                <Mixed class="infinite-icon-page-menu-i" :style="{transform: `scale(${clientScale})`}" />
+                <Mixed class="infinite-icon-page-menu-i"
+                       :style="{transform: `scale(${clientScale})`}" />
                 <p>Mixed</p>
               </div>
             </div>
@@ -51,19 +64,19 @@
           <div class="infinite-icon-page-window-menu"></div>
           <!-- end of 左侧菜单 -->
           <!-- 右侧icon列表 -->
-          <div class="infinite-icon-page-window-icon-list" :class="iconDislocationAnimation">
+          <div class="infinite-icon-page-window-icon-list"
+               :class="iconDislocationAnimation">
             <div class="infinite-icon-page-list-mask"></div>
             <ul class="infinite-icon-page-list-main flex jcsb aic fww">
-              <li
-                class="infinite-icon-page-list-main-li fn"
-                v-for="(item, index) in iconList"
-                :key="index"
-              >
+              <li class="infinite-icon-page-list-main-li fn"
+                  v-for="(item, index) in iconList"
+                  :key="index">
                 <div class="infinite-icon-page-li-beat"></div>
                 <div class="infinite-icon-page-li-icon flex fdc aic jcc">
                   <div :class="`infinite-icon-page-li-icon-i ${item.other || ''}`"
-                    :ref="item.other">
-                    <i :class="`${item.icon}`" :style="{transform: `scale(${clientScale})`}"></i>  
+                       :ref="item.other">
+                    <i :class="`${item.icon}`"
+                       :style="{transform: `scale(${clientScale})`}"></i>
                   </div>
                   <p class="infinite-icon-page-li-icon-text">{{item.text}}</p>
                 </div>
@@ -361,5 +374,5 @@ export default {
 }
 </script>
 <style lang='scss' scoped>
-  @import "./index.scss";
+@import "./index.scss";
 </style>
