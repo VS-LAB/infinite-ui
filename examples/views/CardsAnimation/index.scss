@@ -1,4 +1,4 @@
-$typeArea:1220px;
+$typeArea:1440px;
 
 .anime-container {
   user-select: none;
@@ -7,7 +7,7 @@ $typeArea:1220px;
     opacity: 0;
     position: fixed;
     pointer-events: none;
-    box-shadow: 0px 0.9375vw 5.41667vw #dfe5f6;
+    box-shadow: 0px 18px 104px #dfe5f6;
   }
 
   .img_connect-anime_start {
@@ -46,7 +46,8 @@ $typeArea:1220px;
   .anime-canvas {
     height: 100%;
     background: #f3f7fe;
-    overflow: hidden;
+    // overflow: hidden;
+    overflow: auto;
     transition: all 0.8s;
 
     // 头部文案动画 start
@@ -79,7 +80,8 @@ $typeArea:1220px;
 
     // 组件视图区域 start
     .component_view {
-      width: $typeArea;
+      width: 100%;
+
       height: 100vh;
       position: relative;
       z-index: 1;
@@ -88,10 +90,13 @@ $typeArea:1220px;
       text-align: center;
 
       &-container {
-        position: relative;
-        padding-bottom: calc(100% * 2028 / 3752);
+        width: $typeArea;
+        margin: 0 auto;
+        position: fixed;
+        padding-bottom: $typeArea * 778 / 1440;
         top: 50%;
-        transform: translateY(-50%);
+        left: 50%;
+        transform: translate(-50%, -50%);
       }
 
       &-notebook {
@@ -109,7 +114,7 @@ $typeArea:1220px;
       }
 
       &-imgs_padding {
-        padding: 3.4% 15.5% 7.47%;
+        padding: 3.4% 15.3% 7.5%;
         box-sizing: border-box;
         width: 100%;
         height: 100%;
@@ -180,7 +185,7 @@ $typeArea:1220px;
             transition: all 0.8s;
 
             &:nth-child(7) {
-              padding-bottom: 4vw;
+              padding-bottom: 20px;
             }
 
             &:nth-child(n + 2) {
@@ -242,7 +247,7 @@ $typeArea:1220px;
                 border-radius: 12px;
 
                 +img {
-                  margin-top: calc(0.9vw - 4px);
+                  margin-top: 12px;
                 }
               }
 
@@ -252,86 +257,100 @@ $typeArea:1220px;
                 transition-duration: 1.2s;
               }
 
+              .imgs_2,
+              .imgs_6,
+              .imgs_15 {
+                transition-duration: 0.8s;
+              }
+
+              .imgs_7,
+              .imgs_3,
+              .imgs_13 {
+                transition-duration: 0.9s;
+              }
+
               .imgs_7 {
-                width: 35.4vw;
+                width: 602px;
               }
 
               .imgs_18,
               .imgs_19 {
-                width: 23vw;
+                width: 390px;
               }
 
               .imgs_23 {
-                width: 11.6vw;
-                left: 5.1vw;
+                width: 196px;
+                left: 88px;
               }
 
               .imgs_24 {
-                width: 32.4vw;
-                left: 10.3vw;
+                width: 546px;
+                left: 176px;
               }
             }
           }
         }
 
         .table_imgs_position {
-          $start_position_x: -28vw;
-          $start_position_y: 13vw;
+          $start_position_x: -480px;
+          $start_position_y: 250px;
+          $position_scale: 2;
 
           // 第一列
           .imgs_1 {
-            transform: translate($start_position_x, $start_position_y) scale(2);
+            transform: translate($start_position_x, $start_position_y) scale($position_scale);
           }
 
           .imgs_5 {
-            transform: translate($start_position_x, $start_position_y + 19) scale(2);
+            transform: translate($start_position_x, $start_position_y + 280) scale($position_scale);
           }
 
           // 第二列
           .imgs_2 {
-            transform: translate($start_position_x + 11, $start_position_y) scale(2);
+            transform: translate($start_position_x + 178, $start_position_y) scale($position_scale);
           }
 
           .imgs_6 {
-            transform: translate($start_position_x + 11,
-                $start_position_y + 10.4) scale(2);
+            transform: translate($start_position_x + 178,
+                $start_position_y + 158) scale($position_scale);
           }
 
           .imgs_7 {
-            transform: translate($start_position_x + 11,
-                $start_position_y + 24.4) scale(2);
+            transform: translate($start_position_x + 178,
+                $start_position_y + 288) scale($position_scale);
           }
 
           // 第三列
           .imgs_3 {
-            transform: translate($start_position_x + 25, $start_position_y) scale(2);
+            transform: translate($start_position_x + 412, $start_position_y) scale($position_scale);
           }
 
           .imgs_9 {
-            transform: translate($start_position_x + 25, $start_position_y + 7) scale(2);
+            transform: translate($start_position_x + 412, $start_position_y + 118) scale($position_scale);
           }
 
           .imgs_10 {
-            transform: translate($start_position_x + 25, $start_position_y + 19) scale(2);
+            transform: translate($start_position_x + 412, $start_position_y + 268) scale($position_scale);
           }
 
           // 第四列
           .imgs_12 {
-            transform: translate($start_position_x + 38.5, $start_position_y) scale(2);
+            transform: translate($start_position_x + 640, $start_position_y) scale($position_scale);
           }
 
           .imgs_13 {
-            transform: translate($start_position_x + 38.5,
-                $start_position_y + 14.4) scale(2);
+            transform: translate($start_position_x + 640,
+                $start_position_y + 218) scale($position_scale);
           }
 
+          // 第五列
           .imgs_15 {
-            transform: translate($start_position_x + 47.5, $start_position_y) scale(2);
+            transform: translate($start_position_x + 798, $start_position_y) scale($position_scale);
           }
 
           .imgs_16 {
-            transform: translate($start_position_x + 47.5,
-                $start_position_y + +16.7) scale(2);
+            transform: translate($start_position_x + 798,
+                $start_position_y + +238) scale($position_scale);
           }
         }
       }

@@ -143,8 +143,4 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@media screen and (min-width: 1366px) {
-  @import "./LogAnimation/index.scss";
-  @import "./CardsAnimation/index.scss";
-}
 </style>

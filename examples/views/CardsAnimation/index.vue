@@ -278,7 +278,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "./index.scss";
-// @media screen and (min-width: 1200px) {
-//   @import "./index.scss";
-// }
+@media screen and (min-width: 1366px) {
+  @import "./index.scss";
+}
 </style>
