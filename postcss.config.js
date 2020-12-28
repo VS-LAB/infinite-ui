@@ -2,7 +2,7 @@ module.exports = {
   plugins: {
     'postcss-px-to-viewport': {
       unitToConvert: 'px',
-      viewportWidth: 1920, // ui设计图为1920*1080的屏幕
+      viewportWidth: 1366, // ui设计图为1920*1080的屏幕 1920 
       unitPrecision: 5,
       propList: ['*'],
       viewportUnit: 'vw',

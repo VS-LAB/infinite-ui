@@ -59,6 +59,7 @@
   $footer_text_x_position : calc(-50% + 32px);
 
   .footer-text {
+    white-space: nowrap;
     font-size: 30px;
     color: #222222;
     letter-spacing: 68px;

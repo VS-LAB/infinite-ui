@@ -1,3 +1,5 @@
+$typeArea:1220px;
+
 .anime-container {
   user-select: none;
 
@@ -23,11 +25,12 @@
     z-index: 2;
     left: 0;
     top: 0;
-    width: 100%;
+    width: calc(100% + 17px);
     height: 100vh;
     box-sizing: border-box;
     overflow: hidden auto;
     opacity: 0;
+    transform: translateX(17px);
 
     &-placeholder {
       height: 400vh;
@@ -76,7 +79,7 @@
 
     // 组件视图区域 start
     .component_view {
-      width: 85%;
+      width: $typeArea;
       height: 100vh;
       position: relative;
       z-index: 1;
@@ -101,8 +104,8 @@
       }
 
       .component_view-notebook-anime_start {
+        width: $typeArea;
         transform: translate(-50%, -50%);
-        width: 85%;
       }
 
       &-imgs_padding {
@@ -132,7 +135,6 @@
           opacity: 0;
           background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff);
           z-index: 1;
-          pointer-events: none;
         }
       }
 
@@ -159,7 +161,6 @@
 
       &-imgs_container {
         height: 100%;
-        pointer-events: none;
         scrollbar-width: none;
         /* firefox */
         -ms-overflow-style: none;

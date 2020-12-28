@@ -233,9 +233,7 @@ export default {
             setTimeout(() => {
               this.lastAnimeCompile = !reversal
               this.animeContinue = false
-              this.$nextTick(() => {
-                this.$refs.replaceScrollRef.focus()
-              })
+
               if (reversal) {
                 document.querySelector('.imgs_content_9').style.display = 'none'
               }
@@ -270,7 +268,6 @@ export default {
         if ((el.scrollTop === 0 && wheelDistance > 0) || (scrollTopSpace - el.scrollTop < 1 && wheelDistance < 0) || this.lastAnimeCompile || this.animeContinue) {
           this.padScrollSwitch = false
         }
-        this.$refs.replaceScrollRef.focus()
         event.stopPropagation()
         event.cancelBubble = true
       }
@@ -281,4 +278,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "./index.scss";
+// @media screen and (min-width: 1200px) {
+//   @import "./index.scss";
+// }
 </style>
