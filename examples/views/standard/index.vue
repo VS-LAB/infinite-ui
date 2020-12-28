@@ -80,10 +80,6 @@
               :class="{'fade-in-box-1':showLine}"
             ></div>
             <div
-              class="infinite-standard-line_vertical left55"
-              :class="{'fade-in-box-2':showLine}"
-            ></div>
-            <div
               class="infinite-standard-line_vertical left55 "
               :class="{'fade-in-box-2':showLine}"
             ></div>
