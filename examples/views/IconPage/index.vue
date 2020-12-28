@@ -3,19 +3,11 @@
     <div :class="`infinite-home-animation-icon-page
       infinite-home-animation-icon-page-step${showAni}
       ${noShow ? 'infinite-home-animation-icon-page-noShow' : ''}`">
-      <div class="orange-circle"
-           :class="`${showDefaultBg} ${orangeBgAnimateName}`"
-           :style="{zIndex: bgAnimateNameZindex === 0 ? 1 : ''}"></div>
-      <div class="icon-bg-circle or-circle"
-           :class="orBgAnimateName"
-           :style="{zIndex: bgAnimateNameZindex === 1 ? 2 : ''}"></div>
-      <div class="icon-bg-circle blue-circle"
-           :class="blueBgAnimateName"
-           :style="{zIndex: bgAnimateNameZindex === 2 ? 3 : ''}"></div>
-      <div class="icon-bg-circle black-circle"
-           :class="blackBgAnimateName"
-           :style="{zIndex: bgAnimateNameZindex === 3 ? 4 : ''}"></div>
-      <div class="infinite-icon-page-content">
+      <div class="orange-circle" :class="`${showDefaultBg} ${orangeBgAnimateName}`" :style="{zIndex: bgAnimateNameZindex === 0 ? 1 : ''}"></div>
+      <div class="icon-bg-circle or-circle" :class="orBgAnimateName" :style="{zIndex: bgAnimateNameZindex === 1 ? 2 : ''}"></div>
+      <div class="icon-bg-circle blue-circle" :class="blueBgAnimateName" :style="{zIndex: bgAnimateNameZindex === 2 ? 3 : ''}"></div>
+      <div class="icon-bg-circle black-circle" :class="blackBgAnimateName" :style="{zIndex: bgAnimateNameZindex === 3 ? 4 : ''}"></div>
+      <div class="infinite-icon-page-content flex fdc aic jcc">
         <!-- title -->
         <div class="icons-introduce flex fdc aic jcfe"
              :class="showIconsIntroduce">
@@ -38,18 +30,21 @@
             <!-- 左侧菜单 -->
             <div class="infinite-icon-page-window-menu">
               <div class="infinite-icon-page-menu-top flex aic jcfs">
-                <Wireframe class="infinite-icon-page-menu-i"
-                           :style="{transform: `scale(${clientScale})`}" />
+                <div :class="`infinite-icon-page-menu-i`">
+                  <i :class="`icon-wireframe`" :style="{transform: `scale(${clientScale})`}"></i>  
+                </div>
                 <p>Wireframe</p>
               </div>
               <div class="infinite-icon-page-menu-center flex aic jcfs">
-                <Filled class="infinite-icon-page-menu-i"
-                        :style="{transform: `scale(${clientScale})`}" />
+                <div :class="`infinite-icon-page-menu-i`">
+                  <i :class="`icon-filled`" :style="{transform: `scale(${clientScale})`}"></i>  
+                </div>
                 <p>Filled</p>
               </div>
               <div class="infinite-icon-page-menu-bottom flex aic jcfs">
-                <Mixed class="infinite-icon-page-menu-i"
-                       :style="{transform: `scale(${clientScale})`}" />
+                <div :class="`infinite-icon-page-menu-i`">
+                  <i :class="`icon-mixed`" :style="{transform: `scale(${clientScale})`}"></i>  
+                </div>
                 <p>Mixed</p>
               </div>
             </div>
@@ -95,17 +90,9 @@
 <script>
 
 import EventBus from '@/EventBus'
-import Wireframe from './Icon/Wireframe'
-import Filled from './Icon/Filled'
-import Mixed from './Icon/Mixed'
 
 export default {
   name: 'IconPage',
-  components: {
-    Wireframe,
-    Filled,
-    Mixed
-  },
   props: {
     pageCurrentZindex: {
       type: Number,
@@ -127,26 +114,26 @@ export default {
           // icon: 'el-icon-warning-outline',
           icon: 'icon-annotate',
           component: 'Annotate',
-          text: 'Annotate',
+          text: 'annotate',
           other: 'hideIcon'
         },
         {
           // icon: 'el-icon-edit',
           icon: 'icon-edit',
           component: 'Edit',
-          text: 'Edit'
+          text: 'edit'
         },
         {
           // icon: 'el-icon-delete',
           icon: 'icon-delete',
           component: 'Delete',
-          text: 'Delete'
+          text: 'delete'
         },
         {
           // icon: 'el-icon-s-home',
           icon: 'icon-home',
           component: 'Home',
-          text: 'Home'
+          text: 'home'
         },
         {
           // icon: 'el-icon-refresh',
@@ -158,13 +145,13 @@ export default {
           // icon: 'el-icon-chat-dot-square',
           icon: 'icon-message',
           component: 'Message',
-          text: 'Message'
+          text: 'message'
         },
         {
           // icon: 'el-icon-date',
           icon: 'icon-calendar',
           component: 'Calendar',
-          text: 'Calendar'
+          text: 'calendar'
         },
         {
           // icon: 'el-icon-picture-outline',
@@ -175,42 +162,42 @@ export default {
         {
           icon: 'icon-history',
           component: 'History',
-          text: 'History'
+          text: 'history'
         },
         {
           icon: 'icon-mail',
           component: 'Mail',
-          text: 'Mail'
+          text: 'mail'
         },
         {
           icon: 'icon-share',
           component: 'Share',
-          text: 'Share'
+          text: 'share'
         },
         {
           icon: 'icon-search',
           component: 'Search',
-          text: 'Search'
+          text: 'search'
         },
         {
           icon: 'icon-set',
           component: 'Set',
-          text: 'Set'
+          text: 'set'
         },
         {
           icon: 'icon-download',
           component: 'Download',
-          text: 'Download'
+          text: 'download'
         },
         {
-          icon: 'icon-shut',
+          icon: 'icon-shutdown',
           component: 'Shut',
-          text: 'Shut'
+          text: 'shut down'
         },
         {
           icon: 'icon-file',
           component: 'File',
-          text: 'File'
+          text: 'file'
         }
       ], // 图标列表
       showAni: 0, // 动画状态

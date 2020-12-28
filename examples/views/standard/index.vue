@@ -305,7 +305,7 @@ export default {
           clearTimeout(hideMaskTimer)
           this.hideMask = false
           iconMask.style.left = `${c * 0.5 - c * 0.0869}px`
-          iconMask.style.top = `${d * 0.5 - c * 0.0174}px`
+          iconMask.style.top = `${d * 0.5 - c * 0.0162}px`
           EventBus.$emit('page2_goEndTop', reversal)
         }
         
