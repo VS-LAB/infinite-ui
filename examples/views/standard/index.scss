@@ -35,7 +35,10 @@
 }
 .infinite-standard {
   position: relative;
-  @extend .center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   .show-top {
     transform: translateY(0);
     opacity: 1;
