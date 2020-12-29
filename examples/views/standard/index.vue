@@ -305,8 +305,13 @@ export default {
           const d = document.body.clientHeight
           clearTimeout(hideMaskTimer)
           this.hideMask = false
-          iconMask.style.left = `${c * 0.5 - 167.5}px`
-          iconMask.style.top = `${d * 0.5 - 34}px`
+          let leftPosition = `${c * 0.5 - 167.5}px`
+          let topPosition = `${d * 0.5 - 34}px`
+          if (c <= 1366) { // 小屏幕使用vw单位，防止上下图标错位
+            leftPosition = '38.36806vw'
+          }
+          iconMask.style.left = leftPosition
+          iconMask.style.top = topPosition
           EventBus.$emit('page2_goEndTop', reversal)
         }
         
@@ -354,7 +359,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "./index.scss";
-@media screen and (min-width: 1366px) {
+@media screen and (min-width: 1440px) {
   @import "./index.scss";
 }
 </style>
