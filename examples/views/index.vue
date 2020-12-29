@@ -28,7 +28,7 @@ export default {
 @import "~highlight.js/styles/color-brewer.css";
 .el-container .el-main {
   width: 100%;
-  padding: 0 0 0 270px;
+  padding: 80px 0 0 270px;
   padding-bottom: 100px;
   box-sizing: border-box;
   overflow: initial;

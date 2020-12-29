@@ -11,7 +11,15 @@ module.exports = {
       minPixelValue: 1,
       mediaQuery: false,
       replace: true,
-      exclude: undefined,
+      exclude: [
+        /(\/|\\)node_modules/,
+        /(\/|\\)packages/,
+        /(\/|\\)examples(\/|\\)docs/,
+        /(\/|\\)examples(\/|\\)style/,
+        /(\/|\\)examples(\/|\\)views(\/|\\)index\.vue/,
+        /(\/|\\)examples(\/|\\)App\.vue/,
+        /(\/|\\)examples(\/|\\)components/
+      ],
       include: undefined,
       landscape: false,
       landscapeUnit: 'vw',
