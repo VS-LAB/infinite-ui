@@ -14,7 +14,8 @@
     >
       <div class="infinite-standard-top_title">{{showCardMoveToLeft ? '组件代码规范' : '组件设计规范'}}</div>
       <div class="infinite-standard-top_subTitle">
-        完善的设计指引、设计资源，帮助产品等非设计者快速产出高质量的产品原型帮助设计者完善产品设计、统一设计规范
+        {{showCardMoveToLeft ? '轻松查看以及调用组件代码，清晰的前端代码规范以及前端架构，快速封装代码，提高开发效率' : '完善的设计指引、设计资源，帮助产品等非设计者快速产出高质量的产品原型帮助设计者完善产品设计、统一设计规范'}}
+        
       </div>
     </div>
     <div
