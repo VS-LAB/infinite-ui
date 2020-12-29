@@ -1,10 +1,19 @@
 <template>
   <div class="loading">
     <div class="left">
-      <div class="inner"></div>
+      <div class="inner"
+        :class="{
+          'rotate-step-1': renderAni
+        }"
+      ></div>
     </div>
     <div class="right">
-      <div class="inner"></div>
+      <div class="inner"
+        :class="{
+          'rotate-step-1': renderAni,
+          'show-small-round-edge': show
+        }"
+      ></div>
     </div>
     <div class="content">
       <slot></slot>
@@ -16,7 +25,27 @@
 export default {
   name: 'Radius1',
   props: {
-
+    renderAni: Boolean
+  },
+  data () {
+    return {
+      show: false
+    }
+  },
+  watch: {
+    renderAni: function (val) {
+      if (val) {
+        this.showSmallRoundEdge()
+      }
+    }
+  },
+  methods: {
+    showSmallRoundEdge () {
+      const _this = this
+      setTimeout(()=>{
+        _this.show = true
+      }, 320)
+    }
   }
 }
 </script>
@@ -24,17 +53,15 @@ export default {
 <style lang='scss' scoped>
 
 $radiusColor1: #AC7AFF;
-// $width: 5.21vw;
-// // $radius:0.5em;
-// $radius:1vw;
-
 $width: 100 * 2px;
 $radius: 30px;
+$animtion-time: 0.4s;
 
 .loading {
   width: $width;
   height: $width;
   position: relative;
+  transform: rotate(-190deg);
 }
 
 .loading .content {
@@ -43,10 +70,9 @@ $radius: 30px;
   height: $width - $radius;
   background-color: white;
   border-radius: 50%;
-  left: $radius / 2;
+  left: $radius/2;
   top: $radius/2;
   line-height: $width;
-  text-align: center;
   text-align: center;
   display: flex;
   align-items: center;
@@ -69,30 +95,53 @@ $radius: 30px;
 
 .right {
   border-radius: 0 $width $width 0;
+  margin-left: -0.1px;
 }
 
 .left .inner,
 .right .inner {
-    content: "";
-    position: absolute;
-    display: block;
-    width: $width / 2;
-    height: $width;
-    background-color: white;
-    border-radius: $width 0 0 $width;
-    background-color: $radiusColor1;
+  content: "";
+  position: absolute;
+  display: block;
+  width: $width / 2;
+  height: $width;
+  background-color: white;
+  border-radius: $width 0 0 $width;
+  background-color: $radiusColor1;
 }
 
 .left::before,
 .right::before {
+  content: "";
+  position: absolute;
+  display: block;
+  width: $radius / 2;
+  height: $radius / 2;
+  border-radius: 50%;
+  background-color: $radiusColor1;
+  left: -$radius/4;
+}
+
+.left .inner {
+  transform-origin: right center;
+  transition: all 0.8 * $animtion-time linear;
+  transform: rotateZ(180deg);
+  position: relative;
+  &::before{
     content: "";
-    position: absolute;
-    display: block;
     width: $radius / 2;
     height: $radius / 2;
+    background: $radiusColor1;
+    position: absolute;
     border-radius: 50%;
-    background-color: $radiusColor1;
-    left: -$radius/4;
+    display: block;
+    bottom: 0;
+    right: -$radius/4;
+    z-index: 1;
+  }
+  &.rotate-step-1{
+    transform: rotateZ(0);
+  };
 }
 
 .right .inner {
@@ -100,7 +149,11 @@ $radius: 30px;
   position: absolute;
   display: block;
   border-radius: 0 $width $width 0;
+  transform-origin: left center;
+  transition: all linear 0.2*$animtion-time 0.8*$animtion-time;
+  transform: rotateZ(180deg);
   &::before{
+    display: none;
     content: "";
     width: $radius / 2;
     height: $radius / 2;
@@ -108,44 +161,16 @@ $radius: 30px;
     position: absolute;
     top: 0;
     border-radius: 50%;
-    display: block;
     left: -$radius/4;
     z-index: 1;
   };
-}
-.left .inner {
-  transform-origin: right center;
-  transform: rotateZ(135deg);
-  position: relative;
-  &::before{
-    content: "";
-    width: $radius /2;
-    height: $radius/2;
-    background: $radiusColor1;
-    position: absolute;
-    bottom: 0;
-    border-radius: 50%;
-    display: block;
-    right:-$radius/4;
-    z-index: 1;
+  &.show-small-round-edge{
+    &::before{
+      display: block;
+    }
   };
-}
-
-.right .inner {
-  transform-origin: left center;
-  transform: rotateZ(-10deg);
-  position: relative;
-  &::after{
-    content: "";
-    width: $radius / 2;
-    height: $radius / 2;
-    background: $radiusColor1;
-    position: absolute;
-    bottom: 0;
-    border-radius: 50%;
-    display: block;
-    left: -$radius/4;
-    z-index: 1;
+  &.rotate-step-1{
+    transform: rotateZ(135deg);
   };
 }
 </style>

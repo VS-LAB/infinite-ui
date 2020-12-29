@@ -1,10 +1,14 @@
 <template>
   <div class="loading">
     <div class="left">
-      <div class="inner"></div>
+      <div class="inner"
+        :class="{
+          'rotate-step-1': renderAni
+        }"
+      ></div>
     </div>
     <div class="right">
-      <div class="inner"></div>
+      <div class="inner"/>
     </div>
     <div class="content">
       <slot></slot>
@@ -16,7 +20,27 @@
 export default {
   name: 'Radius1',
   props: {
-
+    renderAni: Boolean
+  },
+  data () {
+    return {
+      show: false
+    }
+  },
+  watch: {
+    renderAni: function (val) {
+      if (val) {
+        this.showSmallRoundEdge()
+      }
+    }
+  },
+  methods: {
+    showSmallRoundEdge () {
+      const _this = this
+      setTimeout(()=>{
+        _this.show = true
+      }, 320)
+    }
   }
 }
 </script>
@@ -24,29 +48,30 @@ export default {
 <style lang='scss' scoped>
 
 $radiusColor1: #4CA9FF;
-// $width: 3.52vw;
-// $radius:1vw;
-
 $width: 70 * 2px;
 $radius: 30px;
+$animtion-time: 0.4s;
 
 .loading {
   width: $width;
   height: $width;
   position: relative;
-  // margin: 1vw;
+  transform: rotate(45deg);
 }
 
 .loading .content {
-    position: absolute;
-    width: $width - $radius;
-    height: $width - $radius;
-    background-color: white;
-    border-radius: 50%;
-    left: $radius /2;
-    top: $radius/2;
-    line-height: $width;
-    text-align: center;
+  position: absolute;
+  width: $width - $radius;
+  height: $width - $radius;
+  background-color: white;
+  border-radius: 50%;
+  left: $radius/2;
+  top: $radius/2;
+  line-height: $width;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .left,
@@ -65,30 +90,53 @@ $radius: 30px;
 
 .right {
   border-radius: 0 $width $width 0;
+  margin-left: -0.1px;
 }
 
 .left .inner,
 .right .inner {
-    content: "";
-    position: absolute;
-    display: block;
-    width: $width / 2;
-    height: $width;
-    background-color: white;
-    border-radius: $width 0 0 $width;
-    background-color: $radiusColor1;
+  content: "";
+  position: absolute;
+  display: block;
+  width: $width / 2;
+  height: $width;
+  background-color: white;
+  border-radius: $width 0 0 $width;
+  background-color: $radiusColor1;
 }
 
 .left::before,
 .right::before {
-    // content: "";
-    // position: absolute;
-    // display: block;
-    // width: $radius;
-    // height: $radius;
-    // border-radius: 50%;
-    // background-color: $radiusColor1;
-    // left: -$radius/4;
+  content: "";
+  position: absolute;
+  display: block;
+  width: $radius / 2;
+  height: $radius / 2;
+  border-radius: 50%;
+  background-color: $radiusColor1;
+  left: -$radius/4;
+}
+
+.left .inner {
+  transform-origin: right center;
+  transition: all  $animtion-time linear;
+  transform: rotateZ(180deg);
+  position: relative;
+  &::before{
+    content: "";
+    width: $radius / 2;
+    height: $radius / 2;
+    background: $radiusColor1;
+    position: absolute;
+    border-radius: 50%;
+    display: block;
+    bottom: 0;
+    right: -$radius/4;
+    z-index: 1;
+  }
+  &.rotate-step-1{
+    transform: rotateZ(26deg);
+  };
 }
 
 .right .inner {
@@ -96,38 +144,27 @@ $radius: 30px;
   position: absolute;
   display: block;
   border-radius: 0 $width $width 0;
+  transform-origin: left center;
+  transform: rotateZ(180deg);
   &::before{
+    display: none;
     content: "";
-    width: $radius /2;
-    height: $radius /2;
+    width: $radius / 2;
+    height: $radius / 2;
     background: $radiusColor1;
     position: absolute;
     top: 0;
     border-radius: 50%;
-    display: block;
     left: -$radius/4;
     z-index: 1;
   };
-}
-.left .inner {
-  transform-origin: right center;
-  transform: rotateZ(-135deg);
-  &::before{
-    content: "";
-    width: $radius /2;
-    height: $radius /2 ;
-    background: $radiusColor1;
-    position: absolute;
-    top: 0;
-    border-radius: 50%;
-    display: block;
-    right: -$radius/4;
-    z-index: 1;
-  }
-}
-
-.right .inner {
-    transform-origin: left center;
-    transform: rotateZ(95deg);
+  &.show-small-round-edge{
+    &::before{
+      display: block;
+    }
+  };
+  &.rotate-step-1{
+    transform: rotateZ(135deg);
+  };
 }
 </style>

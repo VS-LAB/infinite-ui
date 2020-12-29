@@ -1,10 +1,19 @@
 <template>
   <div class="loading">
     <div class="left">
-      <div class="inner"></div>
+      <div class="inner"
+        :class="{
+          'rotate-step-1': renderAni
+        }"
+      ></div>
     </div>
     <div class="right">
-      <div class="inner"></div>
+      <div class="inner"
+        :class="{
+          'rotate-step-1': renderAni,
+          'show-small-round-edge': show
+        }"
+      ></div>
     </div>
     <div class="content">
       <slot></slot>
@@ -16,21 +25,43 @@
 export default {
   name: 'Radius1',
   props: {
-
+    renderAni: Boolean
+  },
+  data () {
+    return {
+      show: false
+    }
+  },
+  watch: {
+    renderAni: function (val) {
+      if (val) {
+        this.showSmallRoundEdge()
+      }
+    }
+  },
+  methods: {
+    showSmallRoundEdge () {
+      const _this = this
+      setTimeout(()=>{
+        _this.show = true
+      }, 320)
+    }
   }
 }
 </script>
 
 <style lang='scss' scoped>
 
-$radiusColor1: #FF8678 ;
-$width: 130 * 2px;
-$radius: 30px;
+$radiusColor1: #FF8678; // 圆形圈颜色
+$width: 130 * 2px;        // 外层宽度
+$radius: 30px;            // 间距
+$animtion-time: 0.4s;     // 动画时长
 
 .loading {
   width: $width;
   height: $width;
   position: relative;
+  transition: all;
 }
 
 .loading .content {
@@ -69,26 +100,48 @@ $radius: 30px;
 
 .left .inner,
 .right .inner {
-    content: "";
-    position: absolute;
-    display: block;
-    width: $width / 2;
-    height: $width;
-    background-color: white;
-    border-radius: $width 0 0 $width;
-    background-color: $radiusColor1;
+  content: "";
+  position: absolute;
+  display: block;
+  width: $width / 2;
+  height: $width;
+  background-color: white;
+  border-radius: $width 0 0 $width;
+  background-color: $radiusColor1;
 }
 
 .left::before,
 .right::before {
+  content: "";
+  position: absolute;
+  display: block;
+  width: $radius / 2;
+  height: $radius / 2;
+  border-radius: 50%;
+  background-color: $radiusColor1;
+  left: -$radius/4;
+}
+
+.left .inner {
+  transform-origin: right center;
+  transition: all 0.8 * $animtion-time linear;
+  transform: rotateZ(180deg);
+  position: relative;
+  &::before{
     content: "";
-    position: absolute;
-    display: block;
     width: $radius / 2;
     height: $radius / 2;
+    background: $radiusColor1;
+    position: absolute;
     border-radius: 50%;
-    background-color: $radiusColor1;
-    left: -$radius/4;
+    display: block;
+    bottom: 0;
+    right: -$radius/4;
+    z-index: 1;
+  }
+  &.rotate-step-1{
+    transform: rotateZ(0);
+  };
 }
 
 .right .inner {
@@ -96,7 +149,11 @@ $radius: 30px;
   position: absolute;
   display: block;
   border-radius: 0 $width $width 0;
+  transform-origin: left center;
+  transition: all linear 0.2*$animtion-time 0.8*$animtion-time;
+  transform: rotateZ(180deg);
   &::before{
+    display: none;
     content: "";
     width: $radius / 2;
     height: $radius / 2;
@@ -104,17 +161,16 @@ $radius: 30px;
     position: absolute;
     top: 0;
     border-radius: 50%;
-    display: block;
     left: -$radius/4;
     z-index: 1;
   };
-}
-.left .inner {
-  transform-origin: right center;
-}
-
-.right .inner {
-    transform-origin: left center;
+  &.show-small-round-edge{
+    &::before{
+      display: block;
+    }
+  };
+  &.rotate-step-1{
     transform: rotateZ(135deg);
+  };
 }
 </style>
