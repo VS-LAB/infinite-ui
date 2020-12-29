@@ -95,7 +95,7 @@ $animtion-time: 0.4s;
 
 .right {
   border-radius: 0 $width $width 0;
-  margin-left: -0.1px;
+  transform: translateX(-0.1PX);
 }
 
 .left .inner,
