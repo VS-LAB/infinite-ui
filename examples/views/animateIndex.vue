@@ -1,5 +1,8 @@
 <template>
   <div class="container">
+    <HeaderNav
+      :show-header-nav="showHeaderNav"
+    ></HeaderNav>
     <component ref="componnet"
                :style="{zIndex:100-index, position:'fixed',width:'100vw',height:'100vh'}"
                v-for="(component,index) in pageNameArr"
@@ -11,6 +14,7 @@
 </template>
 
 <script>
+import HeaderNav from '@/views/HeaderNav/index.vue'
 import LogAnimation from '@/views/LogAnimation/index.vue'
 import CardsAnimation from '@/views/CardsAnimation/index.vue'
 import Standard from '@/views/standard'
@@ -22,6 +26,7 @@ import { isFirefox } from '@/util'
 
 export default {
   components: {
+    HeaderNav,
     LogAnimation,
     CardsAnimation,
     Standard,
@@ -35,6 +40,7 @@ export default {
       animesFun: [],
       animeIndex: 0,
       completeAnimation: false,
+      showHeaderNav: false, // 是否展示顶部nav
       pageNameArr: ['LogAnimation', 'CardsAnimation', 'Standard', 'IconPage', 'ViewCharts', 'LastPage']
       // pageNameArr: ['LogAnimation', 'CardsAnimation', 'Standard', 'homeAnimation', 'LastPage'],
     }
@@ -50,6 +56,7 @@ export default {
       };
     },
     async next (step = 0) {
+      this.showHeaderNav = false
       this.completeAnimation = false
       const currAnimate = this.animesFun[this.animeIndex]
       const animateName = currAnimate.name
@@ -57,6 +64,7 @@ export default {
       this.completeAnimation = await currAnimate()
     },
     async prev () {
+      this.showHeaderNav = true
       this.completeAnimation = false
       const currAnimate = this.animesFun[this.animeIndex + 1]
       const animateName = currAnimate.name
@@ -71,7 +79,7 @@ export default {
         }
         if (animateName.includes('page4_animation_play_step7')) {
           this.$refs.componnet[this.$refs.componnet.length - 1].$el.style.zIndex = 98
-          if (isNext) {// 切换到最后一页需要提前将zindex设高，鼠标事件才能生效
+          if (isNext) { // 切换到最后一页需要提前将zindex设高，鼠标事件才能生效
             setTimeout(() => {
               this.$refs.componnet[this.$refs.componnet.length - 1].$el.style.zIndex = 101
             }, 1000)
@@ -120,6 +128,10 @@ export default {
           wheelDistance = e.detail
         }
         if (self.completeAnimation) {
+          // 首页时向上滚动也加载导航栏
+          if (wheelDistance > 0 && self.animeIndex === 0) { // 当滑轮向上滚动时
+            self.showHeaderNav = true
+          }
           if (wheelDistance > 0 && self.animeIndex >= 1) { // 当滑轮向上滚动时
             self.animeIndex -= 1
             self.prev()

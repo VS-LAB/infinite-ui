@@ -326,8 +326,30 @@ export default {
           clearInterval(timer)
         }
       }, 150)
+    },
+    // 窗口大小改变时的操作
+    listenResize () {
+      const _that = this
+      if (!_that.listenResize) {
+        _that.listenResize = true
+        setTimeout(() => {
+          const { iconMask } = _that.$refs
+          const c = document.body.clientWidth
+          const d = document.body.clientHeight
+          iconMask.style.left = `${c * 0.5 - 167.5}px`
+          iconMask.style.top = `${d * 0.5 - 34}px`
+          _that.listenResize = false
+        }, 400)
+      }
     }
+  },
+  mounted () {
+    window.addEventListener('resize', this.listenResize)  
+  },
+  beforeDestroy () {
+    window.removeEventListener('resize', this.listenResize)
   }
+ 
 }
 </script>
 <style lang="scss" scoped>
