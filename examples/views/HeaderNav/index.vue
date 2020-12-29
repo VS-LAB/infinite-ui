@@ -4,10 +4,12 @@
   >
     <div class="header-nav-container-inner"
       :class="isOpen ? 'header-nav-container-inner-show' : 'header-nav-container-inner-hide'">
+      <div class="header-nav-container-mask" 
+        :class="isOpen ? 'header-nav-container-mask-show' : 'header-nav-container-mask-hide'"
+        @click.stop="menuOpen"></div>
       <i class="icon-shutdown header-nav-container-inner-close" @click.stop="menuOpen"></i>
       <div class="header-nav-container-inner-bg"
-        :class="isOpen ? 'header-nav-container-inner-bg-show' : 'header-nav-container-inner-bg-hide'"
-        @click.stop="menuOpen"></div>
+        :class="isOpen ? 'header-nav-container-inner-bg-show' : 'header-nav-container-inner-bg-hide'"></div>
       <ul class="header-nav-container-inner-list" v-if="isOpen">
         <li class="header-nav-container-inner-list-li"
           v-for="(listItem, listIndex) of listTabTitle"
@@ -19,7 +21,6 @@
         >{{listItem.iconText}} {{listItem.text}}</li>
       </ul>
     </div>
-    <div class="header-nav-container-mask" :class="isOpen ? 'header-nav-container-mask-show' : 'header-nav-container-mask-hide'"></div>
     <div class="header-nav-container-logo">
       <img class="header-nav-container-logo-img"
         src="@/assets/logo.png"
@@ -50,6 +51,13 @@ export default {
     routerIndex: {
       type: Number,
       default: 0
+    }
+  },
+  watch: {
+    showHeaderNav (val) {
+      if (!val) {
+        this.isOpen = false
+      }
     }
   },
   data () {
