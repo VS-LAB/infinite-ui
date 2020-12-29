@@ -124,7 +124,6 @@ export default {
   },
   methods: {
     animation (ratio) {
-      console.log(ratio);
       this.ratio = ratio
       this.animeConfig.forEach((item) => {
         const message = this.isCrtSectionMessage(item.section)
@@ -159,7 +158,7 @@ export default {
     // 设置样式-画布
     canvasAnime (newRatio) {
       this.moveWhiteBackgroundAnime = {
-        transform: `translateY(-${this.getComputedData(0, 105, newRatio)}%)`
+        transform: `translateY(-${this.getComputedData(0, 102, newRatio)}%)`
       }
     },
     // 设置样式-logo_2

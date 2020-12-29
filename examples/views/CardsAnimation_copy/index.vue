@@ -16,10 +16,11 @@
       <div class="component_view">
         <img ref="componentViewNotebookRef"
              class="component_view-notebook"
-             :class="{
-               'component_view-notebook-anime_start':componentViewNotebookAnime
-             }"
+             :style="componentViewNotebookAnime"
              src="@/assets/component/notebook.png">
+        <!-- :class="{
+               'component_view-notebook-anime_start':componentViewNotebookAnime
+             }" -->
         <div class="component_view-container">
           <div class="component_view-imgs_padding">
             <div class="component_view-imgs-linear_gradient"
@@ -75,6 +76,18 @@ export default {
   data () {
     return {
       animeTime: 3000,
+      animeConfig: [
+        {
+          crtRatio: 0,
+          section: [0, 20],
+          animeFun: this.padAnime
+        },
+        {
+          crtRatio: 0,
+          section: [0, 20],
+          animeFun: this.cardAnime
+        }
+      ],
       animesFun: [this.page1_animeStep1, this.page1_animeStep4],
       // 图片数据
       imgCards: [{
@@ -134,7 +147,7 @@ export default {
       }],
       animeCanvasAnime: '', // 画布动画
       headerTextAnime: '', // 头部文案动画
-      componentViewNotebookAnime: '', // 笔记本动画
+      componentViewNotebookAnime: {}, // 笔记本动画
       tableImgsPosition: true, // 图片集合初始化位置
       scrollTop: 0,
       imgsAnimed: false, // 是否开启遮罩及其他imgs数据
@@ -150,7 +163,54 @@ export default {
   },
   methods: {
     animation (ratio) {
+      this.ratio = ratio
+      this.animeConfig.forEach((item) => {
+        const message = this.isCrtSectionMessage(item.section)
+        if (message.status) {
+          item.crtRatio = ratio
+          const newRatio = parseFloat(message.ratio.toFixed(2))
+          item.animeFun(newRatio)
+        } else if (message.position === 'top' && item.crtRatio !== item.section[0] && item.crtRatio !== 0) {
+          item.crtRatio = item.section[0]
+          item.animeFun(0)
+        } else if (message.position === 'bottom' && item.crtRatio !== item.section[1] && item.crtRatio !== 1) {
+          item.crtRatio = item.section[1]
+          item.animeFun(1)
+        }
+      })
       // console.log('第二个动画进度 ===' + ratio);
+    },
+    // 获取该区间滚动信息
+    isCrtSectionMessage (arr) {
+      const message = {
+        status: this.ratio >= arr[0] && this.ratio <= arr[1],//是否在区间内
+        ratio: (this.ratio - arr[0]) / (arr[1] - arr[0]),
+        position: null
+      }
+      if (!message.status) {
+        message.position = this.ratio < arr[0] ? 'top' : 'bottom'
+      }
+      return message
+    },
+    // 通用计算方法
+    getComputedData (start, end, ratio) {
+      return start - (start - end) * ratio
+    },
+    // 设置样式-电脑
+    padAnime (newRatio) {
+      console.log(`translate('-50%', -${this.getComputedData(100, 50, newRatio)}%)`);
+      this.componentViewNotebookAnime = {
+        width: `${this.getComputedData(4080, 1440, newRatio)}px`,
+        transform: `translate(-50%, ${this.getComputedData(100, -50, newRatio)}%)`
+      }
+    },
+    // 设置样式-卡片
+    cardAnime (newRatio) {
+      console.log(`translate('-50%', -${this.getComputedData(100, 50, newRatio)}%)`);
+      this.componentViewNotebookAnime = {
+        width: `${this.getComputedData(4080, 1440, newRatio)}px`,
+        transform: `translate(-50%, ${this.getComputedData(100, -50, newRatio)}%)`
+      }
     },
     // 头部文案动画
     page1_animeStep1 (reversal) {
@@ -176,7 +236,6 @@ export default {
     page1_animeStep2 (reversal) {
       return new Promise((resolve, reject) => {
         this.$nextTick(() => {
-          this.componentViewNotebookAnime = !reversal
           this.tableImgsPosition = reversal
           // 动画执行完成后
           this.$refs.componentViewNotebookRef.ontransitionend = (event) => {
