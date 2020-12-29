@@ -82,6 +82,10 @@
           <!-- end of 白色区域占位、透明部分 -->
         </div>
         <!-- end of 中间白色区域 -->
+        <div class="infinite-icon-page-step flex aic jcc">
+          <i v-for="(item, index) of 3" :key="index"
+            :class="listStepIndex === index ? 'infinite-icon-page-step-active' : ''"></i>
+        </div>
       </div>
     </div>
   </div>
@@ -206,6 +210,7 @@ export default {
       noShow: true,
       showIcon: false,
       bgAnimateNameZindex: 0,
+      listStepIndex: 0, // 动画在第几页
       animesFun: [this.page3_showAniStep2, this.page3_showAniStep3, this.page3_showAniStep4, this.page3_showAniStep5]
     }
   },
@@ -287,9 +292,10 @@ export default {
               _that.showAni = 4
               _that.showDefaultBg = ''
               _that.orBgAnimateName = ''
+              this.listStepIndex = 1
               resolve(true)
             }, 1500)
-          }, 500)
+          }, 100)
         } else {
           this.orBgAnimateName = 'circle-animate'
           this.bgAnimateNameZindex = 1
@@ -299,9 +305,10 @@ export default {
             setTimeout(_ => {
               _that.showAni = 2
               _that.blueBgAnimateName = ''
+              this.listStepIndex = 0
               resolve(true)
             }, 1500)
-          }, 500)
+          }, 100)
         }
       })
     },
@@ -318,9 +325,10 @@ export default {
             setTimeout(_ => {
               _that.showAni = 6
               _that.blueBgAnimateName = ''
+              this.listStepIndex = 2
               resolve(true)
             }, 1500)
-          }, 500)
+          }, 100)
         } else {
           this.blueBgAnimateName = 'circle-animate'
           this.bgAnimateNameZindex = 2
@@ -329,9 +337,10 @@ export default {
             setTimeout(_ => {
               _that.showAni = 4
               _that.blackBgAnimateName = ''
+              this.listStepIndex = 1
               resolve(true)
             }, 1500)
-          }, 500)
+          }, 100)
         }
       })
     },
@@ -362,7 +371,7 @@ export default {
 </script>
 <style lang='scss' scoped>
 @import "./index.scss";
-@media screen and (min-width: 1366px) {
+@media screen and (min-width: 1440px) {
   @import "./index.scss";
 }
 </style>

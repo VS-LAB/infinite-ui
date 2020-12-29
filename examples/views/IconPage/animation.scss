@@ -71,29 +71,24 @@
 
 @keyframes labelOfIconBeat1 {
   0% {
-    top: -14px;
-    left: -6px;
+    transform: translate(-6px, -14px);
     opacity: 0;
   }
   1% {
-    top: -14px;
-    left: -6px;
+    transform: translate(-6px, -14px);
     opacity: 0;
     color: rgba(255,118,53,1);
   }
   5% {
-    top: -14px;
-    left: -6px;
+    transform: translate(-6px, -14px);
     opacity: 0;
   }
   15% {
-    top: 0px;
-    left: 0px;
+    transform: translate(0, 0);
     opacity: 1;
   }
   100% {
-    top: 0px;
-    left: 0px;
+    transform: translate(0, 0);
     opacity: 1;
     color: rgba(255,118,53,1);
   }
@@ -101,31 +96,26 @@
 
 @keyframes labelOfIconBeat3 {
   0% {
-    top: -14px;
-    left: -6px;
+    transform: translate(-6px, -14px);
     opacity: 0;
     color: rgba(24,144,255,1);
   }
   1% {
-    top: -14px;
-    left: -6px;
+    transform: translate(-6px, -14px);
     opacity: 0;
   }
   // 1~5是白色从出现到完全遮挡时间
   5% {
-    top: -14px;
-    left: -6px;
+    transform: translate(-6px, -14px);
     opacity: 0;
   }
   15% {
-    top: 0px;
-    left: 0px;
+    transform: translate(0, 0);
     opacity: 1;
     color: rgba(24,144,255,1);
   }
   100% {
-    top: 0px;
-    left: 0px;
+    transform: translate(0, 0);
     opacity: 1;
     color: rgba(24,144,255,1);
   }
@@ -133,31 +123,26 @@
 
 @keyframes labelOfIconBeat5 {
   0% {
-    top: -14px;
-    left: -6px;
+    transform: translate(-6px, -14px);
     opacity: 0;
     color: rgba(48,49,51,1);
   }
   1% {
-    top: -14px;
-    left: -6px;
+    transform: translate(-6px, -14px);
     opacity: 0;
   }
   // 1~5是白色从出现到完全遮挡时间
   5% {
-    top: -14px;
-    left: -6px;
+    transform: translate(-6px, -14px);
     opacity: 0;
   }
   15% {
-    top: 0px;
-    left: 0px;
+    transform: translate(0, 0);
     opacity: 1;
     color: rgba(48,49,51,1);
   }
   100% {
-    top: 0px;
-    left: 0px;
+    transform: translate(0, 0);
     opacity: 1;
     color: rgba(48,49,51,1);
   }
