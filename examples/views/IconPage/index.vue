@@ -362,7 +362,7 @@ export default {
 </script>
 <style lang='scss' scoped>
 @import "./index.scss";
-@media screen and (min-width: 1366px) {
+@media screen and (min-width: 1440px) {
   @import "./index.scss";
 }
 </style>

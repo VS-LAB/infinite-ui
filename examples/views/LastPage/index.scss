@@ -55,7 +55,7 @@
     margin-top: 60px;
     .title {
       font-family: PingFangSC-Semibold;
-      font-size: 56px;
+      font-size: 58px;
       color: #222;
     }
     .subTitle {
@@ -126,6 +126,12 @@
     font-family: PingFangSC-Regular;
     font-size: 14px;
     color: #222;
+  }
+}
+
+@media screen and (max-width: 1366px) {
+  .explain-footer {
+    bottom: 20px;
   }
 }
 
