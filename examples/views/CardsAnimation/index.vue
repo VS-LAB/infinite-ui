@@ -26,7 +26,7 @@
                  :class="imgsAnimed?'imgs_animed':''">
               <div ref="componentViewImgsContainerRef"
                    class="component_view-imgs_container"
-                   :style="{overflow:isOverflowAutoPad?'hidden auto':''}">
+                   :style="{overflowY:isOverflowAutoPad?'auto':''}">
                 <div class="imgs_container-table"
                      :class="{
                        'table_imgs_position':tableImgsPosition
@@ -175,11 +175,13 @@ export default {
           this.componentViewNotebookAnime = !reversal
           this.tableImgsPosition = reversal
           // 动画执行完成后
-          this.$refs.componentViewNotebookRef.ontransitionend = (event) => {
-            if (event.propertyName == 'transform') {
-              resolve(true)
-            }
-          }
+          setTimeout(() => {
+            resolve(true)
+          }, 1200)
+          // this.$refs.componentViewNotebookRef.ontransitionend = (event) => {
+          //   if (event.propertyName == 'transform') {
+          //   }
+          // }
         })
       })
     },
@@ -249,7 +251,9 @@ export default {
     onScroll (e) {
       let first = this.$refs.replaceScrollRef
       let second = this.$refs.componentViewImgsContainerRef
-      second.scrollTop = first.scrollTop / (first.scrollHeight - first.clientHeight) * (second.scrollHeight - second.clientHeight)
+      const secondHeightDifference = second.children[0].clientHeight - second.clientHeight
+      const scrollTop = first.scrollTop / (first.children[0].clientHeight - first.clientHeight) * secondHeightDifference
+      second.scrollTop = scrollTop >= secondHeightDifference ? secondHeightDifference : scrollTop
     }
   },
   mounted () {
