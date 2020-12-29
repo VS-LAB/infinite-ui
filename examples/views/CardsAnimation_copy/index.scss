@@ -1,0 +1,363 @@
+$typeArea:1440px;
+
+.anime-container {
+  user-select: none;
+
+  .img_connect {
+    opacity: 0;
+    position: fixed;
+    pointer-events: none;
+    border-radius: 20px;
+    box-shadow: 0px 18px 104px #dfe5f6;
+  }
+
+  .img_connect-anime_start {
+    width: 650px !important;
+    height: 450px !important;
+    left: 50% !important;
+    top: 50% !important;
+    margin-top: 136px;
+    transform: translate(-50%, -50%);
+  }
+
+  // 替代滚动
+  .replace_scroll {
+    position: fixed;
+    z-index: 2;
+    left: 0;
+    top: 0;
+    width: calc(100% + 17px);
+    height: 100vh;
+    box-sizing: border-box;
+    overflow: hidden auto;
+    opacity: 0;
+    transform: translateX(17px);
+
+    &-placeholder {
+      height: 400vh;
+    }
+  }
+
+  // 画布动画
+  .anime-canvas-anime_start {
+    transform: translateY(-150vh);
+  }
+
+  // 画布
+  .anime-canvas {
+    height: 100%;
+    background: #f3f7fe;
+    // overflow: hidden;
+    overflow: auto;
+    transition: all 0.8s;
+
+    // 头部文案动画 start
+    .header_text {
+      position: absolute;
+      width: 100%;
+      padding-top: 130px;
+      text-align: center;
+      transition: all 0.8s;
+      z-index: 1;
+
+      h1 {
+        margin: 0 0 32px;
+        font-size: 60px;
+      }
+
+      p {
+        color: rgba(34, 34, 34, 0.6);
+        font-size: 20px;
+        line-height: 32px;
+        white-space: break-spaces;
+      }
+    }
+
+    .header_text-anime_start {
+      transform: translateY(-100vh);
+    }
+
+    // 头部文案动画 end
+
+    // 组件视图区域 start
+    .component_view {
+      width: 100%;
+
+      height: 100vh;
+      position: relative;
+      z-index: 1;
+      margin: 0 auto;
+      box-sizing: border-box;
+      text-align: center;
+
+      &-container {
+        width: $typeArea;
+        margin: 0 auto;
+        position: fixed;
+        padding-bottom: $typeArea * 778 / 1440;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      &-notebook {
+        width: 4080px;
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        transition: all 1s;
+        transform: translate(-50%, 90vh);
+      }
+
+      .component_view-notebook-anime_start {
+        width: $typeArea;
+        transform: translate(-50%, -50%);
+      }
+
+      &-imgs_padding {
+        padding: 3.4% 15.3% 7.5%;
+        box-sizing: border-box;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 2;
+      }
+
+      &-imgs-linear_gradient {
+        height: 100%;
+        position: relative;
+
+        &::before {
+          content: "";
+          width: 100%;
+          height: 24%;
+          display: block;
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          transition: all 0.8s;
+          opacity: 0;
+          background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff);
+          z-index: 1;
+        }
+      }
+
+      // 图片集合动画完成后
+      .imgs_animed {
+        &::before {
+          opacity: 1;
+        }
+
+        .imgs_container-table {
+          &-tr {
+            &:nth-child(n + 2) {
+              opacity: 1;
+            }
+
+            &-td {
+              img {
+                transition: inherit;
+              }
+            }
+          }
+        }
+      }
+
+      &-imgs_container {
+        height: 100%;
+        scrollbar-width: none;
+
+        /* firefox */
+        -ms-overflow-style: none;
+
+        /* IE 10+ */
+        &::-webkit-scrollbar {
+          display: none;
+        }
+
+        .imgs_container-table {
+          width: 100%;
+          padding-top: 1%;
+
+          &-tr {
+            display: flex;
+            padding: 0 1%;
+            transition: all 0.8s;
+
+            &:nth-child(7) {
+              padding-bottom: 20px;
+            }
+
+            &:nth-child(n + 2) {
+              opacity: 0;
+            }
+
+            &+.imgs_container-table-tr {
+              margin-top: -7px;
+            }
+
+            &.imgs-col_5 {
+              .imgs_container-table-tr-td:nth-child(1) {
+                width: 18.4%;
+              }
+
+              .imgs_container-table-tr-td:nth-child(2) {
+                width: 24.1%;
+              }
+
+              .imgs_container-table-tr-td:nth-child(3) {
+                width: 23.3%;
+              }
+
+              .imgs_container-table-tr-td:nth-child(4) {
+                width: 15.9%;
+              }
+
+              .imgs_container-table-tr-td:nth-child(5) {
+                width: 18.3%;
+              }
+            }
+
+            &.imgs-col_3 {
+              .imgs_container-table-tr-td:nth-child(1) {
+                width: 24.14%;
+              }
+
+              .imgs_container-table-tr-td:nth-child(2) {
+                width: 40.08%;
+              }
+
+              .imgs_container-table-tr-td:nth-child(3) {
+                width: 35.78%;
+              }
+            }
+
+            &-td {
+              padding: 1%;
+              box-sizing: border-box;
+              position: relative;
+              vertical-align: top;
+
+              img {
+                position: relative;
+                width: 100%;
+                transition: all 1s;
+                transform-origin: 0 0;
+                box-shadow: 6px 6px 24px 0px #dfe5f6;
+                border-radius: 10px;
+
+                +img {
+                  margin-top: 12px;
+                }
+              }
+
+              .imgs_1,
+              .imgs_5,
+              .imgs_16 {
+                transition-duration: 1.2s;
+              }
+
+              .imgs_2,
+              .imgs_6,
+              .imgs_15 {
+                transition-duration: 0.8s;
+              }
+
+              .imgs_7,
+              .imgs_3,
+              .imgs_13 {
+                transition-duration: 0.9s;
+              }
+
+              .imgs_7 {
+                width: 602px;
+              }
+
+              .imgs_18,
+              .imgs_19 {
+                width: 390px;
+              }
+
+              .imgs_23 {
+                width: 196px;
+                left: 88px;
+              }
+
+              .imgs_24 {
+                width: 546px;
+                left: 176px;
+              }
+            }
+          }
+        }
+
+        .table_imgs_position {
+          $start_position_x: -480px;
+          $start_position_y: 250px;
+          $position_scale: 2;
+
+          // 第一列
+          .imgs_1 {
+            transform: translate($start_position_x, $start_position_y) scale($position_scale);
+          }
+
+          .imgs_5 {
+            transform: translate($start_position_x, $start_position_y + 280) scale($position_scale);
+          }
+
+          // 第二列
+          .imgs_2 {
+            transform: translate($start_position_x + 178, $start_position_y) scale($position_scale);
+          }
+
+          .imgs_6 {
+            transform: translate($start_position_x + 178,
+                $start_position_y + 158) scale($position_scale);
+          }
+
+          .imgs_7 {
+            transform: translate($start_position_x + 178,
+                $start_position_y + 348) scale($position_scale);
+          }
+
+          // 第三列
+          .imgs_3 {
+            transform: translate($start_position_x + 412, $start_position_y) scale($position_scale);
+          }
+
+          .imgs_9 {
+            transform: translate($start_position_x + 412, $start_position_y + 118) scale($position_scale);
+          }
+
+          .imgs_10 {
+            transform: translate($start_position_x + 412, $start_position_y + 278) scale($position_scale);
+          }
+
+          // 第四列
+          .imgs_12 {
+            transform: translate($start_position_x + 640, $start_position_y) scale($position_scale);
+          }
+
+          .imgs_13 {
+            transform: translate($start_position_x + 640,
+                $start_position_y + 218) scale($position_scale);
+          }
+
+          // 第五列
+          .imgs_15 {
+            transform: translate($start_position_x + 798, $start_position_y) scale($position_scale);
+          }
+
+          .imgs_16 {
+            transform: translate($start_position_x + 798,
+                $start_position_y + +238) scale($position_scale);
+          }
+        }
+      }
+    }
+
+    // 组件视图区域 end
+  }
+}

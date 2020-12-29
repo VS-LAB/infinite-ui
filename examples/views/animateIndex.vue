@@ -95,7 +95,12 @@ export default {
     })
     // if()
     this.animesFun = animesFun
-    this.next()
+    this.$nextTick(() => {
+      setTimeout(() => {
+        this.next()
+      }, 500)
+    })
+
     function debounce (fn, wait, immediate) {
       immediate = immediate || false
       var timer = null

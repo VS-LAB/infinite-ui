@@ -23,6 +23,7 @@ import Layout from '@/views'
 import Standard from '@/views/standard'
 import lastPage from '@/views/LastPage/index.vue'
 import animateIndex from '@/views/animateIndex'
+import scrollContainer from '@/views/scrollContainer'
 import viewChart from '@/views/ViewCharts/Index3.vue'
 import { getFileList } from './generate'
 
@@ -62,6 +63,11 @@ const routes = [
     path: '/last',
     name: '/homelast',
     component: lastPage
+  },
+  {
+    path: '/scrollContainer',
+    name: '/scrollContainer',
+    component: scrollContainer
   },
   {
     path: '/view',

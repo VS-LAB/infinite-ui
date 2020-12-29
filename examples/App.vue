@@ -9,7 +9,7 @@
 <template>
   <div style="height: 100%">
     <el-container :class="{ 'home-container': isFixed }">
-      <el-header v-if="$route.name !== '/homeAnimationIndex'"
+      <el-header v-if="!['/homeAnimationIndex','/scrollContainer'].includes($route.name)"
                  height="80"
                  :class="{ 'header-fixed': !isFixed }">
         <header-model></header-model>

@@ -1,0 +1,128 @@
+// 画布
+.anime_container {
+  height: 100%;
+  user-select: none;
+
+  // 雪碧图
+  .anime_log_container {
+    width: 700px;
+    height: 394px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    // transition: all 0.9s;
+
+    &-drawing {
+      width: 100%;
+    }
+  }
+
+  // logo初始化大小
+  .logo_init_size {
+    width: auto;
+    height: auto;
+
+    .anime_log_container-drawing {
+      width: 550px;
+    }
+  }
+
+  // 雪碧图移动至左上角
+  .logo_init_position {
+    transform: translate(-25%, calc(-50% * 0.43)) scale(0.57);
+    left: 20%;
+    top: 0;
+  }
+
+  // 雪碧图移动至隐藏
+  .logo_move_hidden {
+    transition: all 0.3s;
+    transform: translate(-25%, -100%) scale(0.57);
+  }
+
+  // 倒动画
+  &.reversal {
+    .logo_init_position {
+      transition: all 0.3s;
+    }
+  }
+
+
+  // 雪碧图end
+
+  // 创造无限可能 start
+  $footer_text_x_position : calc(-50% + 32px);
+
+  .footer-text {
+    white-space: nowrap;
+    font-size: 30px;
+    color: #222222;
+    letter-spacing: 68px;
+    text-align: center;
+    position: fixed;
+    z-index: 2;
+    left: 50%;
+    top: 50%;
+    transform: translate($footer_text_x_position, calc(-50% + 160px));
+    opacity: 0;
+    // transition: all 0.4s;
+  }
+
+  // 创造无限可能动画开始n
+  .footer-text-anime_start {
+    transform: translate($footer_text_x_position, calc(-50% + 120px));
+    opacity: 1;
+  }
+
+  // 创造无限可能动画终点
+  .footer-text-anime_end {
+    transform: translate($footer_text_x_position, calc(-50% + 80px));
+    opacity: 0;
+  }
+
+  // 创造无限可能 end
+
+  // 白色背景 start
+  .move-white-background {
+    height: 100%;
+    background: #fff;
+    box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.1);
+  }
+
+  .move-white-background-anime_start {
+    transform: translateY(-105%);
+  }
+
+  // 白色背景 end
+
+  // 菜單menu start
+  .header-model {
+    display: flex;
+    height: 80px;
+    line-height: 80px;
+    position: fixed;
+    left: 44.4%;
+    top: 0;
+    z-index: 1;
+    color: #222222;
+
+    .header-menu {
+      font-size: 16px;
+      cursor: pointer;
+      padding: 0 30px;
+
+      &.active {
+        color: #FF7635;
+      }
+    }
+  }
+
+
+  // 菜單menu end
+
+}
