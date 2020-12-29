@@ -10,9 +10,15 @@
       </dl>
     </div>
     <div class="radius-content flex flex-1">
-      <Radius>
-        <Radius1>
-          <Radius2 />
+      <Radius :renderAni="renderClass" :class="{
+        'render': renderClass
+      }">
+        <Radius1 :renderAni="renderClass" :class="{
+          'render': renderClass
+        }">
+          <Radius2 :renderAni="renderClass" :class="{
+            'render': renderClass
+          }" />
         </Radius1>
       </Radius>
     </div>
@@ -31,6 +37,7 @@ export default {
   },
   data () {
     return {
+      renderClass: false,
       legend: [{
         id: 1,
         color: '#FF8678',
@@ -47,6 +54,11 @@ export default {
         name: '增量',
         value: '33.6%'
       }]
+    }
+  },
+  methods: {
+    render () {
+      this.renderClass = true
     }
   }
 }
