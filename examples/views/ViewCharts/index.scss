@@ -73,7 +73,8 @@
   top: 50%;
   width:1253px;
   height: 880px;
-  transform: translate(-50%,calc(-50%));
+  transform: translate(-50%,-50%);
+  transform-origin: left top;
 }
 
 .header{
