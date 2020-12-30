@@ -18,9 +18,8 @@ import HeaderNav from '@/views/HeaderNav/index.vue'
 import LogAnimation from '@/views/LogAnimation/index.vue'
 import CardsAnimation from '@/views/CardsAnimation/index.vue'
 import Standard from '@/views/standard'
-import ViewChart from '@/views/ViewCharts/Index.vue'
 import LastPage from '@/views/LastPage/index.vue'
-import ViewCharts from '../views/ViewCharts/Index4'
+import ViewCharts from '../views/ViewCharts/Index'
 import IconPage from '@/views/IconPage'
 import { isFirefox } from '@/util'
 
@@ -30,7 +29,6 @@ export default {
     LogAnimation,
     CardsAnimation,
     Standard,
-    ViewChart,
     LastPage,
     ViewCharts,
     IconPage

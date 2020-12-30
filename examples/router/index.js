@@ -24,7 +24,7 @@ import Standard from '@/views/standard'
 import lastPage from '@/views/LastPage/index.vue'
 import animateIndex from '@/views/animateIndex'
 import scrollContainer from '@/views/scrollContainer'
-import viewChart from '@/views/ViewCharts/Index3.vue'
+import viewChart from '@/views/ViewCharts/Index.vue'
 import { getFileList } from './generate'
 
 const generateRouters = getFileList()
