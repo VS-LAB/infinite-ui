@@ -135,8 +135,6 @@
 import SliderItem from './Components/SlideItem'
 import EventBus from '@/EventBus'
 
-// import { MouseWheel } from './scroll'
-
 export default {
   name: 'viewChart',
   components: {
@@ -312,13 +310,27 @@ export default {
   },
   mounted () {
     const _this = this
+    const { showdebug } = this
+    if (showdebug) {
+      _this.page4_animation_play_step1()
+      setTimeout(() => {
+        _this.$refs.Bar[0].$refs.bar.render()
+        _this.$refs.RadialBar[0].$refs.RadialBar.render()
+        setTimeout(() => {
+          _this.$refs.smallline[0].$refs.line.render()
+          _this.$refs.bigLine[0].$refs.line.render()
+        }, 500)
+      }, 1000)
+    }
     EventBus.$on('page3_showAniStep5', (reversal) => {
       _this.page4_animation_play_step1()
       setTimeout(() => {
-        _this.$refs.smallline[0].$refs.line.render()
-        _this.$refs.bigLine[0].$refs.line.render()
         _this.$refs.Bar[0].$refs.bar.render()
         _this.$refs.RadialBar[0].$refs.RadialBar.render()
+        setTimeout(() => {
+          _this.$refs.smallline[0].$refs.line.render()
+          _this.$refs.bigLine[0].$refs.line.render()
+        }, 500)
       }, 1000)
     })
   },
@@ -377,14 +389,17 @@ export default {
       const stepDistance = (height - element.clientHeight) / 2 - top
       const stylesh = document.styleSheets[document.styleSheets.length - 1]
       stylesh.insertRule(`
-        .laptop.laptop-move-left-step1.test[data-v-75182f44] {
+        .laptop.laptop-move-left-step1.laptop-move-left-step3[data-v-75182f44] {
           transform: scale(1) translate(-50%, ${stepDistance}px);
         }
       `)
+      // element.style.transition = 'all 1s';
       if (!dirction) {
-        element.classList.add('test')
+        // element.classList.add('laptop-move-left-step3')
+        element.style.transform = `scale(1) translate(-50%, ${stepDistance}px)`
       } else {
-        element.classList.remove('test')
+        // element.classList.remove('laptop-move-left-step3')
+        element.style.transform = ``
       }
     },
     page4_animation_play_step5 (dirction) {
