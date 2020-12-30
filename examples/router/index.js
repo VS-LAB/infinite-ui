@@ -22,7 +22,7 @@ import animateIndex from '@/views/animateIndex'
 import { getFileList } from './generate'
 
 const generateRouters = getFileList()
-console.log(generateRouters);
+console.log(generateRouters)
 const routes = [
   // {
   //   path: '/scrollContainer',
@@ -32,7 +32,7 @@ const routes = [
   {
     path: '/',
     name: '/',
-    redirect: '/index',
+    redirect: '/index'
   },
   {
     path: '/index',
@@ -106,11 +106,7 @@ routes.push(...generateRouters)
 
 // 修复NavigationDuplicated 路由重复点击报错
 const originalPush = VueRouter.prototype.push
-<<<<<<< Updated upstream
-  VueRouter.prototype.push = function push(location) {
-=======
 VueRouter.prototype.push = function push (location) {
->>>>>>> Stashed changes
   return originalPush.call(this, location).catch(err => err)
 }
 Vue.use(VueRouter)

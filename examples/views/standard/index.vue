@@ -255,15 +255,26 @@ export default {
      * 5. 感叹号右移20px 其他部件上滑至透明
      */
     // 步骤1 显示头部与卡片 把上卡片的图片隐藏 当前卡片显示
-    page2_goShowTop () {
+    page2_goShowTop (reversal) {
       return new Promise((resolve, reject) => {
-        document.querySelector('.imgs_content_9').style.display = 'none'
-        document.querySelector('.infinite-standard-card_img').style.display = 'block'
-        document.querySelector('.infinite-standard-card-icon-gruy').style.display = 'flex'
-        this.showTop = !this.showTop
-        setTimeout(_ => {
-          resolve(true)
-        }, 1000)
+        if (!reversal) {
+          console.log('page2_goShowTop == ', document.querySelector('.imgs_content_9'))
+          document.querySelector('.imgs_content_9').style.display = 'none'
+          document.querySelector('.infinite-standard-card_img').style.display = 'block'
+          document.querySelector('.infinite-standard-card-icon-gruy').style.display = 'flex'
+          this.showTop = !this.showTop
+          setTimeout(_ => {
+            resolve(true)
+          }, 1000)
+        } else {
+          document.querySelector('.infinite-standard-card-icon-gruy').style.display = 'none'
+          document.querySelector('.imgs_content_9').style.display = 'block'
+          document.querySelector('.infinite-standard-card_img').style.display = 'none'
+          this.showTop = !this.showTop
+          setTimeout(_ => {
+            resolve(true)
+          }, 1000)
+        }
       })
     },
     // 步骤2 显示边框线

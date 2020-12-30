@@ -250,7 +250,11 @@ export default {
       })
     },
     // 第二步，橙色iconlist跳动出现
-    page3_showAniStep2 (reversal) {
+    async page3_showAniStep2 (reversal, executionType) {
+      console.log('page3_showAniStep2')
+      if (executionType) {
+        await this.page3_showAniStep1()
+      }
       return new Promise((resolve, reject) => {
         const m = document.querySelector('.infinite-standard-card-exclamatory-mark')
         const _that = this

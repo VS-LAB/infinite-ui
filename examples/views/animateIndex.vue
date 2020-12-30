@@ -1,6 +1,9 @@
 <template>
   <div class="container">
-    <HeaderNav :show-header-nav="showHeaderNav"></HeaderNav>
+    <HeaderNav :show-header-nav="showHeaderNav"
+      :close-header-inner="closeHeaderInner"
+      :router-index="routerIndex"
+      @goAnimationStep="goAnimationStep"></HeaderNav>
     <component ref="componnet"
                :style="{zIndex:100-index, position:'fixed',width:'100vw',height:'100vh'}"
                v-for="(component,index) in pageNameArr"
@@ -39,11 +42,77 @@ export default {
       animeIndex: 0,
       completeAnimation: false,
       showHeaderNav: false, // 是否展示顶部nav
+      closeHeaderInner: false,
+      routerIndex: 0, 
       pageNameArr: ['LogAnimation', 'CardsAnimation', 'Standard', 'IconPage', 'ViewCharts', 'LastPage']
       // pageNameArr: ['ScrollContainer', 'CardsAnimation', 'Standard', 'IconPage', 'ViewCharts', 'LastPage']
     }
   },
   methods: {
+    async goAnimationStep (typeName) {
+      console.log('typeName == ', typeName)
+      console.log('this.animesFun == ', this.animesFun)
+      console.log('this.animesFun[0].name == ', this.animesFun[0].name)
+      let stepIndex = 0
+      
+      switch (typeName) {
+        case 'Component':
+          this.animesFun.forEach((item, index) => {
+            if (item.name.includes('page1_animeStep1')) {
+              stepIndex = index
+              this.routerIndex = 1
+            }
+          })
+          break
+        case 'Icon':
+          this.animesFun.forEach((item, index) => {
+            if (item.name.includes('page3_showAniStep2')) {
+              stepIndex = index
+              this.routerIndex = 2
+            }
+          })
+          break
+        case 'Chart':
+          this.animesFun.forEach((item, index) => {
+            if (item.name.includes('page4_animation_play_step2')) {
+              stepIndex = index
+              this.routerIndex = 3
+            }
+          })
+          break
+      
+        default:
+          this.routerIndex = 0
+          break
+      }
+
+      if (stepIndex > this.animeIndex) {
+        let array = []
+        for (let i = 0; i < stepIndex; i++) {
+          array.push(this.animesFun[i]())
+        }
+        Promise.all(array).then((res) => {
+          console.log(res) // [ 0, 1, 2 ]
+        })
+
+        this.animeIndex = stepIndex
+        this.next(0, true)
+      } else {
+        this.closeHeaderInner = !this.closeHeaderInner
+        let array = []
+        for (let i = this.animesFun.length - 1; i > 0; i--) {
+          if (i < this.animeIndex + 1 && i > stepIndex) {
+            array.push(this.animesFun[i](true))
+          }
+        }
+        Promise.all(array).then((res) => {
+          console.log(res) 
+        })
+
+        this.animeIndex = stepIndex
+        this.prev()
+      };
+    },
     doStep (step) {
       if (!step) return
       this.animeIndex = this.animeIndex + step
@@ -53,13 +122,13 @@ export default {
         this.prev()
       };
     },
-    async next (step = 0) {
+    async next (step = 0, executionType) {
       this.showHeaderNav = false
       this.completeAnimation = false
       const currAnimate = this.animesFun[this.animeIndex]
       const animateName = currAnimate.name
       this.setComponentZindex(animateName, true)
-      this.completeAnimation = await currAnimate()
+      this.completeAnimation = await currAnimate(false, executionType)
     },
     async prev () {
       this.showHeaderNav = true

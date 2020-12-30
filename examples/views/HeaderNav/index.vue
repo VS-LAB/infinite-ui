@@ -48,6 +48,10 @@ export default {
       type: Boolean,
       default: false
     },
+    closeHeaderInner: {
+      type: Boolean,
+      default: false
+    },
     routerIndex: {
       type: Number,
       default: 0
@@ -58,6 +62,9 @@ export default {
       if (!val) {
         this.isOpen = false
       }
+    },
+    closeHeaderInner (val) {
+      this.isOpen = false
     }
   },
   data () {
@@ -89,22 +96,22 @@ export default {
         {
           text: '首页',
           iconText: 'Home',
-          click: () => { this.toPath() }
+          click: () => { this.toPath(1, 'Home') }
         },
         {
           text: '组件',
           iconText: 'Component',
-          click: () => { this.toPath() }
+          click: () => { this.toPath(1, 'Component') }
         },
         {
           text: '图标库',
           iconText: 'Icon',
-          click: () => { this.toPath() }
+          click: () => { this.toPath(1, 'Icon') }
         },
         {
           text: '可视化图表',
           iconText: 'Chart',
-          click: () => { this.toPath() }
+          click: () => { this.toPath(1, 'Chart') }
         }
       ]
     }
@@ -119,8 +126,12 @@ export default {
       this.isOpen = !this.isOpen
     },
     // 目前已有的跳转，都只能跳到组件文档页面
-    toPath () {
-      this.$router.push('/guide/installation')
+    toPath (type, typwName) {
+      if (type) {
+        this.$emit('goAnimationStep', typwName)
+      } else {
+        this.$router.push('/guide/installation')
+      }
     }
   },
   mounted () {
