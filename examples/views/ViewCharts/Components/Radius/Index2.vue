@@ -65,41 +65,9 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-@import '../../common.scss';
-.radius{
-  height: 162 * 2px;
-  margin: 0 48px;
-  .radius-content{
-    align-items: center;
-    justify-content: center;
-    transform: translate(20px, -10px);
-  }
-}
+@import "./Index2.scss";
 
-.legend{
-  display: flex;
-  flex-direction: column;
-  dl{
-    display: flex;
-    align-items: baseline;
-    margin-bottom: 32px;
-    dt{
-      width: 20px;
-      height: 20px;
-      border-radius: 6px;
-      margin-right: 20px;
-    }
-    dd{
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      .name{
-        font-size: 24px
-      }
-      .value{
-        font-size: 28px
-      }
-    };
-  };
+@media screen and (min-width: 1440px) {
+  @import "./Index2.scss";
 }
 </style>
