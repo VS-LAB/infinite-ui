@@ -45,7 +45,7 @@ export default {
         // 内容模块第一部分的特殊内容数据
         {
           title: '开发指南',
-          txt: '参看开发指南，一键调用前端组件库,快速完成界面设计',
+          txt: '参看开发指南，一键调用前端组件库，快速完成界面设计',
           tips: '了解详情',
           toPath: true,
           imgSrc: require('@/assets/base3.png')

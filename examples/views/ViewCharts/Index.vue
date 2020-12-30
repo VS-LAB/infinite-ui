@@ -329,12 +329,14 @@ export default {
     EventBus.$on('page3_showAniStep5', (reversal) => {
       _this.page4_animation_play_step1()
       setTimeout(() => {
-        _this.$refs.Bar[0].$refs.bar.render()
-        _this.$refs.RadialBar[0].$refs.RadialBar.render()
-        setTimeout(() => {
-          _this.$refs.smallline[0].$refs.line.render()
-          _this.$refs.bigLine[0].$refs.line.render()
-        }, 500)
+        if (_this.$refs) {
+          _this.$refs.Bar[0].$refs.bar.render()
+          _this.$refs.RadialBar[0].$refs.RadialBar.render()
+          setTimeout(() => {
+            _this.$refs.smallline[0].$refs.line.render()
+            _this.$refs.bigLine[0].$refs.line.render()
+          }, 500)
+        }
       }, 1000)
     })
   },
