@@ -315,6 +315,7 @@ export default {
   mounted () {
     const _this = this
     const { showdebug } = this
+    this.setAutoFill()
     if (showdebug) {
       _this.page4_animation_play_step1()
       setTimeout(() => {
@@ -341,6 +342,18 @@ export default {
     })
   },
   methods: {
+    setAutoFill () {
+      const { clientHeight } = document.documentElement
+      const element = document.querySelector('.main-view-content')
+      const elementTransform = element.style.transform
+      const { height } = element.getBoundingClientRect()
+      const thresholdValue = 0.1  // 防止不够，多缩小一点
+      if ((clientHeight - height) < 100) {
+        const scale = 1 - Math.abs(clientHeight - height) / height - thresholdValue
+        element.style.transform = elementTransform + `scale(${scale}) translate(-50%,-50%)`
+        element.style.transformOrigin = 'left top'
+      }
+    },
     // 动画执行第一步
     page4_animation_play_step1 (dirction) {
       return new Promise((resolve, reject) => {
@@ -392,14 +405,14 @@ export default {
       const height = document.documentElement.clientHeight
       const element = document.querySelector('.laptop')
       const width = document.querySelector('.laptop .laptop-main').clientWidth
-      const { top } = element.getBoundingClientRect()
-      const stepDistance = (height - element.clientHeight) / 2 - top
-      const stylesh = document.styleSheets[document.styleSheets.length - 1]
-      stylesh.insertRule(`
-        .laptop.laptop-move-left-step1.laptop-move-left-step3[data-v-75182f44] {
-          transform: scale(1) translate(-50%, ${stepDistance}px);
-        }
-      `)
+      const { top } = document.querySelector('.laptop .laptop-main').getBoundingClientRect()
+      const stepDistance = ((height - element.clientHeight) / 2 - top)
+      // const stylesh = document.styleSheets[document.styleSheets.length - 1]
+      // stylesh.insertRule(`
+      //   .laptop.laptop-move-left-step1.laptop-move-left-step3[data-v-75182f44] {
+      //     transform: scale(1) translate(-50%, ${stepDistance}px);
+      //   }
+      // `)
       // element.style.transition = 'all 1s';
       const stepLeft = width / 2 + (100)
       if (!dirction) {
