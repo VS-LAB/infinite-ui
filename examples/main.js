@@ -9,16 +9,16 @@ import hljs from 'highlight.js'
 import '../packages/theme-chalk/src/index.scss'
 
 // 导入组件库
-// import packages from '../packages'
+import packages from '../packages'
 
-// for (const key in packages) {
-//   if (packages.hasOwnProperty(key)) {
-//     const element = packages[key]
-//     if (key.toLocaleLowerCase().includes('infinite')) {
-//       Vue.use(element)
-//     };
-//   }
-// }
+for (const key in packages) {
+  if (packages.hasOwnProperty(key)) {
+    const element = packages[key]
+    if (key.toLocaleLowerCase().includes('infinite')) {
+      Vue.use(element)
+    };
+  }
+}
 
 
 Vue.config.productionTip = false

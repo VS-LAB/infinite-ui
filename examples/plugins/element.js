@@ -9,7 +9,6 @@ import {
   Aside
 } from 'element-ui'
 
-
 Vue.use(Col)
   .use(Row)
   .use(Container)
