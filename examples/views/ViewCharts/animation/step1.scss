@@ -18,19 +18,19 @@
 .chart-line-small-step1{
   transform: translate3d(-400px, 0, 0);
   opacity: 0;
-  transition: all 1s ;
-  transition-delay: 0.5s;
   z-index: 1;
+  transition: all 1s;
   &.chart-line-small-step2 {
     transform: translateX(0px);
     opacity: 1;
     z-index: 1;
-    transition: all 1s ;
-    &.chart-line-small-step3{
-      transform: translate(1.2vw, 3.7vw) scale(0.61846);
-      opacity: 1;
-      z-index: 1;
-    }
+    transition: all 1s;
+  }
+  &.chart-line-small-step3{
+    transform: translate(26px, 72px) scale(0.61846);
+    opacity: 1;
+    z-index: 1;
+    transition: all 1s;
   }
 }
 
@@ -38,19 +38,18 @@
 .chart-bar-small-step1{
   transform: translate3d(-400px, 0, 0);
   opacity: 0;
-  transition: all 1s ;
-  transition-delay: 0.5s;
+  transition: all 1s;
   z-index: 1;
   &.chart-bar-small-step2 {
     transform: translateX(0px);
     opacity: 1;
     z-index: 1;
-    transition: all 1s;
-    &.chart-bar-small-step3{
-      transform: translate(-5.7vw, 3.7vw) scale(0.61846);
-      opacity: 1;
-      z-index: 1;
-    }
+    // transition: all 1s 0.5s;
+  }
+  &.chart-bar-small-step3{
+    transform: translate(-106px, 72px) scale(0.61846);
+    opacity: 1;
+    z-index: 1;
   }
 }
 
@@ -58,50 +57,48 @@
 .chart-radius-small-step1{
   transform: translate3d(400px, 0, 0);
   opacity: 0;
-  transition: all 1s ;
-  transition-delay: 0.5s;
+  transition: all 1s;
   z-index: 1;
   &.chart-radius-small-step2 {
     transform: translateX(0px);
     opacity: 1;
     transition: all 1s;
-    &.chart-radius-small-step3{
-      transform: translate(-12.6vw, 3.7vw) scale(0.61846);
-      opacity: 1;
-      z-index: 1;
-    }
+  }
+  &.chart-radius-small-step3{
+    transform: translate(-236px, 72px) scale(0.61846);
+    opacity: 1;
+    z-index: 1;
+    transition: all 1s;
   }
 }
 
 .chart-line-big-step1{
   transform: translate3d(1000px, 0, 0);
   opacity: 0;
-  transition: all 1s ;
-  transition-delay: 0.5s;
+  transition: all 1s 0.8s;
   z-index: 1;
   &.chart-line-big-step2 {
     transform: translateX(0px);
     opacity: 1;
     z-index: 1;
-    transition: all 1s ;
-    &.chart-line-big-step3{
-      transform: translate(-5.7vw, -2.4vw) scale(0.61834);
-      opacity: 1;
-      z-index: 1;
-    }
+    transition: all 1s;
+  }
+  &.chart-line-big-step3{
+    transform: translate(-106px, -48px) scale(0.61846);
+    opacity: 1;
+    z-index: 1;
+    transition: all 1s;
   }
 }
 
 .chart-box {
   height: 100%;
-  width: 52.82vw;
+  width: 1014px;
   margin: 0 auto;
   opacity: 1;
   transition: all 0.01s linear;
   &.scale-chart-box-height-step1{
     height: 1px;
-    // height: 0;
-    // opacity: 0;
   }
 }
 
@@ -116,13 +113,12 @@ $laptopAni-time: 1s;
   }
 }
 
-
 // 内部 图片动画
 .laptop {
   .desc-item, .radius, .nav, .bottom{
     opacity: 0;
-    transition: all $laptopAni-time * 0.9;
-    transition-delay: $laptopAni-time * 0.1;
+    transition: all $laptopAni-time * 0.6;
+    transition-delay: $laptopAni-time * 0.8;
     &.shownav-step1{
       opacity: 1;
     }
@@ -133,10 +129,10 @@ $laptopAni-time: 1s;
   transform: scale(1) translate(0);
   transition: all 1s linear;
   &.laptop-move-left-step1{
-    transform: scale(1) translate(-100px, 0);
+    transform: scale(1) translate(-122px, 0);
     transition: all 1s linear;
     &.laptop-move-left-step2{
-      transform: scale(1) translate(-40vw, -5.42vw)
+      transform: scale(1) translate(-768px, -100px)
     }
   }
 }
@@ -144,11 +140,11 @@ $laptopAni-time: 1s;
 .phone {
   opacity: 0;
   position: absolute;
-  left: 60%;
+  left: 50%;
   transition: all ease 1s;
   &.showphone-step1 {
     opacity: 1;
-    left: 80%;
+    left: calc(50% + 540px);
   }
   .phone-contain{
     transform: translateY(0%);
@@ -166,9 +162,10 @@ $laptopAni-time: 1s;
 
 .show-colorful{
   transform: translateY(100vh);
-  transition:  all linear 1s;
+  transition: all linear 1s;
   &.show-colorfull-step1{
-    transform: translateY(0);
+    top: 50%;
+    transform: translateY(-50%);
   }
 }
 
