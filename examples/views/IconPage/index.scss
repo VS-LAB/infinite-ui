@@ -613,8 +613,9 @@ $screenWidth:1280px;
     .infinite-icon-page-content {
       .infinite-icon-page-window {
         .infinite-icon-page-window-bg {
-          box-shadow: 0 14px 50px 0px rgba(21,95,220,0.1);
-          transition: box-shadow 0s linear;
+          // box-shadow: 0 14px 50px 0px rgba(21,95,220,0.1);
+          // transition: box-shadow 0s linear;
+          animation: windowBgShadow3 1.2s forwards;
           .infinite-icon-page-window-menu {
             .infinite-icon-page-menu-top {
               background: rgba(255,255,255,0.16);
@@ -863,7 +864,7 @@ $screenWidth:1280px;
       .infinite-icon-page-window {
         .infinite-icon-page-window-bg {
           box-shadow: 0 14px 50px 0px rgba(21,95,220,0.7);
-          transition: box-shadow 0.2s linear;
+          // transition: box-shadow 0.2s linear;
           .infinite-icon-page-window-menu {
             .infinite-icon-page-menu-top {
               background: rgba(255,255,255,0.16);
@@ -903,8 +904,9 @@ $screenWidth:1280px;
     .infinite-icon-page-content {
       .infinite-icon-page-window {
         .infinite-icon-page-window-bg {
-          box-shadow: 0 14px 50px 0px rgba(18,17,22,0.1);
-          transition: box-shadow 0s linear;
+          // box-shadow: 0 14px 50px 0px rgba(18,17,22,0.1);
+          // transition: box-shadow 0s linear;
+          animation: windowBgShadow5 1.2s forwards;
           .infinite-icon-page-window-menu {
             .infinite-icon-page-menu-top {
               background: rgba(255,255,255,0.16);
@@ -1158,7 +1160,7 @@ $screenWidth:1280px;
       .infinite-icon-page-window {
         .infinite-icon-page-window-bg {
           box-shadow: 0 14px 50px 0px rgba(18,17,22,0.7);
-          transition: box-shadow 0.2s linear;
+          // transition: box-shadow 0.2s linear;
           .infinite-icon-page-window-menu {
             .infinite-icon-page-menu-top {
               background: rgba(255,255,255,0.16);
@@ -1210,7 +1212,7 @@ $screenWidth:1280px;
         }
         .infinite-icon-page-window-bg {
           box-shadow: 0 14px 50px 0px rgba(18,17,22,0.7);
-          transition: box-shadow 0.2s linear;
+          // transition: box-shadow 0.2s linear;
           .infinite-icon-page-window-menu {
             .infinite-icon-page-menu-top {
               background: rgba(255,255,255,0.16);
@@ -1250,8 +1252,9 @@ $screenWidth:1280px;
     .infinite-icon-page-content {
       .infinite-icon-page-window {
         .infinite-icon-page-window-bg {
-          box-shadow: 0 14px 50px 0px rgba(21,95,220,0.1);
-          transition: box-shadow 0s linear;
+          // box-shadow: 0 14px 50px 0px rgba(21,95,220,0.1);
+          // transition: box-shadow 0s linear;
+          animation: windowBgShadow8 1.2s forwards;
           .infinite-icon-page-window-menu {
             .infinite-icon-page-menu-top {
               background: rgba(255,255,255,0.16);
@@ -1500,8 +1503,9 @@ $screenWidth:1280px;
     .infinite-icon-page-content {
       .infinite-icon-page-window {
         .infinite-icon-page-window-bg {
-          box-shadow: 0 14px 50px 0px rgba(178,79,25,0.1);
-          transition: box-shadow 0s linear;
+          // box-shadow: 0 14px 50px 0px rgba(178,79,25,0.1);
+          // transition: box-shadow 0s linear;
+          animation: windowBgShadow9 1.2s forwards;
           .infinite-icon-page-window-menu {
             background: rgba(255,141,56,1);
             .infinite-icon-page-menu-top {

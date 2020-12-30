@@ -10,13 +10,13 @@
       <i class="icon-close header-nav-container-inner-close" @click.stop="menuOpen"></i>
       <div class="header-nav-container-inner-bg"
         :class="isOpen ? 'header-nav-container-inner-bg-show' : 'header-nav-container-inner-bg-hide'"></div>
-      <ul class="header-nav-container-inner-list" v-if="isOpen">
+      <ul class="header-nav-container-inner-list">
         <li class="header-nav-container-inner-list-li"
           v-for="(listItem, listIndex) of listTabTitle"
           :key="listIndex"
           :class="`${isOpen ? `header-nav-container-inner-list-li-show` : 'header-nav-container-inner-list-li-hide'}
           ${routerIndex === listIndex ? 'header-nav-container-inner-list-li-active' : ''}`"
-          :style="{transition: `all .2s linear .${listIndex}s`}"
+          :style="{transition: `all .2s linear .${listIndex + 4}s`}"
           @click="listItem.click()"
         >{{listItem.iconText}} {{listItem.text}}</li>
       </ul>

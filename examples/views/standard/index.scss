@@ -294,12 +294,29 @@
       width: 9%;
       height: 11%;
       background: #fff;
-      opacity: 0;
-      transition: opacity .1s;
-      &.hide-gruy-icon {
-        opacity: 1;
-        transition: opacity .1s linear .5s;
-      } 
+      // opacity: 0;
+      // transition: opacity .1s;
+      // &.hide-gruy-icon {
+      //   opacity: 1;
+      //   transition: opacity .1s linear .5s;
+      // } 
+    }
+    &-icon-gruy {
+      position: absolute;
+      top: 58.5px;
+      right: 55px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      font-size: 34px;
+      color: #909399;
+      // width: 1.8vw;
+      // height: 1.8vw;
+      border-radius: 50%;
+      i {
+        border-radius: 50%;
+        // overflow: hidden;
+      }
     }
   }
 
@@ -383,37 +400,40 @@
     // width: 1.8vw;
     // height: 1.8vw;
     border-radius: 50%;
-    font-size: 36px;
+    font-size: 28px;
     color: rgba(255,118,53,1);
     background: #fff;
     transform-origin: center;
     box-shadow: 0 5px 20px 0 rgba(255, 214, 176, 0.6);
     opacity: 0;
     z-index: 999;
+    transform: scale(1.265);
     transition: all 1s;
     i {
       border-radius: 50%;
-      overflow: hidden;
+      // overflow: hidden;
       transform: scale(1);
-      transition: all 1.5s;
+      transition: all 1s;
     }
   }
   .show-tip {
     opacity: 1;
     i {
-      transform: scale(0.7);
+      transform: scale(0.64);
+      // transition: all .4s linear .2s;
     }
-    transform: scale(2.0);
+    transform: scale(2.3); // 2.5
   }
   .end-mask {
     z-index: 999;
     transform: scale(1);
+    font-size: 28px;
     opacity: 1;
     box-shadow: none;
     i {
       transform: scale(1);
     }
-    transition: all 1.5s;
+    transition: all 1.2s;
   }
   .hide-mask {
     opacity: 0;
