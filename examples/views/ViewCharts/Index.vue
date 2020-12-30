@@ -235,7 +235,11 @@ export default {
         }],
         1: [{
           ele: '.chart-box', // 盒子高度缩微0
-          className: 'scale-chart-box-height-step1'
+          className: 'scale-chart-box-height-step1',
+          delay: {
+            next: '0s',
+            prev: '1s'
+          }
         }, {
           ele: ['.charts .chart-line-small-step1'], // 小line动画
           className: 'chart-line-small-step3'
