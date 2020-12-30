@@ -1,13 +1,22 @@
 <template>
-  <div>
+  <div class="line-chart">
     <div :id="id"></div>
+    <div class="line-chart-tool-tips" v-if="showType === 'large' && showToolTips">
+      <dl class="pv">
+        <dt>浏览量</dt>
+        <dd>85</dd>
+      </dl>
+      <dl class="yoy">
+        <dt>同比</dt>
+        <dd>↑12%</dd>
+      </dl>
+    </div>
   </div>
 </template>
 
 <script>
 import { Chart } from '@antv/g2'
 import { WIDTH } from '../CONFIG.js'
-// import { throttle } from '@/util'
 export default {
   name: 'LineChart',
   props: {
@@ -34,6 +43,7 @@ export default {
   },
   data () {
     return {
+      showToolTips: false,
       msg: '',
       chart: null,
       data: [
@@ -119,7 +129,7 @@ export default {
   methods: {
     /**
      * @description 获取最大的实现宽度，最大宽度为1200，超出1200的宽度，不变
-     */
+    */
     getWidth () {
       const width = document.documentElement.clientWidth
       return width > WIDTH ? WIDTH : width
@@ -157,10 +167,7 @@ export default {
           range: [0, 1]
         }
       })
-      chart.tooltip({
-        showCrosshairs: true,
-        shared: false
-      })
+      chart.tooltip(false)
       const { showType } = this
       const width = this.getWidth()
       const AxisFontSize = width * (24 / WIDTH)
@@ -187,7 +194,11 @@ export default {
       this.chart = chart
     },
     render () {
+      const _this = this;
       this.chart.render()
+      setTimeout(()=>{
+        _this.showToolTips = true
+      },400)
     },
     initComponent () {
       const chart = new Chart({
@@ -234,3 +245,4 @@ export default {
   }
 }
 </script>
+
