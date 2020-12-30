@@ -1,7 +1,11 @@
 <template>
   <div class="line-chart">
     <div :id="id"></div>
-    <div class="line-chart-tool-tips" v-if="showType === 'large' && showToolTips">
+    <div class="line-chart-tool-tips" v-if="showType === 'large'"
+      :class="{
+        'show':showToolTips
+      }"
+    >
       <dl class="pv">
         <dt>浏览量</dt>
         <dd>85</dd>
