@@ -73,16 +73,23 @@ module.exports = {
     config.when(isProduction, config => {
       config.optimization.splitChunks({
         chunks: 'all',
+        minSize: 30000,
+        maxSize: 0,
+        minChunks: 1,
+        maxAsyncRequests: 6,
+        maxInitialRequests: 4,
+        automaticNameDelimiter: '~',
         cacheGroups: {
           elementUI: {
             name: 'chunk-elementUI',
-            priority: 20,
+            priority: 40,
             test: /[\\/]node_modules[\\/]_?element-ui(.*)/
           },
-          highlightJS: {
-            name: 'chunk-highlightJS',
-            priority: 20,
-            test: /[\\/]node_modules[\\/]_?highlight\.js(.*)/
+          vendors: {
+            name: `chunk-vendors`,
+            test: /[\\/]node_modules[\\/]/,
+            priority: 15,
+            chunks: 'initial'
           }
         }
       })
