@@ -6,6 +6,7 @@
 
 <script>
 import { Chart, registerShape } from '@antv/g2'
+import { WIDTH } from '../CONFIG.js'
 export default {
   name: 'BarChart',
   props: {
@@ -39,10 +40,17 @@ export default {
     }
   },
   methods: {
-    initComponent () {
+    /**
+     * @description 获取最大的实现宽度，最大宽度为1200，超出1200的宽度，不变
+    */
+    getWidth () {
       const width = document.documentElement.clientWidth
-      const padding = [(24 * width / 1920), (16 * width / 1920)]
-      const size = 8 * 2 * width / 1920
+      return width > WIDTH ? WIDTH : width
+    },
+    initComponent () {
+      const width = this.getWidth()
+      const padding = [(40 * width / WIDTH), (16 * width / WIDTH)]
+      const size = 8 * 2 * width / WIDTH
       // 自定义 shape, 支持图片形式的气泡
       registerShape('interval', 'borderRadius', {
         draw: function draw (cfg, container) {
