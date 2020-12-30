@@ -388,8 +388,8 @@ export default {
     },
     handleStep4 (dirction) {
       const height = document.documentElement.clientHeight
-      const width = document.documentElement.clientWidth
       const element = document.querySelector('.laptop')
+      const width = document.querySelector('.laptop .laptop-main').clientWidth
       const { top } = element.getBoundingClientRect()
       const stepDistance = (height - element.clientHeight) / 2 - top
       const stylesh = document.styleSheets[document.styleSheets.length - 1]
@@ -399,7 +399,7 @@ export default {
         }
       `)
       // element.style.transition = 'all 1s';
-      const stepLeft = width / 2 + (width * 2 / 100)
+      const stepLeft = width / 2 + (100)
       if (!dirction) {
         // element.classList.add('laptop-move-left-step3')
         element.style.transform = `scale(1) translate(${-stepLeft}px, ${stepDistance}px)`
