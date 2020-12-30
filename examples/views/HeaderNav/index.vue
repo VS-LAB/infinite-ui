@@ -7,7 +7,7 @@
       <div class="header-nav-container-mask" 
         :class="isOpen ? 'header-nav-container-mask-show' : 'header-nav-container-mask-hide'"
         @click.stop="menuOpen"></div>
-      <i class="icon-shutdown header-nav-container-inner-close" @click.stop="menuOpen"></i>
+      <i class="icon-close header-nav-container-inner-close" @click.stop="menuOpen"></i>
       <div class="header-nav-container-inner-bg"
         :class="isOpen ? 'header-nav-container-inner-bg-show' : 'header-nav-container-inner-bg-hide'"></div>
       <ul class="header-nav-container-inner-list" v-if="isOpen">
@@ -34,7 +34,7 @@
       >{{item.text}}</div>
     </div>
     <div class="header-nav-container-menu">
-      <i class="icon-history header-nav-container-menu-out-icon" @click.stop="menuOpen"></i>
+      <i class="icon-nav header-nav-container-menu-out-icon" @click.stop="menuOpen"></i>
     </div>
   </div>
 </template>
