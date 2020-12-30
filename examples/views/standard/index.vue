@@ -1,23 +1,36 @@
 <template>
-  <div class="infinite-standard" :class="wrapAnimate">
-    <div class="infinite-standard-card-exclamatory-mark"
-        :class="{'end-mask':endTop,'show-tip':showMask,'hide-mask':hideMask}" 
-        ref="iconMask"
-      >
-      <i 
-        class="icon-annotate" 
-        ></i>
-    </div>
+  <div
+    class="infinite-standard"
+    :class="wrapAnimate"
+  >
     <div
-      class="infinite-standard-top"
-      :class="{'end-top':endTop,'show-top':showTop}"
+      class="infinite-standard-card-exclamatory-mark"
+      :class="{'end-mask':endTop,'show-tip':showMask,'hide-mask':hideMask}"
+      ref="iconMask"
     >
-      <div class="infinite-standard-top_title">{{showCardMoveToLeft ? '组件代码规范' : '组件设计规范'}}</div>
-      <div class="infinite-standard-top_subTitle">
-        {{showCardMoveToLeft ? '轻松查看以及调用组件代码，清晰的前端代码规范以及前端架构，快速封装代码，提高开发效率' : '完善的设计指引、设计资源，帮助产品等非设计者快速产出高质量的产品原型帮助设计者完善产品设计、统一设计规范'}}
-        
+      <i class="icon-annotate"></i>
+    </div>
+    <div class="top-wrapper">
+      <div
+        class="infinite-standard-top design"
+        :class="{'end-top':endTop,'show-top':showTop, 'hide-design':showCardMoveToLeft}"
+      >
+        <div class="infinite-standard-top_title">组件设计规范</div>
+        <div class="infinite-standard-top_subTitle">
+          完善的设计指引、设计资源，帮助产品等非设计者快速产出高质量的产品原型帮助设计者完善产品设计、统一设计规范
+        </div>
+      </div>
+      <div
+        class="infinite-standard-top"
+        :class="{'end-top':endTop,'show-top':showCardMoveToLeft}"
+      >
+        <div class="infinite-standard-top_title">组件代码规范</div>
+        <div class="infinite-standard-top_subTitle">
+          轻松查看以及调用组件代码，清晰的前端代码规范以及前端架构，快速封装代码，提高开发效率
+        </div>
       </div>
     </div>
+
     <div
       class="infinite-standard_content"
       :class="{'end-top':endTop}"
@@ -27,9 +40,7 @@
           class="infinite-standard-card"
           :class="{'move-card':showCardMoveToLeft}"
         >
-          <div
-            class="infinite-standard-line"
-          >
+          <div class="infinite-standard-line">
 
             <!-- horizontal line -->
             <div
@@ -314,7 +325,7 @@ export default {
           iconMask.style.top = topPosition
           EventBus.$emit('page2_goEndTop', reversal)
         }
-        
+
         this.endTop = !this.endTop
         // this.wrapAnimate = reversal ? '' : 'fade-out'
         setTimeout(_ => {
@@ -349,12 +360,12 @@ export default {
     }
   },
   mounted () {
-    window.addEventListener('resize', this.listenResize)  
+    window.addEventListener('resize', this.listenResize)
   },
   beforeDestroy () {
     window.removeEventListener('resize', this.listenResize)
   }
- 
+
 }
 </script>
 <style lang="scss" scoped>

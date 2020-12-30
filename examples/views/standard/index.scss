@@ -43,8 +43,19 @@
     transform: translateY(0);
     opacity: 1;
   }
+  .hide-design{
+    transform: translateY(-280px);
+    opacity: 0;
+    transition: all 0.5s;
+  }
+  .top-wrapper{
+    height: 166px;
+    width: 720px;
+    display: flex;
+    justify-content: center;
+  }
   &-top {
-    position: relative;
+    position: absolute;
     text-align: center;
     opacity: 0;
     z-index: 1;
@@ -229,7 +240,7 @@
       @include right(52px);
     }
     .right110 {
-      @include right(88px);
+      @include right(92px);
     }
 
     .left135 {
