@@ -6,6 +6,7 @@
 
 <script>
 import { Chart } from '@antv/g2'
+import { WIDTH } from '../CONFIG.js'
 // import { throttle } from '@/util'
 export default {
   name: 'LineChart',
@@ -99,13 +100,6 @@ export default {
     width () {
       return document.documentElement.clientWidth / 2
     },
-    padding () {
-      const { showType } = this
-      if (showType === 'large') {
-        return [40, 40, 40, 50]
-      }
-      return [0]
-    },
     slodScale () {
       const { showType } = this
       if (showType === 'large') {
@@ -123,6 +117,13 @@ export default {
     }
   },
   methods: {
+    /**
+     * @description 获取最大的实现宽度，最大宽度为1200，超出1200的宽度，不变
+     */
+    getWidth () {
+      const width = document.documentElement.clientWidth
+      return width > WIDTH ? WIDTH : width
+    },
     getHeight () {
       // 获取宽度
       const { showType } = this
@@ -135,11 +136,11 @@ export default {
     getPadding () {
       // 获取宽度
       const { showType } = this
-      const width = document.documentElement.clientWidth / 100
+      const width = this.getWidth() / 100
       if (showType === 'large') {
-        return 15.625 * 2 * width
+        return 8 * width
       }
-      return 12.08 * width
+      return 0
     },
     initComponent2 () {
       // 需要重新计算高宽，取消从外部传入规则
@@ -147,7 +148,7 @@ export default {
         container: this.id,
         autoFit: true,
         height: this.height,
-        padding: this.padding
+        padding: this.getPadding()
       })
       chart.data(this.showData)
       chart.scale({
@@ -161,26 +162,29 @@ export default {
         shared: false
       })
       const { showType } = this
+      const width = this.getWidth()
+      const AxisFontSize = width * (24 / WIDTH)
       if (showType !== 'large') {
         chart.axis(false)
-      }
-      // else {
-      //   chart.axis({
-      //     labels: {
-      //       label: {
-      //         textAlign: 'center', // 文本对齐方向，可取值为： left center right
-      //         fill: '#f00', // 文本的颜色
-      //         fontSize: '48'
-      //       }
-      //     }
-      //   })
-      // };
-
+      } else {
+        chart.axis('genre', {
+          label: {
+            style: {
+              fontSize: AxisFontSize
+            }
+          }
+        })
+        chart.axis('sold', {
+          label: {
+            style: {
+              fontSize: AxisFontSize
+            }
+          }
+        })
+      };
       chart.area().position('genre*sold').shape('smooth').color(this.colorArea)
       chart.line().size(4).position('genre*sold').shape('smooth').color(this.colorLine)
       this.chart = chart
-
-      // chart.render()
     },
     render () {
       this.chart.render()

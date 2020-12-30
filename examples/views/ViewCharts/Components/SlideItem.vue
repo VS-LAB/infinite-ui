@@ -43,9 +43,9 @@
 </template>
 
 <script>
+import { WIDTH } from './CONFIG'
 import LineChart from './Charts/LineChart'
 import BarChart from './Charts/BarChart'
-import RadialBar from './Charts/RadialBar'
 import Radius from './Radius/Index2'
 export default {
   name: 'SliderItem',
@@ -94,12 +94,17 @@ export default {
     height () {
       const { showType, width } = this
       if (showType === 'large') {
-        return 15.625 * 2 * width
+        return 58 * (WIDTH / 1920) * width
       }
-      return 12.08 * width
+      return 12.08 * 2 * (WIDTH / 1920) * width
     },
     width () {
-      return document.documentElement.clientWidth / 100
+      const { clientWidth } = document.documentElement
+      if (clientWidth > WIDTH) {
+        return WIDTH / 100
+      } else {
+        return document.documentElement.clientWidth / 100
+      };
     }
   }
 }
