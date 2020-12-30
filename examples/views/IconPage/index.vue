@@ -143,7 +143,7 @@ export default {
           // icon: 'el-icon-refresh',
           icon: 'icon-refresh',
           component: 'Refresh',
-          text: 'Refresh'
+          text: 'refresh'
         },
         {
           // icon: 'el-icon-chat-dot-square',
@@ -161,7 +161,7 @@ export default {
           // icon: 'el-icon-picture-outline',
           icon: 'icon-report',
           component: 'Report',
-          text: 'Report'
+          text: 'report'
         },
         {
           icon: 'icon-history',
@@ -357,7 +357,7 @@ export default {
           this.showAni = 6
           setTimeout(_ => {
             resolve(true)
-          }, 500)
+          }, 1500)
         }
       })
     }
