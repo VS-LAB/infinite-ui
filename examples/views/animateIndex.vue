@@ -1,8 +1,6 @@
 <template>
   <div class="container">
-    <HeaderNav
-      :show-header-nav="showHeaderNav"
-    ></HeaderNav>
+    <HeaderNav :show-header-nav="showHeaderNav"></HeaderNav>
     <component ref="componnet"
                :style="{zIndex:100-index, position:'fixed',width:'100vw',height:'100vh'}"
                v-for="(component,index) in pageNameArr"
@@ -16,6 +14,7 @@
 <script>
 import HeaderNav from '@/views/HeaderNav/index.vue'
 import LogAnimation from '@/views/LogAnimation/index.vue'
+// import ScrollContainer from '@/views/scrollContainer.vue'
 import CardsAnimation from '@/views/CardsAnimation/index.vue'
 import Standard from '@/views/standard'
 import LastPage from '@/views/LastPage/index.vue'
@@ -27,6 +26,7 @@ export default {
   components: {
     HeaderNav,
     LogAnimation,
+    // ScrollContainer,
     CardsAnimation,
     Standard,
     LastPage,
@@ -40,7 +40,7 @@ export default {
       completeAnimation: false,
       showHeaderNav: false, // 是否展示顶部nav
       pageNameArr: ['LogAnimation', 'CardsAnimation', 'Standard', 'IconPage', 'ViewCharts', 'LastPage']
-      // pageNameArr: ['LogAnimation', 'CardsAnimation', 'Standard', 'homeAnimation', 'LastPage'],
+      // pageNameArr: ['ScrollContainer', 'CardsAnimation', 'Standard', 'IconPage', 'ViewCharts', 'LastPage']
     }
   },
   methods: {
@@ -91,33 +91,12 @@ export default {
     this.$refs.componnet.forEach((component) => {
       animesFun = [...animesFun, ...(component.animesFun || [])]
     })
-    // if()
     this.animesFun = animesFun
     this.$nextTick(() => {
       setTimeout(() => {
         this.next()
       }, 500)
     })
-
-    function debounce (fn, wait, immediate) {
-      immediate = immediate || false
-      var timer = null
-      var count = 0
-      return function () {
-        var _this = this
-        var _arg = arguments
-        clearTimeout(timer)
-        if (immediate) {
-          fn.apply(_this, _arg)
-          count++
-        } else {
-          timer = setTimeout(function () {
-            fn.apply(_this, _arg)
-            count++
-          }, wait)
-        }
-      }
-    }
 
     windowAddMouseWheel()
     let self = this

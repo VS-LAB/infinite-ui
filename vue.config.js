@@ -8,7 +8,8 @@ const { getExternalsEl } = require('./build/get-externals-elements')
 const isProduction = process.env.NODE_ENV === 'production'
 const vendorPackage = isProduction ? {
   vue: 'Vue',
-  'vue-router': 'VueRouter'
+  'vue-router': 'VueRouter',
+  'highlight.js': 'highlight'
 } : {}
 const propElExternals = process.env.NODE_ENV === 'lib' ? getExternalsEl() : {}
 module.exports = {
@@ -68,17 +69,36 @@ module.exports = {
       .use('./build/md-loader/index.js')
       .loader('./build/md-loader/index.js')
 
-    // config
-    //   .plugin('webpack-bundle-analyzer')
-    //   .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
-    //   .tap(options => {
-    //     options.push({
-    //       analyzerPort: async () => {
-    //         await portfinder.getPortPromise()
-    //       }
-    //     })
-    //     return options
-    //   })
+
+    config.when(isProduction, config => {
+      config.optimization.splitChunks({
+        chunks: 'all',
+        cacheGroups: {
+          elementUI: {
+            name: 'chunk-elementUI',
+            priority: 20,
+            test: /[\\/]node_modules[\\/]_?element-ui(.*)/
+          },
+          highlightJS: {
+            name: 'chunk-highlightJS',
+            priority: 20,
+            test: /[\\/]node_modules[\\/]_?highlight\.js(.*)/
+          }
+        }
+      })
+    })
+
+    config
+      .plugin('webpack-bundle-analyzer')
+      .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
+      .tap(options => {
+        options.push({
+          analyzerPort: async () => {
+            await portfinder.getPortPromise()
+          }
+        })
+        return options
+      })
   },
   devServer: {
     overlay: {

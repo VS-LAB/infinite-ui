@@ -13,7 +13,10 @@
         <h1>全新可视化前端组件</h1>
         <p v-html="'一套基于 Vue 2.0 , 为平安内部前端开发者提供的桌面端组件库\r打造全新一代数据可视化解决方案，致力于提供一套简单方便、专业可靠的数据可视化组件'"></p>
       </div>
-      <div class="component_view">
+      <div class="component_view"
+           :class="{
+                       'component_view_position':tableImgsPosition
+                     }">
         <img ref="componentViewNotebookRef"
              class="component_view-notebook"
              :class="{
@@ -23,10 +26,12 @@
         <div class="component_view-container">
           <div class="component_view-imgs_padding">
             <div class="component_view-imgs-linear_gradient"
-                 :class="imgsAnimed?'imgs_animed':''">
+                 :class="{
+                   'imgs_animed':imgsAnimed
+                 }">
               <div ref="componentViewImgsContainerRef"
                    class="component_view-imgs_container"
-                   :style="{overflowY:isOverflowAutoPad?'auto':''}">
+                   :style="{overflowY:isOverflowAutoPad?'hidden':''}">
                 <div class="imgs_container-table"
                      :class="{
                        'table_imgs_position':tableImgsPosition
@@ -177,11 +182,7 @@ export default {
           // 动画执行完成后
           setTimeout(() => {
             resolve(true)
-          }, 1200)
-          // this.$refs.componentViewNotebookRef.ontransitionend = (event) => {
-          //   if (event.propertyName == 'transform') {
-          //   }
-          // }
+          }, 1000)
         })
       })
     },
@@ -197,13 +198,13 @@ export default {
           setTimeout(_ => {
             this.padScrollSwitch = true
             resolve(true)
-          }, 800)
+          }, 200)
         } else {
           this.imgsAnimed = false
           this.timeStep3 = setTimeout(() => {
             this.isOverflowAutoPad = false
             resolve(true)
-          }, 800)
+          }, 200)
         }
       })
     },
