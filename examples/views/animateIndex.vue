@@ -17,9 +17,8 @@ import LogAnimation from '@/views/LogAnimation/index.vue'
 // import ScrollContainer from '@/views/scrollContainer.vue'
 import CardsAnimation from '@/views/CardsAnimation/index.vue'
 import Standard from '@/views/standard'
-import ViewChart from '@/views/ViewCharts/Index.vue'
 import LastPage from '@/views/LastPage/index.vue'
-import ViewCharts from '../views/ViewCharts/Index4'
+import ViewCharts from '../views/ViewCharts/Index'
 import IconPage from '@/views/IconPage'
 import { isFirefox } from '@/util'
 
@@ -30,7 +29,6 @@ export default {
     // ScrollContainer,
     CardsAnimation,
     Standard,
-    ViewChart,
     LastPage,
     ViewCharts,
     IconPage
