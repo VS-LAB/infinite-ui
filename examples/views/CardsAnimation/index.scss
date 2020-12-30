@@ -48,7 +48,7 @@ $typeArea:1440px;
   .anime-canvas {
     height: 100%;
     background: #f3f7fe;
-    overflow: auto;
+    overflow: hidden;
     transition: all 0.8s;
 
     // 头部文案动画 start
@@ -61,15 +61,16 @@ $typeArea:1440px;
       z-index: 1;
 
       h1 {
+        color: #222222;
         margin: 0 0 32px;
         font-size: 60px;
       }
 
       p {
-        color: rgba(34, 34, 34, 0.6);
+        color: #222222;
         font-size: 20px;
         line-height: 32px;
-        white-space: break-spaces;
+        white-space: pre;
       }
     }
 
@@ -81,8 +82,8 @@ $typeArea:1440px;
 
     // 组件视图区域 start
     .component_view {
+      transition: all 1s;
       width: 100%;
-
       height: 100vh;
       position: relative;
       z-index: 1;
@@ -152,7 +153,16 @@ $typeArea:1440px;
 
         .imgs_container-table {
           &-tr {
-            &:nth-child(n + 2) {
+            &:nth-child(2) {
+              .imgs_container-table-tr-td {
+                img {
+                  opacity: 1;
+                  transform: translateY(0);
+                }
+              }
+            }
+
+            &:nth-child(n + 3) {
               opacity: 1;
             }
 
@@ -187,10 +197,42 @@ $typeArea:1440px;
             transition: all 0.8s;
 
             &:nth-child(7) {
+              transition: all 0.3s;
               padding-bottom: 20px;
             }
 
-            &:nth-child(n + 2) {
+            &:nth-child(2) {
+              .imgs_container-table-tr-td {
+                img {
+                  opacity: 0;
+                  transform: translateY(200px);
+                }
+
+                &:nth-child(1) {
+                  img {
+                    transition: all 0.3s cubic-bezier(0.07, 0.7, 0.63, 0.66);
+                  }
+                }
+
+                &:nth-child(2) {
+                  img {
+                    transition: all 0.3s cubic-bezier(0.26, 0.54, 0.46, 1.01);
+                  }
+
+                }
+
+                &:nth-child(3) {
+                  img {
+                    transition: all 0.3s cubic-bezier(0.51, 0.27, 0.46, 1.01);
+                  }
+
+                }
+
+              }
+            }
+
+            &:nth-child(n + 3) {
+              transition: none;
               opacity: 0;
             }
 
@@ -295,7 +337,7 @@ $typeArea:1440px;
 
         .table_imgs_position {
           $start_position_x: -480px;
-          $start_position_y: 250px;
+          $start_position_y: 10px;
           $position_scale: 2;
 
           // 第一列
@@ -355,9 +397,15 @@ $typeArea:1440px;
                 $start_position_y + +238) scale($position_scale);
           }
         }
+
+
       }
     }
 
     // 组件视图区域 end
+  }
+
+  .component_view_position {
+    transform: translateY(320px);
   }
 }

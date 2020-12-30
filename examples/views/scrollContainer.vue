@@ -18,24 +18,35 @@
 
 <script>
 import LogAnimation from '@/views/LogAnimation_copy/index.vue'
-import CardsAnimation from '@/views/CardsAnimation_copy/index.vue'
+// import CardsAnimation from '@/views/CardsAnimation_copy/index.vue'
 export default {
   name: 'ScrollContainer',
   components: {
     LogAnimation,
-    CardsAnimation,
+    // CardsAnimation,
   },
   data () {
     return {
+      animesFun: [this.notAnime, this.initAnime],
       scrollRatio: 0,//总进度条滚动占比
       animeComponents: {},//动画组件
-      completeAnimation: true,//需要等待的动画是否已经完成动画
+      completeAnimation: false,//需要等待的动画是否已经完成动画
       ratioDistribution: {},//组件总的占比
       allAnimaComponentRatio: {},//所有组件进度集合占比
       pageNameArr: [],//组件名称
     }
   },
   methods: {
+    notAnime () {
+      return new Promise((resolve, reject) => {
+        resolve(true)
+      })
+    },
+    initAnime () {
+      return new Promise((resolve, reject) => {
+        resolve(true)
+      })
+    },
     // 页面滚动
     onscroll (e) {
       // 获取当前滚动位置比例
@@ -107,17 +118,22 @@ export default {
   },
   mounted () {
     this.initRatioDistribution()
-    console.log(this.pageNameArr);
-    console.log(this.animeComponents);
-    console.log(this.ratioDistribution);
-    console.log(this.allAnimaComponentRatio);
 
-    // 初始化动画
     this.$nextTick(async () => {
+      // 初始化动画
       this.completeAnimation = false
       // 动画执行完后再进行滚动
       this.completeAnimation = await this.$refs.componnet[0].page0_animeStep1()
     })
+    document.body.addEventListener('mousewheel', (e) => {
+      const event = e || window.event
+      // 判断是否不可以滚动了，此时需要走上一步或者下一步动画
+      if (this.scrollRatio < 100) {
+        event.stopPropagation()
+        event.cancelBubble = true
+      }
+    })
+
   }
 }
 </script>
@@ -126,19 +142,30 @@ export default {
 .scroll_container {
   width: 100vw;
   height: 100vh;
-  overflow: hidden auto;
+  overflow-x: hidden;
+  overflow-y: auto;
   position: relative;
+  scrollbar-width: none;
+
+  /* firefox */
+  -ms-overflow-style: none;
+
+  /* IE 10+ */
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
   &.disabled_scroll {
     overflow: hidden;
   }
 
   &-placeholder {
-    height: 2000vh;
+    // height: 2000vh;
+    height: 800vh;
   }
 
   &-component {
-    width: calc(100% - 10px);
+    width: 100%;
     height: 100vh;
     position: fixed;
     left: 0;

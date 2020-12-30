@@ -16,66 +16,25 @@ import {
   ThemePicker,
   Tree
 } from './docs'
-import Home from '@/views/home'
-// import HomeAnimation from '@/views/homeAnimation.vue'
-import HomeAnimation from '@/views/IconPage'
+// import Home from '@/views/home'
 import Layout from '@/views'
-import Standard from '@/views/standard'
-import lastPage from '@/views/LastPage/index.vue'
 import animateIndex from '@/views/animateIndex'
-import scrollContainer from '@/views/scrollContainer'
-import viewChart from '@/views/ViewCharts/Index3.vue'
 import { getFileList } from './generate'
 
 const generateRouters = getFileList()
-
+console.log(generateRouters);
 const routes = [
+  // {
+  //   path: '/scrollContainer',
+  //   name: '/scrollContainer',
+  //   component: scrollContainer
+  // },
   {
     path: '/',
     name: '/',
-    redirect: '/home',
-    component: Home,
-    children: [
-      {
-        path: 'home',
-        name: 'home'
-      }
-    ]
+    redirect: '/index',
   },
   {
-    path: '/standard',
-    name: 'standard',
-    component: Standard
-  },
-  {
-    path: '/ani',
-    name: '/Ani',
-    redirect: '/ani/homeAnimation',
-    component: HomeAnimation,
-    children: [
-      {
-        path: 'homeAnimation',
-        name: 'homeAnimation'
-      }
-    ]
-  },
-  {
-    path: '/last',
-    name: '/homelast',
-    component: lastPage
-  },
-  {
-    path: '/scrollContainer',
-    name: '/scrollContainer',
-    component: scrollContainer
-  },
-  {
-    path: '/view',
-    name: '/view',
-    component: viewChart
-  },
-  {
-
     path: '/index',
     name: '/homeAnimationIndex',
     component: animateIndex
