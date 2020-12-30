@@ -12,7 +12,7 @@ export default {
   },
   methods: {
     toHome () {
-      this.$router.push('/home')
+      this.$router.push('/index')
     },
     toPath () {
       this.$router.push('/guide/installation')

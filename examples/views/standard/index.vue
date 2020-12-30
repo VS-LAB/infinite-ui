@@ -165,6 +165,11 @@
             :src="require('@/assets/bigcardComponent.png')"
           />
           <!-- <div :class="`infinite-standard-card-icon ${hideGruyIcon ? 'hide-gruy-icon' : ''}`"></div> -->
+          <div class="infinite-standard-card-icon-gruy">
+            <i 
+              class="icon-annotate" 
+              ></i>
+          </div>
         </div>
 
       </div>
@@ -215,7 +220,11 @@ export default {
       ],
       wrapAnimate: '',
       hideGruyIcon: false,
-      hideMask: false
+      hideMask: false,
+      gruyIconLeft: 0,
+      gruyIconTop: 0,
+      listenResizeTimer: '',
+      listenResizeFlag: false
     }
   },
   computed: {
@@ -250,6 +259,7 @@ export default {
       return new Promise((resolve, reject) => {
         document.querySelector('.imgs_content_9').style.display = 'none'
         document.querySelector('.infinite-standard-card_img').style.display = 'block'
+        document.querySelector('.infinite-standard-card-icon-gruy').style.display = 'flex'
         this.showTop = !this.showTop
         setTimeout(_ => {
           resolve(true)
@@ -275,6 +285,8 @@ export default {
         this.showCardMoveToLeft = !this.showCardMoveToLeft
         this.codeShowLine()
         setTimeout(_ => {
+          this.getGruyIconPosition()
+          this.setIconMaskPosition(this.gruyIconLeft, this.gruyIconTop)
           resolve(true)
         }, 1500)
       })
@@ -293,36 +305,45 @@ export default {
         }, 1500)
       })
     },
+    // 获取灰色icon位置
+    getGruyIconPosition (callback) {
+      const gruyIcon = document.querySelector('.infinite-standard-card-icon-gruy')
+      if (gruyIcon) {
+        const h = gruyIcon.getBoundingClientRect() // 计算点居中
+        this.gruyIconLeft = `${h.left + 2}px`
+        this.gruyIconTop = `${h.top + 4}px`
+        callback && callback()
+      }
+    },
+    // 赋予IconMask位置
+    setIconMaskPosition (left, top) {
+      const { iconMask } = this.$refs
+      if (iconMask) {
+        iconMask.style.left = left
+        iconMask.style.top = top
+      }
+    },
     // 步骤5 保留感叹号 其他部分上滑
     page2_goEndTop (reversal) {
       return new Promise((resolve, reject) => {
         if (!reversal) {
           // 告诉动画页-4此时我的运动状态
-          const hideIcon = document.querySelector('.hideIcon')
+          const hideIcon = document.querySelector('.hideIcon') // 下一动画的首个icon
           if (hideIcon) {
             const b = hideIcon.getBoundingClientRect() // 计算点居中
-            const { iconMask } = this.$refs
-            iconMask.style.left = `${b.left}px`
-            // iconMask.style.top = `${Math.floor(b.top) + 3}px`
-            iconMask.style.top = `${b.top + 1.83}px`
+            this.setIconMaskPosition(`${b.left - 1}px`, `${b.top + 1.83}px`)
           }
+          
+          this.getGruyIconPosition()
+
           EventBus.$emit('page2_goEndTop', reversal)
           hideMaskTimer = setTimeout(_ => {
             this.hideMask = true
           }, 1600)
         } else {
-          const { iconMask } = this.$refs
-          const c = document.body.clientWidth
-          const d = document.body.clientHeight
+          this.setIconMaskPosition(this.gruyIconLeft, this.gruyIconTop)
           clearTimeout(hideMaskTimer)
           this.hideMask = false
-          let leftPosition = `${c * 0.5 - 167.5}px`
-          let topPosition = `${d * 0.5 - 34}px`
-          if (c <= 1366) { // 小屏幕使用vw单位，防止上下图标错位
-            leftPosition = '38.36806vw'
-          }
-          iconMask.style.left = leftPosition
-          iconMask.style.top = topPosition
           EventBus.$emit('page2_goEndTop', reversal)
         }
 
@@ -346,15 +367,15 @@ export default {
     // 窗口大小改变时的操作
     listenResize () {
       const _that = this
-      if (!_that.listenResize) {
-        _that.listenResize = true
+      console.log('listenResizeFlag before ~~ ')
+      if (!_that.listenResizeFlag) {
+        _that.listenResizeFlag = true
         setTimeout(() => {
-          const { iconMask } = _that.$refs
-          const c = document.body.clientWidth
-          const d = document.body.clientHeight
-          iconMask.style.left = `${c * 0.5 - 167.5}px`
-          iconMask.style.top = `${d * 0.5 - 34}px`
-          _that.listenResize = false
+          _that.getGruyIconPosition(() => {
+            console.log('listenResizeFlag ~~ ', _that.gruyIconLeft, _that.gruyIconTop)
+            _that.setIconMaskPosition(_that.gruyIconLeft, _that.gruyIconTop)
+          })
+          _that.listenResizeFlag = false
         }, 400)
       }
     }

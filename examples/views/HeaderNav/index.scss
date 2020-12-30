@@ -32,7 +32,7 @@
   }
   &-logo {
     @include flex-alc-jcc();
-    @include flex-width(auto);
+    @include flex-width(1);
     height: 100%;
     &-img {
       width: 180px;
@@ -41,18 +41,19 @@
   }
   &-tab {
     @include flex-alc-jcc();
-    @include flex-width(none);
+    @include flex-width(1);
     height: 100%;
     &-item {
       @include flex-alc-jcc();
       width: 90px;
       height: 100%;
       font-size: 16px;
+      cursor: pointer;
     }
   }
   &-menu {
     @include flex-alc-jcc();
-    @include flex-width(auto);
+    @include flex-width(1);
     height: 100%;
     font-size: 24px;
     &-out-icon {
@@ -98,43 +99,60 @@
     }
     &-bg {
       position: fixed;
-      top: 25px;
-      right: 28px;
+      // top: 25px;
+      // right: 28px;
+      top: 0;
+      right: 0;
       width: 0px;
       height: 0;
-      border-top: 0vh solid #000;
-      border-left: 0px solid transparent;
-      transition: .5s;
+      border-top: 0 solid #000;
+      border-left: 0 solid transparent;
+      transition: all .5s;
       &-show {
         top: 0px;
         right: 0px;
-        width: 426px;
+        width: 50vh;
+        // border-top: 100vh solid #000;
+        // border-left: 364px solid transparent;
         border-top: 100vh solid #000;
-        border-left: 364px solid transparent;
+        // border-right: 40px solid #000;
+        // border-bottom: 50px solid transparent;
+        border-left: 40vh solid transparent;
+        // transform: scale(10);
+        // &::before {
+        //   content: '';
+        //   position: absolute;
+        //   top: -10vh;
+        //   right: 0;
+        //   border-top: 10vh solid transparent;
+        //   border-left: 5vh solid transparent;
+        // }
       }
     }
     &-list {
       box-sizing: border-box;
       position: absolute;
       top: 0px;
-      right: 0;
-      width: 824px;
-      padding-top: 270px;
-      padding-left: 270px;
+      right: 0vh;
+      width: 90vh;
+      padding-top: 40vh; // 270
+      padding-left: 100px;
       line-height: 70px;
       text-align: left;
       color: #f9f9f9;
       font-weight: 700;
-      transform: rotate(-18deg);
+      transform: rotate(-21deg);
+      transform-origin: 0 0;
       &-li {
         margin-bottom: 60px;
         font-size: 40px;
         opacity: 0;
-        transform: translateX(30px) rotate(18deg);
+        transform: translateX(30px) rotate(21deg);
         transition: all .2s linear .2s;
+        cursor: pointer;
         &-show {
           opacity: 1;
-          transform: rotate(18deg);
+          transform: rotate(21deg);
         }
         &-active {
           color: #ff7c37;
