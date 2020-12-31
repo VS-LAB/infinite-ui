@@ -34,7 +34,7 @@
 
   // 雪碧图移动至左上角
   .logo_init_position {
-    transform: translate(-25%, calc(-50% * 0.43)) scale(0.57);
+    transform: translate(-64%, calc(-50% * 0.43)) scale(0.32);
     left: 20%;
     top: 0;
   }
@@ -42,7 +42,7 @@
   // 雪碧图移动至隐藏
   .logo_move_hidden {
     transition: all 0.3s;
-    transform: translate(-25%, -100%) scale(0.57);
+    transform: translate(-64%, -100%) scale(0.32);
   }
 
   // 倒动画
@@ -107,8 +107,9 @@
     height: 80px;
     line-height: 80px;
     position: fixed;
-    left: 44.4%;
+    left: 50%;
     top: 0;
+    transform: translateX(-50%);
     z-index: 1;
     color: #222222;
     transition: all 0.4s;
@@ -121,11 +122,15 @@
       &.active {
         color: #FF7635;
       }
+      &.unactive {
+        color: rgba(34,34,34,.4);
+        cursor: default;
+      }
     }
   }
 
   .header-model-anime_start {
-    transform: translateY(-100%);
+    transform: translate(-50%, -100%);
   }
 
   // 菜單menu end

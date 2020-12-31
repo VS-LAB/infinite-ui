@@ -30,163 +30,162 @@
         </div>
       </div>
     </div>
-
-    <div
-      class="infinite-standard_content"
-      :class="{'end-top':endTop}"
-    >
-      <div class="infinite-standard-card-wrapper">
-        <div
-          class="infinite-standard-card"
-          :class="{'move-card':showCardMoveToLeft}"
-        >
-          <div class="infinite-standard-line">
-
-            <!-- horizontal line -->
-            <div
-              class="infinite-standard-line_horizontal transform-origin-left"
-              :class="{'fade-in-box-6':showLine}"
-            ></div>
-            <div
-              class="infinite-standard-line_horizontal top55 transform-origin-right line-transition-delay"
-              :class="{'fade-in-box-7':showLine}"
-            ></div>
-            <div
-              class="infinite-standard-line_horizontal top90 transform-origin-right line-transition-delay"
-              :class="{'fade-in-box-7':showLine}"
-            ></div>
-            <div
-              class="infinite-standard-line_horizontal top135 transform-origin-left line-transition-delay"
-              :class="{'fade-in-box-9':showLine}"
-            ></div>
-            <div
-              class="infinite-standard-line_horizontal top195 transform-origin-left line-transition-delay"
-              :class="{'fade-in-box-9':showLine}"
-            ></div>
-            <div
-              class="infinite-standard-line_horizontal top255 transform-origin-right line-transition-delay"
-              :class="{'fade-in-box-7':showLine}"
-            ></div>
-            <div
-              class="infinite-standard-line_horizontal top295 transform-origin-left line-transition-delay"
-              :class="{'fade-in-box-9':showLine}"
-            ></div>
-            <div
-              class="infinite-standard-line_horizontal top370 transform-origin-left line-transition-delay"
-              :class="{'fade-in-box-9':showLine}"
-            ></div>
-            <div
-              class="infinite-standard-line_horizontal top410 transform-origin-left line-transition-delay"
-              :class="{'fade-in-box-9':showLine}"
-            ></div>
-            <div
-              class="infinite-standard-line_horizontal top450 transform-origin-left"
-              :class="{'fade-in-box-6':showLine}"
-            ></div>
-
-            <!-- vertical line -->
-            <div
-              class="infinite-standard-line_vertical left0 transform-origin-top"
-              :class="{'fade-in-box-1':showLine}"
-            ></div>
-            <div
-              class="infinite-standard-line_vertical left55 transform-origin-bottom line-transition-delay"
-              :class="{'fade-in-box-2':showLine}"
-            ></div>
-            <div
-              class="infinite-standard-line_vertical right110 transform-origin-bottom line-transition-delay"
-              :class="{'fade-in-box-2':showLine}"
-            ></div>
-
-            <div
-              class="infinite-standard-line_vertical right70 transform-origin-bottom line-transition-delay"
-              :class="{'fade-in-box-2':showLine}"
-            ></div>
-            <div
-              class="infinite-standard-line_vertical right0 transform-origin-top"
-              :class="{'fade-in-box-1':showLine}"
-            ></div>
-
-            <!-- small line -->
-            <div
-              class="infinite-standard-line_vertical-small left135 transform-origin-bottom line-transition-delay"
-              :class="{'fade-in-box-2':showLine}"
-            ></div>
-            <div
-              class="infinite-standard-line_vertical-small left175 transform-origin-bottom line-transition-delay"
-              :class="{'fade-in-box-2':showLine}"
-            ></div>
-            <div
-              class="infinite-standard-line_vertical-small left200 transform-origin-bottom line-transition-delay"
-              :class="{'fade-in-box-2':showLine}"
-            ></div>
-            <div
-              class="infinite-standard-line_vertical-small left210 transform-origin-bottom line-transition-delay"
-              :class="{'fade-in-box-2':showLine}"
-            ></div>
-            <div
-              class="infinite-standard-line_vertical-small right140 transform-origin-bottom line-transition-delay"
-              :class="{'fade-in-box-2':showLine}"
-            ></div>
-            <div
-              class="infinite-standard-line_vertical-small right176 transform-origin-bottom line-transition-delay"
-              :class="{'fade-in-box-2':showLine}"
-            ></div>
-            <div
-              class="infinite-standard-line_vertical-small right150 transform-origin-bottom line-transition-delay"
-              :class="{'fade-in-box-2':showLine}"
-            ></div>
-            <div
-              class="infinite-standard-line_vertical-small righ180 transform-origin-bottom line-transition-delay"
-              :class="{'fade-in-box-2':showLine}"
-            ></div>
-            <div
-              class="infinite-standard-line_vertical-small right210 transform-origin-bottom line-transition-delay"
-              :class="{'fade-in-box-2':showLine}"
-            ></div>
-          </div>
-
-          <!-- 外框线 -->
-          <div
-            class="infinite-standard-line line-box"
-            :class="{'show-sec-line':showCardMoveToLeft}"
-          >
-            <!-- horizontal line -->
-            <div class="infinite-standard-line_horizontal transform-origin-left"></div>
-            <div class="infinite-standard-line_horizontal top450 transform-origin-left"></div>
-
-            <!-- vertical line -->
-            <div class="infinite-standard-line_vertical left0"></div>
-            <div class="infinite-standard-line_vertical right0"></div>
-          </div>
-          <!-- end of 外框线 -->
-          <img
-            class="infinite-standard-card_img"
-            :src="require('@/assets/bigcardComponent.png')"
-          />
-          <!-- <div :class="`infinite-standard-card-icon ${hideGruyIcon ? 'hide-gruy-icon' : ''}`"></div> -->
-          <div class="infinite-standard-card-icon-gruy">
-            <i 
-              class="icon-annotate" 
-              ></i>
-          </div>
-        </div>
-
-      </div>
-      <!-- 代码打字效果 -->
+    <div class="infinite-standard_content-size2">
       <div
-        class="infinite-standard-code"
-        :class="{'show-code':showCardMoveToLeft}"
+        class="infinite-standard_content"
+        :class="{'end-top':endTop}"
       >
-        <p
-          :class="showCode(index)"
-          v-for="(code, index) in codes"
-          :key="index"
+        <div class="infinite-standard-card-wrapper">
+          <div
+            class="infinite-standard-card"
+            :class="{'move-card':showCardMoveToLeft}"
+          >
+            <div class="infinite-standard-line">
+
+              <!-- horizontal line -->
+              <div
+                class="infinite-standard-line_horizontal transform-origin-left"
+                :class="{'fade-in-box-6':showLine}"
+              ></div>
+              <div
+                class="infinite-standard-line_horizontal top55 transform-origin-right line-transition-delay"
+                :class="{'fade-in-box-7':showLine}"
+              ></div>
+              <div
+                class="infinite-standard-line_horizontal top90 transform-origin-right line-transition-delay"
+                :class="{'fade-in-box-7':showLine}"
+              ></div>
+              <div
+                class="infinite-standard-line_horizontal top135 transform-origin-left line-transition-delay"
+                :class="{'fade-in-box-9':showLine}"
+              ></div>
+              <div
+                class="infinite-standard-line_horizontal top195 transform-origin-left line-transition-delay"
+                :class="{'fade-in-box-9':showLine}"
+              ></div>
+              <div
+                class="infinite-standard-line_horizontal top255 transform-origin-right line-transition-delay"
+                :class="{'fade-in-box-7':showLine}"
+              ></div>
+              <div
+                class="infinite-standard-line_horizontal top295 transform-origin-left line-transition-delay"
+                :class="{'fade-in-box-9':showLine}"
+              ></div>
+              <div
+                class="infinite-standard-line_horizontal top370 transform-origin-left line-transition-delay"
+                :class="{'fade-in-box-9':showLine}"
+              ></div>
+              <div
+                class="infinite-standard-line_horizontal top410 transform-origin-left line-transition-delay"
+                :class="{'fade-in-box-9':showLine}"
+              ></div>
+              <div
+                class="infinite-standard-line_horizontal top450 transform-origin-left"
+                :class="{'fade-in-box-6':showLine}"
+              ></div>
+
+              <!-- vertical line -->
+              <div
+                class="infinite-standard-line_vertical left0 transform-origin-top"
+                :class="{'fade-in-box-1':showLine}"
+              ></div>
+              <div
+                class="infinite-standard-line_vertical left55 transform-origin-bottom line-transition-delay"
+                :class="{'fade-in-box-2':showLine}"
+              ></div>
+              <div
+                class="infinite-standard-line_vertical right110 transform-origin-bottom line-transition-delay"
+                :class="{'fade-in-box-2':showLine}"
+              ></div>
+
+              <div
+                class="infinite-standard-line_vertical right70 transform-origin-bottom line-transition-delay"
+                :class="{'fade-in-box-2':showLine}"
+              ></div>
+              <div
+                class="infinite-standard-line_vertical right0 transform-origin-top"
+                :class="{'fade-in-box-1':showLine}"
+              ></div>
+
+              <!-- small line -->
+              <div
+                class="infinite-standard-line_vertical-small left135 transform-origin-bottom line-transition-delay"
+                :class="{'fade-in-box-2':showLine}"
+              ></div>
+              <div
+                class="infinite-standard-line_vertical-small left175 transform-origin-bottom line-transition-delay"
+                :class="{'fade-in-box-2':showLine}"
+              ></div>
+              <div
+                class="infinite-standard-line_vertical-small left200 transform-origin-bottom line-transition-delay"
+                :class="{'fade-in-box-2':showLine}"
+              ></div>
+              <div
+                class="infinite-standard-line_vertical-small left210 transform-origin-bottom line-transition-delay"
+                :class="{'fade-in-box-2':showLine}"
+              ></div>
+              <div
+                class="infinite-standard-line_vertical-small right140 transform-origin-bottom line-transition-delay"
+                :class="{'fade-in-box-2':showLine}"
+              ></div>
+              <div
+                class="infinite-standard-line_vertical-small right176 transform-origin-bottom line-transition-delay"
+                :class="{'fade-in-box-2':showLine}"
+              ></div>
+              <div
+                class="infinite-standard-line_vertical-small right150 transform-origin-bottom line-transition-delay"
+                :class="{'fade-in-box-2':showLine}"
+              ></div>
+              <div
+                class="infinite-standard-line_vertical-small righ180 transform-origin-bottom line-transition-delay"
+                :class="{'fade-in-box-2':showLine}"
+              ></div>
+              <div
+                class="infinite-standard-line_vertical-small right210 transform-origin-bottom line-transition-delay"
+                :class="{'fade-in-box-2':showLine}"
+              ></div>
+            </div>
+
+            <!-- 外框线 -->
+            <div
+              class="infinite-standard-line line-box"
+              :class="{'show-sec-line':showCardMoveToLeft}"
+            >
+              <!-- horizontal line -->
+              <div class="infinite-standard-line_horizontal transform-origin-left"></div>
+              <div class="infinite-standard-line_horizontal top450 transform-origin-left"></div>
+
+              <!-- vertical line -->
+              <div class="infinite-standard-line_vertical left0"></div>
+              <div class="infinite-standard-line_vertical right0"></div>
+            </div>
+            <!-- end of 外框线 -->
+            <img
+              class="infinite-standard-card_img"
+              :src="require('@/assets/bigcardComponent.png')"
+            />
+            <!-- <div :class="`infinite-standard-card-icon ${hideGruyIcon ? 'hide-gruy-icon' : ''}`"></div> -->
+            <div class="infinite-standard-card-icon-gruy">
+              <i class="icon-annotate"></i>
+            </div>
+          </div>
+
+        </div>
+        <!-- 代码打字效果 -->
+        <div
+          class="infinite-standard-code"
+          :class="{'show-code':showCardMoveToLeft}"
         >
-          {{ code }}
-        </p>
+          <p
+            :class="showCode(index)"
+            v-for="(code, index) in codes"
+            :key="index"
+          >
+            {{ code }}
+          </p>
+        </div>
+        <!-- end of 代码打字效果 -->
       </div>
-      <!-- end of 代码打字效果 -->
     </div>
   </div>
 </template>
@@ -344,7 +343,7 @@ export default {
             const b = hideIcon.getBoundingClientRect() // 计算点居中
             this.setIconMaskPosition(`${b.left - 1}px`, `${b.top + 1.83}px`)
           }
-          
+
           this.getGruyIconPosition()
 
           EventBus.$emit('page2_goEndTop', reversal)

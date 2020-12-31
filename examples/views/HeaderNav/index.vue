@@ -31,7 +31,14 @@
         :key="index"
         :class="item.disabled ? 'header-nav-container-tab-item-unactive' : ''"
         @click="item.click()"
-      >{{item.text}}</div>
+        @mouseenter="mouseover(item, index)" 
+        @mouseleave="mouseLeave(item, index)"
+      >
+        {{item.text}}
+        <div class="header-nav-container-tab-item-hover" v-if="tabActiveIndex === index + 1">
+          <span>敬请期待</span>
+        </div>
+      </div>
     </div>
     <div class="header-nav-container-menu">
       <i class="icon-nav header-nav-container-menu-out-icon" @click.stop="menuOpen"></i>
@@ -69,7 +76,8 @@ export default {
   },
   data () {
     return {
-      isOpen: false,
+      isOpen: false, // 下拉蒙层是否打开
+      tabActiveIndex: 0, // 气泡提示
       navTabTitle: [
         {
           text: '首页',
@@ -123,6 +131,16 @@ export default {
     
   },
   methods: {
+    // 鼠标进入
+    mouseover (item, index) {
+      if (item.disabled) {
+        this.tabActiveIndex = index + 1
+      }
+    },
+    // 鼠标离开
+    mouseLeave (item, index) {
+      this.tabActiveIndex = 0
+    },
     // 展示/关闭弹窗
     menuOpen () {
       console.log('menuOpen')

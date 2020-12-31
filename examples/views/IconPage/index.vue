@@ -292,11 +292,11 @@ export default {
           setTimeout(_ => {
             _that.showAni = 3
             _that.showIcon = false
+            this.listStepIndex = 1
             setTimeout(_ => {
               _that.showAni = 4
               _that.showDefaultBg = ''
               _that.orBgAnimateName = ''
-              this.listStepIndex = 1
               resolve(true)
             }, 1500)
           }, 100)
@@ -306,10 +306,10 @@ export default {
           setTimeout(_ => {
             _that.showAni = 9
             _that.showIcon = true
+            this.listStepIndex = 0
             setTimeout(_ => {
               _that.showAni = 2
               _that.blueBgAnimateName = ''
-              this.listStepIndex = 0
               resolve(true)
             }, 1500)
           }, 100)
@@ -326,10 +326,10 @@ export default {
           this.bgAnimateNameZindex = 3
           setTimeout(_ => {
             _that.showAni = 5
+            this.listStepIndex = 2
             setTimeout(_ => {
               _that.showAni = 6
               _that.blueBgAnimateName = ''
-              this.listStepIndex = 2
               resolve(true)
             }, 1500)
           }, 100)
@@ -338,10 +338,10 @@ export default {
           this.bgAnimateNameZindex = 2
           setTimeout(_ => {
             _that.showAni = 8
+            this.listStepIndex = 1
             setTimeout(_ => {
               _that.showAni = 4
               _that.blackBgAnimateName = ''
-              this.listStepIndex = 1
               resolve(true)
             }, 1500)
           }, 100)

@@ -1,11 +1,11 @@
 $size: scale(0.8);
 
+// 在不影响其他transform 效果情况下 最好外层嵌套div
 .size-X2{
-  transform: $size;
-  // /deep/ .infinite-standard_content{
-  //   transform: $size;
-  // }
-  // /deep/ .top-wrapper{
-  //   transform: $size;
-  // }
+  /deep/ .infinite-standard_content-size2{
+    transform: $size;
+  }
+  /deep/ .top-wrapper{
+    transform: $size;
+  }
 }
