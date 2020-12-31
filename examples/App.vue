@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-21 09:47:44
- * @LastEditTime: 2020-12-21 09:57:14
+ * @LastEditTime: 2020-12-31 16:09:04
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /infinite-ui/examples/App.vue
@@ -33,8 +33,14 @@ export default {
   },
   computed: {
     isFixed () {
-      console.log('this.$route.name', this.$route.name);
+      console.log('this.$route.name', this.$route.name)
       return this.$route.name.includes('home')
+    }
+  },
+  mounted () {
+    var t = window.devicePixelRatio 
+    if (t !== 1) {
+      alert('当前缩放比不正确，请调整成100%缩放比体验最佳')
     }
   }
 }
