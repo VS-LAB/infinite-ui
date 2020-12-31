@@ -152,7 +152,7 @@ export default {
       const { showType } = this
       const width = this.getWidth() / 100
       if (showType === 'large') {
-        return 8 * width
+        return [8 * width, 5 * width, 6 * width, 7 * width ]
       }
       return 0
     },
@@ -198,11 +198,11 @@ export default {
       this.chart = chart
     },
     render () {
-      const _this = this;
+      const _this = this
       this.chart.render()
-      setTimeout(()=>{
+      setTimeout(() => {
         _this.showToolTips = true
-      },400)
+      }, 400)
     },
     initComponent () {
       const chart = new Chart({
@@ -249,4 +249,3 @@ export default {
   }
 }
 </script>
-

@@ -94,9 +94,9 @@ export default {
     height () {
       const { showType, width } = this
       if (showType === 'large') {
-        return 58 * (WIDTH / 1920) * width
+        return 53 * (WIDTH / 1920) * width
       }
-      return 12.08 * 2 * (WIDTH / 1920) * width
+      return 21 * (WIDTH / 1920) * width
     },
     width () {
       const { clientWidth } = document.documentElement
