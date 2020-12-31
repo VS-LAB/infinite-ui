@@ -303,8 +303,8 @@
     }
     &-icon-gruy {
       position: absolute;
-      top: 58.5px;
-      right: 55px;
+      top: 58px;
+      left: calc(100% - 89px);
       display: none;
       align-items: center;
       justify-content: center;
@@ -389,6 +389,7 @@
   }
 
   .infinite-standard-card-exclamatory-mark {
+    box-sizing: content-box;
     position: fixed;
     // left: calc(50% - 8.69vw);
     // top: calc(50% - 1.62vw);
@@ -400,6 +401,7 @@
     // width: 1.8vw;
     // height: 1.8vw;
     border-radius: 50%;
+    // font-size: 34px;
     font-size: 28px;
     color: rgba(255,118,53,1);
     background: #fff;
@@ -407,31 +409,38 @@
     box-shadow: 0 5px 20px 0 rgba(255, 214, 176, 0.6);
     opacity: 0;
     z-index: 999;
-    transform: scale(1.265);
-    transition: all 1s;
+    transform: translate(3px, 3px) scale(1.265);
+    transition: all .5s linear;
     i {
       border-radius: 50%;
       // overflow: hidden;
-      transform: scale(1);
-      transition: all 1s;
+      // transform: scale(1);
+      transition: all 1s linear;
     }
   }
   .show-tip {
+    padding: 8px;
+    transform: translate(-5px, -5px) scale(2);
+    // width: 58px;
+    // height: 58px;
     opacity: 1;
+    transition: all .5s linear;
     i {
-      transform: scale(0.64);
+      // transform: scale(0.64);
       // transition: all .4s linear .2s;
     }
-    transform: scale(2.3); // 2.5
+    // transform: scale(2.3); // 2.5
   }
   .end-mask {
+    padding: 0;
     z-index: 999;
-    transform: scale(1);
+    // transform: scale(1);
+    transform: translate(0, 0) scale(1);
     font-size: 28px;
     opacity: 1;
     box-shadow: none;
     i {
-      transform: scale(1);
+      // transform: scale(1);
     }
     transition: all 1.2s;
   }

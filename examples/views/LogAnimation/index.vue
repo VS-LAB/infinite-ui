@@ -136,7 +136,7 @@ export default {
           this.moveWhiteBackgroundAnime = 'move-white-background-anime_start'
           setTimeout(_ => {
             this.footerTextAnime = 'footer-text-anime_end'
-          }, 100)
+          }, 500)
           this.footerTextAnime = 'footer-text-anime_end'
           setTimeout(_ => {
             this.logoMoveHidden = true

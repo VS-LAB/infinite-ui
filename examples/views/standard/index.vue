@@ -311,8 +311,13 @@ export default {
       return new Promise((resolve, reject) => {
         this.showMask = !this.showMask
         if (!reversal) {
+          // this.getGruyIconPosition()
+          // console.log('---')
+          // this.setIconMaskPosition((this.gruyIconLeft.replace('px', '') - 12) + 'px', (this.gruyIconTop.replace('px', '') - 12) + 'px')
           this.hideGruyIcon = true
         } else {
+          // this.getGruyIconPosition()
+          // this.setIconMaskPosition(this.gruyIconLeft, this.gruyIconTop)
           this.hideGruyIcon = false
         }
         setTimeout(_ => {
@@ -325,8 +330,8 @@ export default {
       const gruyIcon = document.querySelector('.infinite-standard-card-icon-gruy')
       if (gruyIcon) {
         const h = gruyIcon.getBoundingClientRect() // 计算点居中
-        this.gruyIconLeft = `${h.left + 2}px`
-        this.gruyIconTop = `${h.top + 4}px`
+        this.gruyIconLeft = `${h.left}px`
+        this.gruyIconTop = `${h.top}px`
         callback && callback()
       }
     },
@@ -348,6 +353,7 @@ export default {
             const b = hideIcon.getBoundingClientRect() // 计算点居中
             this.setIconMaskPosition(`${b.left - 1}px`, `${b.top + 1.83}px`)
           }
+          this.endTop = true
 
           this.getGruyIconPosition()
 
@@ -355,13 +361,12 @@ export default {
           hideMaskTimer = setTimeout(_ => {
             this.hideMask = true
           }, 1600)
-          this.endTop = true
         } else {
           this.setIconMaskPosition(this.gruyIconLeft, this.gruyIconTop)
+          this.endTop = false
           clearTimeout(hideMaskTimer)
           this.hideMask = false
           EventBus.$emit('page2_goEndTop', reversal)
-          this.endTop = false
         }
 
         // this.endTop = !this.endTop
