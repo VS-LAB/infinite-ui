@@ -1,4 +1,4 @@
-const WIDTH = 1366
+const WIDTH = 1360
 
 export {
   WIDTH
