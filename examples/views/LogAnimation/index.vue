@@ -31,7 +31,8 @@
          v-show="moveWhiteBackgroundAnime">
       <div class="header-menu"
            :class="{
-             'active':$route.path === menu.route
+              'active':$route.path === menu.route,
+              'unactive': menu.disabled
            }"
            v-for="menu in menuData"
            :key="menu.label"
@@ -55,6 +56,7 @@ export default {
       menuData: [
         {
           label: '首页',
+
           route: '/index'
         },
         {
@@ -63,15 +65,18 @@ export default {
         },
         {
           label: '图标',
+          disabled: true,
           route: ''
         },
         {
           label: '图表',
-          route: '/guide/LineChart'
+          disabled: true
+          // route: '/guide/LineChart'
         },
         {
           label: '下载',
-          route: '/guide/installation'
+          disabled: true
+          // route: '/guide/installation'
         }
       ],
       logoTimer: null, // cube计时器
