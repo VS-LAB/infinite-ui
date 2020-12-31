@@ -62,8 +62,9 @@
          :class="{
            'img_connect-anime_start':imgConnectAnime
          }"
-         :src="require(`@/assets/component/card (9).png`)"
+         :src="require(`@/assets/bigcardComponentBefore.png`)"
          alt="">
+         <!-- :src="require(`@/assets/component/card (9).png`)" -->
     <div class="replace_scroll"
          v-show="isOverflowAutoPad && !animeContinue && !lastAnimeCompile"
          ref="replaceScrollRef"

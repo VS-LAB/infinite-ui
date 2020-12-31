@@ -46,13 +46,38 @@
     height: 100%;
     &-item {
       @include flex-alc-jcc();
+      position: relative;
       width: 90px;
       height: 100%;
       font-size: 16px;
       cursor: pointer;
       &-unactive {
-        color: #ccc;
-        cursor: text;
+        color: rgba(34,34,34,.4);
+        cursor: default;
+      }
+      &-hover {
+        @include flex-alc-jcc();
+        position: absolute;
+        top: calc(50% + 22px);
+        left: 24px;
+        padding: 6px 10px;
+        white-space: nowrap;
+        // width: 160px;
+        background: #e0edf7;
+        color: rgba(34,34,34,1);
+        border-radius: 6px;
+        &::before {
+          content: "";
+          position: absolute;
+          top: -6px;
+          left: 10px;
+          width: 0;
+          height: 0;
+          display: block;
+          border-left: 10px solid transparent;
+          border-right: 10px solid transparent;
+          border-bottom: 10px solid #e0edf7;
+        }
       }
     }
   }

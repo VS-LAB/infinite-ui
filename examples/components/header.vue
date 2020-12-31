@@ -1,6 +1,6 @@
 <template>
   <div class="header-model" to ='/'>
-    <img src='@/assets/log.png' alt="Infinite-ui" class="info" @click="toHome()">
+    <img src='@/assets/logo.png' alt="Infinite-ui" class="info" @click="toHome()">
     <div class="header-menu" @click="toPath()">组件</div>
   </div>
 </template>
@@ -31,7 +31,7 @@ export default {
   align-items: center;
   text-align: right;
   .info {
-   width: 190px;
+   width: 180px;
    &:hover{
     cursor:pointer;
    }
