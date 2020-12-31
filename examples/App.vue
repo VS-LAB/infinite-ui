@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-21 09:47:44
- * @LastEditTime: 2020-12-31 16:09:04
+ * @LastEditTime: 2020-12-31 16:18:57
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /infinite-ui/examples/App.vue
@@ -38,10 +38,10 @@ export default {
     }
   },
   mounted () {
-    var t = window.devicePixelRatio 
-    if (t !== 1) {
-      alert('当前缩放比不正确，请调整成100%缩放比体验最佳')
-    }
+    // var t = window.devicePixelRatio 
+    // if (t !== 1) {
+    //   alert('当前缩放比不正确，请调整成100%缩放比体验最佳')
+    // }
   }
 }
 </script>
