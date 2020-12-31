@@ -444,3 +444,24 @@
 /deep/ .view-container {
   background-color: #fff;
 }
+.infinite-standard_content-size2{
+  height: 450px;
+}
+
+.main-view-content-standard{
+  position: absolute;
+  margin: auto;
+  width: 719px;
+  height: 720px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transform-origin: left top;
+}
+
+.infinite-standard_content-flex{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
