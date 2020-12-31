@@ -347,7 +347,7 @@ export default {
       const element = document.querySelector('.main-view-content')
       const elementTransform = element.style.transform
       const { height } = element.getBoundingClientRect()
-      const thresholdValue = 0.1  // 防止不够，多缩小一点
+      const thresholdValue = 0.1 // 防止不够，多缩小一点
       if ((clientHeight - height) < 100) {
         const scale = 1 - Math.abs(clientHeight - height) / height - thresholdValue
         element.style.transform = elementTransform + `scale(${scale}) translate(-50%,-50%)`
@@ -546,7 +546,7 @@ export default {
 @import './btn.scss';
 @import "./index.scss";
 
-@media screen and (min-width: 1440px) {
+@media screen and (min-width: 1360px) {
   @import "./index.scss";
 }
 </style>

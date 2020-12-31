@@ -78,14 +78,14 @@ export default {
       logoCount: 1, // 计数
       logoUrl: require('@/assets/logo.png'),
       logoNum: 30,
-      logoSwitchTime: 60,//图片切换时间
-      logoAnimeCompile: false,//logo的动画完成
-      logoInitPosition: false,//logo初始化左上角位置
-      logoMoveHidden: false,//logo是否移动至隐藏
-      footerTextAnime: '',//创造无限可能动画 footer-text-anime_start
-      moveWhiteBackgroundAnime: '',//背景动画
-      headerModelAnime: '',//菜单动画
-      reversal: false,//正动画或倒动画
+      logoSwitchTime: 60, // 图片切换时间
+      logoAnimeCompile: false, // logo的动画完成
+      logoInitPosition: false, // logo初始化左上角位置
+      logoMoveHidden: false, // logo是否移动至隐藏
+      footerTextAnime: '', // 创造无限可能动画 footer-text-anime_start
+      moveWhiteBackgroundAnime: '', // 背景动画
+      headerModelAnime: '', // 菜单动画
+      reversal: false // 正动画或倒动画
     }
   },
   methods: {
@@ -128,8 +128,8 @@ export default {
       return new Promise((resolve, reject) => {
         if (!reversal) {
           this.logoInitPosition = true
-          this.moveWhiteBackgroundAnime = "move-white-background-anime_start"
-          this.footerTextAnime = "footer-text-anime_end"
+          this.moveWhiteBackgroundAnime = 'move-white-background-anime_start'
+          this.footerTextAnime = 'footer-text-anime_end'
           setTimeout(_ => {
             this.logoMoveHidden = true
             this.headerModelAnime = true
@@ -138,17 +138,17 @@ export default {
             }, 500)
           }, 700)
         } else {
-          this.moveWhiteBackgroundAnime = "_"
+          this.moveWhiteBackgroundAnime = '_'
           this.headerModelAnime = false
           this.logoMoveHidden = false
           setTimeout(_ => {
             this.logoInitPosition = false
             setTimeout(_ => {
-              this.moveWhiteBackgroundAnime = ""
+              this.moveWhiteBackgroundAnime = ''
               resolve(true)
             }, 800)
             setTimeout(() => {
-              this.footerTextAnime = "footer-text-anime_start"
+              this.footerTextAnime = 'footer-text-anime_start'
             }, 400)
           }, 400)
         }
@@ -160,7 +160,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "./index.scss";
-@media screen and (min-width: 1440px) {
+@media screen and (min-width: 1360px) {
   @import "./index.scss";
 }
 </style>

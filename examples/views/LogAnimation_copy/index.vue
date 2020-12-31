@@ -112,14 +112,14 @@ export default {
       logoCount: 1, // 计数
       logoUrl: require('@/assets/logo.png'),
       logoNum: 30,
-      logoSwitchTime: 60,//图片切换时间
-      logoAnimeCompile: false,//logo的动画完成
-      logoInitPosition: {},//logo初始化左上角位置
-      logoMoveHidden: false,//logo是否移动至隐藏
-      footerTextAnime: '',//创造无限可能动画 footer-text-anime_start
-      moveWhiteBackgroundAnime: '',//背景动画
-      headerModelAnime: {},//菜单动画
-      reversal: false,//正动画或倒动画
+      logoSwitchTime: 60, // 图片切换时间
+      logoAnimeCompile: false, // logo的动画完成
+      logoInitPosition: {}, // logo初始化左上角位置
+      logoMoveHidden: false, // logo是否移动至隐藏
+      footerTextAnime: '', // 创造无限可能动画 footer-text-anime_start
+      moveWhiteBackgroundAnime: '', // 背景动画
+      headerModelAnime: {}, // 菜单动画
+      reversal: false // 正动画或倒动画
     }
   },
   methods: {
@@ -152,7 +152,7 @@ export default {
       this.logoInitPosition = {
         transform: `translate(-${this.getComputedData(50, 25, newRatio)}%, calc(-${this.getComputedData(50, 21.5, newRatio)}%)) scale(${this.getComputedData(1, 0.57, newRatio)})`,
         left: `${this.getComputedData(50, 20, newRatio)}%`,
-        top: `${this.getComputedData(50, 0, newRatio)}%`,
+        top: `${this.getComputedData(50, 0, newRatio)}%`
       }
     },
     // 设置样式-画布
@@ -181,7 +181,7 @@ export default {
     // 获取该区间滚动信息
     isCrtSectionMessage (arr) {
       const message = {
-        status: this.ratio >= arr[0] && this.ratio <= arr[1],//是否在区间内
+        status: this.ratio >= arr[0] && this.ratio <= arr[1], // 是否在区间内
         ratio: (this.ratio - arr[0]) / (arr[1] - arr[0]),
         position: null
       }
@@ -217,13 +217,13 @@ export default {
         })
       })
     }
-  },
+  }
 }
 </script>
 
 <style lang="scss" scoped>
 @import "./index.scss";
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1360px) {
   @import "./index.scss";
 }
 </style>

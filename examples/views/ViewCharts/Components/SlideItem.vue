@@ -113,7 +113,7 @@ export default {
 <style lang="scss" scoped>
 @import "./SlideItem.scss";
 
-@media screen and (min-width: 1440px) {
+@media screen and (min-width: 1360px) {
   @import "./SlideItem.scss";
 }
 </style>

@@ -147,9 +147,9 @@ export default {
       imgConnectAnime: '', // 连接下个图片图画
       lastAnimeCompile: false, // 最后一个动画状态
       animeContinue: false, // 动画是否进行当中
-      isOverflowAutoPad: false,//是否在pad上进行滚动
-      padScrollSwitch: false,//电脑上下滑动开关
-      continueSlide: false,//持续滑动
+      isOverflowAutoPad: false, // 是否在pad上进行滚动
+      padScrollSwitch: false, // 电脑上下滑动开关
+      continueSlide: false // 持续滑动
     }
   },
   methods: {
@@ -283,7 +283,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "./index.scss";
-@media screen and (min-width: 1440px) {
+@media screen and (min-width: 1360px) {
   @import "./index.scss";
 }
 </style>

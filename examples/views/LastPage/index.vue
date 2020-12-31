@@ -137,7 +137,7 @@ export default {
       this.$router.push('/guide/installation')
     },
     page5_animeStep1 () {
-      console.log('page5_animeStep1');
+      console.log('page5_animeStep1')
       return new Promise((resolve, reject) => {
         resolve(true)
       })
@@ -150,7 +150,7 @@ export default {
 </script>
 <style lang='scss' scoped>
 @import "./index.scss";
-@media screen and (min-width: 1440px) {
+@media screen and (min-width: 1360px) {
   @import "./index.scss";
 }
 </style>

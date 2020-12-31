@@ -37,7 +37,7 @@ export default {
   methods: {
     showSmallRoundEdge () {
       const _this = this
-      setTimeout(()=>{
+      setTimeout(() => {
         _this.show = true
       }, 320)
     }
@@ -48,7 +48,7 @@ export default {
 <style lang='scss' scoped>
 @import "./Radius2.scss";
 
-@media screen and (min-width: 1440px) {
+@media screen and (min-width: 1360px) {
   @import "./Radius2.scss";
 }
 </style>

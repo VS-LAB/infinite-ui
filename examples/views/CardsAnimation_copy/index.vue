@@ -156,9 +156,9 @@ export default {
       imgConnectAnime: '', // 连接下个图片图画
       lastAnimeCompile: false, // 最后一个动画状态
       animeContinue: false, // 动画是否进行当中
-      isOverflowAutoPad: false,//是否在pad上进行滚动
-      padScrollSwitch: false,//电脑上下滑动开关
-      continueSlide: false,//持续滑动
+      isOverflowAutoPad: false, // 是否在pad上进行滚动
+      padScrollSwitch: false, // 电脑上下滑动开关
+      continueSlide: false // 持续滑动
     }
   },
   methods: {
@@ -183,7 +183,7 @@ export default {
     // 获取该区间滚动信息
     isCrtSectionMessage (arr) {
       const message = {
-        status: this.ratio >= arr[0] && this.ratio <= arr[1],//是否在区间内
+        status: this.ratio >= arr[0] && this.ratio <= arr[1], // 是否在区间内
         ratio: (this.ratio - arr[0]) / (arr[1] - arr[0]),
         position: null
       }
@@ -198,7 +198,7 @@ export default {
     },
     // 设置样式-电脑
     padAnime (newRatio) {
-      console.log(`translate('-50%', -${this.getComputedData(100, 50, newRatio)}%)`);
+      console.log(`translate('-50%', -${this.getComputedData(100, 50, newRatio)}%)`)
       this.componentViewNotebookAnime = {
         width: `${this.getComputedData(4080, 1440, newRatio)}px`,
         transform: `translate(-50%, ${this.getComputedData(100, -50, newRatio)}%)`
@@ -206,7 +206,7 @@ export default {
     },
     // 设置样式-卡片
     cardAnime (newRatio) {
-      console.log(`translate('-50%', -${this.getComputedData(100, 50, newRatio)}%)`);
+      console.log(`translate('-50%', -${this.getComputedData(100, 50, newRatio)}%)`)
       this.componentViewNotebookAnime = {
         width: `${this.getComputedData(4080, 1440, newRatio)}px`,
         transform: `translate(-50%, ${this.getComputedData(100, -50, newRatio)}%)`
@@ -341,7 +341,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "./index.scss";
-@media screen and (min-width: 1440px) {
+@media screen and (min-width: 1360px) {
   @import "./index.scss";
 }
 </style>

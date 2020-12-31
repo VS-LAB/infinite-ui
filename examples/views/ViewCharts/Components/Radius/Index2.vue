@@ -67,7 +67,7 @@ export default {
 <style lang='scss' scoped>
 @import "./Index2.scss";
 
-@media screen and (min-width: 1440px) {
+@media screen and (min-width: 1360px) {
   @import "./Index2.scss";
 }
 </style>
