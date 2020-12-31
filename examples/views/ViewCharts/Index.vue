@@ -178,6 +178,7 @@ export default {
         title: '数据分析'
       }
       ],
+      scale: 1,
       colorList: [{
         id: 4,
         color: '#1C1A31'
@@ -201,13 +202,17 @@ export default {
       animationList: {
         0: [{
           ele: ['.main-view .header'], // 顶部标题动画
-          className: 'flow'
+          className: 'flow',
+          delay: {
+            next: '0s',
+            prev: '1s'
+          }
         }, {
           ele: ['.charts .chart-line-small-step1'], // 小line动画
           className: 'chart-line-small-step2',
           delay: {
             next: '1s',
-            prev: 0
+            prev: '0s'
           }
         },
         {
@@ -215,7 +220,7 @@ export default {
           className: 'chart-bar-small-step2',
           delay: {
             next: '0.5s',
-            prev: 0
+            prev: '0.5s'
           }
         },
         {
@@ -223,14 +228,14 @@ export default {
           className: 'chart-radius-small-step2',
           delay: {
             next: '0.5s',
-            prev: 0
+            prev: '0.5s'
           }
         }, {
           ele: ['.charts .chart-line-big-step1'],
           className: 'chart-line-big-step2',
           delay: {
             next: '1s',
-            prev: 0
+            prev: '0s'
           }
         }],
         1: [{
@@ -242,16 +247,32 @@ export default {
           }
         }, {
           ele: ['.charts .chart-line-small-step1'], // 小line动画
-          className: 'chart-line-small-step3'
+          className: 'chart-line-small-step3',
+          delay: {
+            next: '0s',
+            prev: '0s'
+          }
         }, {
           ele: ['.charts .chart-bar-small-step1'], // 小line动画
-          className: 'chart-bar-small-step3'
+          className: 'chart-bar-small-step3',
+          delay: {
+            next: '0.16s',
+            prev: '0s'
+          }
         }, {
           ele: ['.charts .chart-radius-small-step1'], // 小line动画
-          className: 'chart-radius-small-step3'
+          className: 'chart-radius-small-step3',
+          delay: {
+            next: '0.08s',
+            prev: '0s'
+          }
         }, {
           ele: ['.charts .chart-line-big-step1'], // 大line动画
-          className: 'chart-line-big-step3'
+          className: 'chart-line-big-step3',
+          delay: {
+            next: '0.24s',
+            prev: '0s'
+          }
         }, {
           ele: '.laptop .laptop-main', // laptop
           className: 'showlaptop-step1'
@@ -350,6 +371,7 @@ export default {
       const thresholdValue = 0.1 // 防止不够，多缩小一点
       if ((clientHeight - height) < 100) {
         const scale = 1 - Math.abs(clientHeight - height) / height - thresholdValue
+        this.scale = scale
         element.style.transform = elementTransform + `scale(${scale}) translate(-50%,-50%)`
         element.style.transformOrigin = 'left top'
       }
@@ -406,20 +428,11 @@ export default {
       const element = document.querySelector('.laptop')
       const width = document.querySelector('.laptop .laptop-main').clientWidth
       const { top } = document.querySelector('.laptop .laptop-main').getBoundingClientRect()
-      const stepDistance = ((height - element.clientHeight) / 2 - top)
-      // const stylesh = document.styleSheets[document.styleSheets.length - 1]
-      // stylesh.insertRule(`
-      //   .laptop.laptop-move-left-step1.laptop-move-left-step3[data-v-75182f44] {
-      //     transform: scale(1) translate(-50%, ${stepDistance}px);
-      //   }
-      // `)
-      // element.style.transition = 'all 1s';
+      const stepDistance = ((height - element.clientHeight * this.scale) / 2 - top)
       const stepLeft = width / 2 + (100)
       if (!dirction) {
-        // element.classList.add('laptop-move-left-step3')
         element.style.transform = `scale(1) translate(${-stepLeft}px, ${stepDistance}px)`
       } else {
-        // element.classList.remove('laptop-move-left-step3')
         element.style.transform = ``
       }
     },

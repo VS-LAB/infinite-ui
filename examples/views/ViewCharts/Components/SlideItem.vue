@@ -1,5 +1,5 @@
 <template>
-  <div class="slider-container" :class="{
+  <div ref='slider-item' class="slider-container" :class="{
       'small-item': showType === 'small',
       'large-item': showType === 'large',
     }">
@@ -93,17 +93,21 @@ export default {
     },
     height () {
       const { showType, width } = this
+      // if (showType === 'large') {
+      //   return 50 * (WIDTH / 1920) * width
+      // }
+      // return 19.8 * (WIDTH / 1920) * width
       if (showType === 'large') {
-        return 53 * (WIDTH / 1920) * width
+        return width * (300 * 2 / WIDTH)
       }
-      return 21 * (WIDTH / 1920) * width
+      return width * (110 * 2 / WIDTH)
     },
     width () {
       const { clientWidth } = document.documentElement
-      if (clientWidth > WIDTH) {
-        return WIDTH / 100
+      if (clientWidth >= WIDTH) {
+        return WIDTH
       } else {
-        return document.documentElement.clientWidth / 100
+        return clientWidth
       };
     }
   }

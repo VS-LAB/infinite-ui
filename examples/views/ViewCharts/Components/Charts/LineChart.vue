@@ -74,7 +74,6 @@ export default {
         { genre: '21th', sold: 49 }
       ],
       data2: [
-        { genre: '0', sold: 67 },
         { genre: '1日', sold: 93 },
         { genre: '4日', sold: 116 },
         { genre: '7日', sold: 97 },
@@ -141,18 +140,18 @@ export default {
     getHeight () {
       // 获取宽度
       const { showType } = this
-      const width = document.documentElement.clientWidth / 100
+      const width = this.getWidth()
       if (showType === 'large') {
-        return 15.625 * 2 * width
+        return 278 * 2 * (width / WIDTH)
       }
-      return 12.08 * width
+      return 116 * 2 * (width / WIDTH)
     },
     getPadding () {
       // 获取宽度
       const { showType } = this
       const width = this.getWidth() / 100
       if (showType === 'large') {
-        return [8 * width, 5 * width, 6 * width, 7 * width ]
+        return [6 * width, 5 * width, 6 * width, 7 * width ]
       }
       return 0
     },
@@ -161,7 +160,7 @@ export default {
       const chart = new Chart({
         container: this.id,
         autoFit: true,
-        height: this.height,
+        height: this.getHeight(),
         padding: this.getPadding()
       })
       chart.data(this.showData)
@@ -175,11 +174,13 @@ export default {
       const { showType } = this
       const width = this.getWidth()
       const AxisFontSize = width * (24 / WIDTH)
+      const AxisOffset = width * (24 / WIDTH)
       if (showType !== 'large') {
         chart.axis(false)
       } else {
         chart.axis('genre', {
           label: {
+            offset: AxisOffset,
             style: {
               fontSize: AxisFontSize
             }
