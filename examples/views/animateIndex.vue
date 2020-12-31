@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" :class="{'size-X2':sizeX2}">
     <HeaderNav :show-header-nav="showHeaderNav"
       :close-header-inner="closeHeaderInner"
       :router-index="routerIndex"
@@ -44,11 +44,34 @@ export default {
       showHeaderNav: false, // 是否展示顶部nav
       closeHeaderInner: false,
       routerIndex: 0, 
+      sizeX2: false,
       pageNameArr: ['LogAnimation', 'CardsAnimation', 'Standard', 'IconPage', 'ViewCharts', 'LastPage']
       // pageNameArr: ['ScrollContainer', 'CardsAnimation', 'Standard', 'IconPage', 'ViewCharts', 'LastPage']
     }
   },
   methods: {
+    // 检测浏览器缩放比例
+    detectZoom () {
+      var ratio = 0
+      var screen = window.screen
+      var ua = navigator.userAgent.toLowerCase()
+ 
+      if (window.devicePixelRatio !== undefined) {
+        ratio = window.devicePixelRatio
+      } else if (~ua.indexOf('msie')) {
+        if (screen.deviceXDPI && screen.logicalXDPI) {
+          ratio = screen.deviceXDPI / screen.logicalXDPI
+        }
+      } else if (window.outerWidth !== undefined && window.innerWidth !== undefined) {
+        ratio = window.outerWidth / window.innerWidth
+      }
+ 
+      if (ratio) {
+        ratio = Math.round(ratio * 100)
+      }
+ 
+      return ratio
+    },
     async goAnimationStep (typeName) {
       console.log('typeName == ', typeName)
       console.log('this.animesFun == ', this.animesFun)
@@ -156,6 +179,10 @@ export default {
     }
   },
   mounted () {
+    let sizeX2 = this.detectZoom()
+    if (sizeX2 > 120) {
+      this.sizeX2 = true
+    }
     let animesFun = []
     this.$refs.componnet.forEach((component) => {
       animesFun = [...animesFun, ...(component.animesFun || [])]
@@ -206,4 +233,5 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+@import '@/style/size2.scss';
 </style>
