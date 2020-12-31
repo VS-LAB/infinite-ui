@@ -16,7 +16,6 @@
           :key="listIndex"
           :class="`${isOpen ? `header-nav-container-inner-list-li-show` : 'header-nav-container-inner-list-li-hide'}
           ${routerIndex === listIndex ? 'header-nav-container-inner-list-li-active' : ''}`"
-          :style="{transition: `all .2s linear .${listIndex + 4}s`}"
           @click="listItem.click()"
         >{{listItem.iconText}} {{listItem.text}}</li>
       </ul>
@@ -30,6 +29,7 @@
       <div class="header-nav-container-tab-item"
         v-for="(item, index) of navTabTitle"
         :key="index"
+        :class="item.disabled ? 'header-nav-container-tab-item-unactive' : ''"
         @click="item.click()"
       >{{item.text}}</div>
     </div>
@@ -81,15 +81,18 @@ export default {
         },
         {
           text: '图标',
-          click: () => { this.toPath() }
+          disabled: true,
+          click: () => { }
         },
         {
           text: '图表',
-          click: () => { this.toPath() }
+          disabled: true,
+          click: () => { }
         },
         {
           text: '下载',
-          click: () => { this.toPath() }
+          disabled: true,
+          click: () => { }
         }
       ],
       listTabTitle: [

@@ -109,14 +109,16 @@ $screenWidth:1280px;
       color: #FF7635;
       border: none;
       font-size: 14px;
-    }
-    .text-button:hover, .text-button:focus {
-      color: #FFF;
-      border-color: #ffd6c2;
-      background-image: linear-gradient(179deg, #FFA874 0%, #FF7979 100%);
-      border-radius: 17px;
-      padding: 6px 23px;
-      cursor: pointer;
+      &-path-active {
+        &:hover, &:focus {
+          color: #FFF;
+          border-color: #ffd6c2;
+          background-image: linear-gradient(179deg, #FFA874 0%, #FF7979 100%);
+          border-radius: 17px;
+          padding: 6px 23px;
+          cursor: pointer;
+        }
+      }
     }
   }
 }

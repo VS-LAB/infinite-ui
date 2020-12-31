@@ -18,8 +18,8 @@
                  :style="{ width: item.width }" />
             <p class="base-title">{{ item.title }}</p>
             <p class="base-txt">{{ item.txt }}</p>
-            <span class="text-button" :disabled="!item.toPath"
-                             @click="toPath()">{{
+            <span class="text-button" :class="item.toPath ? 'text-button-path-active' : ''" :disabled="!item.toPath"
+                             @click="toPath(item.toPath)">{{
               item.tips
             }}</span>
           </div>
@@ -60,15 +60,15 @@ export default {
         {
           title: '图标库',
           txt: '在线实时预览，可视化定制和管理图标样式，轻松搞定图标设计',
-          tips: '了解详情',
-          toPath: true,
+          tips: '敬请期待',
+          toPath: false,
           imgSrc: require('@/assets/base1.png')
         },
         {
           title: '可视化图表',
           txt: '从数据出发，轻松构建各类图表，让数据栩栩如生',
-          tips: '了解详情',
-          toPath: true,
+          tips: '敬请期待',
+          toPath: false,
           imgSrc: require('@/assets/base4.png')
         }
       ],
@@ -133,8 +133,10 @@ export default {
   },
   methods: {
     // 目前已有的跳转，都只能跳到组件文档页面
-    toPath () {
-      this.$router.push('/guide/installation')
+    toPath (is) {
+      if (is) {
+        this.$router.push('/guide/installation')
+      }
     },
     page5_animeStep1 () {
       console.log('page5_animeStep1')
