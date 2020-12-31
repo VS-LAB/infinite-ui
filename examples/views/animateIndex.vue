@@ -179,10 +179,10 @@ export default {
     }
   },
   mounted () {
-    let sizeX2 = this.detectZoom()
-    if (sizeX2 > 120) {
-      this.sizeX2 = true
-    }
+    // let sizeX2 = this.detectZoom()
+    // if (sizeX2 > 120) {
+    //   this.sizeX2 = true
+    // }
     let animesFun = []
     this.$refs.componnet.forEach((component) => {
       animesFun = [...animesFun, ...(component.animesFun || [])]

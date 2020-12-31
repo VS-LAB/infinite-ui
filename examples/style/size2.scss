@@ -1,10 +1,11 @@
 $size: scale(0.8);
 
 .size-X2{
-  /deep/ .infinite-standard_content{
-    transform: $size;
-  }
-  /deep/ .top-wrapper{
-    transform: $size;
-  }
+  transform: $size;
+  // /deep/ .infinite-standard_content{
+  //   transform: $size;
+  // }
+  // /deep/ .top-wrapper{
+  //   transform: $size;
+  // }
 }
