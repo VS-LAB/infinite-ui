@@ -3,14 +3,37 @@ $width: 70 * 2px;
 $radius: 30px;
 $animtion-time: 0.4s;
 
-.loading {
+.loading-radius2 {
   width: $width;
   height: $width;
   position: relative;
   transform: rotate(45deg);
+  font-size: 0;
+  &::before{
+    content: "";
+    display: block;
+    position: absolute;
+    width: 1PX;
+    height: $radius / 2;
+    top: 0;
+    left: calc(50% - 1PX);
+    z-index: 100;
+    background: $radiusColor1;
+  }
+  // &::after{
+  //   content: "";
+  //   display: block;
+  //   position: absolute;
+  //   width: 1PX;
+  //   height: $radius / 2;
+  //   bottom: 0;
+  //   left: calc(50% - 1PX);
+  //   z-index: 100;
+  //   background: $radiusColor1;
+  // }
 }
 
-.loading .content {
+.loading-radius2 .content {
   position: absolute;
   width: $width - $radius;
   height: $width - $radius;
@@ -41,7 +64,7 @@ $animtion-time: 0.4s;
 
 .right {
   border-radius: 0 $width $width 0;
-  transform: translateX(-0.1PX);
+  // transform: translateX(-1PX);
 }
 
 .left .inner,

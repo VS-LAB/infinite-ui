@@ -1,5 +1,5 @@
 <template>
-  <div class="loading">
+  <div class="loading-radius1">
     <div class="left">
       <div class="inner"
         :class="{
