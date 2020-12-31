@@ -258,13 +258,15 @@ export default {
       return new Promise((resolve, reject) => {
         if (!reversal) {
           console.log('page2_goShowTop == ', document.querySelector('.imgs_content_9'))
-          document.querySelector('.imgs_content_9').style.display = 'none'
-          document.querySelector('.infinite-standard-card_img').style.display = 'block'
-          document.querySelector('.infinite-standard-card-icon-gruy').style.display = 'flex'
-          this.showTop = !this.showTop
-          setTimeout(_ => {
-            resolve(true)
-          }, 1000)
+          this.$nextTick(() => {
+            document.querySelector('.imgs_content_9').style.display = 'none'
+            document.querySelector('.infinite-standard-card_img').style.display = 'block'
+            document.querySelector('.infinite-standard-card-icon-gruy').style.display = 'flex'
+            this.showTop = !this.showTop
+            setTimeout(_ => {
+              resolve(true)
+            }, 1000)
+          })
         } else {
           document.querySelector('.infinite-standard-card-icon-gruy').style.display = 'none'
           document.querySelector('.imgs_content_9').style.display = 'block'
@@ -350,14 +352,16 @@ export default {
           hideMaskTimer = setTimeout(_ => {
             this.hideMask = true
           }, 1600)
+          this.endTop = true
         } else {
           this.setIconMaskPosition(this.gruyIconLeft, this.gruyIconTop)
           clearTimeout(hideMaskTimer)
           this.hideMask = false
           EventBus.$emit('page2_goEndTop', reversal)
+          this.endTop = false
         }
 
-        this.endTop = !this.endTop
+        // this.endTop = !this.endTop
         // this.wrapAnimate = reversal ? '' : 'fade-out'
         setTimeout(_ => {
           resolve(true)

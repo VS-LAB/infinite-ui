@@ -79,11 +79,7 @@ export default {
       return ratio
     },
     async goAnimationStep (typeName) {
-      console.log('typeName == ', typeName)
-      console.log('this.animesFun == ', this.animesFun)
-      console.log('this.animesFun[0].name == ', this.animesFun[0].name)
       let stepIndex = 0
-
       switch (typeName) {
         case 'Component':
           this.animesFun.forEach((item, index) => {
@@ -151,6 +147,17 @@ export default {
         this.prev()
       };
     },
+    setRouterIndexIndexAnimation (animateName) {
+      if (animateName.includes('page0')) {
+        this.routerIndex = 0
+      } else if (animateName.includes('page1')) {
+        this.routerIndex = 1
+      } else if (animateName.includes('page3')) {
+        this.routerIndex = 2
+      } else if (animateName.includes('page4')) {
+        this.routerIndex = 3
+      }
+    },
     async next (step = 0, executionType) {
       this.showHeaderNav = false
       this.completeAnimation = false
@@ -158,6 +165,7 @@ export default {
       const animateName = currAnimate.name
       this.setComponentZindex(animateName, true)
       this.completeAnimation = await currAnimate(false, executionType)
+      this.setRouterIndexIndexAnimation(animateName)
     },
     async prev () {
       this.showHeaderNav = true
@@ -166,6 +174,7 @@ export default {
       const animateName = currAnimate.name
       this.setComponentZindex(animateName, false)
       this.completeAnimation = await currAnimate(true)
+      this.setRouterIndexIndexAnimation(animateName)
     },
     setComponentZindex (animateName, isNext) {
       this.$refs.componnet.forEach((component, componentIndex) => {
