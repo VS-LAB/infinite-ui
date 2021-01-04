@@ -121,8 +121,8 @@ export default {
             // console.log('stepIndex > this.animeIndex - stepIndex - this.animeIndex - i - this.stepFun[i].name == ', stepIndex, this.animeIndex, i, this.stepFun[i].name)
           }
           await Promise.all(array).then((res) => {
-            console.log('>', res) // [ 0, 1, 2 ]
-            console.log('> - 下一行')
+            // console.log('>', res) // [ 0, 1, 2 ]
+            // console.log('> - 下一行')
             this.animeIndex = stepIndex
             this.next(0, true)
           })
@@ -136,8 +136,8 @@ export default {
             }
           }
           await Promise.all(array).then((res) => {
-            console.log('<=', res)
-            console.log('<= - 下一行')
+            // console.log('<=', res)
+            // console.log('<= - 下一行')
 
             this.animeIndex = stepIndex
             this.prev()
@@ -166,7 +166,7 @@ export default {
       }
     },
     async next (step = 0, executionType) {
-      console.log('next')
+      // console.log('next')
       this.showHeaderNav = false
       this.completeAnimation = false
       const currAnimate = this.animesFun[this.animeIndex]
@@ -177,7 +177,7 @@ export default {
       this.startToInterrupt = false
     },
     async prev () {
-      console.log('prev')
+      // console.log('prev')
       this.showHeaderNav = true
       this.completeAnimation = false
       const currAnimate = this.animesFun[this.animeIndex + 1]
@@ -248,12 +248,12 @@ export default {
           }
           if (wheelDistance > 0 && self.animeIndex >= 1) { // 当滑轮向上滚动时
             self.animeIndex -= 1
-            console.log('滚轮触发 prev')
+            // console.log('滚轮触发 prev')
             self.prev()
           }
           if (wheelDistance < 0 && self.animeIndex < self.animesFun.length - 1) { // 当滑轮向下滚动时
             self.animeIndex += 1
-            console.log('滚轮触发 next')
+            // console.log('滚轮触发 next')
             self.next()
           }
         }
