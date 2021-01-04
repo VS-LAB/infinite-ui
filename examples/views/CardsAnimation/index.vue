@@ -1,5 +1,6 @@
 <template>
-  <div class="anime-container" @wheel="mousewheelCallBack">
+  <div class="anime-container"
+       @wheel="mousewheelCallBack">
     <div class="anime-canvas"
          ref="animeCanvasAnimeRef"
          :class="{
@@ -158,6 +159,7 @@ export default {
   methods: {
     // 头部文案动画
     page1_animeStep1 (reversal) {
+      EventBus.$emit('isStopWheel', true)
       this.padScrollSwitch = false
       return new Promise(async (resolve, reject) => {
         this.animeContinue = true
@@ -169,6 +171,7 @@ export default {
           await this.page1_animeStep3(true)
           this.headerTextAnime = false
           await this.page1_animeStep2(true)
+          EventBus.$emit('isStopWheel', false)
         }
         resolve(true)
         this.animeContinue = false
@@ -347,7 +350,6 @@ export default {
               top: `${connectImgElientRect.top}px`,
               transform: `translateX(-50%)`
             }
-            // document.querySelector('.imgs_content_9').style.display = 'block'
             standardCaedImgEl.style.display = 'none'
             this.imgConnectStyle = reversal ? this.recordEndImgConnectStyle : this.recordStartImgConnectStyle
           }
@@ -386,8 +388,12 @@ export default {
         }
         const scrollTopSpace = el.children[0].clientHeight - el.clientHeight
         // 判断是否不可以滚动了，此时需要走上一步或者下一步动画
+        console.log('el.scrollTop ', el.scrollTop);
+        console.log('wheelDistance ', wheelDistance);
+        console.log('scrollTopSpace ', scrollTopSpace);
         if ((el.scrollTop === 0 && wheelDistance > 0) || (scrollTopSpace - el.scrollTop < 1 && wheelDistance < 0) || this.lastAnimeCompile || this.animeContinue) {
           this.padScrollSwitch = false
+          EventBus.$emit('isStopWheel', false)
         }
         event.stopPropagation()
         event.cancelBubble = true

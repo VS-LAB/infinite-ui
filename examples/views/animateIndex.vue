@@ -1,27 +1,22 @@
 <template>
-  <div
-    class="container"
-    @wheel="handleWheel"
-  >
-    <HeaderNav
-      :show-header-nav="showHeaderNav"
-      :close-header-inner="closeHeaderInner"
-      :router-index="routerIndex"
-      @goAnimationStep="goAnimationStep"
-    ></HeaderNav>
-    <component
-      ref="componnet"
-      :style="{zIndex:100-index, position:'fixed',width:'100vw',height:'100vh'}"
-      v-for="(component,index) in pageNameArr"
-      :is="component"
-      @doStep=doStep
-      :key="component"
-    >
+  <div class="container"
+       @wheel="handleWheel">
+    <HeaderNav :show-header-nav="showHeaderNav"
+               :close-header-inner="closeHeaderInner"
+               :router-index="routerIndex"
+               @goAnimationStep="goAnimationStep"></HeaderNav>
+    <component ref="componnet"
+               :style="{zIndex:100-index, position:'fixed',width:'100vw',height:'100vh'}"
+               v-for="(component,index) in pageNameArr"
+               :is="component"
+               @doStep=doStep
+               :key="component">
     </component>
   </div>
 </template>
 
 <script>
+import EventBus from '@/EventBus'
 import HeaderNav from '@/views/HeaderNav/index.vue'
 import LogAnimation from '@/views/LogAnimation/index.vue'
 // import ScrollContainer from '@/views/scrollContainer.vue'
@@ -53,6 +48,7 @@ export default {
       closeHeaderInner: false,
       routerIndex: 0,
       sizeX2: false,
+      isStopWheel: false,//是否阻止鼠标滚轮
       startToInterrupt: false, // 是否打断滚动发生
       pageNameArr: ['LogAnimation', 'CardsAnimation', 'Standard', 'IconPage', 'ViewCharts', 'LastPage'],
       // pageNameArr: ['ScrollContainer', 'CardsAnimation', 'Standard', 'IconPage', 'ViewCharts', 'LastPage']
@@ -60,6 +56,7 @@ export default {
   },
   methods: {
     handleWheel (e) {
+      if (this.isStopWheel) return
       e.stopPropagation()
       let self = this
       if (self.startToInterrupt) {
@@ -79,13 +76,11 @@ export default {
         }
         if (wheelDistance > 0 && self.animeIndex >= 1) { // 当滑轮向上滚动时
           self.animeIndex -= 1
-          // console.log('滚轮触发 prev')
           this.animateByMenu = false
           self.prev()
         }
         if (wheelDistance < 0 && self.animeIndex < self.animesFun.length - 1) { // 当滑轮向下滚动时
           self.animeIndex += 1
-          // console.log('滚轮触发 next')
           self.next()
         }
       }
@@ -150,14 +145,11 @@ export default {
           let array = []
           for (let i = this.animeIndex; i < stepIndex; i++) {
             array.push(this.stepFun[i]())
-            // console.log('stepIndex > this.animeIndex - stepIndex - this.animeIndex - i - this.stepFun[i].name == ', stepIndex, this.animeIndex, i, this.stepFun[i].name)
           }
           this.animeIndex = stepIndex
           this.next(0, true)
           // this.startToInterrupt = true
           await Promise.all(array).then((res) => {
-            // console.log('>', res) // [ 0, 1, 2 ]
-            // console.log('> - 下一行')
             // this.animeIndex = stepIndex
             // this.next(0, true)
             this.startToInterrupt = false
@@ -168,16 +160,12 @@ export default {
           for (let i = this.stepFun.length - 1; i > 0; i--) {
             if (i < this.animeIndex + 1 && i > stepIndex) {
               array.push(this.stepFun[i](true))
-              // console.log('stepIndex <= this.animeIndex - stepIndex - this.animeIndex - i - this.stepFun[i].name == ', stepIndex, this.animeIndex, i, this.stepFun[i].name)
             }
           }
           this.animeIndex = stepIndex
           this.prev()
           // this.startToInterrupt = true
           await Promise.all(array).then((res) => {
-            // console.log('<=', res)
-            // console.log('<= - 下一行')
-
             // this.animeIndex = stepIndex
             // this.prev()
             this.startToInterrupt = false
@@ -206,7 +194,6 @@ export default {
       }
     },
     async next (step = 0, executionType) {
-      // console.log('next')
       this.showHeaderNav = false
       this.completeAnimation = false
       const currAnimate = this.animesFun[this.animeIndex]
@@ -217,7 +204,6 @@ export default {
       // this.startToInterrupt = false
     },
     async prev () {
-      // console.log('prev')
       this.showHeaderNav = true
       this.completeAnimation = false
       const currAnimate = this.animesFun[this.animeIndex + 1]
@@ -249,6 +235,10 @@ export default {
     // if (sizeX2 > 120) {
     // this.sizeX2 = true
     // }
+    EventBus.$on('isStopWheel', isStopWheel => {
+      this.isStopWheel = isStopWheel
+    })
+
     let animesFun = []
     let stepFun = []
     this.$refs.componnet.forEach((component) => {
@@ -257,9 +247,7 @@ export default {
     })
     this.animesFun = animesFun
     this.stepFun = stepFun
-    // console.log('animesFun == ', animesFun)
     animesFun.forEach(item => {
-      // console.log('animesFun - item == ', item.name)
     })
     this.$nextTick(() => {
       setTimeout(() => {
