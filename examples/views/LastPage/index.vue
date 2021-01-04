@@ -133,6 +133,40 @@ export default {
     }
   },
   methods: {
+    /**
+     *
+     */
+    setAutoFill () {
+      const { clientHeight } = document.documentElement
+      const element = document.querySelector('.explain-list')
+      const explainFooter = document.querySelector('.explain-footer')
+      const elementTransform = element.style.transform
+      const { height } = element.getBoundingClientRect()
+      const { height: explainFooterHeight, bottom } = explainFooter.getBoundingClientRect()
+      const explainFooterBottom = clientHeight - bottom
+      const thresholdValue = 0.1 // 防止不够，多缩小一点
+      if ((clientHeight - height - explainFooterHeight) < 100) {
+        const scale = 1 - Math.abs(clientHeight - height - explainFooterHeight) / height - thresholdValue
+        this.scale = scale
+        element.style.transform = elementTransform + `scale(${scale}) translate(-50%,-50%)`
+        element.style.transformOrigin = 'left top'
+
+        explainFooter.style.transform = elementTransform + `scale(${scale})`
+        explainFooter.style.transformOrigin = 'center bottom'
+        if (explainFooterBottom) {
+          // 主要内容区，底部实际高度
+          const RealHeight = (clientHeight - scale * height) / 2 - 10
+          if ((explainFooterHeight + explainFooterBottom) * scale > RealHeight) {
+            console.log('====================================')
+            console.log('hhh')
+            console.log('====================================')
+            explainFooter.style.bottom = `0px`
+            return
+          }
+          explainFooter.style.bottom = `${explainFooterBottom * scale}px`
+        }
+      }
+    },
     // 目前已有的跳转，都只能跳到组件文档页面
     toPath (is) {
       if (is) {
@@ -148,6 +182,7 @@ export default {
   },
   mounted () {
     document.body.style.overflow = 'auto'
+    this.setAutoFill()
   }
 }
 </script>
