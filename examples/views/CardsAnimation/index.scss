@@ -345,30 +345,30 @@ $typeArea:1440px;
         }
 
         .table_imgs_position {
-          $start_position_x: 0px;
+          $start_position_x: 31px;
           $start_position_y: 10px;
           $position_scale: 1.9;
 
           // 第一列
           .imgs_1 {
-            transform: translate(-256%, $start_position_y) scale($position_scale);
+            transform: translate(calc(#{$start_position_x} - 256%), $start_position_y) scale($position_scale);
           }
 
           .imgs_5 {
-            transform: translate(-256%, 160%) scale($position_scale);
+            transform: translate(calc(#{$start_position_x} - 256%), 160%) scale($position_scale);
           }
 
           // 第二列
           .imgs_2 {
-            transform: translate(-100%, $start_position_y) scale($position_scale);
+            transform: translate(calc(#{$start_position_x} - 100%), $start_position_y) scale($position_scale);
           }
 
           .imgs_6 {
-            transform: translate(-100%, 90%) scale($position_scale);
+            transform: translate(calc(#{$start_position_x} - 100%), 90%) scale($position_scale);
           }
 
           .imgs_7 {
-            transform: translate(-7%, 350%) scale($position_scale);
+            transform: translate(calc(#{$start_position_x} - 7%), 350%) scale($position_scale);
           }
 
           // 第三列
@@ -386,20 +386,20 @@ $typeArea:1440px;
 
           // 第四列
           .imgs_12 {
-            transform: translate(130%, $start_position_y) scale($position_scale);
+            transform: translate(calc(#{$start_position_x} + 130%), $start_position_y) scale($position_scale);
           }
 
           .imgs_13 {
-            transform: translate(130%, 195%) scale($position_scale);
+            transform: translate(calc(#{$start_position_x} + 130%), 195%) scale($position_scale);
           }
 
           // 第五列
           .imgs_15 {
-            transform: translate(206%, $start_position_y) scale($position_scale);
+            transform: translate(calc(#{$start_position_x} + 206%), $start_position_y) scale($position_scale);
           }
 
           .imgs_16 {
-            transform: translate(206%, 110%) scale($position_scale);
+            transform: translate(calc(#{$start_position_x} + 206%), 110%) scale($position_scale);
           }
         }
 
