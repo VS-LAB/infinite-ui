@@ -83,7 +83,7 @@ export default {
       logoTimer: null, // cube计时器
       logoCount: 1, // 计数
       logoUrl: require('@/assets/logo.png'),
-      logoNum: 30,
+      logoNum: 27,
       logoSwitchTime: 60, // 图片切换时间
       logoAnimeCompile: false, // logo的动画完成
       logoInitPosition: false, // logo初始化左上角位置

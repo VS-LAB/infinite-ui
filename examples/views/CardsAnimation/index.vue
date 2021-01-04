@@ -273,7 +273,7 @@ export default {
     })
     document.body.addEventListener('mousewheel', (e) => {
       const event = e || window.event
-      const el = this.$refs.componentViewImgsContainerRef
+      const el = this.$refs.replaceScrollRef
       if (el && this.padScrollSwitch) {
         let wheelDistance // 滑轮滚动距离
         if (e.wheelDelta) { // 判断浏览器IE，谷歌滑轮事件
