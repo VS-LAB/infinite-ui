@@ -146,7 +146,14 @@ export default {
       const explainFooterBottom = clientHeight - bottom
       const thresholdValue = 0.1 // 防止不够，多缩小一点
       if ((clientHeight - height - explainFooterHeight) < 100) {
-        const scale = 1 - Math.abs(clientHeight - height - explainFooterHeight) / height - thresholdValue
+        // const scale = 1 - Math.abs(clientHeight - height - explainFooterHeight) / height - thresholdValue
+        // //  如果此时任然不够
+        // // 主要内容区，底部实际高度
+        // const RealHeight = (clientHeight - scale * height) / 2 - 10
+        // if ((explainFooterHeight + explainFooterBottom) * scale > RealHeight) {
+        //   return
+        // }
+        const scale = getScale(thresholdValue)
         this.scale = scale
         element.style.transform = elementTransform + `scale(${scale}) translate(-50%,-50%)`
         element.style.transformOrigin = 'left top'
@@ -154,17 +161,23 @@ export default {
         explainFooter.style.transform = elementTransform + `scale(${scale})`
         explainFooter.style.transformOrigin = 'center bottom'
         if (explainFooterBottom) {
-          // 主要内容区，底部实际高度
-          const RealHeight = (clientHeight - scale * height) / 2 - 10
-          if ((explainFooterHeight + explainFooterBottom) * scale > RealHeight) {
-            console.log('====================================')
-            console.log('hhh')
-            console.log('====================================')
-            explainFooter.style.bottom = `0px`
-            return
+          const RealHeight = ((clientHeight - scale * height) / 2 - explainFooterHeight * scale) / 2
+          if (RealHeight < explainFooterBottom) {
+            explainFooter.style.bottom = `${RealHeight}px`
           }
-          explainFooter.style.bottom = `${explainFooterBottom * scale}px`
         }
+      }
+
+      function getScale (thresholdValue = 0.1) {
+        var scale = 1 - Math.abs(clientHeight - height - explainFooterHeight) / height - thresholdValue
+        const RealHeight = (clientHeight - scale * height) / 2 - 10
+        //  如果此时任然不够
+        // 主要内容区，底部实际高度
+        if ((explainFooterHeight + explainFooterBottom) * scale < RealHeight) {
+          return scale
+        }
+        var newthresholdValue = thresholdValue + 0.05
+        return getScale(newthresholdValue)
       }
     },
     // 目前已有的跳转，都只能跳到组件文档页面
