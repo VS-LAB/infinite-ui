@@ -180,25 +180,26 @@ export default {
         this.animeContinue = true
         const componentViewImgsContainerRefEl = this.$refs.componentViewImgsContainerRef
         const replaceScrollRefEl = this.$refs.replaceScrollRef
-        const replace_scroll = document.getElementsByClassName('replace_scroll')[0]
         if (!reversal) {
           this.headerTextAnime = true
           await this.page1_step2()
           await this.page1_step3()
           replaceScrollRefEl.style.display = 'block'
           componentViewImgsContainerRefEl.scrollTop = componentViewImgsContainerRefEl.children[0].clientHeight - componentViewImgsContainerRefEl.clientHeight
-           replaceScrollRefEl.scrollTop =  replaceScrollRefEl.children[0].clientHeight - replaceScrollRefEl.clientHeight
+          replaceScrollRefEl.scrollTop = replaceScrollRefEl.children[0].clientHeight - replaceScrollRefEl.clientHeight
         } else {
           await this.page1_step3(true)
           this.headerTextAnime = false
           await this.page1_step2(true)
+          this.isOverflowAutoPad = true
           replaceScrollRefEl.style.display = 'block'
-          componentViewImgsContainerRefEl.scrollTop = replaceScrollRefEl.scrollTop = 0
+          componentViewImgsContainerRefEl.scrollTop = 0
+          replaceScrollRefEl.scrollTop = 0
+          setTimeout(() => {
+            this.isOverflowAutoPad = false
+          }, 200)
         }
-          replaceScrollRefEl.style.display = 'none'
-      // if (replace_scroll) { // 重置scroll滚动值
-      //   replace_scroll.scrollTop = 0
-      // }
+        replaceScrollRefEl.style.display = 'none'
         resolve(true)
         this.animeContinue = false
       })
@@ -301,7 +302,9 @@ export default {
         }
         this.$nextTick(() => {
           setTimeout(() => {
-            this.imgConnectStyle = reversal ? this.recordStartImgConnectStyle : this.recordEndImgConnectStyle
+            const imgConnectStyle = reversal ? this.recordStartImgConnectStyle : this.recordEndImgConnectStyle
+            imgConnectStyle.transition = 'all 1s'
+            this.imgConnectStyle = imgConnectStyle
             this.imgConnectAnime = !reversal
             this.animeCanvasAnime = !reversal
             setTimeout(() => {
@@ -327,7 +330,6 @@ export default {
           const connectImgElientRect = standardCaedImgEl.getBoundingClientRect()
           this.animeContinue = true
           const imgEl = this.$refs.imgRef9[1]
-          console.log('imgEl ---- ', imgEl)
           if (imgEl) {
             const boundingClientRect = imgEl.getBoundingClientRect()
             this.recordStartImgConnectStyle = {
