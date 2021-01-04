@@ -322,47 +322,47 @@ export default {
       this.padScrollSwitch = false
       EventBus.$emit('page1_animeStep4', reversal)
       return new Promise((resolve, reject) => {
-        const standardCaedImgEl = document.querySelector('.infinite-standard-card_img')
-        const connectImgElientRect = standardCaedImgEl.getBoundingClientRect()
-        this.animeContinue = true
-        const imgEl = this.$refs.imgRef9[1]
-        console.log('imgEl ---- ', imgEl)
-        if (imgEl) {
-          const boundingClientRect = imgEl.getBoundingClientRect()
-          this.recordStartImgConnectStyle = {
-            width: imgEl.offsetWidth + 'px',
-            height: imgEl.offsetHeight + 'px',
-            opacity: 1,
-            left: boundingClientRect.left + 'px',
-            top: !reversal ? boundingClientRect.top + 'px' : `calc(${boundingClientRect.top}px + 150vh)`,
-            display: 'block'
+        setTimeout(() => {
+          const standardCaedImgEl = document.querySelector('.infinite-standard-card_img')
+          const connectImgElientRect = standardCaedImgEl.getBoundingClientRect()
+          this.animeContinue = true
+          const imgEl = this.$refs.imgRef9[1]
+          console.log('imgEl ---- ', imgEl)
+          if (imgEl) {
+            const boundingClientRect = imgEl.getBoundingClientRect()
+            this.recordStartImgConnectStyle = {
+              width: imgEl.offsetWidth + 'px',
+              height: imgEl.offsetHeight + 'px',
+              opacity: 1,
+              left: boundingClientRect.left + 'px',
+              top: !reversal ? boundingClientRect.top + 'px' : `calc(${boundingClientRect.top}px + 150vh)`,
+              display: 'block'
+            }
+            this.recordEndImgConnectStyle = {
+              width: `${connectImgElientRect.width}px`,
+              height: `${connectImgElientRect.height}px`,
+              left: `50% `,
+              top: `${connectImgElientRect.top}px`,
+              transform: `translateX(-50%)`
+            }
+            // document.querySelector('.imgs_content_9').style.display = 'block'
+            standardCaedImgEl.style.display = 'none'
+            this.imgConnectStyle = reversal ? this.recordEndImgConnectStyle : this.recordStartImgConnectStyle
           }
-          this.recordEndImgConnectStyle = {
-            width: `${connectImgElientRect.width}px`,
-            height: `${connectImgElientRect.height}px`,
-            left: `50% `,
-            top: `${connectImgElientRect.top}px`,
-            transform: `translateX(-50%)`
-          }
-          // document.querySelector('.imgs_content_9').style.display = 'block'
-          standardCaedImgEl.style.display = 'none'
-          this.imgConnectStyle = reversal ? this.recordEndImgConnectStyle : this.recordStartImgConnectStyle
-        }
-        this.$nextTick(() => {
-          this.imgConnectStyle = reversal ? this.recordStartImgConnectStyle : this.recordEndImgConnectStyle
-          this.imgConnectAnime = !reversal
-          this.animeCanvasAnime = !reversal
-          this.lastAnimeCompile = !reversal
-          this.animeContinue = false
-          console.log('reversal ---- ', reversal)
-          if (reversal) {
-            console.log('nex ---- ', document.querySelector('.imgs_content_9'))
-            document.querySelector('.imgs_content_9').style.display = 'none'
-            standardCaedImgEl.style.display = 'block'
-            this.padScrollSwitch = true
-          }
-          resolve(true)
-        })
+          this.$nextTick(() => {
+            this.imgConnectStyle = reversal ? this.recordStartImgConnectStyle : this.recordEndImgConnectStyle
+            this.imgConnectAnime = !reversal
+            this.animeCanvasAnime = !reversal
+            this.lastAnimeCompile = !reversal
+            this.animeContinue = false
+            if (reversal) {
+              document.querySelector('.imgs_content_9').style.display = 'none'
+              standardCaedImgEl.style.display = 'block'
+              this.padScrollSwitch = true
+            }
+            resolve(true)
+          })
+        }, 0)
       })
     },
     onScroll (e) {
