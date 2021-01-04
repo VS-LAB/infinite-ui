@@ -409,7 +409,7 @@
     box-shadow: 0 5px 20px 0 rgba(255, 214, 176, 0.6);
     opacity: 0;
     z-index: 999;
-    transform: translate(3px, 3px) scale(1.265);
+    // transform: translate(3px, 3px) scale(1.265);
     transition: all .5s linear;
     i {
       border-radius: 50%;
@@ -420,7 +420,7 @@
   }
   .show-tip {
     padding: 8px;
-    transform: translate(-5px, -5px) scale(2);
+    // transform: translate(-5px, -5px) scale(2);
     // width: 58px;
     // height: 58px;
     opacity: 1;
@@ -435,7 +435,7 @@
     padding: 0;
     z-index: 999;
     // transform: scale(1);
-    transform: translate(0, 0) scale(1);
+    // transform: translate(0, 0) scale(1);
     font-size: 28px;
     opacity: 1;
     box-shadow: none;

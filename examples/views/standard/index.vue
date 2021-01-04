@@ -2,9 +2,12 @@
   <div class="infinite-standard"
        :class="wrapAnimate">
 
-    <div class="infinite-standard-card-exclamatory-mark"
-         :class="{'end-mask':endTop,'show-tip':showMask,'hide-mask':hideMask}"
-         ref="iconMask">
+    <div
+      class="infinite-standard-card-exclamatory-mark"
+      :class="{'end-mask':endTop,'show-tip':showMask,'hide-mask':hideMask}"
+      :style="{transform: `translate(3px, 3px) scale(${1.265 * scale})`}"
+      ref="iconMask"
+    >
       <i class="icon-annotate"></i>
     </div>
     <div class="main-view-content-standard">
@@ -162,7 +165,8 @@ export default {
       gruyIconTopBefore: 0,
       listenResizeTimer: '',
       listenResizeFlag: false,
-      intervalResetMask: ''
+      intervalResetMask: '',
+      scale: 1
     }
   },
   computed: {
@@ -303,7 +307,7 @@ export default {
           this.showLine = false
           this.showCardMoveToLeft = false
         }
-        while (this.row === this.codes.length) {
+        for (let i = 0; i < this.codes.length; i++) {
           this.row += 1
         }
         this.getGruyIconPosition()
@@ -318,12 +322,14 @@ export default {
         // this.showMask = !this.showMask
         if (!reversal) {
           this.showMask = true
+          this.setIconMaskTransform(-5, -5, 2)
           // this.getGruyIconPosition()
           // console.log('---')
           // this.setIconMaskPosition((this.gruyIconLeft.replace('px', '') - 12) + 'px', (this.gruyIconTop.replace('px', '') - 12) + 'px')
           // this.hideGruyIcon = true
         } else {
           this.showMask = false
+          this.setIconMaskTransform(3, 3, 1.265)
           // this.getGruyIconPosition()
           // this.setIconMaskPosition(this.gruyIconLeft, this.gruyIconTop)
           // this.hideGruyIcon = false
@@ -338,8 +344,10 @@ export default {
       return new Promise((resolve, reject) => {
         if (!reversal) {
           this.showMask = true
+          this.setIconMaskTransform(-5, -5, 2)
         } else {
           this.showMask = false
+          this.setIconMaskTransform(3, 3, 1.265)
         }
         resolve(true)
       })
@@ -364,6 +372,15 @@ export default {
         iconMask.style.top = top
       }
     },
+    // 赋予IconMaskStyle
+    setIconMaskTransform (x, y, sca) {
+      // console.log('setIconMaskPosition left, top == ', left, top)
+      const { iconMask } = this.$refs
+      if (iconMask) {
+        console.log('setIconMaskTransform == ', sca, this.scale, sca * this.scale)
+        iconMask.style.transform = `translate(${x}px, ${y}px) scale(${sca * this.scale})`
+      }
+    },
     // 步骤5 保留感叹号 其他部分上滑
     page2_goEndTop (reversal) {
       return new Promise((resolve, reject) => {
@@ -372,9 +389,10 @@ export default {
         if (!reversal) {
           if (hideIcon) {
             const b = hideIcon.getBoundingClientRect() // 计算点居中
-            this.setIconMaskPosition(`${b.left - 1}px`, `${b.top + 1.83}px`)
+            this.setIconMaskPosition(`${b.left - 1}px`, `${b.top + 0.83}px`)
           }
           this.endTop = true
+          this.setIconMaskTransform(0, 0, 1)
 
           this.getGruyIconPosition()
           this.gruyIconTopBefore = this.gruyIconTop
@@ -407,6 +425,7 @@ export default {
             // console.log('this.gruyIconLeft, this.gruyIconTop == ', this.gruyIconLeft, this.gruyIconTop)
           }, 100)
           this.endTop = false
+          this.setIconMaskTransform(-5, -5, 2)
           clearTimeout(hideMaskTimer)
           this.hideMask = false
           EventBus.$emit('page2_goEndTop', reversal)
@@ -430,6 +449,7 @@ export default {
             this.setIconMaskPosition(`${b.left - 1}px`, `${b.top + 1.83}px`)
           }
           this.endTop = true
+          this.setIconMaskTransform(0, 0, 1)
 
           this.getGruyIconPosition()
           this.gruyIconTopBefore = this.gruyIconTop
@@ -462,6 +482,7 @@ export default {
           // console.log('this.gruyIconLeft, this.gruyIconTop == ', this.gruyIconLeft, this.gruyIconTop)
           // }, 100)
           this.endTop = false
+          this.setIconMaskTransform(-5, -5, 2)
           // clearTimeout(hideMaskTimer)
           this.hideMask = false
           EventBus.$emit('page2_goEndTop', reversal)
@@ -508,6 +529,7 @@ export default {
       if ((clientHeight - height) < 100) {
         const scale = 1 - Math.abs(clientHeight - height) / height - thresholdValue
         this.scale = scale
+        console.log('this.scale - stand = ', this.scale)
         element.style.transform = elementTransform + `scale(${scale}) translate(-50%,-50%)`
         element.style.transformOrigin = 'left top'
       }
