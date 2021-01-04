@@ -341,7 +341,7 @@ export default {
       _this.page4_animation_play_step1()
     }
     EventBus.$on('page3_showAniStep5', (reversal) => {
-      _this.page4_animation_play_step1()
+      _this.page4_animation_play_step1(reversal)
     })
   },
   methods: {
