@@ -10,9 +10,7 @@
         </p>
       </section>
       <div class="chart-box"
-       :class="{
-          'hide':showOrange
-        }"
+        :class="classObject"
       >
         <section class="charts">
           <div class="chart-item" v-for="item in cardList" :key="item.id"
@@ -142,6 +140,7 @@ export default {
   },
   data () {
     return {
+      classObject: '',
       animesFun: [this.page4_animation_play_step2, this.page4_animation_play_step3, this.page4_animation_play_step4, this.page4_animation_play_step5, this.page4_animation_play_step6, this.page4_animation_play_step7],
       stepFun: [this.page4_animation_play_step2, this.page4_animation_play_step3, this.page4_animation_play_step4, this.page4_animation_play_step5, this.page4_animation_play_step6, this.page4_animation_play_step7],
       showOrange: false,
@@ -244,7 +243,7 @@ export default {
           className: 'scale-chart-box-height-step1',
           delay: {
             next: '0s',
-            prev: '1s'
+            prev: '0s'
           }
         }, {
           ele: ['.charts .chart-line-small-step1'], // 小line动画
@@ -387,27 +386,34 @@ export default {
       })
     },
     page4_animation_play_step2 (dirction) {
+      const _this = this
       return new Promise((resolve, reject) => {
         if (dirction) {
           this.showOrange = false
         }
-        const animationList = this.animationList[1]
-        this.handleElementsAnimation(dirction, animationList)
+        this.classObject = 'chart-box scale-chart-box-height-step1'
+        setTimeout(()=>{
+          const animationList = this.animationList[1]
+          _this.handleElementsAnimation(dirction, animationList)
+        })
         setTimeout(_ => {
           resolve(true)
-        }, 1200)
+        }, 2000)
       })
     },
     page4_animation_play_step3 (dirction) {
+      const _this = this;
       return new Promise((resolve, reject) => {
         if (!dirction) {
           this.showOrange = true
+          this.classObject = 'chart-box scale-chart-box-height-step1 hide'
         }
         const animationList = this.animationList[2]
         this.handleElementsAnimation(dirction, animationList)
         setTimeout(() => {
+          dirction && (_this.classObject = 'chart-box scale-chart-box-height-step1')
           resolve(true)
-        }, 1200)
+        }, 2000)
       })
     },
     page4_animation_play_step4 (dirction) {
@@ -420,7 +426,7 @@ export default {
         this.handleElementsAnimation(dirction, animationList)
         setTimeout(() => {
           resolve(true)
-        }, 1200)
+        }, 2000)
       })
     },
     handleStep4 (dirction) {
