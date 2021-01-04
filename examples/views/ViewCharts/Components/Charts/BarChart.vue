@@ -47,7 +47,7 @@ export default {
       const width = document.documentElement.clientWidth
       return width > WIDTH ? WIDTH : width
     },
-    initComponent () {
+    initComponent (tag) {
       const width = this.getWidth()
       const padding = [(40 * width / WIDTH), (16 * width / WIDTH)]
       const size = 8 * 2 * width / WIDTH
@@ -99,9 +99,20 @@ export default {
       chart.axis(false)
       chart.legend(false)
       this.chart = chart
+      tag && this.chart.render()
     },
     render () {
-      this.chart.render()
+      if (this.chart) {
+        if (this.chart.destroyed) {
+          this.initComponent(true)
+        } else {
+          this.chart.render()
+        }
+      }
+    },
+    destroy () {
+      this.showToolTips = false
+      this.chart && this.chart.destroy()
     }
   }
 }
