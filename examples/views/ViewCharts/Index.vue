@@ -494,9 +494,6 @@ export default {
             if (!!dirction && prev) {
               element.style.transitionDelay = prev
             }
-            console.log('====================================')
-            console.log(delay, element.style.transitionDelay)
-            console.log('====================================')
           }
           setTimeout(() => {
             if (!dirction) {
@@ -546,9 +543,6 @@ export default {
       // 获取前进步数
       if (activeColor === id) return
       const step = id - activeColor
-      console.log('====================================')
-      console.log(step)
-      console.log('====================================')
       this.$emit('doStep', step)
     }
   }
