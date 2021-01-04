@@ -64,7 +64,6 @@
          }"
          :src="require(`@/assets/bigcardComponentBefore.png`)"
          alt="">
-         <!-- :src="require(`@/assets/component/card (9).png`)" -->
     <div class="replace_scroll"
          v-show="isOverflowAutoPad && !animeContinue && !lastAnimeCompile"
          ref="replaceScrollRef"
@@ -82,6 +81,7 @@ export default {
     return {
       animesFun: [this.page1_animeStep1, this.page1_animeStep4],
       stepFun: [this.page1_animeStep1, this.page1_animeStep4],
+      standardScale: 1,
       // 图片数据
       imgCards: [{
         col: 5,
@@ -146,7 +146,9 @@ export default {
       imgsAnimed: false, // 是否开启遮罩及其他imgs数据
       timeStep3: null,
       imgConnectStyle: null,
-      imgConnectAnime: '', // 连接下个图片图画
+      recordStartImgConnectStyle: null,
+      recordEndImgConnectAnime: null, // 连接下个图片图画
+      imgConnectAnime: false,
       lastAnimeCompile: false, // 最后一个动画状态
       animeContinue: false, // 动画是否进行当中
       isOverflowAutoPad: false, // 是否在pad上进行滚动
@@ -211,38 +213,46 @@ export default {
       })
     },
     page1_animeStep4 (reversal) {
-      EventBus.$emit('page1_animeStep4', reversal)
       this.padScrollSwitch = false
+      EventBus.$emit('page1_animeStep4', reversal)
       return new Promise((resolve, reject) => {
+        const standardCaedImgEl = document.querySelector('.infinite-standard-card_img')
+        const connectImgElientRect = standardCaedImgEl.getBoundingClientRect()
+        console.log(connectImgElientRect);
         this.animeContinue = true
         const imgEl = this.$refs.imgRef9[1]
         if (imgEl) {
           const boundingClientRect = imgEl.getBoundingClientRect()
-          this.imgConnectStyle = {
+          this.recordStartImgConnectStyle = {
             width: imgEl.offsetWidth + 'px',
             height: imgEl.offsetHeight + 'px',
             opacity: 1,
             left: boundingClientRect.left + 'px',
             top: !reversal ? boundingClientRect.top + 'px' : `calc(${boundingClientRect.top}px + 150vh)`,
-            zIndex: 1,
-            transition: 'all 1s',
             display: 'block'
           }
+          this.recordEndImgConnectStyle = {
+            width: `${connectImgElientRect.width}px`,
+            height: `${connectImgElientRect.height}px`,
+            left: `50% `,
+            top: `${connectImgElientRect.top}px`,
+            transform: `translateX(-50%)`,
+          }
           document.querySelector('.imgs_content_9').style.display = 'block'
-          document.querySelector('.infinite-standard-card_img').style.display = 'none'
+          standardCaedImgEl.style.display = 'none'
+          this.imgConnectStyle = reversal ? this.recordEndImgConnectStyle : this.recordStartImgConnectStyle
         }
         this.$nextTick(() => {
           setTimeout(() => {
+            this.imgConnectStyle = reversal ? this.recordStartImgConnectStyle : this.recordEndImgConnectStyle
             this.imgConnectAnime = !reversal
             this.animeCanvasAnime = !reversal
             setTimeout(() => {
               this.lastAnimeCompile = !reversal
               this.animeContinue = false
-
               if (reversal) {
                 document.querySelector('.imgs_content_9').style.display = 'none'
-              }
-              if (reversal) {
+                standardCaedImgEl.style.display = 'block'
                 this.padScrollSwitch = true
               }
               resolve(true)
@@ -260,6 +270,9 @@ export default {
     }
   },
   mounted () {
+    EventBus.$on('standardScale', (scale) => {
+      this.standardScale = scale
+    })
     document.body.addEventListener('mousewheel', (e) => {
       const event = e || window.event
       const el = this.$refs.componentViewImgsContainerRef

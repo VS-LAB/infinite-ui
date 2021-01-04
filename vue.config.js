@@ -108,17 +108,17 @@ module.exports = {
     //   })
     // })
 
-    config
-      .plugin('webpack-bundle-analyzer')
-      .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
-      .tap(options => {
-        options.push({
-          analyzerPort: async () => {
-            await portfinder.getPortPromise()
-          }
-        })
-        return options
-      })
+    // config
+    //   .plugin('webpack-bundle-analyzer')
+    //   .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
+    //   .tap(options => {
+    //     options.push({
+    //       analyzerPort: async () => {
+    //         await portfinder.getPortPromise()
+    //       }
+    //     })
+    //     return options
+    //   })
   },
   devServer: {
     overlay: {

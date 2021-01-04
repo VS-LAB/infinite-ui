@@ -4,20 +4,20 @@ $typeArea:1440px;
   user-select: none;
 
   .img_connect {
-    opacity: 0;
     position: fixed;
     pointer-events: none;
     border-radius: 20px;
     box-shadow: 0px 18px 104px #dfe5f6;
+    transition: all 1s
   }
 
   .img_connect-anime_start {
-    width: 650px !important;
-    height: 450px !important;
-    left: 50% !important;
-    top: 50% !important;
-    margin-top: 136px;
-    transform: translate(-50%, -50%);
+    // width: 650px !important;
+    // height: 450px !important;
+    // left: 50% !important;
+    // top: 50% !important;
+    // margin-top: 130px;
+    // transform: translate(-50%, -50%);
   }
 
   // 替代滚动
@@ -92,10 +92,14 @@ $typeArea:1440px;
       text-align: center;
 
       &-container {
-        width: $typeArea;
+        width: calc(100vh * 3752 / 2028);
+        min-width: calc(570px * 3752 / 2028);
+        max-width: calc(900px * 3752 / 2028);
+        height: 100vh;
+        min-height: 570px;
+        max-height: 900px;
         margin: 0 auto;
         position: fixed;
-        padding-bottom: $typeArea * 778 / 1440;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
@@ -111,7 +115,12 @@ $typeArea:1440px;
       }
 
       .component_view-notebook-anime_start {
-        width: $typeArea;
+        width: calc(100vh * 3752 / 2028);
+        min-width: calc(570px * 3752 / 2028);
+        max-width: calc(900px * 3752 / 2028);
+        height: 100vh;
+        min-height: 570px;
+        max-height: 900px;
         transform: translate(-50%, -50%);
       }
 
@@ -314,22 +323,22 @@ $typeArea:1440px;
               }
 
               .imgs_7 {
-                width: 602px;
+                width: 277%;
               }
 
               .imgs_18,
               .imgs_19 {
-                width: 390px;
+                width: 180%;
               }
 
               .imgs_23 {
-                width: 196px;
-                left: 88px;
+                width: 52%;
+                left: 24%;
               }
 
               .imgs_24 {
-                width: 546px;
-                left: 176px;
+                width: 146%;
+                left: 48%;
               }
             }
           }
