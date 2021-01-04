@@ -152,11 +152,15 @@ export default {
             array.push(this.stepFun[i]())
             // console.log('stepIndex > this.animeIndex - stepIndex - this.animeIndex - i - this.stepFun[i].name == ', stepIndex, this.animeIndex, i, this.stepFun[i].name)
           }
+          this.animeIndex = stepIndex
+          this.next(0, true)
+          // this.startToInterrupt = true
           await Promise.all(array).then((res) => {
             // console.log('>', res) // [ 0, 1, 2 ]
             // console.log('> - 下一行')
-            this.animeIndex = stepIndex
-            this.next(0, true)
+            // this.animeIndex = stepIndex
+            // this.next(0, true)
+            this.startToInterrupt = false
           })
         } else {
           this.closeHeaderInner = !this.closeHeaderInner
@@ -167,12 +171,16 @@ export default {
               // console.log('stepIndex <= this.animeIndex - stepIndex - this.animeIndex - i - this.stepFun[i].name == ', stepIndex, this.animeIndex, i, this.stepFun[i].name)
             }
           }
+          this.animeIndex = stepIndex
+          this.prev()
+          // this.startToInterrupt = true
           await Promise.all(array).then((res) => {
             // console.log('<=', res)
             // console.log('<= - 下一行')
 
-            this.animeIndex = stepIndex
-            this.prev()
+            // this.animeIndex = stepIndex
+            // this.prev()
+            this.startToInterrupt = false
           })
         };
       })
@@ -206,7 +214,7 @@ export default {
       this.setComponentZindex(animateName, true)
       this.completeAnimation = await currAnimate(false, executionType)
       this.setRouterIndexIndexAnimation(animateName)
-      this.startToInterrupt = false
+      // this.startToInterrupt = false
     },
     async prev () {
       // console.log('prev')
@@ -217,7 +225,7 @@ export default {
       this.setComponentZindex(animateName, false)
       this.completeAnimation = await currAnimate(true)
       this.setRouterIndexIndexAnimation(animateName)
-      this.startToInterrupt = false
+      // this.startToInterrupt = false
     },
     setComponentZindex (animateName, isNext) {
       this.$refs.componnet.forEach((component, componentIndex) => {

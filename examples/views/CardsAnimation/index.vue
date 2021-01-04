@@ -80,7 +80,7 @@ export default {
   data () {
     return {
       animesFun: [this.page1_animeStep1, this.page1_animeStep4],
-      stepFun: [this.page1_animeStep1, this.page1_animeStep4],
+      stepFun: [this.page1_step1, this.page1_step4],
       standardScale: 1,
       // 图片数据
       imgCards: [{
@@ -179,6 +179,25 @@ export default {
         this.animeContinue = false
       })
     },
+    page1_step1 (reversal) {
+      this.padScrollSwitch = false
+      return new Promise(async (resolve, reject) => {
+        this.animeContinue = true
+        const el = this.$refs.componentViewImgsContainerRef
+        this.scrollTop = el.scrollTop = 0
+        if (!reversal) {
+          this.headerTextAnime = true
+          await this.page1_step2()
+          await this.page1_step3()
+        } else {
+          await this.page1_step3(true)
+          this.headerTextAnime = false
+          await this.page1_step2(true)
+        }
+        resolve(true)
+        this.animeContinue = false
+      })
+    },
     // 组件视图区域
     page1_animeStep2 (reversal) {
       return new Promise((resolve, reject) => {
@@ -189,6 +208,18 @@ export default {
           setTimeout(() => {
             resolve(true)
           }, 1000)
+        })
+      })
+    },
+    page1_step2 (reversal) {
+      return new Promise((resolve, reject) => {
+        this.$nextTick(() => {
+          this.componentViewNotebookAnime = !reversal
+          this.tableImgsPosition = reversal
+          // 动画执行完成后
+          // setTimeout(() => {
+          resolve(true)
+          // }, 1000)
         })
       })
     },
@@ -211,6 +242,27 @@ export default {
             this.isOverflowAutoPad = false
             resolve(true)
           }, 200)
+        }
+      })
+    },
+    page1_step3 (reversal) {
+      return new Promise((resolve, reject) => {
+        // if (this.timeStep3) {
+        //   clearTimeout(this.timeStep3)
+        // }
+        if (!reversal) {
+          this.imgsAnimed = true
+          this.isOverflowAutoPad = true
+          // setTimeout(_ => {
+          this.padScrollSwitch = true
+          resolve(true)
+          // }, 200)
+        } else {
+          this.imgsAnimed = false
+          // this.timeStep3 = setTimeout(() => {
+          this.isOverflowAutoPad = false
+          resolve(true)
+          // }, 200)
         }
       })
     },
@@ -261,6 +313,53 @@ export default {
         })
       })
     },
+    page1_step4 (reversal) {
+      this.padScrollSwitch = false
+      EventBus.$emit('page1_animeStep4', reversal)
+      return new Promise((resolve, reject) => {
+        const standardCaedImgEl = document.querySelector('.infinite-standard-card_img')
+        const connectImgElientRect = standardCaedImgEl.getBoundingClientRect()
+        this.animeContinue = true
+        const imgEl = this.$refs.imgRef9[1]
+        console.log('imgEl ---- ', imgEl)
+        if (imgEl) {
+          const boundingClientRect = imgEl.getBoundingClientRect()
+          this.recordStartImgConnectStyle = {
+            width: imgEl.offsetWidth + 'px',
+            height: imgEl.offsetHeight + 'px',
+            opacity: 1,
+            left: boundingClientRect.left + 'px',
+            top: !reversal ? boundingClientRect.top + 'px' : `calc(${boundingClientRect.top}px + 150vh)`,
+            display: 'block'
+          }
+          this.recordEndImgConnectStyle = {
+            width: `${connectImgElientRect.width}px`,
+            height: `${connectImgElientRect.height}px`,
+            left: `50% `,
+            top: `${connectImgElientRect.top}px`,
+            transform: `translateX(-50%)`
+          }
+          // document.querySelector('.imgs_content_9').style.display = 'block'
+          standardCaedImgEl.style.display = 'none'
+          this.imgConnectStyle = reversal ? this.recordEndImgConnectStyle : this.recordStartImgConnectStyle
+        }
+        this.$nextTick(() => {
+          this.imgConnectStyle = reversal ? this.recordStartImgConnectStyle : this.recordEndImgConnectStyle
+          this.imgConnectAnime = !reversal
+          this.animeCanvasAnime = !reversal
+          this.lastAnimeCompile = !reversal
+          this.animeContinue = false
+          console.log('reversal ---- ', reversal)
+          if (reversal) {
+            console.log('nex ---- ', document.querySelector('.imgs_content_9'))
+            document.querySelector('.imgs_content_9').style.display = 'none'
+            standardCaedImgEl.style.display = 'block'
+            this.padScrollSwitch = true
+          }
+          resolve(true)
+        })
+      })
+    },
     onScroll (e) {
       let first = this.$refs.replaceScrollRef
       let second = this.$refs.componentViewImgsContainerRef
@@ -280,7 +379,7 @@ export default {
         }
         const scrollTopSpace = el.children[0].clientHeight - el.clientHeight
         // 判断是否不可以滚动了，此时需要走上一步或者下一步动画
-        if ((el.scrollTop === 0 && wheelDistance > 0) || (scrollTopSpace - el.scrollTop < 1 && wheelDistance < 0) || this.lastAnimeCompile || this.animeContinue ) {
+        if ((el.scrollTop === 0 && wheelDistance > 0) || (scrollTopSpace - el.scrollTop < 1 && wheelDistance < 0) || this.lastAnimeCompile || this.animeContinue) {
           this.padScrollSwitch = false
         }
         event.stopPropagation()

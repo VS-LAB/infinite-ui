@@ -224,17 +224,21 @@ export default {
     page2_step1 (reversal) {
       return new Promise((resolve, reject) => {
         this.$nextTick(() => {
-          if (!reversal) {
-            document.querySelector('.imgs_content_9').style.display = 'none'
-            document.querySelector('.infinite-standard-card_img').style.display = 'block'
-            document.querySelector('.infinite-standard-card-icon-gruy').style.display = 'flex'
-            this.showTop = true
-          } else {
-            document.querySelector('.infinite-standard-card-icon-gruy').style.display = 'none'
-            document.querySelector('.imgs_content_9').style.display = 'block'
-            document.querySelector('.infinite-standard-card_img').style.display = 'none'
-            this.showTop = false
-          }
+          setTimeout(() => {
+            if (!reversal) {
+              document.querySelector('.imgs_content_9').style.display = 'none'
+              console.log('stand -- ', document.querySelector('.imgs_content_9'), document.querySelector('.imgs_content_9').style.display)
+              document.querySelector('.infinite-standard-card_img').style.display = 'block'
+              document.querySelector('.infinite-standard-card-icon-gruy').style.display = 'flex'
+              this.showTop = true
+            } else {
+              document.querySelector('.infinite-standard-card-icon-gruy').style.display = 'none'
+              document.querySelector('.imgs_content_9').style.display = 'block'
+              console.log('stand prev -- ', document.querySelector('.imgs_content_9').style.display)
+              document.querySelector('.infinite-standard-card_img').style.display = 'none'
+              this.showTop = false
+            }
+          }, 0)
           resolve(true)
         })
       })
@@ -275,6 +279,9 @@ export default {
           this.showLine = true
           this.showCardMoveToLeft = true
           this.codeShowLine()
+          // this.getGruyIconPosition()
+          // this.setIconMaskPosition(this.gruyIconLeft, this.gruyIconTop)
+          // this.gruyIconTopBefore = this.gruyIconTop
           setTimeout(_ => {
             this.getGruyIconPosition()
             this.setIconMaskPosition(this.gruyIconLeft, this.gruyIconTop)
@@ -288,10 +295,13 @@ export default {
           this.showLine = false
           this.showCardMoveToLeft = false
           this.codeShowLine()
+          // this.getGruyIconPosition()
+          // this.setIconMaskPosition(this.gruyIconLeft, this.gruyIconTop)
+          // this.gruyIconTopBefore = this.gruyIconTop
           setTimeout(_ => {
-            this.getGruyIconPosition()
-            this.setIconMaskPosition(this.gruyIconLeft, this.gruyIconTop)
-            this.gruyIconTopBefore = this.gruyIconTop
+            // this.getGruyIconPosition()
+            // this.setIconMaskPosition(this.gruyIconLeft, this.gruyIconTop)
+            // this.gruyIconTopBefore = this.gruyIconTop
             resolve(true)
           }, 1500)
         }
