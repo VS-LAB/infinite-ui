@@ -143,6 +143,7 @@ export default {
   data () {
     return {
       animesFun: [this.page4_animation_play_step2, this.page4_animation_play_step3, this.page4_animation_play_step4, this.page4_animation_play_step5, this.page4_animation_play_step6, this.page4_animation_play_step7],
+      stepFun: [this.page4_animation_play_step2, this.page4_animation_play_step3, this.page4_animation_play_step4, this.page4_animation_play_step5, this.page4_animation_play_step6, this.page4_animation_play_step7],
       showOrange: false,
       activeColor: 4,
       animation: {
