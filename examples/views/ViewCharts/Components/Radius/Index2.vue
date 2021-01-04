@@ -59,6 +59,9 @@ export default {
   methods: {
     render () {
       this.renderClass = true
+    },
+    destroy () {
+      this.renderClass = false
     }
   }
 }

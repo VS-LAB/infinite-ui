@@ -200,6 +200,7 @@ export default {
   data () {
     return {
       animesFun: [this.page2_goShowTop, this.page2_goShowLine, this.page2_goShowCardMoveToLeft, this.page2_goShowExlamatoryMark, this.page2_goEndTop],
+      stepFun: [this.page2_step1, this.page2_step2, this.page2_step3, this.page2_step4, this.page2_step5],
       isShowCode: false,
       row: 0,
       endTop: false,
@@ -225,8 +226,10 @@ export default {
       hideMask: false,
       gruyIconLeft: 0,
       gruyIconTop: 0,
+      gruyIconTopBefore: 0,
       listenResizeTimer: '',
-      listenResizeFlag: false
+      listenResizeFlag: false,
+      intervalResetMask: ''
     }
   },
   computed: {
@@ -260,7 +263,7 @@ export default {
     page2_goShowTop (reversal) {
       return new Promise((resolve, reject) => {
         if (!reversal) {
-          console.log('page2_goShowTop == ', document.querySelector('.imgs_content_9'))
+          // console.log('page2_goShowTop == ', document.querySelector('.imgs_content_9'))
           this.$nextTick(() => {
             document.querySelector('.imgs_content_9').style.display = 'none'
             document.querySelector('.infinite-standard-card_img').style.display = 'block'
@@ -281,48 +284,131 @@ export default {
         }
       })
     },
-    // 步骤2 显示边框线
-    page2_goShowLine () {
+    page2_step1 (reversal) {
       return new Promise((resolve, reject) => {
-        this.showLine = !this.showLine
-        setTimeout(_ => {
+        this.$nextTick(() => {
+          if (!reversal) {
+            document.querySelector('.imgs_content_9').style.display = 'none'
+            document.querySelector('.infinite-standard-card_img').style.display = 'block'
+            document.querySelector('.infinite-standard-card-icon-gruy').style.display = 'flex'
+            this.showTop = true
+          } else {
+            document.querySelector('.infinite-standard-card-icon-gruy').style.display = 'none'
+            document.querySelector('.imgs_content_9').style.display = 'block'
+            document.querySelector('.infinite-standard-card_img').style.display = 'none'
+            this.showTop = false
+          }
           resolve(true)
-        }, 1500)
+        })
+      })
+    },
+    // 步骤2 显示边框线
+    page2_goShowLine (reversal) {
+      return new Promise((resolve, reject) => {
+        if (!reversal) { 
+          this.showLine = true
+          setTimeout(_ => {
+            resolve(true)
+          }, 1500)
+        } else {
+          this.showLine = false
+          setTimeout(_ => {
+            resolve(true)
+          }, 1500)
+        }
+      })
+    },
+    page2_step2 (reversal) {
+      return new Promise((resolve, reject) => {
+        if (!reversal) { 
+          this.showLine = true
+        } else {
+          this.showLine = false
+        }
+        resolve(true)
       })
     },
     // 步骤3 卡片位移
-    page2_goShowCardMoveToLeft () {
+    page2_goShowCardMoveToLeft (reversal) {
       return new Promise((resolve, reject) => {
-        setTimeout(() => {
-          this.row = 0
-        }, 100)
-        this.showLine = !this.showLine
-        this.showCardMoveToLeft = !this.showCardMoveToLeft
-        this.codeShowLine()
-        setTimeout(_ => {
-          this.getGruyIconPosition()
-          this.setIconMaskPosition(this.gruyIconLeft, this.gruyIconTop)
-          resolve(true)
-        }, 1500)
+        if (!reversal) { 
+          setTimeout(() => {
+            this.row = 0
+          }, 100)
+          this.showLine = true
+          this.showCardMoveToLeft = true
+          this.codeShowLine()
+          setTimeout(_ => {
+            this.getGruyIconPosition()
+            this.setIconMaskPosition(this.gruyIconLeft, this.gruyIconTop)
+            this.gruyIconTopBefore = this.gruyIconTop
+            resolve(true)
+          }, 1500)
+        } else {
+          setTimeout(() => {
+            this.row = 0
+          }, 100)
+          this.showLine = false
+          this.showCardMoveToLeft = false
+          this.codeShowLine()
+          setTimeout(_ => {
+            this.getGruyIconPosition()
+            this.setIconMaskPosition(this.gruyIconLeft, this.gruyIconTop)
+            this.gruyIconTopBefore = this.gruyIconTop
+            resolve(true)
+          }, 1500)
+        }
+      })
+    },
+    page2_step3 (reversal) {
+      return new Promise((resolve, reject) => {
+        this.row = 0
+        if (!reversal) { 
+          this.showLine = true
+          this.showCardMoveToLeft = true
+        } else {
+          this.showLine = false
+          this.showCardMoveToLeft = false
+        }
+        while (this.row === this.codes.length) {
+          this.row += 1
+        }
+        this.getGruyIconPosition()
+        this.setIconMaskPosition(this.gruyIconLeft, this.gruyIconTop)
+        this.gruyIconTopBefore = this.gruyIconTop
+        resolve(true)
       })
     },
     // 步骤4 显示感叹号
     page2_goShowExlamatoryMark (reversal) {
       return new Promise((resolve, reject) => {
-        this.showMask = !this.showMask
+        // this.showMask = !this.showMask
         if (!reversal) {
+          this.showMask = true
           // this.getGruyIconPosition()
           // console.log('---')
           // this.setIconMaskPosition((this.gruyIconLeft.replace('px', '') - 12) + 'px', (this.gruyIconTop.replace('px', '') - 12) + 'px')
-          this.hideGruyIcon = true
+          // this.hideGruyIcon = true
         } else {
+          this.showMask = false
           // this.getGruyIconPosition()
           // this.setIconMaskPosition(this.gruyIconLeft, this.gruyIconTop)
-          this.hideGruyIcon = false
+          // this.hideGruyIcon = false
         }
         setTimeout(_ => {
           resolve(true)
         }, 1500)
+      })
+    },
+    // 步骤4 显示感叹号
+    page2_step4 (reversal) {
+      return new Promise((resolve, reject) => {
+        if (!reversal) {
+          this.showMask = true
+        } else {
+          this.showMask = false
+        }
+        resolve(true)
       })
     },
     // 获取灰色icon位置
@@ -330,6 +416,7 @@ export default {
       const gruyIcon = document.querySelector('.infinite-standard-card-icon-gruy')
       if (gruyIcon) {
         const h = gruyIcon.getBoundingClientRect() // 计算点居中
+        // console.log('gruyIcon == ', gruyIcon, h)
         this.gruyIconLeft = `${h.left}px`
         this.gruyIconTop = `${h.top}px`
         callback && callback()
@@ -337,6 +424,7 @@ export default {
     },
     // 赋予IconMask位置
     setIconMaskPosition (left, top) {
+      // console.log('setIconMaskPosition left, top == ', left, top)
       const { iconMask } = this.$refs
       if (iconMask) {
         iconMask.style.left = left
@@ -346,9 +434,9 @@ export default {
     // 步骤5 保留感叹号 其他部分上滑
     page2_goEndTop (reversal) {
       return new Promise((resolve, reject) => {
+        // 告诉动画页-4此时我的运动状态
+        const hideIcon = document.querySelector('.hideIcon') // 下一动画的首个icon
         if (!reversal) {
-          // 告诉动画页-4此时我的运动状态
-          const hideIcon = document.querySelector('.hideIcon') // 下一动画的首个icon
           if (hideIcon) {
             const b = hideIcon.getBoundingClientRect() // 计算点居中
             this.setIconMaskPosition(`${b.left - 1}px`, `${b.top + 1.83}px`)
@@ -356,13 +444,35 @@ export default {
           this.endTop = true
 
           this.getGruyIconPosition()
+          this.gruyIconTopBefore = this.gruyIconTop
 
           EventBus.$emit('page2_goEndTop', reversal)
           hideMaskTimer = setTimeout(_ => {
             this.hideMask = true
           }, 1600)
         } else {
-          this.setIconMaskPosition(this.gruyIconLeft, this.gruyIconTop)
+          // console.log('page2_goEndTop prev - this.gruyIconLeft, this.gruyIconTop == ', this.gruyIconLeft, this.gruyIconTop)
+          // this.getGruyIconPosition()
+          // console.log('page2_goEndTop prev get - this.gruyIconLeft, this.gruyIconTop == ', this.gruyIconLeft, this.gruyIconTop)
+
+          this.intervalResetMask = setInterval(() => {
+            this.getGruyIconPosition()
+            let topPosi = 0
+            if (hideIcon) {
+              const b = hideIcon.getBoundingClientRect() // 计算点居中
+              topPosi = b.top + 'px'
+              if (Number(this.gruyIconTop.replace('px', '')) > b.top) {
+                topPosi = this.gruyIconTop
+              }
+            }
+            if (this.gruyIconTopBefore === this.gruyIconTop) {
+              topPosi = this.gruyIconTop
+              clearInterval(this.intervalResetMask)
+            }
+            this.setIconMaskPosition(this.gruyIconLeft, topPosi)
+            this.gruyIconTopBefore = this.gruyIconTop
+            // console.log('this.gruyIconLeft, this.gruyIconTop == ', this.gruyIconLeft, this.gruyIconTop)
+          }, 100)
           this.endTop = false
           clearTimeout(hideMaskTimer)
           this.hideMask = false
@@ -372,8 +482,64 @@ export default {
         // this.endTop = !this.endTop
         // this.wrapAnimate = reversal ? '' : 'fade-out'
         setTimeout(_ => {
+          // clearInterval(this.intervalResetMask)
           resolve(true)
         }, 1000)
+      })
+    },
+    page2_step5 (reversal) {
+      return new Promise((resolve, reject) => {
+        // 告诉动画页-4此时我的运动状态
+        const hideIcon = document.querySelector('.hideIcon') // 下一动画的首个icon
+        if (!reversal) {
+          if (hideIcon) {
+            const b = hideIcon.getBoundingClientRect() // 计算点居中
+            this.setIconMaskPosition(`${b.left - 1}px`, `${b.top + 1.83}px`)
+          }
+          this.endTop = true
+
+          this.getGruyIconPosition()
+          this.gruyIconTopBefore = this.gruyIconTop
+
+          EventBus.$emit('page2_goEndTop', reversal)
+          // hideMaskTimer = setTimeout(_ => {
+          this.hideMask = true
+          // }, 1600)
+        } else {
+          // console.log('page2_goEndTop prev - this.gruyIconLeft, this.gruyIconTop == ', this.gruyIconLeft, this.gruyIconTop)
+          // this.getGruyIconPosition()
+          // console.log('page2_goEndTop prev get - this.gruyIconLeft, this.gruyIconTop == ', this.gruyIconLeft, this.gruyIconTop)
+
+          // this.intervalResetMask = setInterval(() => {
+          this.getGruyIconPosition()
+          let topPosi = 0
+          if (hideIcon) {
+            const b = hideIcon.getBoundingClientRect() // 计算点居中
+            topPosi = b.top + 'px'
+            if (Number(this.gruyIconTop.replace('px', '')) > b.top) {
+              topPosi = this.gruyIconTop
+            }
+          }
+          if (this.gruyIconTopBefore === this.gruyIconTop) {
+            topPosi = this.gruyIconTop
+            // clearInterval(this.intervalResetMask)
+          }
+          this.setIconMaskPosition(this.gruyIconLeft, topPosi)
+          this.gruyIconTopBefore = this.gruyIconTop
+          // console.log('this.gruyIconLeft, this.gruyIconTop == ', this.gruyIconLeft, this.gruyIconTop)
+          // }, 100)
+          this.endTop = false
+          // clearTimeout(hideMaskTimer)
+          this.hideMask = false
+          EventBus.$emit('page2_goEndTop', reversal)
+        }
+
+        // this.endTop = !this.endTop
+        // this.wrapAnimate = reversal ? '' : 'fade-out'
+        // setTimeout(_ => {
+        // clearInterval(this.intervalResetMask)
+        resolve(true)
+        // }, 1000)
       })
     },
     // 计时器
@@ -389,12 +555,11 @@ export default {
     // 窗口大小改变时的操作
     listenResize () {
       const _that = this
-      console.log('listenResizeFlag before ~~ ')
       if (!_that.listenResizeFlag) {
         _that.listenResizeFlag = true
         setTimeout(() => {
           _that.getGruyIconPosition(() => {
-            console.log('listenResizeFlag ~~ ', _that.gruyIconLeft, _that.gruyIconTop)
+            _that.gruyIconTopBefore = _that.gruyIconTop
             _that.setIconMaskPosition(_that.gruyIconLeft, _that.gruyIconTop)
           })
           _that.listenResizeFlag = false
@@ -407,7 +572,6 @@ export default {
       const elementTransform = element.style.transform
       const { height } = element.getBoundingClientRect()
       const thresholdValue = 0.1 // 防止不够，多缩小一点
-      console.log(clientHeight, height)
       if ((clientHeight - height) < 100) {
         const scale = 1 - Math.abs(clientHeight - height) / height - thresholdValue
         this.scale = scale

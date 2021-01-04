@@ -99,6 +99,16 @@ $screenWidth:1280px;
   }
     
   .infinite-icon-page-content {
+    position: absolute;
+    margin: auto;
+    width: 806px;
+    height: 798px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transform-origin: left top;
+
+
     // position: absolute;
     // top: 50%;
     // left: 50%;
@@ -1156,7 +1166,8 @@ $screenWidth:1280px;
     }
     .infinite-icon-page-content {
       transition: transform 1.5s;
-      transform: translate(0, 0);
+      // transform: translate(0, 0);
+      transform: translate(-50%, -50%);
       // transform: translate(-50%, -50%);
       .infinite-icon-page-window {
         .infinite-icon-page-window-bg {
@@ -1202,7 +1213,8 @@ $screenWidth:1280px;
     }
     .infinite-icon-page-content {
       transition: transform 1.5s;
-      transform: translate(0, -120vh);
+      // transform: translate(0, -120vh);
+      transform: translate(-50%, -120vh);
       .icons-introduce {
         transform: translateY(-13vh);
         transition: transform .25s;

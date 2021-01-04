@@ -53,6 +53,7 @@ export default {
   data () {
     return {
       animesFun: [this.page0_animeStep1, this.page0_animeStep3],
+      stepFun: [this.page0_animeStep1, this.page0_animeStep3],
       menuData: [
         {
           label: '首页',

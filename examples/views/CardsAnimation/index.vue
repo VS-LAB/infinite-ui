@@ -81,6 +81,7 @@ export default {
   data () {
     return {
       animesFun: [this.page1_animeStep1, this.page1_animeStep4],
+      stepFun: [this.page1_animeStep1, this.page1_animeStep4],
       // 图片数据
       imgCards: [{
         col: 5,

@@ -45,12 +45,14 @@ export default {
   data () {
     return {
       animesFun: [],
+      stepFun: [],
       animeIndex: 0,
       completeAnimation: false,
       showHeaderNav: false, // 是否展示顶部nav
       closeHeaderInner: false,
       routerIndex: 0,
       sizeX2: false,
+      startToInterrupt: false, // 是否打断滚动发生
       pageNameArr: ['LogAnimation', 'CardsAnimation', 'Standard', 'IconPage', 'ViewCharts', 'LastPage']
       // pageNameArr: ['ScrollContainer', 'CardsAnimation', 'Standard', 'IconPage', 'ViewCharts', 'LastPage']
     }
@@ -79,10 +81,11 @@ export default {
       return ratio
     },
     async goAnimationStep (typeName) {
+      this.startToInterrupt = true
       let stepIndex = 0
       switch (typeName) {
         case 'Component':
-          this.animesFun.forEach((item, index) => {
+          this.stepFun.forEach((item, index) => {
             if (item.name.includes('page1_animeStep1')) {
               stepIndex = index
               this.routerIndex = 1
@@ -90,15 +93,15 @@ export default {
           })
           break
         case 'Icon':
-          this.animesFun.forEach((item, index) => {
-            if (item.name.includes('page3_showAniStep2')) {
+          this.stepFun.forEach((item, index) => {
+            if (item.name.includes('page3_step2')) {
               stepIndex = index
               this.routerIndex = 2
             }
           })
           break
         case 'Chart':
-          this.animesFun.forEach((item, index) => {
+          this.stepFun.forEach((item, index) => {
             if (item.name.includes('page4_animation_play_step2')) {
               stepIndex = index
               this.routerIndex = 3
@@ -110,33 +113,37 @@ export default {
           this.routerIndex = 0
           break
       }
-
-      if (stepIndex > this.animeIndex) {
-        let array = []
-        for (let i = 0; i < stepIndex; i++) {
-          array.push(this.animesFun[i]())
-        }
-        Promise.all(array).then((res) => {
-          console.log(res) // [ 0, 1, 2 ]
-        })
-
-        this.animeIndex = stepIndex
-        this.next(0, true)
-      } else {
-        this.closeHeaderInner = !this.closeHeaderInner
-        let array = []
-        for (let i = this.animesFun.length - 1; i > 0; i--) {
-          if (i < this.animeIndex + 1 && i > stepIndex) {
-            array.push(this.animesFun[i](true))
+      this.$nextTick(async () => {
+        if (stepIndex > this.animeIndex) {
+          let array = []
+          for (let i = this.animeIndex; i < stepIndex; i++) {
+            array.push(this.stepFun[i]())
+            // console.log('stepIndex > this.animeIndex - stepIndex - this.animeIndex - i - this.stepFun[i].name == ', stepIndex, this.animeIndex, i, this.stepFun[i].name)
           }
-        }
-        Promise.all(array).then((res) => {
-          console.log(res)
-        })
+          await Promise.all(array).then((res) => {
+            // console.log('>', res) // [ 0, 1, 2 ]
+            // console.log('> - 下一行')
+            this.animeIndex = stepIndex
+            this.next(0, true)
+          })
+        } else {
+          this.closeHeaderInner = !this.closeHeaderInner
+          let array = []
+          for (let i = this.stepFun.length - 1; i > 0; i--) {
+            if (i < this.animeIndex + 1 && i > stepIndex) {
+              array.push(this.stepFun[i](true))
+              // console.log('stepIndex <= this.animeIndex - stepIndex - this.animeIndex - i - this.stepFun[i].name == ', stepIndex, this.animeIndex, i, this.stepFun[i].name)
+            }
+          }
+          await Promise.all(array).then((res) => {
+            // console.log('<=', res)
+            // console.log('<= - 下一行')
 
-        this.animeIndex = stepIndex
-        this.prev()
-      };
+            this.animeIndex = stepIndex
+            this.prev()
+          })
+        };
+      })
     },
     doStep (step) {
       if (!step) return
@@ -159,6 +166,7 @@ export default {
       }
     },
     async next (step = 0, executionType) {
+      // console.log('next')
       this.showHeaderNav = false
       this.completeAnimation = false
       const currAnimate = this.animesFun[this.animeIndex]
@@ -166,8 +174,10 @@ export default {
       this.setComponentZindex(animateName, true)
       this.completeAnimation = await currAnimate(false, executionType)
       this.setRouterIndexIndexAnimation(animateName)
+      this.startToInterrupt = false
     },
     async prev () {
+      // console.log('prev')
       this.showHeaderNav = true
       this.completeAnimation = false
       const currAnimate = this.animesFun[this.animeIndex + 1]
@@ -175,6 +185,7 @@ export default {
       this.setComponentZindex(animateName, false)
       this.completeAnimation = await currAnimate(true)
       this.setRouterIndexIndexAnimation(animateName)
+      this.startToInterrupt = false
     },
     setComponentZindex (animateName, isNext) {
       this.$refs.componnet.forEach((component, componentIndex) => {
@@ -199,10 +210,17 @@ export default {
     // this.sizeX2 = true
     // }
     let animesFun = []
+    let stepFun = []
     this.$refs.componnet.forEach((component) => {
       animesFun = [...animesFun, ...(component.animesFun || [])]
+      stepFun = [...stepFun, ...(component.stepFun || [])]
     })
     this.animesFun = animesFun
+    this.stepFun = stepFun
+    // console.log('animesFun == ', animesFun)
+    animesFun.forEach(item => {
+      // console.log('animesFun - item == ', item.name)
+    })
     this.$nextTick(() => {
       setTimeout(() => {
         this.next()
@@ -213,6 +231,9 @@ export default {
     let self = this
     function windowAddMouseWheel () {
       var scrollFunc = function (e) {
+        if (self.startToInterrupt) {
+          return
+        }
         e = e || window.event
         let wheelDistance // 滑轮滚动距离
         if (e.wheelDelta) { // 判断浏览器IE，谷歌滑轮事件
@@ -227,10 +248,12 @@ export default {
           }
           if (wheelDistance > 0 && self.animeIndex >= 1) { // 当滑轮向上滚动时
             self.animeIndex -= 1
+            // console.log('滚轮触发 prev')
             self.prev()
           }
           if (wheelDistance < 0 && self.animeIndex < self.animesFun.length - 1) { // 当滑轮向下滚动时
             self.animeIndex += 1
+            // console.log('滚轮触发 next')
             self.next()
           }
         }

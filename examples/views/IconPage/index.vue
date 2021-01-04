@@ -211,7 +211,8 @@ export default {
       showIcon: false,
       bgAnimateNameZindex: 0,
       listStepIndex: 0, // 动画在第几页
-      animesFun: [this.page3_showAniStep2, this.page3_showAniStep3, this.page3_showAniStep4, this.page3_showAniStep5]
+      animesFun: [this.page3_showAniStep2, this.page3_showAniStep3, this.page3_showAniStep4, this.page3_showAniStep5],
+      stepFun: [this.page3_step2, this.page3_step3, this.page3_step4, this.page3_step5]
     }
   },
   computed: {
@@ -249,13 +250,35 @@ export default {
         }
       })
     },
+    page3_step1 (reversal) {
+      return new Promise((resolve, reject) => {
+        // 当前页动画才展示icon 回到上页动画则icon消失
+        if (!reversal) {
+          this.showIconsIntroduce = 'show-icons-introduce'
+          this.orangeBgAnimateName = 'show-orange-circle'
+          this.rotateAnimateName = 'rotate-in'
+          this.iconDislocationAnimation = 'icon-dislocation-animation'
+          this.rotateAnimateName = 'show-rotate-in'
+          this.noShow = false
+        } else {
+          this.showIcon = false
+          this.showIconsIntroduce = 'hide-icons-introduce'
+          this.rotateAnimateName = ''
+          this.orangeBgAnimateName = 'hide-orange-circle'
+          this.iconDislocationAnimation = ''
+          this.noShow = true
+        }
+        resolve(true)
+      })
+    },
     // 第二步，橙色iconlist跳动出现
     async page3_showAniStep2 (reversal, executionType) {
-      console.log('page3_showAniStep2')
+      // console.log('page3_showAniStep2')
       if (executionType) {
         await this.page3_showAniStep1()
       }
       return new Promise((resolve, reject) => {
+        // 上一画面移动图标
         const m = document.querySelector('.infinite-standard-card-exclamatory-mark')
         const _that = this
         if (!reversal) {
@@ -263,7 +286,21 @@ export default {
           this.showIcon = true
           setTimeout(_ => {
             if (m) {
-              m.style.display = 'none'
+              const h = m.getBoundingClientRect() // 计算点居中
+              // 本画面第一个图标
+              const { hideIcon } = this.$refs
+              if (hideIcon && Array.isArray(hideIcon) && hideIcon[0]) {
+                const g = hideIcon[0].getBoundingClientRect()
+                // console.log('h.left, g.left, h, g, m, hideIcon[0] == ', h.left, g.left, h, g, m, hideIcon[0])
+                // console.log('Math.abs(h.left - g.left) == ', Math.abs(h.left - g.left))
+                if (Math.abs(h.left - g.left) > 5 || Math.abs(h.top - g.top) > 5) {
+                  // console.log('m == ', m)
+                  m.style.left = g.left + 'px'
+                  m.style.top = g.top + 'px'
+                  // console.log('m.style.left, m.style.top == ', m.style.left, g.left, m.style.top, g.top)
+                }
+              }
+              // m.style.display = 'none'
             }
             _that.showAni = 2
             resolve(true)
@@ -280,6 +317,42 @@ export default {
             resolve(true)
           }, 1500)
         }
+      })
+    },
+    async page3_step2 (reversal, executionType) {
+      if (executionType) {
+        await this.page3_step1()
+      }
+      return new Promise((resolve, reject) => {
+        // 上一画面移动图标
+        const m = document.querySelector('.infinite-standard-card-exclamatory-mark')
+        const _that = this
+        if (!reversal) {
+          this.showAni = 1
+          this.showIcon = true
+          if (m) {
+            const h = m.getBoundingClientRect() // 计算点居中
+            // 本画面第一个图标
+            const { hideIcon } = this.$refs
+            if (hideIcon && Array.isArray(hideIcon) && hideIcon[0]) {
+              const g = hideIcon[0].getBoundingClientRect()
+              if (Math.abs(h.left - g.left) > 5 || Math.abs(h.top - g.top) > 5) {
+                m.style.left = g.left + 'px'
+                m.style.top = g.top + 'px'
+              }
+            }
+          }
+          _that.showAni = 2
+        } else {
+          if (m) {
+            m.style.display = ''
+            this.showIcon = true
+          }
+          this.bgAnimateNameZindex = 0
+          this.orBgAnimateName = ''
+          this.showAni = 0
+        }
+        resolve(true)
       })
     },
     // 第三步，蓝色iconlist跳动出现，蓝色圈圈出现
@@ -316,6 +389,30 @@ export default {
         }
       })
     },
+    page3_step3 (reversal) {
+      return new Promise((resolve, reject) => {
+        const _that = this
+        if (!reversal) {
+          this.blueBgAnimateName = 'circle-animate'
+          this.bgAnimateNameZindex = 2
+          _that.showAni = 3
+          _that.showIcon = false
+          this.listStepIndex = 1
+          _that.showAni = 4
+          _that.showDefaultBg = ''
+          _that.orBgAnimateName = ''
+        } else {
+          this.orBgAnimateName = 'circle-animate'
+          this.bgAnimateNameZindex = 1
+          _that.showAni = 9
+          _that.showIcon = true
+          this.listStepIndex = 0
+          _that.showAni = 2
+          _that.blueBgAnimateName = ''
+        }
+        resolve(true)
+      })
+    },
     // 第四步，黑色iconlist出现，黑色圈圈出现
     page3_showAniStep4 (reversal) {
       return new Promise((resolve, reject) => {
@@ -348,6 +445,28 @@ export default {
         }
       })
     },
+    page3_step4 (reversal) {
+      return new Promise((resolve, reject) => {
+        const _that = this
+        this.showIcon = false
+        if (!reversal) {
+          this.blackBgAnimateName = 'circle-animate'
+          this.bgAnimateNameZindex = 3
+          _that.showAni = 5
+          this.listStepIndex = 2
+          _that.showAni = 6
+          _that.blueBgAnimateName = ''
+        } else {
+          this.blueBgAnimateName = 'circle-animate'
+          this.bgAnimateNameZindex = 2
+          _that.showAni = 8
+          this.listStepIndex = 1
+          _that.showAni = 4
+          _that.blackBgAnimateName = ''
+        }
+        resolve(true)
+      })
+    },
     // iconlist上升消失，触发下一动画第一步
     page3_showAniStep5 (reversal) {
       return new Promise((resolve, reject) => {
@@ -358,15 +477,43 @@ export default {
             resolve(true)
           }, 1500)
         } else {
-          this.showAni = 6
+          setTimeout(_ => {
+            this.showAni = 6
+          }, 1200)
           setTimeout(_ => {
             resolve(true)
-          }, 1500)
+          }, 1000)
         }
       })
+    },
+    page3_step5 (reversal) {
+      return new Promise((resolve, reject) => {
+        EventBus.$emit('page3_showAniStep5', reversal)
+        if (!reversal) {
+          this.showAni = 7
+        } else {
+          this.showAni = 6
+        }
+        resolve(true)
+      })
+    },
+    // 针对可视区的缩放
+    setAutoFill () {
+      const { clientHeight } = document.documentElement
+      const element = document.querySelector('.infinite-icon-page-content')
+      const elementTransform = element.style.transform
+      const { height } = element.getBoundingClientRect()
+      const thresholdValue = 0.1 // 防止不够，多缩小一点
+      if ((clientHeight - height) < 100) {
+        const scale = 1 - Math.abs(clientHeight - height) / height - thresholdValue
+        this.scale = scale
+        element.style.transform = elementTransform + `scale(${scale}) translate(-50%,-50%)`
+        element.style.transformOrigin = 'left top'
+      }
     }
   },
   mounted () {
+    this.setAutoFill()
     EventBus.$on('page2_goEndTop', (reversal) => {
       this.page3_showAniStep1(reversal)
     })

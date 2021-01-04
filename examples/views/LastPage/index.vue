@@ -41,6 +41,7 @@ export default {
   data () {
     return {
       animesFun: [this.page5_animeStep1],
+      stepFun: [this.page5_animeStep1],
       baseList: [
         // 内容模块第一部分的特殊内容数据
         {
