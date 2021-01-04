@@ -155,7 +155,7 @@ export default {
       }
       return 0
     },
-    initComponent2 () {
+    initComponent2 (tag) {
       // 需要重新计算高宽，取消从外部传入规则
       const chart = new Chart({
         container: this.id,
@@ -197,13 +197,24 @@ export default {
       chart.area().position('genre*sold').shape('smooth').color(this.colorArea)
       chart.line().size(4).position('genre*sold').shape('smooth').color(this.colorLine)
       this.chart = chart
+      tag && this.chart.render();
     },
     render () {
       const _this = this
-      this.chart.render()
-      setTimeout(() => {
-        _this.showToolTips = true
-      }, 400)
+      if (this.chart) {
+        if (this.chart.destroyed) {
+          this.initComponent2(true)
+        } else {
+          this.chart.render()
+        }
+        setTimeout(() => {
+          _this.showToolTips = true
+        }, 400)
+      }
+    },
+    destroy () {
+      this.showToolTips = false
+      this.chart && this.chart.destroy()
     },
     initComponent () {
       const chart = new Chart({
