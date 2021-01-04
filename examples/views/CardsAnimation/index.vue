@@ -1,5 +1,5 @@
 <template>
-  <div class="anime-container">
+  <div class="anime-container" @wheel="mousewheelCallBack">
     <div class="anime-canvas"
          ref="animeCanvasAnimeRef"
          :class="{
@@ -160,10 +160,12 @@ export default {
     // 头部文案动画
     page1_animeStep1 (reversal) {
       this.padScrollSwitch = false
+      const replace_scroll = document.getElementsByClassName('replace_scroll')[0]
+      if (replace_scroll) { // 重置scroll滚动值
+        replace_scroll.scrollTop = 0
+      }
       return new Promise(async (resolve, reject) => {
         this.animeContinue = true
-        const el = this.$refs.componentViewImgsContainerRef
-        this.scrollTop = el.scrollTop = 0
         if (!reversal) {
           this.headerTextAnime = true
           await this.page1_animeStep2()
@@ -265,13 +267,8 @@ export default {
       const secondHeightDifference = second.children[0].clientHeight - second.clientHeight
       const scrollTop = first.scrollTop / (first.children[0].clientHeight - first.clientHeight) * secondHeightDifference
       second.scrollTop = scrollTop >= secondHeightDifference ? secondHeightDifference : scrollTop
-    }
-  },
-  mounted () {
-    EventBus.$on('standardScale', (scale) => {
-      this.standardScale = scale
-    })
-    document.body.addEventListener('mousewheel', (e) => {
+    },
+    mousewheelCallBack (e) {
       const event = e || window.event
       const el = this.$refs.replaceScrollRef
       if (el && this.padScrollSwitch) {
@@ -283,12 +280,17 @@ export default {
         }
         const scrollTopSpace = el.children[0].clientHeight - el.clientHeight
         // 判断是否不可以滚动了，此时需要走上一步或者下一步动画
-        if ((el.scrollTop === 0 && wheelDistance > 0) || (scrollTopSpace - el.scrollTop < 1 && wheelDistance < 0) || this.lastAnimeCompile || this.animeContinue) {
+        if ((el.scrollTop === 0 && wheelDistance > 0) || (scrollTopSpace - el.scrollTop < 1 && wheelDistance < 0) || this.lastAnimeCompile || this.animeContinue ) {
           this.padScrollSwitch = false
         }
         event.stopPropagation()
         event.cancelBubble = true
       }
+    }
+  },
+  mounted () {
+    EventBus.$on('standardScale', (scale) => {
+      this.standardScale = scale
     })
   }
 }

@@ -1,6 +1,7 @@
 <template>
   <div
     class="container"
+    @wheel="handleWheel"
   >
     <HeaderNav
       :show-header-nav="showHeaderNav"
@@ -53,11 +54,42 @@ export default {
       routerIndex: 0,
       sizeX2: false,
       startToInterrupt: false, // 是否打断滚动发生
-      pageNameArr: ['LogAnimation', 'CardsAnimation', 'Standard', 'IconPage', 'ViewCharts', 'LastPage']
+      pageNameArr: ['LogAnimation', 'CardsAnimation', 'Standard', 'IconPage', 'ViewCharts', 'LastPage'],
       // pageNameArr: ['ScrollContainer', 'CardsAnimation', 'Standard', 'IconPage', 'ViewCharts', 'LastPage']
     }
   },
   methods: {
+    handleWheel (e) {
+      e.stopPropagation()
+      let self = this
+      if (self.startToInterrupt) {
+        return
+      }
+      e = e || window.event
+      let wheelDistance // 滑轮滚动距离
+      if (e.wheelDelta) { // 判断浏览器IE，谷歌滑轮事件
+        wheelDistance = e.wheelDelta
+      } else if (e.detail) { // Firefox滑轮事件
+        wheelDistance = e.detail
+      }
+      if (self.completeAnimation) {
+        // 首页时向上滚动也加载导航栏
+        if (wheelDistance > 0 && self.animeIndex === 0) { // 当滑轮向上滚动时
+          self.showHeaderNav = true
+        }
+        if (wheelDistance > 0 && self.animeIndex >= 1) { // 当滑轮向上滚动时
+          self.animeIndex -= 1
+          // console.log('滚轮触发 prev')
+          this.animateByMenu = false
+          self.prev()
+        }
+        if (wheelDistance < 0 && self.animeIndex < self.animesFun.length - 1) { // 当滑轮向下滚动时
+          self.animeIndex += 1
+          // console.log('滚轮触发 next')
+          self.next()
+        }
+      }
+    },
     // 检测浏览器缩放比例
     detectZoom () {
       var ratio = 0
@@ -226,46 +258,13 @@ export default {
         this.next()
       }, 500)
     })
-
-    windowAddMouseWheel()
-    let self = this
-    function windowAddMouseWheel () {
-      var scrollFunc = function (e) {
-        if (self.startToInterrupt) {
-          return
-        }
-        e = e || window.event
-        let wheelDistance // 滑轮滚动距离
-        if (e.wheelDelta) { // 判断浏览器IE，谷歌滑轮事件
-          wheelDistance = e.wheelDelta
-        } else if (e.detail) { // Firefox滑轮事件
-          wheelDistance = e.detail
-        }
-        if (self.completeAnimation) {
-          // 首页时向上滚动也加载导航栏
-          if (wheelDistance > 0 && self.animeIndex === 0) { // 当滑轮向上滚动时
-            self.showHeaderNav = true
-          }
-          if (wheelDistance > 0 && self.animeIndex >= 1) { // 当滑轮向上滚动时
-            self.animeIndex -= 1
-            // console.log('滚轮触发 prev')
-            self.prev()
-          }
-          if (wheelDistance < 0 && self.animeIndex < self.animesFun.length - 1) { // 当滑轮向下滚动时
-            self.animeIndex += 1
-            // console.log('滚轮触发 next')
-            self.next()
-          }
-        }
-      }
+    windowAddMouseWheel(this)
+    function windowAddMouseWheel (self) {
       // 给页面绑定滑轮滚动事件
       if (isFirefox()) { // DOMMouseScroll事件只有火狐浏览器支持
-        document.addEventListener('DOMMouseScroll', scrollFunc, false)
-        window.addEventListener('DOMMouseScroll', scrollFunc, false)
+        document.addEventListener('DOMMouseScroll', self.handleWheel, false)
+        window.addEventListener('DOMMouseScroll', self.handleWheel, false)
       }
-      // 滚动滑轮触发scrollFunc方法
-      document.addEventListener('mousewheel', scrollFunc)
-      window.addEventListener('mousewheel', scrollFunc)
     }
   }
 }
