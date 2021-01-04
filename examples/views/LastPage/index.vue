@@ -145,6 +145,7 @@ export default {
       const { height: explainFooterHeight, bottom } = explainFooter.getBoundingClientRect()
       const explainFooterBottom = clientHeight - bottom
       const thresholdValue = 0.1 // 防止不够，多缩小一点
+      console.log('(clientHeight - height - explainFooterHeight)', (clientHeight - height - explainFooterHeight), (clientHeight - height - explainFooterHeight) < 100);
       if ((clientHeight - height - explainFooterHeight) < 100) {
         // const scale = 1 - Math.abs(clientHeight - height - explainFooterHeight) / height - thresholdValue
         // //  如果此时任然不够

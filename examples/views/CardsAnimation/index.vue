@@ -142,7 +142,6 @@ export default {
       headerTextAnime: '', // 头部文案动画
       componentViewNotebookAnime: '', // 笔记本动画
       tableImgsPosition: true, // 图片集合初始化位置
-      scrollTop: 0,
       imgsAnimed: false, // 是否开启遮罩及其他imgs数据
       timeStep3: null,
       imgConnectStyle: null,
@@ -160,10 +159,6 @@ export default {
     // 头部文案动画
     page1_animeStep1 (reversal) {
       this.padScrollSwitch = false
-      const replace_scroll = document.getElementsByClassName('replace_scroll')[0]
-      if (replace_scroll) { // 重置scroll滚动值
-        replace_scroll.scrollTop = 0
-      }
       return new Promise(async (resolve, reject) => {
         this.animeContinue = true
         if (!reversal) {
@@ -183,17 +178,27 @@ export default {
       this.padScrollSwitch = false
       return new Promise(async (resolve, reject) => {
         this.animeContinue = true
-        const el = this.$refs.componentViewImgsContainerRef
-        this.scrollTop = el.scrollTop = 0
+        const componentViewImgsContainerRefEl = this.$refs.componentViewImgsContainerRef
+        const replaceScrollRefEl = this.$refs.replaceScrollRef
+        const replace_scroll = document.getElementsByClassName('replace_scroll')[0]
         if (!reversal) {
           this.headerTextAnime = true
           await this.page1_step2()
           await this.page1_step3()
+          replaceScrollRefEl.style.display = 'block'
+          componentViewImgsContainerRefEl.scrollTop = componentViewImgsContainerRefEl.children[0].clientHeight - componentViewImgsContainerRefEl.clientHeight
+           replaceScrollRefEl.scrollTop =  replaceScrollRefEl.children[0].clientHeight - replaceScrollRefEl.clientHeight
         } else {
           await this.page1_step3(true)
           this.headerTextAnime = false
           await this.page1_step2(true)
+          replaceScrollRefEl.style.display = 'block'
+          componentViewImgsContainerRefEl.scrollTop = replaceScrollRefEl.scrollTop = 0
         }
+          replaceScrollRefEl.style.display = 'none'
+      // if (replace_scroll) { // 重置scroll滚动值
+      //   replace_scroll.scrollTop = 0
+      // }
         resolve(true)
         this.animeContinue = false
       })

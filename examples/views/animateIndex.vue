@@ -118,7 +118,7 @@ export default {
       switch (typeName) {
         case 'Component':
           this.stepFun.forEach((item, index) => {
-            if (item.name.includes('page1_animeStep1')) {
+            if (item.name.includes('page1_step1')) {
               stepIndex = index
               this.routerIndex = 1
             }
