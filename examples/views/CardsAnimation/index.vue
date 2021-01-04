@@ -217,8 +217,8 @@ export default {
       EventBus.$emit('page1_animeStep4', reversal)
       return new Promise((resolve, reject) => {
         const standardCaedImgEl = document.querySelector('.infinite-standard-card_img')
+        standardCaedImgEl.style.display = 'block'
         const connectImgElientRect = standardCaedImgEl.getBoundingClientRect()
-        console.log(connectImgElientRect);
         this.animeContinue = true
         const imgEl = this.$refs.imgRef9[1]
         if (imgEl) {
@@ -226,7 +226,6 @@ export default {
           this.recordStartImgConnectStyle = {
             width: imgEl.offsetWidth + 'px',
             height: imgEl.offsetHeight + 'px',
-            opacity: 1,
             left: boundingClientRect.left + 'px',
             top: !reversal ? boundingClientRect.top + 'px' : `calc(${boundingClientRect.top}px + 150vh)`,
             display: 'block'
@@ -234,9 +233,8 @@ export default {
           this.recordEndImgConnectStyle = {
             width: `${connectImgElientRect.width}px`,
             height: `${connectImgElientRect.height}px`,
-            left: `50% `,
             top: `${connectImgElientRect.top}px`,
-            transform: `translateX(-50%)`,
+            left: `${connectImgElientRect.left}px`
           }
           document.querySelector('.imgs_content_9').style.display = 'block'
           standardCaedImgEl.style.display = 'none'

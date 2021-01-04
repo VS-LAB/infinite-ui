@@ -295,7 +295,7 @@ $typeArea:1440px;
                 position: relative;
                 width: 100%;
                 transition: all 1s;
-                transform-origin: 0 0;
+                transform-origin: center top;
                 box-shadow: 6px 6px 24px 0px #dfe5f6;
                 border-radius: 10px;
 
@@ -345,65 +345,61 @@ $typeArea:1440px;
         }
 
         .table_imgs_position {
-          $start_position_x: -480px;
+          $start_position_x: 0px;
           $start_position_y: 10px;
-          $position_scale: 2;
+          $position_scale: 1.9;
 
           // 第一列
           .imgs_1 {
-            transform: translate($start_position_x, $start_position_y) scale($position_scale);
+            transform: translate(-256%, $start_position_y) scale($position_scale);
           }
 
           .imgs_5 {
-            transform: translate($start_position_x, $start_position_y + 280) scale($position_scale);
+            transform: translate(-256%, 160%) scale($position_scale);
           }
 
           // 第二列
           .imgs_2 {
-            transform: translate($start_position_x + 178, $start_position_y) scale($position_scale);
+            transform: translate(-100%, $start_position_y) scale($position_scale);
           }
 
           .imgs_6 {
-            transform: translate($start_position_x + 178,
-                $start_position_y + 158) scale($position_scale);
+            transform: translate(-100%, 90%) scale($position_scale);
           }
 
           .imgs_7 {
-            transform: translate($start_position_x + 178,
-                $start_position_y + 348) scale($position_scale);
+            transform: translate(-7%, 350%) scale($position_scale);
           }
 
           // 第三列
           .imgs_3 {
-            transform: translate($start_position_x + 412, $start_position_y) scale($position_scale);
+            transform: translate($start_position_x, $start_position_y) scale($position_scale);
           }
 
           .imgs_9 {
-            transform: translate($start_position_x + 412, $start_position_y + 118) scale($position_scale);
+            transform: translate($start_position_x, 80%) scale($position_scale);
           }
 
           .imgs_10 {
-            transform: translate($start_position_x + 412, $start_position_y + 278) scale($position_scale);
+            transform: translate($start_position_x, 520%) scale($position_scale);
           }
 
           // 第四列
           .imgs_12 {
-            transform: translate($start_position_x + 640, $start_position_y) scale($position_scale);
+            transform: translate(130%, $start_position_y) scale($position_scale);
           }
 
           .imgs_13 {
-            transform: translate($start_position_x + 640,
-                $start_position_y + 218) scale($position_scale);
+            transform: translate(130%, 195%) scale($position_scale);
           }
 
           // 第五列
           .imgs_15 {
-            transform: translate($start_position_x + 798, $start_position_y) scale($position_scale);
+            transform: translate(206%, $start_position_y) scale($position_scale);
           }
 
           .imgs_16 {
-            transform: translate($start_position_x + 798,
-                $start_position_y + +238) scale($position_scale);
+            transform: translate(206%, 110%) scale($position_scale);
           }
         }
 
