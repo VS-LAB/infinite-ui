@@ -339,27 +339,9 @@ export default {
     this.setAutoFill()
     if (showdebug) {
       _this.page4_animation_play_step1()
-      setTimeout(() => {
-        _this.$refs.Bar[0].$refs.bar.render()
-        _this.$refs.RadialBar[0].$refs.RadialBar.render()
-        setTimeout(() => {
-          _this.$refs.smallline[0].$refs.line.render()
-          _this.$refs.bigLine[0].$refs.line.render()
-        }, 500)
-      }, 1000)
     }
     EventBus.$on('page3_showAniStep5', (reversal) => {
       _this.page4_animation_play_step1()
-      setTimeout(() => {
-        if (_this.$refs) {
-          _this.$refs.Bar[0].$refs.bar.render()
-          _this.$refs.RadialBar[0].$refs.RadialBar.render()
-          setTimeout(() => {
-            _this.$refs.smallline[0].$refs.line.render()
-            _this.$refs.bigLine[0].$refs.line.render()
-          }, 500)
-        }
-      }, 1000)
     })
   },
   methods: {
@@ -378,11 +360,28 @@ export default {
     },
     // 动画执行第一步
     page4_animation_play_step1 (dirction) {
+      const _this = this
       return new Promise((resolve, reject) => {
         const animationList = this.animationList[0]
         this.handleElementsAnimation(dirction, animationList)
-        setTimeout(_ => {
-          resolve(true)
+        setTimeout(() => {
+          if (dirction) {
+            _this.$refs.RadialBar[0].$refs.RadialBar.destroy()
+            _this.$refs.Bar[0].$refs.bar.destroy()
+            setTimeout(() => {
+              _this.$refs.smallline[0].$refs.line.destroy()
+              _this.$refs.bigLine[0].$refs.line.destroy()
+              resolve(true)
+            }, 500)
+          } else {
+            _this.$refs.RadialBar[0].$refs.RadialBar.render()
+            _this.$refs.Bar[0].$refs.bar.render()
+            setTimeout(() => {
+              _this.$refs.smallline[0].$refs.line.render()
+              _this.$refs.bigLine[0].$refs.line.render()
+              resolve(true)
+            }, 500)
+          }
         }, 1000)
       })
     },
