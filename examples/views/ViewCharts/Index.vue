@@ -66,7 +66,8 @@
                 </div>
                 <img class="bottom" src="../../assets/visualization-chart/footer.png" alt="">
               </div>
-              <img v-show="!!showOrange" src="../../assets/visualization-chart/laptop-orange.png" alt="">
+              <!-- <img v-show="!!showOrange" src="../../assets/visualization-chart/laptop-orange.png" alt=""> -->
+              <img v-show="!!showOrange" :src="ImgUrl" alt="">
               <img src="../../assets/visualization-chart/laptop-blue.png" alt="">
               <img src="../../assets/visualization-chart/laptop-dark.png" alt="">
             </div>
@@ -333,6 +334,33 @@ export default {
       }
     }
   },
+  computed: {
+    isWindows () {
+      var agent = navigator.userAgent.toLowerCase()
+      var isMac = /macintosh|mac os x/i.test(navigator.userAgent)
+      if (agent.indexOf('win32') >= 0 || agent.indexOf('wow32') >= 0) {
+        // your code
+        return true
+      }
+      if (agent.indexOf('win64') >= 0 || agent.indexOf('wow64') >= 0) {
+        // your code
+        return true
+      }
+      if (isMac) {
+        // your code
+        return false
+      }
+      return false
+    },
+    ImgUrl () {
+      const imgMac = require('../../assets/visualization-chart/laptop-orange.png')
+      const imgWin = require('../../assets/visualization-chart/laptop-orange-windows.png')
+      if (this.isWindows) {
+        return imgWin
+      }
+      return imgMac
+    }
+  },
   mounted () {
     const _this = this
     const { showdebug } = this
@@ -392,7 +420,7 @@ export default {
           this.showOrange = false
         }
         this.classObject = 'chart-box scale-chart-box-height-step1'
-        setTimeout(()=>{
+        setTimeout(() => {
           const animationList = this.animationList[1]
           _this.handleElementsAnimation(dirction, animationList)
         })
@@ -402,7 +430,7 @@ export default {
       })
     },
     page4_animation_play_step3 (dirction) {
-      const _this = this;
+      const _this = this
       return new Promise((resolve, reject) => {
         if (!dirction) {
           this.showOrange = true
