@@ -8,11 +8,13 @@ $typeArea:1440px;
     pointer-events: none;
     border-radius: 20px;
     box-shadow: 0px 18px 104px #dfe5f6;
+
     img {
       display: block;
       width: 100%;
       height: 100%;
     }
+
     .infinite-imgs-card-icon-gruy {
       position: absolute;
       top: 58px;
@@ -23,6 +25,7 @@ $typeArea:1440px;
       font-size: 34px;
       color: #909399;
       border-radius: 50%;
+
       i {
         border-radius: 50%;
       }
@@ -369,24 +372,24 @@ $typeArea:1440px;
 
           // 第一列
           .imgs_1 {
-            transform: translate(calc(#{$start_position_x} - 256%), $start_position_y) scale($position_scale);
+            transform: translate(calc(#{$start_position_x} - 240%), $start_position_y) scale($position_scale);
           }
 
           .imgs_5 {
-            transform: translate(calc(#{$start_position_x} - 256%), 160%) scale($position_scale);
+            transform: translate(calc(#{$start_position_x} - 240%), 152%) scale($position_scale);
           }
 
           // 第二列
           .imgs_2 {
-            transform: translate(calc(#{$start_position_x} - 100%), $start_position_y) scale($position_scale);
+            transform: translate(calc(#{$start_position_x} - 94%), $start_position_y) scale($position_scale);
           }
 
           .imgs_6 {
-            transform: translate(calc(#{$start_position_x} - 100%), 90%) scale($position_scale);
+            transform: translate(calc(#{$start_position_x} - 94%), 86%) scale($position_scale);
           }
 
           .imgs_7 {
-            transform: translate(calc(#{$start_position_x} - 7%), 350%) scale($position_scale);
+            transform: translate(calc(#{$start_position_x} - 6%), 330%) scale($position_scale);
           }
 
           // 第三列
@@ -395,7 +398,7 @@ $typeArea:1440px;
           }
 
           .imgs_9 {
-            transform: translate($start_position_x, 80%) scale($position_scale);
+            transform: translate($start_position_x, 78%) scale($position_scale);
           }
 
           .imgs_10 {
@@ -404,20 +407,20 @@ $typeArea:1440px;
 
           // 第四列
           .imgs_12 {
-            transform: translate(calc(#{$start_position_x} + 130%), $start_position_y) scale($position_scale);
+            transform: translate(calc(#{$start_position_x} + 122%), $start_position_y) scale($position_scale);
           }
 
           .imgs_13 {
-            transform: translate(calc(#{$start_position_x} + 130%), 195%) scale($position_scale);
+            transform: translate(calc(#{$start_position_x} + 122%), 188%) scale($position_scale);
           }
 
           // 第五列
           .imgs_15 {
-            transform: translate(calc(#{$start_position_x} + 206%), $start_position_y) scale($position_scale);
+            transform: translate(calc(#{$start_position_x} + 194%), $start_position_y) scale($position_scale);
           }
 
           .imgs_16 {
-            transform: translate(calc(#{$start_position_x} + 206%), 110%) scale($position_scale);
+            transform: translate(calc(#{$start_position_x} + 194%), 105%) scale($position_scale);
           }
         }
 

@@ -56,12 +56,12 @@
   // 雪碧图end
 
   // 创造无限可能 start
-  $footer_text_x_position : calc(-50% + 32px);
+  $footer_text_x_position : calc(-50% + 37px);
 
   .footer-text {
     white-space: nowrap;
     font-size: 30px;
-    color: #222222;
+    color: rgba(34, 34, 34, 0.6);
     letter-spacing: 68px;
     text-align: center;
     position: fixed;
@@ -122,8 +122,9 @@
       &.active {
         color: #FF7635;
       }
+
       &.unactive {
-        color: rgba(34,34,34,.4);
+        color: rgba(34, 34, 34, .4);
         cursor: default;
       }
     }
