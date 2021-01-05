@@ -144,11 +144,21 @@ $screenWidth:1280px;
 }
 
 @media screen and (max-width: 1366px) {
+  .explain-container {
+    .explain-txt {
+      margin-bottom: 80px;
+    }
+  }
   .explain-footer {
     bottom: 16px;
   }
 }
 @media screen and (max-width: $screenWidth) {
+  .explain-container {
+    .explain-txt {
+      margin-bottom: 50px;
+    }
+  }
   .explain-footer {
     p {
       margin-top: 10px;
