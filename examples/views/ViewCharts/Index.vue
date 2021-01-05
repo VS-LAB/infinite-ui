@@ -441,7 +441,7 @@ export default {
         setTimeout(() => {
           dirction && (_this.classObject = 'chart-box scale-chart-box-height-step1')
           resolve(true)
-        }, 2000)
+        }, 1000)
       })
     },
     page4_animation_play_step4 (dirction) {

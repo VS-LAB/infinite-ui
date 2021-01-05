@@ -127,7 +127,7 @@ $laptopAni-time: 1s;
 
 .laptop{
   transform: scale(1) translate(0);
-  transition: all 1s linear;
+  transition: all 0.5s linear;
   &.laptop-move-left-step1{
     transform: scale(1) translate(-122px, 0);
     // transition: all 1s linear;
@@ -141,7 +141,7 @@ $laptopAni-time: 1s;
   opacity: 0;
   position: absolute;
   left: 50%;
-  transition: all linear 1s;
+  transition: all linear 0.5s;
   &.showphone-step1 {
     opacity: 1;
     left: calc(50% + 540px);
