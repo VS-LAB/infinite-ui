@@ -10,15 +10,17 @@
       <i class="icon-close header-nav-container-inner-close" @click.stop="menuOpen"></i>
       <div class="header-nav-container-inner-bg"
         :class="isOpen ? 'header-nav-container-inner-bg-show' : 'header-nav-container-inner-bg-hide'"></div>
-      <ul class="header-nav-container-inner-list">
-        <li class="header-nav-container-inner-list-li"
-          v-for="(listItem, listIndex) of listTabTitle"
-          :key="listIndex"
-          :class="`${isOpen ? `header-nav-container-inner-list-li-show` : 'header-nav-container-inner-list-li-hide'}
-          ${routerIndex === listIndex ? 'header-nav-container-inner-list-li-active' : ''}`"
-          @click="listItem.click()"
-        >{{listItem.iconText}} {{listItem.text}}</li>
-      </ul>
+      <div class="header-nav-container-inner-list">
+        <ul class="header-nav-container-inner-list-ul">
+          <li class="header-nav-container-inner-list-ul-li"
+            v-for="(listItem, listIndex) of listTabTitle"
+            :key="listIndex"
+            :class="`${isOpen ? `header-nav-container-inner-list-ul-li-show` : 'header-nav-container-inner-list-ul-li-hide'}
+            ${routerIndex === listIndex ? 'header-nav-container-inner-list-ul-li-active' : ''}`"
+            @click="listItem.click()"
+          >{{listItem.iconText}} {{listItem.text}}</li>
+        </ul>
+      </div>
     </div>
     <div class="header-nav-container-logo">
       <img class="header-nav-container-logo-img"
@@ -29,7 +31,7 @@
       <div class="header-nav-container-tab-item"
         v-for="(item, index) of navTabTitle"
         :key="index"
-        :class="`${item.disabled ? 'header-nav-container-tab-item-unactive' : ''} 
+        :class="`${item.disabled ? 'header-nav-container-tab-item-unactive' : 'header-nav-container-tab-item-nomal'} 
         ${$route.path === item.route ? 'header-nav-container-tab-item-active' : ''}`"
         @click="item.click()"
         @mouseenter="mouseover(item, index)" 
@@ -126,7 +128,8 @@ export default {
           iconText: 'Chart',
           click: () => { this.toPath(1, 'Chart') }
         }
-      ]
+      ],
+      scale: 1
     }
   },
   computed: {
@@ -155,10 +158,23 @@ export default {
       } else {
         this.$router.push('/guide/installation')
       }
+    },
+    setAutoFill () {
+      const { clientHeight } = document.documentElement
+      const element = document.querySelector('.header-nav-container-inner-list-ul')
+      const elementTransform = element.style.transform
+      const { height } = element.getBoundingClientRect()
+      const thresholdValue = 0.1 // 防止不够，多缩小一点
+      if ((clientHeight - height) < 100) {
+        const scale = 1 - Math.abs(clientHeight - height) / height - thresholdValue
+        this.scale = scale
+        element.style.transform = elementTransform + `scale(${scale})`
+        element.style.transformOrigin = 'left center'
+      }
     }
   },
   mounted () {
-    
+    this.setAutoFill()
   }
 }
 </script>

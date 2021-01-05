@@ -559,7 +559,6 @@ export default {
       if ((clientHeight - height) < 100) {
         const scale = 1 - Math.abs(clientHeight - height) / height - thresholdValue
         this.scale = scale
-        console.log('this.scale - stand = ', this.scale)
         element.style.transform = elementTransform + `scale(${scale}) translate(-50%,-50%)`
         element.style.transformOrigin = 'left top'
       }

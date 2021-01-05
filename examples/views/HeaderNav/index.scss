@@ -55,6 +55,11 @@
         color: rgba(34,34,34,.4);
         cursor: default;
       }
+      &-nomal {
+        &:hover {
+          color: #FF7635;
+        }
+      }
       &-hover {
         @include flex-alc-jcc();
         position: absolute;
@@ -91,6 +96,9 @@
     font-size: 24px;
     &-out-icon {
       cursor: pointer;
+      &:hover {
+        color: #FF7635;
+      }
     }
   }
   &-mask {
@@ -129,6 +137,10 @@
       font-size: 24px;
       color: #fff;
       z-index: 6;
+      cursor: pointer;
+      &:hover {
+        opacity: 0.8;
+      }
     }
     &-bg {
       position: fixed;
@@ -164,7 +176,6 @@
     }
     &-list {
       @include flex-alc-jcc(flex, flex-start, center, column);
-      box-sizing: border-box;
       position: absolute;
       // top: 50%;
       top: 0%;
@@ -182,32 +193,44 @@
       transform: rotate(-21.8deg);
       // transform-origin: 0 50%;
       transform-origin: 0 0;
-      &-li {
-        width: 100%;
-        margin-bottom: 60px;
-        font-size: 40px;
-        opacity: 0;
-        transform-origin: 0 0;
-        transform: translateX(40px) rotate(21.8deg);
-        cursor: pointer;
-        &:nth-child(1) {
-          transition: all .2s linear 0.1s;
-        }
-        &:nth-child(2) {
-          transition: all .2s linear 0.15s;
-        }
-        &:nth-child(3) {
-          transition: all .2s linear 0.2s;
-        }
-        &:nth-child(4) {
-          transition: all .2s linear 0.25s;
-        }
-        &-show {
-          opacity: 1;
-          transform: rotate(21.8deg);
-        }
-        &-active {
-          color: #ff7c37;
+      &-ul {
+        @include flex-alc-jcc(flex, flex-start, center, column);
+        box-sizing: border-box;
+        width: 90vh;
+        height: 520px;
+        padding-left: 120px;
+        transform-origin: center center;
+        &-li {
+          width: 100%;
+          margin-bottom: 60px;
+          font-size: 40px;
+          opacity: 0;
+          transform-origin: 0 0;
+          transform: translateX(40px) rotate(21.8deg);
+          cursor: pointer;
+          &:nth-child(1) {
+            transition: all .2s linear 0.1s;
+          }
+          &:nth-child(2) {
+            transition: all .2s linear 0.15s;
+          }
+          &:nth-child(3) {
+            transition: all .2s linear 0.2s;
+          }
+          &:nth-child(4) {
+            transition: all .2s linear 0.25s;
+          }
+          &-show {
+            opacity: 1;
+            transform: rotate(21.8deg);
+          }
+          &-active {
+            color: #ff7c37;
+          }
+          &:hover {
+            color: #ff7c37;
+            transition: color 0s linear 0s;
+          }
         }
       }
     }
