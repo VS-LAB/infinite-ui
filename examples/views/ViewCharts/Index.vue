@@ -426,7 +426,7 @@ export default {
         })
         setTimeout(_ => {
           resolve(true)
-        }, 2000)
+        }, 1500)
       })
     },
     page4_animation_play_step3 (dirction) {
