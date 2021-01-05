@@ -145,7 +145,7 @@ export default {
       const { height: explainFooterHeight, bottom } = explainFooter.getBoundingClientRect()
       const explainFooterBottom = clientHeight - bottom
       const thresholdValue = 0.1 // 防止不够，多缩小一点
-      console.log('(clientHeight - height - explainFooterHeight)', (clientHeight - height - explainFooterHeight), (clientHeight - height - explainFooterHeight) < 100);
+      console.log('(clientHeight - height - explainFooterHeight)', (clientHeight - height - explainFooterHeight), (clientHeight - height - explainFooterHeight) < 100)
       if ((clientHeight - height - explainFooterHeight) < 100) {
         // const scale = 1 - Math.abs(clientHeight - height - explainFooterHeight) / height - thresholdValue
         // //  如果此时任然不够
@@ -167,6 +167,11 @@ export default {
             explainFooter.style.bottom = `${RealHeight}px`
           }
         }
+      }
+      // 布局不合理导致的位置遮挡问题
+      else if (element.getBoundingClientRect().bottom > explainFooter.top) {
+        const newBottom = clientHeight - element.getBoundingClientRect().bottom
+        explainFooter.style.bottom = `${newBottom / 2}px`
       }
 
       function getScale (thresholdValue = 0.1) {
