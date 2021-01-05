@@ -146,6 +146,7 @@ export default {
       const explainFooterBottom = clientHeight - bottom
       const thresholdValue = 0.1 // 防止不够，多缩小一点
       console.log('(clientHeight - height - explainFooterHeight)', (clientHeight - height - explainFooterHeight), (clientHeight - height - explainFooterHeight) < 100)
+      // debugger
       if ((clientHeight - height - explainFooterHeight) < 100) {
         // const scale = 1 - Math.abs(clientHeight - height - explainFooterHeight) / height - thresholdValue
         // //  如果此时任然不够
@@ -169,8 +170,8 @@ export default {
         }
       }
       // 布局不合理导致的位置遮挡问题
-      else if (element.getBoundingClientRect().bottom > explainFooter.top) {
-        const newBottom = clientHeight - element.getBoundingClientRect().bottom
+      else if (element.getBoundingClientRect().bottom > explainFooter.getBoundingClientRect().top) {
+        const newBottom = clientHeight - element.getBoundingClientRect().bottom - explainFooterHeight
         explainFooter.style.bottom = `${newBottom / 2}px`
       }
 
