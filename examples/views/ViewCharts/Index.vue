@@ -90,7 +90,7 @@
         </div>
       </div>
       <div class="show-colorful">
-            <h1 class="title font-60">多彩变化</h1>
+            <div class="title font-60">多彩变化</div>
             <p>一键换色，轻松适配不同产品；<br>多彩并不为博取眼球，只为探索体验上的多种可能</p>
             <div class="check-box">
               <div class="checks"
@@ -454,7 +454,7 @@ export default {
         this.handleElementsAnimation(dirction, animationList)
         setTimeout(() => {
           resolve(true)
-        }, 2000)
+        }, 1100)
       })
     },
     handleStep4 (dirction) {
