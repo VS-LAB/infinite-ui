@@ -168,6 +168,11 @@ export default {
           }
         }
       }
+      // 布局不合理导致的位置遮挡问题
+      else if (element.getBoundingClientRect().bottom > explainFooter.top) {
+        const newBottom = clientHeight - element.getBoundingClientRect().bottom
+        explainFooter.style.bottom = `${newBottom / 2}px`
+      }
 
       function getScale (thresholdValue = 0.1) {
         var scale = 1 - Math.abs(clientHeight - height - explainFooterHeight) / height - thresholdValue
