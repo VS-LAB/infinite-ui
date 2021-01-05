@@ -29,7 +29,8 @@
       <div class="header-nav-container-tab-item"
         v-for="(item, index) of navTabTitle"
         :key="index"
-        :class="item.disabled ? 'header-nav-container-tab-item-unactive' : ''"
+        :class="`${item.disabled ? 'header-nav-container-tab-item-unactive' : ''} 
+        ${$route.path === item.route ? 'header-nav-container-tab-item-active' : ''}`"
         @click="item.click()"
         @mouseenter="mouseover(item, index)" 
         @mouseleave="mouseLeave(item, index)"
@@ -81,7 +82,8 @@ export default {
       navTabTitle: [
         {
           text: '首页',
-          click: () => { this.toPath() }
+          route: '/index',
+          click: () => { this.toPath(1, 'Home') }
         },
         {
           text: '组件',
