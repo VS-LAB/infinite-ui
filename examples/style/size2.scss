@@ -1,11 +1,21 @@
 $size: scale(0.8);
 
+html {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
 // 在不影响其他transform 效果情况下 最好外层嵌套div
-.size-X2{
-  /deep/ .infinite-standard_content-size2{
+.size-X2 {
+  /deep/ .infinite-standard_content-size2 {
     transform: $size;
   }
-  /deep/ .top-wrapper{
+
+  /deep/ .top-wrapper {
     transform: $size;
   }
 }

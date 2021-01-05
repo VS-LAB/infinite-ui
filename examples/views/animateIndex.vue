@@ -268,3 +268,13 @@ export default {
 <style lang="scss" scoped>
 @import "@/style/size2.scss";
 </style>
+<style>
+html {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+</style>
