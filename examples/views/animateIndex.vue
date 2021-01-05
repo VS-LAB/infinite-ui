@@ -4,6 +4,7 @@
     <HeaderNav :show-header-nav="showHeaderNav"
                :close-header-inner="closeHeaderInner"
                :router-index="routerIndex"
+               :is-transition="isTransition"
                @goAnimationStep="goAnimationStep"></HeaderNav>
     <component ref="componnet"
                :style="{zIndex:100-index, position:'fixed',width:'100vw',height:'100vh'}"
@@ -40,12 +41,13 @@ export default {
   },
   data () {
     return {
-      animesFun: [],
-      stepFun: [],
-      animeIndex: 0,
-      completeAnimation: false,
+      animesFun: [],//动画方法集合
+      stepFun: [],//初始化动画方法集合
+      animeIndex: 0,//
+      completeAnimation: false,//动画是否完成
       showHeaderNav: false, // 是否展示顶部nav
-      closeHeaderInner: false,
+      isTransition: false,//是否需要顶部动画
+      closeHeaderInner: false,//
       routerIndex: 0,
       sizeX2: false,
       isStopWheel: false,//是否阻止鼠标滚轮
@@ -194,7 +196,17 @@ export default {
       }
     },
     async next (step = 0, executionType) {
-      this.showHeaderNav = false
+      // 当执行第一个动画时，顶部导航默认停留
+      if (this.animeIndex === 1) {
+        setTimeout(_ => {
+          this.showHeaderNav = true
+          setTimeout(() => {
+            this.isTransition = true
+          }, 200)
+        }, 720)
+      } else {
+        this.showHeaderNav = false
+      }
       this.completeAnimation = false
       const currAnimate = this.animesFun[this.animeIndex]
       const animateName = currAnimate.name

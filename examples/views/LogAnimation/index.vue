@@ -6,17 +6,13 @@
     <!-- 雪碧图 -->
     <div ref="animeLogContainer"
          :class="{
-          'logo_init_position':logoInitPosition,
-          'logo_move_hidden':logoMoveHidden,
+          
           'logo_init_size':this.logoAnimeCompile
           }"
          class="anime_log_container">
       <img class="anime_log_container-drawing"
            v-if="!this.logoAnimeCompile"
            :src="require(`@/assets/cube/logo (${this.logoCount}).png`)" />
-      <img v-show="this.logoAnimeCompile"
-           class="anime_log_container-drawing replace_logo"
-           :src="this.logoUrl" />
     </div>
     <!-- 创造无限可能 -->
     <div class="footer-text"
@@ -26,17 +22,31 @@
     <!-- menu -->
     <div class="header-model"
          :class="{
-           'header-model-anime_start':headerModelAnime
-         }"
-         v-show="moveWhiteBackgroundAnime">
-      <div class="header-menu"
-           :class="{
+           'logo_move_hidden':logoMoveHidden,
+           'header-model-anime_start':headerModelAnime,
+      'header-model-init_position':!moveWhiteBackgroundAnime,
+         }">
+      <div class="replace_logo">
+        <img v-show="this.logoAnimeCompile"
+             class="anime_log_container-drawing"
+             :class="{
+               'logo_init_position':!logoInitPosition,
+             }"
+             :src="this.logoUrl" />
+      </div>
+      <div class="header-center">
+        <div class="header-menu"
+             :class="{
               'active':$route.path === menu.route,
               'unactive': menu.disabled
            }"
-           v-for="menu in menuData"
-           :key="menu.label"
-           @click="menuClick(menu)">{{menu.label}}</div>
+             v-for="menu in menuData"
+             :key="menu.label">{{menu.label}}</div>
+      </div>
+      <div class="header-nav-container-menu">
+        <i class="icon-nav header-nav-container-menu-out-icon"></i>
+      </div>
+
     </div>
     <!-- 移动白色背景 -->
     <div class="move-white-background"
@@ -95,11 +105,6 @@ export default {
     }
   },
   methods: {
-    // 菜单点击
-    menuClick (menu) {
-      if (!menu.route || menu.route === this.$route.path) return
-      this.$router.push(menu.route)
-    },
     // 立方体动画
     page0_animeStep1 () {
       return new Promise((resolve, reject) => {

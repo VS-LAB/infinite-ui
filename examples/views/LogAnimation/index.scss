@@ -1,3 +1,14 @@
+@mixin flex-alc-jcc($flex: flex, $alc: center, $jcc: center, $fdr: row) {
+  display: $flex;
+  flex-direction: $fdr;
+  align-items: $alc;
+  justify-content: $jcc;
+}
+
+@mixin flex-width($width: 1) {
+  flex: $width
+}
+
 // 画布
 .anime_container {
   height: 100%;
@@ -14,7 +25,7 @@
     z-index: 1;
     left: 50%;
     top: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, calc(-50% - 60px));
     transition: all 0.9s;
 
     &-drawing {
@@ -32,18 +43,14 @@
     }
   }
 
-  // 雪碧图移动至左上角
-  .logo_init_position {
-    transform: translate(-64%, calc(-50% * 0.43)) scale(0.32);
-    left: 20%;
-    top: 0;
-  }
+  // // 雪碧图移动至左上角
+  // .logo_init_position {
+  //   transform: translate(-58.4%, calc(-50% * 0.43)) scale(0.328);
+  //   left: 20%;
+  //   top: 0;
+  // }
 
-  // 雪碧图移动至隐藏
-  .logo_move_hidden {
-    transition: all 0.3s;
-    transform: translate(-64%, -100%) scale(0.32);
-  }
+
 
   // 倒动画
   &.reversal {
@@ -68,20 +75,20 @@
     z-index: 2;
     left: 50%;
     top: 50%;
-    transform: translate($footer_text_x_position, calc(-50% + 160px));
+    transform: translate($footer_text_x_position, calc(-50% + 100px));
     opacity: 0;
     transition: all 0.4s;
   }
 
   // 创造无限可能动画开始n
   .footer-text-anime_start {
-    transform: translate($footer_text_x_position, calc(-50% + 120px));
+    transform: translate($footer_text_x_position, calc(-50% + 60px));
     opacity: 1;
   }
 
   // 创造无限可能动画终点
   .footer-text-anime_end {
-    transform: translate($footer_text_x_position, calc(-50% + 80px));
+    transform: translate($footer_text_x_position, calc(-50% + 20px));
     opacity: 0;
   }
 
@@ -91,7 +98,6 @@
   .move-white-background {
     height: 100%;
     background: #fff;
-    box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.1);
     transition: all 1.2s cubic-bezier(0.17, 0.08, 0.39, 0.97);
   }
 
@@ -104,6 +110,7 @@
   // 菜單menu start
   .header-model {
     display: flex;
+    width: 100%;
     height: 80px;
     line-height: 80px;
     position: fixed;
@@ -114,26 +121,103 @@
     color: #222222;
     transition: all 0.4s;
 
-    .header-menu {
-      font-size: 16px;
-      cursor: pointer;
-      padding: 0 30px;
+    >div {
+      flex: 1;
+    }
 
-      &.active {
-        color: #FF7635;
+    .replace_logo {
+      position: relative;
+
+      img {
+        position: absolute;
+        width: 180px;
+        height: calc(180px * 280 / 1100);
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        transition: all 0.8s;
       }
 
-      &.unactive {
-        color: rgba(34, 34, 34, .4);
-        cursor: default;
+      .logo_init_position {
+        width: 550px;
+        height: 140px;
+        left: 0;
+        top: 0;
+        transform: translate(calc(50vw - 50%), calc(50vh - 50% - 60px));
       }
+    }
+
+    .header-center {
+      display: flex;
+      white-space: nowrap;
+      justify-content: center;
+
+      .header-menu {
+        font-size: 16px;
+        cursor: pointer;
+        width: 90px;
+        height: 80px;
+        text-align: center;
+
+        &.active {
+          color: #FF7635;
+        }
+
+        &.unactive {
+          color: rgba(34, 34, 34, .4);
+          cursor: default;
+        }
+      }
+    }
+
+    &-anime_start {
+      transform: translate(-50%, -100%);
+    }
+
+  }
+
+
+
+  .header-model-init_position {
+    // .replace_logo {
+    //   img {
+    //     width: 550px;
+    //     height: 140px;
+    //     left: 0;
+    //     top: 0;
+    //     transform: translate(calc(50vw - 50%), calc(50vh - 50%));
+    //   }
+    // }
+
+    .header-center,
+    .header-nav-container-menu {
+      opacity: 0;
     }
   }
 
-  .header-model-anime_start {
+
+
+  // 雪碧图移动至隐藏
+  .logo_move_hidden {
+    transition: all 0.3s;
     transform: translate(-50%, -100%);
   }
 
   // 菜單menu end
+
+
+  // 汉堡包 start
+  .header-nav-container-menu {
+    @include flex-alc-jcc();
+    @include flex-width(1);
+    height: 100%;
+    font-size: 24px;
+
+    &-out-icon {
+      cursor: pointer;
+    }
+  }
+
+  // 汉堡包 end
 
 }

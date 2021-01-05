@@ -1,50 +1,50 @@
 <template>
   <div class="header-nav-container"
-    :class="showHeaderNav ? 'header-nav-container-show' : 'header-nav-container-hide'"
-  >
+       :class="[showHeaderNav ? 'header-nav-container-show' : 'header-nav-container-hide',isTransition?'is-transition':'']">
     <div class="header-nav-container-inner"
-      :class="isOpen ? 'header-nav-container-inner-show' : 'header-nav-container-inner-hide'">
-      <div class="header-nav-container-mask" 
-        :class="isOpen ? 'header-nav-container-mask-show' : 'header-nav-container-mask-hide'"
-        @click.stop="menuOpen"></div>
-      <i class="icon-close header-nav-container-inner-close" @click.stop="menuOpen"></i>
+         :class="isOpen ? 'header-nav-container-inner-show' : 'header-nav-container-inner-hide'">
+      <div class="header-nav-container-mask"
+           :class="isOpen ? 'header-nav-container-mask-show' : 'header-nav-container-mask-hide'"
+           @click.stop="menuOpen"></div>
+      <i class="icon-close header-nav-container-inner-close"
+         @click.stop="menuOpen"></i>
       <div class="header-nav-container-inner-bg"
-        :class="isOpen ? 'header-nav-container-inner-bg-show' : 'header-nav-container-inner-bg-hide'"></div>
+           :class="isOpen ? 'header-nav-container-inner-bg-show' : 'header-nav-container-inner-bg-hide'"></div>
       <div class="header-nav-container-inner-list">
         <ul class="header-nav-container-inner-list-ul">
           <li class="header-nav-container-inner-list-ul-li"
-            v-for="(listItem, listIndex) of listTabTitle"
-            :key="listIndex"
-            :class="`${isOpen ? `header-nav-container-inner-list-ul-li-show` : 'header-nav-container-inner-list-ul-li-hide'}
+              v-for="(listItem, listIndex) of listTabTitle"
+              :key="listIndex"
+              :class="`${isOpen ? `header-nav-container-inner-list-ul-li-show` : 'header-nav-container-inner-list-ul-li-hide'}
             ${routerIndex === listIndex ? 'header-nav-container-inner-list-ul-li-active' : ''}`"
-            @click="listItem.click()"
-          >{{listItem.iconText}} {{listItem.text}}</li>
+              @click="listItem.click()">{{listItem.iconText}} {{listItem.text}}</li>
         </ul>
       </div>
     </div>
     <div class="header-nav-container-logo">
       <img class="header-nav-container-logo-img"
-        src="@/assets/logo.png"
-        alt="" />
+           src="@/assets/logo.png"
+           alt="" />
     </div>
     <div class="header-nav-container-tab">
       <div class="header-nav-container-tab-item"
-        v-for="(item, index) of navTabTitle"
-        :key="index"
-        :class="`${item.disabled ? 'header-nav-container-tab-item-unactive' : 'header-nav-container-tab-item-nomal'} 
+           v-for="(item, index) of navTabTitle"
+           :key="index"
+           :class="`${item.disabled ? 'header-nav-container-tab-item-unactive' : 'header-nav-container-tab-item-nomal'} 
         ${$route.path === item.route ? 'header-nav-container-tab-item-active' : ''}`"
-        @click="item.click()"
-        @mouseenter="mouseover(item, index)" 
-        @mouseleave="mouseLeave(item, index)"
-      >
+           @click="item.click()"
+           @mouseenter="mouseover(item, index)"
+           @mouseleave="mouseLeave(item, index)">
         {{item.text}}
-        <div class="header-nav-container-tab-item-hover" v-if="tabActiveIndex === index + 1">
+        <div class="header-nav-container-tab-item-hover"
+             v-if="tabActiveIndex === index + 1">
           <span>敬请期待</span>
         </div>
       </div>
     </div>
     <div class="header-nav-container-menu">
-      <i class="icon-nav header-nav-container-menu-out-icon" @click.stop="menuOpen"></i>
+      <i class="icon-nav header-nav-container-menu-out-icon"
+         @click.stop="menuOpen"></i>
     </div>
   </div>
 </template>
@@ -65,6 +65,10 @@ export default {
     routerIndex: {
       type: Number,
       default: 0
+    },
+    isTransition: {
+      type: Boolean,
+      default: false
     }
   },
   watch: {
@@ -133,7 +137,7 @@ export default {
     }
   },
   computed: {
-    
+
   },
   methods: {
     // 鼠标进入
