@@ -514,6 +514,7 @@ export default {
   },
   mounted () {
     this.setAutoFill()
+    EventBus.$emit('page2_setAutoFill_cale', this.scale)
     EventBus.$on('page2_goEndTop', (reversal) => {
       this.page3_showAniStep1(reversal)
     })
