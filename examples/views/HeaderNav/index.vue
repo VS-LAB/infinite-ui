@@ -169,16 +169,21 @@ export default {
       const elementTransform = element.style.transform
       const { height } = element.getBoundingClientRect()
       const thresholdValue = 0.1 // 防止不够，多缩小一点
+      console.log('clientHeight', clientHeight, height)
+      console.log('clientHeight - height', clientHeight - height)
       if ((clientHeight - height) < 100) {
         const scale = 1 - Math.abs(clientHeight - height) / height - thresholdValue
         this.scale = scale
         element.style.transform = elementTransform + `scale(${scale})`
         element.style.transformOrigin = 'left center'
       }
+      console.log('this.scale ', this.scale)
     }
   },
   mounted () {
-    this.setAutoFill()
+    setTimeout(() => {
+      this.setAutoFill()
+    }, 500)
   }
 }
 </script>
