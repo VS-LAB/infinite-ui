@@ -464,7 +464,7 @@ export default {
         setTimeout(_ => {
           // clearInterval(this.intervalResetMask)
           resolve(true)
-        }, 1000)
+        }, 1600)
       })
     },
     page2_step5 (reversal) {
