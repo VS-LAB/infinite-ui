@@ -50,6 +50,7 @@
 </template>
 
 <script>
+import EventBus from '@/EventBus'
 
 export default {
   name: 'HeaderNav',
@@ -85,6 +86,7 @@ export default {
     return {
       isOpen: false, // 下拉蒙层是否打开
       tabActiveIndex: 0, // 气泡提示
+      afterScale: 1,
       navTabTitle: [
         {
           text: '首页',
@@ -181,9 +183,19 @@ export default {
     }
   },
   mounted () {
-    setTimeout(() => {
-      this.setAutoFill()
-    }, 500)
+    // setTimeout(() => {
+    //   this.setAutoFill()
+    // }, 4500)
+    EventBus.$on('page2_setAutoFill_cale', (res) => {
+      this.afterScale = res || 1
+      console.log('res == ', res)
+      console.log('herder-afterScale == ', this.afterScale)
+
+      const element = document.querySelector('.header-nav-container-inner-list-ul')
+      const elementTransform = element.style.transform
+      element.style.transform = elementTransform + `scale(${this.afterScale})`
+      element.style.transformOrigin = 'left center'
+    })
   }
 }
 </script>

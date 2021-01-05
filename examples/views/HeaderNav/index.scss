@@ -230,6 +230,7 @@
         width: 90vh;
         height: 520px;
         padding-left: 120px;
+        padding-top: 60px;
         transform-origin: center center;
 
         &-li {
@@ -237,6 +238,7 @@
           margin-bottom: 60px;
           font-size: 40px;
           opacity: 0;
+          white-space: nowrap;
           transform-origin: 0 0;
           transform: translateX(40px) rotate(21.8deg);
           cursor: pointer;
