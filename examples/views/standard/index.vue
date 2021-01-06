@@ -211,11 +211,11 @@ export default {
             }, 1000)
           })
         } else {
-          document.querySelector('.infinite-standard-card-icon-gruy').style.display = 'none'
           document.querySelector('.imgs_content_9').style.display = 'block'
-          document.querySelector('.infinite-standard-card_img').style.display = 'none'
           this.showTop = !this.showTop
           setTimeout(_ => {
+            document.querySelector('.infinite-standard-card-icon-gruy').style.display = 'none'
+            document.querySelector('.infinite-standard-card_img').style.display = 'none'
             resolve(true)
           }, 1000)
         }
