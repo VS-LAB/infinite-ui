@@ -275,53 +275,57 @@ export default {
         }
       })
     },
-    page1_animeStep4 (reversal) {
+    async page1_animeStep4 (reversal) {
       this.padScrollSwitch = false
       EventBus.$emit('page1_animeStep4', reversal)
       return new Promise((resolve, reject) => {
-        const standardCaedImgEl = document.querySelector('.infinite-standard-card_img')
-        standardCaedImgEl.style.display = 'block'
-        const connectImgElientRect = standardCaedImgEl.getBoundingClientRect()
-        this.animeContinue = true
-        const imgEl = this.$refs.imgRef9[1]
-        if (imgEl) {
-          const boundingClientRect = imgEl.getBoundingClientRect()
-          this.recordStartImgConnectStyle = {
-            width: imgEl.offsetWidth + 'px',
-            height: imgEl.offsetHeight + 'px',
-            left: boundingClientRect.left + 'px',
-            top: !reversal ? boundingClientRect.top + 'px' : `calc(${boundingClientRect.top}px + 150vh)`,
-            display: 'block'
+        setTimeout(() => {
+          const standardCaedImgEl = document.querySelector('.infinite-standard-card_img')
+          standardCaedImgEl.style.display = 'block'
+          const connectImgElientRect = standardCaedImgEl.getBoundingClientRect()
+          this.animeContinue = true
+          const imgEl = this.$refs.imgRef9[1]
+          if (imgEl) {
+            const boundingClientRect = imgEl.getBoundingClientRect()
+            this.recordStartImgConnectStyle = {
+              width: imgEl.offsetWidth + 'px',
+              height: imgEl.offsetHeight + 'px',
+              left: boundingClientRect.left + 'px',
+              top: !reversal ? boundingClientRect.top + 'px' : `calc(${boundingClientRect.top}px + 150vh)`,
+              display: 'block'
+            }
+            this.recordEndImgConnectStyle = {
+              width: `${connectImgElientRect.width}px`,
+              height: `${connectImgElientRect.height}px`,
+              top: `${connectImgElientRect.top}px`,
+              left: `${connectImgElientRect.left}px`
+            }
+            document.querySelector('.imgs_content_9').style.display = 'block'
+            standardCaedImgEl.style.display = 'none'
+            this.imgConnectStyle = reversal ? this.recordEndImgConnectStyle : this.recordStartImgConnectStyle
           }
-          this.recordEndImgConnectStyle = {
-            width: `${connectImgElientRect.width}px`,
-            height: `${connectImgElientRect.height}px`,
-            top: `${connectImgElientRect.top}px`,
-            left: `${connectImgElientRect.left}px`
-          }
-          document.querySelector('.imgs_content_9').style.display = 'block'
-          standardCaedImgEl.style.display = 'none'
-          this.imgConnectStyle = reversal ? this.recordEndImgConnectStyle : this.recordStartImgConnectStyle
-        }
-        this.$nextTick(() => {
-          setTimeout(() => {
-            const imgConnectStyle = reversal ? this.recordStartImgConnectStyle : this.recordEndImgConnectStyle
-            imgConnectStyle.transition = 'all 1s'
-            this.imgConnectStyle = imgConnectStyle
-            this.imgConnectAnime = !reversal
-            this.animeCanvasAnime = !reversal
+          this.$nextTick(() => {
             setTimeout(() => {
-              this.lastAnimeCompile = !reversal
-              this.animeContinue = false
-              if (reversal) {
-                document.querySelector('.imgs_content_9').style.display = 'none'
-                standardCaedImgEl.style.display = 'block'
-                this.padScrollSwitch = true
-              }
-              resolve(true)
-            }, 1000)
-          }, 200)
-        })
+              const imgConnectStyle = reversal ? this.recordStartImgConnectStyle : this.recordEndImgConnectStyle
+              imgConnectStyle.transition = 'all 1s'
+              this.imgConnectStyle = imgConnectStyle
+              this.imgConnectAnime = !reversal
+              this.animeCanvasAnime = !reversal
+              setTimeout(() => {
+                this.lastAnimeCompile = !reversal
+                this.animeContinue = false
+                if (reversal) {
+                  document.querySelector('.imgs_content_9').style.display = 'none'
+                  standardCaedImgEl.style.display = 'block'
+                  this.padScrollSwitch = true
+                }
+                setTimeout(() => {
+                  resolve(true)
+                }, reversal ? 1000 : 0)
+              }, 1000)
+            }, 200)
+          })
+        }, reversal ? 700 : 0)
       })
     },
     page1_step4 (reversal) {
@@ -388,9 +392,9 @@ export default {
         }
         const scrollTopSpace = el.children[0].clientHeight - el.clientHeight
         // 判断是否不可以滚动了，此时需要走上一步或者下一步动画
-        console.log('el.scrollTop ', el.scrollTop);
-        console.log('wheelDistance ', wheelDistance);
-        console.log('scrollTopSpace ', scrollTopSpace);
+        console.log('el.scrollTop ', el.scrollTop)
+        console.log('wheelDistance ', wheelDistance)
+        console.log('scrollTopSpace ', scrollTopSpace)
         if ((el.scrollTop === 0 && wheelDistance > 0) || (scrollTopSpace - el.scrollTop < 1 && wheelDistance < 0) || this.lastAnimeCompile || this.animeContinue) {
           this.padScrollSwitch = false
           EventBus.$emit('isStopWheel', false)
