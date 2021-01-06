@@ -4,6 +4,7 @@
   transition: all 0.5s linear;
   opacity: 0;
   transform: translateY(400px);
+  backface-visibility: hidden;
   &.flow {
     transition: all 1s linear;
     transform: translateY(0px);
@@ -22,6 +23,7 @@
   opacity: 0;
   z-index: 1;
   transition: all 1s;
+  backface-visibility: hidden;
   &.chart-line-small-step2 {
     transform: translateX(0px);
     opacity: 1;
@@ -39,6 +41,7 @@
 // 原始状态 小柱状图动画
 .chart-bar-small-step1{
   transform: translate3d(-400px, 0, 0);
+  backface-visibility: hidden;
   opacity: 0;
   transition: all 1s;
   z-index: 1;
@@ -58,6 +61,7 @@
 // 原始状态
 .chart-radius-small-step1{
   transform: translate3d(400px, 0, 0);
+  backface-visibility: hidden;
   opacity: 0;
   transition: all 1s;
   z-index: 1;
@@ -76,6 +80,7 @@
 
 .chart-line-big-step1{
   transform: translate3d(1000px, 0, 0);
+  backface-visibility: hidden;
   opacity: 0;
   transition: all 1s 0.8s;
   z-index: 1;
@@ -99,6 +104,7 @@
   margin: 0 auto;
   opacity: 1;
   transition: height 1s linear;
+  backface-visibility: hidden;
   &.scale-chart-box-height-step1{
     height: 1px;
   }
@@ -109,6 +115,7 @@ $laptopAni-time: 1s;
 .laptop-main {
   position: relative;
   transform: scale(1.98) translateY(100vh);
+  backface-visibility: hidden;
   transition: all $laptopAni-time linear;
   &.showlaptop-step1{
     transform: scale(1) translateY(0);
@@ -130,6 +137,7 @@ $laptopAni-time: 1s;
 .laptop{
   transform: scale(1) translate(0);
   transition: all 0.5s linear;
+  backface-visibility: hidden;
   &.laptop-move-left-step1{
     transform: scale(1) translate(-122px, 0);
     // transition: all 1s linear;
@@ -144,6 +152,7 @@ $laptopAni-time: 1s;
   position: absolute;
   left: 50%;
   transition: all linear 0.5s;
+  backface-visibility: hidden;
   &.showphone-step1 {
     opacity: 1;
     left: calc(50% + 540px);
@@ -166,7 +175,6 @@ $laptopAni-time: 1s;
   transform: translateY(100vh);
   transition: all linear 1s;
   backface-visibility: hidden;
-  perspective: 1000;
   &.show-colorfull-step1{
     top: 50%;
     transform: translateY(-50%);
@@ -176,6 +184,7 @@ $laptopAni-time: 1s;
 .laptop-container{
   transform: translateY(0);
   transition: all 1s linear;
+  backface-visibility: hidden;
   &.show-colorfullaotop-step1{
     transform: translateY(-33.3%);
     // transition: all 1s linear;
@@ -189,6 +198,7 @@ $laptopAni-time: 1s;
 .view-chart{
   transform: translateY(0);
   transition: all 0.5s linear;
+  backface-visibility: hidden;
   &.leave-step1{
     transform: translateY(-100vh)
   }

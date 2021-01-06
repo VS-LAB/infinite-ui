@@ -321,7 +321,7 @@ export default {
                 }
                 setTimeout(() => {
                   resolve(true)
-                }, reversal ? 1000 : 0)
+                }, !reversal ? 1000 : 0)
               }, 1000)
             }, 200)
           })

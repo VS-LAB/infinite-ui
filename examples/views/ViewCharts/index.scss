@@ -73,6 +73,7 @@
   width:1253px;
   height: 880px;
   transform: translate(-50%,-50%);
+  backface-visibility: hidden;
   transform-origin: left top;
 }
 
@@ -157,6 +158,7 @@ $laptopAni-time: 1s;
 @keyframes laptopAni {
   0% {
     transform: scale(2.98) translateY(1000px);
+    backface-visibility: hidden;
     .desc-item {
       opacity: 0;
     }
@@ -168,6 +170,7 @@ $laptopAni-time: 1s;
   }
   100% {
     transform: scale(1) translateY(0);
+    backface-visibility: hidden;
      .desc-item {
       opacity: 1;
     }
@@ -189,6 +192,7 @@ $laptopAni-time: 1s;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
+  backface-visibility: hidden;
   z-index: -1;
   overflow: hidden;
   border-radius: 36px;

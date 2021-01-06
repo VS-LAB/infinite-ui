@@ -33,14 +33,15 @@ $screenWidth:1280px;
   left: 50%;
   transform: translate(-50%, -50%);
   backface-visibility: hidden;
-  perspective: 1000;
 }
 
 .explain {
   width: 1200px;
   margin: 0 auto;
+  backface-visibility: hidden;
   img:hover {
     animation: scaleDraw 5s ease-in-out infinite;
+    backface-visibility: hidden;
   }
 }
 

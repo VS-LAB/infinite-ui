@@ -211,11 +211,9 @@ export default {
             }, 1000)
           })
         } else {
+          document.querySelector('.infinite-standard-card_img').style.display = 'none'
+          document.querySelector('.infinite-standard-card-icon-gruy').style.display = 'none'
           document.querySelector('.imgs_content_9').style.display = 'block'
-          setTimeout(() => {
-            document.querySelector('.infinite-standard-card-icon-gruy').style.display = 'none'
-            document.querySelector('.infinite-standard-card_img').style.display = 'none'
-          }, 500)
           this.showTop = !this.showTop
           setTimeout(_ => {
             resolve(true)
