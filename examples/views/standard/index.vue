@@ -134,8 +134,8 @@ let hideMaskTimer
 export default {
   data () {
     return {
-      animesFun: [this.page2_goShowTop, this.page2_goShowLine, this.page2_goShowCardMoveToLeft, this.page2_goShowExlamatoryMark, this.page2_goEndTop],
-      stepFun: [this.page2_step1, this.page2_step2, this.page2_step3, this.page2_step4, this.page2_step5],
+      animesFun: [this.page2_goShowLine, this.page2_goShowCardMoveToLeft, this.page2_goShowExlamatoryMark, this.page2_goEndTop],
+      stepFun: [this.page2_step2, this.page2_step3, this.page2_step4, this.page2_step5],
       isShowCode: false,
       row: 0,
       endTop: false,
@@ -212,10 +212,12 @@ export default {
           })
         } else {
           document.querySelector('.imgs_content_9').style.display = 'block'
-          this.showTop = !this.showTop
-          setTimeout(_ => {
+          setTimeout(() => {
             document.querySelector('.infinite-standard-card-icon-gruy').style.display = 'none'
             document.querySelector('.infinite-standard-card_img').style.display = 'none'
+          }, 500)
+          this.showTop = !this.showTop
+          setTimeout(_ => {
             resolve(true)
           }, 1000)
         }
@@ -570,6 +572,17 @@ export default {
     EventBus.$emit('standardScale', this.scale)
     EventBus.$on('page2_setAutoFill_cale', (res) => {
       this.afterScale = res || 1
+    })
+
+    // 监听上一个卡片下来 同时执行top上升
+    EventBus.$on('page1_animeStep4', (res) => {
+      if (res) {
+        this.page2_goShowTop(res)
+      } else {
+        setTimeout(() => {
+          this.page2_goShowTop()
+        }, 1200)
+      }
     })
   },
   beforeDestroy () {
