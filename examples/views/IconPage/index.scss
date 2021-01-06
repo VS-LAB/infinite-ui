@@ -63,10 +63,14 @@ $screenWidth:1280px;
     opacity: 0;
     transform: translateY(13vh);
     transition: all 0.5s cubic-bezier(0.44, 0.01, 1, 1) 0s;
+    backface-visibility: hidden;
+    perspective: 1000;
   }
   .show-icons-introduce {
     opacity: 1;
     transition: all 0.5s cubic-bezier(0.44, 0.01, 1, 1) 0.5s;
+    backface-visibility: hidden;
+    perspective: 1000;
   }
   // 第一个橙色背景上滑动画
   .rotate-in {
@@ -128,6 +132,8 @@ $screenWidth:1280px;
       font-size: 60px;
       font-weight: 400;
       margin: 0;
+      backface-visibility: hidden;
+      perspective: 1000;
     }
     .infinite-icon-page-title-p-top {
       font-size: 20px;
@@ -139,6 +145,8 @@ $screenWidth:1280px;
       font-size: 20px;
       font-weight: 100;
       margin-top: 2px;
+      backface-visibility: hidden;
+      perspective: 1000;
     }
     .infinite-icon-page-window {
       position: relative;
