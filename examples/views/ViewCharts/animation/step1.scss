@@ -8,6 +8,8 @@
     transition: all 1s linear;
     transform: translateY(0px);
     opacity: 1;
+    backface-visibility: hidden;
+    perspective: 1000;
     &.flow-step2{
       transform: translateY(-400px);
     }
@@ -163,6 +165,8 @@ $laptopAni-time: 1s;
 .show-colorful{
   transform: translateY(100vh);
   transition: all linear 1s;
+  backface-visibility: hidden;
+  perspective: 1000;
   &.show-colorfull-step1{
     top: 50%;
     transform: translateY(-50%);

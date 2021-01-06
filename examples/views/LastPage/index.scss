@@ -32,6 +32,8 @@ $screenWidth:1280px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  backface-visibility: hidden;
+  perspective: 1000;
 }
 
 .explain {
@@ -109,7 +111,10 @@ $screenWidth:1280px;
       color: #FF7635;
       border: none;
       font-size: 14px;
+      backface-visibility: hidden;
+      perspective: 1000;
       &-path-active {
+        cursor: pointer;
         &:hover, &:focus {
           color: #FFF;
           border-color: #ffd6c2;
@@ -131,6 +136,8 @@ $screenWidth:1280px;
   position: absolute;
   width: 100%;
   bottom: 57px;
+  backface-visibility: hidden;
+  perspective: 1000;
   img {
     width: 172px;
   }

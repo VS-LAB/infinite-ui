@@ -121,6 +121,8 @@ $screenWidth:1280px;
       // height: 10vw;
       height: 180px;
       margin-bottom: 20px;
+      backface-visibility: hidden;
+      perspective: 1000;
     }
     .infinite-icon-page-title-h3 {
       font-size: 60px;
