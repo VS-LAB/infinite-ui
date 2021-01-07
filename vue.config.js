@@ -8,7 +8,10 @@ const { getExternalsEl } = require('./build/get-externals-elements')
 const isProduction = process.env.NODE_ENV === 'production'
 const vendorPackage = isProduction ? {
   vue: 'Vue',
-  'vue-router': 'VueRouter'
+  'vue-router': 'VueRouter',
+  'highlight.js': 'hljs',
+  'element-ui': 'ELEMENT',
+  '@antv/g2': 'G2'
 } : {}
 const propElExternals = process.env.NODE_ENV === 'lib' ? getExternalsEl() : {}
 module.exports = {

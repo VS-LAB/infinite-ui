@@ -35,12 +35,14 @@ new Vue({
 ```json
 {
   "plugins": [
+    ...,
     [
       "component",
       {
         "libraryName": "infinite-ui",
         "styleLibraryName": "theme-chalk"
-      }
+      },
+      "infinite-ui"
     ]
   ]
 }

@@ -8,19 +8,13 @@ function getFileName (data) {
 }
 // 配置打包排除组件
 const config = {
-  // antv/g2依赖
-  '@antv/g2/lib/core': '@antv/g2/lib/core',
-  '@antv/g2/lib/geometry/line': '@antv/g2/lib/geometry/line',
-  '@antv/g2/lib/geometry/point': '@antv/g2/lib/geometry/point',
-  '@antv/g2/lib/geometry/interval': '@antv/g2/lib/geometry/interval',
-  '@antv/g2/lib/chart/controller/axis': '@antv/g2/lib/chart/controller/axis',
-  '@antv/g2/lib/chart/controller/tooltip': '@antv/g2/lib/chart/controller/tooltip',
-  '@antv/g2/lib/chart/controller/legend': '@antv/g2/lib/chart/controller/legend',
-  '@antv/coord/lib/factory': '@antv/coord/lib/factory',
-  '@antv/g-canvas': '@antv/g-canvas',
+  // antv/g2
+  '@antv/g2': '@antv/g2',
   // 公共依赖
-  'infinite-ui/packages/utils/index': 'infinite-ui/lib/utils/index',
-  'infinite-ui/packages/mixins/chart': 'infinite-ui/lib/mixins/chart'
+  // 'infinite-ui/packages/utils/index': 'infinite-ui/lib/utils/index',
+  // 'infinite-ui/packages/mixins/chart': 'infinite-ui/lib/mixins/chart'
+  'infinite-ui/packages/mixins/chart': 'finite-ui-wz/lib/mixins/chart',
+  'infinite-ui/packages/utils/index': 'finite-ui-wz/lib/utils/index'
 }
 
 elConponentList.forEach(file => {
@@ -29,10 +23,10 @@ elConponentList.forEach(file => {
   }
 })
 
-const getExternalsEl = function (external) {
+const getExternalsEl = function (include) {
   const externalsElUrl = {}
   Object.keys(config).forEach(key => {
-    if ((external && !key.includes(external)) || (!external)) {
+    if (!include || key.includes(include)) {
       externalsElUrl[key] = config[key]
     }
   })
@@ -40,5 +34,6 @@ const getExternalsEl = function (external) {
 }
 module.exports = {
   config,
-  getExternalsEl
+  getExternalsEl,
+  elConponentList
 }

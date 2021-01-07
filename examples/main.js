@@ -10,7 +10,6 @@ import {
   Main,
   Aside
 } from 'element-ui'
-// import 'element-ui/lib/theme-chalk/index.css'
 import './style/index.scss'
 import demoBlock from './components/demo-block'
 import hljs from 'highlight.js'
@@ -20,6 +19,7 @@ import '../packages/theme-chalk/src/index.scss'
 import packages from '../packages'
 // import infiniteUi from '../lib/infinite-ui.umd'
 // import '../lib/theme-chalk/index.css'
+// Vue.use(infiniteUi)
 Vue.use(Col)
   .use(Row)
   .use(Container)
@@ -35,10 +35,7 @@ for (const key in packages) {
   }
 }
 
-// Vue.use(infiniteUi)
-
 Vue.config.productionTip = false
-
 Vue.component('demo-block', demoBlock)
 
 router.afterEach(route => {
