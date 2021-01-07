@@ -125,25 +125,38 @@ describe('InfiniteSelectTags.vue', () => {
     })
 
     const rootCheckboxInput = wrapper.findAll('.infinite-select-group-level-1 .exist-children > .el-checkbox input[type="checkbox"]').at(1)
+
     // 选中根节点
     await rootCheckboxInput.setChecked()
     expect(wrapper.emitted('checkBoxChange')).toBeTruthy()
     const childCheckboxInput = wrapper.findAll('.infinite-select-group-level-2').at(1).findAll('input[type="checkbox"]').at(0)
+
     // 取消子节点
     await childCheckboxInput.setChecked(false)
     expect(wrapper.emitted('checkBoxChange').length).toBe(2)
+
     // 点击全选
     const selectAllInput = wrapper.find('.infinite-select-button input[type="checkbox"]')
     await selectAllInput.setChecked()
     expect(wrapper.emitted('allSelect')).toBeTruthy()
+
+    // 点击确定按钮
+    const sureButton = wrapper.find('.infinite-select-button .infinite-button')
+    sureButton.vm.$emit('click')
+    expect(wrapper.emitted('makeSure')).toBeTruthy()
+
     // 下拉框弹出
     const selectTags = wrapper.find('.el-select')
     await selectTags.trigger('click')
+    // 已弹出，触发一次 visible-change'
     expect(selectTags.emitted('visible-change').length).toBe(1)
+    // 测试blur方法是否可关闭弹窗
     const mockBlur = jest.fn(wrapper.vm.blur)
     mockBlur()
+    // blur方法触发一次
     expect(mockBlur).toBeCalledTimes(1)
     await wrapper.vm.$nextTick()
+    // 弹窗关闭，合计触发两次 visible-change
     expect(selectTags.emitted('visible-change').length).toBe(2)
   })
 
