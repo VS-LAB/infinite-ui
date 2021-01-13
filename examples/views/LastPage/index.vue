@@ -142,7 +142,7 @@ export default {
       const explainFooter = document.querySelector('.explain-footer')
       const elementTransform = element.style.transform
       const { height } = element.getBoundingClientRect()
-      const { height: explainFooterHeight, bottom, top } = explainFooter.getBoundingClientRect()
+      const { height: explainFooterHeight, bottom } = explainFooter.getBoundingClientRect()
       const explainFooterBottom = clientHeight - bottom
       const thresholdValue = 0.1 // 防止不够，多缩小一点
       console.log('(clientHeight - height - explainFooterHeight)', (clientHeight - height - explainFooterHeight), (clientHeight - height - explainFooterHeight) < 100)
