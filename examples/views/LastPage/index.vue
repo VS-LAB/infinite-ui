@@ -168,9 +168,7 @@ export default {
             explainFooter.style.bottom = `${RealHeight}px`
           }
         }
-      }
-      // 布局不合理导致的位置遮挡问题
-      else if (element.getBoundingClientRect().bottom > explainFooter.getBoundingClientRect().top) {
+      } else if (element.getBoundingClientRect().bottom > explainFooter.getBoundingClientRect().top) { // 布局不合理导致的位置遮挡问题
         const newBottom = clientHeight - element.getBoundingClientRect().bottom - explainFooterHeight
         explainFooter.style.bottom = `${newBottom / 2}px`
       }

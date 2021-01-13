@@ -41,18 +41,18 @@ export default {
   },
   data () {
     return {
-      animesFun: [],//动画方法集合
-      stepFun: [],//初始化动画方法集合
-      animeIndex: 0,//
-      completeAnimation: false,//动画是否完成
+      animesFun: [], // 动画方法集合
+      stepFun: [], // 初始化动画方法集合
+      animeIndex: 0, //
+      completeAnimation: false, // 动画是否完成
       showHeaderNav: false, // 是否展示顶部nav
-      isTransition: false,//是否需要顶部动画
-      closeHeaderInner: false,//
+      isTransition: false, // 是否需要顶部动画
+      closeHeaderInner: false, //
       routerIndex: 0,
       sizeX2: false,
-      isStopWheel: false,//是否阻止鼠标滚轮
+      isStopWheel: false, // 是否阻止鼠标滚轮
       startToInterrupt: false, // 是否打断滚动发生
-      pageNameArr: ['LogAnimation', 'CardsAnimation', 'Standard', 'IconPage', 'ViewCharts', 'LastPage'],
+      pageNameArr: ['LogAnimation', 'CardsAnimation', 'Standard', 'IconPage', 'ViewCharts', 'LastPage']
       // pageNameArr: ['ScrollContainer', 'CardsAnimation', 'Standard', 'IconPage', 'ViewCharts', 'LastPage']
     }
   },
