@@ -8,7 +8,9 @@ import {
   Container,
   Header,
   Main,
-  Aside
+  Aside,
+  Message,
+  Notification
 } from 'element-ui'
 import './style/index.scss'
 import demoBlock from './components/demo-block'
@@ -26,6 +28,8 @@ Vue.use(Col)
   .use(Header)
   .use(Main)
   .use(Aside)
+Vue.prototype.$message = Message
+Vue.prototype.$notify = Notification
 for (const key in packages) {
   if (packages.hasOwnProperty(key)) {
     const element = packages[key]
