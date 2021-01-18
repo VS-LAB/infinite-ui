@@ -34,7 +34,6 @@ export default {
       type: Array,
       default: () => [
         {
-          id: 'label',
           placeholder: '请输入节点名称',
           vilidateError: '',
           validateFun: value => {
@@ -140,7 +139,7 @@ export default {
         const newData = { ...TreeCtrl.createNode() }
         // 添加动态属性
         this.editInputs.forEach(item => {
-          newData[item.id || 'label'] = ''
+          newData[item.id] = ''
         })
         const newNode = !data ? this.$refs.infiniteTreeRef.root : node
         // 获取子节点
@@ -186,7 +185,7 @@ export default {
         this.editInputs.forEach((item, index) => {
           const editInputMapItem = this.editInputMap[item.id]
           // 初始化label对应到输入框
-          editInputMapItem.value = data[item.id || 'label']
+          editInputMapItem.value = data[item.id]
           // 初始化错误信息
           editInputMapItem.validateError = ''
         })

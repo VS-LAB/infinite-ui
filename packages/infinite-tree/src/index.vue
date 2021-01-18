@@ -24,8 +24,8 @@
             v-if="!data['in-input-type']">
         <slot v-bind="{ node, data }">
           <template v-for="(item,index) in editInputs">
-            <template v-if="index && data[item.id || 'label']">({{data[item.id || 'label']}})</template>
-            <template v-else>{{data[item.id || 'label']}}</template>
+            <template v-if="index && data[item.id || props.label]">({{data[item.id || props.label]}})</template>
+            <template v-else>{{data[item.id || props.label]}}</template>
           </template>
         </slot>
       </span>
