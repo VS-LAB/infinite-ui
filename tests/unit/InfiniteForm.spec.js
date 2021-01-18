@@ -7,19 +7,14 @@ import InfiniteSelectTags from '@/packages/infinite-select-tags/src/index.vue'
 import ElForm from 'element-ui/lib/form.js'
 import ElFormItem from 'element-ui/lib/form-item.js'
 import ElInput from 'element-ui/lib/input.js'
-// import ElSelect from 'element-ui/lib/select.js'
-// import ElOption from 'element-ui/lib/option.js'
 import ElSwitch from 'element-ui/lib/switch.js'
 import ElSlider from 'element-ui/lib/slider.js'
-// import ElRadio from 'element-ui/lib/radio.js'
 import ElDatePicker from 'element-ui/lib/date-picker.js'
 config.stubs['InfiniteFormItem'] = InfiniteFormItem
 config.stubs['ElForm'] = ElForm
 config.stubs['ElFormItem'] = ElFormItem
 config.stubs['InfiniteButton'] = InfiniteButton
 config.stubs['InfiniteButton'] = InfiniteButton
-// config.stubs['ElSelect'] = ElSelect
-// config.stubs['ElOption'] = ElOption
 const validatePass = (_, value, callback) => {
   if (!value) {
     callback(new Error('密码不能为空'))

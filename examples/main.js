@@ -8,9 +8,10 @@ import {
   Container,
   Header,
   Main,
-  Aside
+  Aside,
+  Message,
+  Notification
 } from 'element-ui'
-// import 'element-ui/lib/theme-chalk/index.css'
 import './style/index.scss'
 import demoBlock from './components/demo-block'
 import hljs from 'highlight.js'
@@ -20,12 +21,15 @@ import '../packages/theme-chalk/src/index.scss'
 import packages from '../packages'
 // import infiniteUi from '../lib/infinite-ui.umd'
 // import '../lib/theme-chalk/index.css'
+// Vue.use(infiniteUi)
 Vue.use(Col)
   .use(Row)
   .use(Container)
   .use(Header)
   .use(Main)
   .use(Aside)
+Vue.prototype.$message = Message
+Vue.prototype.$notify = Notification
 for (const key in packages) {
   if (packages.hasOwnProperty(key)) {
     const element = packages[key]
@@ -34,8 +38,6 @@ for (const key in packages) {
     };
   }
 }
-
-// Vue.use(infiniteUi)
 
 Vue.config.productionTip = false
 

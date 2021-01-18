@@ -3,12 +3,15 @@ const resolve = (dir) => {
   return path.join(__dirname, dir)
 }
 const html = require('html-webpack-plugin')
-// const portfinder = require('portfinder')
+const portfinder = require('portfinder')
 const { getExternalsEl } = require('./build/get-externals-elements')
 const isProduction = process.env.NODE_ENV === 'production'
 const vendorPackage = isProduction ? {
   vue: 'Vue',
-  'vue-router': 'VueRouter'
+  'vue-router': 'VueRouter',
+  'highlight.js': 'hljs',
+  'element-ui': 'ELEMENT',
+  '@antv/g2': 'G2'
 } : {}
 const propElExternals = process.env.NODE_ENV === 'lib' ? getExternalsEl() : {}
 module.exports = {
@@ -67,6 +70,40 @@ module.exports = {
       .end()
       .use('./build/md-loader/index.js')
       .loader('./build/md-loader/index.js')
+
+    // config.when(isProduction, config => {
+    //   config.optimization.splitChunks({
+    //     chunks: 'all',
+    //     cacheGroups: {
+    //       elementUI: {
+    //         name: 'chunk-elementUI',
+    //         priority: 40,
+    //         test: /[\\/]node_modules[\\/]_?element-ui(.*)/
+    //       },
+    //       // antv: {
+    //       //   name: 'chunk-antv',
+    //       //   priority: 40,
+    //       //   test: /[\\/]node_modules[\\/]_?@antv(.*)/
+    //       // },
+    //       // antvG2: {
+    //       //   name: 'chunk-antvG2',
+    //       //   priority: 45,
+    //       //   test: /[\\/]node_modules[\\/]_?@antv\/G2(.*)/
+    //       // },
+    //       // 'highlight': {
+    //       //   name: 'chunk-highlight',
+    //       //   priority: 45,
+    //       //   test: /[\\/]node_modules[\\/]_?highlight\.js(.*)/
+    //       // },
+    //       // vendors: {
+    //       //   name: `chunk-vendors`,
+    //       //   test: /[\\/]node_modules[\\/]/,
+    //       //   priority: 15,
+    //       //   chunks: 'initial'
+    //       // }
+    //     }
+    //   })
+    // })
 
     // config
     //   .plugin('webpack-bundle-analyzer')

@@ -1,0 +1,437 @@
+$typeArea:1440px;
+
+.anime-container {
+  user-select: none;
+
+  .img_connect {
+    position: fixed;
+    pointer-events: none;
+    border-radius: 20px;
+    box-shadow: 0px 18px 104px #dfe5f6;
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .infinite-imgs-card-icon-gruy {
+      position: absolute;
+      top: 58px;
+      left: calc(100% - 89px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 34px;
+      color: #909399;
+      border-radius: 50%;
+
+      i {
+        border-radius: 50%;
+      }
+    }
+  }
+
+  .img_connect-anime_start {
+    // width: 650px !important;
+    // height: 450px !important;
+    // left: 50% !important;
+    // top: 50% !important;
+    // margin-top: 130px;
+    // transform: translate(-50%, -50%);
+  }
+
+  // 替代滚动
+  .replace_scroll {
+    position: fixed;
+    z-index: 2;
+    left: -17px;
+    top: 0;
+    width: calc(100% + 17px);
+    height: 100vh;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: auto;
+    opacity: 0;
+    transform: translateX(17px);
+
+    &-placeholder {
+      height: 400vh;
+    }
+  }
+
+  // 画布动画
+  .anime-canvas-anime_start {
+    transform: translateY(-150vh);
+  }
+
+  // 画布
+  .anime-canvas {
+    height: 100%;
+    background: #f3f7fe;
+    overflow: hidden;
+    transition: all 0.8s;
+
+    // 头部文案动画 start
+    .header_text {
+      position: absolute;
+      width: 100%;
+      padding-top: 130px;
+      text-align: center;
+      transition: all 0.8s;
+      z-index: 1;
+
+      h1 {
+        color: #222222;
+        margin: 0 0 32px;
+        font-size: 60px;
+      }
+
+      p {
+        color: #222222;
+        font-size: 20px;
+        line-height: 32px;
+        white-space: pre;
+      }
+    }
+
+    .header_text-anime_start {
+      transform: translateY(-100vh);
+    }
+
+    // 头部文案动画 end
+
+    // 组件视图区域 start
+    .component_view {
+      transition: all 1s;
+      width: 100%;
+      height: 100vh;
+      position: relative;
+      z-index: 1;
+      margin: 0 auto;
+      box-sizing: border-box;
+      text-align: center;
+
+      &-container {
+        width: calc(100vh * 3752 / 2028);
+        min-width: calc(570px * 3752 / 2028);
+        max-width: calc(900px * 3752 / 2028);
+        height: 100vh;
+        min-height: 570px;
+        max-height: 900px;
+        margin: 0 auto;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      &-notebook {
+        width: 4080px;
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        transition: all 1s;
+        transform: translate(-50%, 90vh);
+      }
+
+      .component_view-notebook-anime_start {
+        width: calc(100vh * 3752 / 2028);
+        min-width: calc(570px * 3752 / 2028);
+        max-width: calc(900px * 3752 / 2028);
+        height: 100vh;
+        min-height: 570px;
+        max-height: 900px;
+        transform: translate(-50%, -50%);
+      }
+
+      &-imgs_padding {
+        padding: 3.4% 15.3% 7.5%;
+        box-sizing: border-box;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 2;
+      }
+
+      &-imgs-linear_gradient {
+        height: 100%;
+        position: relative;
+
+        &::before {
+          content: "";
+          width: 100%;
+          height: 24%;
+          display: block;
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          transition: all 0.8s;
+          opacity: 0;
+          background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff);
+          z-index: 1;
+        }
+      }
+
+      // 图片集合动画完成后
+      .imgs_animed {
+        &::before {
+          opacity: 1;
+        }
+
+        .imgs_container-table {
+          &-tr {
+            &:nth-child(2) {
+              .imgs_container-table-tr-td {
+                img {
+                  opacity: 1;
+                  transform: translateY(0);
+                }
+              }
+            }
+
+            &:nth-child(n + 3) {
+              opacity: 1;
+            }
+
+            &-td {
+              img {
+                transition: inherit;
+              }
+            }
+          }
+        }
+      }
+
+      &-imgs_container {
+        height: 100%;
+        scrollbar-width: none;
+
+        /* firefox */
+        -ms-overflow-style: none;
+
+        /* IE 10+ */
+        &::-webkit-scrollbar {
+          display: none;
+        }
+
+        .imgs_container-table {
+          width: 100%;
+          padding-top: 1%;
+
+          &-tr {
+            display: flex;
+            padding: 0 1%;
+            transition: all 0.8s;
+
+            &:nth-child(7) {
+              transition: all 0.3s;
+              padding-bottom: 20px;
+            }
+
+            &:nth-child(2) {
+              .imgs_container-table-tr-td {
+                img {
+                  opacity: 0;
+                  transform: translateY(200px);
+                }
+
+                &:nth-child(1) {
+                  img {
+                    transition: all 0.3s cubic-bezier(0.07, 0.7, 0.63, 0.66);
+                  }
+                }
+
+                &:nth-child(2) {
+                  img {
+                    transition: all 0.3s cubic-bezier(0.26, 0.54, 0.46, 1.01);
+                  }
+
+                }
+
+                &:nth-child(3) {
+                  img {
+                    transition: all 0.3s cubic-bezier(0.51, 0.27, 0.46, 1.01);
+                  }
+
+                }
+
+              }
+            }
+
+            &:nth-child(n + 3) {
+              transition: none;
+              opacity: 0;
+            }
+
+            &+.imgs_container-table-tr {
+              margin-top: -7px;
+            }
+
+            &.imgs-col_5 {
+              .imgs_container-table-tr-td:nth-child(1) {
+                width: 18.4%;
+              }
+
+              .imgs_container-table-tr-td:nth-child(2) {
+                width: 24.1%;
+              }
+
+              .imgs_container-table-tr-td:nth-child(3) {
+                width: 23.3%;
+              }
+
+              .imgs_container-table-tr-td:nth-child(4) {
+                width: 15.9%;
+              }
+
+              .imgs_container-table-tr-td:nth-child(5) {
+                width: 18.3%;
+              }
+            }
+
+            &.imgs-col_3 {
+              .imgs_container-table-tr-td:nth-child(1) {
+                width: 24.14%;
+              }
+
+              .imgs_container-table-tr-td:nth-child(2) {
+                width: 40.08%;
+              }
+
+              .imgs_container-table-tr-td:nth-child(3) {
+                width: 35.78%;
+              }
+            }
+
+            &-td {
+              padding: 1%;
+              box-sizing: border-box;
+              position: relative;
+              vertical-align: top;
+
+              img {
+                position: relative;
+                width: 100%;
+                transition: all 1s;
+                transform-origin: center top;
+                box-shadow: 6px 6px 24px 0px #dfe5f6;
+                border-radius: 10px;
+
+                +img {
+                  margin-top: 12px;
+                }
+              }
+
+              .imgs_1,
+              .imgs_5,
+              .imgs_16 {
+                transition-duration: 1.2s;
+              }
+
+              .imgs_2,
+              .imgs_6,
+              .imgs_15 {
+                transition-duration: 0.8s;
+              }
+
+              .imgs_7,
+              .imgs_3,
+              .imgs_13 {
+                transition-duration: 0.9s;
+              }
+
+              .imgs_7 {
+                width: 277%;
+              }
+
+              .imgs_18,
+              .imgs_19 {
+                width: 180%;
+              }
+
+              .imgs_23 {
+                width: 52%;
+                left: 24%;
+              }
+
+              .imgs_24 {
+                width: 146%;
+                left: 48%;
+              }
+            }
+          }
+        }
+
+        .table_imgs_position {
+          $start_position_x: 31px;
+          $start_position_y: 10px;
+          $position_scale: 1.9;
+
+          // 第一列
+          .imgs_1 {
+            transform: translate(calc(#{$start_position_x} - 240%), $start_position_y) scale($position_scale);
+          }
+
+          .imgs_5 {
+            transform: translate(calc(#{$start_position_x} - 240%), 152%) scale($position_scale);
+          }
+
+          // 第二列
+          .imgs_2 {
+            transform: translate(calc(#{$start_position_x} - 94%), $start_position_y) scale($position_scale);
+          }
+
+          .imgs_6 {
+            transform: translate(calc(#{$start_position_x} - 94%), 86%) scale($position_scale);
+          }
+
+          .imgs_7 {
+            transform: translate(calc(#{$start_position_x} - 6%), 330%) scale($position_scale);
+          }
+
+          // 第三列
+          .imgs_3 {
+            transform: translate($start_position_x, $start_position_y) scale($position_scale);
+          }
+
+          .imgs_9 {
+            transform: translate($start_position_x, 78%) scale($position_scale);
+          }
+
+          .imgs_10 {
+            transform: translate($start_position_x, 520%) scale($position_scale);
+          }
+
+          // 第四列
+          .imgs_12 {
+            transform: translate(calc(#{$start_position_x} + 122%), $start_position_y) scale($position_scale);
+          }
+
+          .imgs_13 {
+            transform: translate(calc(#{$start_position_x} + 122%), 188%) scale($position_scale);
+          }
+
+          // 第五列
+          .imgs_15 {
+            transform: translate(calc(#{$start_position_x} + 194%), $start_position_y) scale($position_scale);
+          }
+
+          .imgs_16 {
+            transform: translate(calc(#{$start_position_x} + 194%), 105%) scale($position_scale);
+          }
+        }
+
+
+      }
+    }
+
+    // 组件视图区域 end
+  }
+
+  .component_view_position {
+    transform: translateY(320px);
+  }
+}

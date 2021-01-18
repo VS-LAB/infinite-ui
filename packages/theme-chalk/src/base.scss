@@ -1,2 +1,9 @@
 @import './common/reset.scss';
 @import '../../../node_modules/element-ui/packages/theme-chalk/src/icon.scss';
+$infinite-background-color:#f5f7fa;
+
+.el-input.is-disabled {
+  .el-input__inner {
+    background-color: $infinite-background-color;
+  }
+}

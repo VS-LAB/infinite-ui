@@ -1,0 +1,144 @@
+$radiusColor1: #AC7AFF;
+$width: 100 * 2px;
+$radius: 30px;
+$animtion-time: 0.4s;
+
+.loading-radius1 {
+  width: $width;
+  height: $width;
+  position: relative;
+  transform: rotate(-190deg);
+  font-size: 0;
+  &::before{
+    content: "";
+    display: block;
+    position: absolute;
+    width: 1PX;
+    height: $radius / 2;
+    top: 0;
+    left: calc(50% - 1PX);
+    z-index: 100;
+    background: $radiusColor1;
+  }
+  &::after{
+    content: "";
+    display: block;
+    position: absolute;
+    width: 1PX;
+    height: $radius / 2;
+    bottom: 0;
+    left: calc(50% - 1PX);
+    z-index: 100;
+    background: $radiusColor1;
+  }
+}
+
+.loading-radius1 .content {
+  position: absolute;
+  width: $width - $radius;
+  height: $width - $radius;
+  background-color: white;
+  border-radius: 50%;
+  left: $radius/2;
+  top: $radius/2;
+  line-height: $width;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.left,
+.right {
+  width: $width / 2;
+  height: $width;
+  overflow: hidden;
+  position: relative;
+  float: left;
+  background-color: #ECEEF1
+}
+
+.left {
+  border-radius: $width 0 0 $width;
+}
+
+.right {
+  border-radius: 0 $width $width 0;
+  transform: translateX(-1PX);
+}
+
+.left .inner,
+.right .inner {
+  content: "";
+  position: absolute;
+  display: block;
+  width: $width / 2;
+  height: $width;
+  background-color: white;
+  border-radius: $width 0 0 $width;
+  background-color: $radiusColor1;
+}
+
+.left::before,
+.right::before {
+  content: "";
+  position: absolute;
+  display: block;
+  width: $radius / 2;
+  height: $radius / 2;
+  border-radius: 50%;
+  background-color: $radiusColor1;
+  left: -$radius/4;
+}
+
+.left .inner {
+  transform-origin: right center;
+  transition: all 0.8 * $animtion-time linear;
+  transform: rotateZ(180deg);
+  position: relative;
+  &::before{
+    content: "";
+    width: $radius / 2;
+    height: $radius / 2;
+    background: $radiusColor1;
+    position: absolute;
+    border-radius: 50%;
+    display: block;
+    bottom: 0;
+    right: -$radius/4;
+    z-index: 1;
+  }
+  &.rotate-step-1{
+    transform: rotateZ(0);
+  };
+}
+
+.right .inner {
+  content: "";
+  position: absolute;
+  display: block;
+  border-radius: 0 $width $width 0;
+  transform-origin: left center;
+  transition: all linear 0.2*$animtion-time 0.8*$animtion-time;
+  transform: rotateZ(180deg);
+  &::before{
+    display: none;
+    content: "";
+    width: $radius / 2;
+    height: $radius / 2;
+    background: $radiusColor1;
+    position: absolute;
+    top: 0;
+    border-radius: 50%;
+    left: -$radius/4;
+    z-index: 1;
+  };
+  &.show-small-round-edge{
+    &::before{
+      display: block;
+    }
+  };
+  &.rotate-step-1{
+    transform: rotateZ(135deg);
+  };
+}
