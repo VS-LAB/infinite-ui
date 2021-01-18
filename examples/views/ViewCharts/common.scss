@@ -1,0 +1,106 @@
+$fs-22: 0.22rem;
+$dark-font-color: #303133;
+$font-color: #606266;
+$light-font-color: #909399;
+
+
+$bg-dark: #2A2E4A;
+$bg-white: #fff;
+
+.font-16{
+  font-size: 0.16rem;
+};
+
+.font-22{
+  font-size: $fs-22;
+};
+
+.font-36{
+  font-size: 0.36rem;
+};
+
+.font-60 {
+  font-size: 0.60rem;
+};
+
+
+.align-center {
+  text-align: center;
+}
+
+.font-color-normal{
+  color: $font-color
+}
+
+.font-color-light {
+  color:$light-font-color
+}
+
+.font-color-dark{
+  color: $dark-font-color
+}
+
+.bg-white{
+  background-color: $bg-white
+};
+
+.bg-dark{
+  background-color: $bg-dark;
+}
+
+
+.flex{
+  display: flex;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.flex-1{
+  flex:1
+}
+
+.flex-align{
+  align-items: center
+};
+
+.flex-content-center{
+  justify-content: center
+};
+.flex-content-space{
+  justify-content: space-between;
+};
+
+.main-view {
+  width: 100vw;
+  height: 100vh;
+  // max-width: 10.14rem;
+  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  overflow: hidden;
+}
+
+.hide {
+  display: none;
+}
+
+@mixin bottom-border($color: green,$height: 1px, $bottom: -2px) {
+  position: relative;
+  &::after{
+    position: absolute;
+    content: '';
+    display: block;
+    bottom: $bottom;
+    height: $height;
+    width: 100%;
+    padding: 0 1px;
+    background-color: $color;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: $height;
+  }
+}

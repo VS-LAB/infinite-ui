@@ -1,0 +1,1786 @@
+@import "./animation.scss";
+$screenWidth:1280px;
+
+//****通用定义****//
+.flex {
+  display: flex;
+}
+.fdc {
+  flex-direction: column;
+}
+.aic {
+  align-items: center;
+}
+.jcc {
+  justify-content: center;
+}
+.jcsb {
+  justify-content: space-between;
+}
+.jcfs {
+  justify-content: flex-start;
+}
+.jcfe {
+  justify-content: flex-end;
+}
+.fn {
+  flex: none;
+}
+.fww {
+  flex-wrap: wrap;
+}
+
+.infinite-home-animation-icon-page {
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #fff;
+  overflow: hidden;
+  font-family: PingFangSC-Semibold;
+
+  //****非通用定义****//
+  .infinite-icon-page-bg {
+    width: 100%;
+    height: 100%;
+  }
+  .icon-bg-circle {
+    position: absolute;
+    left: -100vw;
+    top: -70vw;
+    margin:150px auto;
+    width:100vw;
+    height:100vw;
+    border-radius: 50%;
+    background: linear-gradient(180deg, #FFB240 0%, #FF8D38 100%);
+  }
+  .circle-animate {
+    animation: circleWave 1.2s cubic-bezier(0.32, 0.04, 0.63, 1.04);
+    animation-fill-mode:forwards;
+  }
+  // 随心图标库文字上滑动画
+  .hide-icons-introduce {
+    opacity: 0;
+    transform: translateY(13vh);
+    transition: all 0.5s cubic-bezier(0.44, 0.01, 1, 1) 0s;
+    backface-visibility: hidden;
+    perspective: 1000;
+  }
+  .show-icons-introduce {
+    opacity: 1;
+    transition: all 0.5s cubic-bezier(0.44, 0.01, 1, 1) 0.5s;
+    backface-visibility: hidden;
+    perspective: 1000;
+  }
+  // 第一个橙色背景上滑动画
+  .rotate-in {
+    animation: rotateIn 0.8s cubic-bezier(0.15, 0.31, 0.82, 0.89);
+    animation-fill-mode:forwards;
+  }
+  .orange-circle {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(180deg, #FFB240 0%, #FF8D38 100%);
+    transition: all .8s;
+  }
+  .hide-orange-circle {
+    top: 100vh;
+    opacity: 0;
+  }
+  .show-orange-circle {
+    top: 0;
+    opacity: 1;
+  }
+  .or-circle {
+    background: linear-gradient(180deg, #FFB240 0%, #FF8D38 100%);
+  }
+  .blue-circle {
+    background: linear-gradient(180deg, #45AAFF 0%, #1890FF 100%);
+  }
+  .black-circle {
+    background: linear-gradient(180deg, #32303F 0%, #201E2B 100%);
+  }
+    
+  .infinite-icon-page-content {
+    position: absolute;
+    margin: auto;
+    width: 806px;
+    height: 798px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transform-origin: left top;
+
+
+    // position: absolute;
+    // top: 50%;
+    // left: 50%;
+    // transform: translate(-50%, -50%);
+    text-align: center;
+    color: #fff;
+    z-index: 8;
+    font-family: PingFangSC-Semibold;
+    .icons-introduce {
+      // height: 10vw;
+      height: 180px;
+      margin-bottom: 20px;
+      backface-visibility: hidden;
+      perspective: 1000;
+    }
+    .infinite-icon-page-title-h3 {
+      font-size: 60px;
+      font-weight: 400;
+      margin: 0;
+      backface-visibility: hidden;
+      perspective: 1000;
+    }
+    .infinite-icon-page-title-p-top {
+      font-size: 20px;
+      font-weight: 100;
+      // margin-top: 1.4vw;
+      margin-top: 32px;
+    }
+    .infinite-icon-page-title-p-bottom {
+      font-size: 20px;
+      font-weight: 100;
+      margin-top: 2px;
+      backface-visibility: hidden;
+      perspective: 1000;
+    }
+    .infinite-icon-page-window {
+      position: relative;
+      margin: 58px auto 0;
+      // width: 42vw;
+      width: 806px;
+      // height: 30vw;
+      height: 556px;
+      .infinite-icon-page-window-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 14px;
+        overflow: hidden;
+        // box-shadow: 0 0 16px 8px rgba(0,0,0,0.1);
+        transform-origin: -128px -43px;
+        // transform: translate(151vw, -28vh) rotateZ(70deg) skewY(158deg) scale(6);
+        transform:translate(257vw, -35vw) rotateZ(62deg) skewY(160deg) scale(6);
+        transition: all 1.2s cubic-bezier(0.89, 0.82, 0.31, 0.15);
+        &.infinite-icon-page-window-icon-list {
+          background: rgba(247,250,252,1);
+        }
+        &.show-rotate-in {
+          transform: translate(0vw, 0vh) rotateZ(0deg) skewY(180deg) scale(1);
+          transition: all 0.9s cubic-bezier(0.15, 0.31, 0.82, 0.89);
+        }
+      }
+      .infinite-icon-page-window-menu {
+        // width: 7.2vw;
+        width: 138px;
+        height: 100%;
+        background: rgba(255,255,255,0);
+        .infinite-icon-page-menu-top {
+          height: 10.5%;
+          margin-top: 29.4%;
+          background: rgba(255, 255, 255, 0.16);
+        }
+        .infinite-icon-page-menu-center {
+          height: 10.5%;
+          margin-top: 14.4%;
+        }
+        .infinite-icon-page-menu-bottom {
+          height: 10.5%;
+          margin-top: 14.4%;
+        }
+        .infinite-icon-page-menu-i {
+          flex: 4;
+          // margin: 0 0.18vw 0 0.48vw;
+          // font-size: 1vw;
+          font-size: 18px;
+          // text-indent: 0.3vw;
+          text-indent: 6px;
+        }
+        p	{
+          flex: 9;
+          text-align: left;
+          // font-size: 0.7vw;
+          font-size: 14px;
+        }
+      }
+      .infinite-icon-page-window-icon-list {
+        height: 100%;
+        // width: 34.8vw;
+        width: 668px;
+        // min-width: 82.9%;
+        .infinite-icon-page-list-main {
+          box-sizing: border-box;
+          height: 100%;
+          // padding: 0.6vw 0.8vw;
+          padding: 12px 16px;
+          .infinite-icon-page-list-main-li {
+            position: relative;
+            width: 24%;
+            height: 23%;
+            border-radius: 6px;
+            background: rgba(255,255,255,0);
+            .infinite-icon-page-li-beat {
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              border-radius: 6px;
+              z-index: 9;
+            }
+            .infinite-icon-page-li-icon {
+              height: 100%;
+              .infinite-icon-page-li-icon-i {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                // width: 1.8vw;
+                // height: 1.8vw;
+                // font-size: 1.76vw;
+                font-size: 26px;
+                // border-radius: 50%;
+                // overflow: hidden;
+                opacity: 0;
+              }
+              .infinite-icon-page-li-icon-text {
+                // margin-top: 1vw;
+                margin-top: 18px;
+                font-size: 12px;
+                opacity: 0;
+              } 
+            }
+          }
+        }
+        &.icon-dislocation-animation {
+          .infinite-icon-page-list-main-li {
+            &:nth-child(1) {
+              & .infinite-icon-page-li-icon {
+                .infinite-icon-page-li-icon-i {
+                  transition: opacity 0.1s linear 1.5s, color 0.1s linear 1.5s;
+                  opacity: 1;
+                  color: rgba(255,118,53,1);
+                  background: #fff;
+                  border-radius: 50%;
+                  font-size: 28px;
+                }
+              }
+            }
+            &:nth-child(13) {
+              & .infinite-icon-page-li-icon {
+                .infinite-icon-page-li-icon-i {
+                  font-size: 28px;
+                }
+              }
+            }
+            &:nth-child(15) {
+              & .infinite-icon-page-li-icon {
+                .infinite-icon-page-li-icon-i {
+                  font-size: 28px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .infinite-icon-page-step {
+      width: 100%;
+      margin-top: 44px;
+      i {
+        display: inline-block;
+        width: 40px;
+        height: 2px;
+        margin-left: 20px;
+        border-radius: 2.5px;
+        background: #fff;
+        opacity: 0.2;
+        &.infinite-icon-page-step-active {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  // 无
+  &.infinite-home-animation-icon-page-step0 {
+    .infinite-icon-page-bg {
+      background-image: linear-gradient(180deg, #FFB240 0%, #FF8D38 100%); // 橙
+    }
+    .infinite-icon-page-content {
+      .infinite-icon-page-window {
+        .infinite-icon-page-window-bg {
+          transition: all 0.9s cubic-bezier(0.15, 0.31, 0.82, 0.89), box-shadow 0s linear;
+          &.show-rotate-in {
+            box-shadow: 0 14px 50px 0px rgba(178,79,25,0.7);
+            // transform: translate(0vw, 0vh) rotateZ(0deg) skewY(180deg) scale(1);
+            transition: all 0.9s cubic-bezier(0.15, 0.31, 0.82, 0.89), box-shadow 0s linear 0.9s;
+          }
+          .infinite-icon-page-window-menu {
+            background: rgba(255,141,56,1);
+            .infinite-icon-page-menu-top {
+              background: rgba(255,255,255,0.16);
+            }
+          }
+          .infinite-icon-page-window-icon-list {
+            background: rgba(247,250,252,1);
+          }
+        }
+      }
+    }
+  }
+  
+  // 无 => 橙
+  &.infinite-home-animation-icon-page-step1 {
+    .infinite-icon-page-bg {
+      background-image: linear-gradient(180deg, #FFB240 0%, #FF8D38 100%); // 橙
+    }
+    .infinite-icon-page-content {
+      .infinite-icon-page-window {
+        .infinite-icon-page-window-bg {
+          box-shadow: 0 14px 50px 0px rgba(178,79,25,0.7);
+          .infinite-icon-page-window-menu {
+            // animation: sectionOfMenuTransparency1 1s linear 0s;
+            background: rgba(255,141,56,1);
+            .infinite-icon-page-menu-top {
+              background: rgba(255,255,255,0.16);
+            }
+          }
+          .infinite-icon-page-window-icon-list {
+            background: rgba(247,250,252,1);
+          }
+        }
+        .infinite-icon-page-window-icon-list {
+          .infinite-icon-page-list-main {
+            .infinite-icon-page-list-main-li {
+              &:nth-child(1) {
+                animation: labelOfLi1 1.5s linear .2s;
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear 0s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .15s;
+                  }
+                }
+              }
+              &:nth-child(2) {
+                animation: labelOfLi1 1.5s linear .35s;
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .15s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat1 1.5s linear .3s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .3s;
+                  }
+                }
+              }
+              &:nth-child(5) {
+                animation: labelOfLi1 1.5s linear .35s;
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .15s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat1 1.5s linear .3s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .3s;
+                  }
+                }
+              }
+              &:nth-child(3) {
+                animation: labelOfLi1 1.5s linear .5s;
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .3s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat1 1.5s linear .45s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .45s;
+                  }
+                }
+              }
+              &:nth-child(6) {
+                animation: labelOfLi1 1.5s linear .5s;
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .3s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat1 1.5s linear .45s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .45s;
+                  }
+                }
+              }
+              &:nth-child(9) {
+                animation: labelOfLi1 1.5s linear .5s;
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .3s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat1 1.5s linear .45s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .45s;
+                  }
+                }
+              }
+              &:nth-child(4) {
+                animation: labelOfLi1 1.5s linear .65s;
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .45s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat1 1.5s linear .6s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .6s;
+                  }
+                }
+              }
+              &:nth-child(7) {
+                animation: labelOfLi1 1.5s linear .65s;
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .45s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat1 1.5s linear .6s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .6s;
+                  }
+                }
+              }
+              &:nth-child(10) {
+                animation: labelOfLi1 1.5s linear .65s;
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .45s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat1 1.5s linear .6s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .6s;
+                  }
+                }
+              }
+              &:nth-child(13) {
+                animation: labelOfLi1 1.5s linear .65s;
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .45s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat1 1.5s linear .6s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .6s;
+                  }
+                }
+              }
+              &:nth-child(8) {
+                animation: labelOfLi1 1.5s linear .8s;
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .6s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat1 1.5s linear .75s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .75s;
+                  }
+                }
+              }
+              &:nth-child(11) {
+                animation: labelOfLi1 1.5s linear .8s;
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .6s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat1 1.5s linear .75s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .75s;
+                  }
+                }
+              }
+              &:nth-child(14) {
+                animation: labelOfLi1 1.5s linear .8s;
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .6s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat1 1.5s linear .75s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .75s;
+                  }
+                }
+              }
+              &:nth-child(12) {
+                animation: labelOfLi1 1.5s linear .95s;
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .75s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat1 1.5s linear .9s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .9s;
+                  }
+                }
+              }
+              &:nth-child(15) {
+                animation: labelOfLi1 1.5s linear .95s;
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .75s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat1 1.5s linear .9s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .9s;
+                  }
+                }
+              }
+              &:nth-child(16) {
+                animation: labelOfLi1 1.5s linear 1.1s;
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .9s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat1 1.5s linear 1.05s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear 1.05s;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // 橙
+  &.infinite-home-animation-icon-page-step2 {
+    .infinite-icon-page-bg {
+      background-image: linear-gradient(180deg, #FFB240 0%, #FF8D38 100%); // 橙
+    }
+    .infinite-icon-page-content {
+      .infinite-icon-page-window {
+        .infinite-icon-page-window-bg {
+          box-shadow: 0 14px 50px 0px rgba(178,79,25,0.7);
+          .infinite-icon-page-window-menu {
+            background: rgba(255,141,56,1);
+            .infinite-icon-page-menu-top {
+              background: rgba(255,255,255,0.16);
+            }
+          }
+          .infinite-icon-page-window-icon-list {
+            background: rgba(247,250,252,1);
+          }
+        }
+        .infinite-icon-page-window-icon-list {
+          .infinite-icon-page-list-main {
+            .infinite-icon-page-list-main-li {
+              background: rgba(255,255,255,1);
+              box-shadow: 0 6px 12px 0 #E9E7FB;
+              .infinite-icon-page-li-icon {
+                .infinite-icon-page-li-icon-i {
+                  color: rgba(255,118,53,1);
+                  opacity: 1;
+                }
+                .infinite-icon-page-li-icon-text {
+                  color: rgba(72,89,104,1);
+                  opacity: 1;
+                } 
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // 橙 => 蓝
+  &.infinite-home-animation-icon-page-step3 {
+    .infinite-icon-page-bg {
+      background-image: linear-gradient(180deg, #45AAFF 0%, #1890FF 100%);
+    }
+    .infinite-icon-page-content {
+      .infinite-icon-page-window {
+        .infinite-icon-page-window-bg {
+          // box-shadow: 0 14px 50px 0px rgba(21,95,220,0.1);
+          // transition: box-shadow 0s linear;
+          animation: windowBgShadow3 1.2s forwards;
+          .infinite-icon-page-window-menu {
+            .infinite-icon-page-menu-top {
+              background: rgba(255,255,255,0.16);
+            }
+          }
+          .infinite-icon-page-window-icon-list {
+            animation: sectionOfList 1.5s linear 0s;
+          }
+        }
+        .infinite-icon-page-window-icon-list {
+          .infinite-icon-page-list-main {
+            .infinite-icon-page-list-main-li {
+              background: rgba(255,255,255,1);
+              box-shadow: 0 6px 12px 0 #E9E7FB;
+              .infinite-icon-page-li-icon {
+                .infinite-icon-page-li-icon-i {
+                  color: rgba(255,118,53,1);
+                  opacity: 1;
+                }
+                .infinite-icon-page-li-icon-text {
+                  color: rgba(72,89,104,1);
+                  opacity: 1;
+                } 
+              }
+              &:nth-child(1) {
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear 0s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat3 1.5s linear .15s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .15s;
+                  }
+                }
+              }
+              &:nth-child(2) {
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .15s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat3 1.5s linear .3s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .3s;
+                  }
+                }
+              }
+              &:nth-child(5) {
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .15s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat3 1.5s linear .3s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .3s;
+                  }
+                }
+              }
+              &:nth-child(3) {
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .3s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat3 1.5s linear .45s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .45s;
+                  }
+                }
+              }
+              &:nth-child(6) {
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .3s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat3 1.5s linear .45s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .45s;
+                  }
+                }
+              }
+              &:nth-child(9) {
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .3s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat3 1.5s linear .45s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .45s;
+                  }
+                }
+              }
+              &:nth-child(4) {
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .45s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat3 1.5s linear .6s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .6s;
+                  }
+                }
+              }
+              &:nth-child(7) {
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .45s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat3 1.5s linear .6s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .6s;
+                  }
+                }
+              }
+              &:nth-child(10) {
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .45s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat3 1.5s linear .6s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .6s;
+                  }
+                }
+              }
+              &:nth-child(13) {
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .45s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat3 1.5s linear .6s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .6s;
+                  }
+                }
+              }
+              &:nth-child(8) {
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .6s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat3 1.5s linear .75s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .75s;
+                  }
+                }
+              }
+              &:nth-child(11) {
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .6s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat3 1.5s linear .75s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .75s;
+                  }
+                }
+              }
+              &:nth-child(14) {
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .6s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat3 1.5s linear .75s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .75s;
+                  }
+                }
+              }
+              &:nth-child(12) {
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .75s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat3 1.5s linear .9s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .9s;
+                  }
+                }
+              }
+              &:nth-child(15) {
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .75s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat3 1.5s linear .9s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .9s;
+                  }
+                }
+              }
+              &:nth-child(16) {
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .9s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat3 1.5s linear 1.05s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear 1.05s;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // 蓝
+  &.infinite-home-animation-icon-page-step4 {
+    .infinite-icon-page-bg {
+      background-image: linear-gradient(180deg, #45AAFF 0%, #1890FF 100%);
+    }
+    .infinite-icon-page-content {
+      .infinite-icon-page-window {
+        .infinite-icon-page-window-bg {
+          box-shadow: 0 14px 50px 0px rgba(21,95,220,0.7);
+          // transition: box-shadow 0.2s linear;
+          .infinite-icon-page-window-menu {
+            .infinite-icon-page-menu-top {
+              background: rgba(255,255,255,0.16);
+            }
+          }
+          .infinite-icon-page-window-icon-list {
+            background: rgba(247,250,252,1);
+          }
+        }
+        .infinite-icon-page-window-icon-list {
+          .infinite-icon-page-list-main {
+            .infinite-icon-page-list-main-li {
+              background: rgba(255,255,255,1);
+              box-shadow: 0 6px 12px 0 #E9E7FB;
+              .infinite-icon-page-li-icon {
+                .infinite-icon-page-li-icon-i {
+                  color: rgba(24,144,255,1);
+                  opacity: 1;
+                }
+                .infinite-icon-page-li-icon-text {
+                  color: rgba(72,89,104,1);
+                  opacity: 1;
+                } 
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // 蓝 => 黑
+  &.infinite-home-animation-icon-page-step5 {
+    .infinite-icon-page-bg {
+      background-image: linear-gradient(180deg, #32303F 0%, #201E2B 100%);
+    }
+    .infinite-icon-page-content {
+      .infinite-icon-page-window {
+        .infinite-icon-page-window-bg {
+          // box-shadow: 0 14px 50px 0px rgba(18,17,22,0.1);
+          // transition: box-shadow 0s linear;
+          animation: windowBgShadow5 1.2s forwards;
+          .infinite-icon-page-window-menu {
+            .infinite-icon-page-menu-top {
+              background: rgba(255,255,255,0.16);
+            }
+          }
+          .infinite-icon-page-window-icon-list {
+            animation: sectionOfList 1.5s linear 0s;
+          }
+        } 
+        .infinite-icon-page-window-icon-list {
+          .infinite-icon-page-list-main {
+            .infinite-icon-page-list-main-li {
+              background: rgba(255,255,255,1);
+              box-shadow: 0 6px 12px 0 #E9E7FB;
+              .infinite-icon-page-li-icon {
+                .infinite-icon-page-li-icon-i {
+                  color: rgba(24,144,255,1);
+                  opacity: 1;
+                }
+                .infinite-icon-page-li-icon-text {
+                  color: rgba(72,89,104,1);
+                  opacity: 1;
+                } 
+              }
+              &:nth-child(1) {
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear 0s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat5 1.5s linear .15s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .15s;
+                  }
+                }
+              }
+              &:nth-child(2) {
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .15s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat5 1.5s linear .3s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .3s;
+                  }
+                }
+              }
+              &:nth-child(5) {
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .15s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat5 1.5s linear .3s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .3s;
+                  }
+                }
+              }
+              &:nth-child(3) {
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .3s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat5 1.5s linear .45s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .45s;
+                  }
+                }
+              }
+              &:nth-child(6) {
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .3s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat5 1.5s linear .45s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .45s;
+                  }
+                }
+              }
+              &:nth-child(9) {
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .3s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat5 1.5s linear .45s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .45s;
+                  }
+                }
+              }
+              &:nth-child(4) {
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .45s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat5 1.5s linear .6s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .6s;
+                  }
+                }
+              }
+              &:nth-child(7) {
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .45s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat5 1.5s linear .6s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .6s;
+                  }
+                }
+              }
+              &:nth-child(10) {
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .45s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat5 1.5s linear .6s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .6s;
+                  }
+                }
+              }
+              &:nth-child(13) {
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .45s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat5 1.5s linear .6s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .6s;
+                  }
+                }
+              }
+              &:nth-child(8) {
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .6s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat5 1.5s linear .75s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .75s;
+                  }
+                }
+              }
+              &:nth-child(11) {
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .6s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat5 1.5s linear .75s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .75s;
+                  }
+                }
+              }
+              &:nth-child(14) {
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .6s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat5 1.5s linear .75s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .75s;
+                  }
+                }
+              }
+              &:nth-child(12) {
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .75s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat5 1.5s linear .9s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .9s;
+                  }
+                }
+              }
+              &:nth-child(15) {
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .75s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat5 1.5s linear .9s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .9s;
+                  }
+                }
+              }
+              &:nth-child(16) {
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .9s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat5 1.5s linear 1.05s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear 1.05s;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // 黑
+  &.infinite-home-animation-icon-page-step6 {
+    transition: opacity 1.5s;
+    opacity: 1;
+    .infinite-icon-page-bg {
+      background-image: linear-gradient(180deg, #32303F 0%, #201E2B 100%);
+    }
+    .infinite-icon-page-content {
+      transition: transform 1.5s;
+      // transform: translate(0, 0);
+      transform: translate(-50%, -50%);
+      // transform: translate(-50%, -50%);
+      .infinite-icon-page-window {
+        .infinite-icon-page-window-bg {
+          box-shadow: 0 14px 50px 0px rgba(18,17,22,0.7);
+          // transition: box-shadow 0.2s linear;
+          .infinite-icon-page-window-menu {
+            .infinite-icon-page-menu-top {
+              background: rgba(255,255,255,0.16);
+            }
+          }
+          .infinite-icon-page-window-icon-list {
+            background: rgba(247,250,252,1);
+          }
+        }
+        .infinite-icon-page-window-icon-list {
+          .infinite-icon-page-list-main {
+            .infinite-icon-page-list-main-li {
+              background: rgba(255,255,255,1);
+              box-shadow: 0 6px 12px 0 #E9E7FB;
+              .infinite-icon-page-li-icon {
+                .infinite-icon-page-li-icon-i {
+                  color: rgba(48,49,51,1);
+                  opacity: 1;
+                }
+                .infinite-icon-page-li-icon-text {
+                  color: rgba(72,89,104,1);
+                  opacity: 1;
+                } 
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // 黑 => 无
+  &.infinite-home-animation-icon-page-step7 {
+    transition: opacity 1.5s;
+    opacity: 0;
+    .infinite-icon-page-bg {
+      background-image: linear-gradient(180deg, #32303F 0%, #201E2B 100%);
+    }
+    .infinite-icon-page-content {
+      transition: transform 1.5s;
+      // transform: translate(0, -120vh);
+      transform: translate(-50%, -120vh);
+      .icons-introduce {
+        transform: translateY(-60vh);
+        transition: transform .25s;
+      }
+      .infinite-icon-page-window {
+        .icon-bg-move {
+          animation: hideIconBgMove .5s linear forwards;
+        }
+        .infinite-icon-page-window-bg {
+          box-shadow: 0 14px 50px 0px rgba(18,17,22,0.7);
+          // transition: box-shadow 0.2s linear;
+          .infinite-icon-page-window-menu {
+            .infinite-icon-page-menu-top {
+              background: rgba(255,255,255,0.16);
+            }
+          }
+          .infinite-icon-page-window-icon-list {
+            background: rgba(247,250,252,1);
+          }
+        }
+        .infinite-icon-page-window-icon-list {
+          .infinite-icon-page-list-main {
+            .infinite-icon-page-list-main-li {
+              background: rgba(255,255,255,1);
+              box-shadow: 0 6px 12px 0 #E9E7FB;
+              .infinite-icon-page-li-icon {
+                .infinite-icon-page-li-icon-i {
+                  color: rgba(48,49,51,1);
+                  opacity: 1;
+                }
+                .infinite-icon-page-li-icon-text {
+                  color: rgba(72,89,104,1);
+                  opacity: 1;
+                } 
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // 黑 => 蓝
+  &.infinite-home-animation-icon-page-step8 {
+    .infinite-icon-page-bg {
+      background-image: linear-gradient(180deg, #45AAFF 0%, #1890FF 100%);
+    }
+    .infinite-icon-page-content {
+      .infinite-icon-page-window {
+        .infinite-icon-page-window-bg {
+          // box-shadow: 0 14px 50px 0px rgba(21,95,220,0.1);
+          // transition: box-shadow 0s linear;
+          animation: windowBgShadow8 1.2s forwards;
+          .infinite-icon-page-window-menu {
+            .infinite-icon-page-menu-top {
+              background: rgba(255,255,255,0.16);
+            }
+          }
+          .infinite-icon-page-window-icon-list {
+            animation: sectionOfList 1.5s linear 0s;
+          }
+        }
+        
+        .infinite-icon-page-window-icon-list {
+          .infinite-icon-page-list-main {
+            .infinite-icon-page-list-main-li {
+              background: rgba(255,255,255,1);
+              box-shadow: 0 6px 12px 0 #E9E7FB;
+              .infinite-icon-page-li-icon {
+                .infinite-icon-page-li-icon-i {
+                  color: rgba(48,49,51,1);
+                  opacity: 1;
+                }
+                .infinite-icon-page-li-icon-text {
+                  color: rgba(72,89,104,1);
+                  opacity: 1;
+                } 
+              }
+              &:nth-child(1) {
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear 0s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat3 1.5s linear .15s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .15s;
+                  }
+                }
+              }
+              &:nth-child(2) {
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .15s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat3 1.5s linear .3s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .3s;
+                  }
+                }
+              }
+              &:nth-child(5) {
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .15s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat3 1.5s linear .3s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .3s;
+                  }
+                }
+              }
+              &:nth-child(3) {
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .3s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat3 1.5s linear .45s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .45s;
+                  }
+                }
+              }
+              &:nth-child(6) {
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .3s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat3 1.5s linear .45s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .45s;
+                  }
+                }
+              }
+              &:nth-child(9) {
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .3s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat3 1.5s linear .45s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .45s;
+                  }
+                }
+              }
+              &:nth-child(4) {
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .45s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat3 1.5s linear .6s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .6s;
+                  }
+                }
+              }
+              &:nth-child(7) {
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .45s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat3 1.5s linear .6s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .6s;
+                  }
+                }
+              }
+              &:nth-child(10) {
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .45s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat3 1.5s linear .6s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .6s;
+                  }
+                }
+              }
+              &:nth-child(13) {
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .45s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat3 1.5s linear .6s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .6s;
+                  }
+                }
+              }
+              &:nth-child(8) {
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .6s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat3 1.5s linear .75s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .75s;
+                  }
+                }
+              }
+              &:nth-child(11) {
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .6s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat3 1.5s linear .75s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .75s;
+                  }
+                }
+              }
+              &:nth-child(14) {
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .6s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat3 1.5s linear .75s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .75s;
+                  }
+                }
+              }
+              &:nth-child(12) {
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .75s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat3 1.5s linear .9s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .9s;
+                  }
+                }
+              }
+              &:nth-child(15) {
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .75s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat3 1.5s linear .9s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .9s;
+                  }
+                }
+              }
+              &:nth-child(16) {
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .9s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat3 1.5s linear 1.05s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear 1.05s;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // 蓝 => 橙
+  &.infinite-home-animation-icon-page-step9 {
+    .infinite-icon-page-bg {
+      background-image: linear-gradient(180deg, #FFB240 0%, #FF8D38 100%); // 橙
+    }
+    .infinite-icon-page-content {
+      .infinite-icon-page-window {
+        .infinite-icon-page-window-bg {
+          // box-shadow: 0 14px 50px 0px rgba(178,79,25,0.1);
+          // transition: box-shadow 0s linear;
+          animation: windowBgShadow9 1.2s forwards;
+          .infinite-icon-page-window-menu {
+            background: rgba(255,141,56,1);
+            .infinite-icon-page-menu-top {
+              background: rgba(255,255,255,0.16);
+            }
+          }
+          .infinite-icon-page-window-icon-list {
+            animation: sectionOfList 1.5s linear 0s;
+          }
+        }
+        .infinite-icon-page-window-icon-list {
+          .infinite-icon-page-list-main {
+            .infinite-icon-page-list-main-li {
+              background: rgba(255,255,255,1);
+              box-shadow: 0 6px 12px 0 #E9E7FB;
+              .infinite-icon-page-li-icon {
+                .infinite-icon-page-li-icon-i {
+                  color: rgba(24,144,255,1);
+                  opacity: 1;
+                }
+                .infinite-icon-page-li-icon-text {
+                  color: rgba(72,89,104,1);
+                  opacity: 1;
+                } 
+              }
+              &:nth-child(1) {
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear 0s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat1 1.5s linear .15s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .15s;
+                  }
+                }
+              }
+              &:nth-child(2) {
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .15s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat1 1.5s linear .3s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .3s;
+                  }
+                }
+              }
+              &:nth-child(5) {
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .15s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat1 1.5s linear .3s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .3s;
+                  }
+                }
+              }
+              &:nth-child(3) {
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .3s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat1 1.5s linear .45s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .45s;
+                  }
+                }
+              }
+              &:nth-child(6) {
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .3s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat1 1.5s linear .45s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .45s;
+                  }
+                }
+              }
+              &:nth-child(9) {
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .3s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat1 1.5s linear .45s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .45s;
+                  }
+                }
+              }
+              &:nth-child(4) {
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .45s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat1 1.5s linear .6s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .6s;
+                  }
+                }
+              }
+              &:nth-child(7) {
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .45s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat1 1.5s linear .6s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .6s;
+                  }
+                }
+              }
+              &:nth-child(10) {
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .45s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat1 1.5s linear .6s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .6s;
+                  }
+                }
+              }
+              &:nth-child(13) {
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .45s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat1 1.5s linear .6s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .6s;
+                  }
+                }
+              }
+              &:nth-child(8) {
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .6s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat1 1.5s linear .75s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .75s;
+                  }
+                }
+              }
+              &:nth-child(11) {
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .6s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat1 1.5s linear .75s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .75s;
+                  }
+                }
+              }
+              &:nth-child(14) {
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .6s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat1 1.5s linear .75s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .75s;
+                  }
+                }
+              }
+              &:nth-child(12) {
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .75s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat1 1.5s linear .9s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .9s;
+                  }
+                }
+              }
+              &:nth-child(15) {
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .75s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat1 1.5s linear .9s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear .9s;
+                  }
+                }
+              }
+              &:nth-child(16) {
+                & .infinite-icon-page-li-beat {
+                  animation: labelOfLiBeat .4s linear .9s;
+                }
+                & .infinite-icon-page-li-icon {
+                  .infinite-icon-page-li-icon-i {
+                    animation: labelOfIconBeat1 1.5s linear 1.05s;
+                  }
+                  .infinite-icon-page-li-icon-text {
+                    animation: labelOfTextBeat 1.5s linear 1.05s;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // 刚进来无展示
+  &.infinite-home-animation-icon-page-noShow {
+    .infinite-icon-page-content {
+      .infinite-icon-page-window {
+        box-shadow: 0 0 0 0 rgba(0,0,0,0);
+        .infinite-icon-page-window-bg {
+          .infinite-icon-page-window-icon-list {
+            background: rgba(247,250,252,0);
+          }
+        }
+      }
+    }
+  }
+}

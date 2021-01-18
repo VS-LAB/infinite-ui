@@ -71,17 +71,51 @@ module.exports = {
       .use('./build/md-loader/index.js')
       .loader('./build/md-loader/index.js')
 
-    config
-      .plugin('webpack-bundle-analyzer')
-      .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
-      .tap(options => {
-        options.push({
-          analyzerPort: async () => {
-            await portfinder.getPortPromise()
-          }
-        })
-        return options
-      })
+    // config.when(isProduction, config => {
+    //   config.optimization.splitChunks({
+    //     chunks: 'all',
+    //     cacheGroups: {
+    //       elementUI: {
+    //         name: 'chunk-elementUI',
+    //         priority: 40,
+    //         test: /[\\/]node_modules[\\/]_?element-ui(.*)/
+    //       },
+    //       // antv: {
+    //       //   name: 'chunk-antv',
+    //       //   priority: 40,
+    //       //   test: /[\\/]node_modules[\\/]_?@antv(.*)/
+    //       // },
+    //       // antvG2: {
+    //       //   name: 'chunk-antvG2',
+    //       //   priority: 45,
+    //       //   test: /[\\/]node_modules[\\/]_?@antv\/G2(.*)/
+    //       // },
+    //       // 'highlight': {
+    //       //   name: 'chunk-highlight',
+    //       //   priority: 45,
+    //       //   test: /[\\/]node_modules[\\/]_?highlight\.js(.*)/
+    //       // },
+    //       // vendors: {
+    //       //   name: `chunk-vendors`,
+    //       //   test: /[\\/]node_modules[\\/]/,
+    //       //   priority: 15,
+    //       //   chunks: 'initial'
+    //       // }
+    //     }
+    //   })
+    // })
+
+    // config
+    //   .plugin('webpack-bundle-analyzer')
+    //   .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
+    //   .tap(options => {
+    //     options.push({
+    //       analyzerPort: async () => {
+    //         await portfinder.getPortPromise()
+    //       }
+    //     })
+    //     return options
+    //   })
   },
   devServer: {
     overlay: {

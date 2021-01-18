@@ -40,6 +40,7 @@ for (const key in packages) {
 }
 
 Vue.config.productionTip = false
+
 Vue.component('demo-block', demoBlock)
 
 router.afterEach(route => {

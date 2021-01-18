@@ -71,7 +71,6 @@ export default {
       this.addNotChildrenNodeAttr()
     },
     insertBefore (data, refNode) {
-      console.log(this)
       this.$refs.infiniteTreeRef.insertBefore(data, refNode)
       this.addNotChildrenNodeAttr()
     },

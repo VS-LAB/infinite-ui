@@ -1,0 +1,70 @@
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 600px;
+  }
+}
+@keyframes opacity100 {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes showTop {
+  from {
+    opacity: 0.5;
+    transform: translateY(380px);
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+// 感叹号
+@keyframes showMask {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+    transform: scale(2);
+  }
+}
+@keyframes endTop {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-950px);
+  }
+}
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@keyframes showCode {
+  0% {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+}
+@keyframes codeMask {
+  0% {
+    transform: translateX(0);
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+
+  100% {
+    transform: translateX(367px);
+    background-color: rgba(255, 255, 255, 0);
+  }
+}

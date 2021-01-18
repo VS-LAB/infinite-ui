@@ -1,31 +1,29 @@
 
 let chart = null
 // if (['lib', 'development'].includes(process.env.NODE_ENV)) {
-//   const { Chart, registerEngine, registerGeometry, registerComponentController } = require('@antv/g2/lib/core')
-//   chart = Chart
-//   const Line = require('@antv/g2/lib/geometry/line').default
-//   const Point = require('@antv/g2/lib/geometry/point').default
-//   const Interval = require('@antv/g2/lib/geometry/interval').default
-//   const Axis = require('@antv/g2/lib/chart/controller/axis').default
-//   const Tooltip = require('@antv/g2/lib/chart/controller/tooltip').default
-//   const Legend = require('@antv/g2/lib/chart/controller/legend').default
-//   const Coordinate = require('@antv/coord/lib/factory').default
-//   const G = require('@antv/g-canvas')
-//   // 按需注入
-//   registerEngine('canvas', G)
-//   console.log(Point)
-//   console.log(Interval)
-//   registerGeometry('line', Line)
-//   registerGeometry('point', Point)
-//   registerGeometry('interval', Interval)
+const { Chart, registerEngine, registerGeometry, registerComponentController } = require('@antv/g2/lib/core')
+chart = Chart
+const Line = require('@antv/g2/lib/geometry/line').default
+const Point = require('@antv/g2/lib/geometry/point').default
+const Interval = require('@antv/g2/lib/geometry/interval').default
+const Axis = require('@antv/g2/lib/chart/controller/axis').default
+const Tooltip = require('@antv/g2/lib/chart/controller/tooltip').default
+const Legend = require('@antv/g2/lib/chart/controller/legend').default
+const Coordinate = require('@antv/coord/lib/factory').default
+const G = require('@antv/g-canvas')
+// 按需注入
+registerEngine('canvas', G)
+registerGeometry('line', Line)
+registerGeometry('point', Point)
+registerGeometry('interval', Interval)
 
-//   registerComponentController('axis', Axis)
-//   registerComponentController('tooltip', Tooltip)
-//   registerComponentController('legend', Legend)
-//   registerComponentController('coordinate', Coordinate)
+registerComponentController('axis', Axis)
+registerComponentController('tooltip', Tooltip)
+registerComponentController('legend', Legend)
+registerComponentController('coordinate', Coordinate)
 // } else {
-const G2 = require('@antv/g2')
-chart = G2.Chart
+//   const G2 = require('@antv/g2')
+//   chart = G2.Chart
 // }
 
 export default {
@@ -54,8 +52,6 @@ export default {
       }
       // const dom = document.getElementById(this.id)
       const dom = this.$el
-      // console.log(dom)
-      // console.log(this.$el)
       if (dom && dom.innerHTML) {
         dom.innerHTML = ''
       }

@@ -125,7 +125,6 @@ describe('InfiniteSelectTags.vue', () => {
     })
 
     const rootCheckboxInput = wrapper.findAll('.infinite-select-group-level-1 .exist-children > .el-checkbox input[type="checkbox"]').at(1)
-
     // 选中根节点
     await rootCheckboxInput.setChecked()
     expect(wrapper.emitted('checkBoxChange')).toBeTruthy()
