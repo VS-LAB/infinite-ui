@@ -4,7 +4,8 @@
 @import '../../../node_modules/element-ui/packages/theme-chalk/src/message.scss';
 @import '../../../node_modules/element-ui/packages/theme-chalk/src/notification.scss';
 
-$node-height:30px;
+$in-node-height:30px;
+$in-hover-background-color:#cbe6ff;
 
 .infinite-tree {
   width: 100%;
@@ -17,7 +18,7 @@ $node-height:30px;
   .el-tree-node {
     position: relative;
     padding-left: 16px;
-    min-height: $node-height;
+    min-height: $in-node-height;
 
     &:focus {
       >.el-tree-node__content {
@@ -27,7 +28,7 @@ $node-height:30px;
       >.el-tree-node__content {
         >.custom-tree-node {
           >.custom-tree-node-text {
-            background-color: #cbe6ff;
+            background-color: $in-hover-background-color;
           }
         }
       }
@@ -37,7 +38,7 @@ $node-height:30px;
   // 节点盒子
   .el-tree-node__content {
     height: 100%;
-    min-height: $node-height;
+    min-height: $in-node-height;
     align-items: initial;
 
     .custom-tree-node {
@@ -48,6 +49,8 @@ $node-height:30px;
         margin-top: 6px;
         border-radius: 4px;
         user-select: none;
+
+
       }
     }
 
@@ -64,11 +67,11 @@ $node-height:30px;
 
   // 定制节点
   .custom-tree-node {
-    line-height: $node-height;
+    line-height: $in-node-height;
 
     &:hover {
       .custom-tree-node-text {
-        background-color: #cbe6ff;
+        background-color: $in-hover-background-color;
       }
     }
   }
@@ -233,6 +236,12 @@ $node-height:30px;
       &:hover {
         .custom-tree-node-text {
           background-color: transparent;
+        }
+      }
+
+      .custom-tree-node-text {
+        &.highlight-node {
+          background-color: $in-hover-background-color;
         }
       }
     }

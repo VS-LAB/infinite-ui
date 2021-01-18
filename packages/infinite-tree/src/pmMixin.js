@@ -79,6 +79,17 @@ export default {
       this.$refs.infiniteTreeRef.insertAfter(data, refNode)
       this.addNotChildrenNodeAttr()
     },
+    // 设置高亮节点
+    setHighlightNode (dataKey, status = true) {
+      // 数组高亮方法
+      if (Array.isArray(dataKey)) {
+        dataKey.forEach(key => {
+          this.$set(this.highlightNodeMap, key, status)
+        })
+      } else {
+        this.$set(this.highlightNodeMap, dataKey, status)
+      }
+    },
     // 设置无子节点的dom属性标识
     addNotChildrenNodeAttr () {
       this.$nextTick(() => {

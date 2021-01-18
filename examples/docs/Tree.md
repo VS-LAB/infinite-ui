@@ -438,7 +438,7 @@ Tree 增删改及自定义编辑功能。
       :default-expand-all="true"
     >
     </infinite-tree>
-    <infinite-button @click="confirm">高亮 资源112</infinite-button>
+    <infinite-button @click="setHighlightNode">切换资源112高亮</infinite-button>
   </div>
 </template>
 <script>
@@ -468,13 +468,15 @@ Tree 增删改及自定义编辑功能。
             ],
           },
         ],
+        highlightStatus: true,
       };
     },
     methods: {
-      confirm() {
-        this.$refs.infiniteTreeRef.isInOperation(() => {
-          console.log(this.treeData);
-        });
+      setHighlightNode() {
+        this.$refs.infiniteTreeRef.setHighlightNode(
+          112,
+          (this.highlightStatus = !this.highlightStatus)
+        );
       },
     },
   };
@@ -525,6 +527,7 @@ Tree 增删改及自定义编辑功能。
 | addRootNode | 添加根节点 | —|
 | isInOperation | 当`edit-inputs`设置校验规则后，该方法可以提供校验及成功后的回调 | callback 接受一个回调函数|
 | revocationDel | 当某一个节点删除以后，该方法可以撤销上一次删除 | —|
+| setHighlightNode | 设置需要高亮的节点 | 第一个参数 dataKeys 可以为数组或字符串或数字类型作为需要设置高亮的节点的 node-key，第二个参数则为设置高亮的开关|
 | filter | 对树节点进行筛选操作 | 接收一个任意类型的参数，该参数会在 filter-node-method 中作为第一个参数 |
 | updateKeyChildren | 通过 keys 设置节点子元素，使用此方法必须设置 node-key 属性 | (key, data) 接收两个参数，1. 节点 key 2. 节点数据的数组 |
 | getCheckedNodes | 若节点可被选择（即 `show-checkbox` 为 `true`），则返回目前被选中的节点所组成的数组 | (leafOnly, includeHalfChecked) 接收两个 boolean 类型的参数，1. 是否只是叶子节点，默认值为 `false` 2. 是否包含半选节点，默认值为 `false` |

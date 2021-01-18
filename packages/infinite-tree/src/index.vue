@@ -22,6 +22,9 @@
           slot-scope="{ node, data }">
       <!-- 非编辑状态 -->
       <span class="custom-tree-node-text"
+            :class="{
+              'highlight-node':highlightNodeMap[data[nodeKey]]
+            }"
             v-if="!data['in-input-type']">{{ node.label }}</span>
 
       <!---编辑节点按钮，只在编辑状态下显示-->
@@ -86,11 +89,13 @@ export default {
   },
   data () {
     return {
+      // 垃圾回收器
       dustbin: {
         peerDatas: null,
         data: null,
         index: 0
       },
+      highlightNodeMap: {}, // 高亮keys集合
       editInputMap: [], // 输入框集合
       operationNode: null, // 当前操作节点
       peerOperationNodes: null, // 当前操作节点父节点
@@ -170,8 +175,6 @@ export default {
     this.setCurrentNode = this.$refs.infiniteTreeRef.setCurrentNode
     this.getNode = this.$refs.infiniteTreeRef.getNode
     this.addNotChildrenNodeAttr()
-    console.log(this)
-    console.log(this.$refs.infiniteTreeRef)
   }
 }
 </script>
