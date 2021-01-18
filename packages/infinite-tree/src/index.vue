@@ -4,18 +4,14 @@
            class="infinite-tree "
            :class="{
              'in-tree-line':treeLine,
-             'in-show-checkbox':showCheckbox
+             'in-show-checkbox':$attrs['show-checkbox']
            }"
-           :data="treeData"
-           :props="defaultProps"
-           :draggable="draggable"
-           :showCheckbox="showCheckbox"
-           :default-expand-all="defaultExpandAll"
-           :default-expanded-keys="defaultExpandedKeys"
+           v-bind="$attrs"
+           v-on="$listeners"
+           :props="props"
            :node-key="nodeKey"
            :indent="0"
            :expand-on-click-node="!this.isEditNode"
-           v-on="$listeners"
            @node-expand="nodeExpand">
     <span class="custom-tree-node"
           :class="{'node_editing':data && data[nodeKey] === (operationNode?operationNode.data[nodeKey]:'')}"
@@ -25,7 +21,14 @@
             :class="{
               'highlight-node':highlightNodeMap[data[nodeKey]]
             }"
-            v-if="!data['in-input-type']">{{ node.label }}</span>
+            v-if="!data['in-input-type']">
+        <slot v-bind="{ node, data }">
+          <template v-for="(item,index) in editInputs">
+            <template v-if="index && data[item.id || 'label']">({{data[item.id || 'label']}})</template>
+            <template v-else>{{data[item.id || 'label']}}</template>
+          </template>
+        </slot>
+      </span>
 
       <!---编辑节点按钮，只在编辑状态下显示-->
       <span v-if="isEditNode && !data['in-input-type']"
@@ -47,13 +50,13 @@
              v-for="(item,index) in editInputs"
              v-show="!item.hidden"
              :key="index">
-          <el-input v-model.trim="editInputMap[index].value"
+          <el-input v-model.trim="editInputMap[item.id].value"
                     :disabled="item.disabled"
                     :size="editComponentSize"
                     :placeholder="item.placeholder"
-                    @input="validateInput(item,index)"></el-input>
+                    @input="validateInput(item)"></el-input>
           <div class="group_inputs-vilidate-error">
-            {{item.validateFun && editInputMap[index].validateError}}
+            {{item.validateFun && editInputMap[item.id].validateError}}
           </div>
         </div>
         <!-- 编辑节点操作 -->
@@ -79,6 +82,7 @@ import InfiniteButton from '../../infinite-button/src/index.vue'
 export default {
   name: 'InfiniteTree',
   mixins: [pmMixin],
+  inheritAttrs: false,
   components: {
     ElTree,
     ElInput,
@@ -152,10 +156,10 @@ export default {
   created () {
     if (this.isEditNode) {
       // 初始化编辑时input
-      this.editInputs.forEach((item, index) => {
-        this.$set(this.editInputMap, index, {})
-        this.$set(this.editInputMap[index], 'value', '')
-        this.$set(this.editInputMap[index], 'validateError', '')
+      this.editInputs.forEach(item => {
+        this.$set(this.editInputMap, item.id, {})
+        this.$set(this.editInputMap[item.id], 'value', '')
+        this.$set(this.editInputMap[item.id], 'validateError', '')
       })
     }
   },

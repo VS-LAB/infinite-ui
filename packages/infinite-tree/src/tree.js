@@ -7,7 +7,6 @@ class TreeCtrl {
   createNode (node) {
     return {
       id: `temp${this.tempId++}`,
-      label: '',
       'in-input-type': 'input',
       outer: true
     }

@@ -150,6 +150,7 @@ $in-hover-background-color:#cbe6ff;
       color: $--color-danger;
       font-size: 12px;
       margin-top: 4px;
+      line-height: initial;
     }
 
     +.editing__content-group_inputs {
