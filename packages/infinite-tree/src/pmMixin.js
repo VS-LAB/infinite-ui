@@ -15,6 +15,14 @@ export default {
       type: String,
       default: 'id'
     },
+    draggable: { // 是否开启拖拽节点功能
+      type: Boolean,
+      default: false
+    },
+    isAutoExpandChildren: {// 拖拽时，是否自动展开子集
+      type: Boolean,
+      default: true
+    },
     isEditNode: { // 是否可编辑树节点
       type: Boolean,
       default: false
@@ -41,6 +49,10 @@ export default {
           }
         }
       ]
+    },
+    sameOperationError: {
+      type: String,
+      default: '请先完成当前操作'
     }
   },
   methods: {
@@ -63,7 +75,11 @@ export default {
     // 设置高亮节点
     setHighlightNode (dataKey, status = true) {
       // 数组高亮方法
-      if (Array.isArray(dataKey)) {
+      if (!dataKey) {
+        Object.keys(this.highlightNodeMap).forEach(key => {
+          this.$set(this.highlightNodeMap, key, status)
+        })
+      } else if (Array.isArray(dataKey)) {
         dataKey.forEach(key => {
           this.$set(this.highlightNodeMap, key, status)
         })
@@ -106,7 +122,7 @@ export default {
     // 是否操作中判断
     isInOperation (cb) {
       if (this.operationNode) {
-        this.$message.error('请先完成当前操作')
+        this.$message.error(this.sameOperationError)
         return
       }
       cb && cb()
@@ -129,38 +145,35 @@ export default {
     },
     // 新增节点
     addNode (data, node) {
-      // 判断是否有正在编辑的节点
-      this.isInOperation(() => {
-        // 初始化inputs
-        this.editInputs.forEach(item => {
-          const editInputMapItem = this.editInputMap[item.id]
-          editInputMapItem.value = editInputMapItem.validateError = ''
-        })
-        const newData = { ...TreeCtrl.createNode() }
-        // 添加动态属性
-        this.editInputs.forEach(item => {
-          newData[item.id] = ''
-        })
-        const newNode = !data ? this.$refs.infiniteTreeRef.root : node
-        // 获取子节点
-        const childNode = newNode.childNodes[0]
-        // 添加节点
-        if (childNode) {
-          this.insertBefore(newData, childNode)
-        } else {
-          this.append(newData, newNode)
-        }
-        // 记录节点
-        this.peerOperationNodes = newNode.childNodes
-        this.operationNode = newNode.childNodes[0]
-        if (data) {
-          // 添加子节点时，展开当前节点
-          node.expanded = true
-        }
-
-        // 将新增节点数据暴露出去
-        this.$emit('addNode', data || newNode)
+      // 初始化inputs
+      this.editInputs.forEach(item => {
+        const editInputMapItem = this.editInputMap[item.id]
+        editInputMapItem.value = editInputMapItem.validateError = ''
       })
+      const newData = { ...TreeCtrl.createNode() }
+      // 添加动态属性
+      this.editInputs.forEach(item => {
+        newData[item.id] = ''
+      })
+      const newNode = !data ? this.$refs.infiniteTreeRef.root : node
+      // 获取子节点
+      const childNode = newNode.childNodes[0]
+      // 添加节点
+      if (childNode) {
+        this.insertBefore(newData, childNode)
+      } else {
+        this.append(newData, newNode)
+      }
+      // 记录节点
+      this.peerOperationNodes = newNode.childNodes
+      this.operationNode = newNode.childNodes[0]
+      if (data) {
+        // 添加子节点时，展开当前节点
+        node.expanded = true
+      }
+
+      // 将新增节点数据暴露出去
+      this.$emit('addNode', data || newNode)
     },
     // 新增根节点
     addRootNode () {
@@ -178,21 +191,18 @@ export default {
     },
     // 编辑节点
     editNode (data, node) {
-      // 判断是否有正在编辑的节点
-      this.isInOperation(() => {
-        this.$set(data, 'in-input-type', 'input')
-        // 获取分割后的labels
-        this.editInputs.forEach((item, index) => {
-          const editInputMapItem = this.editInputMap[item.id]
-          // 初始化label对应到输入框
-          editInputMapItem.value = data[item.id]
-          // 初始化错误信息
-          editInputMapItem.validateError = ''
-        })
-        // 设置正在编辑的节点中
-        this.operationNode = node
-        this.$emit('editNode', data)
+      this.$set(data, 'in-input-type', 'input')
+      // 获取分割后的labels
+      this.editInputs.forEach((item, index) => {
+        const editInputMapItem = this.editInputMap[item.id]
+        // 初始化label对应到输入框
+        editInputMapItem.value = data[item.id]
+        // 初始化错误信息
+        editInputMapItem.validateError = ''
       })
+      // 设置正在编辑的节点中
+      this.operationNode = node
+      this.$emit('editNode', data)
     },
     // 确认节点
     confirmNode (data, node) {
@@ -263,9 +273,9 @@ export default {
       isOldData && this.$emit('handlerDelete', this.operationNode)
     },
     // 撤销删除，目前仅支持撤销上一次删除的内容
-    revocationDel () {
-      if (this.dustbin) {
-        const { parent, data, nextSibling, previousSibling } = this.dustbin
+    revocationDel (dustbin) {
+      if (dustbin || this.dustbin) {
+        const { parent, data, nextSibling, previousSibling } = dustbin || this.dustbin
         if (nextSibling) {
           this.insertBefore(data, nextSibling)
         } else if (previousSibling) {

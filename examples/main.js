@@ -9,6 +9,7 @@ import {
   Header,
   Main,
   Aside,
+  Input,
   Message,
   Notification
 } from 'element-ui'
@@ -28,6 +29,7 @@ Vue.use(Col)
   .use(Header)
   .use(Main)
   .use(Aside)
+  .use(Input)
 Vue.prototype.$message = Message
 Vue.prototype.$notify = Notification
 for (const key in packages) {

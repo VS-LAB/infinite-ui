@@ -5,7 +5,6 @@
 @import '../../../node_modules/element-ui/packages/theme-chalk/src/notification.scss';
 
 $in-node-height:30px;
-$in-hover-background-color:#cbe6ff;
 
 .infinite-tree {
   width: 100%;
@@ -24,12 +23,14 @@ $in-hover-background-color:#cbe6ff;
       >.el-tree-node__content {
         background-color: initial;
       }
+    }
 
+    // 鼠标拖拽至目标中心时
+    &.is-drop-inner {
       >.el-tree-node__content {
-        >.custom-tree-node {
-          >.custom-tree-node-text {
-            background-color: $in-hover-background-color;
-          }
+        .custom-tree-node-text {
+          background-color: $--color-primary;
+          color: #fff;
         }
       }
     }
@@ -50,6 +51,9 @@ $in-hover-background-color:#cbe6ff;
         border-radius: 4px;
         user-select: none;
 
+        &.highlight-node {
+          background-color: $--background-color-base;
+        }
 
       }
     }
@@ -71,7 +75,7 @@ $in-hover-background-color:#cbe6ff;
 
     &:hover {
       .custom-tree-node-text {
-        background-color: $in-hover-background-color;
+        background-color: $--background-color-base;
       }
     }
   }
@@ -233,19 +237,13 @@ $in-hover-background-color:#cbe6ff;
   &.in-show-checkbox {
 
     // 禁用悬浮背景色
-    .custom-tree-node {
-      &:hover {
-        .custom-tree-node-text {
-          background-color: transparent;
-        }
-      }
-
-      .custom-tree-node-text {
-        &.highlight-node {
-          background-color: $in-hover-background-color;
-        }
-      }
-    }
+    // .custom-tree-node {
+    //   &:hover {
+    //     .custom-tree-node-text {
+    //       background-color: transparent;
+    //     }
+    //   }
+    // }
 
     // 禁用焦点背景色
     .el-tree-node {
@@ -254,6 +252,22 @@ $in-hover-background-color:#cbe6ff;
           background-color: transparent;
         }
       }
+    }
+  }
+
+  .el-tree__drop-indicator {
+    margin-left: -9px;
+
+    &::before {
+      content: '';
+      display: block;
+      width: 5px;
+      height: 5px;
+      border-radius: 5px;
+      background-color: $--color-primary;
+      position: absolute;
+      left: -5px;
+      top: -2px;
     }
   }
 }

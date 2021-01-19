@@ -12,7 +12,13 @@
            :node-key="nodeKey"
            :indent="0"
            :expand-on-click-node="!this.isEditNode"
-           @node-expand="nodeExpand">
+           :draggable="!operationNode && draggable"
+           @node-expand="nodeExpand"
+           @node-drag-start="nodeDragStart"
+           @node-drag-end="nodeDragEnd"
+           @node-drag-enter="nodeDragEnter"
+           @node-click="nodeClick"
+           @node-drop="nodeDrop">
     <span class="custom-tree-node"
           :class="{'node_editing':data && data[nodeKey] === (operationNode?operationNode.data[nodeKey]:'')}"
           slot-scope="{ node, data }">
@@ -31,7 +37,7 @@
       </span>
 
       <!---编辑节点按钮，只在编辑状态下显示-->
-      <span v-if="isEditNode && !data['in-input-type']"
+      <span v-if="!moving && isEditNode && !data['in-input-type']"
             class="tree-edit-btns">
         <!-- 节点操作按钮 -->
         <infinite-button v-for="(btn,index) in nodeOperationBtn"
@@ -78,10 +84,11 @@ import ElTree from 'element-ui/lib/tree'
 import ElInput from 'element-ui/lib/input'
 import ElMessage from 'element-ui/lib/message'
 import pmMixin from './pmMixin'
+import dragMixin from './dragMixin'
 import InfiniteButton from '../../infinite-button/src/index.vue'
 export default {
   name: 'InfiniteTree',
-  mixins: [pmMixin],
+  mixins: [pmMixin, dragMixin],
   inheritAttrs: false,
   components: {
     ElTree,
@@ -100,6 +107,10 @@ export default {
         index: 0
       },
       highlightNodeMap: {}, // 高亮keys集合
+      dragTimer: null, // 自动展开定时器
+      draggNode: null, // 记录拖拽节点
+      moving: false, // 拖拽中
+      dragSuccess: false, // 是否拖拽成功
       editInputMap: [], // 输入框集合
       operationNode: null, // 当前操作节点
       peerOperationNodes: null, // 当前操作节点父节点
@@ -127,8 +138,11 @@ export default {
           icon: 'el-icon-plus',
           type: 'primary',
           click: (data, node) => {
-            this.$emit('addNodeBefore', data, node)
-            this.addNode(data, node)
+            // 判断是否有正在编辑的节点
+            this.isInOperation(() => {
+              this.$emit('addNodeBefore', data, node)
+              this.addNode(data, node)
+            })
           }
         },
         // 编辑
@@ -136,8 +150,11 @@ export default {
           icon: 'el-icon-edit',
           type: 'info',
           click: (data, node) => {
-            this.$emit('edietNodeBefore', data, node)
-            this.editNode(data, node)
+            // 判断是否有正在编辑的节点
+            this.isInOperation(() => {
+              this.$emit('edietNodeBefore', data, node)
+              this.editNode(data, node)
+            })
           }
         },
         // 删除
