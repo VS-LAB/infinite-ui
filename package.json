@@ -14,7 +14,7 @@
     "build:entry": "node build/build-entry.js ",
     "build:lib": "node build/build-lib.js",
     "build:utils": "cross-env BABEL_ENV=utils babel packages/utils --out-dir lib/utils && babel packages/mixins --out-dir lib/mixins",
-    "build:style": "gulp build --gulpfile packages/theme-chalk/gulpfile.js && cp-cli packages/theme-chalk/lib lib/theme-chalk && cp-cli packages/theme-chalk/src/fonts lib/theme-chalk/fonts",
+    "build:style": "gulp build --gulpfile packages/theme-chalk/gulpfile.js",
     "clean": "rimraf lib && rimraf packages/*/lib",
     "init": "npm install commitizen -g && commitizen init cz-conventional-changelog --save-dev --save-exact && npm run bootstrap",
     "lib": "vue-cli-service build --target lib --name infinite-ui --mode lib --dest lib packages/index.js && webpack --config ./build/webpack.component.js"
