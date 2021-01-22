@@ -1,6 +1,6 @@
 
 let chart = null
-// if (['lib', 'development'].includes(process.env.NODE_ENV)) {
+// if (process.env.NODE_ENV === 'lib' || process.env.NODE_ENV === 'development') {
 const { Chart, registerEngine, registerGeometry, registerComponentController } = require('@antv/g2/lib/core')
 chart = Chart
 const Line = require('@antv/g2/lib/geometry/line').default

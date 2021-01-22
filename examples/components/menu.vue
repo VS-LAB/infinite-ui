@@ -37,10 +37,14 @@ export default {
     menuList () {
       const componentlist = []
       this.$router.options.routes.forEach((route) => {
-        if (route.meta && route.meta.type === 'component') {
-          componentlist.push({
-            index: route.path,
-            label: route.name
+        if (route.name === 'Guide') {
+          route.children.forEach(r => {
+            if (r.meta && r.meta.type === 'component') {
+              componentlist.push({
+                index: r.path,
+                label: r.name
+              })
+            }
           })
         }
       })
