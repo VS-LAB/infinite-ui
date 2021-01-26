@@ -40,18 +40,15 @@
       <span v-if="!moving && isEditNode && !data['in-input-type']"
             class="tree-edit-btns">
         <!-- 节点操作按钮 -->
-        <infinite-button v-for="(btn,index) in nodeOperationBtn"
-                         :key="index"
-                         :icon="btn.icon"
-                         :size="editComponentSize"
-                         circle
-                         :type="btn.type"
-                         @click="btn.click(data, node)"></infinite-button>
+        <i v-for="(btn,index) in nodeOperationBtn"
+           :key="index"
+           :class="btn.icon"
+           @click="btn.click(data, node)"></i>
       </span>
 
       <!--编辑状态中...-->
       <div class="editing__content"
-           v-else-if="data['in-input-type'] === 'input'">
+           v-else-if="data['in-input-type'] === 'input' && isEditNode">
         <div class="editing__content-group_inputs"
              v-for="(item,index) in editInputs"
              v-show="!item.hidden"
@@ -68,6 +65,7 @@
         <!-- 编辑节点操作 -->
         <div class="operation-group-btn">
           <infinite-button class="btn-text"
+                           :class="btn.class"
                            v-for="(btn,index) in editNodeOperationBtn"
                            :key="index"
                            :type="btn.type"
@@ -117,6 +115,7 @@ export default {
       // 编辑中的操作按钮
       editNodeOperationBtn: [
         {
+          class: 'operation-confirm',
           label: '确定',
           type: 'text',
           click: (data, node) => {
@@ -124,6 +123,7 @@ export default {
           }
         },
         {
+          class: 'operation-cancel',
           label: '取消',
           type: 'text',
           click: (data, node) => {
@@ -135,8 +135,7 @@ export default {
       nodeOperationBtn: [
         // 新增
         {
-          icon: 'el-icon-plus',
-          type: 'primary',
+          icon: 'el-icon-circle-plus-outline',
           click: (data, node) => {
             // 判断是否有正在编辑的节点
             this.isInOperation(() => {
@@ -145,39 +144,42 @@ export default {
             })
           }
         },
-        // 编辑
-        {
-          icon: 'el-icon-edit',
-          type: 'info',
-          click: (data, node) => {
-            // 判断是否有正在编辑的节点
-            this.isInOperation(() => {
-              this.$emit('edietNodeBefore', data, node)
-              this.editNode(data, node)
-            })
-          }
-        },
         // 删除
         {
-          icon: 'el-icon-delete',
-          type: 'danger',
+          icon: 'el-icon-remove-outline',
           click: (data, node) => {
             this.isInOperation(() => {
               this.delSelect(data, node, true)
+            })
+          }
+        },
+        // 编辑
+        {
+          icon: 'el-icon-edit',
+          click: (data, node) => {
+            // 判断是否有正在编辑的节点
+            this.isInOperation(() => {
+              this.$emit('editNodeBefore', data, node)
+              this.editNode(data, node)
             })
           }
         }
       ]
     }
   },
-  created () {
-    if (this.isEditNode) {
-      // 初始化编辑时input
-      this.editInputs.forEach(item => {
-        this.$set(this.editInputMap, item.id, {})
-        this.$set(this.editInputMap[item.id], 'value', '')
-        this.$set(this.editInputMap[item.id], 'validateError', '')
-      })
+  watch: {
+    isEditNode: {
+      handler (val) {
+        if (val) {
+          // 初始化编辑时input
+          this.editInputs.forEach(item => {
+            this.$set(this.editInputMap, item.id, {})
+            this.$set(this.editInputMap[item.id], 'value', '')
+            this.$set(this.editInputMap[item.id], 'validateError', '')
+          })
+        }
+      },
+      immediate: true
     }
   },
   mounted () {

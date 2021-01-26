@@ -42,8 +42,9 @@ export default {
       type: Array,
       default: () => [
         {
+          id: 'label',
           placeholder: '请输入节点名称',
-          vilidateError: '',
+          sameNameError: '节点名称重复',
           validateFun: value => {
             return !value ? '节点名称不能为空' : ''
           }
@@ -74,16 +75,19 @@ export default {
     },
     // 设置高亮节点
     setHighlightNode (dataKey, status = true) {
-      // 数组高亮方法
+      // 设置高亮
       if (!dataKey) {
+        // 所有节点高亮
         Object.keys(this.highlightNodeMap).forEach(key => {
           this.$set(this.highlightNodeMap, key, status)
         })
       } else if (Array.isArray(dataKey)) {
+        // 数组遍历高亮
         dataKey.forEach(key => {
           this.$set(this.highlightNodeMap, key, status)
         })
       } else {
+        // 单个节点高亮
         this.$set(this.highlightNodeMap, dataKey, status)
       }
     },
@@ -105,14 +109,6 @@ export default {
     validateInput (item) {
       const editInputMapItem = this.editInputMap[item.id]
       editInputMapItem.validateError = item.validateFun ? item.validateFun(editInputMapItem.value) : ''
-    },
-    // 判断当前层级是否存在相同资源
-    isSameNodeName (value, currentData, peerDatas) {
-      return peerDatas
-        .map(
-          (c) => c[[this.props.label]].split('(')[0] === value && c[this.nodeKey] !== currentData[this.nodeKey]
-        )
-        .some((c) => c === true)
     },
     // 清除记录的操作节点信息
     clearRecordNode () {
@@ -223,7 +219,7 @@ export default {
       // 阻止代码流程
       if (flag) return
       // 遍历复数输入框
-      this.editInputs.forEach((item, index) => {
+      this.editInputs.forEach(item => {
         // 判断节点是否需要校验重名(存在同名错误信息 + 改节点没有被hidden掉 + 假设验证通过)
         if (item.sameNameError && !item.hidden && !flag) {
           const editInputMapItem = this.editInputMap[item.id]

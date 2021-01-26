@@ -87,11 +87,12 @@ $in-node-height:30px;
     opacity: 0;
     transition: opacity 0.1s;
 
-    .el-button {
-      transform: scale(0.7); // 缩小按钮
+    i {
+      font-size: 16px;
+      color: $--color-primary;
 
-      &+.el-button {
-        margin-left: -1px;
+      &+i {
+        margin-left: 6px;
       }
     }
   }
@@ -208,6 +209,8 @@ $in-node-height:30px;
   // 连接线
   &.in-tree-line {
     .el-tree-node {
+      overflow: hidden;
+
       &::before {
         content: '';
         display: block;

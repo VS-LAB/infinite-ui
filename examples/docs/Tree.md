@@ -9,13 +9,14 @@ Tree 增删改及自定义编辑功能。
 <template>
   <div>
     <infinite-button @click="addRootNode">添加根节点</infinite-button>
+    <infinite-button @click="editSwitch">编辑开关</infinite-button>
     <infinite-tree
       ref="infiniteTreeRef"
       :data="treeData"
       :is-edit-node="isEditNode"
       :edit-inputs="editInputs"
       @addNodeBefore="addNodeBefore"
-      @edietNodeBefore="edietNodeBefore"
+      @editNodeBefore="editNodeBefore"
       @handlerSave="handlerSave"
       @handlerDelete="handlerDelete"
     >
@@ -168,7 +169,7 @@ Tree 增删改及自定义编辑功能。
         this.editInputs[1].disabled = false;
       },
       // 编辑节点之前
-      edietNodeBefore(data, node) {
+      editNodeBefore(data, node) {
         // 禁用资源ID输入框
         this.editInputs[1].disabled = !data.outer;
       },
@@ -176,6 +177,12 @@ Tree 增删改及自定义编辑功能。
       addRootNode() {
         this.editInputs[1].disabled = false;
         this.$refs.infiniteTreeRef.addRootNode();
+      },
+      // 编辑开关
+      editSwitch() {
+        this.$refs.infiniteTreeRef.isInOperation(() => {
+          this.isEditNode = !this.isEditNode;
+        });
       },
       // 删除完成
       handlerDelete(node) {
@@ -245,7 +252,7 @@ Tree 自定义增删改，新增拖拽成功后撤回功能。
       :edit-inputs="editInputs"
       :draggable="true"
       @addNodeBefore="addNodeBefore"
-      @edietNodeBefore="edietNodeBefore"
+      @editNodeBefore="editNodeBefore"
       @handlerSave="handlerSave"
       @handlerDelete="handlerDelete"
       @node-drop="nodeDrop"
@@ -400,7 +407,7 @@ Tree 自定义增删改，新增拖拽成功后撤回功能。
         this.editInputs[1].hidden = true;
       },
       // 编辑节点之前
-      edietNodeBefore(data) {
+      editNodeBefore(data) {
         this.editInputs[1].disabled = true;
         this.editInputs[1].hidden = !data.number;
       },
@@ -630,7 +637,6 @@ Tree 自定义插槽内容
 | 参数                    | 说明                                                                                                                                       | 类型                                   | 可选值 | 默认值           |
 | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------- | ------ | ---------------- |
 | data                    | 展示数据                                                                                                                                   | Array                                  | —      | —                |
-| default-props           | 配置选项，具体看下表                                                                                                                       | Object                                 | —      | —                |
 | is-edit-node            | 是否可编辑子节点                                                                                                                           | Boolean                                | —      | false            |
 | edit-inputs             | 编辑时对应的输入框，具体看下表                                                                                                             | Array                                  | —      | —                |
 | edit-component-size     | 节点编辑时，对应输入框按钮大小                                                                                                             | String                                 | —      | 'mini'           |
@@ -713,7 +719,7 @@ Tree 自定义插槽内容
 | 事件名称         | 说明                                                  | 回调参数                                                                                                                                                           |
 | ---------------- | ----------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | addNodeBefore    | 添加节点之前，`is-edit-node`开启时会生效              | 共两个参数，操作节点的 `data`，操作节点的`node`                                                                                                                    |
-| edietNodeBefore  | 编辑节点之前，`is-edit-node`开启时会生效              | 共两个参数，操作节点的 `data`，操作节点的`node`                                                                                                                    |
+| editNodeBefore   | 编辑节点之前，`is-edit-node`开启时会生效              | 共两个参数，操作节点的 `data`，操作节点的`node`                                                                                                                    |
 | addNode          | 点击添加节点按钮，`is-edit-node`开启时会生效          | 共一个参数，操作节点的 `data`                                                                                                                                      |
 | editNode         | 点击编辑节点按钮，`is-edit-node`开启时会生效          | 共一个参数，操作节点的 `data`                                                                                                                                      |
 | handlerSave      | 节点保存成功，`is-edit-node`开启时会生效              | 共一个参数，保存的当前节点的 `data`                                                                                                                                |
