@@ -185,7 +185,7 @@ Tree 增删改及自定义编辑功能。
         });
       },
       // 删除完成
-      handlerDelete(node) {
+      handlerDelete() {
         const h = this.$createElement;
         // 删除提示
         this.localNotify && this.localNotify.close();
@@ -417,7 +417,7 @@ Tree 自定义增删改，新增拖拽成功后撤回功能。
         this.$refs.infiniteTreeRef.addRootNode();
       },
       // 删除完成
-      handlerDelete(node) {
+      handlerDelete() {
         const h = this.$createElement;
         // 删除提示
         this.localNotify && this.localNotify.close();

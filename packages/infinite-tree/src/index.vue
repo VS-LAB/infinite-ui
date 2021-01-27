@@ -147,9 +147,9 @@ export default {
         // 删除
         {
           icon: 'el-icon-remove-outline',
-          click: (data, node) => {
+          click: (_, node) => {
             this.isInOperation(() => {
-              this.delSelect(data, node, true)
+              this.delSelect(node, true)
             })
           }
         },

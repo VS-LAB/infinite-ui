@@ -179,7 +179,7 @@ export default {
     cancelNode (data, node) {
       // 新增时取消
       if (TreeCtrl.isAddCancel(data)) {
-        this.delSelect(data, node, false) // 移除节点
+        this.delSelect(node, false) // 移除节点
       } else {
         // 编辑时取消
         this.editOver(data)
@@ -253,7 +253,7 @@ export default {
       this.$emit('handlerSave', data)
     },
     // 删除节点
-    delSelect (data, node, isOldData) {
+    delSelect (node, isOldData) {
       // 垃圾收集器
       this.dustbin = {
         parent: node.parent,
@@ -266,7 +266,7 @@ export default {
       // 清除记录的操作节点信息
       this.clearRecordNode()
       // 删除的是已创建存的节点时，emit删除完成方法
-      isOldData && this.$emit('handlerDelete', this.operationNode)
+      isOldData && this.$emit('handlerDelete', node.data)
     },
     // 撤销删除，目前仅支持撤销上一次删除的内容
     revocationDel (dustbin) {
