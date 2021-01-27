@@ -694,6 +694,7 @@ Tree 自定义插槽内容
 | addRootNode | 添加根节点 | —|
 | isInOperation | 当`edit-inputs`设置校验规则后，该方法可以提供校验及成功后的回调 | callback 接受一个回调函数|
 | revocationDel | 当某一个节点删除以后，该方法可以撤销上一次删除 | —|
+| revocationDrag | 拖拽成功后撤销方法，该方法可以撤销上一次拖拽 | —|
 | setHighlightNode | 设置需要高亮的节点 | 第一个参数 dataKeys 可以为数组或字符串或数字类型作为需要设置高亮的节点的 node-key，第二个参数则为设置高亮的开关|
 | filter | 对树节点进行筛选操作 | 接收一个任意类型的参数，该参数会在 filter-node-method 中作为第一个参数 |
 | updateKeyChildren | 通过 keys 设置节点子元素，使用此方法必须设置 node-key 属性 | (key, data) 接收两个参数，1. 节点 key 2. 节点数据的数组 |

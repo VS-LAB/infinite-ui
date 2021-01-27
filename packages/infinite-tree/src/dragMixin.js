@@ -1,7 +1,7 @@
 export default {
   methods: {
     // 拖拽开始
-    nodeDragStart (node, event) {
+    nodeDragStart (node) {
       this.moving = true
       this.dragSuccess = false
       this.draggNode = {
@@ -12,7 +12,7 @@ export default {
       }
     },
     // 拖拽结束
-    nodeDragEnd (dragging, dropNode, dropType, event) {
+    nodeDragEnd () {
       this.moving = false
     },
     // 拽入至其他节点时
@@ -27,7 +27,7 @@ export default {
       }
     },
     // 拖拽成功
-    nodeDrop (dragging, dropNode, dropType, event) {
+    nodeDrop (dragging) {
       this.dragSuccess = true
       // 清除上一次拖拽后的高亮节点
       this.setHighlightNode(null, false)
@@ -46,6 +46,7 @@ export default {
       if (this.dragSuccess && this.draggNode) {
         // 移除拖拽后的节点
         this.remove(this.draggNode.data)
+        this.dustbin = null
         // 恢复拖拽前的节点
         this.revocationDel(this.draggNode)
         this.draggNode = null

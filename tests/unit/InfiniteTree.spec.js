@@ -1,5 +1,6 @@
 import { mount } from '@vue/test-utils'
 import InfiniteTree from '@/packages/infinite-tree/src/index.vue'
+import ElTree from 'element-ui/lib/tree'
 import ElInput from 'element-ui/lib/input'
 const getTestData = function () {
   return [
@@ -55,6 +56,13 @@ const getTestData = function () {
     }
   ]
 }
+const delay = (time = 1000) => {
+  return new Promise(resolve => {
+    setTimeout(_ => {
+      resolve()
+    }, time)
+  })
+}
 
 describe('InfiniteSelectTags.vue', () => {
   const isEditNode = true
@@ -62,14 +70,15 @@ describe('InfiniteSelectTags.vue', () => {
 
   const wrapper = mount(InfiniteTree, {
     propsData: {
-      isEditNode
+      draggable: true
     }
   })
 
   //  新增测试
   it('add node test', async () => {
     await wrapper.setProps({
-      data
+      data,
+      isEditNode: true
     })
     // 获取新增按钮
     const addBtn = wrapper.findAll(`.${wrapper.vm.nodeOperationBtn[0].icon}`).at(0)
@@ -289,22 +298,6 @@ describe('InfiniteSelectTags.vue', () => {
     await wrapper.find(`.operation-cancel`).trigger('click')
   })
 
-  // 重复操作测试
-  it('repetition operation test', async () => {
-    await wrapper.setProps({
-      data: getTestData()
-    })
-    // 获取编辑按钮
-    const editBtn = wrapper.findAll(`.${wrapper.vm.nodeOperationBtn[2].icon}`).at(0)
-    // 点击编辑按钮
-    await editBtn.trigger('click')
-    // 再次点击编辑按钮
-    await editBtn.trigger('click')
-    expect(!!wrapper.vm.operationNode).toBe(true)
-    // 点击取消按钮
-    await wrapper.find(`.operation-cancel`).trigger('click')
-  })
-
   // 设置高亮节点测试
   it('set highlight node test', async () => {
     // 高亮所有节点
@@ -328,6 +321,8 @@ describe('InfiniteSelectTags.vue', () => {
     await wrapper.vm.$nextTick()
     // 断言高亮节点为同一个节点
     expect(wrapper.find('.highlight-node').text()).toBe(data[0][wrapper.vm.editInputs[0].id])
+    // 关闭所有高亮节点
+    wrapper.vm.setHighlightNode(null, false)
   })
 
   // 节点展开后,设置节点是否存在子字节的属性测试
@@ -340,5 +335,40 @@ describe('InfiniteSelectTags.vue', () => {
     // 获取展开后的子节点
     const childNode = wrapper.findAll('.el-tree-node').at(1)
     expect(childNode.attributes('not-children')).toBe('true')
+  })
+
+  // 模拟拖拽功能测试
+  it('draggable test', async () => {
+    //  获取树控件
+    const localTree = wrapper.findComponent(ElTree)
+    //  手动触发开始拖拽
+    localTree.vm.$emit('node-drag-start', wrapper.vm.getNode(11))
+    expect(wrapper.vm.moving).toBe(true)
+    expect(wrapper.vm.dragSuccess).toBe(false)
+    //  手动触发拽入至自身节点时
+    localTree.vm.$emit('node-drag-enter', null, wrapper.vm.getNode(11))
+    //  手动触发拽入至其他节点时
+    localTree.vm.$emit('node-drag-enter', null, wrapper.vm.getNode(20))
+    await delay(1000)
+    expect(!!wrapper.vm.dragTimer).toBe(true)
+    //  手动触发结束拖拽
+    localTree.vm.$emit('node-drag-end')
+    expect(wrapper.vm.moving).toBe(false)
+    //  手动触发拖拽成功
+    localTree.vm.$emit('node-drop', wrapper.vm.getNode(11))
+    expect(wrapper.vm.dragSuccess).toBe(true)
+    // 模拟节点移动至
+    wrapper.vm.remove(wrapper.vm.getNode(11))
+    const testData = getTestData()
+    wrapper.vm.insertBefore(testData[0].children[0], wrapper.vm.getNode(21))
+    // 调用拖拽后撤销
+    wrapper.vm.revocationDrag()
+    await wrapper.vm.$nextTick()
+    // 断言原节点位资源2位置不变
+    expect(localTree.vm.data[0].children[0].label).toBe(testData[0].children[0].label)
+    // 手动触发节点点击，清除拖拽后高亮状态,即不存在高亮节点
+    localTree.vm.$emit('node-click')
+    await wrapper.vm.$nextTick()
+    expect(wrapper.find('.highlight-node').exists()).toBe(false)
   })
 })
