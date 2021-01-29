@@ -180,6 +180,9 @@ export default {
         }
       },
       immediate: true
+    },
+    operationNode () {
+      this.$emit('editChange', !!this.operationNode)
     }
   },
   mounted () {

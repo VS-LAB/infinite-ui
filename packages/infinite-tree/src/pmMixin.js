@@ -116,12 +116,13 @@ export default {
       this.peerOperationNodes = null
     },
     // 是否操作中判断
-    isInOperation (cb) {
+    isInOperation (success) {
       if (this.operationNode) {
+        this.$message.closeAll()
         this.$message.error(this.sameOperationError)
         return
       }
-      cb && cb()
+      success && success()
     },
     // 编辑结束
     editOver (data, isSave) {
@@ -173,7 +174,9 @@ export default {
     },
     // 新增根节点
     addRootNode () {
-      this.addNode()
+      this.isInOperation(() => {
+        this.addNode()
+      })
     },
     // 取消节点操作
     cancelNode (data, node) {
