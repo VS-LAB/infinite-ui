@@ -1,80 +1,82 @@
 <template>
-  <!-- tree-line -->
-  <el-tree ref="infiniteTreeRef"
-           class="infinite-tree "
-           :class="{
+  <div class="infinite-tree ">
+    <!-- tree-line -->
+    <el-tree ref="infiniteTreeRef"
+             :class="{
              'in-tree-line':treeLine,
              'in-show-checkbox':$attrs['show-checkbox']
            }"
-           v-bind="$attrs"
-           v-on="$listeners"
-           :props="props"
-           :node-key="nodeKey"
-           :indent="0"
-           :expand-on-click-node="!this.isEditNode"
-           :draggable="!operationNode && draggable"
-           @node-expand="nodeExpand"
-           @node-drag-start="nodeDragStart"
-           @node-drag-end="nodeDragEnd"
-           @node-drag-enter="nodeDragEnter"
-           @node-click="nodeClick"
-           @node-drop="nodeDrop">
-    <span class="custom-tree-node"
-          :class="{'node_editing':data && data[nodeKey] === (operationNode?operationNode.data[nodeKey]:'')}"
-          slot-scope="{ node, data }">
-      <!-- 非编辑状态 -->
-      <span class="custom-tree-node-text"
-            :class="{
+             v-bind="$attrs"
+             v-on="$listeners"
+             :props="props"
+             :node-key="nodeKey"
+             :indent="0"
+             :expand-on-click-node="!operationNode"
+             :draggable="!operationNode && draggable"
+             @node-expand="nodeExpand"
+             @node-drag-start="nodeDragStart"
+             @node-drag-end="nodeDragEnd"
+             @node-drag-enter="nodeDragEnter"
+             @node-click="nodeClick"
+             @node-drop="nodeDrop">
+      <div class="custom-tree-node"
+           :class="{'node_editing':data && data[nodeKey] === (operationNode?operationNode.data[nodeKey]:'')}"
+           slot-scope="{ node, data }">
+        <!-- 非编辑状态 -->
+        <div class="custom-tree-node-text"
+             :class="{
               'highlight-node':highlightNodeMap[data[nodeKey]]
             }"
-            v-if="!data['in-input-type']">
-        <slot v-bind="{ node, data }">
-          <template v-for="(item,index) in editInputs">
-            <template v-if="index && data[item.id || props.label]">({{data[item.id || props.label]}})</template>
-            <template v-else>{{data[item.id || props.label]}}</template>
-          </template>
-        </slot>
-      </span>
+             v-if="!data['in-input-type']">
+          <slot v-bind="{ node, data }">
+            <template v-for="(item,index) in editInputs">
+              <template v-if="index && data[item.id || props.label]"> ({{data[item.id || props.label]}})</template>
+              <template v-else>{{data[item.id || props.label]}}</template>
+            </template>
+          </slot>
+        </div>
 
-      <!---编辑节点按钮，只在编辑状态下显示-->
-      <span v-if="!moving && isEditNode && !data['in-input-type']"
-            class="tree-edit-btns">
-        <!-- 节点操作按钮 -->
-        <i v-for="(btn,index) in nodeOperationBtn"
-           :key="index"
-           :class="btn.icon"
-           @click="btn.click(data, node)"></i>
-      </span>
+        <!---编辑节点按钮，只在编辑状态下显示-->
+        <div v-if="!moving && isEditNode && !data['in-input-type']"
+             class="tree-edit-btns">
+          <!-- 节点操作按钮 -->
+          <i v-for="(btn,index) in nodeOperationBtn"
+             :key="index"
+             :class="btn.icon"
+             @click.stop="btn.click(data, node)"></i>
+        </div>
 
-      <!--编辑状态中...-->
-      <div class="editing__content"
-           v-else-if="data['in-input-type'] === 'input' && isEditNode">
-        <div class="editing__content-group_inputs"
-             v-for="(item,index) in editInputs"
-             v-show="!item.hidden"
-             :key="index">
-          <el-input v-model.trim="editInputMap[item.id].value"
-                    :disabled="item.disabled"
-                    :size="editComponentSize"
-                    :placeholder="item.placeholder"
-                    @input="validateInput(item)"></el-input>
-          <div class="group_inputs-vilidate-error">
-            {{item.validateFun && editInputMap[item.id].validateError}}
+        <!--编辑状态中...-->
+        <div class="editing__content"
+             v-else-if="data['in-input-type'] === 'input' && isEditNode">
+          <div class="editing__content-group_inputs"
+               v-for="(item,index) in editInputs"
+               v-show="!item.hidden"
+               :key="index">
+            <el-input v-model.trim="editInputMap[item.id].value"
+                      :disabled="item.disabled"
+                      :size="editComponentSize"
+                      :placeholder="item.placeholder"
+                      @input="validateInput(item)"></el-input>
+            <div class="group_inputs-vilidate-error">
+              {{item.validateFun && editInputMap[item.id].validateError}}
+            </div>
+          </div>
+          <!-- 编辑节点操作 -->
+          <div class="operation-group-btn">
+            <infinite-button class="btn-text"
+                             :class="btn.class"
+                             v-for="(btn,index) in editNodeOperationBtn"
+                             :key="index"
+                             :type="btn.type"
+                             @click.stop="btn.click(data,node)">{{btn.label}}</infinite-button>
           </div>
         </div>
-        <!-- 编辑节点操作 -->
-        <div class="operation-group-btn">
-          <infinite-button class="btn-text"
-                           :class="btn.class"
-                           v-for="(btn,index) in editNodeOperationBtn"
-                           :key="index"
-                           :type="btn.type"
-                           @click="btn.click(data,node)">{{btn.label}}</infinite-button>
-        </div>
-      </div>
 
-    </span>
-  </el-tree>
+      </div>
+    </el-tree>
+  </div>
+
 </template>
 
 <script>
