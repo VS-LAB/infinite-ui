@@ -1,6 +1,7 @@
 ## infinite-ui
 
 ### npm 安装
+
 ```
 npm i infinite-ui
 ```
