@@ -7,12 +7,15 @@ const cssmin = require('gulp-cssmin')
 const replace = require('gulp-replace')
 const themeNames = ['', 'blue']
 // var_default
-const compiles = themeNames.map((name, index) => {
-  return () => {
-    const newName = name ? '-' + name : ''
+const compiles = []
+themeNames.forEach((name, index) => {
+  const newName = name ? '-' + name : ''
+  const changeVar = () => {
+    return src('./src/*.scss').pipe(replace(`var${themeNames[index - 1] ? '_' + themeNames[index - 1] : ''}.scss`, `var${themeNames[index] ? '_' + themeNames[index] : ''}.scss`)).pipe(dest('./src/'))
+  }
+  compiles.push(changeVar)
+  const compile = () => {
     return src('./src/*.scss')
-      .pipe(replace(`var${themeNames[index - 1] ? '_' + themeNames[index - 1] : ''}.scss`, `var${themeNames[index] ? '_' + themeNames[index] : ''}.scss`))
-      .pipe(dest('./src/'))
       .pipe(sass.sync())
       .pipe(autoprefixer({
         browsers: ['ie > 9', 'last 2 versions'],
@@ -21,6 +24,7 @@ const compiles = themeNames.map((name, index) => {
       .pipe(cssmin())
       .pipe(dest(`./lib${newName}`))
   }
+  compiles.push(compile)
 })
 
 function recover () {
