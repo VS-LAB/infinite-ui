@@ -11,7 +11,7 @@
     "bootstrap": "npm install && cd ./packages/theme-chalk && npm install",
     "build:bundle": "webpack --config ./build/webpack.component.js",
     "build:docs": "vue-cli-service build",
-    "build:entry": "node build/build-entry.js ",
+    "build:entry": "node build/build-entry.js",
     "build:lib": "node build/build-lib.js",
     "build:utils": "cross-env BABEL_ENV=utils babel packages/utils --out-dir lib/utils && babel packages/mixins --out-dir lib/mixins",
     "build:style": "gulp build --gulpfile packages/theme-chalk/gulpfile.js",
