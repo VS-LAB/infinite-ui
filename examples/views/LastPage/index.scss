@@ -1,0 +1,190 @@
+//****通用定义****//
+$screenWidth:1280px;
+.fs-18 {
+  font-size: 18px;
+}
+.fs-48 {
+  font-size: 48px;
+}
+.black {
+  color: #222;
+  display: inline-block;
+  &.tags::before {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 4px;
+    background-color: #ff7635;
+  }
+}
+.white {
+  color: #fff;
+  &.tags::before {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 4px;
+    background-color: #fff;
+  }
+}
+.explain-list {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  backface-visibility: hidden;
+}
+
+.explain {
+  width: 1200px;
+  margin: 0 auto;
+  backface-visibility: hidden;
+  img:hover {
+    animation: scaleDraw 5s ease-in-out infinite;
+    backface-visibility: hidden;
+  }
+}
+
+//****非通用定义****//
+
+// 内容模块
+.explain-container {
+  background: #F3F7FE;
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  .explain-txt {
+    text-align: center;
+    margin-bottom: 100px;
+    .title {
+      font-family: PingFangSC-Semibold;
+      font-size: 58px;
+      color: #222;
+    }
+    .subTitle {
+      margin-top: 28px;
+      opacity: 0.6;
+      font-family: PingFangSC-Regular;
+      font-size: 20px;
+      color: #222;
+    }
+    @media screen and (max-width: $screenWidth) {
+      .title {
+        font-size: 50px;
+      }
+      .subTitle {
+        margin-top: 0;
+      }
+    }
+  }
+}
+
+// 内容模块第一部分的特殊内容
+.explain-base {
+  display: flex;
+  background-color: #fff;
+  box-shadow: 0 2px 50px 0 #eaf1fc;
+  border-radius: 8px;
+  margin-top: 80px;
+  @media screen and (max-width: $screenWidth) {
+    margin-top: 0;
+  }
+  &-list {
+    flex: 1;
+    padding: 94px 0 110px 0;
+    text-align: center;
+    img {
+      width: 180px;
+    }
+    .base-title {
+      font-size: 24px;
+      font-weight: 600;
+      color: #0f2237;
+    }
+    .base-txt {
+      font-size: 14px;
+      color: rgba(15, 34, 55, 0.5);
+      width: 200px;
+      margin: 20px auto;
+    }
+    .text-button {
+      color: #FF7635;
+      border: none;
+      font-size: 14px;
+      backface-visibility: hidden;
+      perspective: 1000;
+      &-path-active {
+        cursor: pointer;
+        &:hover, &:focus {
+          color: #FFF;
+          border-color: #ffd6c2;
+          background-image: linear-gradient(179deg, #FFA874 0%, #FF7979 100%);
+          border-radius: 17px;
+          padding: 6px 23px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
+// 底部模块
+.explain-footer {
+  // margin-top: 126px;
+  background: #d8d8d800;
+  text-align: center;
+  position: absolute;
+  width: 100%;
+  bottom: 57px;
+  backface-visibility: hidden;
+  perspective: 1000;
+  img {
+    width: 172px;
+  }
+  p {
+    margin-top: 17px;
+    opacity: 0.65;
+    font-family: PingFangSC-Regular;
+    font-size: 14px;
+    color: #222;
+  }
+}
+
+@media screen and (max-width: 1366px) {
+  .explain-container {
+    .explain-txt {
+      margin-bottom: 80px;
+    }
+  }
+  .explain-footer {
+    bottom: 16px;
+  }
+}
+@media screen and (max-width: $screenWidth) {
+  .explain-container {
+    .explain-txt {
+      margin-bottom: 50px;
+    }
+  }
+  .explain-footer {
+    p {
+      margin-top: 10px;
+    }
+  }
+}
+
+@keyframes scaleDraw {
+  0% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.2);
+  }
+  50% {
+    transform: scale(1);
+  }
+  75% {
+    transform: scale(1.2);
+  }
+}

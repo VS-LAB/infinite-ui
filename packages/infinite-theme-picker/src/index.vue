@@ -41,9 +41,9 @@ export default {
   },
   watch: {
     vModel: {
-      handler (val, oldVal) {
+      async handler (val, oldVal) {
         this.theme = val
-        const nVal = val || ORIGINAL_THEME
+        const nVal = val
         const oldV = oldVal || ORIGINAL_THEME
         const themeCluster = this.getThemeCluster(nVal.replace('#', ''))
         const originalCluster = this.getThemeCluster(oldV.replace('#', ''))
@@ -64,22 +64,19 @@ export default {
         const chalkHandler = getHandler('chalk', 'chalk-style')
         if (!this.chalk) {
           const url = `https://unpkg.com/element-ui@${version}/lib/theme-chalk/index.css`
-          this.getCSSString(url).then((val) => {
-            this.chalk = val
-            chalkHandler()
-          })
-        } else {
-          chalkHandler()
+          await this.getCSSString(url)
         }
-        const styles = [].slice.call(document.querySelectorAll('style'))
-          .filter(style => {
-            const text = style.innerText
-            return new RegExp(oldV, 'i').test(text) && !/Chalk Variables/.test(text)
+        chalkHandler()
+        this.$nextTick(() => {
+          const styles = [].slice.call(document.querySelectorAll('style'))
+            .filter(style => {
+              const text = style.innerText
+              return new RegExp(oldV, 'i').test(text) && !/Chalk Variables/.test(text)
+            })
+          styles.forEach(style => {
+            const { innerText } = style
+            style.innerText = this.updateStyle(innerText, originalCluster, themeCluster)
           })
-        styles.forEach(style => {
-          const { innerText } = style
-          if (typeof innerText !== 'string') return
-          style.innerText = this.updateStyle(innerText, originalCluster, themeCluster)
         })
         this.$emit('changeTheme', this.vModel)
       },
@@ -104,13 +101,13 @@ export default {
       })
       return newStyle
     },
-
     getCSSString (url) {
       return new Promise((resolve, reject) => {
         const xhr = new XMLHttpRequest()
         xhr.onreadystatechange = () => {
           if (xhr.readyState === 4 && xhr.status === 200) {
-            resolve(xhr.responseText.replace(/@font-face{[^}]+}/, ''))
+            this.chalk = xhr.responseText.replace(/@font-face{[^}]+}/, '')
+            resolve(this.chalk)
           }
         }
         xhr.open('GET', url)

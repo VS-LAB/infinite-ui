@@ -1,0 +1,358 @@
+@keyframes labelOfLi1 {
+  0% {
+    background: rgba(255,255,255,1);
+    box-shadow: 0 6px 12px 0 #E9E7FB;
+  }
+  100% {
+    background: rgba(255,255,255,1);
+    box-shadow: 0 6px 12px 0 #E9E7FB;
+  }
+}
+
+@keyframes labelOfLiBeat {
+  0% {
+    transform: translate(-16px, -20px);
+    background: rgba(255,255,255,0);
+    box-shadow: 0 0 4px 1px rgba(233, 231, 251, 0);
+  }
+  50% {
+    transform: translate(-0px, -0px);
+    background: rgba(255,255,255,1);
+    box-shadow: 0 0 4px 1px rgba(233, 231, 251, 1);
+  }
+  51% {
+    box-shadow: 0 0 4px 1px rgba(233, 231, 251, 0);
+  }
+  100% {
+    background: rgba(255,255,255,0);
+  }
+}
+
+@keyframes labelOfTextBeat {
+  0% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 0;
+    color: rgba(72,89,104,1);
+  }
+  50% {
+    opacity: 1;
+    color: rgba(72,89,104,1);
+  }
+  100% {
+    opacity: 1;
+    color: rgba(72,89,104,1);
+  }
+}
+
+@keyframes labelOfIconBeat {
+  0% {
+    transform: translate(-6px, -14px);
+    opacity: 0;
+  }
+  1% {
+    transform: translate(-6px, -14px);
+    opacity: 1;
+  }
+  25% {
+    transform: translate(-6px, -14px);
+    opacity: 1;
+  }
+  75% {
+    transform: translate(-0px, -0px);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-0px, -0px);
+    opacity: 1;
+  }
+}
+
+@keyframes labelOfIconBeat1 {
+  0% {
+    transform: translate(-6px, -14px);
+    opacity: 0;
+  }
+  1% {
+    transform: translate(-6px, -14px);
+    opacity: 0;
+    color: rgba(255,118,53,1);
+  }
+  5% {
+    transform: translate(-6px, -14px);
+    opacity: 0;
+  }
+  15% {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(0, 0);
+    opacity: 1;
+    color: rgba(255,118,53,1);
+  }
+}
+
+@keyframes labelOfIconBeat3 {
+  0% {
+    transform: translate(-6px, -14px);
+    opacity: 0;
+    color: rgba(24,144,255,1);
+  }
+  1% {
+    transform: translate(-6px, -14px);
+    opacity: 0;
+  }
+  // 1~5是白色从出现到完全遮挡时间
+  5% {
+    transform: translate(-6px, -14px);
+    opacity: 0;
+  }
+  15% {
+    transform: translate(0, 0);
+    opacity: 1;
+    color: rgba(24,144,255,1);
+  }
+  100% {
+    transform: translate(0, 0);
+    opacity: 1;
+    color: rgba(24,144,255,1);
+  }
+}
+
+@keyframes labelOfIconBeat5 {
+  0% {
+    transform: translate(-6px, -14px);
+    opacity: 0;
+    color: rgba(48,49,51,1);
+  }
+  1% {
+    transform: translate(-6px, -14px);
+    opacity: 0;
+  }
+  // 1~5是白色从出现到完全遮挡时间
+  5% {
+    transform: translate(-6px, -14px);
+    opacity: 0;
+  }
+  15% {
+    transform: translate(0, 0);
+    opacity: 1;
+    color: rgba(48,49,51,1);
+  }
+  100% {
+    transform: translate(0, 0);
+    opacity: 1;
+    color: rgba(48,49,51,1);
+  }
+}
+
+@keyframes sectionOfMenuTransparency1 {
+  0% {
+    background: rgba(255,141,56,1);
+  }
+  100% {
+    
+  }
+}
+
+@keyframes sectionOfMenuTransparency3 {
+  0% {
+    background: rgba(255,141,56,1);
+  }
+  25% {
+    background: rgba(255,141,56,.5);
+  }
+  75% {
+    background: rgba(24,144,255,.5);
+  }
+  100% {
+    background: rgba(24,144,255,1);
+  }
+}
+
+@keyframes sectionOfMenuTransparency5 {
+  0% {
+    background: rgba(24,144,255,1);
+  }
+  25% {
+    background: rgba(24,144,255,.5);
+  }
+  75% {
+    background: rgba(43,41,57,.5);
+  }
+  100% {
+    background: rgba(43,41,57,1);
+  }
+}
+@keyframes sectionOfListO {
+  0% {
+    background: rgba(247,250,252,1);
+  }
+  40% {
+    background: rgba(247,250,252,1);
+  }
+  100% {
+    background: rgba(247,250,252,.9);
+  }
+}
+@keyframes OsectionOfList {
+  0% {
+    background: rgba(247,250,252,.9);
+  }
+  60% {
+    background: rgba(247,250,252,1);
+  }
+  75% {
+    background: rgba(247,250,252,1);
+  }
+  100% {
+    background: rgba(247,250,252,1);
+  }
+}
+@keyframes sectionOfList {
+  0% {
+    background: rgba(247,250,252,1);
+  }
+  30% {
+    background: rgba(247,250,252,.9);
+  }
+  65% {
+    background: rgba(247,250,252,1);
+  }
+  100% {
+    background: rgba(247,250,252,1);
+  }
+}
+
+/* 背景纯色圆环仿水波效果 */
+@keyframes circleWave {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(3.5);
+    top: -45vw;
+  }
+}
+/* 元素以一定角度旋转飞入效果 */
+@keyframes rotateIn {
+  0% {
+    top: -77vh;
+    left: 170vw;
+    opacity: 1;
+    // translateZ(0)
+    transform: rotateZ(50deg) skewY(158deg) scale(5);
+    transform-origin: -128px -43px;
+  }
+  100% {
+    top: 20vh;
+    left: 0vw;
+    opacity: 1;
+    transform: rotateZ(0deg) skewY(180deg) scale(1);
+    transform-origin: -128px -43px;
+  }
+}
+@keyframes slideUp {
+  0% {
+    opacity: 0;
+    top: 20vh;
+  }
+  100% {
+    opacity: 1;
+    top: 7vh;
+  }
+}
+@keyframes slideUpBg {
+  0% {
+    opacity: 0;
+    top: 100vh;
+  }
+  100% {
+    opacity: 1;
+    top: 0vh;
+  }
+}
+@keyframes hideIconBgMove {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: .3;
+  }
+}
+@keyframes hideIconPageWindow {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: .6;
+  }
+}
+@keyframes hideIconPageStep7 {
+  0% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100%);
+    opacity: .6;
+  }
+}
+@keyframes windowBgShadow3 {
+  0% {
+    box-shadow: 0 14px 50px 0px rgba(178,79,25,0.7);
+  }
+  50% {
+    box-shadow: 0 14px 50px 0px rgba(21,95,220,0.1);
+  }
+  80% {
+    box-shadow: 0 14px 50px 0px rgba(21,95,220,0.7);
+  }
+  100% {
+    box-shadow: 0 14px 50px 0px rgba(21,95,220,0.7);
+  }
+}
+@keyframes windowBgShadow5 {
+  0% {
+    box-shadow: 0 14px 50px 0px rgba(21,95,220,0.7);
+  }
+  50% {
+    box-shadow: 0 14px 50px 0px rgba(18,17,22,0.1);
+  }
+  80% {
+    box-shadow: 0 14px 50px 0px rgba(18,17,22,0.7);
+  }
+  100% {
+    box-shadow: 0 14px 50px 0px rgba(18,17,22,0.7);
+  }
+}
+@keyframes windowBgShadow8 {
+  0% {
+    box-shadow: 0 14px 50px 0px rgba(18,17,22,0.7);
+  }
+  50% {
+    box-shadow: 0 14px 50px 0px rgba(21,95,220,0.1);
+  }
+  80% {
+    box-shadow: 0 14px 50px 0px rgba(21,95,220,0.7);
+  }
+  100% {
+    box-shadow: 0 14px 50px 0px rgba(21,95,220,0.7);
+  }
+}
+@keyframes windowBgShadow9 {
+  0% {
+    box-shadow: 0 14px 50px 0px rgba(21,95,220,0.7);
+  }
+  50% {
+    box-shadow: 0 14px 50px 0px rgba(178,79,25,0.1);
+  }
+  80% {
+    box-shadow: 0 14px 50px 0px rgba(178,79,25,0.7);
+  }
+  100% {
+    box-shadow: 0 14px 50px 0px rgba(178,79,25,0.7);
+  }
+}

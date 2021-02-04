@@ -1,7 +1,16 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-12-21 09:47:44
+ * @LastEditTime: 2020-12-31 16:18:57
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /infinite-ui/examples/App.vue
+-->
 <template>
   <div style="height: 100%">
     <el-container :class="{ 'home-container': isFixed }">
-      <el-header height="80"
+      <el-header v-if="!['/homeAnimationIndex','/scrollContainer'].includes($route.name)"
+                 height="80"
                  :class="{ 'header-fixed': !isFixed }">
         <header-model></header-model>
       </el-header>
@@ -15,6 +24,7 @@
 </template>
 <script>
 import HeaderModel from './components/header'
+console.log(222)
 export default {
   components: {
     HeaderModel
@@ -24,8 +34,15 @@ export default {
   },
   computed: {
     isFixed () {
+      console.log(this.$route.name)
       return this.$route.name.includes('home')
     }
+  },
+  mounted () {
+    // var t = window.devicePixelRatio 
+    // if (t !== 1) {
+    //   alert('当前缩放比不正确，请调整成100%缩放比体验最佳')
+    // }
   }
 }
 </script>

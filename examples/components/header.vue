@@ -1,7 +1,12 @@
 <template>
-  <div class="header-model" to ='/'>
-    <img src='@/assets/log.png' alt="Infinite-ui" class="info" @click="toHome()">
-    <div class="header-menu" @click="toPath()">组件</div>
+  <div class="header-model"
+       to='/'>
+    <img src='@/assets/logo.png'
+         alt="Infinite-ui"
+         class="info"
+         @click="toHome()">
+    <div class="header-menu"
+         @click="toPath()">组件</div>
   </div>
 </template>
 
@@ -12,7 +17,7 @@ export default {
   },
   methods: {
     toHome () {
-      this.$router.push('/home')
+      this.$router.push('/index')
     },
     toPath () {
       this.$router.push('/guide/installation')
@@ -27,21 +32,21 @@ export default {
   background: #fff;
   box-sizing: border-box;
   margin: 0 auto;
-  display:flex;
+  display: flex;
   align-items: center;
   text-align: right;
   .info {
-   width: 190px;
-   &:hover{
-    cursor:pointer;
-   }
+    width: 180px;
+    &:hover {
+      cursor: pointer;
+    }
   }
-  .header-menu{
+  .header-menu {
     flex: 1;
     font-size: 16px;
-    color: #FF7635;
-    &:hover{
-      cursor:pointer;
+    color: #ff7635;
+    &:hover {
+      cursor: pointer;
       // background: rgba(255,118,53,.1);
       // border-radius: 14px;
     }

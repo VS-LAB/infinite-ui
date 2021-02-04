@@ -1,16 +1,18 @@
-import { Chart, registerEngine, registerGeometry, registerComponentController } from '@antv/g2/lib/core'
-import Line from '@antv/g2/lib/geometry/line'
-import Point from '@antv/g2/lib/geometry/point'
-import Interval from '@antv/g2/lib/geometry/interval'
-import Axis from '@antv/g2/lib/chart/controller/axis'
-import Tooltip from '@antv/g2/lib/chart/controller/tooltip'
-import Legend from '@antv/g2/lib/chart/controller/legend'
-import Coordinate from '@antv/coord/lib/factory'
-import * as G from '@antv/g-canvas'
 
+let chart = null
+// if (process.env.NODE_ENV === 'lib' || process.env.NODE_ENV === 'development') {
+const { Chart, registerEngine, registerGeometry, registerComponentController } = require('@antv/g2/lib/core')
+chart = Chart
+const Line = require('@antv/g2/lib/geometry/line').default
+const Point = require('@antv/g2/lib/geometry/point').default
+const Interval = require('@antv/g2/lib/geometry/interval').default
+const Axis = require('@antv/g2/lib/chart/controller/axis').default
+const Tooltip = require('@antv/g2/lib/chart/controller/tooltip').default
+const Legend = require('@antv/g2/lib/chart/controller/legend').default
+const Coordinate = require('@antv/coord/lib/factory').default
+const G = require('@antv/g-canvas')
 // 按需注入
 registerEngine('canvas', G)
-
 registerGeometry('line', Line)
 registerGeometry('point', Point)
 registerGeometry('interval', Interval)
@@ -19,6 +21,10 @@ registerComponentController('axis', Axis)
 registerComponentController('tooltip', Tooltip)
 registerComponentController('legend', Legend)
 registerComponentController('coordinate', Coordinate)
+// } else {
+//   const G2 = require('@antv/g2')
+//   chart = G2.Chart
+// }
 
 export default {
   computed: {
@@ -44,11 +50,12 @@ export default {
       if (this.chart) {
         this.chart.destroy()
       }
-      const dom = document.getElementById(this.id)
+      // const dom = document.getElementById(this.id)
+      const dom = this.$el
       if (dom && dom.innerHTML) {
         dom.innerHTML = ''
       }
-      return new Chart({
+      return new chart({
         container: this.id,
         width: dom.offsetWidth || 800,
         height: dom.offsetHeight || 500,

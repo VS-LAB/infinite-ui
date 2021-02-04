@@ -1,31 +1,17 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router/index'
-// 引入element-ui
-import {
-  Col,
-  Row,
-  Container,
-  Header,
-  Main,
-  Aside
-} from 'element-ui'
-// import 'element-ui/lib/theme-chalk/index.css'
+// // 引入element-ui
+import './plugins/element'
+
+import 'element-ui/lib/theme-chalk/index.css'
 import './style/index.scss'
 import demoBlock from './components/demo-block'
 import hljs from 'highlight.js'
 import '../packages/theme-chalk/src/index.scss'
-
-// 导入组件库
+// // 导入组件库
 import packages from '../packages'
-// import infiniteUi from '../lib/infinite-ui.umd'
-// import '../lib/theme-chalk/index.css'
-Vue.use(Col)
-  .use(Row)
-  .use(Container)
-  .use(Header)
-  .use(Main)
-  .use(Aside)
+
 for (const key in packages) {
   if (packages.hasOwnProperty(key)) {
     const element = packages[key]
@@ -34,8 +20,6 @@ for (const key in packages) {
     };
   }
 }
-
-// Vue.use(infiniteUi)
 
 Vue.config.productionTip = false
 

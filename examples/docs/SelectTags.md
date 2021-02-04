@@ -618,6 +618,7 @@
 | tags-num          | 指定 input 内被选中选项的标签显示个数                           | number  | —      | 3              |
 | placeholder       | 输入框占位文本                                                  | String  | —      | 请选择         |
 | filterable        | 是否开启关键字搜索功能                                          | Boolean | —      | false          |
+| clearable         | 搜索框是否开启清除功能                                          | Boolean | —      | false          |
 | serachPlaceholder | 开启关键字搜索功能时可以设置`serachPlaceholder`为搜索框占位文本 | String  | —      | 请输入字段名称 |
 
 ### Options Attributes

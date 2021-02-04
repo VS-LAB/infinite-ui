@@ -79,7 +79,7 @@
     <div class="explain-footer">
       <img src="@/assets/log_footer.png"
            alt="Infinite-ui" />
-      <p>Copyright&copy;2020 信贷风险及数据分析数据中台可视化</p>
+      <p>Copyright&copy;2021 信贷风险及数据分析数据中台可视化</p>
     </div>
   </div>
 </template>

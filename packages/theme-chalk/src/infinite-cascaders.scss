@@ -72,12 +72,10 @@
     border-color: $--color-primary;
   }
 
-
   .el-date-table td.current:not(.disabled) span {
     background-color: $--color-primary;
     color: #fff;
   }
-
 
   .el-month-table td .cell {
     border-radius: 2px;

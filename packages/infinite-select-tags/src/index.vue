@@ -15,6 +15,7 @@
         <el-input v-model.trim="serachKeyWord"
                   :placeholder="serachPlaceholder"
                   :size="size"
+                  :clearable="clearable"
                   prefix-icon="el-icon-search" />
       </div>
 
@@ -120,6 +121,10 @@ const vue = {
     serachPlaceholder: {
       type: String,
       default: '请输入字段名称'
+    },
+    clearable: {
+      type: Boolean,
+      default: true
     },
     filterLabels: {
       type: Function,
