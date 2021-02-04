@@ -24,9 +24,10 @@ $popperWidth : 424px;
   .infinite-selected {
     display: flex;
     align-items: center;
-    width: $popperWidth;
+    width: calc(#{$popperWidth} - 38px);
     height: 100%;
     position: relative;
+    overflow: hidden;
 
     .infinite-selected-tag {
       display: flex;

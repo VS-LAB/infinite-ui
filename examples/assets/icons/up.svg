@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="26px" height="30px" viewBox="0 0 26 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 63 (92445) - https://sketch.com -->
+    <title>红色箭头</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <filter x="-34.9%" y="-50.4%" width="169.8%" height="200.9%" filterUnits="objectBoundingBox" id="filter-1">
+            <feOffset dx="0" dy="18" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="52" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.876199065   0 0 0 0 0.899843936   0 0 0 0 0.964022871  0 0 0 0.7401934 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+    </defs>
+    <g id="v1.4" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="05" transform="translate(-1123.000000, -797.000000)" fill="#EF4642" fill-rule="nonzero">
+            <g id="编组-15">
+                <g id="达成率" filter="url(#filter-1)" transform="translate(634.000000, 409.000000)">
+                    <g id="大卡片" transform="translate(-0.000000, -0.000002)">
+                        <g id="编组-2" transform="translate(488.600000, 387.200002)">
+                            <path d="M13.2943369,2.3 C14.0641488,2.3 14.6973143,2.8850523 14.7734529,3.63477626 L14.7811291,3.78679212 L14.781,24.301 L22.8618871,16.2222634 C23.4062263,15.6779243 24.2676363,15.6439031 24.8516094,16.1201999 L24.9645287,16.2222634 C25.5088678,16.7666026 25.542889,17.6280127 25.0665923,18.2119857 L24.9645287,18.324905 L14.4513208,28.8381129 C13.9069816,29.3824521 13.0455715,29.4164733 12.4615985,28.9401765 L12.3486792,28.8381129 L1.83547133,18.324905 C1.25484289,17.7442766 1.25484289,16.8028919 1.83547133,16.2222634 C2.37981049,15.6779243 3.24122058,15.6439031 3.82519361,16.1201999 L3.93811291,16.2222634 L11.807,24.091 L11.8075448,3.78679212 C11.8075448,2.9656595 12.4732043,2.3 13.2943369,2.3 Z" id="形状结合" transform="translate(13.400000, 15.786792) scale(1, -1) translate(-13.400000, -15.786792) "></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

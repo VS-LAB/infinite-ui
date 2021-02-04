@@ -1,6 +1,6 @@
 {
   "name": "infinite-ui",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "An Vue UI Toolkit For Web",
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -11,10 +11,10 @@
     "bootstrap": "npm install && cd ./packages/theme-chalk && npm install",
     "build:bundle": "webpack --config ./build/webpack.component.js",
     "build:docs": "vue-cli-service build",
-    "build:entry": "node build/build-entry.js ",
+    "build:entry": "node build/build-entry.js",
     "build:lib": "node build/build-lib.js",
     "build:utils": "cross-env BABEL_ENV=utils babel packages/utils --out-dir lib/utils && babel packages/mixins --out-dir lib/mixins",
-    "build:style": "gulp build --gulpfile packages/theme-chalk/gulpfile.js && cp-cli packages/theme-chalk/lib lib/theme-chalk && cp-cli packages/theme-chalk/src/fonts lib/theme-chalk/fonts",
+    "build:style": "gulp build --gulpfile packages/theme-chalk/gulpfile.js",
     "clean": "rimraf lib && rimraf packages/*/lib",
     "init": "npm install commitizen -g && commitizen init cz-conventional-changelog --save-dev --save-exact && npm run bootstrap",
     "lib": "vue-cli-service build --target lib --name infinite-ui --mode lib --dest lib packages/index.js && webpack --config ./build/webpack.component.js"
@@ -58,6 +58,7 @@
     "mini-css-extract-plugin": "^0.9.0",
     "node-sass": "^4.14.1",
     "portfinder": "^1.0.28",
+    "postcss-px-to-viewport": "^1.1.1",
     "progress-bar-webpack-plugin": "^2.1.0",
     "sass-loader": "^8.0.0",
     "shelljs": "^0.8.4",

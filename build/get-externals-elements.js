@@ -21,6 +21,9 @@ const config = {
   // 公共依赖
   'infinite-ui/packages/utils/index': 'infinite-ui/lib/utils/index',
   'infinite-ui/packages/mixins/chart': 'infinite-ui/lib/mixins/chart'
+  // 测试数据
+  // 'infinite-ui/packages/utils/index': 'finite-ui-wz/lib/utils/index',
+  // 'infinite-ui/packages/mixins/chart': 'finite-ui-wz/lib/mixins/chart'
 }
 
 elConponentList.forEach(file => {
@@ -29,10 +32,10 @@ elConponentList.forEach(file => {
   }
 })
 
-const getExternalsEl = function (external) {
+const getExternalsEl = function (include) {
   const externalsElUrl = {}
   Object.keys(config).forEach(key => {
-    if ((external && !key.includes(external)) || (!external)) {
+    if (!include || key.includes(include)) {
       externalsElUrl[key] = config[key]
     }
   })
@@ -40,5 +43,6 @@ const getExternalsEl = function (external) {
 }
 module.exports = {
   config,
-  getExternalsEl
+  getExternalsEl,
+  elConponentList
 }

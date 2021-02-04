@@ -14,7 +14,7 @@ import InfiniteTable from './infinite-table'
 import InfiniteTableColumn from './infinite-table-column'
 import InfiniteThemePicker from './infinite-theme-picker'
 import InfiniteTree from './infinite-tree'
-const version = '0.0.10'
+const version = '1.0.4'
 const components = [
   InfiniteButton,
   InfiniteCascaders,
