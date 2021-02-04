@@ -1,0 +1,18 @@
+language: node_js
+node_js:
+  - "10"
+
+env:
+  - TRAVIS_CI=1
+
+cache:
+  yarn: true
+  directories:
+    - node_modules
+
+install:
+  npm i
+
+script:
+  - npm run test:unit
+  - npm run build:lib
