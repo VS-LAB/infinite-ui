@@ -6,6 +6,7 @@
                :router-index="routerIndex"
                :is-transition="isTransition"
                @goAnimationStep="goAnimationStep"></HeaderNav>
+    <tip-scroll :show="showTipScroll" />
     <component ref="componnet"
                :style="{zIndex:100-index, position:'fixed',width:'100vw',height:'100vh'}"
                v-for="(component,index) in pageNameArr"
@@ -26,6 +27,7 @@ import Standard from '@/views/standard'
 import LastPage from '@/views/LastPage/index.vue'
 import ViewCharts from '../views/ViewCharts/Index'
 import IconPage from '@/views/IconPage'
+import tipScroll from '@/components/tipScroll'
 import { isFirefox } from '@/util'
 
 export default {
@@ -37,10 +39,12 @@ export default {
     Standard,
     LastPage,
     ViewCharts,
-    IconPage
+    IconPage,
+    tipScroll
   },
   data () {
     return {
+      showTipScroll: false,
       animesFun: [], // 动画方法集合
       stepFun: [], // 初始化动画方法集合
       animeIndex: 0, //
@@ -196,6 +200,14 @@ export default {
       }
     },
     async next (step = 0, executionType) {
+      // 当执行第一个动画时，显示滚动提示
+      if (this.animeIndex === 0) {
+        setTimeout(() => {
+          this.showTipScroll = true
+        }, 2000)
+      } else {
+        this.showTipScroll = false
+      }
       // 当执行第一个动画时，顶部导航默认停留
       if (this.animeIndex === 1) {
         setTimeout(_ => {

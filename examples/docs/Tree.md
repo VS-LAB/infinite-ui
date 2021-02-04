@@ -1,6 +1,6 @@
 ## Tree
 
-### "门神" - 资源管理 / 资源详情树
+### 编辑功能使用
 
 Tree 增删改及自定义编辑功能。
 :::demo
@@ -9,13 +9,14 @@ Tree 增删改及自定义编辑功能。
 <template>
   <div>
     <infinite-button @click="addRootNode">添加根节点</infinite-button>
+    <infinite-button @click="editSwitch">编辑开关</infinite-button>
     <infinite-tree
       ref="infiniteTreeRef"
-      :tree-data="treeData"
+      :data="treeData"
       :is-edit-node="isEditNode"
       :edit-inputs="editInputs"
       @addNodeBefore="addNodeBefore"
-      @edietNodeBefore="edietNodeBefore"
+      @editNodeBefore="editNodeBefore"
       @handlerSave="handlerSave"
       @handlerDelete="handlerDelete"
     >
@@ -30,15 +31,18 @@ Tree 增删改及自定义编辑功能。
         treeData: [
           {
             id: 10,
-            label: '资源1(1)',
+            label: '资源1',
+            number: '1',
             children: [
               {
                 id: 11,
-                label: '资源11(11)',
+                label: '资源11',
+                number: '11',
                 children: [
                   {
                     id: 111,
-                    label: '资源111(111)',
+                    label: '资源111',
+                    number: '111',
                   },
                 ],
               },
@@ -46,25 +50,30 @@ Tree 增删改及自定义编辑功能。
           },
           {
             id: 20,
-            label: '资源2(2)',
+            label: '资源2',
+            number: '2',
             children: [
               {
                 id: 21,
-                label: '资源21(21)',
+                label: '资源21',
+                number: '21',
                 children: [
                   {
                     id: 211,
-                    label: '资源211(211)',
+                    label: '资源211',
+                    number: '211',
                   },
                 ],
               },
               {
                 id: 22,
-                label: '资源22(22)',
+                label: '资源22',
+                number: '22',
                 children: [
                   {
                     id: 212,
-                    label: '资源221(221)',
+                    label: '资源221',
+                    number: '221',
                   },
                 ],
               },
@@ -76,6 +85,7 @@ Tree 增删改及自定义编辑功能。
         // 编辑中输入框
         editInputs: [
           {
+            id: 'label',
             placeholder: '请输入资源名称',
             sameNameError: '资源名称重复',
             sameNameValiMode: 'local',
@@ -102,6 +112,7 @@ Tree 增删改及自定义编辑功能。
             },
           },
           {
+            id: 'number',
             placeholder: '资源ID,支持数字、英文、"-"，1-16位',
             disabled: false,
             hidden: false,
@@ -158,7 +169,7 @@ Tree 增删改及自定义编辑功能。
         this.editInputs[1].disabled = false;
       },
       // 编辑节点之前
-      edietNodeBefore(data, node) {
+      editNodeBefore(data, node) {
         // 禁用资源ID输入框
         this.editInputs[1].disabled = !data.outer;
       },
@@ -167,8 +178,14 @@ Tree 增删改及自定义编辑功能。
         this.editInputs[1].disabled = false;
         this.$refs.infiniteTreeRef.addRootNode();
       },
+      // 编辑开关
+      editSwitch() {
+        this.$refs.infiniteTreeRef.isInOperation(() => {
+          this.isEditNode = !this.isEditNode;
+        });
+      },
       // 删除完成
-      handlerDelete(node) {
+      handlerDelete() {
         const h = this.$createElement;
         // 删除提示
         this.localNotify && this.localNotify.close();
@@ -219,9 +236,9 @@ Tree 增删改及自定义编辑功能。
 
 :::
 
-### "门神" - 组织管理 / 编辑
+### 拖拽使用
 
-Tree 增删改及自定义编辑功能。
+Tree 自定义增删改，新增拖拽成功后撤回功能。
 :::demo
 
 ```html
@@ -230,34 +247,55 @@ Tree 增删改及自定义编辑功能。
     <infinite-button @click="addRootNode">添加根节点</infinite-button>
     <infinite-tree
       ref="infiniteTreeRef"
-      :tree-data="treeData"
+      :data="treeData"
       :is-edit-node="isEditNode"
       :edit-inputs="editInputs"
+      :draggable="true"
       @addNodeBefore="addNodeBefore"
-      @edietNodeBefore="edietNodeBefore"
+      @editNodeBefore="editNodeBefore"
       @handlerSave="handlerSave"
       @handlerDelete="handlerDelete"
+      @node-drop="nodeDrop"
     >
     </infinite-tree>
     <infinite-button @click="confirm">提交</infinite-button>
+    <infinite-button @click="resetData">刷新数据</infinite-button>
+    <infinite-dialog
+      v-model="visible"
+      title="重复节点名称"
+      width="450px"
+      @close="close"
+      @confirm="dialogConfirm"
+    >
+      <span>
+        <el-input v-model="nodeLabel"></el-input>
+      </span>
+    </infinite-dialog>
   </div>
 </template>
 <script>
   export default {
     data() {
       return {
+        nodeLabel: '',
+        visible: false,
+        backupsData: null,
+        dragging: null,
         treeData: [
           {
             id: 10,
-            label: '资源1(1)',
+            label: '资源1',
+            number: '1',
             children: [
               {
                 id: 11,
-                label: '资源11(11)',
+                label: '资源11',
+                number: '11',
                 children: [
                   {
                     id: 111,
-                    label: '资源111(111)',
+                    label: '资源111',
+                    number: '111',
                   },
                 ],
               },
@@ -265,25 +303,30 @@ Tree 增删改及自定义编辑功能。
           },
           {
             id: 20,
-            label: '资源2(2)',
+            label: '资源2',
+            number: '2',
             children: [
               {
                 id: 21,
-                label: '资源21(21)',
+                label: '资源21',
+                number: '21',
                 children: [
                   {
                     id: 211,
-                    label: '资源211(211)',
+                    label: '资源211',
+                    number: '211',
                   },
                 ],
               },
               {
                 id: 22,
-                label: '资源21(21)',
+                label: '资源22',
+                number: '22',
                 children: [
                   {
                     id: 212,
-                    label: '资源211(211)',
+                    label: '资源221',
+                    number: '221',
                   },
                 ],
               },
@@ -295,6 +338,7 @@ Tree 增删改及自定义编辑功能。
         // 编辑中输入框
         editInputs: [
           {
+            id: 'label',
             placeholder: '请输入组织名称',
             sameNameError: '资源名称重复',
             sameNameValiMode: 'local',
@@ -321,6 +365,7 @@ Tree 增删改及自定义编辑功能。
             },
           },
           {
+            id: 'number',
             disabled: true,
             hidden: false,
           },
@@ -362,9 +407,9 @@ Tree 增删改及自定义编辑功能。
         this.editInputs[1].hidden = true;
       },
       // 编辑节点之前
-      edietNodeBefore(data) {
+      editNodeBefore(data) {
         this.editInputs[1].disabled = true;
-        this.editInputs[1].hidden = !data.label.includes('(');
+        this.editInputs[1].hidden = !data.number;
       },
       // 添加根节点
       addRootNode() {
@@ -372,7 +417,7 @@ Tree 增删改及自定义编辑功能。
         this.$refs.infiniteTreeRef.addRootNode();
       },
       // 删除完成
-      handlerDelete(node) {
+      handlerDelete() {
         const h = this.$createElement;
         // 删除提示
         this.localNotify && this.localNotify.close();
@@ -411,11 +456,56 @@ Tree 增删改及自定义编辑功能。
           duration: 2000,
         });
       },
+      // 提交时可以做当前操作众的判断后获取数据
       confirm() {
         this.$refs.infiniteTreeRef.isInOperation(() => {
           console.log(this.treeData);
         });
       },
+      // 初始化数据
+      resetData() {
+        this.treeData = JSON.parse(JSON.stringify(this.backupsData));
+      },
+      // 节点名称是否相同
+      isSameNodeLabel(nodes) {},
+      nodeDrop(dragging, dropNode) {
+        const crtId = dragging.data.id;
+        const crtNode = this.$refs.infiniteTreeRef.getNode(crtId);
+        // 获取相同级别的所有数据，这里特殊处理根节点
+        const sameLevelNodes =
+          crtNode.parent.data.children || crtNode.parent.data;
+        // 假设当前节点没有重复
+        let flag = false;
+        sameLevelNodes.forEach((item) => {
+          //排除自身节点
+          if (item.id !== crtId && !flag && item.label === crtNode.data.label) {
+            flag = true;
+          }
+        });
+        // 当前节点重复判断
+        if (flag) {
+          this.nodeLabel = dragging.data.label;
+          this.dragging = dragging;
+          this.visible = true;
+        }
+      },
+      // 关闭弹窗
+      close() {
+        // 恢复仅上一次拖拽成功的节点
+        this.$refs.infiniteTreeRef.revocationDrag();
+      },
+      // 弹窗确定
+      dialogConfirm() {
+        if (this.dragging.data.label === this.nodeLabel) {
+          this.$message.error('节点名称重复');
+          return;
+        }
+        this.visible = false;
+        this.dragging.data.label = this.nodeLabel;
+      },
+    },
+    mounted() {
+      this.backupsData = JSON.parse(JSON.stringify(this.treeData));
     },
   };
 </script>
@@ -423,9 +513,9 @@ Tree 增删改及自定义编辑功能。
 
 :::
 
-### "门神" - 角色管理 / 编辑
+### 高亮/复选框/禁用使用
 
-Tree 增删改及自定义编辑功能。
+Tree 新增高亮方法。
 :::demo
 
 ```html
@@ -433,7 +523,7 @@ Tree 增删改及自定义编辑功能。
   <div>
     <infinite-tree
       ref="infiniteTreeRef"
-      :tree-data="treeData"
+      :data="treeData"
       :show-checkbox="true"
       :default-expand-all="true"
     >
@@ -468,7 +558,7 @@ Tree 增删改及自定义编辑功能。
             ],
           },
         ],
-        highlightStatus: true,
+        highlightStatus: false,
       };
     },
     methods: {
@@ -485,23 +575,99 @@ Tree 增删改及自定义编辑功能。
 
 :::
 
+### 插槽使用
+
+Tree 自定义插槽内容
+:::demo
+
+```html
+<template>
+  <div>
+    <infinite-tree
+      ref="infiniteTreeRef"
+      :data="treeData"
+      :default-expand-all="true"
+    >
+      <template slot-scope="{node, data}">
+        <i v-if="node.childNodes.length" class="el-icon-folder-opened"></i>
+        <i v-else class="el-icon-document"></i>
+        {{node.label}}
+      </template>
+    </infinite-tree>
+  </div>
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        treeData: [
+          {
+            id: 10,
+            label: '资源1(1)',
+            disabled: true,
+            children: [
+              {
+                id: 11,
+                label: '资源11(11)',
+                children: [
+                  {
+                    id: 111,
+                    label: '资源111(111)',
+                  },
+                  {
+                    id: 112,
+                    label: '资源112(112)',
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+        highlightStatus: false,
+      };
+    },
+  };
+</script>
+```
+
+:::
+
 ### Attributes
 
-| 参数                  | 说明                                                 | 类型    | 可选值 | 默认值 |
-| --------------------- | ---------------------------------------------------- | ------- | ------ | ------ |
-| tree-data             | 展示数据                                             | Array   | —      | —      |
-| default-props         | 配置选项，具体看下表                                 | Object  | —      | —      |
-| show-checkbox         | 节点是否可被选择                                     | Boolean | —      | false  |
-| default-expand-all    | 是否默认展开所有节点                                 | Boolean | —      | false  |
-| default-expanded-keys | 默认展开的节点的 key 的数组                          | Array   | —      | —      |
-| node-key              | 每个树节点用来作为唯一标识的属性，整棵树应该是唯一的 | String  | —      | id     |
-| is-edit-node          | 是否可编辑子节点                                     | Boolean | —      | false  |
-| edit-inputs           | 编辑时对应的输入框，具体看下表                       | Array   | —      | —      |
-| draggable             | 是否可拖拽                                           | Boolean | —      | false  |
-| edit-component-size   | 节点编辑时，对应输入框按钮大小                       | String  | —      | 'mini' |
-| tree-line             | 节点连接线                                           | Boolean | —      | true   |
+| 参数                    | 说明                                                                                                                                       | 类型                                   | 可选值 | 默认值           |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------- | ------ | ---------------- |
+| data                    | 展示数据                                                                                                                                   | Array                                  | —      | —                |
+| is-edit-node            | 是否可编辑子节点                                                                                                                           | Boolean                                | —      | false            |
+| edit-inputs             | 编辑时对应的输入框，具体看下表                                                                                                             | Array                                  | —      | —                |
+| edit-component-size     | 节点编辑时，对应输入框按钮大小                                                                                                             | String                                 | —      | 'mini'           |
+| tree-line               | 节点连接线                                                                                                                                 | Boolean                                | —      | true             |
+| same-operation-error    | 可编辑时，重复操作提示内容                                                                                                                 | String                                 | —      | 请先完成当前操作 |
+| is-auto-expand-children | 拖拽时，且拖拽至目标节点停留时，是否默认展开目标节点                                                                                       | Boolean                                | —      | true             |
+| empty-text              | 内容为空的时候展示的文本                                                                                                                   | String                                 | —      | —                |
+| node-key                | 每个树节点用来作为唯一标识的属性，整棵树应该是唯一的                                                                                       | String                                 | —      | id               |
+| props                   | 配置选项，具体看下表                                                                                                                       | object                                 | —      | —                |
+| render-after-expand     | 是否在第一次展开某个树节点后才渲染其子节点                                                                                                 | boolean                                | —      | true             |
+| load                    | 加载子树数据的方法，仅当 lazy 属性为 true 时生效                                                                                           | function(node, resolve)                | —      | —                |
+| render-content          | 树节点的内容区的渲染 Function                                                                                                              | Function(h, { node, data, store }      | —      | —                |
+| highlight-current       | 是否高亮当前选中节点，默认值是 false。                                                                                                     | boolean                                | —      | false            |
+| default-expand-all      | 是否默认展开所有节点                                                                                                                       | boolean                                | —      | false            |
+| expand-on-click-node    | 是否在点击节点的时候展开或者收缩节点， 默认值为 true，如果为 false，则只有点箭头图标的时候才会展开或者收缩节点。                           | boolean                                | —      | true             |
+| check-on-click-node     | 是否在点击节点的时候选中节点，默认值为 false，即只有在点击复选框时才会选中节点。                                                           | boolean                                | —      | false            |
+| auto-expand-parent      | 展开子节点的时候是否自动展开父节点                                                                                                         | boolean                                | —      | true             |
+| default-expanded-keys   | 默认展开的节点的 key 的数组                                                                                                                | array                                  | —      | —                |
+| show-checkbox           | 节点是否可被选择                                                                                                                           | boolean                                | —      | false            |
+| check-strictly          | 在显示复选框的情况下，是否严格的遵循父子不互相关联的做法，默认为 false                                                                     | boolean                                | —      | false            |
+| default-checked-keys    | 默认勾选的节点的 key 的数组                                                                                                                | array                                  | —      | —                |
+| current-node-key        | 当前选中的节点                                                                                                                             | string, number                         | —      | —                |
+| filter-node-method      | 对树节点进行筛选时执行的方法，返回 true 表示这个节点可以显示，返回 false 则表示这个节点会被隐藏                                            | Function(value, data, node)            | —      | —                |
+| accordion               | 是否每次只打开一个同级树节点展开                                                                                                           | boolean                                | —      | false            |
+| icon-class              | 自定义树节点的图标                                                                                                                         | string                                 | -      | -                |
+| lazy                    | 是否懒加载子节点，需与 load 方法结合使用                                                                                                   | boolean                                | —      | false            |
+| draggable               | 是否开启拖拽节点功能                                                                                                                       | boolean                                | —      | false            |
+| allow-drag              | 判断节点能否被拖拽                                                                                                                         | Function(node)                         | —      | —                |
+| allow-drop              | 拖拽时判定目标节点能否被放置。`type` 参数有三种情况：'prev'、'inner' 和 'next'，分别表示放置在目标节点前、插入至目标节点和放置在目标节点后 | Function(draggingNode, dropNode, type) | —      | —                |
 
-### default-props Attributes
+### props Attributes
 
 | 参数     | 说明     | 类型   | 可选值 | 默认值 |
 | -------- | -------- | ------ | ------ | ------ |
@@ -512,6 +678,7 @@ Tree 增删改及自定义编辑功能。
 
 | 参数             | 说明                                                 | 类型            | 可选值             | 默认值 |
 | ---------------- | ---------------------------------------------------- | --------------- | ------------------ | ------ |
+| id               | 编辑节点的 key                                       | String          | —                  | label  |
 | placeholder      | 占位符                                               | String          | —                  | —      |
 | sameNameError    | 当该属性存在值时，自动开启同名校验，值则为同名的提示 | String          | —                  | —      |
 | sameNameValiMode | 同名校验规则，这里默认为`local`当前层级校验          | String          | `overall`、`local` | local  |
@@ -527,6 +694,7 @@ Tree 增删改及自定义编辑功能。
 | addRootNode | 添加根节点 | —|
 | isInOperation | 当`edit-inputs`设置校验规则后，该方法可以提供校验及成功后的回调 | callback 接受一个回调函数|
 | revocationDel | 当某一个节点删除以后，该方法可以撤销上一次删除 | —|
+| revocationDrag | 拖拽成功后撤销方法，该方法可以撤销上一次拖拽 | —|
 | setHighlightNode | 设置需要高亮的节点 | 第一个参数 dataKeys 可以为数组或字符串或数字类型作为需要设置高亮的节点的 node-key，第二个参数则为设置高亮的开关|
 | filter | 对树节点进行筛选操作 | 接收一个任意类型的参数，该参数会在 filter-node-method 中作为第一个参数 |
 | updateKeyChildren | 通过 keys 设置节点子元素，使用此方法必须设置 node-key 属性 | (key, data) 接收两个参数，1. 节点 key 2. 节点数据的数组 |
@@ -552,11 +720,12 @@ Tree 增删改及自定义编辑功能。
 | 事件名称         | 说明                                                  | 回调参数                                                                                                                                                           |
 | ---------------- | ----------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | addNodeBefore    | 添加节点之前，`is-edit-node`开启时会生效              | 共两个参数，操作节点的 `data`，操作节点的`node`                                                                                                                    |
-| edietNodeBefore  | 编辑节点之前，`is-edit-node`开启时会生效              | 共两个参数，操作节点的 `data`，操作节点的`node`                                                                                                                    |
+| editNodeBefore   | 编辑节点之前，`is-edit-node`开启时会生效              | 共两个参数，操作节点的 `data`，操作节点的`node`                                                                                                                    |
 | addNode          | 点击添加节点按钮，`is-edit-node`开启时会生效          | 共一个参数，操作节点的 `data`                                                                                                                                      |
 | editNode         | 点击编辑节点按钮，`is-edit-node`开启时会生效          | 共一个参数，操作节点的 `data`                                                                                                                                      |
 | handlerSave      | 节点保存成功，`is-edit-node`开启时会生效              | 共一个参数，保存的当前节点的 `data`                                                                                                                                |
 | handlerDelete    | 节点删除成功，`is-edit-node`开启时会生效              | 共一个参数，删除的当前节点的 `data`                                                                                                                                |
+| editChange       | 编辑节点时的变化状态                                  | 共一个参数，节点编辑切换时候的状态`status`                                                                                                                         |
 | node-click       | 节点被点击时的回调                                    | 共三个参数，依次为：传递给 `data` 属性的数组中该节点所对应的对象、节点对应的 Node、节点组件本身。                                                                  |
 | node-contextmenu | 当某一节点被鼠标右键点击时会触发该事件                | 共四个参数，依次为：event、传递给 `data` 属性的数组中该节点所对应的对象、节点对应的 Node、节点组件本身。                                                           |
 | check-change     | 节点选中状态发生变化时的回调                          | 共三个参数，依次为：传递给 `data` 属性的数组中该节点所对应的对象、节点本身是否被选中、节点的子树中是否有被选中的节点                                               |
@@ -570,3 +739,9 @@ Tree 增删改及自定义编辑功能。
 | node-drag-over   | 在拖拽节点时触发的事件（类似浏览器的 mouseover 事件） | 共三个参数，依次为：被拖拽节点对应的 Node、当前进入节点对应的 Node、event                                                                                          |
 | node-drag-end    | 拖拽结束时（可能未成功）触发的事件                    | 共四个参数，依次为：被拖拽节点对应的 Node、结束拖拽时最后进入的节点（可能为空）、被拖拽节点的放置位置（before、after、inner）、event                               |
 | node-drop        | 拖拽成功完成时触发的事件                              | 共四个参数，依次为：被拖拽节点对应的 Node、结束拖拽时最后进入的节点、被拖拽节点的放置位置（before、after、inner）、event                                           |
+
+### Scoped Slot
+
+| name | 说明                                      |
+| ---- | ----------------------------------------- |
+| ---- | 自定义树节点的内容，参数为 { node, data } |

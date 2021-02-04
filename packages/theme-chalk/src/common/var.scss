@@ -1,8 +1,4 @@
-/** default node_modules\element-ui\packages\theme-chalk\src\common\var.scss/
-
-/**  blue /
-/* Colors
--------------------------- */
+/** default node_modules\element-ui\packages\theme-chalk\src\common\var.scss */
 $--color-primary: #FF7635;
 $--color-success: #52C41A;
 $--color-warning: #FAA64B;
@@ -12,3 +8,4 @@ $--color-text-primary: #606266;
 -------------------------- */
 $--background-color-base:#ff76351a;
 $--disabled-fill-base: #FAFBFC;
+@import '../../../../node_modules/element-ui/packages/theme-chalk/src/common/var.scss';

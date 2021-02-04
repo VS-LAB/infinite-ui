@@ -1,73 +1,82 @@
 <template>
-  <!-- tree-line -->
-  <el-tree ref="infiniteTreeRef"
-           class="infinite-tree "
-           :class="{
+  <div class="infinite-tree ">
+    <!-- tree-line -->
+    <el-tree ref="infiniteTreeRef"
+             :class="{
              'in-tree-line':treeLine,
-             'in-show-checkbox':showCheckbox
+             'in-show-checkbox':$attrs['show-checkbox']
            }"
-           :data="treeData"
-           :props="defaultProps"
-           :draggable="draggable"
-           :showCheckbox="showCheckbox"
-           :default-expand-all="defaultExpandAll"
-           :default-expanded-keys="defaultExpandedKeys"
-           :node-key="nodeKey"
-           :indent="0"
-           :expand-on-click-node="!this.isEditNode"
-           v-on="$listeners"
-           @node-expand="nodeExpand">
-    <span class="custom-tree-node"
-          :class="{'node_editing':data && data[nodeKey] === (operationNode?operationNode.data[nodeKey]:'')}"
-          slot-scope="{ node, data }">
-      <!-- 非编辑状态 -->
-      <span class="custom-tree-node-text"
-            :class="{
+             v-bind="$attrs"
+             v-on="$listeners"
+             :props="props"
+             :node-key="nodeKey"
+             :indent="0"
+             :expand-on-click-node="!operationNode"
+             :draggable="!operationNode && draggable"
+             @node-expand="nodeExpand"
+             @node-drag-start="nodeDragStart"
+             @node-drag-end="nodeDragEnd"
+             @node-drag-enter="nodeDragEnter"
+             @node-click="nodeClick"
+             @node-drop="nodeDrop">
+      <div class="custom-tree-node"
+           :class="{'node_editing':data && data[nodeKey] === (operationNode?operationNode.data[nodeKey]:'')}"
+           slot-scope="{ node, data }">
+        <!-- 非编辑状态 -->
+        <div class="custom-tree-node-text"
+             :class="{
               'highlight-node':highlightNodeMap[data[nodeKey]]
             }"
-            v-if="!data['in-input-type']">{{ node.label }}</span>
+             v-if="!data['in-input-type']">
+          <slot v-bind="{ node, data }">
+            <template v-for="(item,index) in editInputs">
+              <template v-if="index && data[item.id || props.label]"> ({{data[item.id || props.label]}})</template>
+              <template v-else>{{data[item.id || props.label]}}</template>
+            </template>
+          </slot>
+        </div>
 
-      <!---编辑节点按钮，只在编辑状态下显示-->
-      <span v-if="isEditNode && !data['in-input-type']"
-            class="tree-edit-btns">
-        <!-- 节点操作按钮 -->
-        <infinite-button v-for="(btn,index) in nodeOperationBtn"
-                         :key="index"
-                         :icon="btn.icon"
-                         :size="editComponentSize"
-                         circle
-                         :type="btn.type"
-                         @click="btn.click(data, node)"></infinite-button>
-      </span>
+        <!---编辑节点按钮，只在编辑状态下显示-->
+        <div v-if="!moving && isEditNode && !data['in-input-type']"
+             class="tree-edit-btns">
+          <!-- 节点操作按钮 -->
+          <i v-for="(btn,index) in nodeOperationBtn"
+             :key="index"
+             :class="btn.icon"
+             @click.stop="btn.click(data, node)"></i>
+        </div>
 
-      <!--编辑状态中...-->
-      <div class="editing__content"
-           v-else-if="data['in-input-type'] === 'input'">
-        <div class="editing__content-group_inputs"
-             v-for="(item,index) in editInputs"
-             v-show="!item.hidden"
-             :key="index">
-          <el-input v-model.trim="editInputMap[index].value"
-                    :disabled="item.disabled"
-                    :size="editComponentSize"
-                    :placeholder="item.placeholder"
-                    @input="validateInput(item,index)"></el-input>
-          <div class="group_inputs-vilidate-error">
-            {{item.validateFun && editInputMap[index].validateError}}
+        <!--编辑状态中...-->
+        <div class="editing__content"
+             v-else-if="data['in-input-type'] === 'input' && isEditNode">
+          <div class="editing__content-group_inputs"
+               v-for="(item,index) in editInputs"
+               v-show="!item.hidden"
+               :key="index">
+            <el-input v-model.trim="editInputMap[item.id].value"
+                      :disabled="item.disabled"
+                      :size="editComponentSize"
+                      :placeholder="item.placeholder"
+                      @input="validateInput(item)"></el-input>
+            <div class="group_inputs-vilidate-error">
+              {{item.validateFun && editInputMap[item.id].validateError}}
+            </div>
+          </div>
+          <!-- 编辑节点操作 -->
+          <div class="operation-group-btn">
+            <infinite-button class="btn-text"
+                             :class="btn.class"
+                             v-for="(btn,index) in editNodeOperationBtn"
+                             :key="index"
+                             :type="btn.type"
+                             @click.stop="btn.click(data,node)">{{btn.label}}</infinite-button>
           </div>
         </div>
-        <!-- 编辑节点操作 -->
-        <div class="operation-group-btn">
-          <infinite-button class="btn-text"
-                           v-for="(btn,index) in editNodeOperationBtn"
-                           :key="index"
-                           :type="btn.type"
-                           @click="btn.click(data,node)">{{btn.label}}</infinite-button>
-        </div>
-      </div>
 
-    </span>
-  </el-tree>
+      </div>
+    </el-tree>
+  </div>
+
 </template>
 
 <script>
@@ -75,10 +84,12 @@ import ElTree from 'element-ui/lib/tree'
 import ElInput from 'element-ui/lib/input'
 import ElMessage from 'element-ui/lib/message'
 import pmMixin from './pmMixin'
+import dragMixin from './dragMixin'
 import InfiniteButton from '../../infinite-button/src/index.vue'
 export default {
   name: 'InfiniteTree',
-  mixins: [pmMixin],
+  mixins: [pmMixin, dragMixin],
+  inheritAttrs: false,
   components: {
     ElTree,
     ElInput,
@@ -96,12 +107,17 @@ export default {
         index: 0
       },
       highlightNodeMap: {}, // 高亮keys集合
+      dragTimer: null, // 自动展开定时器
+      draggNode: null, // 记录拖拽节点
+      moving: false, // 拖拽中
+      dragSuccess: false, // 是否拖拽成功
       editInputMap: [], // 输入框集合
       operationNode: null, // 当前操作节点
       peerOperationNodes: null, // 当前操作节点父节点
       // 编辑中的操作按钮
       editNodeOperationBtn: [
         {
+          class: 'operation-confirm',
           label: '确定',
           type: 'text',
           click: (data, node) => {
@@ -109,6 +125,7 @@ export default {
           }
         },
         {
+          class: 'operation-cancel',
           label: '取消',
           type: 'text',
           click: (data, node) => {
@@ -120,43 +137,54 @@ export default {
       nodeOperationBtn: [
         // 新增
         {
-          icon: 'el-icon-plus',
-          type: 'primary',
+          icon: 'el-icon-circle-plus-outline',
           click: (data, node) => {
-            this.$emit('addNodeBefore', data, node)
-            this.addNode(data, node)
+            // 判断是否有正在编辑的节点
+            this.isInOperation(() => {
+              this.$emit('addNodeBefore', data, node)
+              this.addNode(data, node)
+            })
+          }
+        },
+        // 删除
+        {
+          icon: 'el-icon-remove-outline',
+          click: (_, node) => {
+            this.isInOperation(() => {
+              this.delSelect(node, true)
+            })
           }
         },
         // 编辑
         {
           icon: 'el-icon-edit',
-          type: 'info',
           click: (data, node) => {
-            this.$emit('edietNodeBefore', data, node)
-            this.editNode(data, node)
-          }
-        },
-        // 删除
-        {
-          icon: 'el-icon-delete',
-          type: 'danger',
-          click: (data, node) => {
+            // 判断是否有正在编辑的节点
             this.isInOperation(() => {
-              this.delSelect(data, node, true)
+              this.$emit('editNodeBefore', data, node)
+              this.editNode(data, node)
             })
           }
         }
       ]
     }
   },
-  created () {
-    if (this.isEditNode) {
-      // 初始化编辑时input
-      this.editInputs.forEach((item, index) => {
-        this.$set(this.editInputMap, index, {})
-        this.$set(this.editInputMap[index], 'value', '')
-        this.$set(this.editInputMap[index], 'validateError', '')
-      })
+  watch: {
+    isEditNode: {
+      handler (val) {
+        if (val) {
+          // 初始化编辑时input
+          this.editInputs.forEach(item => {
+            this.$set(this.editInputMap, item.id, {})
+            this.$set(this.editInputMap[item.id], 'value', '')
+            this.$set(this.editInputMap[item.id], 'validateError', '')
+          })
+        }
+      },
+      immediate: true
+    },
+    operationNode () {
+      this.$emit('editChange', !!this.operationNode)
     }
   },
   mounted () {

@@ -2,15 +2,15 @@ const path = require('path')
 const resolve = (dir) => {
   return path.join(__dirname, dir)
 }
-const html = require('html-webpack-plugin')
 const portfinder = require('portfinder')
+const html = require('html-webpack-plugin')
+
 const { getExternalsEl } = require('./build/get-externals-elements')
 const isProduction = process.env.NODE_ENV === 'production'
 const vendorPackage = isProduction ? {
   vue: 'Vue',
   'vue-router': 'VueRouter',
   'highlight.js': 'hljs',
-  'element-ui': 'ELEMENT',
   '@antv/g2': 'G2'
 } : {}
 const propElExternals = process.env.NODE_ENV === 'lib' ? getExternalsEl() : {}
@@ -52,7 +52,16 @@ module.exports = {
       })
     }
   },
+  filenameHashing: false,
   chainWebpack: config => {
+    if (isProduction) {
+      config.plugin('html-index').tap(options => {
+        // 添加分割后需要载入的分包
+        options[0].chunks.push(...['chunk-elementui', 'chunk-antv'])
+        return options
+      })
+    }
+    // config.plugins.delete('preload-index')
     config.module
       .rule('js')
       .include.add(path.resolve(__dirname, 'packages')).end()
@@ -71,39 +80,29 @@ module.exports = {
       .use('./build/md-loader/index.js')
       .loader('./build/md-loader/index.js')
 
-    // config.when(isProduction, config => {
-    //   config.optimization.splitChunks({
-    //     chunks: 'all',
-    //     cacheGroups: {
-    //       elementUI: {
-    //         name: 'chunk-elementUI',
-    //         priority: 40,
-    //         test: /[\\/]node_modules[\\/]_?element-ui(.*)/
-    //       },
-    //       // antv: {
-    //       //   name: 'chunk-antv',
-    //       //   priority: 40,
-    //       //   test: /[\\/]node_modules[\\/]_?@antv(.*)/
-    //       // },
-    //       // antvG2: {
-    //       //   name: 'chunk-antvG2',
-    //       //   priority: 45,
-    //       //   test: /[\\/]node_modules[\\/]_?@antv\/G2(.*)/
-    //       // },
-    //       // 'highlight': {
-    //       //   name: 'chunk-highlight',
-    //       //   priority: 45,
-    //       //   test: /[\\/]node_modules[\\/]_?highlight\.js(.*)/
-    //       // },
-    //       // vendors: {
-    //       //   name: `chunk-vendors`,
-    //       //   test: /[\\/]node_modules[\\/]/,
-    //       //   priority: 15,
-    //       //   chunks: 'initial'
-    //       // }
-    //     }
-    //   })
-    // })
+    config.when(isProduction, config => {
+      config.optimization.splitChunks({
+        cacheGroups: {
+          antv: {
+            name: 'chunk-antv',
+            priority: 10,
+            test: /[\\/]node_modules[\\/]_?@antv(.*)/
+          },
+          elementui: {
+            name: 'chunk-elementui',
+            priority: 10,
+            test: /[\\/]node_modules[\\/]_?element-ui(.*)/,
+            chunks: 'initial'
+          },
+          vendors: {
+            name: `chunk-vendors`,
+            test: /[\\/]node_modules[\\/]/,
+            priority: -5,
+            chunks: 'all'
+          }
+        }
+      })
+    })
 
     // config
     //   .plugin('webpack-bundle-analyzer')

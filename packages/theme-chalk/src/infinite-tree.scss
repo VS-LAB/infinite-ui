@@ -5,14 +5,9 @@
 @import '../../../node_modules/element-ui/packages/theme-chalk/src/notification.scss';
 
 $in-node-height:30px;
-$in-hover-background-color:#cbe6ff;
 
 .infinite-tree {
-  width: 100%;
-  max-width: 700px;
-  max-height: 60vh;
-  padding: 2em;
-  overflow: auto;
+  margin: 20px;
 
   // 节点
   .el-tree-node {
@@ -24,54 +19,72 @@ $in-hover-background-color:#cbe6ff;
       >.el-tree-node__content {
         background-color: initial;
       }
+    }
 
+    // 鼠标拖拽至目标中心时
+    &.is-drop-inner {
       >.el-tree-node__content {
-        >.custom-tree-node {
-          >.custom-tree-node-text {
-            background-color: $in-hover-background-color;
-          }
+        .custom-tree-node-text {
+          background-color: $--color-primary;
+          color: #fff;
         }
       }
     }
   }
 
   // 节点盒子
-  .el-tree-node__content {
-    height: 100%;
-    min-height: $in-node-height;
-    align-items: initial;
+  .el-tree {
+    .el-tree-node {
+      .el-tree-node__content {
+        height: 100%;
+        min-height: $in-node-height;
+        align-items: initial;
 
-    .custom-tree-node {
-      margin-left: 4px;
+        .custom-tree-node {
 
-      .custom-tree-node-text {
-        padding: 4px 6px;
-        margin-top: 6px;
-        border-radius: 4px;
-        user-select: none;
+          .custom-tree-node-text {
+            padding: 4px 6px;
+            margin: 3px 0;
+            line-height: 16px;
+            border-radius: 4px;
+            user-select: none;
 
+            &.highlight-node {
+              background-color: $--background-color-base;
+            }
 
-      }
-    }
+          }
+        }
 
-    >.el-checkbox {
-      margin: 0 0px 0 10px;
-      display: flex;
-      align-items: center;
+        >.el-checkbox {
+          margin: 0 0px 0 10px;
+          display: flex;
+          align-items: center;
 
-      >.el-checkbox__input {
-        height: 14px;
+          >.el-checkbox__input {
+            height: 14px;
+          }
+        }
       }
     }
   }
 
   // 定制节点
-  .custom-tree-node {
-    line-height: $in-node-height;
+  .el-tree {
+    .el-tree-node {
+      >.el-tree-node__content {
+        .custom-tree-node {
+          display: flex;
+          margin-left: 4px;
+          cursor: pointer;
+          line-height: $in-node-height;
 
-    &:hover {
-      .custom-tree-node-text {
-        background-color: $in-hover-background-color;
+          &:hover {
+            >.custom-tree-node-text {
+              background-color: $--background-color-base;
+            }
+          }
+        }
       }
     }
   }
@@ -83,11 +96,12 @@ $in-hover-background-color:#cbe6ff;
     opacity: 0;
     transition: opacity 0.1s;
 
-    .el-button {
-      transform: scale(0.7); // 缩小按钮
+    i {
+      font-size: 16px;
+      color: $--color-primary;
 
-      &+.el-button {
-        margin-left: -1px;
+      &+i {
+        margin-left: 6px;
       }
     }
   }
@@ -101,7 +115,6 @@ $in-hover-background-color:#cbe6ff;
     }
 
     .custom-tree-node {
-      cursor: pointer;
 
       &:hover {
         .tree-edit-btns {
@@ -150,6 +163,7 @@ $in-hover-background-color:#cbe6ff;
       color: $--color-danger;
       font-size: 12px;
       margin-top: 4px;
+      line-height: initial;
     }
 
     +.editing__content-group_inputs {
@@ -159,8 +173,6 @@ $in-hover-background-color:#cbe6ff;
 
   // 三角箭头
   .el-tree-node__expand-icon {
-    height: 12px;
-    margin-top: 0;
     position: absolute;
     left: 0;
     top: 3px;
@@ -201,17 +213,20 @@ $in-hover-background-color:#cbe6ff;
   }
 
   // 连接线
-  &.in-tree-line {
+  .el-tree.in-tree-line {
     .el-tree-node {
+      overflow: hidden;
+
       &::before {
         content: '';
         display: block;
         width: 0;
         height: 0;
+        padding-left: 1px;
         border-left: 1px dashed $--border-color-base;
         position: absolute;
         left: 12px;
-        top: 27px;
+        top: 24px;
       }
 
       &.is-expanded::before {
@@ -229,22 +244,16 @@ $in-hover-background-color:#cbe6ff;
 
 
 
-  &.in-show-checkbox {
+  .in-show-checkbox {
 
     // 禁用悬浮背景色
-    .custom-tree-node {
-      &:hover {
-        .custom-tree-node-text {
-          background-color: transparent;
-        }
-      }
-
-      .custom-tree-node-text {
-        &.highlight-node {
-          background-color: $in-hover-background-color;
-        }
-      }
-    }
+    // .custom-tree-node {
+    //   &:hover {
+    //     .custom-tree-node-text {
+    //       background-color: transparent;
+    //     }
+    //   }
+    // }
 
     // 禁用焦点背景色
     .el-tree-node {
@@ -253,6 +262,22 @@ $in-hover-background-color:#cbe6ff;
           background-color: transparent;
         }
       }
+    }
+  }
+
+  .el-tree__drop-indicator {
+    margin-left: -9px;
+
+    &::before {
+      content: '';
+      display: block;
+      width: 5px;
+      height: 5px;
+      border-radius: 5px;
+      background-color: $--color-primary;
+      position: absolute;
+      left: -5px;
+      top: -2px;
     }
   }
 }

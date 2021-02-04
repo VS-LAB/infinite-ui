@@ -24,6 +24,7 @@
 </template>
 <script>
 import HeaderModel from './components/header'
+console.log(222)
 export default {
   components: {
     HeaderModel
@@ -33,6 +34,7 @@ export default {
   },
   computed: {
     isFixed () {
+      console.log(this.$route.name)
       return this.$route.name.includes('home')
     }
   },
