@@ -6,41 +6,37 @@
  * @Description: In User Settings Edit
  * @FilePath: /infinite-ui/tests/unit/InfinitiSelect.spec.js
  */
-import {shallowMount,mount,createLocalVue} from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
 
 import InfiniteSelect from '@/packages/infinite-select/src/index.vue'
 
-describe('InfiniteSelect',() =>{
-  const wrapper = mount(InfiniteSelect,{
+describe('InfiniteSelect', () => {
+  const wrapper = mount(InfiniteSelect, {
     propsData: {
       value: '123'
     }
   })
 
-  it('toMatchSnapshot',() =>{
+  it('toMatchSnapshot', () => {
     expect(wrapper).toMatchSnapshot()
   })
 
-  it('select exists',() =>{
+  it('select exists', () => {
     const select = wrapper.findComponent({
       ref: 'infiniteSelect'
     })
     expect(select.exists()).toBe(true)
   })
 
-  it('visible-change true',() =>{
+  it('visible-change true', () => {
     const select = wrapper.findComponent({
       ref: 'infiniteSelect'
     })
-    wrapper.vm.visibleChange = jest.fn()
-    select.vm.visible = true
-  })
-
-  it('visible-change false',async () =>{
-    const select = wrapper.findComponent({
-      ref: 'infiniteSelect'
-    })
-    wrapper.vm.visibleChange = jest.fn()
-    select.vm.visible = false
+    const mock = jest.fn()
+    select.vm.blur = mock
+    select.vm.$emit('visible-change', true)
+    expect(mock).toBeCalledTimes(0)
+    select.vm.$emit('visible-change', false)
+    expect(mock).toBeCalledTimes(1)
   })
 })
