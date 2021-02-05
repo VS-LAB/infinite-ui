@@ -1,12 +1,3 @@
-<template>
-  <el-option
-    v-bind="$attrs"
-    v-on="$listeners"
-  >
-    <slot></slot>
-  </el-option>
-</template>
-
 <script>
 import ElOption from 'element-ui/lib/option'
 export default {
@@ -14,6 +5,12 @@ export default {
   inheritAttrs: false,
   components: {
     ElOption
+  },
+  render (h) {
+    return h('el-option', {
+      props: this.$attrs,
+      on: this.$listeners
+    }, [this.$slots.default])
   }
 }
 </script>
