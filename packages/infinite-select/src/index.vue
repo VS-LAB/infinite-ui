@@ -13,6 +13,7 @@ export default {
     }
   },
   render (h) {
+    const slots = ['default', 'prefix', 'empty'].map(slot => (<template slot={slot}>{this.$slots[slot]}</template>))
     return h('el-select', {
       ref: 'infiniteSelect',
       props: this.$attrs,
@@ -20,7 +21,7 @@ export default {
         'visible-change': this.visibleChange,
         ...this.$listeners
       }
-    }, [this.$slots.default])
+    }, slots)
   }
 }
 </script>
