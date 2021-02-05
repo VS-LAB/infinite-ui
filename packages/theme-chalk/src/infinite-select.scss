@@ -4,3 +4,7 @@
 .el-select-dropdown__item:hover span{
   color: $--color-primary;
 }
+
+.el-select-dropdown__item.is-disabled span{
+  color: #C0C4CC;
+}
