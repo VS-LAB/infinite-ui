@@ -15,7 +15,9 @@ import packages from '../packages'
 for (const key in packages) {
   if (packages.hasOwnProperty(key)) {
     const element = packages[key]
-    if (key.toLocaleLowerCase().includes('infinite')) {
+    if (key.toLocaleLowerCase() === 'infinitedownload') {
+      Vue.prototype.$infiniteDownload = element
+    } else if (key.toLocaleLowerCase().includes('infinite')) {
       Vue.use(element)
     };
   }
