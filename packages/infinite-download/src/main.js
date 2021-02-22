@@ -6,7 +6,7 @@ const Download = function (options) {
     const { resouce = '', name = '', mode = modes[0] } = options
     Download.downloadFun[mode](resouce, name)
   } else {
-    console.error('You need to pass in an object')
+    throw new Error('You need to pass in an object')
   }
 }
 
