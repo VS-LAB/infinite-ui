@@ -15,7 +15,7 @@ import packages from '../packages'
 for (const key in packages) {
   if (packages.hasOwnProperty(key)) {
     const element = packages[key]
-    if (element.name && element.name.toLocaleLowerCase().includes('infinite')) {
+    if (element.install && element.name.toLocaleLowerCase().includes('infinite')) {
       Vue.use(element)
     };
   }

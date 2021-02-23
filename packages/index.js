@@ -3,6 +3,7 @@
 import InfiniteButton from './infinite-button'
 import InfiniteCascaders from './infinite-cascaders'
 import InfiniteDialog from './infinite-dialog'
+import InfiniteDownload from './infinite-download'
 import InfiniteForm from './infinite-form'
 import InfiniteLineChart from './infinite-line-chart'
 import InfiniteNavMenu from './infinite-nav-menu'
@@ -16,12 +17,12 @@ import InfiniteTable from './infinite-table'
 import InfiniteTableColumn from './infinite-table-column'
 import InfiniteThemePicker from './infinite-theme-picker'
 import InfiniteTree from './infinite-tree'
-import InfiniteDownload from './infinite-download'
 const version = '1.0.4'
 const components = [
   InfiniteButton,
   InfiniteCascaders,
   InfiniteDialog,
+  InfiniteDownload,
   InfiniteForm,
   InfiniteLineChart,
   InfiniteNavMenu,
@@ -34,14 +35,17 @@ const components = [
   InfiniteTable,
   InfiniteTableColumn,
   InfiniteThemePicker,
-  InfiniteTree,
+  InfiniteTree
 ]
 const install = Vue => {
   components.forEach(Component => {
-    Vue.use(Component)
+    if (Component.install && Component.name.toLocaleLowerCase().includes('infinite')) {
+      Vue.use(Component)
+    }else{
+      Vue.prototype[`$${Component.name}`] = Component
+    }
   })
-  Vue.prototype.$InfiniteDownload = InfiniteDownload;
-};
+};  
 /* istanbul ignore if */
 if (typeof window !== 'undefined' && window.Vue) {
   install(window.Vue)
@@ -52,6 +56,7 @@ export {
   InfiniteButton,
   InfiniteCascaders,
   InfiniteDialog,
+  InfiniteDownload,
   InfiniteForm,
   InfiniteLineChart,
   InfiniteNavMenu,
@@ -64,8 +69,7 @@ export {
   InfiniteTable,
   InfiniteTableColumn,
   InfiniteThemePicker,
-  InfiniteTree,
-  InfiniteDownload
+  InfiniteTree
 }
 export default {
   install,
@@ -73,6 +77,7 @@ export default {
   InfiniteButton,
   InfiniteCascaders,
   InfiniteDialog,
+  InfiniteDownload,
   InfiniteForm,
   InfiniteLineChart,
   InfiniteNavMenu,
@@ -85,6 +90,6 @@ export default {
   InfiniteTable,
   InfiniteTableColumn,
   InfiniteThemePicker,
-  InfiniteTree,
-  InfiniteDownload
+  InfiniteTree
 }
+  

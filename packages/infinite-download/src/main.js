@@ -1,17 +1,17 @@
 const modes = ['stream', 'url']
 
-const Download = function (options) {
+const InfiniteDownload = function (options) {
   if (options.constructor === Object) {
     const { resouce, name, mode = modes[0] } = options
-    Download.downloadFun[mode](resouce, name)
+    InfiniteDownload.downloadFun[mode](resouce, name)
   } else {
     throw new Error('You need to pass in an object')
   }
 }
 
 modes.forEach(mode => {
-  Download[mode] = (resouce, name) => {
-    Download({
+  InfiniteDownload[mode] = (resouce, name) => {
+    InfiniteDownload({
       resouce,
       name,
       mode
@@ -19,7 +19,7 @@ modes.forEach(mode => {
   }
 })
 
-Download.downloadFun = {
+InfiniteDownload.downloadFun = {
   stream: function (resouce, name) {
     const blob = new Blob([resouce])
     // IE浏览器
@@ -47,5 +47,4 @@ Download.downloadFun = {
     }, 300)
   }
 }
-
-export default Download
+export default InfiniteDownload
