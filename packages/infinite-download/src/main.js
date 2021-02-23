@@ -1,9 +1,8 @@
 const modes = ['stream', 'url']
 
 const Download = function (options) {
-  options = options || {}
   if (options.constructor === Object) {
-    const { resouce = '', name = '', mode = modes[0] } = options
+    const { resouce, name, mode = modes[0] } = options
     Download.downloadFun[mode](resouce, name)
   } else {
     throw new Error('You need to pass in an object')
@@ -11,7 +10,7 @@ const Download = function (options) {
 }
 
 modes.forEach(mode => {
-  Download[mode] = (resouce = '', name = '') => {
+  Download[mode] = (resouce, name) => {
     Download({
       resouce,
       name,
