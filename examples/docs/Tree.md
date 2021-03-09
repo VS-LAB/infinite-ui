@@ -15,6 +15,7 @@ Tree 增删改及自定义编辑功能。
       :data="treeData"
       :is-edit-node="isEditNode"
       :edit-inputs="editInputs"
+      :before-delete="beforeDelete"
       @addNodeBefore="addNodeBefore"
       @editNodeBefore="editNodeBefore"
       @handlerSave="handlerSave"
@@ -183,6 +184,16 @@ Tree 增删改及自定义编辑功能。
         this.$refs.infiniteTreeRef.isInOperation(() => {
           this.isEditNode = !this.isEditNode;
         });
+      },
+      // 移除之前,如果存在子集，不允移除
+      beforeDelete(node) {
+        if (node.childNodes && node.childNodes.length) {
+          this.$message.warning('存在子节点，不能移除');
+          return false;
+        } else {
+          return true;
+        }
+        return;
       },
       // 删除完成
       handlerDelete() {
@@ -643,6 +654,9 @@ Tree 自定义插槽内容
 | tree-line               | 节点连接线                                                                                                                                 | Boolean                                | —      | true             |
 | same-operation-error    | 可编辑时，重复操作提示内容                                                                                                                 | String                                 | —      | 请先完成当前操作 |
 | is-auto-expand-children | 拖拽时，且拖拽至目标节点停留时，是否默认展开目标节点                                                                                       | Boolean                                | —      | true             |
+| beforeAdd               | 添加节点前的 Callback，如果 callback 返回 true 则允 添加，否则不添加                                                                       | Function(node)                         | —      | true             |
+| beforeEdit              | 编辑节点前的 Callback，如果 callback 返回 true 则允编辑，否则不编辑                                                                        | Function(node)                         | —      | true             |
+| beforeDelete            | 移除节点前的 Callback，如果 callback 返回 true 则允移除，否则不移除                                                                        | Function(node)                         | —      | true             |
 | empty-text              | 内容为空的时候展示的文本                                                                                                                   | String                                 | —      | —                |
 | node-key                | 每个树节点用来作为唯一标识的属性，整棵树应该是唯一的                                                                                       | String                                 | —      | id               |
 | props                   | 配置选项，具体看下表                                                                                                                       | object                                 | —      | —                |
