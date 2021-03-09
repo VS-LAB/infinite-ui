@@ -3,11 +3,14 @@
 import InfiniteButton from './infinite-button'
 import InfiniteCascaders from './infinite-cascaders'
 import InfiniteDialog from './infinite-dialog'
+import InfiniteDownload from './infinite-download'
 import InfiniteForm from './infinite-form'
 import InfiniteLineChart from './infinite-line-chart'
 import InfiniteNavMenu from './infinite-nav-menu'
+import InfiniteOption from './infinite-option'
 import InfinitePagination from './infinite-pagination'
 import InfinitePieChart from './infinite-pie-chart'
+import InfiniteSelect from './infinite-select'
 import InfiniteSelectTags from './infinite-select-tags'
 import InfiniteSelectTagsOption from './infinite-select-tags-option'
 import InfiniteTable from './infinite-table'
@@ -19,11 +22,14 @@ const components = [
   InfiniteButton,
   InfiniteCascaders,
   InfiniteDialog,
+  InfiniteDownload,
   InfiniteForm,
   InfiniteLineChart,
   InfiniteNavMenu,
+  InfiniteOption,
   InfinitePagination,
   InfinitePieChart,
+  InfiniteSelect,
   InfiniteSelectTags,
   InfiniteSelectTagsOption,
   InfiniteTable,
@@ -33,7 +39,11 @@ const components = [
 ]
 const install = Vue => {
   components.forEach(Component => {
-    Vue.use(Component)
+    if (Component.install && Component.name.toLocaleLowerCase().includes('infinite')) {
+      Vue.use(Component)
+    }else{
+      Vue.prototype[`$${Component.name}`] = Component
+    }
   })
 };  
 /* istanbul ignore if */
@@ -46,11 +56,14 @@ export {
   InfiniteButton,
   InfiniteCascaders,
   InfiniteDialog,
+  InfiniteDownload,
   InfiniteForm,
   InfiniteLineChart,
   InfiniteNavMenu,
+  InfiniteOption,
   InfinitePagination,
   InfinitePieChart,
+  InfiniteSelect,
   InfiniteSelectTags,
   InfiniteSelectTagsOption,
   InfiniteTable,
@@ -64,11 +77,14 @@ export default {
   InfiniteButton,
   InfiniteCascaders,
   InfiniteDialog,
+  InfiniteDownload,
   InfiniteForm,
   InfiniteLineChart,
   InfiniteNavMenu,
+  InfiniteOption,
   InfinitePagination,
   InfinitePieChart,
+  InfiniteSelect,
   InfiniteSelectTags,
   InfiniteSelectTagsOption,
   InfiniteTable,
