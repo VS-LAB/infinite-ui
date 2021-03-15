@@ -1,49 +1,54 @@
-<template>
-  <el-steps v-bind="$attrs" v-on="$listeners" @change="change" :class="`infinite-steps-container ${stepsClass}`" ref="infiniteSteps">
-    <slot></slot>
-    <el-step v-for="(item, index) of children" :key="item.key || index" v-bind="item" />
-  </el-steps>
-</template>
+
 <script>
-import ElStep from 'element-ui/lib/step'
+import InfiniteStep from './infiniteStep'
 import ElSteps from 'element-ui/lib/steps'
 export default {
   name: 'InfiniteSteps',
+  inheritAttrs: false,
   components: {
-    ElStep,
+    InfiniteStep,
     ElSteps
   },
+  model: {
+    prop: 'active',
+    event: 'input'
+  },
   props: {
+    active: {
+      type: Number,
+      default: 0
+    },
     // steps的数据
     stepsData: {
-      type: Object,
-      default: () => ({})
-    }
-  },
-  computed: {
-    // step的数据集合
-    children () {
-      return this?.stepsData?.children || []
+      type: Array,
+      default: () => []
     },
-    // step的添加类名
-    stepsClass () {
-      const { combinationDirection } = this.$attrs
-      let str = ''
-      if (!this.$attrs.hasOwnProperty('align-center')) {
-        if (['horizontal'].includes(combinationDirection)) {
-          str = 'infinite-steps-step-horizontal' // 水平-标题居右
-        }
-        if (['vertical'].includes(combinationDirection)) {
-          str = 'infinite-steps-step-vertical' // 垂直-标题在底部
-        }
-      }
-      return str
+    // 是否跳跃步骤方法
+    isSkipMethod: {
+      type: Function,
+      default: () => false
     }
   },
-  methods: {
-    change (newVal, oldVal) {
-      this.$emit('change', newVal, oldVal)
-    }
+  render (h) {
+    const { stepsData = [], active } = this
+
+    // 获取根据数据驱动来的step组件
+    const stepList = stepsData.map(step => {
+      return (h('infinite-step', {
+        attrs: step
+      }))
+    })
+
+    // 优先使用stepsData去占位
+    return h('el-steps', {
+      props: {
+        ...this.$attrs,
+        active
+      },
+      on: this.$listeners,
+      class: 'infinite-steps'
+    }, [stepList.length ? stepList : this.$slots.default]
+    )
   }
 }
 </script>
