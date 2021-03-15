@@ -2,6 +2,7 @@
 @import '../../../node_modules/element-ui/packages/theme-chalk/src/steps.scss';
 
 .infinite-steps-container {
+  text-align: left;
   &.el-steps--simple {
     background: #f5f7fa;
   }
