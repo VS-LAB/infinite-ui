@@ -51,6 +51,12 @@ export default {
         }
       ]
     },
+    nodeOperationBtnsProp: {
+      type: Object,
+      default: () => {
+        return {}
+      }
+    },
     sameOperationError: {
       type: String,
       default: '请先完成当前操作'
