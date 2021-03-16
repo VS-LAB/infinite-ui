@@ -30,7 +30,7 @@ export default {
     }
   },
   render (h) {
-    const { stepsData = [], active } = this
+    const { stepsData, active } = this
 
     // 获取根据数据驱动来的step组件
     const stepList = stepsData.map(step => {
