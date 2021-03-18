@@ -124,9 +124,9 @@ export default {
       this.addNotChildrenNodeAttr()
     },
     // input校验规则
-    validateInput (item) {
+    validateInput (item, node) {
       const editInputMapItem = this.editInputMap[item.id]
-      editInputMapItem.validateError = item.validateFun ? item.validateFun(editInputMapItem.value) : ''
+      editInputMapItem.validateError = item.validateFun ? item.validateFun(editInputMapItem.value, node) : ''
     },
     // 清除记录的操作节点信息
     clearRecordNode () {
@@ -164,7 +164,8 @@ export default {
         // 初始化inputs
         this.editInputs.forEach(item => {
           const editInputMapItem = this.editInputMap[item.id]
-          editInputMapItem.value = editInputMapItem.validateError = ''
+          editInputMapItem.value = item.defaultValue || ''
+          editInputMapItem.validateError = ''
         })
         const newData = { ...TreeCtrl.createNode() }
         // 添加动态属性
@@ -234,7 +235,7 @@ export default {
         // 判断节点是否需要校验
         if (item.validateFun && !item.hidden) {
           // 获取校验后的错误信息
-          editInputMapItem.validateError = item.validateFun(editInputMapItem.value)
+          editInputMapItem.validateError = item.validateFun(editInputMapItem.value, node)
           if (editInputMapItem.validateError) {
             flag = true
           }

@@ -58,7 +58,7 @@
                       :disabled="item.disabled"
                       :size="editComponentSize"
                       :placeholder="item.placeholder"
-                      @input="validateInput(item)"></el-input>
+                      @input="validateInput(item,node)"></el-input>
             <div class="group_inputs-vilidate-error">
               {{item.validateFun && editInputMap[item.id].validateError}}
             </div>

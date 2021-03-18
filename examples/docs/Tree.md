@@ -90,7 +90,7 @@ Tree 增删改及自定义编辑功能。
             placeholder: '请输入资源名称',
             sameNameError: '资源名称重复',
             sameNameValiMode: 'local',
-            validateFun: (value) => {
+            validateFun: (value, node) => {
               const regEN = /[`~!@#$%^&*()-+<>?:="{}\_,.\/;'[\]]/im;
               const regCN = /[·！#￥（——）：；”“‘’，……|《。》？、【】[\]]/im;
               const regCEN = /[^\a-\z\A-\Z0-9\u4E00-\u9FA5]/g;
@@ -963,6 +963,7 @@ Tree 自定义插槽内容
 | validateFun      | 输入框内容校验                                       | Function(value) | —                  | —      |
 | disabled         | 是否禁用                                             | Boolean         | —                  | false  |
 | hidden           | 是否隐藏，注意：这里隐藏后将不做输入框及同名校验     | Boolean         | —                  | false  |
+| defaultValue     | 新增节点时，设置为默认的输入框值                     | String          | —                  | —      |
 
 ### node-operation-btns-prop Attributes
 
