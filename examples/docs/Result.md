@@ -11,11 +11,11 @@
 <template>
   <infinite-result
     status="success"
-    title="Successfully Purchased Cloud Server ECS!"
-    subTitle="Order number: 2017182818828182881 Cloud server configuration takes 1-5 minutes, please wait."
+    title="成功购买云服务器ECS"
+    subTitle="订单号:2017182818828182881云服务器配置需要1-5分钟，请耐心等待。"
   >
-    <infinite-button type="primary">go console</infinite-button>
-    <infinite-button>by infinite</infinite-button>
+    <infinite-button type="primary">主要按钮</infinite-button>
+    <infinite-button>infinite-ui</infinite-button>
   </infinite-result>
 </template>
 ```
@@ -29,8 +29,8 @@
 
 ```html
 <template>
-  <infinite-result title="Your operation has been executed">
-    <infinite-button type="primary">go console</infinite-button>
+  <infinite-result title="您的操作已经执行">
+    <infinite-button type="primary">infinite-ui</infinite-button>
   </infinite-result>
 </template>
 ```
@@ -44,11 +44,8 @@
 
 ```html
 <template>
-  <infinite-result
-    status="warning"
-    title="There are some problems with your operation."
-  >
-    <infinite-button type="primary">go console</infinite-button>
+  <infinite-result status="warning" title="你的手术有些问题">
+    <infinite-button type="primary">infinite-ui</infinite-button>
   </infinite-result>
 </template>
 ```
@@ -64,10 +61,10 @@
 <template>
   <infinite-result
     status="error"
-    title="Submission Failed"
-    subTitle="Please check and modify the following information before resubmitting."
+    title="提交失败"
+    subTitle="请检查并修改以下信息后再重新提交"
   >
-    <infinite-button type="primary">go console</infinite-button>
+    <infinite-button type="primary">infinite-ui</infinite-button>
   </infinite-result>
 </template>
 ```
@@ -81,11 +78,11 @@
 
 ```html
 <template>
-  <infinite-result title="awatting">
+  <infinite-result title="等待中...">
     <template slot="icon">
       <i class="el-icon-loading"></i>
     </template>
-    <infinite-button disabled>await</infinite-button>
+    <infinite-button disabled>提交</infinite-button>
   </infinite-result>
 </template>
 ```
