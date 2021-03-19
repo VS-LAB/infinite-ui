@@ -10,6 +10,7 @@ import InfiniteNavMenu from './infinite-nav-menu'
 import InfiniteOption from './infinite-option'
 import InfinitePagination from './infinite-pagination'
 import InfinitePieChart from './infinite-pie-chart'
+import InfiniteResult from './infinite-result'
 import InfiniteSelect from './infinite-select'
 import InfiniteSelectTags from './infinite-select-tags'
 import InfiniteSelectTagsOption from './infinite-select-tags-option'
@@ -29,6 +30,7 @@ const components = [
   InfiniteOption,
   InfinitePagination,
   InfinitePieChart,
+  InfiniteResult,
   InfiniteSelect,
   InfiniteSelectTags,
   InfiniteSelectTagsOption,
@@ -63,6 +65,7 @@ export {
   InfiniteOption,
   InfinitePagination,
   InfinitePieChart,
+  InfiniteResult,
   InfiniteSelect,
   InfiniteSelectTags,
   InfiniteSelectTagsOption,
@@ -84,6 +87,7 @@ export default {
   InfiniteOption,
   InfinitePagination,
   InfinitePieChart,
+  InfiniteResult,
   InfiniteSelect,
   InfiniteSelectTags,
   InfiniteSelectTagsOption,
