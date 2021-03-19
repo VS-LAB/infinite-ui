@@ -9,11 +9,7 @@
 
 ```html
 <template>
-  <infinite-result
-    status="success"
-    title="成功购买云服务器ECS"
-    subTitle="订单号:2017182818828182881云服务器配置需要1-5分钟，请耐心等待。"
-  >
+  <infinite-result status="success" title="成功" subTitle="欢迎来到Infinite-ui">
     <infinite-button type="primary">主要按钮</infinite-button>
     <infinite-button>infinite-ui</infinite-button>
   </infinite-result>
@@ -44,7 +40,7 @@
 
 ```html
 <template>
-  <infinite-result status="warning" title="你的手术有些问题">
+  <infinite-result status="warning" title="你的操作有些问题">
     <infinite-button type="primary">infinite-ui</infinite-button>
   </infinite-result>
 </template>
