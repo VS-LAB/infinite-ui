@@ -10,9 +10,12 @@ import InfiniteNavMenu from './infinite-nav-menu'
 import InfiniteOption from './infinite-option'
 import InfinitePagination from './infinite-pagination'
 import InfinitePieChart from './infinite-pie-chart'
+import InfiniteResult from './infinite-result'
 import InfiniteSelect from './infinite-select'
 import InfiniteSelectTags from './infinite-select-tags'
 import InfiniteSelectTagsOption from './infinite-select-tags-option'
+import InfiniteStep from './infinite-step'
+import InfiniteSteps from './infinite-steps'
 import InfiniteTable from './infinite-table'
 import InfiniteTableColumn from './infinite-table-column'
 import InfiniteThemePicker from './infinite-theme-picker'
@@ -29,9 +32,12 @@ const components = [
   InfiniteOption,
   InfinitePagination,
   InfinitePieChart,
+  InfiniteResult,
   InfiniteSelect,
   InfiniteSelectTags,
   InfiniteSelectTagsOption,
+  InfiniteStep,
+  InfiniteSteps,
   InfiniteTable,
   InfiniteTableColumn,
   InfiniteThemePicker,
@@ -63,9 +69,12 @@ export {
   InfiniteOption,
   InfinitePagination,
   InfinitePieChart,
+  InfiniteResult,
   InfiniteSelect,
   InfiniteSelectTags,
   InfiniteSelectTagsOption,
+  InfiniteStep,
+  InfiniteSteps,
   InfiniteTable,
   InfiniteTableColumn,
   InfiniteThemePicker,
@@ -84,9 +93,12 @@ export default {
   InfiniteOption,
   InfinitePagination,
   InfinitePieChart,
+  InfiniteResult,
   InfiniteSelect,
   InfiniteSelectTags,
   InfiniteSelectTagsOption,
+  InfiniteStep,
+  InfiniteSteps,
   InfiniteTable,
   InfiniteTableColumn,
   InfiniteThemePicker,
