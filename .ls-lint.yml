@@ -1,0 +1,13 @@
+ls:
+  '{packages}':
+      .dir: kebab-case | camelCase
+      .js: kebab-case | camelCase
+      .vue: camelCase
+      .ts: camelCase | camelCase
+
+
+ignore: 
+    - .git 
+    - node_modules
+    - tests
+    - build
