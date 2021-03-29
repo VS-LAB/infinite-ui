@@ -8,6 +8,7 @@ ls:
 
 ignore: 
     - .git 
+    - packages/theme-chalk/node_modules
     - node_modules
     - tests
     - build
