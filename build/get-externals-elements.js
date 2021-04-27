@@ -1,7 +1,7 @@
 var path = require('path')
 var fs = require('fs')
 var elConponentList = fs.readdirSync(path.resolve(__dirname, '../node_modules/element-ui/lib'))
-
+const { name } = require('../package.json')
 // 获取文件名称（去掉扩展名）
 function getFileName (data) {
   return data.substring(0, data.lastIndexOf('.'))
@@ -19,11 +19,8 @@ const config = {
   '@antv/coord/lib/factory': '@antv/coord/lib/factory',
   '@antv/g-canvas': '@antv/g-canvas',
   // 公共依赖
-  '@shmilyvidian/infinite-ui/packages/utils/index': 'infinite-ui/lib/utils/index',
-  '@shmilyvidian/infinite-ui/packages/mixins/chart': 'infinite-ui/lib/mixins/chart'
-  // 测试数据，finite-ui-wz为WeiZe测试npm包名，可以删除
-  // 'infinite-ui/packages/utils/index': 'finite-ui-wz/lib/utils/index',
-  // 'infinite-ui/packages/mixins/chart': 'finite-ui-wz/lib/mixins/chart'
+  [`${name}/packages/utils/index`]: 'infinite-ui/lib/utils/index',
+  [`${name}/packages/mixins/chart`]: 'infinite-ui/lib/mixins/chart'
 }
 
 elConponentList.forEach(file => {
