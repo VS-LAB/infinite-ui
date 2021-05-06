@@ -20,8 +20,9 @@ for (const key in packages) {
     };
   }
 }
-const { InfiniteDownload } = packages
+const { InfiniteDownload, InfiniteBackPlatform } = packages
 Vue.prototype.$InfiniteDownload = InfiniteDownload
+Vue.prototype.$InfiniteBackPlatform = InfiniteBackPlatform
 Vue.config.productionTip = false
 
 Vue.component('demo-block', demoBlock)
