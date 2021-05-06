@@ -2,7 +2,7 @@ import Vue from 'vue'
 import merge from 'infinite-ui/packages/utils/merge'
 import { isVNode } from 'infinite-ui/packages/utils/vdom'
 import { uuidv4, hyphenate } from 'infinite-ui/packages/utils/index.js'
-import InfiniteBackPlatformVue from './index.vue'
+import InfiniteDragContainerVue from './index.vue'
 const defaults = {
   platform: null,
   defaultsStyle: {
@@ -14,7 +14,7 @@ const defaults = {
     cursor: 'grab'
   }
 }
-const InfiniteBackPlatformConstructor = Vue.extend(InfiniteBackPlatformVue)
+const InfiniteDragContainerConstructor = Vue.extend(InfiniteDragContainerVue)
 
 let currentBpf, instance // 当前拖拽组件对象 当前拖拽组件节点
 let bpfQueue = [] // 所有拖拽组件集合
@@ -23,7 +23,7 @@ const vm = new Vue()
 const h = vm.$createElement
 // 创建节点
 const initInstance = () => {
-  instance = new InfiniteBackPlatformConstructor({
+  instance = new InfiniteDragContainerConstructor({
     el: document.createElement('div')
   })
 }
@@ -55,22 +55,23 @@ const showNextIBPF = (options) => {
   document.body.appendChild(instance.$el)
 }
 // 初始化拖拽对象
-const InfiniteBackPlatform = function (options) {
+const InfiniteDragContainer = function (options) {
+  const optionsAll = merge({}, defaults, InfiniteDragContainer.defaults, options)
   if (typeof Promise !== 'undefined') {
     return new Promise((resolve, reject) => { // eslint-disable-line
       bpfQueue.push({
-        options: merge({}, defaults, InfiniteBackPlatform.defaults, options),
+        options: optionsAll,
         resolve: resolve,
         reject: reject
       })
 
-      showNextIBPF()
+      showNextIBPF(optionsAll)
     })
   } else {
     bpfQueue.push({
-      options: merge({}, defaults, InfiniteBackPlatform.defaults, options)
+      options: optionsAll
     })
-    showNextIBPF()
+    showNextIBPF(optionsAll)
   }
 }
 // 创建插入css
@@ -84,7 +85,7 @@ const creatStyle = function () {
     styleElInnerHTML += `${hyphenate(k)}: ${innerSty[k]};`
   })
   styleEl.innerHTML = `
-      .infinite-back-platform {
+      .infinite-drag-container {
         ${styleElInnerHTML}
       }
     `
@@ -92,11 +93,11 @@ const creatStyle = function () {
   document.getElementsByTagName('HEAD').item(0).appendChild(styleEl)
 }
 // 获取实例
-InfiniteBackPlatform.getInstance = () => {
-  InfiniteBackPlatform.instance = instance
+InfiniteDragContainer.getInstance = () => {
+  InfiniteDragContainer.instance = instance
 }
 // 隐藏
-InfiniteBackPlatform.close = () => {
+InfiniteDragContainer.close = () => {
   if (instance) {
     instance.visible = false
     bpfQueue = []
@@ -104,11 +105,11 @@ InfiniteBackPlatform.close = () => {
   }
 }
 // 移除
-InfiniteBackPlatform.remove = () => {
+InfiniteDragContainer.remove = () => {
   if (instance) {
     if (instance.handleRemove && ['function'].includes(typeof instance.handleRemove)) {
       instance.handleRemove()
-      const dom = document.body.querySelector('.infinite-back-platform')
+      const dom = document.body.querySelector('.infinite-drag-container')
       document.body.removeChild(dom)
       document.getElementById(styleId).remove()
     }
@@ -119,5 +120,5 @@ InfiniteBackPlatform.remove = () => {
   }
 }
 
-export default InfiniteBackPlatform
-export { InfiniteBackPlatform }
+export default InfiniteDragContainer
+export { InfiniteDragContainer }

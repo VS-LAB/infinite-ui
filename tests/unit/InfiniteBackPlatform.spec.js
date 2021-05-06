@@ -1,4 +1,4 @@
-import { InfiniteBackPlatform } from '@/packages/infinite-back-platform/src/index.js'
+import { InfiniteDragContainer } from '@/packages/infinite-drag-container/src/index.js'
 const delay = (time = 1000) => {
   return new Promise(resolve => {
     setTimeout(_ => {
@@ -6,11 +6,11 @@ const delay = (time = 1000) => {
     }, time)
   })
 }
-describe('InfiniteBackPlatform.vue', () => {
+describe('InfiniteDragContainer.vue', () => {
   let actionStr = ''
-  it('document is has appendChild after InfiniteBackPlatform in vNode', () => {
+  it('document is has appendChild after InfiniteDragContainer in vNode', () => {
     jest.spyOn(document.body, 'appendChild')
-    InfiniteBackPlatform({
+    InfiniteDragContainer({
       platform: (h) => {
         return h('div', {}, [
           h('span', null, '内容必须是 '),
@@ -28,29 +28,29 @@ describe('InfiniteBackPlatform.vue', () => {
     // 是否触发appendChild
     expect(document.body.appendChild).toBeCalledWith(expect.objectContaining({}))
   })
-  it('document is has appendChild after InfiniteBackPlatform in string', () => {
+  it('document is has appendChild after InfiniteDragContainer in string', () => {
     jest.spyOn(document.body, 'appendChild')
-    InfiniteBackPlatform({
+    InfiniteDragContainer({
       platform: '<div>string of platform</div>'
     })
     // 是否触发appendChild
     expect(document.body.appendChild).toBeCalledWith(expect.objectContaining({}))
   })
-  it('InfiniteBackPlatform is click hide or remove after event', async () => {
-    const dom = document.body.querySelector('.infinite-back-platform')
+  it('InfiniteDragContainer is click hide or remove after event', async () => {
+    const dom = document.body.querySelector('.infinite-drag-container')
     expect(window.getComputedStyle(dom).display).toBe('inline-block')
     dom.click()
     await delay(300)
     expect(actionStr).toBe('click')
 
     // 关闭拖拽容器
-    InfiniteBackPlatform.close()
+    InfiniteDragContainer.close()
     await delay(300)
     expect(window.getComputedStyle(dom).display).toBe('none')
     // 移除拖拽容器 
-    InfiniteBackPlatform.remove()
+    InfiniteDragContainer.remove()
     await delay(3000)
-    const removeDom = document.body.querySelector('.infinite-back-platform')
+    const removeDom = document.body.querySelector('.infinite-drag-container')
     expect(removeDom).toBe(null)
   })
   // 定义鼠标按下时位置点
@@ -76,7 +76,7 @@ describe('InfiniteBackPlatform.vue', () => {
   }
   // 模拟拖拽功能测试
   it('draggable of test', async () => {
-    InfiniteBackPlatform({
+    InfiniteDragContainer({
       platform: (h) => {
         return h('div', {}, [
           h('span', null, '内容必须是 '),
@@ -84,21 +84,21 @@ describe('InfiniteBackPlatform.vue', () => {
         ])
       }
     })
-    InfiniteBackPlatform.getInstance()
-    InfiniteBackPlatform.instance.handleMousedown(mousedownEv)
+    InfiniteDragContainer.getInstance()
+    InfiniteDragContainer.instance.handleMousedown(mousedownEv)
     await delay(300)
-    expect(InfiniteBackPlatform.instance.move).toBe(true)
-    InfiniteBackPlatform.instance.handleMousemove(mousemoveEv)
+    expect(InfiniteDragContainer.instance.move).toBe(true)
+    InfiniteDragContainer.instance.handleMousemove(mousemoveEv)
     await delay(300)
-    InfiniteBackPlatform.instance.handleMouseup(mouseupEv)
+    InfiniteDragContainer.instance.handleMouseup(mouseupEv)
     await delay(300)
-    expect(InfiniteBackPlatform.instance.move).toBe(false)
-    const dom = document.body.querySelector('.infinite-back-platform')
+    expect(InfiniteDragContainer.instance.move).toBe(false)
+    const dom = document.body.querySelector('.infinite-drag-container')
     expect(window.getComputedStyle(dom).right).toBe('0px')
     expect(window.getComputedStyle(dom).bottom).toBe('0px')
   })
   it('draggable of horizontal test', async () => {
-    InfiniteBackPlatform({
+    InfiniteDragContainer({
       platform: (h) => {
         return h('div', {}, [
           h('span', null, '内容必须是 '),
@@ -107,21 +107,21 @@ describe('InfiniteBackPlatform.vue', () => {
       },
       dragDirection: 'horizontal'
     })
-    InfiniteBackPlatform.getInstance()
-    InfiniteBackPlatform.instance.handleMousedown(mousedownEv)
+    InfiniteDragContainer.getInstance()
+    InfiniteDragContainer.instance.handleMousedown(mousedownEv)
     await delay(300)
-    expect(InfiniteBackPlatform.instance.move).toBe(true)
-    InfiniteBackPlatform.instance.handleMousemove(mousemoveEv)
+    expect(InfiniteDragContainer.instance.move).toBe(true)
+    InfiniteDragContainer.instance.handleMousemove(mousemoveEv)
     await delay(300)
-    InfiniteBackPlatform.instance.handleMouseup(mouseupEv)
+    InfiniteDragContainer.instance.handleMouseup(mouseupEv)
     await delay(300)
-    expect(InfiniteBackPlatform.instance.move).toBe(false)
-    const dom = document.body.querySelector('.infinite-back-platform')
+    expect(InfiniteDragContainer.instance.move).toBe(false)
+    const dom = document.body.querySelector('.infinite-drag-container')
     expect(window.getComputedStyle(dom).right).toBe('0px')
     expect(window.getComputedStyle(dom).bottom).toBe('0px')
   })
   it('draggable of vertical test', async () => {
-    InfiniteBackPlatform({
+    InfiniteDragContainer({
       platform: (h) => {
         return h('div', {}, [
           h('span', null, '内容必须是 '),
@@ -130,7 +130,7 @@ describe('InfiniteBackPlatform.vue', () => {
       },
       dragDirection: 'vertical'
     })
-    InfiniteBackPlatform.getInstance()
+    InfiniteDragContainer.getInstance()
     // 定义鼠标按下时位置点
     const mousedownEv = {
       clientX: 0,
@@ -152,19 +152,19 @@ describe('InfiniteBackPlatform.vue', () => {
       preventDefault: () => {},
       stopPropagation: () => {}
     }
-    InfiniteBackPlatform.instance.handleMousedown(mousedownEv)
+    InfiniteDragContainer.instance.handleMousedown(mousedownEv)
     await delay(300)
-    expect(InfiniteBackPlatform.instance.move).toBe(true)
-    InfiniteBackPlatform.instance.handleMousemove(mousemoveEv)
+    expect(InfiniteDragContainer.instance.move).toBe(true)
+    InfiniteDragContainer.instance.handleMousemove(mousemoveEv)
     await delay(300)
-    InfiniteBackPlatform.instance.handleMouseup(mouseupEv)
+    InfiniteDragContainer.instance.handleMouseup(mouseupEv)
     await delay(300)
-    expect(InfiniteBackPlatform.instance.move).toBe(false)
-    const dom = document.body.querySelector('.infinite-back-platform')
+    expect(InfiniteDragContainer.instance.move).toBe(false)
+    const dom = document.body.querySelector('.infinite-drag-container')
     expect(window.getComputedStyle(dom).right).toBe('0px')
     expect(window.getComputedStyle(dom).bottom).toBe('0px')
     await delay(300)
-    InfiniteBackPlatform({
+    InfiniteDragContainer({
       platform: (h) => {
         return h('div', {}, [
           h('span', null, '内容必须是 '),
@@ -173,6 +173,6 @@ describe('InfiniteBackPlatform.vue', () => {
       },
       dragDirection: 'vertical'
     })
-    InfiniteBackPlatform.getInstance()
+    InfiniteDragContainer.getInstance()
   })
 })

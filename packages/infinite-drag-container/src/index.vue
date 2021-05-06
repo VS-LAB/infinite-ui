@@ -1,7 +1,7 @@
 <template>
   <div
-    class="infinite-back-platform"
-    ref="InfinitebackplatformWrapper"
+    class="infinite-drag-container"
+    ref="InfiniteDragContainerWrapper"
     v-show="visible"
     @click.stop="handleAction('click')"
     @mousedown.stop="(ev) => {handleMousedown(ev)}">
@@ -32,14 +32,14 @@ export default {
       this.move = false
       ev.preventDefault()
       ev.stopPropagation()
-      const { InfinitebackplatformWrapper } = this.$refs
+      const { InfiniteDragContainerWrapper } = this.$refs
       this.clientWidth = document.body.clientWidth // 屏幕的宽
       this.clientHeight = document.body.clientHeight  
       this.targetLeft = ev.clientX // 点击点在视图的位置
       this.targetTop = ev.clientY
-      this.targetOffsetWidth = InfinitebackplatformWrapper.offsetWidth // 拖拽容器的宽
-      this.targetOffsetHeight = InfinitebackplatformWrapper.offsetHeight
-      const { right, bottom } = getComputedStyle(InfinitebackplatformWrapper, null)
+      this.targetOffsetWidth = InfiniteDragContainerWrapper.offsetWidth // 拖拽容器的宽
+      this.targetOffsetHeight = InfiniteDragContainerWrapper.offsetHeight
+      const { right, bottom } = getComputedStyle(InfiniteDragContainerWrapper, null)
       this.initialRight = parseInt(right.replace('px', '')) // 拖拽容器右下角的定位位置
       this.initialBottom = parseInt(bottom.replace('px', ''))
       this.move = true
@@ -48,7 +48,7 @@ export default {
       ev.preventDefault()
       ev.stopPropagation()
       if (this.move) {
-        const { InfinitebackplatformWrapper } = this.$refs
+        const { InfiniteDragContainerWrapper } = this.$refs
         this.cx = ev.clientX // 移动点在视图的位置
         this.cy = ev.clientY
         // /** 元素在视图的定位 */
@@ -62,13 +62,13 @@ export default {
         if (fy > this.clientHeight - this.targetOffsetHeight) fy = this.clientHeight - this.targetOffsetHeight
         switch (this.dragDirection) {
           case 'horizontal': // 水平
-            InfinitebackplatformWrapper.setAttribute('style', `right:${fx}px;`)    
+            InfiniteDragContainerWrapper.setAttribute('style', `right:${fx}px;`)    
             break
           case 'vertical': // 垂直
-            InfinitebackplatformWrapper.setAttribute('style', `bottom:${fy}px;`)    
+            InfiniteDragContainerWrapper.setAttribute('style', `bottom:${fy}px;`)    
             break
           default:
-            InfinitebackplatformWrapper.setAttribute('style', `right:${fx}px;bottom:${fy}px`)
+            InfiniteDragContainerWrapper.setAttribute('style', `right:${fx}px;bottom:${fy}px`)
             break
         }
       }

@@ -1,6 +1,6 @@
 /* eslint-disable */
 // This file is auto gererated by build/build-entry.js
-import InfiniteBackPlatform from './infinite-back-platform'
+import InfiniteDragContainer from './infinite-drag-container'
 import InfiniteButton from './infinite-button'
 import InfiniteCascaders from './infinite-cascaders'
 import InfiniteDialog from './infinite-dialog'
@@ -23,7 +23,7 @@ import InfiniteThemePicker from './infinite-theme-picker'
 import InfiniteTree from './infinite-tree'
 const version = '1.0.7'
 const components = [
-  InfiniteBackPlatform,
+  InfiniteDragContainer,
   InfiniteButton,
   InfiniteCascaders,
   InfiniteDialog,
@@ -61,7 +61,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 export {
   install,
   version,
-  InfiniteBackPlatform,
+  InfiniteDragContainer,
   InfiniteButton,
   InfiniteCascaders,
   InfiniteDialog,
@@ -86,7 +86,7 @@ export {
 export default {
   install,
   version,
-  InfiniteBackPlatform,
+  InfiniteDragContainer,
   InfiniteButton,
   InfiniteCascaders,
   InfiniteDialog,
