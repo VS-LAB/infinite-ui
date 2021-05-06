@@ -1,10 +1,10 @@
 /* eslint-disable */
 // This file is auto gererated by build/build-entry.js
-import InfiniteDragContainer from './infinite-drag-container'
 import InfiniteButton from './infinite-button'
 import InfiniteCascaders from './infinite-cascaders'
 import InfiniteDialog from './infinite-dialog'
 import InfiniteDownload from './infinite-download'
+import InfiniteDragContainer from './infinite-drag-container'
 import InfiniteForm from './infinite-form'
 import InfiniteLineChart from './infinite-line-chart'
 import InfiniteNavMenu from './infinite-nav-menu'
@@ -23,11 +23,11 @@ import InfiniteThemePicker from './infinite-theme-picker'
 import InfiniteTree from './infinite-tree'
 const version = '1.0.7'
 const components = [
-  InfiniteDragContainer,
   InfiniteButton,
   InfiniteCascaders,
   InfiniteDialog,
   InfiniteDownload,
+  InfiniteDragContainer,
   InfiniteForm,
   InfiniteLineChart,
   InfiniteNavMenu,
@@ -61,11 +61,11 @@ if (typeof window !== 'undefined' && window.Vue) {
 export {
   install,
   version,
-  InfiniteDragContainer,
   InfiniteButton,
   InfiniteCascaders,
   InfiniteDialog,
   InfiniteDownload,
+  InfiniteDragContainer,
   InfiniteForm,
   InfiniteLineChart,
   InfiniteNavMenu,
@@ -86,11 +86,11 @@ export {
 export default {
   install,
   version,
-  InfiniteDragContainer,
   InfiniteButton,
   InfiniteCascaders,
   InfiniteDialog,
   InfiniteDownload,
+  InfiniteDragContainer,
   InfiniteForm,
   InfiniteLineChart,
   InfiniteNavMenu,
