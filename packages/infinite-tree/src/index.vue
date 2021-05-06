@@ -55,7 +55,7 @@
 
         <!---编辑节点按钮，只在编辑状态下显示-->
         <div
-          v-if="(!moving && isEditNode && !data['in-input-type']) || enabelCopy"
+          v-if="(!moving && isEditNode && !data['in-input-type']) "
           class="tree-edit-btns"
         >
           <!-- 节点操作按钮 -->
