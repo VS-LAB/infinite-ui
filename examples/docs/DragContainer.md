@@ -31,8 +31,8 @@
             return h('div', {
               'data-lot': '66'
             }, [
-              h('span', null, '内容必须是 '),
-              h('i', { style: 'color: teal' }, 'VNode')
+              h('span', null, '拖拽 '),
+              h('i', { style: 'color: teal' }, '内容')
             ])
           },
           style: {
