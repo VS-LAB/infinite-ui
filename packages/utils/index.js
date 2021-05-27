@@ -53,6 +53,12 @@ export const numFormat = function (value) {
   }
 }
 
+// 驼峰转中划线
+const hyphenateRE = /\B([A-Z])/g
+export const hyphenate = (str) => {
+  return str.replace(hyphenateRE, '-$1').toLowerCase()
+}
+
 // 处理浮点数或整数(浮点数取一位/整数不做处理)  问题: floatIntFormat(0.58*100) 返回 58.0
 export const floatIntFormat = function (value) {
   if (!value) return 0
@@ -123,5 +129,6 @@ export default {
   color,
   AxisOption,
   jsonFlat,
-  uuidv4
+  uuidv4,
+  hyphenate
 }
