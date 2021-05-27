@@ -1,11 +1,13 @@
 /* eslint-disable */
 // This file is auto gererated by build/build-entry.js
 import InfiniteButton from './infinite-button'
+import InfiniteCard from './infinite-card'
 import InfiniteCascaders from './infinite-cascaders'
 import InfiniteDialog from './infinite-dialog'
 import InfiniteDownload from './infinite-download'
 import InfiniteDragContainer from './infinite-drag-container'
 import InfiniteForm from './infinite-form'
+import InfiniteFormSearch from './infinite-form-search'
 import InfiniteLineChart from './infinite-line-chart'
 import InfiniteNavMenu from './infinite-nav-menu'
 import InfiniteOption from './infinite-option'
@@ -21,15 +23,16 @@ import InfiniteTable from './infinite-table'
 import InfiniteTableColumn from './infinite-table-column'
 import InfiniteThemePicker from './infinite-theme-picker'
 import InfiniteTree from './infinite-tree'
-import InfiniteFormSearch from './infinite-form-search'
 const version = '1.0.10'
 const components = [
   InfiniteButton,
+  InfiniteCard,
   InfiniteCascaders,
   InfiniteDialog,
   InfiniteDownload,
   InfiniteDragContainer,
   InfiniteForm,
+  InfiniteFormSearch,
   InfiniteLineChart,
   InfiniteNavMenu,
   InfiniteOption,
@@ -44,8 +47,7 @@ const components = [
   InfiniteTable,
   InfiniteTableColumn,
   InfiniteThemePicker,
-  InfiniteTree,
-  InfiniteFormSearch
+  InfiniteTree
 ]
 const install = Vue => {
   components.forEach(Component => {
@@ -64,11 +66,13 @@ export {
   install,
   version,
   InfiniteButton,
+  InfiniteCard,
   InfiniteCascaders,
   InfiniteDialog,
   InfiniteDownload,
   InfiniteDragContainer,
   InfiniteForm,
+  InfiniteFormSearch,
   InfiniteLineChart,
   InfiniteNavMenu,
   InfiniteOption,
@@ -83,18 +87,19 @@ export {
   InfiniteTable,
   InfiniteTableColumn,
   InfiniteThemePicker,
-  InfiniteTree,
-  InfiniteFormSearch
+  InfiniteTree
 }
 export default {
   install,
   version,
   InfiniteButton,
+  InfiniteCard,
   InfiniteCascaders,
   InfiniteDialog,
   InfiniteDownload,
   InfiniteDragContainer,
   InfiniteForm,
+  InfiniteFormSearch,
   InfiniteLineChart,
   InfiniteNavMenu,
   InfiniteOption,
@@ -109,7 +114,6 @@ export default {
   InfiniteTable,
   InfiniteTableColumn,
   InfiniteThemePicker,
-  InfiniteTree,
-  InfiniteFormSearch
+  InfiniteTree
 }
   
