@@ -14,6 +14,7 @@ import ThemePicker from '@/docs/ThemePicker.md'
 import Tree from '@/docs/Tree.md'
 import Select from '@/docs/Select.md'
 import Steps from '@/docs/Steps.md'
+import FromSearch from '@/docs/FromSearch.md'
 
 export {
   Installation,
@@ -30,5 +31,6 @@ export {
   ThemePicker,
   Tree,
   Select,
-  Steps
+  Steps,
+  FromSearch
 }
