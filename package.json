@@ -17,8 +17,9 @@
     "build:utils": "cross-env BABEL_ENV=utils babel packages/utils --out-dir lib/utils && babel packages/mixins --out-dir lib/mixins",
     "build:style": "gulp build --gulpfile packages/theme-chalk/gulpfile.js",
     "clean": "rimraf lib && rimraf packages/*/lib",
-    "init": "npm install commitizen -g && commitizen init cz-conventional-changelog --save-dev --save-exact && npm run bootstrap",
-    "lib": "vue-cli-service build --target lib --name infinite-ui --mode lib --dest lib packages/index.js && webpack --config ./build/webpack.component.js"
+    "init:cz": "npm install commitizen -g && commitizen init cz-conventional-changelog --save-dev --save-exact",
+    "lib": "vue-cli-service build --target lib --name infinite-ui --mode lib --dest lib packages/index.js && webpack --config ./build/webpack.component.js",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
   },
   "main": "lib/infinite-ui.umd.js",
   "files": [
@@ -99,8 +100,7 @@
   },
   "lint-staged": {
     "*.{js,vue,ts}": [
-      "npm run lint",
-      "git add"
+      "npm run lint"
     ]
   },
   "keywords": [
