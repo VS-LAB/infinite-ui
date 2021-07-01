@@ -23,7 +23,12 @@ import InfiniteTable from './infinite-table'
 import InfiniteTableColumn from './infinite-table-column'
 import InfiniteThemePicker from './infinite-theme-picker'
 import InfiniteTree from './infinite-tree'
-const version = '1.0.11'
+import InfiniteVirtualTree from './infinite-virtual-tree'
+import InfiniteToolTips from './infinite-tooltips'
+import InfiniteOperation from './infinite-operation'
+import InfiniteScrollBar from './infinite-scrollbar'
+
+const version = '1.0.11-alpha'
 const components = [
   InfiniteButton,
   InfiniteCard,
@@ -47,7 +52,12 @@ const components = [
   InfiniteTable,
   InfiniteTableColumn,
   InfiniteThemePicker,
-  InfiniteTree
+  InfiniteTree,
+  InfiniteFormSearch,
+  InfiniteVirtualTree,
+  InfiniteToolTips,
+  InfiniteOperation,
+  InfiniteScrollBar
 ]
 const install = Vue => {
   components.forEach(Component => {
@@ -87,7 +97,11 @@ export {
   InfiniteTable,
   InfiniteTableColumn,
   InfiniteThemePicker,
-  InfiniteTree
+  InfiniteTree,
+  InfiniteVirtualTree,
+  InfiniteToolTips,
+  InfiniteOperation,
+  InfiniteScrollBar
 }
 export default {
   install,
@@ -114,6 +128,10 @@ export default {
   InfiniteTable,
   InfiniteTableColumn,
   InfiniteThemePicker,
-  InfiniteTree
+  InfiniteTree,
+  InfiniteFormSearch,
+  InfiniteVirtualTree,
+  InfiniteToolTips,
+  InfiniteOperation,
+  InfiniteScrollBar
 }
-  
