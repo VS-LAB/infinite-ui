@@ -10,10 +10,12 @@ import InfiniteForm from './infinite-form'
 import InfiniteFormSearch from './infinite-form-search'
 import InfiniteLineChart from './infinite-line-chart'
 import InfiniteNavMenu from './infinite-nav-menu'
+import InfiniteOperation from './infinite-operation'
 import InfiniteOption from './infinite-option'
 import InfinitePagination from './infinite-pagination'
 import InfinitePieChart from './infinite-pie-chart'
 import InfiniteResult from './infinite-result'
+import InfiniteScrollbar from './infinite-scrollbar'
 import InfiniteSelect from './infinite-select'
 import InfiniteSelectTags from './infinite-select-tags'
 import InfiniteSelectTagsOption from './infinite-select-tags-option'
@@ -22,13 +24,10 @@ import InfiniteSteps from './infinite-steps'
 import InfiniteTable from './infinite-table'
 import InfiniteTableColumn from './infinite-table-column'
 import InfiniteThemePicker from './infinite-theme-picker'
+import InfiniteTooltips from './infinite-tooltips'
 import InfiniteTree from './infinite-tree'
 import InfiniteVirtualTree from './infinite-virtual-tree'
-import InfiniteToolTips from './infinite-tooltips'
-import InfiniteOperation from './infinite-operation'
-import InfiniteScrollBar from './infinite-scrollbar'
-
-const version = '1.0.11-alpha'
+const version = '1.0.12'
 const components = [
   InfiniteButton,
   InfiniteCard,
@@ -40,10 +39,12 @@ const components = [
   InfiniteFormSearch,
   InfiniteLineChart,
   InfiniteNavMenu,
+  InfiniteOperation,
   InfiniteOption,
   InfinitePagination,
   InfinitePieChart,
   InfiniteResult,
+  InfiniteScrollbar,
   InfiniteSelect,
   InfiniteSelectTags,
   InfiniteSelectTagsOption,
@@ -52,12 +53,9 @@ const components = [
   InfiniteTable,
   InfiniteTableColumn,
   InfiniteThemePicker,
+  InfiniteTooltips,
   InfiniteTree,
-  InfiniteFormSearch,
-  InfiniteVirtualTree,
-  InfiniteToolTips,
-  InfiniteOperation,
-  InfiniteScrollBar
+  InfiniteVirtualTree
 ]
 const install = Vue => {
   components.forEach(Component => {
@@ -85,10 +83,12 @@ export {
   InfiniteFormSearch,
   InfiniteLineChart,
   InfiniteNavMenu,
+  InfiniteOperation,
   InfiniteOption,
   InfinitePagination,
   InfinitePieChart,
   InfiniteResult,
+  InfiniteScrollbar,
   InfiniteSelect,
   InfiniteSelectTags,
   InfiniteSelectTagsOption,
@@ -97,11 +97,9 @@ export {
   InfiniteTable,
   InfiniteTableColumn,
   InfiniteThemePicker,
+  InfiniteTooltips,
   InfiniteTree,
-  InfiniteVirtualTree,
-  InfiniteToolTips,
-  InfiniteOperation,
-  InfiniteScrollBar
+  InfiniteVirtualTree
 }
 export default {
   install,
@@ -116,10 +114,12 @@ export default {
   InfiniteFormSearch,
   InfiniteLineChart,
   InfiniteNavMenu,
+  InfiniteOperation,
   InfiniteOption,
   InfinitePagination,
   InfinitePieChart,
   InfiniteResult,
+  InfiniteScrollbar,
   InfiniteSelect,
   InfiniteSelectTags,
   InfiniteSelectTagsOption,
@@ -128,10 +128,8 @@ export default {
   InfiniteTable,
   InfiniteTableColumn,
   InfiniteThemePicker,
+  InfiniteTooltips,
   InfiniteTree,
-  InfiniteFormSearch,
-  InfiniteVirtualTree,
-  InfiniteToolTips,
-  InfiniteOperation,
-  InfiniteScrollBar
+  InfiniteVirtualTree
 }
+  
